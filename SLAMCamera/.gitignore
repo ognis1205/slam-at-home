@@ -161,11 +161,4 @@ DerivedData/
 ### https://developer.apple.com/library/archive/qa/qa1514/_index.html
 /*.gcno
 
-### Xcode Patch ###
-*.xcodeproj/*
-!*.xcodeproj/project.pbxproj
-!*.xcodeproj/xcshareddata/
-!*.xcworkspace/contents.xcworkspacedata
-**/xcshareddata/WorkspaceSettings.xcsettings
-
 # End of https://www.toptal.com/developers/gitignore/api/macos,xcode,swift
