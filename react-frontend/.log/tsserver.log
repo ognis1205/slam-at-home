@@ -1,0 +1,1659 @@
+Info 0    [12:22:08.712] Starting TS Server
+Info 1    [12:22:08.718] Version: 4.1.3
+Info 2    [12:22:08.718] Arguments: /Users/shin/.anyenv/envs/nodenv/versions/15.2.1/bin/node /Users/shin/.anyenv/envs/nodenv/versions/15.2.1/bin/tsserver --logFile /Users/shin/Documents/github/slam-at-home/react-frontend/.log/tsserver.log --logVerbosity info --cancellationPipeName /private/var/folders/90/kskh3wbj04d1cp3_crkb9cgr0000gn/T/47932a5a62a73daa874db01a227afe1a/tscancellation*
+Info 3    [12:22:08.718] Platform: darwin NodeVersion: 15 CaseSensitive: false
+Info 4    [12:22:08.718] ServerMode: undefined syntaxOnly: false hasUnknownServerMode: undefined
+Info 5    [12:22:08.737] Search path: /Users/shin/Documents/github/slam-at-home/react-frontend/src/components/drawer
+Info 6    [12:22:08.739] For info: /Users/shin/Documents/github/slam-at-home/react-frontend/src/components/drawer/props.ts :: Config file name: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json
+Info 7    [12:22:08.739] Opened configuration file /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json
+Info 8    [12:22:08.794] Config: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json : {
+ "rootNames": [
+  "/Users/shin/Documents/github/slam-at-home/react-frontend/next-env.d.ts",
+  "/Users/shin/Documents/github/slam-at-home/react-frontend/src/components/drawer/index.ts",
+  "/Users/shin/Documents/github/slam-at-home/react-frontend/src/components/drawer/props.ts",
+  "/Users/shin/Documents/github/slam-at-home/react-frontend/src/pages/_app.tsx",
+  "/Users/shin/Documents/github/slam-at-home/react-frontend/src/pages/_document.tsx",
+  "/Users/shin/Documents/github/slam-at-home/react-frontend/src/pages/index.tsx"
+ ],
+ "options": {
+  "target": 1,
+  "lib": [
+   "lib.dom.d.ts",
+   "lib.dom.iterable.d.ts",
+   "lib.esnext.d.ts"
+  ],
+  "allowJs": true,
+  "skipLibCheck": true,
+  "strict": false,
+  "forceConsistentCasingInFileNames": true,
+  "noEmit": true,
+  "esModuleInterop": true,
+  "module": 99,
+  "moduleResolution": 2,
+  "resolveJsonModule": true,
+  "isolatedModules": true,
+  "jsx": 1,
+  "configFilePath": "/Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json"
+ }
+}
+Info 9    [12:22:08.899] Starting updateGraphWorker: Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json
+Info 10   [12:22:14.620] Finishing updateGraphWorker: Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json Version: 1 structureChanged: true Elapsed: 5720.570405960083ms
+Info 11   [12:22:14.620] Project '/Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json' (Configured)
+Info 12   [12:22:14.620] 	Files (175)
+
+Info 13   [12:22:14.620] -----------------------------------------------
+Info 14   [12:22:14.854] Before ensureProjectForOpenFiles:
+Info 15   [12:22:14.855] After ensureProjectForOpenFiles:
+Info 16   [12:22:14.855] got projects updated in background, updating diagnostics for /Users/shin/Documents/github/slam-at-home/react-frontend/src/components/drawer/props.ts
+Info 17   [12:22:14.866] DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 18   [12:22:14.867] Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json Detected file add/remove of non supported extension: /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log
+Info 19   [12:22:14.867] Elapsed:: 0.6316900253295898ms DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 20   [12:22:14.867] DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 21   [12:22:14.867] Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json Detected file add/remove of non supported extension: /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log
+Info 22   [12:22:14.867] Elapsed:: 0.08651697635650635ms DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 23   [12:22:14.867] DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 24   [12:22:14.867] Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json Detected file add/remove of non supported extension: /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log
+Info 25   [12:22:14.867] Elapsed:: 0.06168699264526367ms DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 26   [12:22:14.868] DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 27   [12:22:14.868] Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json Detected file add/remove of non supported extension: /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log
+Info 28   [12:22:14.868] Elapsed:: 0.07541298866271973ms DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 29   [12:22:14.868] DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 30   [12:22:14.868] Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json Detected file add/remove of non supported extension: /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log
+Info 31   [12:22:14.868] Elapsed:: 0.07251501083374023ms DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 32   [12:22:14.868] DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 33   [12:22:14.868] Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json Detected file add/remove of non supported extension: /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log
+Info 34   [12:22:14.869] Elapsed:: 0.10619604587554932ms DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 35   [12:22:14.869] DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 36   [12:22:14.869] Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json Detected file add/remove of non supported extension: /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log
+Info 37   [12:22:14.869] Elapsed:: 0.060330986976623535ms DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 38   [12:22:14.869] DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 39   [12:22:14.870] Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json Detected file add/remove of non supported extension: /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log
+Info 40   [12:22:14.870] Elapsed:: 1.3281500339508057ms DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 41   [12:22:14.870] DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 42   [12:22:14.870] Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json Detected file add/remove of non supported extension: /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log
+Info 43   [12:22:14.870] Elapsed:: 0.06644594669342041ms DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 44   [12:22:14.870] DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 45   [12:22:14.870] Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json Detected file add/remove of non supported extension: /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log
+Info 46   [12:22:14.871] Elapsed:: 0.04875493049621582ms DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 47   [12:22:14.871] DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 48   [12:22:14.871] Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json Detected file add/remove of non supported extension: /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log
+Info 49   [12:22:14.871] Elapsed:: 0.04686999320983887ms DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 50   [12:22:14.871] DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 51   [12:22:14.871] Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json Detected file add/remove of non supported extension: /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log
+Info 52   [12:22:14.871] Elapsed:: 0.04418504238128662ms DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 53   [12:22:14.871] DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 54   [12:22:14.871] Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json Detected file add/remove of non supported extension: /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log
+Info 55   [12:22:14.871] Elapsed:: 0.04319608211517334ms DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 56   [12:22:14.871] DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 57   [12:22:14.871] Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json Detected file add/remove of non supported extension: /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log
+Info 58   [12:22:14.871] Elapsed:: 0.042514920234680176ms DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 59   [12:22:14.871] DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 60   [12:22:14.871] Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json Detected file add/remove of non supported extension: /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log
+Info 61   [12:22:14.871] Elapsed:: 0.06128799915313721ms DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 62   [12:22:14.871] DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 63   [12:22:14.871] Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json Detected file add/remove of non supported extension: /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log
+Info 64   [12:22:14.871] Elapsed:: 0.04647696018218994ms DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 65   [12:22:14.871] DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 66   [12:22:14.871] Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json Detected file add/remove of non supported extension: /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log
+Info 67   [12:22:14.872] Elapsed:: 0.045832037925720215ms DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 68   [12:22:14.872] DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 69   [12:22:14.872] Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json Detected file add/remove of non supported extension: /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log
+Info 70   [12:22:14.872] Elapsed:: 0.06258702278137207ms DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 71   [12:22:14.872] DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 72   [12:22:14.872] Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json Detected file add/remove of non supported extension: /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log
+Info 73   [12:22:14.872] Elapsed:: 0.06476998329162598ms DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 74   [12:22:14.872] DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 75   [12:22:14.872] Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json Detected file add/remove of non supported extension: /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log
+Info 76   [12:22:14.872] Elapsed:: 0.04171895980834961ms DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 77   [12:22:14.872] DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 78   [12:22:14.872] Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json Detected file add/remove of non supported extension: /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log
+Info 79   [12:22:14.872] Elapsed:: 0.040679097175598145ms DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 80   [12:22:14.872] DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 81   [12:22:14.872] Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json Detected file add/remove of non supported extension: /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log
+Info 82   [12:22:14.872] Elapsed:: 0.04426300525665283ms DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 83   [12:22:14.872] DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 84   [12:22:14.872] Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json Detected file add/remove of non supported extension: /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log
+Info 85   [12:22:14.872] Elapsed:: 0.03967106342315674ms DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 86   [12:22:14.872] DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 87   [12:22:14.872] Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json Detected file add/remove of non supported extension: /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log
+Info 88   [12:22:14.872] Elapsed:: 0.053019046783447266ms DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 89   [12:22:14.873] DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 90   [12:22:14.873] Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json Detected file add/remove of non supported extension: /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log
+Info 91   [12:22:14.873] Elapsed:: 0.04343092441558838ms DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 92   [12:22:14.873] DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 93   [12:22:14.873] Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json Detected file add/remove of non supported extension: /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log
+Info 94   [12:22:14.873] Elapsed:: 0.038659095764160156ms DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 95   [12:22:14.873] DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 96   [12:22:14.873] Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json Detected file add/remove of non supported extension: /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log
+Info 97   [12:22:14.873] Elapsed:: 0.042993903160095215ms DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 98   [12:22:14.873] DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 99   [12:22:14.873] Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json Detected file add/remove of non supported extension: /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log
+Info 100  [12:22:14.873] Elapsed:: 0.03881990909576416ms DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 101  [12:22:14.873] DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 102  [12:22:14.873] Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json Detected file add/remove of non supported extension: /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log
+Info 103  [12:22:14.873] Elapsed:: 0.04939699172973633ms DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 104  [12:22:14.873] DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 105  [12:22:14.873] Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json Detected file add/remove of non supported extension: /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log
+Info 106  [12:22:14.873] Elapsed:: 0.054916977882385254ms DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 107  [12:22:14.873] DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 108  [12:22:14.873] Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json Detected file add/remove of non supported extension: /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log
+Info 109  [12:22:14.873] Elapsed:: 0.049803972244262695ms DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 110  [12:22:14.874] DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 111  [12:22:14.874] Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json Detected file add/remove of non supported extension: /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log
+Info 112  [12:22:14.874] Elapsed:: 0.2029860019683838ms DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 113  [12:22:14.874] DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 114  [12:22:14.874] Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json Detected file add/remove of non supported extension: /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log
+Info 115  [12:22:14.874] Elapsed:: 0.06621205806732178ms DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 116  [12:22:14.874] DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 117  [12:22:14.874] Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json Detected file add/remove of non supported extension: /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log
+Info 118  [12:22:14.874] Elapsed:: 0.08060300350189209ms DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 119  [12:22:14.874] DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 120  [12:22:14.875] Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json Detected file add/remove of non supported extension: /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log
+Info 121  [12:22:14.875] Elapsed:: 0.0866539478302002ms DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 122  [12:22:14.875] DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 123  [12:22:14.875] Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json Detected file add/remove of non supported extension: /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log
+Info 124  [12:22:14.875] Elapsed:: 0.04462897777557373ms DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 125  [12:22:14.875] DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 126  [12:22:14.875] Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json Detected file add/remove of non supported extension: /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log
+Info 127  [12:22:14.875] Elapsed:: 0.051344990730285645ms DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 128  [12:22:14.875] DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 129  [12:22:14.875] Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json Detected file add/remove of non supported extension: /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log
+Info 130  [12:22:14.875] Elapsed:: 0.04684793949127197ms DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 131  [12:22:14.875] DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 132  [12:22:14.875] Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json Detected file add/remove of non supported extension: /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log
+Info 133  [12:22:14.875] Elapsed:: 0.04434704780578613ms DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 134  [12:22:14.880] Starting updateGraphWorker: Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json
+Info 135  [12:22:14.950] Finishing updateGraphWorker: Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json Version: 2 structureChanged: false Elapsed: 69.66674304008484ms
+Info 136  [12:22:14.950] Different program with same set of files:: structureIsReused:: 2
+Info 137  [12:22:15.176] getCompletionData: Get current token: 0.014678001403808594
+Info 138  [12:22:15.176] getCompletionData: Is inside comment: 0.008061051368713379
+Info 139  [12:22:15.176] getCompletionData: Get previous token 1: 0.042788028717041016
+Info 140  [12:22:15.176] getCompletionData: Get previous token 2: 0.12670505046844482
+Info 141  [12:22:15.177] getCompletionsAtPosition: isCompletionListBlocker: 0.16391897201538086
+Info 142  [12:22:15.177] Returning an empty list because completion was requested in an invalid position.
+Info 143  [12:22:17.749] DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 144  [12:22:17.749] Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json Detected file add/remove of non supported extension: /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log
+Info 145  [12:22:17.749] Elapsed:: 0.1375730037689209ms DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/.log/ti-86244.log :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 146  [12:22:18.536] Starting updateGraphWorker: Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json
+Info 147  [12:22:18.574] Finishing updateGraphWorker: Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json Version: 3 structureChanged: false Elapsed: 37.98220407962799ms
+Info 148  [12:22:18.574] Different program with same set of files:: structureIsReused:: 2
+Info 149  [12:22:20.910] forEachExternalModuleToImportFrom: filtered out 33 modules by package.json contents
+Info 150  [12:23:13.964] getCompletionData: Get current token: 0.0313870906829834
+Info 151  [12:23:13.964] getCompletionData: Is inside comment: 0.013230085372924805
+Info 152  [12:23:13.964] getCompletionData: Get previous token 1: 0.08720290660858154
+Info 153  [12:23:13.965] getCompletionData: Get previous token 2: 0.12198507785797119
+Info 154  [12:23:13.965] getCompletionsAtPosition: isCompletionListBlocker: 0.31942999362945557
+Info 155  [12:23:13.967] getCompletionData: Semantic work: 1.320106029510498
+Info 156  [12:23:13.968] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 0.0051500797271728516
+Info 157  [12:23:16.417] Starting updateGraphWorker: Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json
+Info 158  [12:23:16.442] Finishing updateGraphWorker: Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json Version: 4 structureChanged: false Elapsed: 24.814615964889526ms
+Info 159  [12:23:16.442] Different program with same set of files:: structureIsReused:: 2
+Info 160  [12:23:21.594] getCompletionData: Get current token: 0.02821493148803711
+Info 161  [12:23:21.594] getCompletionData: Is inside comment: 0.061756014823913574
+Info 162  [12:23:21.594] getCompletionData: Get previous token 1: 0.03888499736785889
+Info 163  [12:23:21.594] getCompletionsAtPosition: isCompletionListBlocker: 0.005208015441894531
+Info 164  [12:23:21.601] getSymbolsFromOtherSourceFileExports: Recomputing list
+Info 165  [12:23:21.655] forEachExternalModuleToImportFrom: filtered out 33 modules by package.json contents
+Info 166  [12:23:21.666] getSymbolsFromOtherSourceFileExports: 64.82074904441833
+Info 167  [12:23:21.685] getCompletionData: Semantic work: 91.3870769739151
+Info 168  [12:23:21.730] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 43.717772006988525
+Info 169  [12:23:21.756] getCompletionData: Get current token: 0.0103529691696167
+Info 170  [12:23:21.756] getCompletionData: Is inside comment: 0.03071904182434082
+Info 171  [12:23:21.756] getCompletionData: Get previous token 1: 0.01708507537841797
+Info 172  [12:23:21.756] getCompletionsAtPosition: isCompletionListBlocker: 0.003972053527832031
+Info 173  [12:23:21.769] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 174  [12:23:21.780] getCompletionData: Semantic work: 23.617467045783997
+Info 175  [12:23:21.822] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 40.58725202083588
+Info 176  [12:23:21.836] getCompletionData: Get current token: 0.009504914283752441
+Info 177  [12:23:21.836] getCompletionData: Is inside comment: 0.024569988250732422
+Info 178  [12:23:21.836] getCompletionData: Get previous token 1: 0.017067909240722656
+Info 179  [12:23:21.836] getCompletionsAtPosition: isCompletionListBlocker: 0.0038199424743652344
+Info 180  [12:23:21.858] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 181  [12:23:21.862] getCompletionData: Semantic work: 26.239722967147827
+Info 182  [12:23:21.879] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 16.583644032478333
+Info 183  [12:23:21.887] getCompletionData: Get current token: 0.009184956550598145
+Info 184  [12:23:21.887] getCompletionData: Is inside comment: 0.023362040519714355
+Info 185  [12:23:21.887] getCompletionData: Get previous token 1: 0.015878915786743164
+Info 186  [12:23:21.887] getCompletionsAtPosition: isCompletionListBlocker: 0.003247976303100586
+Info 187  [12:23:21.894] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 188  [12:23:21.899] getCompletionData: Semantic work: 11.596094012260437
+Info 189  [12:23:21.934] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 33.99783205986023
+Info 190  [12:23:22.010] getCompletionData: Get current token: 0.009428977966308594
+Info 191  [12:23:22.010] getCompletionData: Is inside comment: 0.023079991340637207
+Info 192  [12:23:22.010] getCompletionData: Get previous token 1: 0.016278982162475586
+Info 193  [12:23:22.010] getCompletionsAtPosition: isCompletionListBlocker: 0.0030460357666015625
+Info 194  [12:23:22.023] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 195  [12:23:22.025] getCompletionData: Semantic work: 14.788193941116333
+Info 196  [12:23:22.042] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 17.397782921791077
+Info 197  [12:23:22.052] getCompletionData: Get current token: 0.008971929550170898
+Info 198  [12:23:22.052] getCompletionData: Is inside comment: 0.022825002670288086
+Info 199  [12:23:22.052] getCompletionData: Get previous token 1: 0.01565706729888916
+Info 200  [12:23:22.052] getCompletionsAtPosition: isCompletionListBlocker: 0.003347039222717285
+Info 201  [12:23:22.060] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 202  [12:23:22.063] getCompletionData: Semantic work: 11.028072953224182
+Info 203  [12:23:22.072] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 7.519410014152527
+Info 204  [12:23:22.080] getCompletionData: Get current token: 0.01002204418182373
+Info 205  [12:23:22.080] getCompletionData: Is inside comment: 0.022433996200561523
+Info 206  [12:23:22.080] getCompletionData: Get previous token 1: 0.01536095142364502
+Info 207  [12:23:22.080] getCompletionsAtPosition: isCompletionListBlocker: 0.003224968910217285
+Info 208  [12:23:22.083] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 209  [12:23:22.085] getCompletionData: Semantic work: 4.5521169900894165
+Info 210  [12:23:22.092] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 7.491145014762878
+Info 211  [12:23:23.450] getCompletionData: Get current token: 0.015805959701538086
+Info 212  [12:23:23.450] getCompletionData: Is inside comment: 0.04155302047729492
+Info 213  [12:23:23.450] getCompletionData: Get previous token 1: 0.027848005294799805
+Info 214  [12:23:23.450] getCompletionsAtPosition: isCompletionListBlocker: 0.005228996276855469
+Info 215  [12:23:23.455] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 216  [12:23:23.458] getCompletionData: Semantic work: 7.5702420473098755
+Info 217  [12:23:23.465] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 7.3412909507751465
+Info 218  [12:23:23.590] getCompletionData: Get current token: 0.01026308536529541
+Info 219  [12:23:23.590] getCompletionData: Is inside comment: 0.025038957595825195
+Info 220  [12:23:23.591] getCompletionData: Get previous token 1: 0.01632106304168701
+Info 221  [12:23:23.591] getCompletionsAtPosition: isCompletionListBlocker: 0.0036089420318603516
+Info 222  [12:23:23.596] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 223  [12:23:23.598] getCompletionData: Semantic work: 7.420685052871704
+Info 224  [12:23:23.604] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 6.198904991149902
+Info 225  [12:23:23.615] getCompletionData: Get current token: 0.008755087852478027
+Info 226  [12:23:23.615] getCompletionData: Is inside comment: 0.02273106575012207
+Info 227  [12:23:23.615] getCompletionData: Get previous token 1: 0.01559293270111084
+Info 228  [12:23:23.615] getCompletionsAtPosition: isCompletionListBlocker: 0.005975008010864258
+Info 229  [12:23:23.618] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 230  [12:23:23.619] getCompletionData: Semantic work: 4.096732020378113
+Info 231  [12:23:23.632] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 12.832053065299988
+Info 232  [12:23:23.658] getCompletionData: Get current token: 0.008764982223510742
+Info 233  [12:23:23.658] getCompletionData: Is inside comment: 0.023000001907348633
+Info 234  [12:23:23.658] getCompletionData: Get previous token 1: 0.015218019485473633
+Info 235  [12:23:23.658] getCompletionsAtPosition: isCompletionListBlocker: 0.010477066040039062
+Info 236  [12:23:23.661] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 237  [12:23:23.662] getCompletionData: Semantic work: 3.6862510442733765
+Info 238  [12:23:23.668] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 5.497939109802246
+Info 239  [12:23:23.717] getCompletionData: Get current token: 0.009757041931152344
+Info 240  [12:23:23.717] getCompletionData: Is inside comment: 0.02452099323272705
+Info 241  [12:23:23.717] getCompletionData: Get previous token 1: 0.015663981437683105
+Info 242  [12:23:23.717] getCompletionsAtPosition: isCompletionListBlocker: 0.0040770769119262695
+Info 243  [12:23:23.720] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 244  [12:23:23.721] getCompletionData: Semantic work: 3.770300030708313
+Info 245  [12:23:23.727] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 5.833606958389282
+Info 246  [12:23:23.740] getCompletionData: Get current token: 0.008798956871032715
+Info 247  [12:23:23.741] getCompletionData: Is inside comment: 0.022271037101745605
+Info 248  [12:23:23.741] getCompletionData: Get previous token 1: 0.015794992446899414
+Info 249  [12:23:23.741] getCompletionsAtPosition: isCompletionListBlocker: 0.003818035125732422
+Info 250  [12:23:23.743] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 251  [12:23:23.744] getCompletionData: Semantic work: 3.179206967353821
+Info 252  [12:23:23.752] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 7.876927971839905
+Info 253  [12:23:23.794] getCompletionData: Get current token: 0.00837099552154541
+Info 254  [12:23:23.794] getCompletionData: Is inside comment: 0.007194995880126953
+Info 255  [12:23:23.794] getCompletionData: Get previous token 1: 0.021950960159301758
+Info 256  [12:23:23.794] getCompletionsAtPosition: isCompletionListBlocker: 0.0034869909286499023
+Info 257  [12:23:23.796] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 258  [12:23:23.803] getCompletionData: Semantic work: 8.757475972175598
+Info 259  [12:23:23.811] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 8.11379599571228
+Info 260  [12:23:23.941] getCompletionData: Get current token: 0.009590983390808105
+Info 261  [12:23:23.941] getCompletionData: Is inside comment: 0.004516005516052246
+Info 262  [12:23:23.941] getCompletionData: Get previous token 1: 0.021481037139892578
+Info 263  [12:23:23.941] getCompletionsAtPosition: isCompletionListBlocker: 0.003994941711425781
+Info 264  [12:23:23.943] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 265  [12:23:23.946] getCompletionData: Semantic work: 5.152529001235962
+Info 266  [12:23:23.963] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 9.837620973587036
+Info 267  [12:23:23.977] getCompletionData: Get current token: 0.008329987525939941
+Info 268  [12:23:23.977] getCompletionData: Is inside comment: 0.004556059837341309
+Info 269  [12:23:23.977] getCompletionData: Get previous token 1: 0.020813941955566406
+Info 270  [12:23:23.977] getCompletionsAtPosition: isCompletionListBlocker: 0.0034589767456054688
+Info 271  [12:23:23.991] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 272  [12:23:23.995] getCompletionData: Semantic work: 17.97886300086975
+Info 273  [12:23:24.016] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 20.11960196495056
+Info 274  [12:23:24.025] getCompletionData: Get current token: 0.009575963020324707
+Info 275  [12:23:24.025] getCompletionData: Is inside comment: 0.025817036628723145
+Info 276  [12:23:24.025] getCompletionData: Get previous token 1: 0.01973891258239746
+Info 277  [12:23:24.025] getCompletionsAtPosition: isCompletionListBlocker: 0.014497995376586914
+Info 278  [12:23:24.028] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 279  [12:23:24.039] getCompletionData: Semantic work: 13.810795903205872
+Info 280  [12:23:24.063] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 23.258133053779602
+Info 281  [12:23:24.128] getCompletionData: Get current token: 0.011669039726257324
+Info 282  [12:23:24.128] getCompletionData: Is inside comment: 0.03125
+Info 283  [12:23:24.128] getCompletionData: Get previous token 1: 0.023368000984191895
+Info 284  [12:23:24.128] getCompletionsAtPosition: isCompletionListBlocker: 0.025305986404418945
+Info 285  [12:23:24.131] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 286  [12:23:24.135] getCompletionData: Semantic work: 6.122017979621887
+Info 287  [12:23:24.160] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 9.848471999168396
+Info 288  [12:23:24.189] getCompletionData: Get current token: 0.010442018508911133
+Info 289  [12:23:24.189] getCompletionData: Is inside comment: 0.027680039405822754
+Info 290  [12:23:24.189] getCompletionData: Get previous token 1: 0.020205020904541016
+Info 291  [12:23:24.189] getCompletionsAtPosition: isCompletionListBlocker: 0.021766066551208496
+Info 292  [12:23:24.192] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 293  [12:23:24.193] getCompletionData: Semantic work: 4.14752197265625
+Info 294  [12:23:24.216] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 23.345329999923706
+Info 295  [12:23:24.225] getCompletionData: Get current token: 0.008843064308166504
+Info 296  [12:23:24.225] getCompletionData: Is inside comment: 0.004608035087585449
+Info 297  [12:23:24.225] getCompletionData: Get previous token 1: 0.02472102642059326
+Info 298  [12:23:24.225] getCompletionsAtPosition: isCompletionListBlocker: 0.011877059936523438
+Info 299  [12:23:24.234] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 300  [12:23:24.240] getCompletionData: Semantic work: 14.058472990989685
+Info 301  [12:23:24.255] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 14.819764018058777
+Info 302  [12:23:24.345] getCompletionData: Get current token: 0.009429931640625
+Info 303  [12:23:24.345] getCompletionData: Is inside comment: 0.005071043968200684
+Info 304  [12:23:24.345] getCompletionData: Get previous token 1: 0.024517059326171875
+Info 305  [12:23:24.345] getCompletionsAtPosition: isCompletionListBlocker: 0.019637107849121094
+Info 306  [12:23:24.348] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 307  [12:23:24.351] getCompletionData: Semantic work: 5.509658098220825
+Info 308  [12:23:24.380] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 27.454854011535645
+Info 309  [12:23:24.393] getCompletionData: Get current token: 0.009457945823669434
+Info 310  [12:23:24.393] getCompletionData: Is inside comment: 0.00498509407043457
+Info 311  [12:23:24.393] getCompletionData: Get previous token 1: 0.024445056915283203
+Info 312  [12:23:24.393] getCompletionsAtPosition: isCompletionListBlocker: 0.014155030250549316
+Info 313  [12:23:24.395] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 314  [12:23:24.398] getCompletionData: Semantic work: 5.4950480461120605
+Info 315  [12:23:24.405] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 6.3724730014801025
+Info 316  [12:23:24.665] Starting updateGraphWorker: Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json
+Info 317  [12:23:24.713] Finishing updateGraphWorker: Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json Version: 5 structureChanged: false Elapsed: 48.79807806015015ms
+Info 318  [12:23:24.713] Different program with same set of files:: structureIsReused:: 2
+Info 319  [12:23:26.319] forEachExternalModuleToImportFrom: filtered out 33 modules by package.json contents
+Info 320  [12:23:29.275] forEachExternalModuleToImportFrom: filtered out 33 modules by package.json contents
+Info 321  [12:23:29.303] forEachExternalModuleToImportFrom: filtered out 33 modules by package.json contents
+Info 322  [12:23:29.933] forEachExternalModuleToImportFrom: filtered out 33 modules by package.json contents
+Info 323  [12:23:29.959] forEachExternalModuleToImportFrom: filtered out 33 modules by package.json contents
+Info 324  [12:23:29.980] getCompletionData: Get current token: 0.01494896411895752
+Info 325  [12:23:29.980] getCompletionData: Is inside comment: 0.004389047622680664
+Info 326  [12:23:29.980] getCompletionData: Get previous token 1: 0.02873694896697998
+Info 327  [12:23:29.980] getCompletionData: Get previous token 2: 0.02427804470062256
+Info 328  [12:23:29.980] getCompletionsAtPosition: isCompletionListBlocker: 0.02687704563140869
+Info 329  [12:23:29.983] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 330  [12:23:29.992] getCompletionData: Semantic work: 12.387737035751343
+Info 331  [12:23:30.000] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 7.852697968482971
+Info 332  [12:23:30.023] getCompletionData: Get current token: 0.015154004096984863
+Info 333  [12:23:30.023] getCompletionData: Is inside comment: 0.0042150020599365234
+Info 334  [12:23:30.023] getCompletionData: Get previous token 1: 0.03034794330596924
+Info 335  [12:23:30.023] getCompletionData: Get previous token 2: 0.023990988731384277
+Info 336  [12:23:30.024] getCompletionsAtPosition: isCompletionListBlocker: 0.02177596092224121
+Info 337  [12:23:30.028] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 338  [12:23:30.031] getCompletionData: Semantic work: 7.729629993438721
+Info 339  [12:23:30.040] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 7.566267967224121
+Info 340  [12:23:30.066] getCompletionData: Get current token: 0.014528989791870117
+Info 341  [12:23:30.066] getCompletionData: Is inside comment: 0.003979086875915527
+Info 342  [12:23:30.066] getCompletionData: Get previous token 1: 0.02890300750732422
+Info 343  [12:23:30.066] getCompletionData: Get previous token 2: 0.022562026977539062
+Info 344  [12:23:30.066] getCompletionsAtPosition: isCompletionListBlocker: 0.028071999549865723
+Info 345  [12:23:30.070] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 346  [12:23:30.074] getCompletionData: Semantic work: 7.637022972106934
+Info 347  [12:23:30.090] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 16.59663200378418
+Info 348  [12:23:30.098] getCompletionData: Get current token: 0.013700008392333984
+Info 349  [12:23:30.098] getCompletionData: Is inside comment: 0.004174947738647461
+Info 350  [12:23:30.099] getCompletionData: Get previous token 1: 0.02877795696258545
+Info 351  [12:23:30.099] getCompletionData: Get previous token 2: 0.022830963134765625
+Info 352  [12:23:30.099] getCompletionsAtPosition: isCompletionListBlocker: 0.014417052268981934
+Info 353  [12:23:30.102] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 354  [12:23:30.104] getCompletionData: Semantic work: 5.704692006111145
+Info 355  [12:23:30.108] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 3.260269045829773
+Info 356  [12:23:30.288] getCompletionData: Get current token: 0.018617987632751465
+Info 357  [12:23:30.288] getCompletionData: Is inside comment: 0.004989981651306152
+Info 358  [12:23:30.288] getCompletionData: Get previous token 1: 0.03876793384552002
+Info 359  [12:23:30.288] getCompletionData: Get previous token 2: 0.031004905700683594
+Info 360  [12:23:30.289] getCompletionsAtPosition: isCompletionListBlocker: 0.015550971031188965
+Info 361  [12:23:30.294] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 362  [12:23:30.296] getCompletionData: Semantic work: 7.27764105796814
+Info 363  [12:23:30.300] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 4.18258798122406
+Info 364  [12:23:30.313] getCompletionData: Get current token: 0.02926790714263916
+Info 365  [12:23:30.313] getCompletionData: Is inside comment: 0.00918591022491455
+Info 366  [12:23:30.313] getCompletionData: Get previous token 1: 0.044245004653930664
+Info 367  [12:23:30.313] getCompletionData: Get previous token 2: 0.027928948402404785
+Info 368  [12:23:30.313] getCompletionsAtPosition: isCompletionListBlocker: 0.014283061027526855
+Info 369  [12:23:30.316] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 370  [12:23:30.318] getCompletionData: Semantic work: 4.760640025138855
+Info 371  [12:23:30.328] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 9.893471956253052
+Info 372  [12:23:30.343] getCompletionData: Get current token: 0.015762925148010254
+Info 373  [12:23:30.344] getCompletionData: Is inside comment: 0.01023399829864502
+Info 374  [12:23:30.344] getCompletionData: Get previous token 1: 0.04581499099731445
+Info 375  [12:23:30.344] getCompletionData: Get previous token 2: 0.028175950050354004
+Info 376  [12:23:30.344] getCompletionsAtPosition: isCompletionListBlocker: 0.015022993087768555
+Info 377  [12:23:30.350] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 378  [12:23:30.352] getCompletionData: Semantic work: 8.515173077583313
+Info 379  [12:23:30.357] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 4.431710958480835
+Info 380  [12:23:32.652] Starting updateGraphWorker: Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json
+Info 381  [12:23:32.676] Finishing updateGraphWorker: Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json Version: 6 structureChanged: false Elapsed: 23.490514993667603ms
+Info 382  [12:23:32.676] Different program with same set of files:: structureIsReused:: 2
+Info 383  [12:23:33.997] forEachExternalModuleToImportFrom: filtered out 33 modules by package.json contents
+Info 384  [12:23:41.577] forEachExternalModuleToImportFrom: filtered out 33 modules by package.json contents
+Info 385  [12:23:41.607] forEachExternalModuleToImportFrom: filtered out 33 modules by package.json contents
+Info 386  [12:23:42.279] forEachExternalModuleToImportFrom: filtered out 33 modules by package.json contents
+Info 387  [12:23:42.308] forEachExternalModuleToImportFrom: filtered out 33 modules by package.json contents
+Info 388  [12:23:42.340] getCompletionData: Get current token: 0.019118070602416992
+Info 389  [12:23:42.340] getCompletionData: Is inside comment: 0.004509925842285156
+Info 390  [12:23:42.340] getCompletionData: Get previous token 1: 0.03610503673553467
+Info 391  [12:23:42.340] getCompletionData: Get previous token 2: 0.03170502185821533
+Info 392  [12:23:42.340] getCompletionsAtPosition: isCompletionListBlocker: 0.018800020217895508
+Info 393  [12:23:42.346] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 394  [12:23:42.350] getCompletionData: Semantic work: 10.199620962142944
+Info 395  [12:23:42.361] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 10.902547955513
+Info 396  [12:23:42.416] getCompletionData: Get current token: 0.017088890075683594
+Info 397  [12:23:42.416] getCompletionData: Is inside comment: 0.004828929901123047
+Info 398  [12:23:42.416] getCompletionData: Get previous token 1: 0.03546404838562012
+Info 399  [12:23:42.417] getCompletionData: Get previous token 2: 0.02741396427154541
+Info 400  [12:23:42.417] getCompletionsAtPosition: isCompletionListBlocker: 0.016849994659423828
+Info 401  [12:23:42.420] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 402  [12:23:42.424] getCompletionData: Semantic work: 7.218086004257202
+Info 403  [12:23:42.436] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 11.795962929725647
+Info 404  [12:23:42.447] getCompletionData: Get current token: 0.016360998153686523
+Info 405  [12:23:42.447] getCompletionData: Is inside comment: 0.0040999650955200195
+Info 406  [12:23:42.447] getCompletionData: Get previous token 1: 0.03437697887420654
+Info 407  [12:23:42.447] getCompletionData: Get previous token 2: 0.027183055877685547
+Info 408  [12:23:42.447] getCompletionsAtPosition: isCompletionListBlocker: 0.013155102729797363
+Info 409  [12:23:42.450] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 410  [12:23:42.456] getCompletionData: Semantic work: 9.036850929260254
+Info 411  [12:23:42.468] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 11.246124029159546
+Info 412  [12:23:42.486] getCompletionData: Get current token: 0.017771005630493164
+Info 413  [12:23:42.486] getCompletionData: Is inside comment: 0.004336953163146973
+Info 414  [12:23:42.486] getCompletionData: Get previous token 1: 0.02093803882598877
+Info 415  [12:23:42.486] getCompletionData: Get previous token 2: 0.015954017639160156
+Info 416  [12:23:42.486] getCompletionsAtPosition: isCompletionListBlocker: 0.01165306568145752
+Info 417  [12:23:42.492] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 418  [12:23:42.494] getCompletionData: Semantic work: 7.906264901161194
+Info 419  [12:23:42.497] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 3.525624990463257
+Info 420  [12:23:44.489] Starting updateGraphWorker: Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json
+Info 421  [12:23:44.504] Finishing updateGraphWorker: Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json Version: 7 structureChanged: false Elapsed: 14.53420603275299ms
+Info 422  [12:23:44.504] Different program with same set of files:: structureIsReused:: 2
+Info 423  [12:23:48.163] getCompletionData: Get current token: 0.023326992988586426
+Info 424  [12:23:48.163] getCompletionData: Is inside comment: 0.010163068771362305
+Info 425  [12:23:48.163] getCompletionData: Get previous token 1: 0.04099297523498535
+Info 426  [12:23:48.164] getCompletionData: Get previous token 2: 0.03700900077819824
+Info 427  [12:23:48.164] getCompletionsAtPosition: isCompletionListBlocker: 0.024648070335388184
+Info 428  [12:23:48.164] getCompletionData: Semantic work: 0.07603490352630615
+Info 429  [12:23:48.164] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 0.2221900224685669
+Info 430  [12:23:50.043] Starting updateGraphWorker: Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json
+Info 431  [12:23:50.059] Finishing updateGraphWorker: Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json Version: 8 structureChanged: false Elapsed: 15.915918111801147ms
+Info 432  [12:23:50.059] Different program with same set of files:: structureIsReused:: 2
+Info 433  [12:23:55.011] getCompletionData: Get current token: 0.01646602153778076
+Info 434  [12:23:55.012] getCompletionData: Is inside comment: 0.006911039352416992
+Info 435  [12:23:55.012] getCompletionData: Get previous token 1: 0.02455604076385498
+Info 436  [12:23:55.012] getCompletionData: Get previous token 2: 0.0275270938873291
+Info 437  [12:23:55.012] getCompletionsAtPosition: isCompletionListBlocker: 0.018651962280273438
+Info 438  [12:23:55.012] getCompletionData: Semantic work: 0.03178000450134277
+Info 439  [12:23:55.012] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 0.0038700103759765625
+Info 440  [12:23:57.723] getCompletionData: Get current token: 0.017057061195373535
+Info 441  [12:23:57.723] getCompletionData: Is inside comment: 0.0076580047607421875
+Info 442  [12:23:57.723] getCompletionData: Get previous token 1: 0.02486598491668701
+Info 443  [12:23:57.723] getCompletionData: Get previous token 2: 0.03013002872467041
+Info 444  [12:23:57.723] getCompletionsAtPosition: isCompletionListBlocker: 0.021404027938842773
+Info 445  [12:23:57.724] getCompletionData: Semantic work: 0.04211699962615967
+Info 446  [12:23:57.724] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 0.0032989978790283203
+Info 447  [12:24:00.097] getCompletionData: Get current token: 0.017356038093566895
+Info 448  [12:24:00.097] getCompletionData: Is inside comment: 0.0072460174560546875
+Info 449  [12:24:00.097] getCompletionData: Get previous token 1: 0.02576601505279541
+Info 450  [12:24:00.097] getCompletionData: Get previous token 2: 0.02274191379547119
+Info 451  [12:24:00.097] getCompletionsAtPosition: isCompletionListBlocker: 0.021245956420898438
+Info 452  [12:24:00.098] getCompletionData: Semantic work: 0.03595101833343506
+Info 453  [12:24:00.098] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 0.0032579898834228516
+Info 454  [12:24:01.774] getCompletionData: Get current token: 0.019662976264953613
+Info 455  [12:24:01.774] getCompletionData: Is inside comment: 0.0070989131927490234
+Info 456  [12:24:01.774] getCompletionData: Get previous token 1: 0.024516940116882324
+Info 457  [12:24:01.774] getCompletionsAtPosition: isCompletionListBlocker: 0.017409920692443848
+Info 458  [12:24:01.779] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 459  [12:24:01.788] getCompletionData: Semantic work: 14.24428105354309
+Info 460  [12:24:01.809] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 20.287853002548218
+Info 461  [12:24:02.491] Starting updateGraphWorker: Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json
+Info 462  [12:24:02.514] Finishing updateGraphWorker: Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json Version: 9 structureChanged: false Elapsed: 22.71735692024231ms
+Info 463  [12:24:02.514] Different program with same set of files:: structureIsReused:: 2
+Info 464  [12:24:21.847] getCompletionData: Get current token: 0.008121967315673828
+Info 465  [12:24:21.847] getCompletionData: Is inside comment: 0.026234030723571777
+Info 466  [12:24:23.356] getCompletionData: Get current token: 0.011110067367553711
+Info 467  [12:24:23.357] getCompletionData: Is inside comment: 0.008036971092224121
+Info 468  [12:24:23.357] getCompletionData: Get previous token 1: 0.0295870304107666
+Info 469  [12:24:23.357] getCompletionData: Get previous token 2: 0.07846701145172119
+Info 470  [12:24:23.357] getCompletionsAtPosition: isCompletionListBlocker: 0.03001391887664795
+Info 471  [12:24:23.361] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 472  [12:24:23.369] getCompletionData: Semantic work: 11.547483921051025
+Info 473  [12:24:23.401] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 30.155441999435425
+Info 474  [12:24:24.545] getCompletionData: Get current token: 0.010388016700744629
+Info 475  [12:24:24.545] getCompletionData: Is inside comment: 0.007036089897155762
+Info 476  [12:24:24.545] getCompletionData: Get previous token 1: 0.030348896980285645
+Info 477  [12:24:24.545] getCompletionData: Get previous token 2: 0.023756980895996094
+Info 478  [12:24:24.545] getCompletionsAtPosition: isCompletionListBlocker: 0.005572915077209473
+Info 479  [12:24:24.545] Returning an empty list because completion was requested in an invalid position.
+Info 480  [12:24:26.316] getCompletionData: Get current token: 0.015487074851989746
+Info 481  [12:24:26.316] getCompletionData: Is inside comment: 0.010350942611694336
+Info 482  [12:24:26.316] getCompletionData: Get previous token 1: 0.03882491588592529
+Info 483  [12:24:26.316] getCompletionData: Get previous token 2: 0.038035035133361816
+Info 484  [12:24:26.317] getCompletionsAtPosition: isCompletionListBlocker: 0.005617022514343262
+Info 485  [12:24:26.317] Returning an empty list because completion was requested in an invalid position.
+Info 486  [12:24:29.968] getCompletionData: Get current token: 0.007122993469238281
+Info 487  [12:24:29.969] getCompletionData: Is inside comment: 0.010524988174438477
+Info 488  [12:24:29.971] getCompletionData: Get previous token 1: 0.05076003074645996
+Info 489  [12:24:29.971] getCompletionsAtPosition: isCompletionListBlocker: 0.0264509916305542
+Info 490  [12:24:29.971] Returning an empty list because completion was requested in an invalid position.
+Info 491  [12:24:30.626] getCompletionData: Get current token: 0.01090097427368164
+Info 492  [12:24:30.626] getCompletionData: Is inside comment: 0.013393998146057129
+Info 493  [12:24:30.626] getCompletionData: Get previous token 1: 0.03021109104156494
+Info 494  [12:24:30.626] getCompletionsAtPosition: isCompletionListBlocker: 0.021669983863830566
+Info 495  [12:24:30.626] Returning an empty list because completion was requested in an invalid position.
+Info 496  [12:24:31.809] getCompletionData: Get current token: 0.012282967567443848
+Info 497  [12:24:31.809] getCompletionData: Is inside comment: 0.007439970970153809
+Info 498  [12:24:31.809] getCompletionData: Get previous token 1: 0.03900802135467529
+Info 499  [12:24:31.810] getCompletionData: Get previous token 2: 0.6263110637664795
+Info 500  [12:24:31.810] getCompletionsAtPosition: isCompletionListBlocker: 0.020793914794921875
+Info 501  [12:24:31.814] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 502  [12:24:31.830] getCompletionData: Semantic work: 20.109071016311646
+Info 503  [12:24:31.854] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 23.570356011390686
+Info 504  [12:24:31.989] getCompletionData: Get current token: 0.007650017738342285
+Info 505  [12:24:31.989] getCompletionData: Is inside comment: 0.004619956016540527
+Info 506  [12:24:31.989] getCompletionData: Get previous token 1: 0.020385026931762695
+Info 507  [12:24:31.989] getCompletionData: Get previous token 2: 0.012619972229003906
+Info 508  [12:24:31.989] getCompletionsAtPosition: isCompletionListBlocker: 0.01464998722076416
+Info 509  [12:24:31.992] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 510  [12:24:31.996] getCompletionData: Semantic work: 6.7036049365997314
+Info 511  [12:24:32.003] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 7.000332951545715
+Info 512  [12:24:32.014] getCompletionData: Get current token: 0.007948994636535645
+Info 513  [12:24:32.014] getCompletionData: Is inside comment: 0.004147052764892578
+Info 514  [12:24:32.014] getCompletionData: Get previous token 1: 0.019358038902282715
+Info 515  [12:24:32.014] getCompletionData: Get previous token 2: 0.01262807846069336
+Info 516  [12:24:32.014] getCompletionsAtPosition: isCompletionListBlocker: 0.011632919311523438
+Info 517  [12:24:32.018] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 518  [12:24:32.024] getCompletionData: Semantic work: 9.863780975341797
+Info 519  [12:24:32.030] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 5.330183029174805
+Info 520  [12:24:32.071] getCompletionData: Get current token: 0.007845044136047363
+Info 521  [12:24:32.071] getCompletionData: Is inside comment: 0.004079103469848633
+Info 522  [12:24:32.071] getCompletionData: Get previous token 1: 0.02040696144104004
+Info 523  [12:24:32.071] getCompletionData: Get previous token 2: 0.012963056564331055
+Info 524  [12:24:32.071] getCompletionsAtPosition: isCompletionListBlocker: 0.011874914169311523
+Info 525  [12:24:32.073] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 526  [12:24:32.076] getCompletionData: Semantic work: 4.2165480852127075
+Info 527  [12:24:32.083] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 6.921926021575928
+Info 528  [12:24:32.212] getCompletionData: Get current token: 0.00794994831085205
+Info 529  [12:24:32.212] getCompletionData: Is inside comment: 0.008204102516174316
+Info 530  [12:24:32.212] getCompletionData: Get previous token 1: 0.027647972106933594
+Info 531  [12:24:32.212] getCompletionData: Get previous token 2: 0.014168977737426758
+Info 532  [12:24:32.212] getCompletionsAtPosition: isCompletionListBlocker: 0.014596939086914062
+Info 533  [12:24:32.215] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 534  [12:24:32.220] getCompletionData: Semantic work: 7.965644001960754
+Info 535  [12:24:32.230] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 9.444746971130371
+Info 536  [12:24:32.253] getCompletionData: Get current token: 0.007691025733947754
+Info 537  [12:24:32.253] getCompletionData: Is inside comment: 0.00444793701171875
+Info 538  [12:24:32.253] getCompletionData: Get previous token 1: 0.020321011543273926
+Info 539  [12:24:32.253] getCompletionData: Get previous token 2: 0.012963056564331055
+Info 540  [12:24:32.253] getCompletionsAtPosition: isCompletionListBlocker: 0.013551950454711914
+Info 541  [12:24:32.257] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 542  [12:24:32.262] getCompletionData: Semantic work: 8.183385014533997
+Info 543  [12:24:32.268] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 6.72607696056366
+Info 544  [12:24:32.286] getCompletionData: Get current token: 0.0074748992919921875
+Info 545  [12:24:32.286] getCompletionData: Is inside comment: 0.004297971725463867
+Info 546  [12:24:32.286] getCompletionData: Get previous token 1: 0.020658016204833984
+Info 547  [12:24:32.286] getCompletionData: Get previous token 2: 0.012930989265441895
+Info 548  [12:24:32.286] getCompletionsAtPosition: isCompletionListBlocker: 0.012639045715332031
+Info 549  [12:24:32.289] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 550  [12:24:32.291] getCompletionData: Semantic work: 4.247079014778137
+Info 551  [12:24:32.298] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 6.9159979820251465
+Info 552  [12:24:32.342] getCompletionData: Get current token: 0.007925987243652344
+Info 553  [12:24:32.342] getCompletionData: Is inside comment: 0.004888057708740234
+Info 554  [12:24:32.342] getCompletionData: Get previous token 1: 0.019697904586791992
+Info 555  [12:24:32.343] getCompletionData: Get previous token 2: 0.013324975967407227
+Info 556  [12:24:32.343] getCompletionsAtPosition: isCompletionListBlocker: 0.013615965843200684
+Info 557  [12:24:32.345] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 558  [12:24:32.349] getCompletionData: Semantic work: 5.97967803478241
+Info 559  [12:24:32.355] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 5.928640961647034
+Info 560  [12:24:32.379] getCompletionData: Get current token: 0.007635951042175293
+Info 561  [12:24:32.379] getCompletionData: Is inside comment: 0.004084944725036621
+Info 562  [12:24:32.379] getCompletionData: Get previous token 1: 0.019868016242980957
+Info 563  [12:24:32.380] getCompletionData: Get previous token 2: 0.012686967849731445
+Info 564  [12:24:32.380] getCompletionsAtPosition: isCompletionListBlocker: 0.013836979866027832
+Info 565  [12:24:32.386] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 566  [12:24:32.390] getCompletionData: Semantic work: 9.959577083587646
+Info 567  [12:24:32.399] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 9.690294981002808
+Info 568  [12:24:32.415] getCompletionData: Get current token: 0.008376002311706543
+Info 569  [12:24:32.415] getCompletionData: Is inside comment: 0.023322105407714844
+Info 570  [12:24:32.415] getCompletionData: Get previous token 1: 0.015932083129882812
+Info 571  [12:24:32.415] getCompletionData: Get previous token 2: 0.011500000953674316
+Info 572  [12:24:32.415] getCompletionsAtPosition: isCompletionListBlocker: 0.012143969535827637
+Info 573  [12:24:32.417] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 574  [12:24:32.420] getCompletionData: Semantic work: 5.060910105705261
+Info 575  [12:24:32.426] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 5.663177967071533
+Info 576  [12:24:32.438] getCompletionData: Get current token: 0.009025931358337402
+Info 577  [12:24:32.438] getCompletionData: Is inside comment: 0.024942994117736816
+Info 578  [12:24:32.438] getCompletionData: Get previous token 1: 0.018003106117248535
+Info 579  [12:24:32.438] getCompletionData: Get previous token 2: 0.029561996459960938
+Info 580  [12:24:32.438] getCompletionsAtPosition: isCompletionListBlocker: 0.013754963874816895
+Info 581  [12:24:32.441] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 582  [12:24:32.444] getCompletionData: Semantic work: 6.082230925559998
+Info 583  [12:24:32.454] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 8.976513028144836
+Info 584  [12:24:32.463] getCompletionData: Get current token: 0.00978100299835205
+Info 585  [12:24:32.464] getCompletionData: Is inside comment: 0.02508997917175293
+Info 586  [12:24:32.464] getCompletionData: Get previous token 1: 0.018169045448303223
+Info 587  [12:24:32.464] getCompletionData: Get previous token 2: 0.012840986251831055
+Info 588  [12:24:32.464] getCompletionsAtPosition: isCompletionListBlocker: 0.013965010643005371
+Info 589  [12:24:32.466] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 590  [12:24:32.468] getCompletionData: Semantic work: 4.765326023101807
+Info 591  [12:24:32.474] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 5.749783039093018
+Info 592  [12:24:32.684] getCompletionData: Get current token: 0.02155303955078125
+Info 593  [12:24:32.684] getCompletionData: Is inside comment: 0.006021976470947266
+Info 594  [12:24:32.684] getCompletionData: Get previous token 1: 0.028851032257080078
+Info 595  [12:24:32.684] getCompletionsAtPosition: isCompletionListBlocker: 0.012248992919921875
+Info 596  [12:24:32.686] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 597  [12:24:32.688] getCompletionData: Semantic work: 3.4803590774536133
+Info 598  [12:24:32.693] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 5.405233979225159
+Info 599  [12:24:33.094] getCompletionData: Get current token: 0.008317947387695312
+Info 600  [12:24:33.094] getCompletionData: Is inside comment: 0.004693031311035156
+Info 601  [12:24:33.094] getCompletionData: Get previous token 1: 0.02235400676727295
+Info 602  [12:24:33.094] getCompletionsAtPosition: isCompletionListBlocker: 0.012778997421264648
+Info 603  [12:24:33.096] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 604  [12:24:33.098] getCompletionData: Semantic work: 3.5994060039520264
+Info 605  [12:24:33.105] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 6.94300103187561
+Info 606  [12:24:33.128] getCompletionData: Get current token: 0.008452057838439941
+Info 607  [12:24:33.128] getCompletionData: Is inside comment: 0.004155993461608887
+Info 608  [12:24:33.128] getCompletionData: Get previous token 1: 0.019272923469543457
+Info 609  [12:24:33.128] getCompletionsAtPosition: isCompletionListBlocker: 0.012180924415588379
+Info 610  [12:24:33.130] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 611  [12:24:33.131] getCompletionData: Semantic work: 3.490546941757202
+Info 612  [12:24:33.140] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 8.808580040931702
+Info 613  [12:24:33.149] getCompletionData: Get current token: 0.008563995361328125
+Info 614  [12:24:33.149] getCompletionData: Is inside comment: 0.004745006561279297
+Info 615  [12:24:33.149] getCompletionData: Get previous token 1: 0.02158498764038086
+Info 616  [12:24:33.149] getCompletionsAtPosition: isCompletionListBlocker: 0.0036880970001220703
+Info 617  [12:24:33.151] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 618  [12:24:33.154] getCompletionData: Semantic work: 4.433019995689392
+Info 619  [12:24:33.160] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 6.438635945320129
+Info 620  [12:24:33.206] getCompletionData: Get current token: 0.010003924369812012
+Info 621  [12:24:33.206] getCompletionData: Is inside comment: 0.004464983940124512
+Info 622  [12:24:33.206] getCompletionData: Get previous token 1: 0.02279198169708252
+Info 623  [12:24:33.206] getCompletionsAtPosition: isCompletionListBlocker: 0.004250884056091309
+Info 624  [12:24:33.209] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 625  [12:24:33.211] getCompletionData: Semantic work: 4.448292016983032
+Info 626  [12:24:33.216] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 5.255205035209656
+Info 627  [12:24:33.245] getCompletionData: Get current token: 0.008215069770812988
+Info 628  [12:24:33.245] getCompletionData: Is inside comment: 0.0042580366134643555
+Info 629  [12:24:33.245] getCompletionData: Get previous token 1: 0.021636962890625
+Info 630  [12:24:33.245] getCompletionsAtPosition: isCompletionListBlocker: 0.003695964813232422
+Info 631  [12:24:33.247] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 632  [12:24:33.250] getCompletionData: Semantic work: 4.872153997421265
+Info 633  [12:24:33.256] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 6.638965964317322
+Info 634  [12:24:33.266] getCompletionData: Get current token: 0.008157968521118164
+Info 635  [12:24:33.266] getCompletionData: Is inside comment: 0.004364967346191406
+Info 636  [12:24:33.266] getCompletionData: Get previous token 1: 0.023548007011413574
+Info 637  [12:24:33.266] getCompletionData: Get previous token 2: 0.017875075340270996
+Info 638  [12:24:33.266] getCompletionsAtPosition: isCompletionListBlocker: 0.0036890506744384766
+Info 639  [12:24:33.268] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 640  [12:24:33.271] getCompletionData: Semantic work: 4.222417950630188
+Info 641  [12:24:33.277] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 5.88586699962616
+Info 642  [12:24:33.355] getCompletionData: Get current token: 0.009567022323608398
+Info 643  [12:24:33.355] getCompletionData: Is inside comment: 0.005045056343078613
+Info 644  [12:24:33.355] getCompletionData: Get previous token 1: 0.02500009536743164
+Info 645  [12:24:33.355] getCompletionData: Get previous token 2: 0.018213987350463867
+Info 646  [12:24:33.355] getCompletionsAtPosition: isCompletionListBlocker: 0.003919005393981934
+Info 647  [12:24:33.359] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 648  [12:24:33.361] getCompletionData: Semantic work: 6.243009090423584
+Info 649  [12:24:33.369] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 8.029824018478394
+Info 650  [12:24:33.398] getCompletionData: Get current token: 0.00843203067779541
+Info 651  [12:24:33.398] getCompletionData: Is inside comment: 0.004087090492248535
+Info 652  [12:24:33.398] getCompletionData: Get previous token 1: 0.023259997367858887
+Info 653  [12:24:33.398] getCompletionData: Get previous token 2: 0.017958998680114746
+Info 654  [12:24:33.398] getCompletionsAtPosition: isCompletionListBlocker: 0.003600001335144043
+Info 655  [12:24:33.401] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 656  [12:24:33.404] getCompletionData: Semantic work: 5.0943509340286255
+Info 657  [12:24:33.412] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 8.378952980041504
+Info 658  [12:24:33.421] getCompletionData: Get current token: 0.00884401798248291
+Info 659  [12:24:33.421] getCompletionData: Is inside comment: 0.004855036735534668
+Info 660  [12:24:33.421] getCompletionData: Get previous token 1: 0.02354300022125244
+Info 661  [12:24:33.422] getCompletionData: Get previous token 2: 0.017821907997131348
+Info 662  [12:24:33.422] getCompletionsAtPosition: isCompletionListBlocker: 0.004404902458190918
+Info 663  [12:24:33.424] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 664  [12:24:33.426] getCompletionData: Semantic work: 4.55059289932251
+Info 665  [12:24:33.437] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 10.698304057121277
+Info 666  [12:24:33.546] getCompletionData: Get current token: 0.010152101516723633
+Info 667  [12:24:33.546] getCompletionData: Is inside comment: 0.00528109073638916
+Info 668  [12:24:33.546] getCompletionData: Get previous token 1: 0.02481698989868164
+Info 669  [12:24:33.546] getCompletionData: Get previous token 2: 0.01661396026611328
+Info 670  [12:24:33.546] getCompletionsAtPosition: isCompletionListBlocker: 0.004436969757080078
+Info 671  [12:24:33.549] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 672  [12:24:33.556] getCompletionData: Semantic work: 9.7722989320755
+Info 673  [12:24:33.573] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 15.549453020095825
+Info 674  [12:24:33.588] getCompletionData: Get current token: 0.008468985557556152
+Info 675  [12:24:33.589] getCompletionData: Is inside comment: 0.004241943359375
+Info 676  [12:24:33.589] getCompletionData: Get previous token 1: 0.02495098114013672
+Info 677  [12:24:33.589] getCompletionData: Get previous token 2: 0.028742074966430664
+Info 678  [12:24:33.589] getCompletionsAtPosition: isCompletionListBlocker: 0.0048520565032958984
+Info 679  [12:24:33.593] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 680  [12:24:33.600] getCompletionData: Semantic work: 10.129623889923096
+Info 681  [12:24:33.605] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 5.425220012664795
+Info 682  [12:24:33.616] getCompletionData: Get current token: 0.010367989540100098
+Info 683  [12:24:33.616] getCompletionData: Is inside comment: 0.004308938980102539
+Info 684  [12:24:33.616] getCompletionData: Get previous token 1: 0.2831920385360718
+Info 685  [12:24:33.616] getCompletionData: Get previous token 2: 0.019804954528808594
+Info 686  [12:24:33.617] getCompletionsAtPosition: isCompletionListBlocker: 0.004925966262817383
+Info 687  [12:24:33.636] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 688  [12:24:33.639] getCompletionData: Semantic work: 22.72407293319702
+Info 689  [12:24:33.645] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 5.663303017616272
+Info 690  [12:24:33.743] getCompletionData: Get current token: 0.011379003524780273
+Info 691  [12:24:33.743] getCompletionData: Is inside comment: 0.006139993667602539
+Info 692  [12:24:33.743] getCompletionData: Get previous token 1: 0.03045499324798584
+Info 693  [12:24:33.743] getCompletionData: Get previous token 2: 0.021808981895446777
+Info 694  [12:24:33.743] getCompletionsAtPosition: isCompletionListBlocker: 0.005582928657531738
+Info 695  [12:24:33.752] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 696  [12:24:33.757] getCompletionData: Semantic work: 13.705395102500916
+Info 697  [12:24:33.797] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 39.88661599159241
+Info 698  [12:24:33.825] getCompletionData: Get current token: 0.008301973342895508
+Info 699  [12:24:33.825] getCompletionData: Is inside comment: 0.003903985023498535
+Info 700  [12:24:33.825] getCompletionData: Get previous token 1: 0.022558093070983887
+Info 701  [12:24:33.825] getCompletionData: Get previous token 2: 0.01784694194793701
+Info 702  [12:24:33.826] getCompletionsAtPosition: isCompletionListBlocker: 0.003573894500732422
+Info 703  [12:24:33.832] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 704  [12:24:33.843] getCompletionData: Semantic work: 16.972207069396973
+Info 705  [12:24:33.889] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 46.2406359910965
+Info 706  [12:24:33.900] getCompletionData: Get current token: 0.009007930755615234
+Info 707  [12:24:33.900] getCompletionData: Is inside comment: 0.004274964332580566
+Info 708  [12:24:33.900] getCompletionData: Get previous token 1: 0.02573096752166748
+Info 709  [12:24:33.900] getCompletionData: Get previous token 2: 0.017938971519470215
+Info 710  [12:24:33.900] getCompletionsAtPosition: isCompletionListBlocker: 0.0037659406661987305
+Info 711  [12:24:33.902] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 712  [12:24:33.905] getCompletionData: Semantic work: 4.824934005737305
+Info 713  [12:24:33.911] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 5.645081043243408
+Info 714  [12:24:33.919] getCompletionData: Get current token: 0.009557962417602539
+Info 715  [12:24:33.920] getCompletionData: Is inside comment: 0.008611083030700684
+Info 716  [12:24:33.920] getCompletionData: Get previous token 1: 0.0350569486618042
+Info 717  [12:24:33.920] getCompletionData: Get previous token 2: 0.018226027488708496
+Info 718  [12:24:33.920] getCompletionsAtPosition: isCompletionListBlocker: 0.0067549943923950195
+Info 719  [12:24:33.922] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 720  [12:24:33.927] getCompletionData: Semantic work: 6.6959850788116455
+Info 721  [12:24:33.932] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 5.217422008514404
+Info 722  [12:24:33.942] getCompletionData: Get current token: 0.014649033546447754
+Info 723  [12:24:33.942] getCompletionData: Is inside comment: 0.0075490474700927734
+Info 724  [12:24:33.942] getCompletionData: Get previous token 1: 0.025710105895996094
+Info 725  [12:24:33.942] getCompletionData: Get previous token 2: 0.017799973487854004
+Info 726  [12:24:33.943] getCompletionsAtPosition: isCompletionListBlocker: 0.006263017654418945
+Info 727  [12:24:33.945] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 728  [12:24:33.947] getCompletionData: Semantic work: 4.29661500453949
+Info 729  [12:24:33.953] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 5.761742949485779
+Info 730  [12:24:33.963] getCompletionData: Get current token: 0.011796951293945312
+Info 731  [12:24:33.963] getCompletionData: Is inside comment: 0.004359006881713867
+Info 732  [12:24:33.963] getCompletionData: Get previous token 1: 0.028873920440673828
+Info 733  [12:24:33.963] getCompletionData: Get previous token 2: 0.017794013023376465
+Info 734  [12:24:33.963] getCompletionsAtPosition: isCompletionListBlocker: 0.0040130615234375
+Info 735  [12:24:33.981] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 736  [12:24:33.984] getCompletionData: Semantic work: 20.903185963630676
+Info 737  [12:24:33.991] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 6.218687057495117
+Info 738  [12:24:34.015] getCompletionData: Get current token: 0.009062051773071289
+Info 739  [12:24:34.015] getCompletionData: Is inside comment: 0.004305005073547363
+Info 740  [12:24:34.015] getCompletionData: Get previous token 1: 0.022879958152770996
+Info 741  [12:24:34.015] getCompletionData: Get previous token 2: 0.017727971076965332
+Info 742  [12:24:34.015] getCompletionsAtPosition: isCompletionListBlocker: 0.004282951354980469
+Info 743  [12:24:34.018] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 744  [12:24:34.020] getCompletionData: Semantic work: 4.967880010604858
+Info 745  [12:24:34.028] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 7.054787039756775
+Info 746  [12:24:34.037] getCompletionData: Get current token: 0.008329987525939941
+Info 747  [12:24:34.037] getCompletionData: Is inside comment: 0.004416942596435547
+Info 748  [12:24:34.037] getCompletionData: Get previous token 1: 0.023538947105407715
+Info 749  [12:24:34.037] getCompletionData: Get previous token 2: 0.017054080963134766
+Info 750  [12:24:34.037] getCompletionsAtPosition: isCompletionListBlocker: 0.0036029815673828125
+Info 751  [12:24:34.039] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 752  [12:24:34.041] getCompletionData: Semantic work: 4.094141960144043
+Info 753  [12:24:34.046] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 4.9435670375823975
+Info 754  [12:24:34.055] getCompletionData: Get current token: 0.009762048721313477
+Info 755  [12:24:34.055] getCompletionData: Is inside comment: 0.02570497989654541
+Info 756  [12:24:34.055] getCompletionData: Get previous token 1: 0.017741084098815918
+Info 757  [12:24:34.055] getCompletionsAtPosition: isCompletionListBlocker: 0.09093701839447021
+Info 758  [12:24:34.057] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 759  [12:24:34.059] getCompletionData: Semantic work: 3.7624469995498657
+Info 760  [12:24:34.064] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 5.637342929840088
+Info 761  [12:24:35.217] getCompletionData: Get current token: 0.020938992500305176
+Info 762  [12:24:35.217] getCompletionData: Is inside comment: 0.010528087615966797
+Info 763  [12:24:35.217] getCompletionData: Get previous token 1: 0.05377006530761719
+Info 764  [12:24:35.217] getCompletionsAtPosition: isCompletionListBlocker: 0.013635993003845215
+Info 765  [12:24:35.220] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 766  [12:24:35.224] getCompletionData: Semantic work: 6.921136975288391
+Info 767  [12:24:35.230] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 6.43095600605011
+Info 768  [12:24:36.773] Starting updateGraphWorker: Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json
+Info 769  [12:24:36.792] Finishing updateGraphWorker: Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json Version: 10 structureChanged: false Elapsed: 18.466559052467346ms
+Info 770  [12:24:36.792] Different program with same set of files:: structureIsReused:: 2
+Info 771  [12:24:43.138] getCompletionData: Get current token: 0.015246987342834473
+Info 772  [12:24:43.139] getCompletionData: Is inside comment: 0.049075961112976074
+Info 773  [12:24:43.139] Returning an empty list because completion was inside a regular comment or plain text part of a JsDoc comment.
+Info 774  [12:24:46.350] getCompletionData: Get current token: 0.014642953872680664
+Info 775  [12:24:46.350] getCompletionData: Is inside comment: 0.04536592960357666
+Info 776  [12:24:46.351] Returning an empty list because completion was inside a regular comment or plain text part of a JsDoc comment.
+Info 777  [12:24:47.248] Starting updateGraphWorker: Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json
+Info 778  [12:24:47.261] Finishing updateGraphWorker: Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json Version: 11 structureChanged: false Elapsed: 13.256678938865662ms
+Info 779  [12:24:47.261] Different program with same set of files:: structureIsReused:: 2
+Info 780  [12:25:47.351] DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/Dockerfiles :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 781  [12:25:47.355] Elapsed:: 3.7582439184188843ms DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/Dockerfiles :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 782  [12:25:47.637] Starting updateGraphWorker: Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json
+Info 783  [12:25:47.639] Finishing updateGraphWorker: Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json Version: 12 structureChanged: false Elapsed: 1.6137850284576416ms
+Info 784  [12:25:49.859] Before ensureProjectForOpenFiles:
+Info 785  [12:25:49.859] After ensureProjectForOpenFiles:
+Info 786  [12:25:49.860] got projects updated in background, updating diagnostics for /Users/shin/Documents/github/slam-at-home/react-frontend/src/components/drawer/props.ts
+Info 787  [12:26:17.046] DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/Dockerfiles/.gitkeep :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 788  [12:26:17.047] Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json Detected ignored path: /users/shin/documents/github/slam-at-home/react-frontend/Dockerfiles/.gitkeep
+Info 789  [12:26:17.047] Elapsed:: 0.8743820190429688ms DirectoryWatcher:: Triggered with /users/shin/documents/github/slam-at-home/react-frontend/Dockerfiles/.gitkeep :: WatchInfo: /users/shin/documents/github/slam-at-home/react-frontend 1 undefined Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json WatchType: Wild card directory
+Info 790  [12:27:06.244] Starting updateGraphWorker: Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json
+Info 791  [12:27:06.270] Finishing updateGraphWorker: Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json Version: 13 structureChanged: false Elapsed: 25.870036005973816ms
+Info 792  [12:27:06.270] Different program with same set of files:: structureIsReused:: 2
+Info 793  [12:27:49.633] Starting updateGraphWorker: Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json
+Info 794  [12:27:49.674] Finishing updateGraphWorker: Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json Version: 14 structureChanged: false Elapsed: 40.927634954452515ms
+Info 795  [12:27:49.674] Different program with same set of files:: structureIsReused:: 2
+Info 796  [12:27:56.927] getCompletionData: Get current token: 0.01194000244140625
+Info 797  [12:27:56.927] getCompletionData: Is inside comment: 0.03884994983673096
+Info 798  [12:27:56.927] Returning an empty list because completion was inside a regular comment or plain text part of a JsDoc comment.
+Info 799  [12:27:58.878] getCompletionData: Get current token: 0.015731096267700195
+Info 800  [12:27:58.878] getCompletionData: Is inside comment: 0.0344160795211792
+Info 801  [12:27:58.878] Returning an empty list because completion was inside a regular comment or plain text part of a JsDoc comment.
+Info 802  [12:28:01.849] getCompletionData: Get current token: 0.011453986167907715
+Info 803  [12:28:01.849] getCompletionData: Is inside comment: 0.033933043479919434
+Info 804  [12:28:01.849] Returning an empty list because completion was inside a regular comment or plain text part of a JsDoc comment.
+Info 805  [12:28:03.206] getCompletionData: Get current token: 0.011175036430358887
+Info 806  [12:28:03.206] getCompletionData: Is inside comment: 0.03302597999572754
+Info 807  [12:28:03.207] Returning an empty list because completion was inside a regular comment or plain text part of a JsDoc comment.
+Info 808  [12:28:04.498] getCompletionData: Get current token: 0.008919954299926758
+Info 809  [12:28:04.498] getCompletionData: Is inside comment: 0.026769042015075684
+Info 810  [12:28:04.498] Returning an empty list because completion was inside a regular comment or plain text part of a JsDoc comment.
+Info 811  [12:28:07.409] getCompletionData: Get current token: 0.011636018753051758
+Info 812  [12:28:07.409] getCompletionData: Is inside comment: 0.037873029708862305
+Info 813  [12:28:07.409] Returning an empty list because completion was inside a regular comment or plain text part of a JsDoc comment.
+Info 814  [12:28:09.677] getCompletionData: Get current token: 0.009624004364013672
+Info 815  [12:28:09.677] getCompletionData: Is inside comment: 0.02966594696044922
+Info 816  [12:28:09.785] getCompletionData: Get current token: 0.011355042457580566
+Info 817  [12:28:09.785] getCompletionData: Is inside comment: 0.03956198692321777
+Info 818  [12:28:11.638] getCompletionData: Get current token: 0.010363936424255371
+Info 819  [12:28:11.638] getCompletionData: Is inside comment: 0.029783010482788086
+Info 820  [12:28:11.833] getCompletionData: Get current token: 0.018133997917175293
+Info 821  [12:28:11.834] getCompletionData: Is inside comment: 0.044891953468322754
+Info 822  [12:28:13.211] getCompletionData: Get current token: 0.009855985641479492
+Info 823  [12:28:13.211] getCompletionData: Is inside comment: 0.03448605537414551
+Info 824  [12:28:13.405] getCompletionData: Get current token: 0.018207073211669922
+Info 825  [12:28:13.405] getCompletionData: Is inside comment: 0.06395399570465088
+Info 826  [12:28:15.872] getCompletionData: Get current token: 0.013940930366516113
+Info 827  [12:28:15.872] getCompletionData: Is inside comment: 0.048370957374572754
+Info 828  [12:28:15.872] Returning an empty list because completion was inside a regular comment or plain text part of a JsDoc comment.
+Info 829  [12:28:18.437] Starting updateGraphWorker: Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json
+Info 830  [12:28:18.468] Finishing updateGraphWorker: Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json Version: 15 structureChanged: false Elapsed: 31.161476969718933ms
+Info 831  [12:28:18.468] Different program with same set of files:: structureIsReused:: 2
+Info 832  [12:28:22.190] Starting updateGraphWorker: Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json
+Info 833  [12:28:22.209] Finishing updateGraphWorker: Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json Version: 16 structureChanged: false Elapsed: 18.765456080436707ms
+Info 834  [12:28:22.209] Different program with same set of files:: structureIsReused:: 2
+Info 835  [12:37:44.631] Starting updateGraphWorker: Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json
+Info 836  [12:37:44.654] Finishing updateGraphWorker: Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json Version: 17 structureChanged: false Elapsed: 23.46033203601837ms
+Info 837  [12:37:44.654] Different program with same set of files:: structureIsReused:: 2
+Info 838  [12:37:46.646] forEachExternalModuleToImportFrom: filtered out 33 modules by package.json contents
+Info 839  [12:37:57.044] forEachExternalModuleToImportFrom: filtered out 33 modules by package.json contents
+Info 840  [12:37:57.089] forEachExternalModuleToImportFrom: filtered out 33 modules by package.json contents
+Info 841  [12:37:57.597] Starting updateGraphWorker: Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json
+Info 842  [12:37:57.628] Finishing updateGraphWorker: Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json Version: 18 structureChanged: false Elapsed: 30.606964945793152ms
+Info 843  [12:37:57.628] Different program with same set of files:: structureIsReused:: 2
+Info 844  [12:37:57.670] forEachExternalModuleToImportFrom: filtered out 33 modules by package.json contents
+Info 845  [12:37:57.686] forEachExternalModuleToImportFrom: filtered out 33 modules by package.json contents
+Info 846  [12:38:04.484] Starting updateGraphWorker: Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json
+Info 847  [12:38:04.497] Finishing updateGraphWorker: Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json Version: 19 structureChanged: false Elapsed: 12.917994022369385ms
+Info 848  [12:38:04.497] Different program with same set of files:: structureIsReused:: 2
+Info 849  [12:38:57.507] getCompletionData: Get current token: 0.008303046226501465
+Info 850  [12:38:57.507] getCompletionData: Is inside comment: 0.03899800777435303
+Info 851  [12:38:57.507] getCompletionData: Get previous token 1: 0.01772308349609375
+Info 852  [12:38:57.508] getCompletionsAtPosition: isCompletionListBlocker: 0.174638032913208
+Info 853  [12:38:57.519] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 854  [12:38:57.523] getCompletionData: Semantic work: 15.505858063697815
+Info 855  [12:38:57.539] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 15.188955068588257
+Err 856   [12:38:59.208] Exception on executing command {"command":"getApplicableRefactors","seq":518,"type":"request","arguments":{"file":"/Users/shin/Documents/github/slam-at-home/react-frontend/src/components/drawer/props.ts","startLine":59,"startOffset":9,"endLine":59,"endOffset":9}}:
+
+    Debug Failure. Expected 1701 <= 1693
+
+    Error: Debug Failure. Expected 1701 <= 1693
+        at Object.createFileDiagnostic (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:18492:22)
+        at getRangeToExtract (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:142115:42)
+        at Object.getAvailableActions (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:141920:38)
+        at /Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:133582:128
+        at getIterator (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:567:23)
+        at Object.next (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:562:35)
+        at Object.arrayFrom (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:1307:40)
+        at Object.getApplicableRefactors (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:133581:23)
+        at Object.getApplicableRefactors (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:147480:32)
+        at IOSession.Session.getApplicableRefactors (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:157932:53)
+        at Session.handlers.ts.Map.ts.getEntries._a.<computed> (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:156677:61)
+        at /Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:158282:88
+        at IOSession.Session.executeWithRequestId (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:158273:28)
+        at IOSession.Session.executeCommand (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:158282:33)
+        at IOSession.Session.onMessage (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:158306:35)
+        at Interface.<anonymous> (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:160516:27)
+        at Interface.emit (node:events:329:20)
+        at Interface._onLine (node:readline:337:10)
+        at Interface._normalWrite (node:readline:482:12)
+        at Socket.ondata (node:readline:194:10)
+        at Socket.emit (node:events:329:20)
+        at addChunk (node:internal/streams/readable:304:12)
+        at readableAddChunk (node:internal/streams/readable:279:9)
+        at Socket.Readable.push (node:internal/streams/readable:218:10)
+        at Pipe.onStreamRead (node:internal/stream_base_commons:192:23)
+Err 857   [12:38:59.224] Exception on executing command {"command":"getApplicableRefactors","seq":522,"type":"request","arguments":{"file":"/Users/shin/Documents/github/slam-at-home/react-frontend/src/components/drawer/props.ts","startLine":59,"startOffset":9,"endLine":59,"endOffset":9}}:
+
+    Debug Failure. Expected 1701 <= 1693
+
+    Error: Debug Failure. Expected 1701 <= 1693
+        at Object.createFileDiagnostic (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:18492:22)
+        at getRangeToExtract (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:142115:42)
+        at Object.getAvailableActions (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:141920:38)
+        at /Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:133582:128
+        at getIterator (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:567:23)
+        at Object.next (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:562:35)
+        at Object.arrayFrom (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:1307:40)
+        at Object.getApplicableRefactors (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:133581:23)
+        at Object.getApplicableRefactors (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:147480:32)
+        at IOSession.Session.getApplicableRefactors (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:157932:53)
+        at Session.handlers.ts.Map.ts.getEntries._a.<computed> (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:156677:61)
+        at /Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:158282:88
+        at IOSession.Session.executeWithRequestId (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:158273:28)
+        at IOSession.Session.executeCommand (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:158282:33)
+        at IOSession.Session.onMessage (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:158306:35)
+        at Interface.<anonymous> (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:160516:27)
+        at Interface.emit (node:events:329:20)
+        at Interface._onLine (node:readline:337:10)
+        at Interface._normalWrite (node:readline:482:12)
+        at Socket.ondata (node:readline:194:10)
+        at Socket.emit (node:events:329:20)
+        at addChunk (node:internal/streams/readable:304:12)
+        at readableAddChunk (node:internal/streams/readable:279:9)
+        at Socket.Readable.push (node:internal/streams/readable:218:10)
+        at Pipe.onStreamRead (node:internal/stream_base_commons:192:23)
+Err 858   [12:38:59.797] Exception on executing command {"command":"getApplicableRefactors","seq":525,"type":"request","arguments":{"file":"/Users/shin/Documents/github/slam-at-home/react-frontend/src/components/drawer/props.ts","startLine":59,"startOffset":10,"endLine":59,"endOffset":10}}:
+
+    Debug Failure. Expected 1702 <= 1693
+
+    Error: Debug Failure. Expected 1702 <= 1693
+        at Object.createFileDiagnostic (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:18492:22)
+        at getRangeToExtract (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:142115:42)
+        at Object.getAvailableActions (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:141920:38)
+        at /Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:133582:128
+        at getIterator (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:567:23)
+        at Object.next (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:562:35)
+        at Object.arrayFrom (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:1307:40)
+        at Object.getApplicableRefactors (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:133581:23)
+        at Object.getApplicableRefactors (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:147480:32)
+        at IOSession.Session.getApplicableRefactors (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:157932:53)
+        at Session.handlers.ts.Map.ts.getEntries._a.<computed> (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:156677:61)
+        at /Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:158282:88
+        at IOSession.Session.executeWithRequestId (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:158273:28)
+        at IOSession.Session.executeCommand (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:158282:33)
+        at IOSession.Session.onMessage (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:158306:35)
+        at Interface.<anonymous> (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:160516:27)
+        at Interface.emit (node:events:329:20)
+        at Interface._onLine (node:readline:337:10)
+        at Interface._normalWrite (node:readline:482:12)
+        at Socket.ondata (node:readline:194:10)
+        at Socket.emit (node:events:329:20)
+        at addChunk (node:internal/streams/readable:304:12)
+        at readableAddChunk (node:internal/streams/readable:279:9)
+        at Socket.Readable.push (node:internal/streams/readable:218:10)
+        at Pipe.onStreamRead (node:internal/stream_base_commons:192:23)
+Err 859   [12:38:59.807] Exception on executing command {"command":"getApplicableRefactors","seq":529,"type":"request","arguments":{"file":"/Users/shin/Documents/github/slam-at-home/react-frontend/src/components/drawer/props.ts","startLine":59,"startOffset":10,"endLine":59,"endOffset":10}}:
+
+    Debug Failure. Expected 1702 <= 1693
+
+    Error: Debug Failure. Expected 1702 <= 1693
+        at Object.createFileDiagnostic (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:18492:22)
+        at getRangeToExtract (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:142115:42)
+        at Object.getAvailableActions (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:141920:38)
+        at /Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:133582:128
+        at getIterator (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:567:23)
+        at Object.next (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:562:35)
+        at Object.arrayFrom (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:1307:40)
+        at Object.getApplicableRefactors (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:133581:23)
+        at Object.getApplicableRefactors (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:147480:32)
+        at IOSession.Session.getApplicableRefactors (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:157932:53)
+        at Session.handlers.ts.Map.ts.getEntries._a.<computed> (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:156677:61)
+        at /Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:158282:88
+        at IOSession.Session.executeWithRequestId (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:158273:28)
+        at IOSession.Session.executeCommand (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:158282:33)
+        at IOSession.Session.onMessage (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:158306:35)
+        at Interface.<anonymous> (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:160516:27)
+        at Interface.emit (node:events:329:20)
+        at Interface._onLine (node:readline:337:10)
+        at Interface._normalWrite (node:readline:482:12)
+        at Socket.ondata (node:readline:194:10)
+        at Socket.emit (node:events:329:20)
+        at addChunk (node:internal/streams/readable:304:12)
+        at readableAddChunk (node:internal/streams/readable:279:9)
+        at Socket.Readable.push (node:internal/streams/readable:218:10)
+        at Pipe.onStreamRead (node:internal/stream_base_commons:192:23)
+Err 860   [12:39:00.369] Exception on executing command {"command":"getApplicableRefactors","seq":532,"type":"request","arguments":{"file":"/Users/shin/Documents/github/slam-at-home/react-frontend/src/components/drawer/props.ts","startLine":59,"startOffset":11,"endLine":59,"endOffset":11}}:
+
+    Debug Failure. Expected 1703 <= 1693
+
+    Error: Debug Failure. Expected 1703 <= 1693
+        at Object.createFileDiagnostic (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:18492:22)
+        at getRangeToExtract (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:142115:42)
+        at Object.getAvailableActions (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:141920:38)
+        at /Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:133582:128
+        at getIterator (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:567:23)
+        at Object.next (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:562:35)
+        at Object.arrayFrom (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:1307:40)
+        at Object.getApplicableRefactors (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:133581:23)
+        at Object.getApplicableRefactors (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:147480:32)
+        at IOSession.Session.getApplicableRefactors (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:157932:53)
+        at Session.handlers.ts.Map.ts.getEntries._a.<computed> (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:156677:61)
+        at /Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:158282:88
+        at IOSession.Session.executeWithRequestId (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:158273:28)
+        at IOSession.Session.executeCommand (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:158282:33)
+        at IOSession.Session.onMessage (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:158306:35)
+        at Interface.<anonymous> (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:160516:27)
+        at Interface.emit (node:events:329:20)
+        at Interface._onLine (node:readline:337:10)
+        at Interface._normalWrite (node:readline:482:12)
+        at Socket.ondata (node:readline:194:10)
+        at Socket.emit (node:events:329:20)
+        at addChunk (node:internal/streams/readable:304:12)
+        at readableAddChunk (node:internal/streams/readable:279:9)
+        at Socket.Readable.push (node:internal/streams/readable:218:10)
+        at Pipe.onStreamRead (node:internal/stream_base_commons:192:23)
+Err 861   [12:39:00.384] Exception on executing command {"command":"getApplicableRefactors","seq":536,"type":"request","arguments":{"file":"/Users/shin/Documents/github/slam-at-home/react-frontend/src/components/drawer/props.ts","startLine":59,"startOffset":11,"endLine":59,"endOffset":11}}:
+
+    Debug Failure. Expected 1703 <= 1693
+
+    Error: Debug Failure. Expected 1703 <= 1693
+        at Object.createFileDiagnostic (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:18492:22)
+        at getRangeToExtract (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:142115:42)
+        at Object.getAvailableActions (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:141920:38)
+        at /Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:133582:128
+        at getIterator (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:567:23)
+        at Object.next (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:562:35)
+        at Object.arrayFrom (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:1307:40)
+        at Object.getApplicableRefactors (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:133581:23)
+        at Object.getApplicableRefactors (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:147480:32)
+        at IOSession.Session.getApplicableRefactors (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:157932:53)
+        at Session.handlers.ts.Map.ts.getEntries._a.<computed> (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:156677:61)
+        at /Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:158282:88
+        at IOSession.Session.executeWithRequestId (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:158273:28)
+        at IOSession.Session.executeCommand (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:158282:33)
+        at IOSession.Session.onMessage (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:158306:35)
+        at Interface.<anonymous> (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:160516:27)
+        at Interface.emit (node:events:329:20)
+        at Interface._onLine (node:readline:337:10)
+        at Interface._normalWrite (node:readline:482:12)
+        at Socket.ondata (node:readline:194:10)
+        at Socket.emit (node:events:329:20)
+        at addChunk (node:internal/streams/readable:304:12)
+        at readableAddChunk (node:internal/streams/readable:279:9)
+        at Socket.Readable.push (node:internal/streams/readable:218:10)
+        at Pipe.onStreamRead (node:internal/stream_base_commons:192:23)
+Err 862   [12:39:40.549] Exception on executing command {"command":"getApplicableRefactors","seq":538,"type":"request","arguments":{"file":"/Users/shin/Documents/github/slam-at-home/react-frontend/src/components/drawer/props.ts","startLine":59,"startOffset":10,"endLine":59,"endOffset":10}}:
+
+    Debug Failure. Expected 1702 <= 1693
+
+    Error: Debug Failure. Expected 1702 <= 1693
+        at Object.createFileDiagnostic (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:18492:22)
+        at getRangeToExtract (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:142115:42)
+        at Object.getAvailableActions (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:141920:38)
+        at /Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:133582:128
+        at getIterator (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:567:23)
+        at Object.next (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:562:35)
+        at Object.arrayFrom (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:1307:40)
+        at Object.getApplicableRefactors (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:133581:23)
+        at Object.getApplicableRefactors (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:147480:32)
+        at IOSession.Session.getApplicableRefactors (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:157932:53)
+        at Session.handlers.ts.Map.ts.getEntries._a.<computed> (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:156677:61)
+        at /Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:158282:88
+        at IOSession.Session.executeWithRequestId (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:158273:28)
+        at IOSession.Session.executeCommand (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:158282:33)
+        at IOSession.Session.onMessage (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:158306:35)
+        at Interface.<anonymous> (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:160516:27)
+        at Interface.emit (node:events:329:20)
+        at Interface._onLine (node:readline:337:10)
+        at Interface._normalWrite (node:readline:482:12)
+        at Socket.ondata (node:readline:194:10)
+        at Socket.emit (node:events:329:20)
+        at addChunk (node:internal/streams/readable:304:12)
+        at readableAddChunk (node:internal/streams/readable:279:9)
+        at Socket.Readable.push (node:internal/streams/readable:218:10)
+        at Pipe.onStreamRead (node:internal/stream_base_commons:192:23)
+Err 863   [12:39:40.612] Exception on executing command {"command":"getApplicableRefactors","seq":543,"type":"request","arguments":{"file":"/Users/shin/Documents/github/slam-at-home/react-frontend/src/components/drawer/props.ts","startLine":59,"startOffset":10,"endLine":59,"endOffset":10}}:
+
+    Debug Failure. Expected 1702 <= 1693
+
+    Error: Debug Failure. Expected 1702 <= 1693
+        at Object.createFileDiagnostic (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:18492:22)
+        at getRangeToExtract (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:142115:42)
+        at Object.getAvailableActions (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:141920:38)
+        at /Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:133582:128
+        at getIterator (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:567:23)
+        at Object.next (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:562:35)
+        at Object.arrayFrom (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:1307:40)
+        at Object.getApplicableRefactors (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:133581:23)
+        at Object.getApplicableRefactors (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:147480:32)
+        at IOSession.Session.getApplicableRefactors (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:157932:53)
+        at Session.handlers.ts.Map.ts.getEntries._a.<computed> (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:156677:61)
+        at /Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:158282:88
+        at IOSession.Session.executeWithRequestId (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:158273:28)
+        at IOSession.Session.executeCommand (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:158282:33)
+        at IOSession.Session.onMessage (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:158306:35)
+        at Interface.<anonymous> (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:160516:27)
+        at Interface.emit (node:events:329:20)
+        at Interface._onLine (node:readline:337:10)
+        at Interface._normalWrite (node:readline:482:12)
+        at Socket.ondata (node:readline:194:10)
+        at Socket.emit (node:events:329:20)
+        at addChunk (node:internal/streams/readable:304:12)
+        at readableAddChunk (node:internal/streams/readable:279:9)
+        at Socket.Readable.push (node:internal/streams/readable:218:10)
+        at Pipe.onStreamRead (node:internal/stream_base_commons:192:23)
+Info 864  [12:39:41.007] getCompletionData: Get current token: 0.011437058448791504
+Info 865  [12:39:41.007] getCompletionData: Is inside comment: 0.02947390079498291
+Info 866  [12:39:41.007] getCompletionData: Get previous token 1: 0.021162986755371094
+Info 867  [12:39:41.008] getCompletionsAtPosition: isCompletionListBlocker: 0.01900804042816162
+Info 868  [12:39:41.014] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 869  [12:39:41.023] getCompletionData: Semantic work: 15.700675010681152
+Info 870  [12:39:41.048] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 16.023962020874023
+Info 871  [12:39:41.071] getCompletionData: Get current token: 0.005236029624938965
+Info 872  [12:39:41.071] getCompletionData: Is inside comment: 0.01973700523376465
+Info 873  [12:39:41.071] getCompletionData: Get previous token 1: 0.009510993957519531
+Info 874  [12:39:41.071] getCompletionsAtPosition: isCompletionListBlocker: 0.013647913932800293
+Info 875  [12:39:41.077] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 876  [12:39:41.079] getCompletionData: Semantic work: 7.641924977302551
+Info 877  [12:39:41.092] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 12.749796986579895
+Info 878  [12:39:41.109] getCompletionData: Get current token: 0.005195021629333496
+Info 879  [12:39:41.109] getCompletionData: Is inside comment: 0.018396973609924316
+Info 880  [12:39:41.109] getCompletionData: Get previous token 1: 0.009150028228759766
+Info 881  [12:39:41.109] getCompletionsAtPosition: isCompletionListBlocker: 0.012097001075744629
+Info 882  [12:39:41.118] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 883  [12:39:41.126] getCompletionData: Semantic work: 16.7707200050354
+Info 884  [12:39:41.135] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 9.213841080665588
+Info 885  [12:39:41.145] getCompletionData: Get current token: 0.004577040672302246
+Info 886  [12:39:41.145] getCompletionData: Is inside comment: 0.017951011657714844
+Info 887  [12:39:41.145] getCompletionData: Get previous token 1: 0.008774995803833008
+Info 888  [12:39:41.145] getCompletionsAtPosition: isCompletionListBlocker: 0.011291027069091797
+Info 889  [12:39:41.148] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 890  [12:39:41.151] getCompletionData: Semantic work: 5.965424060821533
+Info 891  [12:39:41.157] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 5.339300990104675
+Info 892  [12:39:41.330] getCompletionData: Get current token: 0.006012916564941406
+Info 893  [12:39:41.330] getCompletionData: Is inside comment: 0.021838903427124023
+Info 894  [12:39:41.330] getCompletionData: Get previous token 1: 0.009680986404418945
+Info 895  [12:39:41.330] getCompletionsAtPosition: isCompletionListBlocker: 0.015887022018432617
+Info 896  [12:39:41.333] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 897  [12:39:41.335] getCompletionData: Semantic work: 4.778141021728516
+Info 898  [12:39:41.344] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 8.823810935020447
+Info 899  [12:39:41.372] getCompletionData: Get current token: 0.005769014358520508
+Info 900  [12:39:41.372] getCompletionData: Is inside comment: 0.01834392547607422
+Info 901  [12:39:41.372] getCompletionData: Get previous token 1: 0.008141040802001953
+Info 902  [12:39:41.372] getCompletionsAtPosition: isCompletionListBlocker: 0.01541900634765625
+Info 903  [12:39:41.375] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 904  [12:39:41.377] getCompletionData: Semantic work: 4.896764039993286
+Info 905  [12:39:41.385] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 8.044826984405518
+Info 906  [12:39:41.396] getCompletionData: Get current token: 0.00466001033782959
+Info 907  [12:39:41.396] getCompletionData: Is inside comment: 0.016993999481201172
+Info 908  [12:39:41.396] getCompletionData: Get previous token 1: 0.007539033889770508
+Info 909  [12:39:41.396] getCompletionsAtPosition: isCompletionListBlocker: 0.012251019477844238
+Info 910  [12:39:41.402] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 911  [12:39:41.404] getCompletionData: Semantic work: 8.121315002441406
+Info 912  [12:39:41.409] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 4.365746021270752
+Info 913  [12:39:41.610] getCompletionData: Get current token: 0.005270957946777344
+Info 914  [12:39:41.611] getCompletionData: Is inside comment: 0.030884981155395508
+Info 915  [12:39:41.611] getCompletionData: Get previous token 1: 0.008540034294128418
+Info 916  [12:39:41.611] getCompletionsAtPosition: isCompletionListBlocker: 0.012688994407653809
+Info 917  [12:39:41.614] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 918  [12:39:41.615] getCompletionData: Semantic work: 4.514462947845459
+Info 919  [12:39:41.621] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 5.454509019851685
+Info 920  [12:39:41.629] getCompletionData: Get current token: 0.004735112190246582
+Info 921  [12:39:41.629] getCompletionData: Is inside comment: 0.015954971313476562
+Info 922  [12:39:41.629] getCompletionData: Get previous token 1: 0.006785988807678223
+Info 923  [12:39:41.629] getCompletionsAtPosition: isCompletionListBlocker: 0.012596964836120605
+Info 924  [12:39:41.654] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 925  [12:39:41.660] getCompletionData: Semantic work: 30.879180908203125
+Info 926  [12:39:41.665] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 4.152768969535828
+Info 927  [12:39:41.675] getCompletionData: Get current token: 0.004989981651306152
+Info 928  [12:39:41.675] getCompletionData: Is inside comment: 0.015535950660705566
+Info 929  [12:39:41.675] getCompletionData: Get previous token 1: 0.006678938865661621
+Info 930  [12:39:41.675] getCompletionsAtPosition: isCompletionListBlocker: 0.012552022933959961
+Info 931  [12:39:41.678] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 932  [12:39:41.681] getCompletionData: Semantic work: 5.646339058876038
+Info 933  [12:39:41.685] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 4.180584073066711
+Info 934  [12:39:41.726] getCompletionData: Get current token: 0.0058699846267700195
+Info 935  [12:39:41.726] getCompletionData: Is inside comment: 0.01649796962738037
+Info 936  [12:39:41.726] getCompletionData: Get previous token 1: 0.0067108869552612305
+Info 937  [12:39:41.726] getCompletionsAtPosition: isCompletionListBlocker: 0.014242053031921387
+Info 938  [12:39:41.729] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 939  [12:39:41.730] getCompletionData: Semantic work: 3.516044020652771
+Info 940  [12:39:41.737] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 5.486575961112976
+Info 941  [12:39:41.757] getCompletionData: Get current token: 0.004912972450256348
+Info 942  [12:39:41.757] getCompletionData: Is inside comment: 0.014765024185180664
+Info 943  [12:39:41.757] getCompletionData: Get previous token 1: 0.006428956985473633
+Info 944  [12:39:41.757] getCompletionsAtPosition: isCompletionListBlocker: 0.012510895729064941
+Info 945  [12:39:41.766] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 946  [12:39:41.768] getCompletionData: Semantic work: 11.001538038253784
+Info 947  [12:39:41.776] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 8.019289016723633
+Info 948  [12:39:41.788] getCompletionData: Get current token: 0.00457608699798584
+Info 949  [12:39:41.789] getCompletionData: Is inside comment: 0.014114022254943848
+Info 950  [12:39:41.789] getCompletionData: Get previous token 1: 0.006569981575012207
+Info 951  [12:39:41.789] getCompletionsAtPosition: isCompletionListBlocker: 0.014058947563171387
+Info 952  [12:39:41.792] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 953  [12:39:41.793] getCompletionData: Semantic work: 4.566740036010742
+Info 954  [12:39:41.799] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 6.078199982643127
+Info 955  [12:39:42.063] getCompletionData: Get current token: 0.006350994110107422
+Info 956  [12:39:42.063] getCompletionData: Is inside comment: 0.01899099349975586
+Info 957  [12:39:42.063] getCompletionData: Get previous token 1: 0.007938981056213379
+Info 958  [12:39:42.063] getCompletionsAtPosition: isCompletionListBlocker: 0.034021973609924316
+Info 959  [12:39:42.068] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 960  [12:39:42.070] getCompletionData: Semantic work: 6.978533983230591
+Info 961  [12:39:42.083] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 11.523638010025024
+Info 962  [12:39:42.130] getCompletionData: Get current token: 0.004230022430419922
+Info 963  [12:39:42.131] getCompletionData: Is inside comment: 0.013583064079284668
+Info 964  [12:39:42.131] getCompletionData: Get previous token 1: 0.00598299503326416
+Info 965  [12:39:42.131] getCompletionsAtPosition: isCompletionListBlocker: 0.011432051658630371
+Info 966  [12:39:42.146] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 967  [12:39:42.148] getCompletionData: Semantic work: 17.786864042282104
+Info 968  [12:39:42.154] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 4.989493012428284
+Info 969  [12:39:42.163] getCompletionData: Get current token: 0.004706978797912598
+Info 970  [12:39:42.164] getCompletionData: Is inside comment: 0.014663100242614746
+Info 971  [12:39:42.164] getCompletionData: Get previous token 1: 0.0061310529708862305
+Info 972  [12:39:42.164] getCompletionsAtPosition: isCompletionListBlocker: 0.01246500015258789
+Info 973  [12:39:42.172] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 974  [12:39:42.174] getCompletionData: Semantic work: 10.558664083480835
+Info 975  [12:39:42.181] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 6.80049991607666
+Info 976  [12:39:42.313] getCompletionData: Get current token: 0.00497591495513916
+Info 977  [12:39:42.313] getCompletionData: Is inside comment: 0.016659021377563477
+Info 978  [12:39:42.313] getCompletionData: Get previous token 1: 0.005939960479736328
+Info 979  [12:39:42.313] getCompletionsAtPosition: isCompletionListBlocker: 0.014258980751037598
+Info 980  [12:39:42.316] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 981  [12:39:42.317] getCompletionData: Semantic work: 4.292212963104248
+Info 982  [12:39:42.323] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 5.36081600189209
+Info 983  [12:39:42.343] getCompletionData: Get current token: 0.0048389434814453125
+Info 984  [12:39:42.343] getCompletionData: Is inside comment: 0.013033032417297363
+Info 985  [12:39:42.343] getCompletionData: Get previous token 1: 0.006042003631591797
+Info 986  [12:39:42.343] getCompletionsAtPosition: isCompletionListBlocker: 0.012679100036621094
+Info 987  [12:39:42.409] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 988  [12:39:42.410] getCompletionData: Semantic work: 67.21827208995819
+Info 989  [12:39:42.418] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 7.115722060203552
+Info 990  [12:39:42.428] getCompletionData: Get current token: 0.005154013633728027
+Info 991  [12:39:42.428] getCompletionData: Is inside comment: 0.014883995056152344
+Info 992  [12:39:42.428] getCompletionData: Get previous token 1: 0.006179928779602051
+Info 993  [12:39:42.428] getCompletionsAtPosition: isCompletionListBlocker: 0.012945055961608887
+Info 994  [12:39:42.442] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 995  [12:39:42.444] getCompletionData: Semantic work: 15.81595492362976
+Info 996  [12:39:42.450] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 6.195610046386719
+Info 997  [12:39:42.467] getCompletionData: Get current token: 0.004574894905090332
+Info 998  [12:39:42.467] getCompletionData: Is inside comment: 0.018471956253051758
+Info 999  [12:39:42.467] getCompletionData: Get previous token 1: 0.005872011184692383
+Info 1000 [12:39:42.467] getCompletionsAtPosition: isCompletionListBlocker: 0.013457059860229492
+Info 1001 [12:39:42.470] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 1002 [12:39:42.473] getCompletionData: Semantic work: 5.544042944908142
+Info 1003 [12:39:42.477] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 4.2633140087127686
+Info 1004 [12:39:42.493] getCompletionData: Get current token: 0.004388928413391113
+Info 1005 [12:39:42.493] getCompletionData: Is inside comment: 0.013407111167907715
+Info 1006 [12:39:42.493] getCompletionData: Get previous token 1: 0.005653023719787598
+Info 1007 [12:39:42.493] getCompletionsAtPosition: isCompletionListBlocker: 0.012007951736450195
+Info 1008 [12:39:42.495] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 1009 [12:39:42.496] getCompletionData: Semantic work: 3.3600090742111206
+Info 1010 [12:39:42.506] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 9.79995596408844
+Info 1011 [12:39:42.515] getCompletionData: Get current token: 0.006023049354553223
+Info 1012 [12:39:42.515] getCompletionData: Is inside comment: 0.014335989952087402
+Info 1013 [12:39:42.515] getCompletionData: Get previous token 1: 0.005938053131103516
+Info 1014 [12:39:42.515] getCompletionsAtPosition: isCompletionListBlocker: 0.014452099800109863
+Info 1015 [12:39:42.518] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 1016 [12:39:42.519] getCompletionData: Semantic work: 4.192494988441467
+Info 1017 [12:39:42.524] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 4.4641759395599365
+Info 1018 [12:39:42.616] getCompletionData: Get current token: 0.0047760009765625
+Info 1019 [12:39:42.616] getCompletionData: Is inside comment: 0.013520956039428711
+Info 1020 [12:39:42.616] getCompletionData: Get previous token 1: 0.006220102310180664
+Info 1021 [12:39:42.616] getCompletionsAtPosition: isCompletionListBlocker: 0.014660000801086426
+Info 1022 [12:39:42.620] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 1023 [12:39:42.622] getCompletionData: Semantic work: 5.306303977966309
+Info 1024 [12:39:42.628] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 6.300307989120483
+Info 1025 [12:39:42.676] getCompletionData: Get current token: 0.004367947578430176
+Info 1026 [12:39:42.676] getCompletionData: Is inside comment: 0.013697981834411621
+Info 1027 [12:39:42.676] getCompletionData: Get previous token 1: 0.0059059858322143555
+Info 1028 [12:39:42.676] getCompletionsAtPosition: isCompletionListBlocker: 0.01190197467803955
+Info 1029 [12:39:42.679] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 1030 [12:39:42.680] getCompletionData: Semantic work: 3.6769139766693115
+Info 1031 [12:39:42.685] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 5.207147002220154
+Info 1032 [12:39:42.699] getCompletionData: Get current token: 0.004293084144592285
+Info 1033 [12:39:42.699] getCompletionData: Is inside comment: 0.015990018844604492
+Info 1034 [12:39:42.699] getCompletionData: Get previous token 1: 0.0059850215911865234
+Info 1035 [12:39:42.699] getCompletionsAtPosition: isCompletionListBlocker: 0.012367010116577148
+Info 1036 [12:39:42.703] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 1037 [12:39:42.704] getCompletionData: Semantic work: 5.298102974891663
+Info 1038 [12:39:42.709] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 4.0311199426651
+Info 1039 [12:39:42.717] getCompletionData: Get current token: 0.0045119524002075195
+Info 1040 [12:39:42.717] getCompletionData: Is inside comment: 0.013247966766357422
+Info 1041 [12:39:42.717] getCompletionData: Get previous token 1: 0.005855083465576172
+Info 1042 [12:39:42.717] getCompletionsAtPosition: isCompletionListBlocker: 0.0122910737991333
+Info 1043 [12:39:42.719] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 1044 [12:39:42.720] getCompletionData: Semantic work: 3.499942898750305
+Info 1045 [12:39:42.725] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 4.153861999511719
+Info 1046 [12:39:42.733] getCompletionData: Get current token: 0.004087924957275391
+Info 1047 [12:39:42.733] getCompletionData: Is inside comment: 0.014441967010498047
+Info 1048 [12:39:42.733] getCompletionData: Get previous token 1: 0.005565047264099121
+Info 1049 [12:39:42.733] getCompletionsAtPosition: isCompletionListBlocker: 0.011911988258361816
+Info 1050 [12:39:42.736] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 1051 [12:39:42.739] getCompletionData: Semantic work: 6.415426969528198
+Info 1052 [12:39:42.744] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 4.23901903629303
+Info 1053 [12:39:42.775] getCompletionData: Get current token: 0.005175948143005371
+Info 1054 [12:39:42.775] getCompletionData: Is inside comment: 0.014107942581176758
+Info 1055 [12:39:42.775] getCompletionData: Get previous token 1: 0.006003975868225098
+Info 1056 [12:39:42.775] getCompletionsAtPosition: isCompletionListBlocker: 0.014023065567016602
+Info 1057 [12:39:42.779] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 1058 [12:39:42.781] getCompletionData: Semantic work: 5.238374948501587
+Info 1059 [12:39:42.785] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 4.084411978721619
+Info 1060 [12:39:43.244] getCompletionData: Get current token: 0.006325960159301758
+Info 1061 [12:39:43.244] getCompletionData: Is inside comment: 0.02290499210357666
+Info 1062 [12:39:43.244] getCompletionData: Get previous token 1: 0.007136106491088867
+Info 1063 [12:39:43.244] getCompletionsAtPosition: isCompletionListBlocker: 0.01803600788116455
+Info 1064 [12:39:43.247] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 1065 [12:39:43.248] getCompletionData: Semantic work: 3.6969929933547974
+Info 1066 [12:39:43.258] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 9.65351688861847
+Info 1067 [12:39:43.269] getCompletionData: Get current token: 0.004565000534057617
+Info 1068 [12:39:43.269] getCompletionData: Is inside comment: 0.012765049934387207
+Info 1069 [12:39:43.269] getCompletionData: Get previous token 1: 0.005858063697814941
+Info 1070 [12:39:43.269] getCompletionsAtPosition: isCompletionListBlocker: 0.011455893516540527
+Info 1071 [12:39:43.271] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 1072 [12:39:43.272] getCompletionData: Semantic work: 3.4858009815216064
+Info 1073 [12:39:43.277] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 4.263662099838257
+Err 1074  [12:39:43.312] Exception on executing command {"command":"getApplicableRefactors","seq":576,"type":"request","arguments":{"file":"/Users/shin/Documents/github/slam-at-home/react-frontend/src/components/drawer/props.ts","startLine":59,"startOffset":21,"endLine":59,"endOffset":21}}:
+
+    Debug Failure. Expected 1713 <= 1693
+
+    Error: Debug Failure. Expected 1713 <= 1693
+        at Object.createFileDiagnostic (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:18492:22)
+        at getRangeToExtract (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:142115:42)
+        at Object.getAvailableActions (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:141920:38)
+        at /Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:133582:128
+        at getIterator (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:567:23)
+        at Object.next (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:562:35)
+        at Object.arrayFrom (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:1307:40)
+        at Object.getApplicableRefactors (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:133581:23)
+        at Object.getApplicableRefactors (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:147480:32)
+        at IOSession.Session.getApplicableRefactors (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:157932:53)
+        at Session.handlers.ts.Map.ts.getEntries._a.<computed> (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:156677:61)
+        at /Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:158282:88
+        at IOSession.Session.executeWithRequestId (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:158273:28)
+        at IOSession.Session.executeCommand (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:158282:33)
+        at IOSession.Session.onMessage (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:158306:35)
+        at Interface.<anonymous> (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:160516:27)
+        at Interface.emit (node:events:329:20)
+        at Interface._onLine (node:readline:337:10)
+        at Interface._normalWrite (node:readline:482:12)
+        at Socket.ondata (node:readline:194:10)
+        at Socket.emit (node:events:329:20)
+        at addChunk (node:internal/streams/readable:304:12)
+        at readableAddChunk (node:internal/streams/readable:279:9)
+        at Socket.Readable.push (node:internal/streams/readable:218:10)
+        at Pipe.onStreamRead (node:internal/stream_base_commons:192:23)
+Info 1075 [12:39:43.507] getCompletionData: Get current token: 0.005584001541137695
+Info 1076 [12:39:43.507] getCompletionData: Is inside comment: 0.018625974655151367
+Info 1077 [12:39:43.507] getCompletionData: Get previous token 1: 0.007333040237426758
+Info 1078 [12:39:43.507] getCompletionsAtPosition: isCompletionListBlocker: 0.01498103141784668
+Info 1079 [12:39:43.510] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 1080 [12:39:43.511] getCompletionData: Semantic work: 4.187433958053589
+Info 1081 [12:39:43.517] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 5.208463907241821
+Info 1082 [12:39:43.737] getCompletionData: Get current token: 0.005373954772949219
+Info 1083 [12:39:43.737] getCompletionData: Is inside comment: 0.01956808567047119
+Info 1084 [12:39:43.737] getCompletionData: Get previous token 1: 0.005833983421325684
+Info 1085 [12:39:43.737] getCompletionsAtPosition: isCompletionListBlocker: 0.016574978828430176
+Info 1086 [12:39:43.740] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 1087 [12:39:43.742] getCompletionData: Semantic work: 4.4058849811553955
+Info 1088 [12:39:43.749] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 7.539869904518127
+Info 1089 [12:39:43.781] getCompletionData: Get current token: 0.004315972328186035
+Info 1090 [12:39:43.781] getCompletionData: Is inside comment: 0.013892054557800293
+Info 1091 [12:39:43.781] getCompletionData: Get previous token 1: 0.005888938903808594
+Info 1092 [12:39:43.781] getCompletionsAtPosition: isCompletionListBlocker: 0.012277960777282715
+Info 1093 [12:39:43.784] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 1094 [12:39:43.785] getCompletionData: Semantic work: 4.23764705657959
+Info 1095 [12:39:43.791] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 5.241629958152771
+Err 1096  [12:39:44.529] Exception on executing command {"command":"getApplicableRefactors","seq":585,"type":"request","arguments":{"file":"/Users/shin/Documents/github/slam-at-home/react-frontend/src/components/drawer/props.ts","startLine":59,"startOffset":23,"endLine":59,"endOffset":23}}:
+
+    Debug Failure. Expected 1715 <= 1693
+
+    Error: Debug Failure. Expected 1715 <= 1693
+        at Object.createFileDiagnostic (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:18492:22)
+        at getRangeToExtract (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:142115:42)
+        at Object.getAvailableActions (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:141920:38)
+        at /Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:133582:128
+        at getIterator (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:567:23)
+        at Object.next (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:562:35)
+        at Object.arrayFrom (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:1307:40)
+        at Object.getApplicableRefactors (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:133581:23)
+        at Object.getApplicableRefactors (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:147480:32)
+        at IOSession.Session.getApplicableRefactors (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:157932:53)
+        at Session.handlers.ts.Map.ts.getEntries._a.<computed> (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:156677:61)
+        at /Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:158282:88
+        at IOSession.Session.executeWithRequestId (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:158273:28)
+        at IOSession.Session.executeCommand (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:158282:33)
+        at IOSession.Session.onMessage (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:158306:35)
+        at Interface.<anonymous> (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:160516:27)
+        at Interface.emit (node:events:329:20)
+        at Interface._onLine (node:readline:337:10)
+        at Interface._normalWrite (node:readline:482:12)
+        at Socket.ondata (node:readline:194:10)
+        at Socket.emit (node:events:329:20)
+        at addChunk (node:internal/streams/readable:304:12)
+        at readableAddChunk (node:internal/streams/readable:279:9)
+        at Socket.Readable.push (node:internal/streams/readable:218:10)
+        at Pipe.onStreamRead (node:internal/stream_base_commons:192:23)
+Info 1097 [12:39:45.169] getCompletionData: Get current token: 0.008257031440734863
+Info 1098 [12:39:45.169] getCompletionData: Is inside comment: 0.023590922355651855
+Info 1099 [12:39:45.169] getCompletionData: Get previous token 1: 0.010290980339050293
+Info 1100 [12:39:45.169] getCompletionsAtPosition: isCompletionListBlocker: 0.024556994438171387
+Info 1101 [12:39:45.173] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 1102 [12:39:45.174] getCompletionData: Semantic work: 5.225368976593018
+Info 1103 [12:39:45.180] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 5.244765996932983
+Info 1104 [12:39:45.263] getCompletionData: Get current token: 0.004861950874328613
+Info 1105 [12:39:45.263] getCompletionData: Is inside comment: 0.015899062156677246
+Info 1106 [12:39:45.263] getCompletionData: Get previous token 1: 0.006279945373535156
+Info 1107 [12:39:45.263] getCompletionsAtPosition: isCompletionListBlocker: 0.015284895896911621
+Info 1108 [12:39:45.266] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 1109 [12:39:45.267] getCompletionData: Semantic work: 3.7883089780807495
+Info 1110 [12:39:45.271] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 4.109880089759827
+Info 1111 [12:39:45.280] getCompletionData: Get current token: 0.004432082176208496
+Info 1112 [12:39:45.280] getCompletionData: Is inside comment: 0.013895988464355469
+Info 1113 [12:39:45.280] getCompletionData: Get previous token 1: 0.00625002384185791
+Info 1114 [12:39:45.280] getCompletionsAtPosition: isCompletionListBlocker: 0.012060046195983887
+Info 1115 [12:39:45.282] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 1116 [12:39:45.284] getCompletionData: Semantic work: 3.799631953239441
+Info 1117 [12:39:45.289] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 4.743026971817017
+Info 1118 [12:39:45.307] getCompletionData: Get current token: 0.0048139095306396484
+Info 1119 [12:39:45.307] getCompletionData: Is inside comment: 0.015272021293640137
+Info 1120 [12:39:45.307] getCompletionData: Get previous token 1: 0.00574803352355957
+Info 1121 [12:39:45.307] getCompletionsAtPosition: isCompletionListBlocker: 0.01286005973815918
+Info 1122 [12:39:45.309] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 1123 [12:39:45.311] getCompletionData: Semantic work: 3.826447010040283
+Info 1124 [12:39:45.316] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 5.442716956138611
+Info 1125 [12:39:45.372] getCompletionData: Get current token: 0.004938006401062012
+Info 1126 [12:39:45.372] getCompletionData: Is inside comment: 0.013820052146911621
+Info 1127 [12:39:45.372] getCompletionData: Get previous token 1: 0.006059050559997559
+Info 1128 [12:39:45.373] getCompletionsAtPosition: isCompletionListBlocker: 0.012720108032226562
+Info 1129 [12:39:45.375] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 1130 [12:39:45.376] getCompletionData: Semantic work: 3.453390955924988
+Info 1131 [12:39:45.380] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 4.182072997093201
+Info 1132 [12:39:45.390] getCompletionData: Get current token: 0.004487037658691406
+Info 1133 [12:39:45.391] getCompletionData: Is inside comment: 0.013782978057861328
+Info 1134 [12:39:45.391] getCompletionData: Get previous token 1: 0.005638003349304199
+Info 1135 [12:39:45.391] getCompletionsAtPosition: isCompletionListBlocker: 0.011716961860656738
+Info 1136 [12:39:45.393] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 1137 [12:39:45.394] getCompletionData: Semantic work: 3.3363341093063354
+Info 1138 [12:39:45.398] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 4.080487966537476
+Info 1139 [12:39:45.517] getCompletionData: Get current token: 0.005946993827819824
+Info 1140 [12:39:45.517] getCompletionData: Is inside comment: 0.016984939575195312
+Info 1141 [12:39:45.517] getCompletionData: Get previous token 1: 0.007467031478881836
+Info 1142 [12:39:45.517] getCompletionsAtPosition: isCompletionListBlocker: 0.013929009437561035
+Info 1143 [12:39:45.519] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 1144 [12:39:45.521] getCompletionData: Semantic work: 4.0777000188827515
+Info 1145 [12:39:45.526] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 5.134850978851318
+Info 1146 [12:39:46.162] getCompletionData: Get current token: 0.005463957786560059
+Info 1147 [12:39:46.162] getCompletionData: Is inside comment: 0.01682305335998535
+Info 1148 [12:39:46.162] getCompletionData: Get previous token 1: 0.006834983825683594
+Info 1149 [12:39:46.162] getCompletionsAtPosition: isCompletionListBlocker: 0.013041019439697266
+Info 1150 [12:39:46.165] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 1151 [12:39:46.166] getCompletionData: Semantic work: 3.8511250019073486
+Info 1152 [12:39:46.171] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 4.804665923118591
+Err 1153  [12:39:46.946] Exception on executing command {"command":"getApplicableRefactors","seq":596,"type":"request","arguments":{"file":"/Users/shin/Documents/github/slam-at-home/react-frontend/src/components/drawer/props.ts","startLine":59,"startOffset":32,"endLine":59,"endOffset":32}}:
+
+    Debug Failure. Expected 1724 <= 1693
+
+    Error: Debug Failure. Expected 1724 <= 1693
+        at Object.createFileDiagnostic (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:18492:22)
+        at getRangeToExtract (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:142115:42)
+        at Object.getAvailableActions (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:141920:38)
+        at /Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:133582:128
+        at getIterator (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:567:23)
+        at Object.next (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:562:35)
+        at Object.arrayFrom (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:1307:40)
+        at Object.getApplicableRefactors (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:133581:23)
+        at Object.getApplicableRefactors (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:147480:32)
+        at IOSession.Session.getApplicableRefactors (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:157932:53)
+        at Session.handlers.ts.Map.ts.getEntries._a.<computed> (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:156677:61)
+        at /Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:158282:88
+        at IOSession.Session.executeWithRequestId (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:158273:28)
+        at IOSession.Session.executeCommand (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:158282:33)
+        at IOSession.Session.onMessage (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:158306:35)
+        at Interface.<anonymous> (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:160516:27)
+        at Interface.emit (node:events:329:20)
+        at Interface._onLine (node:readline:337:10)
+        at Interface._normalWrite (node:readline:482:12)
+        at Socket.ondata (node:readline:194:10)
+        at Socket.emit (node:events:329:20)
+        at addChunk (node:internal/streams/readable:304:12)
+        at readableAddChunk (node:internal/streams/readable:279:9)
+        at Socket.Readable.push (node:internal/streams/readable:218:10)
+        at Pipe.onStreamRead (node:internal/stream_base_commons:192:23)
+Err 1154  [12:39:46.980] Exception on executing command {"command":"getApplicableRefactors","seq":599,"type":"request","arguments":{"file":"/Users/shin/Documents/github/slam-at-home/react-frontend/src/components/drawer/props.ts","startLine":59,"startOffset":32,"endLine":59,"endOffset":32}}:
+
+    Debug Failure. Expected 1724 <= 1693
+
+    Error: Debug Failure. Expected 1724 <= 1693
+        at Object.createFileDiagnostic (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:18492:22)
+        at getRangeToExtract (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:142115:42)
+        at Object.getAvailableActions (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:141920:38)
+        at /Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:133582:128
+        at getIterator (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:567:23)
+        at Object.next (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:562:35)
+        at Object.arrayFrom (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:1307:40)
+        at Object.getApplicableRefactors (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:133581:23)
+        at Object.getApplicableRefactors (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:147480:32)
+        at IOSession.Session.getApplicableRefactors (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:157932:53)
+        at Session.handlers.ts.Map.ts.getEntries._a.<computed> (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:156677:61)
+        at /Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:158282:88
+        at IOSession.Session.executeWithRequestId (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:158273:28)
+        at IOSession.Session.executeCommand (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:158282:33)
+        at IOSession.Session.onMessage (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:158306:35)
+        at Interface.<anonymous> (/Users/shin/.anyenv/envs/nodenv/versions/15.2.1/lib/node_modules/typescript/lib/tsserver.js:160516:27)
+        at Interface.emit (node:events:329:20)
+        at Interface._onLine (node:readline:337:10)
+        at Interface._normalWrite (node:readline:482:12)
+        at Socket.ondata (node:readline:194:10)
+        at Socket.emit (node:events:329:20)
+        at addChunk (node:internal/streams/readable:304:12)
+        at readableAddChunk (node:internal/streams/readable:279:9)
+        at Socket.Readable.push (node:internal/streams/readable:218:10)
+        at Pipe.onStreamRead (node:internal/stream_base_commons:192:23)
+Info 1155 [12:39:47.829] Starting updateGraphWorker: Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json
+Info 1156 [12:39:47.855] Finishing updateGraphWorker: Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json Version: 20 structureChanged: false Elapsed: 25.397454023361206ms
+Info 1157 [12:39:47.855] Different program with same set of files:: structureIsReused:: 2
+Info 1158 [12:39:51.055] Starting updateGraphWorker: Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json
+Info 1159 [12:39:51.076] Finishing updateGraphWorker: Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json Version: 21 structureChanged: false Elapsed: 20.500616908073425ms
+Info 1160 [12:39:51.076] Different program with same set of files:: structureIsReused:: 2
+Info 1161 [12:40:22.811] getCompletionData: Get current token: 0.011586904525756836
+Info 1162 [12:40:22.811] getCompletionData: Is inside comment: 0.027341008186340332
+Info 1163 [12:40:22.811] Returning an empty list because completion was inside a regular comment or plain text part of a JsDoc comment.
+Info 1164 [12:40:25.879] getCompletionData: Get current token: 0.01163792610168457
+Info 1165 [12:40:25.879] getCompletionData: Is inside comment: 0.02393805980682373
+Info 1166 [12:40:25.879] Returning an empty list because completion was inside a regular comment or plain text part of a JsDoc comment.
+Info 1167 [12:40:31.314] Starting updateGraphWorker: Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json
+Info 1168 [12:40:31.327] Finishing updateGraphWorker: Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json Version: 22 structureChanged: false Elapsed: 9.732905983924866ms
+Info 1169 [12:40:31.327] Different program with same set of files:: structureIsReused:: 2
+Info 1170 [12:40:44.624] getCompletionData: Get current token: 0.01472008228302002
+Info 1171 [12:40:44.624] getCompletionData: Is inside comment: 0.0075969696044921875
+Info 1172 [12:40:44.624] getCompletionData: Get previous token 1: 0.03436899185180664
+Info 1173 [12:40:44.624] getCompletionData: Get previous token 2: 0.01822197437286377
+Info 1174 [12:40:44.624] getCompletionsAtPosition: isCompletionListBlocker: 0.007173061370849609
+Info 1175 [12:40:44.625] getCompletionData: Semantic work: 0.2362220287322998
+Info 1176 [12:40:44.625] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 0.0019119977951049805
+Info 1177 [12:40:45.460] Starting updateGraphWorker: Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json
+Info 1178 [12:40:45.475] Finishing updateGraphWorker: Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json Version: 23 structureChanged: false Elapsed: 14.778984069824219ms
+Info 1179 [12:40:45.475] Different program with same set of files:: structureIsReused:: 2
+Info 1180 [12:41:16.606] getCompletionData: Get current token: 0.021687984466552734
+Info 1181 [12:41:16.606] getCompletionData: Is inside comment: 0.016947031021118164
+Info 1182 [12:41:16.606] getCompletionData: Get previous token 1: 0.03440296649932861
+Info 1183 [12:41:16.606] getCompletionData: Get previous token 2: 0.09705901145935059
+Info 1184 [12:41:16.606] getCompletionsAtPosition: isCompletionListBlocker: 0.025524020195007324
+Info 1185 [12:41:16.606] getCompletionData: Semantic work: 0.04120898246765137
+Info 1186 [12:41:16.606] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 0.0025250911712646484
+Info 1187 [12:41:20.047] getCompletionData: Get current token: 0.021874070167541504
+Info 1188 [12:41:20.047] getCompletionData: Is inside comment: 0.012220978736877441
+Info 1189 [12:41:20.047] getCompletionData: Get previous token 1: 0.03760802745819092
+Info 1190 [12:41:20.047] getCompletionData: Get previous token 2: 0.037477970123291016
+Info 1191 [12:41:20.047] getCompletionsAtPosition: isCompletionListBlocker: 0.03892803192138672
+Info 1192 [12:41:20.048] getCompletionData: Semantic work: 0.04586303234100342
+Info 1193 [12:41:20.048] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 0.003278017044067383
+Info 1194 [12:41:20.635] Starting updateGraphWorker: Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json
+Info 1195 [12:41:20.659] Finishing updateGraphWorker: Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json Version: 24 structureChanged: false Elapsed: 23.310729026794434ms
+Info 1196 [12:41:20.659] Different program with same set of files:: structureIsReused:: 2
+Info 1197 [14:42:12.776] Starting updateGraphWorker: Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json
+Info 1198 [14:42:12.819] Finishing updateGraphWorker: Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json Version: 25 structureChanged: false Elapsed: 41.59602200984955ms
+Info 1199 [14:42:12.819] Different program with same set of files:: structureIsReused:: 2
+Info 1200 [14:42:20.806] getCompletionData: Get current token: 0.013751029968261719
+Info 1201 [14:42:20.806] getCompletionData: Is inside comment: 0.013264894485473633
+Info 1202 [14:42:20.806] getCompletionData: Get previous token 1: 0.023103952407836914
+Info 1203 [14:42:20.806] getCompletionsAtPosition: isCompletionListBlocker: 0.05460202693939209
+Info 1204 [14:42:20.807] getCompletionData: Semantic work: 0.8555710315704346
+Info 1205 [14:42:20.807] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 0.13022708892822266
+Info 1206 [14:42:21.894] Starting updateGraphWorker: Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json
+Info 1207 [14:42:21.917] Finishing updateGraphWorker: Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json Version: 26 structureChanged: false Elapsed: 22.898918986320496ms
+Info 1208 [14:42:21.917] Different program with same set of files:: structureIsReused:: 2
+Info 1209 [14:42:25.910] Starting updateGraphWorker: Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json
+Info 1210 [14:42:25.937] Finishing updateGraphWorker: Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json Version: 27 structureChanged: false Elapsed: 26.520420908927917ms
+Info 1211 [14:42:25.937] Different program with same set of files:: structureIsReused:: 2
+Info 1212 [14:42:36.259] getCompletionData: Get current token: 0.01571202278137207
+Info 1213 [14:42:36.259] getCompletionData: Is inside comment: 0.01273500919342041
+Info 1214 [14:42:36.259] getCompletionData: Get previous token 1: 0.02915799617767334
+Info 1215 [14:42:36.259] getCompletionData: Get previous token 2: 0.14689099788665771
+Info 1216 [14:42:36.259] getCompletionsAtPosition: isCompletionListBlocker: 0.040274977684020996
+Info 1217 [14:42:36.276] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 1218 [14:42:36.286] getCompletionData: Semantic work: 26.415552973747253
+Info 1219 [14:42:36.299] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 13.03556203842163
+Info 1220 [14:42:36.398] getCompletionData: Get current token: 0.008823037147521973
+Info 1221 [14:42:36.398] getCompletionData: Is inside comment: 0.004871010780334473
+Info 1222 [14:42:36.398] getCompletionData: Get previous token 1: 0.01185297966003418
+Info 1223 [14:42:36.398] getCompletionData: Get previous token 2: 0.013312935829162598
+Info 1224 [14:42:36.398] getCompletionsAtPosition: isCompletionListBlocker: 0.016756057739257812
+Info 1225 [14:42:36.401] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 1226 [14:42:36.405] getCompletionData: Semantic work: 6.522297978401184
+Info 1227 [14:42:36.413] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 8.280378937721252
+Info 1228 [14:42:36.431] getCompletionData: Get current token: 0.006201028823852539
+Info 1229 [14:42:36.431] getCompletionData: Is inside comment: 0.005817055702209473
+Info 1230 [14:42:36.431] getCompletionData: Get previous token 1: 0.015030980110168457
+Info 1231 [14:42:36.431] getCompletionData: Get previous token 2: 0.010117053985595703
+Info 1232 [14:42:36.431] getCompletionsAtPosition: isCompletionListBlocker: 0.012158036231994629
+Info 1233 [14:42:36.437] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 1234 [14:42:36.439] getCompletionData: Semantic work: 7.959360957145691
+Info 1235 [14:42:36.446] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 6.680598020553589
+Info 1236 [14:42:36.466] getCompletionData: Get current token: 0.0067369937896728516
+Info 1237 [14:42:36.466] getCompletionData: Is inside comment: 0.005932927131652832
+Info 1238 [14:42:36.466] getCompletionData: Get previous token 1: 0.012486100196838379
+Info 1239 [14:42:36.466] getCompletionData: Get previous token 2: 0.010347962379455566
+Info 1240 [14:42:36.466] getCompletionsAtPosition: isCompletionListBlocker: 0.012864112854003906
+Info 1241 [14:42:36.470] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 1242 [14:42:36.475] getCompletionData: Semantic work: 8.65830910205841
+Info 1243 [14:42:36.479] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 4.766927003860474
+Info 1244 [14:42:37.488] Starting updateGraphWorker: Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json
+Info 1245 [14:42:37.505] Finishing updateGraphWorker: Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json Version: 28 structureChanged: false Elapsed: 16.958139061927795ms
+Info 1246 [14:42:37.505] Different program with same set of files:: structureIsReused:: 2
+Info 1247 [14:42:41.504] getCompletionData: Get current token: 0.015334010124206543
+Info 1248 [14:42:41.505] getCompletionData: Is inside comment: 0.01999795436859131
+Info 1249 [14:42:41.505] getCompletionData: Get previous token 1: 0.0391690731048584
+Info 1250 [14:42:41.505] getCompletionData: Get previous token 2: 0.1024770736694336
+Info 1251 [14:42:41.506] getCompletionsAtPosition: isCompletionListBlocker: 0.02364802360534668
+Info 1252 [14:42:41.514] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 1253 [14:42:41.521] getCompletionData: Semantic work: 15.786358952522278
+Info 1254 [14:42:41.536] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 14.07632291316986
+Info 1255 [14:42:44.901] Starting updateGraphWorker: Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json
+Info 1256 [14:42:44.920] Finishing updateGraphWorker: Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json Version: 29 structureChanged: false Elapsed: 18.66445291042328ms
+Info 1257 [14:42:44.920] Different program with same set of files:: structureIsReused:: 2
+Info 1258 [14:42:47.281] getCompletionData: Get current token: 0.011907100677490234
+Info 1259 [14:42:47.281] getCompletionData: Is inside comment: 0.00849294662475586
+Info 1260 [14:42:47.281] getCompletionData: Get previous token 1: 0.026364922523498535
+Info 1261 [14:42:47.281] getCompletionData: Get previous token 2: 0.11403203010559082
+Info 1262 [14:42:47.282] getCompletionsAtPosition: isCompletionListBlocker: 0.02101600170135498
+Info 1263 [14:42:47.288] getSymbolsFromOtherSourceFileExports: Using cached list
+Info 1264 [14:42:47.313] getCompletionData: Semantic work: 31.837172031402588
+Info 1265 [14:42:47.321] getCompletionsAtPosition: getCompletionEntriesFromSymbols: 7.0953710079193115
+Info 1266 [14:42:48.613] Starting updateGraphWorker: Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json
+Info 1267 [14:42:48.638] Finishing updateGraphWorker: Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json Version: 30 structureChanged: false Elapsed: 24.55053198337555ms
+Info 1268 [14:42:48.638] Different program with same set of files:: structureIsReused:: 2
+Info 1269 [14:43:34.199] Starting updateGraphWorker: Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json
+Info 1270 [14:43:34.226] Finishing updateGraphWorker: Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json Version: 31 structureChanged: false Elapsed: 27.43925905227661ms
+Info 1271 [14:43:34.226] Different program with same set of files:: structureIsReused:: 2
+Info 1272 [14:43:35.918] Starting updateGraphWorker: Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json
+Info 1273 [14:43:35.953] Finishing updateGraphWorker: Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json Version: 32 structureChanged: false Elapsed: 35.61873197555542ms
+Info 1274 [14:43:35.953] Different program with same set of files:: structureIsReused:: 2
+Info 1275 [14:43:38.334] Starting updateGraphWorker: Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json
+Info 1276 [14:43:38.349] Finishing updateGraphWorker: Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json Version: 33 structureChanged: false Elapsed: 14.245622992515564ms
+Info 1277 [14:43:38.349] Different program with same set of files:: structureIsReused:: 2
+Info 1278 [14:47:19.196] Starting updateGraphWorker: Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json
+Info 1279 [14:47:19.218] Finishing updateGraphWorker: Project: /Users/shin/Documents/github/slam-at-home/react-frontend/tsconfig.json Version: 34 structureChanged: false Elapsed: 21.022267937660217ms
+Info 1280 [14:47:19.218] Different program with same set of files:: structureIsReused:: 2
