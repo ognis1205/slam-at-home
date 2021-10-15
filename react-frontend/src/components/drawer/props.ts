@@ -1,5 +1,5 @@
 /**
- * @fileoverview Defines {Drawer} and {Item} properties.
+ * @fileoverview Defines {Wrapper} and {Item} properties.
  */
 import type * as React from "react";
 
@@ -12,7 +12,7 @@ type Placement = "left" | "top" | "right" | "bottom";
 /** A type union of draw width definitions. */
 type DrawWidth = number | [number, number];
 
-/** A common properties shared by both {Drawer} and {Item} components. */
+/** A common properties shared by both {Wrapper} and {Item} components. */
 interface CommonProps extends Omit<React.HTMLAttributes<unknown>, "onChange"> {
   prefixClass?: string;
   width?: string | number;
@@ -39,8 +39,8 @@ interface CommonProps extends Omit<React.HTMLAttributes<unknown>, "onChange"> {
   autoFocus?: boolean;
 }
 
-/** A {Drawer} component properties. */
-export interface DrawerProps extends CommonProps {
+/** A {Wrapper} component properties. */
+export interface WrapperProps extends CommonProps {
   getContainer?: GetContainer;
   wrapperClass?: string;
   forceRender?: boolean;
