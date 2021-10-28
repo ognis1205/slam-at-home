@@ -1,19 +1,19 @@
 /**
  * @fileoverview Defines {Wrapper} and {Item} properties.
  */
-import type * as React from "react";
+import type * as React from 'react';
 
 /** A type union of HTML container getters. */
 type GetContainer = string | HTMLElement | (() => HTMLElement);
 
 /** A type union of CSS position properties. */
-type Placement = "left" | "top" | "right" | "bottom";
+type Placement = 'left' | 'top' | 'right' | 'bottom';
 
 /** A type union of draw width definitions. */
 type DrawWidth = number | [number, number];
 
 /** A common properties shared by both {Wrapper} and {Item} components. */
-interface CommonProps extends Omit<React.HTMLAttributes<unknown>, "onChange"> {
+interface CommonProps extends Omit<React.HTMLAttributes<unknown>, 'onChange'> {
   prefixClass?: string;
   width?: string | number;
   height?: string | number;
