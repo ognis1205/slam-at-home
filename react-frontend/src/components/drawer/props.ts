@@ -4,7 +4,7 @@
 import type * as React from 'react';
 
 /** A type union of HTML container getters. */
-type GetContainer = string | HTMLElement | (() => HTMLElement);
+type Container = string | HTMLElement | (() => HTMLElement);
 
 /** A type union of CSS position properties. */
 type Placement = 'left' | 'top' | 'right' | 'bottom';
@@ -41,14 +41,14 @@ interface CommonProps extends Omit<React.HTMLAttributes<unknown>, 'onChange'> {
 
 /** A {Wrapper} component properties. */
 export interface WrapperProps extends CommonProps {
-  getContainer?: GetContainer;
+  container?: Container;
   wrapperClass?: string;
   forceRender?: boolean;
 }
 
 /** A {Item} component properties. */
 export interface ItemProps extends CommonProps {
-  getContainer?: GetContainer;
+  container?: Container;
   getOpenCount?: () => number;
   switchScrollingEffect?: () => void;
 }
