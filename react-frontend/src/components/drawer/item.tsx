@@ -3,10 +3,9 @@
  */
 import * as React from 'react';
 import * as Utils from './utils';
-import classnames from 'classnames';
-import { ItemProps } from './props';
+import * as Props from './props';
 
-export const Item: React.FunctionComponent<ItemProps> = (props: ItemProps): React.ReactElement => {
+export const Item: React.FunctionComponent<Props.Item> = (props: Props.Item): React.ReactElement => {
   /** A Multi-level drawer contents. */
   const [levels, setLevelsState] = React.useState<HTMLElement[]>([]);
 
@@ -18,6 +17,9 @@ export const Item: React.FunctionComponent<ItemProps> = (props: ItemProps): Reac
 
   /** A timeout duration. */
   const [timeout, setTimeoutState] = React.useState<any>(null);
+
+  /** A drawing start duration. */
+  const [startPosition, setStartPositionState] = React.useState<{x: number; y: number}>(null);
 
   /** A reference to the component. */
   const self = React.useRef<HTMLDivElement>(null);
@@ -35,18 +37,21 @@ export const Item: React.FunctionComponent<ItemProps> = (props: ItemProps): Reac
   const button = React.useRef<HTMLElement>(null);
 
 //  private drawerId: string;
-//
-//  private startPos: {
-//    x: number;
-//    y: number;
-//  };
-//
+
+  /** Checks if some drawer is opened. */
+  const isSomeDrawerOpened = (): boolean =>
+    !Object.keys(currentDrawer).some(key => currentDrawer[key]);
+
+  /** Checks if the drawer is opened. */
+  const isOpen = (): boolean =>
+    self.current ? props.open : false;
 
   /** Sets drawer level HTML elements. */
-  const setLevels = (props: ItemProps): void => {
-    if (Utils.windowIsUndefined) return;
+  const setLevels = (): void => {
+    if (Utils.windowIsUndefined)
+      return;
 
-    const container = getContainer(props);
+    const container = Props.getContainer(props);
     const parent = container ? (container.parentNode as HTMLElement) : null;
     setLevelsState([] as HTMLElement[]);
 
@@ -66,22 +71,26 @@ export const Item: React.FunctionComponent<ItemProps> = (props: ItemProps): Reac
     }
   };
 
-  /** Returns the container element of a drawer item. */
-  const getContainer = (props: ItemProps): HTMLElement => {
-    if (props.container instanceof HTMLElement) {
-      return props.container;
-    } else if (typeof props.container === 'string') {
-      return document.getElementById(props.container);
-    } else {
-      return props.container();
+  /** Removes a drawing start handler. */
+  const setStartPosition = (e: React.TouchEvent | TouchEvent): void => {
+    if (e.touches.length > 1) {
+      setStartPositionState(null);
+      return;
     }
+    setStartPositionState({
+      x: e.touches[0].clientX,
+      y: e.touches[0].clientY,
+    });
   };
 
   /** Opens a level with transition. */
-  const openLevelTransition = (props: ItemProps): void => {
+  const openLevelTransition = (): void => {
     const isHorizontal = props.placement === 'left' || props.placement === 'right';
     const translateFunction = `translate${isHorizontal ? 'X' : 'Y'}`;
-    const rect = content.current ? content.current.getBoundingClientRect()[isHorizontal ? 'width' : 'height'] : 0;
+    const rect = 
+      content.current
+      ? content.current.getBoundingClientRect()[isHorizontal ? 'width' : 'height']
+      : 0;
     const size = (isHorizontal ? props.width : props.height) || rect;
 
     if (!Utils.windowIsUndefined) {
@@ -91,23 +100,19 @@ export const Item: React.FunctionComponent<ItemProps> = (props: ItemProps): Reac
         window.innerWidth > document.body.offsetWidth
           ? Utils.getScrollBarSize(true)
           : 0;
-      setLevelTransform(props, translateFunction, size, right);
-      toggleScrolling(props, right);
+      setTransform(translateFunction, size, right);
+      toggleScrolling(right);
     }
-    if (props.onChange) props.onChange(props.open);
+    if (props.onChange)
+      props.onChange(props.open);
   };
 
   /** Sets a transform CSS function on assigned levels. */
-  const setLevelTransform = (
-    props: ItemProps,
-    translateFunction?: string,
-    size?: string | number,
-    right?: number,
-  ): void => {
+  const setTransform = (translateFunction?: string, size?: string | number, right?: number): void => {
     levels.forEach(level => {
       level.style.transition = `transform ${props.drawDuration} ${props.drawEase}`;
       Utils.addEventListener(level, Utils.TRANSITION_END, onTransitionEnd);
-      const width = getDrawWidth(props, level, size);
+      const width = Props.getDrawWidth(props, level, size);
       const pixel = typeof width === 'number' ? `${width}px` : width;
       let position = 
         props.placement === 'left' || props.placement === 'top'
@@ -124,96 +129,34 @@ export const Item: React.FunctionComponent<ItemProps> = (props: ItemProps): Reac
     });
   };
 
-  /** Returns a draw width. */
-  const getDrawWidth = (
-    props: ItemProps,
-    target: HTMLElement,
-    size: string | number
-  ): string | number => {
-    let ret = props.open ? size : 0;
-    if (props.drawWidth) {
-      const width = (() => {
-        const w =
-          typeof props.drawWidth === 'function'
-          ? props.drawWidth({target: target, open: props.open})
-          : props.drawWidth;
-        return Array.isArray(w)
-             ? (w.length === 2 ? w : [w[0], w[1]])
-             : [w];
-      })();
-      ret = props.open
-          ? width[0]
-          : width[1] || 0;
-    }
-    return ret;
-  };
-
-  /** An event handler called on `transitionend` events. */
-  const onTransitionEnd = (e: TransitionEvent): void => {
-    const target: HTMLElement = e.target as HTMLElement;
-    Utils.removeEventListener(target, Utils.TRANSITION_END, onTransitionEnd);
-    target.style.transition = '';
-  };
-
-  /** An event handler called on 'keyboardevent' events. */
-  const onKeyDown = (e: React.KeyboardEvent): void => {
-    const { onClose } = props;
-    if (e.key === 'Escape') {
-      e.stopPropagation();
-      if (onClose) onClose(e as any);
-    }
-  };
-
-  /** An event handler called on 'transitionend' events of the wrapper. */
-  const onWrapperTransitionEnd = (e: React.TransitionEvent): void => {
-    const { open, afterVisibleChange } = props;
-    if (e.target === wrapper.current && e.propertyName.match(/transform$/)) {
-      if (self.current)
-        self.current.style.transition = '';
-      if (!open && isSomeDrawerOpened()) {
-        document.body.style.overflowX = '';
-        if (mask.current) {
-          mask.current.style.left = '';
-          mask.current.style.width = '';
-        }
-      }
-      if (afterVisibleChange)
-        afterVisibleChange(!!open);
-    }
-  };
-
   /** Toggles scrolling effects. */
-  const toggleScrolling = (
-    props: ItemProps,
-    right: number
-  ): void => {
-    const container = getContainer(props);
+  const toggleScrolling = (right: number): void => {
+    const container = Props.getContainer(props);
 
     if (container && container.parentNode === document.body && props.showMask) {
       const events = ['touchstart'];
       const doms = [document.body, mask.current, button.current, content.current];
-
       if (props.open && document.body.style.overflow !== 'hidden') {
-        if (right) addScrollingEffect(props, right);
+        if (right) addScrollingEffect(right);
         document.body.style.touchAction = 'none';
         doms.forEach((item, i) => {
           if (!item) return;
           Utils.addEventListener(
             item,
             events[i] || 'touchmove',
-            i ? removeMoveHandler : removeStartHandler,
+            i ? preventDefaultOnTouch : setStartPosition,
             passive,
           );
         });
       } else if (isSomeDrawerOpened()) {
         document.body.style.touchAction = '';
-        if (right) remScrollingEffect(right);
+        if (right) removeScrollingEffect(right);
         doms.forEach((item, i) => {
           if (!item) return;
           Utils.removeEventListener(
             item,
             events[i] || 'touchmove',
-            i ? removeMoveHandler : removeStartHandler,
+            i ? preventDefaultOnTouch : setStartPosition,
             passive,
           );
         });
@@ -222,7 +165,7 @@ export const Item: React.FunctionComponent<ItemProps> = (props: ItemProps): Reac
   };
 
   /** Adds scrolling effects. */
-  const addScrollingEffect = (props: ItemProps, right: number): void => {
+  const addScrollingEffect = (right: number): void => {
     const widthTransition = `width ${props.drawDuration} ${props.drawEase}`;
     const transformTransition = `transform ${props.drawDuration} ${props.drawEase}`;
     
@@ -250,43 +193,116 @@ export const Item: React.FunctionComponent<ItemProps> = (props: ItemProps): Reac
     }));
   };
 
-  /** Checks if some drawer is opened. */
-  const isSomeDrawerOpened = (): boolean =>
-    !Object.keys(currentDrawer).some(key => currentDrawer[key]);
+  /** Removes scrolling effects. */
+  const removeScrollingEffect = (right: number): void => {
+    if (Utils.transitionEndKey)
+      document.body.style.overflowX = 'hidden';
 
-  /** Checks if the drawer is opened. */
-  const isOpen = ({ open }: ItemProps): boolean => {
-    return self.current ? open : false;
+    self.current.style.transition = 'none';
+    let yTransition: string;
+    let xTransition = `width ${props.drawDuration} ${props.drawEase}`;
+    const transform = `transform ${props.drawDuration} ${props.drawEase}`;
+
+    switch (props.placement) {
+      case 'left': {
+        self.current.style.width = '100%';
+        xTransition = `width 0s ${props.drawEase} ${props.drawDuration}`;
+        break;
+      }
+      case 'right': {
+        self.current.style.transform = `translateX(${right}px)`;
+        self.current.style.width = '100%';
+        xTransition = `width 0s ${props.drawEase} ${props.drawDuration}`;
+        if (mask.current) {
+          mask.current.style.left = `-${right}px`;
+          mask.current.style.width = `calc(100% + ${right}px)`;
+        }
+        break;
+      }
+      case 'top':
+      case 'bottom': {
+        self.current.style.width = `calc(100% + ${right}px)`;
+        self.current.style.height = '100%';
+        self.current.style.transform = 'translateZ(0)';
+        yTransition = `height 0s ${props.drawEase} ${props.drawDuration}`;
+        break;
+      }
+      default:
+        break;
+    }
+
+    clearTimeout(timeout);
+    setTimeoutState(setTimeout(() => {
+      if (self.current) {
+        self.current.style.transition = `${transform},${
+          yTransition ? `${yTransition},` : ''
+        }${xTransition}`;
+        self.current.style.transform = '';
+        self.current.style.width = '';
+        self.current.style.height = '';
+      }
+    }));
   };
 
-  /** Returns the class name of the wrapper. */
-  const getWrapperClass = ({ prefixClass, placement, className, showMask, open }: ItemProps): string => {
-    return classnames(prefixClass, {
-      [`${prefixClass}-${placement}`]: true,
-      [`${prefixClass}-open`]: isOpen({open: open} as ItemProps),
-      [className || '']: !!className,
-      'no-mask': !showMask,
-    });
+  /** Removes touch event handlers. */
+  const preventDefaultOnTouch = (e: React.TouchEvent | TouchEvent): void => {
+    if (e.changedTouches.length > 1 || !startPosition)
+      return;
+
+    const el = e.currentTarget as HTMLElement;
+    const dx = e.changedTouches[0].clientX - startPosition.x;
+    const dy = e.changedTouches[0].clientY - startPosition.y;
+
+    const isMaskTouched =
+      el === mask.current;
+    const isButtonTouched =
+      el === button.current;
+    const isContentTouched = 
+      el === content.current && Utils.isParentScrolling(el, e.target as HTMLElement, dx, dy);
+    const isTouched =
+      isMaskTouched || isButtonTouched || isContentTouched;
+
+    if (isTouched && e.cancelable)
+      e.preventDefault();
   };
 
-  /** Returns the `transform` CSS property. */
-  const getTransform = ({ open, placement }: ItemProps): string => {
-    const position = placement === 'left' || placement === 'top' ? '-100%' : '100%';
-    return open ? '' : `${placement}(${position})`;
+  /** An event handler called on `transitionend` events. */
+  const onTransitionEnd = (e: TransitionEvent): void => {
+    const target: HTMLElement = e.target as HTMLElement;
+    Utils.removeEventListener(target, Utils.TRANSITION_END, onTransitionEnd);
+    target.style.transition = '';
   };
 
-  /** Rerturns the width of the component. */
-  const getWidth = ({ width }: ItemProps): string => {
-    return Utils.isNumeric(width) ? `${width}px` : width as string;
+  /** An event handler called on 'keyboardevent' events. */
+  const onKeyDown = (e: React.KeyboardEvent): void => {
+    if (e.key === 'Escape') {
+      e.stopPropagation();
+      if (props.onClose) props.onClose(e as any);
+    }
   };
 
-  /** Rerturns the height of the component. */
-  const getHeight = ({ height }: ItemProps): string => {
-    return Utils.isNumeric(height) ? `${height}px` : height as string;
+  /** An event handler called on 'transitionend' events of the wrapper. */
+  const onWrapperTransitionEnd = (e: React.TransitionEvent): void => {
+    const { open, afterVisibleChange } = props;
+    if (e.target === wrapper.current && e.propertyName.match(/transform$/)) {
+      if (self.current)
+        self.current.style.transition = '';
+      if (!open && isSomeDrawerOpened()) {
+        document.body.style.overflowX = '';
+        if (mask.current) {
+          mask.current.style.left = '';
+          mask.current.style.width = '';
+        }
+      }
+      if (afterVisibleChange)
+        afterVisibleChange(!!open);
+    }
   };
 
-  const getHandlerElement = ({ handler, onHandleClick }: ItemProps): React.ReactElement<unknown> => {
-    if (handler) {
+  /** Clones a handler element. */
+  const cloneHandlerElement = (): React.ReactElement<unknown> => {
+    const {handler, onHandleClick} = props;
+    if (Props.isReactElement(handler)) {
       return React.cloneElement(handler, {
         onClick: (e: React.MouseEvent): void => {
           if (handler.props.onClick) handler.props.onClick();
@@ -302,10 +318,10 @@ export const Item: React.FunctionComponent<ItemProps> = (props: ItemProps): Reac
     <div
       {...Utils.omit(props, ['switchScrollingEffect', 'autoFocus', 'onChange'])}
       tabIndex={-1}
-      className={getWrapperClass(props)}
+      className={Props.getWrapperClass(props, isOpen())}
       style={props.style}
       ref={self}
-      onKeyDown={isOpen(props) && props.keyboard ? onKeyDown : undefined}
+      onKeyDown={isOpen() && props.keyboard ? onKeyDown : undefined}
       onTransitionEnd={onWrapperTransitionEnd}
     >
       {props.showMask && (
@@ -319,10 +335,10 @@ export const Item: React.FunctionComponent<ItemProps> = (props: ItemProps): Reac
       <div
         className={`${props.prefixClass}-content-wrapper`}
         style={{
-          transform: getTransform(props),
-          msTransform: getTransform(props),
-          width: getWidth(props),
-          height: getHeight(props),
+          transform: Props.getTransform(props),
+          msTransform: Props.getTransform(props),
+          width: Props.getWidth(props),
+          height: Props.getHeight(props),
           ...props.contentWrapperStyle,
         }}
         ref={wrapper}
@@ -333,7 +349,7 @@ export const Item: React.FunctionComponent<ItemProps> = (props: ItemProps): Reac
         >
           {props.children}
         </div>
-        {getHandlerElement(props)}
+        {cloneHandlerElement()}
       </div>
     </div>
   );

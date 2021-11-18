@@ -111,3 +111,50 @@ export const removeEventListener = (
     (target as any).detachEvent(`on${event}`, handler);
   }
 };
+
+/** Returns `true` if a given event is a `touch` event of parent node. */
+export const isParentScrolling = (
+  root: HTMLElement,
+  target: HTMLElement | Document | null,
+  dx: number,
+  dy: number,
+): boolean => {
+  if (!target || target === document || target instanceof Document)
+    return false;
+
+  if (target === root.parentNode)
+    return true;
+
+  const scrollTop = target.scrollHeight - target.clientHeight;
+  const scrollLeft = target.scrollWidth - target.clientWidth;
+  const style = document.defaultView.getComputedStyle(target);
+  const overflowY = style.overflowY === 'auto' || style.overflowY === 'scroll';
+  const overflowX = style.overflowX === 'auto' || style.overflowX === 'scroll';
+
+  const isY =
+    Math.max(Math.abs(dx), Math.abs(dy)) === Math.abs(dy);
+  const isX =
+    Math.max(Math.abs(dx), Math.abs(dy)) === Math.abs(dx);
+  const isScrollableY =
+    scrollTop && overflowY;
+  const isScrollableX =
+    scrollLeft && overflowX;
+  const isExceedingY =
+    isScrollableY && ((target.scrollTop >= scrollTop && dy < 0) || (target.scrollTop <= 0 && dy > 0));
+  const isExceedingX =
+    isScrollableX && ((target.scrollLeft >= scrollLeft && dy < 0) || (target.scrollLeft <= 0 && dx > 0));
+  const isParentScrollingY =
+    isY && (!isScrollableY || isExceedingY);
+  const isParentScrollingX =
+    isX && (!isScrollableX || isExceedingX);
+
+  if (isParentScrollingY || isParentScrollingX)
+    return isParentScrolling(
+      root,
+      target.parentNode as HTMLElement,
+      dx,
+      dy,
+    );
+
+  return false;
+};

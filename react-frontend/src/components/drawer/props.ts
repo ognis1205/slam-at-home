@@ -2,6 +2,8 @@
  * @fileoverview Defines {Wrapper} and {Item} properties.
  */
 import type * as React from 'react';
+import * as Utils from './utils';
+import classnames from 'classnames';
 
 /** A type union of HTML container getters. */
 type Container = string | HTMLElement | (() => HTMLElement);
@@ -13,7 +15,7 @@ type Placement = 'left' | 'top' | 'right' | 'bottom';
 type DrawWidth = number | [number, number];
 
 /** A common properties shared by both {Wrapper} and {Item} components. */
-interface CommonProps extends Omit<React.HTMLAttributes<unknown>, 'onChange'> {
+interface Common extends Omit<React.HTMLAttributes<unknown>, 'onChange'> {
   prefixClass?: string;
   width?: string | number;
   height?: string | number;
@@ -37,18 +39,88 @@ interface CommonProps extends Omit<React.HTMLAttributes<unknown>, 'onChange'> {
   keyboard?: boolean;
   contentWrapperStyle?: React.CSSProperties;
   autoFocus?: boolean;
+  container?: Container;
 }
 
 /** A {Wrapper} component properties. */
-export interface WrapperProps extends CommonProps {
-  container?: Container;
+export interface Wrapper extends Common {
   wrapperClass?: string;
   forceRender?: boolean;
 }
 
 /** A {Item} component properties. */
-export interface ItemProps extends CommonProps {
-  container?: Container;
+export interface Item extends Common {
   getOpenCount?: () => number;
   switchScrollingEffect?: () => void;
 }
+
+/** Returns the container element of a drawer item. */
+export const getContainer = ({container}: Common): HTMLElement => {
+  if (container instanceof HTMLElement) {
+    return container;
+  } else if (typeof container === 'string') {
+    return document.getElementById(container);
+  } else {
+    return container();
+  }
+};
+
+/** Returns the class name of the wrapper. */
+export const getWrapperClass = (
+  {prefixClass, placement, className, showMask}: Common,
+  open: boolean
+): string => {
+  return classnames(prefixClass, {
+    [`${prefixClass}-${placement}`]: true,
+    [`${prefixClass}-open`]: open,
+    [className || '']: !!className,
+    'no-mask': !showMask,
+  });
+};
+
+/** Returns the `transform` CSS property. */
+export const getTransform = ({open, placement}: Common): string => {
+  const position = placement === 'left' || placement === 'top' ? '-100%' : '100%';
+  return open ? '' : `${placement}(${position})`;
+};
+
+/** Rerturns the width of the component. */
+export const getWidth = ({width}: Common): string => {
+  return Utils.isNumeric(width) ? `${width}px` : width as string;
+};
+
+/** Rerturns the height of the component. */
+export const getHeight = ({height}: Common): string => {
+  return Utils.isNumeric(height) ? `${height}px` : height as string;
+};
+
+/** Returns a draw width. */
+export const getDrawWidth = (
+  {open, drawWidth}: Common,
+  target: HTMLElement,
+  size: string | number
+): string | number => {
+  let ret = open ? size : 0;
+  if (drawWidth) {
+    const width = (() => {
+      const w =
+        typeof drawWidth === 'function'
+        ? drawWidth({target: target, open: open})
+        : drawWidth;
+      return Array.isArray(w)
+           ? (w.length === 2 ? w : [w[0], w[1]])
+           : [w];
+    })();
+    ret = open
+        ? width[0]
+        : width[1] || 0;
+  }
+  return ret;
+};
+
+/** Checks if a given handler is `ReactElement.` */
+export const isReactElement = (
+  handler: React.ReactElement | null | false
+): handler is React.ReactElement => {
+  return handler !== false && handler !== null;
+};
