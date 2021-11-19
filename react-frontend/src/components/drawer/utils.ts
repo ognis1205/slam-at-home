@@ -112,8 +112,8 @@ export const removeEventListener = (
   }
 };
 
-/** Returns `true` if a given event is a `touch` event of parent node. */
-export const isParentScrolling = (
+/** Returns `true` if a given event is a `touch` event which attempts to scroll. */
+export const isScrolling = (
   root: HTMLElement,
   target: HTMLElement | Document | null,
   dx: number,
@@ -149,12 +149,7 @@ export const isParentScrolling = (
     isX && (!isScrollableX || isExceedingX);
 
   if (isParentScrollingY || isParentScrollingX)
-    return isParentScrolling(
-      root,
-      target.parentNode as HTMLElement,
-      dx,
-      dy,
-    );
+    return isScrolling(root, target.parentNode as HTMLElement, dx, dy);
 
   return false;
 };
