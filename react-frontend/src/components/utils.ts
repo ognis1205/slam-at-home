@@ -28,6 +28,13 @@ export const toArray = (vars: any): any[] => {
   return [vars];
 };
 
+/** Returns `true` if the `container` has a scrolling bar. */
+export const hasScrollBar = (container: HTMLElement): boolean => {
+  return (container === document.body &&
+          window.innerWidth - document.documentElement.clientWidth > 0) ||
+         container.scrollHeight > container.clientHeight;
+};
+
 /** A cached scroll bar size. */
 let cachedScrollBarSize: number;
 

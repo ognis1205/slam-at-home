@@ -2,7 +2,8 @@
  * @fileoverview Defines {Wrapper} and {Item} properties.
  */
 import type * as React from 'react';
-import * as Utils from './utils';
+import * as Utils from '../utils';
+import * as Scroll from '../scroll';
 import classnames from 'classnames';
 
 /** A type union of HTML container getters. */
@@ -51,6 +52,7 @@ export interface Wrapper extends Common {
 /** A {Item} component properties. */
 export interface Item extends Common {
   getOpenCount?: () => number;
+  scrollLocker?: Scroll.Locker;
   switchScrollingEffect?: () => void;
 }
 

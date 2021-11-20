@@ -2,9 +2,8 @@
  * @fileoverview Defines Item component.
  */
 import * as React from 'react';
-import * as Utils from './utils';
 import * as Props from './props';
-
+import * as Utils from '../utils';
 
 /**
  * Returns a `Item` component.
