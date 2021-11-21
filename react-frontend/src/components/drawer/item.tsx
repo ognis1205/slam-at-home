@@ -3,8 +3,10 @@
  */
 import * as React from 'react';
 import * as Props from './props';
-import * as Hooks from '../hooks';
-import * as Utils from '../utils';
+import * as Event from '../../utils/event';
+import * as Hook from '../../utils/hook';
+import * as Misc from '../../utils/misc';
+import * as Scroll from '../../utils/scroll';
 
 /**
  * Returns a `Item` component.
@@ -56,7 +58,7 @@ export const Item: React.FunctionComponent<Props.Item> = (props: Props.Item): Re
   }, [props.placement]);
 
   /** `componentDidMount` */
-  Hooks.useDidMount(() => {
+  Hook.useDidMount(() => {
     const container = Props.getContainer(props);
 
     initId();
@@ -72,7 +74,7 @@ export const Item: React.FunctionComponent<Props.Item> = (props: Props.Item): Re
   });
 
   /** `componentDidUpdate` */
-  Hooks.useDidUpdate(() => {
+  Hook.useDidUpdate(() => {
     const container = Props.getContainer(props);
 
     if (container && container.parentNode === document.body) currentDrawer[id] = !!props.open;
@@ -86,7 +88,7 @@ export const Item: React.FunctionComponent<Props.Item> = (props: Props.Item): Re
   }, [props.open]);
 
   /** `componentWillUnmount` */
-  Hooks.useWillUnmount(() => {
+  Hook.useWillUnmount(() => {
     delete currentDrawer[id];
     if (props.open) {
       props.open = false;
@@ -121,7 +123,7 @@ export const Item: React.FunctionComponent<Props.Item> = (props: Props.Item): Re
 
   /** Inits the `passive` support. */
   const initPassive = (): void => {
-    if (!Utils.windowIsUndefined) {
+    if (!Misc.isWindowUndefined) {
       let passiveSupported = false;
       try {
         window.addEventListener(
@@ -141,7 +143,7 @@ export const Item: React.FunctionComponent<Props.Item> = (props: Props.Item): Re
 
   /** Inits drawer level HTML elements. */
   const initLevels = (): void => {
-    if (Utils.windowIsUndefined)
+    if (Misc.isWindowUndefined)
       return;
 
     const container = Props.getContainer(props);
@@ -158,7 +160,7 @@ export const Item: React.FunctionComponent<Props.Item> = (props: Props.Item): Re
         ) levels.push(child);
       });
     } else if (props.drawLevel) {
-      Utils.toArray(props.drawLevel).forEach(key => {
+      Misc.toArray(props.drawLevel).forEach(key => {
         document.querySelectorAll(key).forEach(item => levels.push(item));
       });
     }
@@ -186,12 +188,12 @@ export const Item: React.FunctionComponent<Props.Item> = (props: Props.Item): Re
       : 0;
     const size = (isHorizontal ? props.width : props.height) || rect;
 
-    if (!Utils.windowIsUndefined) {
+    if (!Misc.isWindowUndefined) {
       const right =
         document.body.scrollHeight >
           (window.innerHeight || document.documentElement.clientHeight) &&
         window.innerWidth > document.body.offsetWidth
-          ? Utils.getScrollBarSize(true)
+          ? Scroll.getBarSize(true)
           : 0;
       setTransform(translateFunction, size, right);
       toggleScrolling(right);
@@ -204,7 +206,7 @@ export const Item: React.FunctionComponent<Props.Item> = (props: Props.Item): Re
   const setTransform = (translateFunction?: string, size?: string | number, right?: number): void => {
     levels.forEach(level => {
       level.style.transition = `transform ${props.drawDuration} ${props.drawEase}`;
-      Utils.addEventListener(level, Utils.TRANSITION_END, onTransitionEnd);
+      Event.addListener(level, Event.TRANSITION_END, onTransitionEnd);
       const width = Props.getDrawWidth(props, level, size);
       const pixel = 
         typeof width === 'number'
@@ -236,7 +238,7 @@ export const Item: React.FunctionComponent<Props.Item> = (props: Props.Item): Re
         document.body.style.touchAction = 'none';
         doms.forEach((item, i) => {
           if (!item) return;
-          Utils.addEventListener(
+          Event.addListener(
             item,
             events[i] || 'touchmove',
             i ? preventDefaultOnTouch : initStartPosition,
@@ -248,7 +250,7 @@ export const Item: React.FunctionComponent<Props.Item> = (props: Props.Item): Re
         if (right) removeScrollingEffect(right);
         doms.forEach((item, i) => {
           if (!item) return;
-          Utils.removeEventListener(
+          Event.removeListener(
             item,
             events[i] || 'touchmove',
             i ? preventDefaultOnTouch : initStartPosition,
@@ -290,7 +292,7 @@ export const Item: React.FunctionComponent<Props.Item> = (props: Props.Item): Re
 
   /** Removes scrolling effects. */
   const removeScrollingEffect = (right: number): void => {
-    if (Utils.transitionEndKey)
+    if (Event.transitionEndKey)
       document.body.style.overflowX = 'hidden';
 
     self.current.style.transition = 'none';
@@ -353,7 +355,7 @@ export const Item: React.FunctionComponent<Props.Item> = (props: Props.Item): Re
     const isButtonTouched =
       el === button.current;
     const isContentTouched = 
-      el === content.current && Utils.isScrolling(el, e.target as HTMLElement, dx, dy);
+      el === content.current && Scroll.isScrolling(el, e.target as HTMLElement, dx, dy);
     const isTouched =
       isMaskTouched || isButtonTouched || isContentTouched;
 
@@ -364,7 +366,7 @@ export const Item: React.FunctionComponent<Props.Item> = (props: Props.Item): Re
   /** An event handler called on `transitionend` events. */
   const onTransitionEnd = (e: TransitionEvent): void => {
     const target: HTMLElement = e.target as HTMLElement;
-    Utils.removeEventListener(target, Utils.TRANSITION_END, onTransitionEnd);
+    Event.removeListener(target, Event.TRANSITION_END, onTransitionEnd);
     target.style.transition = '';
   };
 
@@ -411,7 +413,7 @@ export const Item: React.FunctionComponent<Props.Item> = (props: Props.Item): Re
 
   return (
     <div
-      {...Utils.omit(props, ['switchScrollingEffect', 'autoFocus', 'onChange'])}
+      {...Misc.omit(props, ['switchScrollingEffect', 'autoFocus', 'onChange'])}
       tabIndex={-1}
       className={Props.getWrapperClass(props, isOpen())}
       style={props.style}

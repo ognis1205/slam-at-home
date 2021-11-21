@@ -1,5 +1,5 @@
 /**
- * @fileoverview Defines CSS style helper functions.
+ * @fileoverview Defines lagacy React life-cycle method equivalents.
  */
 import * as React from 'react';
 

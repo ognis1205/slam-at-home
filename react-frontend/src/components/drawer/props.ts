@@ -2,8 +2,8 @@
  * @fileoverview Defines {Wrapper} and {Item} properties.
  */
 import type * as React from 'react';
-import * as Utils from '../utils';
-import * as Scroll from '../scroll';
+import * as Misc from '../../utils/misc';
+import * as Scroll from '../../utils/scroll';
 import classnames from 'classnames';
 
 /** A type union of HTML container getters. */
@@ -88,12 +88,12 @@ export const getTransform = ({open, placement}: Common): string => {
 
 /** Rerturns the width of the component. */
 export const getWidth = ({width}: Common): string => {
-  return Utils.isNumeric(width) ? `${width}px` : width as string;
+  return Misc.isNumeric(width) ? `${width}px` : width as string;
 };
 
 /** Rerturns the height of the component. */
 export const getHeight = ({height}: Common): string => {
-  return Utils.isNumeric(height) ? `${height}px` : height as string;
+  return Misc.isNumeric(height) ? `${height}px` : height as string;
 };
 
 /** Returns a draw width. */

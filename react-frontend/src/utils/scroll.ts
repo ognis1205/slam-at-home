@@ -2,8 +2,7 @@
  * @fileoverview Defines scrolling helper classes/functions.
  */
 import * as React from 'react';
-import * as Utils from './utils';
-import * as Style from './style';
+import * as CSS from './css';
 
 /** Defines lock interface. */
 interface Lock {
@@ -64,12 +63,12 @@ export class Locker {
 
     const container = this.options?.container || document.body;
     let size = 0;
-    if (Utils.hasScrollBar(container))
-      size = Utils.getScrollBarSize();
+    if (hasBar(container))
+      size = getBarSize();
 
     cachedStyle.set(
       container,
-      Style.set(
+      CSS.set(
         {
           width: size !== 0 ? `calc(100% - ${size}px)` : undefined,
           overflow: 'hidden',
@@ -100,7 +99,7 @@ export class Locker {
     if (!classNameRegex.test(container.className))
       return;
 
-    Style.set(cachedStyle.get(container), container);
+    CSS.set(cachedStyle.get(container), container);
     cachedStyle.delete(container);
     container.className = container.className
       .replace(classNameRegex, '')
@@ -123,3 +122,89 @@ export class Locker {
     }
   };
 }
+
+/** Returns `true` if the `container` has a scrolling bar. */
+export const hasBar = (container: HTMLElement): boolean => {
+  return (container === document.body &&
+          window.innerWidth - document.documentElement.clientWidth > 0) ||
+         container.scrollHeight > container.clientHeight;
+};
+
+/** A cached scroll bar size. */
+let cachedBarSize: number;
+
+/** Computes a scroll bar size if it is defined. */
+export const getBarSize = (fresh?: boolean): number => {
+  if (typeof document === 'undefined') return 0;
+
+  if (fresh || cachedBarSize === undefined) {
+    const inner = document.createElement('div');
+    inner.style.width = '100%';
+    inner.style.height = '200px';
+
+    const outer = document.createElement('div');
+    outer.style.position = 'absolute';
+    outer.style.top = '0';
+    outer.style.left = '0';
+    outer.style.pointerEvents = 'none';
+    outer.style.visibility = 'hidden';
+    outer.style.width = '200px';
+    outer.style.height = '150px';
+    outer.style.overflow = 'hidden';
+
+    outer.appendChild(inner);
+    document.body.appendChild(outer);
+
+    const container = inner.offsetWidth;
+    outer.style.overflow = 'scroll';
+    let scroll = inner.offsetWidth;
+    if (container === scroll) scroll = outer.clientWidth;
+    document.body.removeChild(outer);
+
+    cachedBarSize = container - scroll;
+  }
+
+  return cachedBarSize;
+};
+
+/** Returns `true` if a given event is a `touch` event which attempts to scroll. */
+export const isScrolling = (
+  root: HTMLElement,
+  target: HTMLElement | Document | null,
+  dx: number,
+  dy: number,
+): boolean => {
+  if (!target || target === document || target instanceof Document)
+    return false;
+
+  if (target === root.parentNode)
+    return true;
+
+  const scrollTop = target.scrollHeight - target.clientHeight;
+  const scrollLeft = target.scrollWidth - target.clientWidth;
+  const style = document.defaultView.getComputedStyle(target);
+  const overflowY = style.overflowY === 'auto' || style.overflowY === 'scroll';
+  const overflowX = style.overflowX === 'auto' || style.overflowX === 'scroll';
+
+  const isY =
+    Math.max(Math.abs(dx), Math.abs(dy)) === Math.abs(dy);
+  const isX =
+    Math.max(Math.abs(dx), Math.abs(dy)) === Math.abs(dx);
+  const isScrollableY =
+    scrollTop && overflowY;
+  const isScrollableX =
+    scrollLeft && overflowX;
+  const isExceedingY =
+    isScrollableY && ((target.scrollTop >= scrollTop && dy < 0) || (target.scrollTop <= 0 && dy > 0));
+  const isExceedingX =
+    isScrollableX && ((target.scrollLeft >= scrollLeft && dy < 0) || (target.scrollLeft <= 0 && dx > 0));
+  const isParentScrollingY =
+    isY && (!isScrollableY || isExceedingY);
+  const isParentScrollingX =
+    isX && (!isScrollableX || isExceedingX);
+
+  if (isParentScrollingY || isParentScrollingX)
+    return isScrolling(root, target.parentNode as HTMLElement, dx, dy);
+
+  return false;
+};
