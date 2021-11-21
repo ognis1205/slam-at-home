@@ -3,6 +3,7 @@
  */
 import * as React from 'react';
 import * as Props from './props';
+import * as Hooks from '../hooks';
 import * as Utils from '../utils';
 
 /**
@@ -44,10 +45,18 @@ export const Item: React.FunctionComponent<Props.Item> = (props: Props.Item): Re
   /** @const Holds a reference to the draw handler element. */
   const button = React.useRef<HTMLElement>(null);
 
-  /**
-   *`componentDidMount`
-   */
+  /** `getDerivedStateFromProps` */
   React.useEffect(() => {
+    initLevels();
+  }, [props.drawLevel]);
+
+  /** `getDerivedStateFromProps` */
+  React.useEffect(() => {
+    content.current = null;
+  }, [props.placement]);
+
+  /** `componentDidMount` */
+  Hooks.useDidMount(() => {
     const container = Props.getContainer(props);
 
     initId();
@@ -55,15 +64,37 @@ export const Item: React.FunctionComponent<Props.Item> = (props: Props.Item): Re
     initLevels();
 
     if (props.open) {
-      if (container && container.parentNode === document.body)
-        currentDrawer[id] = props.open;
+      if (container && container.parentNode === document.body) currentDrawer[id] = props.open;
       openLevel();
-      if (props.autoFocus)
-        focus();
-      if (props.showMask)
-        props.scrollLocker?.lock();
+      if (props.autoFocus) focus();
+      if (props.showMask) props.scrollLocker?.lock();
     }
-  }, []);
+  });
+
+  /** `componentDidUpdate` */
+  Hooks.useDidUpdate(() => {
+    const container = Props.getContainer(props);
+
+    if (container && container.parentNode === document.body) currentDrawer[id] = !!props.open;
+    openLevel();
+
+    if (props.open) {
+      if (props.autoFocus) focus();
+      if (props.showMask) props.scrollLocker?.lock();
+      else props.scrollLocker?.unlock();
+    }
+  }, [props.open]);
+
+  /** `componentWillUnmount` */
+  Hooks.useWillUnmount(() => {
+    delete currentDrawer[id];
+    if (props.open) {
+      props.open = false;
+      setTransform();
+      document.body.style.touchAction = '';
+    }
+    props.scrollLocker?.unlock();
+  });
 
   /** Checks if some drawers are opened. */
   const isSomeDrawerOpened = (): boolean =>
