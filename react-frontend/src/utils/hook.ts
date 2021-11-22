@@ -22,7 +22,7 @@ export const useDidUpdate = (callback: () => void, dependencies?: any[]): void =
   const hasMounted = React.useRef(false)
   React.useEffect(() => {
     if (hasMounted.current) callback();
-    else hasMounted.current = true
+    else hasMounted.current = true;
   }, dependencies);
 };
 

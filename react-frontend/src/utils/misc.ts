@@ -2,13 +2,6 @@
  * @fileoverview Defines miscellaneous functions.
  */
 
-/** A boolean constant which specifies `window` is defined or not. */
-export const isWindowUndefined: boolean = !(
-  typeof window !== 'undefined' &&
-  window.document &&
-  window.document.createElement
-);
-
 /** Checks if a given value is numeric. */
 export const isNumeric = (value: string | number | undefined) =>
   !isNaN(parseFloat(value as string)) && isFinite(value as number);

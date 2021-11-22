@@ -3,6 +3,7 @@
  */
 import * as React from 'react';
 import * as Props from './props';
+import * as DOM from '../../utils/dom';
 import * as Event from '../../utils/event';
 import * as Hook from '../../utils/hook';
 import * as Misc from '../../utils/misc';
@@ -60,16 +61,18 @@ export const Item: React.FunctionComponent<Props.Item> = (props: Props.Item): Re
   /** `componentDidMount` */
   Hook.useDidMount(() => {
     const container = Props.getContainer(props);
-
     initId();
     initPassive();
     initLevels();
 
     if (props.open) {
-      if (container && container.parentNode === document.body) currentDrawer[id] = props.open;
+      if (container && container.parentNode === document.body)
+        currentDrawer[id] = props.open;
       openLevel();
-      if (props.autoFocus) focus();
-      if (props.showMask) props.scrollLocker?.lock();
+      if (props.autoFocus)
+        focus();
+      if (props.showMask)
+        props.scrollLocker?.lock();
     }
   });
 
@@ -77,13 +80,17 @@ export const Item: React.FunctionComponent<Props.Item> = (props: Props.Item): Re
   Hook.useDidUpdate(() => {
     const container = Props.getContainer(props);
 
-    if (container && container.parentNode === document.body) currentDrawer[id] = !!props.open;
+    if (container && container.parentNode === document.body)
+      currentDrawer[id] = !!props.open;
     openLevel();
 
     if (props.open) {
-      if (props.autoFocus) focus();
-      if (props.showMask) props.scrollLocker?.lock();
-      else props.scrollLocker?.unlock();
+      if (props.autoFocus)
+        focus();
+      if (props.showMask)
+        props.scrollLocker?.lock();
+      else
+        props.scrollLocker?.unlock();
     }
   }, [props.open]);
 
@@ -123,7 +130,7 @@ export const Item: React.FunctionComponent<Props.Item> = (props: Props.Item): Re
 
   /** Inits the `passive` support. */
   const initPassive = (): void => {
-    if (!Misc.isWindowUndefined) {
+    if (!DOM.isWindowUndefined) {
       let passiveSupported = false;
       try {
         window.addEventListener(
@@ -143,7 +150,7 @@ export const Item: React.FunctionComponent<Props.Item> = (props: Props.Item): Re
 
   /** Inits drawer level HTML elements. */
   const initLevels = (): void => {
-    if (Misc.isWindowUndefined)
+    if (DOM.isWindowUndefined)
       return;
 
     const container = Props.getContainer(props);
@@ -188,7 +195,7 @@ export const Item: React.FunctionComponent<Props.Item> = (props: Props.Item): Re
       : 0;
     const size = (isHorizontal ? props.width : props.height) || rect;
 
-    if (!Misc.isWindowUndefined) {
+    if (!DOM.isWindowUndefined) {
       const right =
         document.body.scrollHeight >
           (window.innerHeight || document.documentElement.clientHeight) &&

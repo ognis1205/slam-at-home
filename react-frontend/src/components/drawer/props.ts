@@ -2,12 +2,10 @@
  * @fileoverview Defines {Wrapper} and {Item} properties.
  */
 import type * as React from 'react';
+import * as DOM from '../../utils/dom';
 import * as Misc from '../../utils/misc';
 import * as Scroll from '../../utils/scroll';
 import classnames from 'classnames';
-
-/** A type union of HTML container getters. */
-type Container = string | HTMLElement | (() => HTMLElement);
 
 /** A type union of CSS position properties. */
 type Placement = 'left' | 'top' | 'right' | 'bottom';
@@ -40,7 +38,7 @@ interface Common extends Omit<React.HTMLAttributes<unknown>, 'onChange'> {
   keyboard?: boolean;
   contentWrapperStyle?: React.CSSProperties;
   autoFocus?: boolean;
-  container?: Container;
+  container?: DOM.Identifier;
 }
 
 /** A {Wrapper} component properties. */
@@ -58,13 +56,7 @@ export interface Item extends Common {
 
 /** Returns the container element of a drawer item. */
 export const getContainer = ({container}: Common): HTMLElement => {
-  if (container instanceof HTMLElement) {
-    return container;
-  } else if (typeof container === 'string') {
-    return document.getElementById(container);
-  } else {
-    return container();
-  }
+  return DOM.get(container);
 };
 
 /** Returns the class name of the wrapper. */

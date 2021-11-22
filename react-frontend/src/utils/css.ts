@@ -1,5 +1,5 @@
 /**
- * @fileoverview Defines CSS style helper functions.
+ * @fileoverview Defines CSS helper functions.
  */
 import * as React from 'react';
 
