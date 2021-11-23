@@ -3,6 +3,7 @@
  */
 import type * as React from 'react';
 import * as DOM from '../../utils/dom';
+import * as Scroll from '../../utils/scroll';
 
 /** A {Item} component properties. */
 export interface Item {
@@ -10,7 +11,19 @@ export interface Item {
   children?: React.ReactNode;
 }
 
-/** Returns the container element of a portal item. */
-export const getContainer = ({container}: Item): HTMLElement => {
-  return DOM.get(container);
-};
+/** A {Content} component properties. */
+export interface Content {
+  container?: DOM.Identifier;
+  getOpenCount?: () => number;
+  scrollLocker?: Scroll.Locker;
+  switchScrollingEffect?: () => void;
+}
+
+/** A {Wrapper} component properties. */
+export interface Wrapper {
+  container?: DOM.Identifier;
+  wrapperClass?: string;
+  visible?: boolean;
+  forceRender?: boolean;
+  children: (content: Content) => React.ReactNode;
+}

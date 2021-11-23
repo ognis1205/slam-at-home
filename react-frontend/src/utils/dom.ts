@@ -10,7 +10,7 @@ export const isWindowUndefined: boolean = !(
 );
 
 /** Returns `true` if DOM APIs are available. */
-export const canUse = (): boolean => {
+export const isDefined = (): boolean => {
   return !!(
     typeof window !== 'undefined' &&
     window.document &&

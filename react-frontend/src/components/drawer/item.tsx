@@ -8,6 +8,72 @@ import * as Event from '../../utils/event';
 import * as Hook from '../../utils/hook';
 import * as Misc from '../../utils/misc';
 import * as Scroll from '../../utils/scroll';
+import classnames from 'classnames';
+
+/** Returns the class name of the wrapper. */
+const getWrapperClass = (
+  {prefixClass, placement, className, showMask}: Props.Item,
+  open: boolean
+): string => {
+  return classnames(prefixClass, {
+    [`${prefixClass}-${placement}`]: true,
+    [`${prefixClass}-open`]: open,
+    [className || '']: !!className,
+    'no-mask': !showMask,
+  });
+};
+
+/** Returns the `transform` CSS property. */
+const getTransform = ({open, placement}: Props.Item): string => {
+  const position = placement === 'left' || placement === 'top' ? '-100%' : '100%';
+  return open ? '' : `${placement}(${position})`;
+};
+
+/** Rerturns the width of the component. */
+const getWidth = ({width}: Props.Item): string => {
+  return Misc.isNumeric(width) ? `${width}px` : width as string;
+};
+
+/** Rerturns the height of the component. */
+const getHeight = ({height}: Props.Item): string => {
+  return Misc.isNumeric(height) ? `${height}px` : height as string;
+};
+
+/** Returns a draw width. */
+const getDrawWidth = (
+  {open, drawWidth}: Props.Item,
+  target: HTMLElement,
+  size: string | number
+): string | number => {
+  let ret = open ? size : 0;
+  if (drawWidth) {
+    const width = (() => {
+      const w =
+        typeof drawWidth === 'function'
+        ? drawWidth({target: target, open: open})
+        : drawWidth;
+      return Array.isArray(w)
+           ? (w.length === 2 ? w : [w[0], w[1]])
+           : [w];
+    })();
+    ret = open
+        ? width[0]
+        : width[1] || 0;
+  }
+  return ret;
+};
+
+/** Returns the container element of a drawer item. */
+export const getContainer = ({container}: Props.Item): HTMLElement => {
+  return DOM.get(container);
+};
+
+/** Checks if a given handler is `ReactElement.` */
+export const isReactElement = (
+  handler: React.ReactElement | null | false
+): handler is React.ReactElement => {
+  return handler !== false && handler !== null;
+};
 
 /**
  * Returns a `Item` component.
@@ -60,7 +126,7 @@ export const Item: React.FunctionComponent<Props.Item> = (props: Props.Item): Re
 
   /** `componentDidMount` */
   Hook.useDidMount(() => {
-    const container = Props.getContainer(props);
+    const container = getContainer(props);
     initId();
     initPassive();
     initLevels();
@@ -78,7 +144,7 @@ export const Item: React.FunctionComponent<Props.Item> = (props: Props.Item): Re
 
   /** `componentDidUpdate` */
   Hook.useDidUpdate(() => {
-    const container = Props.getContainer(props);
+    const container = getContainer(props);
 
     if (container && container.parentNode === document.body)
       currentDrawer[id] = !!props.open;
@@ -153,7 +219,7 @@ export const Item: React.FunctionComponent<Props.Item> = (props: Props.Item): Re
     if (DOM.isWindowUndefined)
       return;
 
-    const container = Props.getContainer(props);
+    const container = getContainer(props);
     const parent = container ? (container.parentNode as HTMLElement) : null;
     setLevels([] as HTMLElement[]);
 
@@ -214,7 +280,7 @@ export const Item: React.FunctionComponent<Props.Item> = (props: Props.Item): Re
     levels.forEach(level => {
       level.style.transition = `transform ${props.drawDuration} ${props.drawEase}`;
       Event.addListener(level, Event.TRANSITION_END, onTransitionEnd);
-      const width = Props.getDrawWidth(props, level, size);
+      const width = getDrawWidth(props, level, size);
       const pixel = 
         typeof width === 'number'
         ? `${width}px`
@@ -236,7 +302,7 @@ export const Item: React.FunctionComponent<Props.Item> = (props: Props.Item): Re
 
   /** Toggles scrolling effects. */
   const toggleScrolling = (right: number): void => {
-    const container = Props.getContainer(props);
+    const container = getContainer(props);
     if (container && container.parentNode === document.body && props.showMask) {
       const events = ['touchstart'];
       const doms = [document.body, mask.current, button.current, content.current];
@@ -405,12 +471,14 @@ export const Item: React.FunctionComponent<Props.Item> = (props: Props.Item): Re
 
   /** Clones a handler element. */
   const cloneHandlerElement = (): React.ReactElement<unknown> => {
-    const {handler, onHandleClick} = props;
-    if (Props.isReactElement(handler)) {
+    const {handler} = props;
+    if (isReactElement(handler)) {
       return React.cloneElement(handler, {
         onClick: (e: React.MouseEvent): void => {
-          if (handler.props.onClick) handler.props.onClick();
-          if (onHandleClick) onHandleClick(e);
+          if (handler.props.onClick)
+            handler.props.onClick();
+          if (props.onHandleClick)
+            props.onHandleClick(e);
         },
         ref: button,
       });
@@ -422,7 +490,7 @@ export const Item: React.FunctionComponent<Props.Item> = (props: Props.Item): Re
     <div
       {...Misc.omit(props, ['switchScrollingEffect', 'autoFocus', 'onChange'])}
       tabIndex={-1}
-      className={Props.getWrapperClass(props, isOpen())}
+      className={getWrapperClass(props, isOpen())}
       style={props.style}
       ref={self}
       onKeyDown={isOpen() && props.keyboard ? onKeyDown : undefined}
@@ -439,10 +507,10 @@ export const Item: React.FunctionComponent<Props.Item> = (props: Props.Item): Re
       <div
         className={`${props.prefixClass}-content-wrapper`}
         style={{
-          transform: Props.getTransform(props),
-          msTransform: Props.getTransform(props),
-          width: Props.getWidth(props),
-          height: Props.getHeight(props),
+          transform: getTransform(props),
+          msTransform: getTransform(props),
+          width: getWidth(props),
+          height: getHeight(props),
           ...props.contentWrapperStyle,
         }}
         ref={wrapper}

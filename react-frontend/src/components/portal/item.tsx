@@ -7,6 +7,11 @@ import * as Props from './props';
 import * as DOM from '../../utils/dom';
 import * as Hook from '../../utils/hook';
 
+/** Returns the container element of a portal item. */
+const getContainer = ({container}: Props.Item): HTMLElement => {
+  return DOM.get(container);
+};
+
 /** Defines `Portal.Item` reference type. */
 export type Ref = {};
 
@@ -23,10 +28,12 @@ export const Item = React.forwardRef<Ref, Props.Item>((props: Props.Item, ref): 
   /** @const Holds a reference to the portal container element. */
   const container = React.useRef<HTMLElement>(null);
 
-  // Create container in client side with sync to avoid useEffect not get ref.
+  /** @const Holds a reference specifies whether this portal is mounted or not. */
   const hasMounted = React.useRef<boolean>(false);
-  if (!hasMounted.current && DOM.canUse()) {
-    container.current = Props.getContainer(props);
+
+  // Creates a container in a client side with sync to avoid useEffect get not any references.
+  if (!hasMounted.current && DOM.isDefined()) {
+    container.current = getContainer(props);
     hasMounted.current = true;
   }
 
