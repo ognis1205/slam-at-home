@@ -64,12 +64,12 @@ const getDrawWidth = (
 };
 
 /** Returns the container element of a drawer item. */
-export const getContainer = ({container}: Props.Item): HTMLElement => {
+const getContainer = ({container}: Props.Item): HTMLElement => {
   return DOM.get(container);
 };
 
 /** Checks if a given handler is `ReactElement.` */
-export const isReactElement = (
+const isReactElement = (
   handler: React.ReactElement | null | false
 ): handler is React.ReactElement => {
   return handler !== false && handler !== null;
@@ -81,23 +81,31 @@ export const isReactElement = (
  * @return {ReactElement} A rendered React element.
  */
 export const Item: React.FunctionComponent<Props.Item> = (props: Props.Item): React.ReactElement => {
-  /** @const Holds a component identifier's state. */
-  const [id, setId] = React.useState<string>(null);
+  /** @const Holds a rerender state. */
+  const [rerender, setRerender] = React.useState<boolean>(false);
 
-  /** @const Holds a multi-level drawer contents' state. */
-  const [levels, setLevels] = React.useState<HTMLElement[]>([]);
+  /** @const Holds a component's identifier. */
+  const id = React.useRef<string>(
+    `drawer_id_${Number(
+      (Date.now() + Math.random())
+        .toString()
+        .replace('.', Math.round(Math.random() * 9).toString()),
+    ).toString(16)}`);
 
-  /** @const Holds a passive mode support flag's state. */
-  const [passive, setPassive] = React.useState<{ passive: boolean } | boolean>(false);
+  /** @const Holds a multi-level drawer contents. */
+  const levels = React.useRef<HTMLElement[]>([]);
 
-  /** @const Holds a drawing start position's state. */
-  const [startPosition, setStartPosition] = React.useState<{x: number; y: number}>(null);
+  /** @const Holds a passive mode support flag. */
+  const passive = React.useRef<{ passive: boolean } | boolean>(false);
 
-  /** @const Holds a after-scrolling effect's state. */
-  const [afterScrolling, setAfterScrolling] = React.useState<any>(null);
+  /** @const Holds a drawing start position. */
+  const startPosition = React.useRef<{x: number; y: number}>(null);
 
-  /** @const Holds a current drawer flags' state. */
-  const [currentDrawer] = React.useState<Record<string, boolean>>({});
+  /** @const Holds a after-scrolling effect. */
+  const afterScrolling = React.useRef<any>(null);
+
+  /** @const Holds a current drawer flags. */
+  const currentDrawer = React.useRef<Record<string, boolean>>({});
 
   /** @const Holds a reference to the component itself. */
   const self = React.useRef<HTMLDivElement>(null);
@@ -117,23 +125,23 @@ export const Item: React.FunctionComponent<Props.Item> = (props: Props.Item): Re
   /** `getDerivedStateFromProps` */
   React.useEffect(() => {
     initLevels();
+    setRerender(!rerender);
   }, [props.drawLevel]);
 
   /** `getDerivedStateFromProps` */
   React.useEffect(() => {
     content.current = null;
+    setRerender(!rerender);
   }, [props.placement]);
 
   /** `componentDidMount` */
   Hook.useDidMount(() => {
     const container = getContainer(props);
-    initId();
     initPassive();
     initLevels();
-
     if (props.open) {
       if (container && container.parentNode === document.body)
-        currentDrawer[id] = props.open;
+        currentDrawer.current[id.current] = props.open;
       openLevel();
       if (props.autoFocus)
         focus();
@@ -145,11 +153,9 @@ export const Item: React.FunctionComponent<Props.Item> = (props: Props.Item): Re
   /** `componentDidUpdate` */
   Hook.useDidUpdate(() => {
     const container = getContainer(props);
-
     if (container && container.parentNode === document.body)
-      currentDrawer[id] = !!props.open;
+      currentDrawer.current[id.current] = !!props.open;
     openLevel();
-
     if (props.open) {
       if (props.autoFocus)
         focus();
@@ -162,7 +168,7 @@ export const Item: React.FunctionComponent<Props.Item> = (props: Props.Item): Re
 
   /** `componentWillUnmount` */
   Hook.useWillUnmount(() => {
-    delete currentDrawer[id];
+    delete currentDrawer.current[id.current];
     if (props.open) {
       props.open = false;
       setTransform();
@@ -173,44 +179,33 @@ export const Item: React.FunctionComponent<Props.Item> = (props: Props.Item): Re
 
   /** Checks if some drawers are opened. */
   const isSomeDrawerOpened = (): boolean =>
-    !Object.keys(currentDrawer).some(key => currentDrawer[key]);
+    !Object.keys(currentDrawer.current).some(key => currentDrawer.current[key]);
 
   /** Checks if the drawer is opened. */
   const isOpen = (): boolean =>
     self.current ? props.open : false;
 
   /** Focuses on this component forcelly. */
-  const focus = (): void => {
-    if (self.current)
-      self.current.focus();
-  };
-
-  /** Inits the `id`. */
-  const initId = (): void => {
-    setId(`drawer_id_${Number(
-      (Date.now() + Math.random())
-        .toString()
-        .replace('.', Math.round(Math.random() * 9).toString()),
-    ).toString(16)}`);
-  };
+  const focus = (): void =>
+      self.current?.focus();
 
   /** Inits the `passive` support. */
   const initPassive = (): void => {
     if (!DOM.isWindowUndefined) {
-      let passiveSupported = false;
+      let supported = false;
       try {
         window.addEventListener(
           'test',
           null,
           Object.defineProperty({}, 'passive', {
             get: () => {
-              passiveSupported = true;
+              supported = true;
               return null
             },
           }),
         );
       } catch (_) {}
-      setPassive(passiveSupported ? { passive: false } : false);
+      passive.current = supported ? { passive: false } : false;
     }
   };
 
@@ -221,7 +216,7 @@ export const Item: React.FunctionComponent<Props.Item> = (props: Props.Item): Re
 
     const container = getContainer(props);
     const parent = container ? (container.parentNode as HTMLElement) : null;
-    setLevels([] as HTMLElement[]);
+    levels.current = [] as HTMLElement[];
 
     if (props.drawLevel === 'all') {
       const children: HTMLElement[] = parent ? Array.prototype.slice.call(parent.children) : [];
@@ -230,11 +225,11 @@ export const Item: React.FunctionComponent<Props.Item> = (props: Props.Item): Re
             child.nodeName !== 'STYLE' &&
             child.nodeName !== 'LINK' &&
             child !== container
-        ) levels.push(child);
+        ) levels.current?.push(child);
       });
     } else if (props.drawLevel) {
       Misc.toArray(props.drawLevel).forEach(key => {
-        document.querySelectorAll(key).forEach(item => levels.push(item));
+        document.querySelectorAll(key).forEach(item => levels.current?.push(item));
       });
     }
   };
@@ -242,13 +237,13 @@ export const Item: React.FunctionComponent<Props.Item> = (props: Props.Item): Re
   /** Removes a drawing start handler. */
   const initStartPosition = (e: React.TouchEvent | TouchEvent): void => {
     if (e.touches.length > 1) {
-      setStartPosition(null);
+      startPosition.current = null;
       return;
     }
-    setStartPosition({
+    startPosition.current = {
       x: e.touches[0].clientX,
       y: e.touches[0].clientY,
-    });
+    };
   };
 
   /** Opens a level. */
@@ -277,7 +272,7 @@ export const Item: React.FunctionComponent<Props.Item> = (props: Props.Item): Re
 
   /** Sets a transform CSS function on assigned levels. */
   const setTransform = (translateFunction?: string, size?: string | number, right?: number): void => {
-    levels.forEach(level => {
+    levels.current?.forEach(level => {
       level.style.transition = `transform ${props.drawDuration} ${props.drawEase}`;
       Event.addListener(level, Event.TRANSITION_END, onTransitionEnd);
       const width = getDrawWidth(props, level, size);
@@ -353,14 +348,14 @@ export const Item: React.FunctionComponent<Props.Item> = (props: Props.Item): Re
         break;
     }
 
-    clearTimeout(afterScrolling);
-    setAfterScrolling(setTimeout(() => {
+    clearTimeout(afterScrolling.current);
+    afterScrolling.current = setTimeout(() => {
       if (self.current) {
         self.current.style.transition = `${transformTransition},${widthTransition}`;
         self.current.style.width = '';
         self.current.style.transform = '';
       }
-    }));
+    });
   };
 
   /** Removes scrolling effects. */
@@ -401,8 +396,8 @@ export const Item: React.FunctionComponent<Props.Item> = (props: Props.Item): Re
         break;
     }
 
-    clearTimeout(afterScrolling);
-    setAfterScrolling(setTimeout(() => {
+    clearTimeout(afterScrolling.current);
+    afterScrolling.current = setTimeout(() => {
       if (self.current) {
         self.current.style.transition = `${transform},${
           yTransition ? `${yTransition},` : ''
@@ -411,17 +406,17 @@ export const Item: React.FunctionComponent<Props.Item> = (props: Props.Item): Re
         self.current.style.width = '';
         self.current.style.height = '';
       }
-    }));
+    });
   };
 
   /** Removes touch event handlers. */
   const preventDefaultOnTouch = (e: React.TouchEvent | TouchEvent): void => {
-    if (e.changedTouches.length > 1 || !startPosition)
+    if (e.changedTouches.length > 1 || !startPosition.current)
       return;
 
     const el = e.currentTarget as HTMLElement;
-    const dx = e.changedTouches[0].clientX - startPosition.x;
-    const dy = e.changedTouches[0].clientY - startPosition.y;
+    const dx = e.changedTouches[0].clientX - startPosition.current?.x;
+    const dy = e.changedTouches[0].clientY - startPosition.current?.y;
 
     const isMaskTouched =
       el === mask.current;

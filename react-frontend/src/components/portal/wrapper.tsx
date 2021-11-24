@@ -39,7 +39,7 @@ export function getOpenCount(): number {
 }
 
 /**
- * Returns a `Item` component.
+ * Returns a `Wrapper` component.
  * @param {Item} props Properties that defines a behaviour of this component.
  * @return {ReactElement} A rendered React element.
  */
