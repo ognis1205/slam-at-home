@@ -6,6 +6,10 @@
 export const isNumeric = (value: string | number | undefined) =>
   !isNaN(parseFloat(value as string)) && isFinite(value as number);
 
+/** Checks if a given value is primitive. */
+export const isPrimitive = (value: unknown): boolean =>
+  value == null || /^[sbn]/.test(typeof value)
+
 /** Drops specified keys from a given target. */
 export const omit = <T extends object, K extends keyof T>(target: T, keys: K[]): Omit<T, K> => {
   const cloned = { ...target };
@@ -15,8 +19,10 @@ export const omit = <T extends object, K extends keyof T>(target: T, keys: K[]):
 }
 
 /** Converts a given argument into array. */
-export const toArray = (vars: any): any[] => {
-  if (Array.isArray(vars))
-    return vars;
-  return [vars];
+export const toArray = (vars: any): any[] =>
+  Array.isArray(vars) ? vars : [vars];
+
+/** Converts a given argument into array. */
+export const arrayFrom = (vars: any): any[] => {
+  return Array.from(vars);
 };
