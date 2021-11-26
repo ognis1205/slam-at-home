@@ -32,7 +32,7 @@ export const Item = React.forwardRef<Ref, Props.Item>((props: Props.Item, ref): 
   const hasMounted = React.useRef<boolean>(false);
 
   // Creates a container in a client side with sync to avoid useEffect get not any references.
-  if (!hasMounted.current && DOM.isDefined()) {
+  if (!hasMounted.current) {
     container.current = getContainer(props);
     hasMounted.current = true;
   }
