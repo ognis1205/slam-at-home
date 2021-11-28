@@ -23,7 +23,7 @@ const className = 'ognis1205-scrolling-effect';
 const classNameRegex = new RegExp(`${className}`, 'g');
 
 /** @const @private Holds cached CSS properties of containers. */
-const cachedStyle = new Map<Element, React.CSSProperties>();
+const lockerCache = new Map<Element, React.CSSProperties>();
 
 /** @export Defines scrolling lock options. */
 export interface LockOptions {
@@ -49,9 +49,12 @@ export class Locker {
   /** @private Holds a lock options which is given to this locker. */
   private options: LockOptions;
 
-  /**
-   * Locks a specified HTML element.
-   */
+  /** Returns a bundled container. */
+  public getContainer = (): HTMLElement | undefined => {
+    return this.options?.container;
+  };
+
+  /** Locks a specified HTML element. */
   public lock = (): void => {
     if (locks.some(({target}: Lock) => target === this.target))
       return;
@@ -66,7 +69,7 @@ export class Locker {
     if (hasBar(container))
       size = getBarSize();
 
-    cachedStyle.set(
+    lockerCache.set(
       container,
       CSS.set(
         {
@@ -85,9 +88,7 @@ export class Locker {
     locks = [...locks, { target: this.target, options: this.options }];
   };
 
-  /**
-   * Unlocks a specified HTML element.
-   */
+  /** Unlocks a specified HTML element. */
   public unlock = (): void => {
     const found = locks.find(({target}: Lock) => target === this.target);
     locks = locks.filter(({target}: Lock) => target !== this.target);
@@ -99,17 +100,14 @@ export class Locker {
     if (!classNameRegex.test(container.className))
       return;
 
-    CSS.set(cachedStyle.get(container), container);
-    cachedStyle.delete(container);
+    CSS.set(lockerCache.get(container), container);
+    lockerCache.delete(container);
     container.className = container.className
       .replace(classNameRegex, '')
       .trim();
   };
 
-  /**
-   * Updates lock options.
-   * @param {LockOptions} options? a new options which is assigned to this lock.
-   */
+  /** Updates lock options. */
   public relock = (options?: LockOptions): void => {
     const found = locks.find(({ target }) => target === this.target);
     if (found)
@@ -131,13 +129,13 @@ export const hasBar = (container: HTMLElement): boolean => {
 };
 
 /** A cached scroll bar size. */
-let cachedBarSize: number;
+let barSizeCache: number;
 
 /** Computes a scroll bar size if it is defined. */
 export const getBarSize = (fresh?: boolean): number => {
   if (typeof document === 'undefined') return 0;
 
-  if (fresh || cachedBarSize === undefined) {
+  if (fresh || barSizeCache === undefined) {
     const inner = document.createElement('div');
     inner.style.width = '100%';
     inner.style.height = '200px';
@@ -161,10 +159,10 @@ export const getBarSize = (fresh?: boolean): number => {
     if (container === scroll) scroll = outer.clientWidth;
     document.body.removeChild(outer);
 
-    cachedBarSize = container - scroll;
+    barSizeCache = container - scroll;
   }
 
-  return cachedBarSize;
+  return barSizeCache;
 };
 
 /** Returns `true` if a given event is a `touch` event which attempts to scroll. */
@@ -207,4 +205,41 @@ export const isScrolling = (
     return isScrolling(root, target.parentNode as HTMLElement, dx, dy);
 
   return false;
+};
+
+/** Returns `true` if `body` is overflowing. */
+export const isBodyOverflowing = (): boolean =>
+  (document.body.scrollHeight >
+    (window.innerHeight || document.documentElement.clientHeight) &&
+   window.innerWidth > document.body.offsetWidth);
+
+/** @const @private Holds cached CSS properties of scroll effects. */
+let effectCache: React.CSSProperties = {};
+
+/** Switched scrolling effects. */
+export const switchEffect = (close: boolean = false): void => {
+  if (!isBodyOverflowing() && !close)
+    return;
+
+  const bodyClassName = document.body.className;
+  if (close) {
+    if (!classNameRegex.test(bodyClassName))
+      return;
+    CSS.set(effectCache);
+    effectCache = {};
+    document.body.className = bodyClassName
+      .replace(classNameRegex, '')
+      .trim();
+    return;
+  }
+
+  const scrollBarSize = getBarSize();
+  if (scrollBarSize) {
+    effectCache = CSS.set({
+      position: 'relative',
+      width: `calc(100% - ${scrollBarSize}px)`,
+    });
+    if (!classNameRegex.test(bodyClassName))
+      document.body.className = `${bodyClassName} ${className}`.trim();
+  }
 };

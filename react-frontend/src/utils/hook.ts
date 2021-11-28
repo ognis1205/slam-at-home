@@ -20,12 +20,12 @@ type UseEffectReturn = ReturnType<typeof React.useEffect>
  */
 export const useDeepComparedMemo = <T>(value: T): T => {
   const ref = React.useRef<T>(value);
-  const sig = React.useRef<number>(0);
+  const [sig, dispatch] = React.useState<{}>(Object.create(null));
   if (!dequal(value, ref.current)) {
     ref.current = value;
-    sig.current += 1;
+    dispatch(Object.create(null));
   }
-  return React.useMemo<T>(() => ref.current, [sig.current]);
+  return React.useMemo<T>(() => ref.current, [sig]);
 };
 
 /**
@@ -50,7 +50,7 @@ export const useDidMount = (callback: () => void): void => {
 };
 
 /**
- * An equivalent for the legacy `componentDidMount` life-cycle method.
+ * An equivalent for the legacy `componentDidUpdate` life-cycle method.
  * @param {() => void} callback The callback function.
  * @param {any[]} dependencies The dependencies.
  */
@@ -72,6 +72,20 @@ export const useWillUnmount = (callback: () => void): void => {
       callback();
     };
   }, []);
+};
+
+/**
+ * An equivalent for the legacy `forceUpdate` life-cycle method.
+ */
+export const useForceUpdate = (): () => void => {
+  const [, dispatch] = React.useState<{}>(Object.create(null));
+  const memoizedDispatch = React.useCallback(
+    (): void => {
+      dispatch(Object.create(null));
+    },
+    [dispatch],
+  );
+  return memoizedDispatch;
 };
 
 /**

@@ -2,9 +2,11 @@
  * @fileoverview Defines {Portal} module.
  */
 export type {
-  Item as ItemProps,
-  Content as ContentProps,
-  Wrapper as WrapperProps
+  Consumer as ConsumerProps,
+  Provider as ProviderProps,
+  Context as Context,
 } from "./props";
 
-export { Item as PortalItem } from './item';
+export {
+  Component as Consumer,
+} from './consumer';

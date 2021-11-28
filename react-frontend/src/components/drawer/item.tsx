@@ -80,9 +80,9 @@ const isReactElement = (
  * @param {Item} props Properties that defines a behaviour of this component.
  * @return {ReactElement} A rendered React element.
  */
-export const Item: React.FunctionComponent<Props.Item> = (props: Props.Item): React.ReactElement => {
-  /** @const Holds a rerender state. */
-  const [rerender, setRerender] = React.useState<boolean>(false);
+export const Component: React.FunctionComponent<Props.Item> = (props: Props.Item): React.ReactElement => {
+  /** @const Holds a force updater. */
+  const forceUpdate = Hook.useForceUpdate();
 
   /** @const Holds a component's identifier. */
   const id = React.useRef<string>(
@@ -125,13 +125,13 @@ export const Item: React.FunctionComponent<Props.Item> = (props: Props.Item): Re
   /** `getDerivedStateFromProps` */
   React.useEffect(() => {
     initLevels();
-    setRerender(!rerender);
+    forceUpdate();
   }, [props.drawLevel]);
 
   /** `getDerivedStateFromProps` */
   React.useEffect(() => {
     content.current = null;
-    setRerender(!rerender);
+    forceUpdate();
   }, [props.placement]);
 
   /** `componentDidMount` */

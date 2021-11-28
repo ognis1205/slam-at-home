@@ -46,6 +46,6 @@ export interface Wrapper extends Common {
 }
 
 /** A {Item} component properties. */
-export interface Item extends Common, Portal.ContentProps {
+export interface Item extends Common, Portal.Context {
   // Placeholder.
 }
