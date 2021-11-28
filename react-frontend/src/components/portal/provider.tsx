@@ -125,7 +125,7 @@ export const Component: React.FunctionComponent<Props.Provider> = (props: Props.
     container.current?.parentNode?.removeChild(container.current);
   };
 
-  /***/
+  /** Returns a portal container. */
   const getPortal = (): HTMLElement => {
     if (!DOM.isDefined())
       return null;

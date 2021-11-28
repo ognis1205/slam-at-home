@@ -2,11 +2,10 @@
  * @fileoverview Defines {Portal} module.
  */
 export type {
-  Consumer as ConsumerProps,
-  Provider as ProviderProps,
+  Provider as Props,
   Context as Context,
 } from "./props";
 
 export {
-  Component as Consumer,
-} from './consumer';
+  Component as Provider,
+} from './provider';
