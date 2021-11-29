@@ -17,7 +17,7 @@ let openCount: number = 0;
 let cachedOverflow: object = {};
 
 /** Returns the container element of a portal provider. */
-const getParent = ({container}: Props.Provider): HTMLElement => {
+const getContainer = ({container}: Props.Provider): HTMLElement => {
   const elems = DOM.select(container);
   return elems.length > 0 ? elems[0] : null;
 };
@@ -47,7 +47,7 @@ export const Component: React.FunctionComponent<Props.Provider> = (props: Props.
 
   /** @const Holds a reference to the scroll locker. */
   const scrollLocker = React.useRef<Scroll.Locker>(new Scroll.Locker({
-    container: getParent(props) as HTMLElement,
+    container: getContainer(props) as HTMLElement,
   }));
 
   /** `componentDidMount` */
@@ -70,7 +70,7 @@ export const Component: React.FunctionComponent<Props.Provider> = (props: Props.
 
   /** `componentWillUnmount` */
   Hook.useWillUnmount(() => {
-    if (DOM.isDefined() && getParent(props) === document.body)
+    if (DOM.isDefined() && getContainer(props) === document.body)
       openCount = props.visible && openCount ? openCount - 1 : openCount;
     removeContainer();
     RAF.cancel(raf.current);
@@ -80,16 +80,16 @@ export const Component: React.FunctionComponent<Props.Provider> = (props: Props.
   const updateScrollLocker = React.useCallback((): void => {
     if (props.visible &&
         DOM.isDefined() &&
-        getParent(props) !== scrollLocker.current?.getContainer())
+        getContainer(props) !== scrollLocker.current?.getContainer())
       scrollLocker.current?.relock({
-        container: getParent(props) as HTMLElement,
+        container: getContainer(props) as HTMLElement,
       });
   }, [props.visible]);
 
   /** Updates open count. */
   const updateOpenCount = React.useCallback((): void => {
     if (DOM.isDefined() &&
-        getParent(props) === document.body) {
+        getContainer(props) === document.body) {
       if (props.visible)
         openCount += 1;
       else
@@ -114,7 +114,7 @@ export const Component: React.FunctionComponent<Props.Provider> = (props: Props.
   /** Sets a container element. */
   const setContainer = (force: boolean = false): void => {
     if (force || (container.current && !container.current?.parentNode)) {
-      const parent = getParent(props);
+      const parent = getContainer(props);
       if (parent)
         parent.appendChild(container.current);
     }

@@ -47,5 +47,6 @@ export interface Wrapper extends Common {
 
 /** A {Content} component properties. */
 export interface Content extends Common, Portal.Context {
-  // Placeholder.
+  visible?: boolean;
+  afterClose?: () => void;
 }
