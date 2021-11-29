@@ -1,5 +1,5 @@
 /**
- * @fileoverview Defines {Wrapper} and {Item} properties.
+ * @fileoverview Defines {Wrapper} and {Content} properties.
  */
 import type * as React from 'react';
 import * as Portal from '../portal';
@@ -11,7 +11,7 @@ type Placement = 'left' | 'top' | 'right' | 'bottom';
 /** A type union of draw width definitions. */
 type DrawWidth = number | [number, number];
 
-/** A common properties shared by both {Wrapper} and {Item} components. */
+/** A common properties shared by both {Wrapper} and {Content} components. */
 interface Common extends Omit<React.HTMLAttributes<unknown>, 'onChange'> {
   prefixClass?: string;
   width?: string | number;
@@ -45,7 +45,7 @@ export interface Wrapper extends Common {
   forceRender?: boolean;
 }
 
-/** A {Item} component properties. */
-export interface Item extends Common, Portal.Context {
+/** A {Content} component properties. */
+export interface Content extends Common, Portal.Context {
   // Placeholder.
 }

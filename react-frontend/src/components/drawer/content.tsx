@@ -1,5 +1,5 @@
 /**
- * @fileoverview Defines Item component.
+ * @fileoverview Defines Content component.
  */
 import * as React from 'react';
 import * as Props from './props';
@@ -12,7 +12,7 @@ import classnames from 'classnames';
 
 /** Returns the class name of the wrapper. */
 const getWrapperClass = (
-  {prefixClass, placement, className, showMask}: Props.Item,
+  {prefixClass, placement, className, showMask}: Props.Content,
   open: boolean
 ): string => {
   return classnames(prefixClass, {
@@ -24,24 +24,24 @@ const getWrapperClass = (
 };
 
 /** Returns the `transform` CSS property. */
-const getTransform = ({open, placement}: Props.Item): string => {
+const getTransform = ({open, placement}: Props.Content): string => {
   const position = placement === 'left' || placement === 'top' ? '-100%' : '100%';
   return open ? '' : `${placement}(${position})`;
 };
 
 /** Rerturns the width of the component. */
-const getWidth = ({width}: Props.Item): string => {
+const getWidth = ({width}: Props.Content): string => {
   return Misc.isNumeric(width) ? `${width}px` : width as string;
 };
 
 /** Rerturns the height of the component. */
-const getHeight = ({height}: Props.Item): string => {
+const getHeight = ({height}: Props.Content): string => {
   return Misc.isNumeric(height) ? `${height}px` : height as string;
 };
 
 /** Returns a draw width. */
 const getDrawWidth = (
-  {open, drawWidth}: Props.Item,
+  {open, drawWidth}: Props.Content,
   target: HTMLElement,
   size: string | number
 ): string | number => {
@@ -63,8 +63,8 @@ const getDrawWidth = (
   return ret;
 };
 
-/** Returns the container element of a drawer item. */
-const getContainer = ({container}: Props.Item): HTMLElement => {
+/** Returns the container element of a drawer content. */
+const getContainer = ({container}: Props.Content): HTMLElement => {
   return DOM.get(container);
 };
 
@@ -75,12 +75,15 @@ const isReactElement = (
   return handler !== false && handler !== null;
 };
 
+/** @const Holds a current drawer flags. */
+const currentDrawer: Record<string, boolean> = {};
+
 /**
- * Returns a `Item` component.
- * @param {Item} props Properties that defines a behaviour of this component.
+ * Returns a `Content` component.
+ * @param {Content} props Properties that defines a behaviour of this component.
  * @return {ReactElement} A rendered React element.
  */
-export const Component: React.FunctionComponent<Props.Item> = (props: Props.Item): React.ReactElement => {
+export const Component: React.FunctionComponent<Props.Content> = (props: Props.Content): React.ReactElement => {
   /** @const Holds a force updater. */
   const forceUpdate = Hook.useForceUpdate();
 
@@ -92,8 +95,8 @@ export const Component: React.FunctionComponent<Props.Item> = (props: Props.Item
         .replace('.', Math.round(Math.random() * 9).toString()),
     ).toString(16)}`);
 
-  /** @const Holds a multi-level drawer contents. */
-  const levels = React.useRef<HTMLElement[]>([]);
+  /** @const Holds drawer items. */
+  const items = React.useRef<HTMLElement[]>([]);
 
   /** @const Holds a passive mode support flag. */
   const passive = React.useRef<{ passive: boolean } | boolean>(false);
@@ -103,9 +106,6 @@ export const Component: React.FunctionComponent<Props.Item> = (props: Props.Item
 
   /** @const Holds a after-scrolling effect. */
   const afterScrolling = React.useRef<any>(null);
-
-  /** @const Holds a current drawer flags. */
-  const currentDrawer = React.useRef<Record<string, boolean>>({});
 
   /** @const Holds a reference to the component itself. */
   const self = React.useRef<HTMLDivElement>(null);
@@ -124,7 +124,7 @@ export const Component: React.FunctionComponent<Props.Item> = (props: Props.Item
 
   /** `getDerivedStateFromProps` */
   React.useEffect(() => {
-    initLevels();
+    init();
     forceUpdate();
   }, [props.drawLevel]);
 
@@ -136,13 +136,12 @@ export const Component: React.FunctionComponent<Props.Item> = (props: Props.Item
 
   /** `componentDidMount` */
   Hook.useDidMount(() => {
+    init();
     const container = getContainer(props);
-    initPassive();
-    initLevels();
     if (props.open) {
       if (container && container.parentNode === document.body)
-        currentDrawer.current[id.current] = props.open;
-      openLevel();
+        currentDrawer[id.current] = props.open;
+      toggle();
       if (props.autoFocus)
         focus();
       if (props.showMask)
@@ -154,8 +153,8 @@ export const Component: React.FunctionComponent<Props.Item> = (props: Props.Item
   Hook.useDidUpdate(() => {
     const container = getContainer(props);
     if (container && container.parentNode === document.body)
-      currentDrawer.current[id.current] = !!props.open;
-    openLevel();
+      currentDrawer[id.current] = !!props.open;
+    toggle();
     if (props.open) {
       if (props.autoFocus)
         focus();
@@ -168,7 +167,7 @@ export const Component: React.FunctionComponent<Props.Item> = (props: Props.Item
 
   /** `componentWillUnmount` */
   Hook.useWillUnmount(() => {
-    delete currentDrawer.current[id.current];
+    delete currentDrawer[id.current];
     if (props.open) {
       props.open = false;
       setTransform();
@@ -179,7 +178,7 @@ export const Component: React.FunctionComponent<Props.Item> = (props: Props.Item
 
   /** Checks if some drawers are opened. */
   const isSomeDrawerOpened = (): boolean =>
-    !Object.keys(currentDrawer.current).some(key => currentDrawer.current[key]);
+    !Object.keys(currentDrawer).some(key => currentDrawer[key]);
 
   /** Checks if the drawer is opened. */
   const isOpen = (): boolean =>
@@ -189,65 +188,48 @@ export const Component: React.FunctionComponent<Props.Item> = (props: Props.Item
   const focus = (): void =>
       self.current?.focus();
 
-  /** Inits the `passive` support. */
-  const initPassive = (): void => {
-    if (!DOM.isWindowUndefined) {
-      let supported = false;
-      try {
-        window.addEventListener(
-          'test',
-          null,
-          Object.defineProperty({}, 'passive', {
-            get: () => {
-              supported = true;
-              return null
-            },
-          }),
-        );
-      } catch (_) {}
-      passive.current = supported ? { passive: false } : false;
-    }
-  };
-
-  /** Inits drawer level HTML elements. */
-  const initLevels = (): void => {
+  /** Inits drawer item HTML elements. */
+  const init = (): void => {
     if (DOM.isWindowUndefined)
       return;
 
+    let passiveIsSupported = false;
+    try {
+      window.addEventListener(
+        'test',
+        null,
+        Object.defineProperty({}, 'passive', {
+          get: () => {
+            passiveIsSupported = true;
+            return null
+          },
+        }),
+      );
+    } catch (_) {}
+    passive.current = passiveIsSupported ? { passive: false } : false;
+
     const container = getContainer(props);
     const parent = container ? (container.parentNode as HTMLElement) : null;
-    levels.current = [] as HTMLElement[];
+    const children = parent ? Array.prototype.slice.call(parent.children) : [];
+    items.current = [] as HTMLElement[];
 
     if (props.drawLevel === 'all') {
-      const children: HTMLElement[] = parent ? Array.prototype.slice.call(parent.children) : [];
       children.forEach((child: HTMLElement) => {
         if (child.nodeName !== 'SCRIPT' &&
             child.nodeName !== 'STYLE' &&
             child.nodeName !== 'LINK' &&
             child !== container
-        ) levels.current?.push(child);
+        ) items.current?.push(child);
       });
     } else if (props.drawLevel) {
       Misc.toArray(props.drawLevel).forEach(key => {
-        document.querySelectorAll(key).forEach(item => levels.current?.push(item));
+        document.querySelectorAll(key).forEach(item => items.current?.push(item));
       });
     }
   };
 
-  /** Removes a drawing start handler. */
-  const initStartPosition = (e: React.TouchEvent | TouchEvent): void => {
-    if (e.touches.length > 1) {
-      startPosition.current = null;
-      return;
-    }
-    startPosition.current = {
-      x: e.touches[0].clientX,
-      y: e.touches[0].clientY,
-    };
-  };
-
-  /** Opens a level. */
-  const openLevel = (): void => {
+  /** Toggles a drawer. */
+  const toggle = (): void => {
     const isHorizontal = props.placement === 'left' || props.placement === 'right';
     const translateFunction = `translate${isHorizontal ? 'X' : 'Y'}`;
     const rect = 
@@ -266,16 +248,17 @@ export const Component: React.FunctionComponent<Props.Item> = (props: Props.Item
       setTransform(translateFunction, size, right);
       toggleScrolling(right);
     }
+
     if (props.onChange)
       props.onChange(props.open);
   };
 
-  /** Sets a transform CSS function on assigned levels. */
+  /** Sets a transform CSS function on assigned items. */
   const setTransform = (translateFunction?: string, size?: string | number, right?: number): void => {
-    levels.current?.forEach(level => {
-      level.style.transition = `transform ${props.drawDuration} ${props.drawEase}`;
-      Event.addListener(level, Event.TRANSITION_END, onTransitionEnd);
-      const width = getDrawWidth(props, level, size);
+    items.current?.forEach(item => {
+      item.style.transition = `transform ${props.drawDuration} ${props.drawEase}`;
+      Event.addListener(item, Event.TRANSITION_END, onTransitionEnd);
+      const width = getDrawWidth(props, item, size);
       const pixel = 
         typeof width === 'number'
         ? `${width}px`
@@ -288,7 +271,7 @@ export const Component: React.FunctionComponent<Props.Item> = (props: Props.Item
         props.showMask && props.placement === 'right' && right
         ? `calc(${position} + ${right}px)`
         : position;
-      level.style.transform =
+      item.style.transform =
         width
         ? `${translateFunction}(${position})`
         : '';
@@ -302,26 +285,26 @@ export const Component: React.FunctionComponent<Props.Item> = (props: Props.Item
       const events = ['touchstart'];
       const doms = [document.body, mask.current, button.current, content.current];
       if (props.open && document.body.style.overflow !== 'hidden') {
-        if (right) addScrollingEffect(right);
+        if (right) addScrolling(right);
         document.body.style.touchAction = 'none';
         doms.forEach((item, i) => {
           if (!item) return;
           Event.addListener(
             item,
             events[i] || 'touchmove',
-            i ? preventDefaultOnTouch : initStartPosition,
+            i ? preventDefaultOnTouch : onTouchMove,
             passive,
           );
         });
       } else if (isSomeDrawerOpened()) {
         document.body.style.touchAction = '';
-        if (right) removeScrollingEffect(right);
+        if (right) removeScrolling(right);
         doms.forEach((item, i) => {
           if (!item) return;
           Event.removeListener(
             item,
             events[i] || 'touchmove',
-            i ? preventDefaultOnTouch : initStartPosition,
+            i ? preventDefaultOnTouch : onTouchMove,
             passive,
           );
         });
@@ -330,7 +313,7 @@ export const Component: React.FunctionComponent<Props.Item> = (props: Props.Item
   };
 
   /** Adds scrolling effects. */
-  const addScrollingEffect = (right: number): void => {
+  const addScrolling = (right: number): void => {
     const widthTransition = `width ${props.drawDuration} ${props.drawEase}`;
     const transformTransition = `transform ${props.drawDuration} ${props.drawEase}`;
 
@@ -359,7 +342,7 @@ export const Component: React.FunctionComponent<Props.Item> = (props: Props.Item
   };
 
   /** Removes scrolling effects. */
-  const removeScrollingEffect = (right: number): void => {
+  const removeScrolling = (right: number): void => {
     if (Event.transitionEndKey)
       document.body.style.overflowX = 'hidden';
 
@@ -431,6 +414,17 @@ export const Component: React.FunctionComponent<Props.Item> = (props: Props.Item
       e.preventDefault();
   };
 
+  /** An event handler called on `touchmove` events. */
+  const onTouchMove = (e: React.TouchEvent | TouchEvent): void => {
+    if (e.touches.length > 1)
+      startPosition.current = null;
+    else
+      startPosition.current = {
+        x: e.touches[0].clientX,
+        y: e.touches[0].clientY,
+      };
+  };
+
   /** An event handler called on `transitionend` events. */
   const onTransitionEnd = (e: TransitionEvent): void => {
     const target: HTMLElement = e.target as HTMLElement;
@@ -467,7 +461,7 @@ export const Component: React.FunctionComponent<Props.Item> = (props: Props.Item
   /** Clones a handler element. */
   const cloneHandlerElement = (): React.ReactElement<unknown> => {
     const {handler} = props;
-    if (isReactElement(handler)) {
+    if (isReactElement(handler))
       return React.cloneElement(handler, {
         onClick: (e: React.MouseEvent): void => {
           if (handler.props.onClick)
@@ -477,8 +471,8 @@ export const Component: React.FunctionComponent<Props.Item> = (props: Props.Item
         },
         ref: button,
       });
-    }
-    return <></>;
+    else
+      return null;
   };
 
   return (

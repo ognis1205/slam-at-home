@@ -137,6 +137,7 @@ export const Component: React.FunctionComponent<Props.Provider> = (props: Props.
     return container.current;
   };
 
+  /** Holds a portal context. */
   const context: Props.Context = {
     container: getPortal,
     getOpenCount: () => openCount,
