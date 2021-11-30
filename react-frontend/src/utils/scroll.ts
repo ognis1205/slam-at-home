@@ -17,13 +17,13 @@ let uuid: number = 0;
 let locks: Lock[] = [];
 
 /** @const @private Holds a class name for scroll locker element. */
-const className = 'ognis1205-scrolling-effect';
+const CLASS_NAME = 'ognis1205-scrolling-effect';
 
 /** @const @private Holds a class name regexp for scroll locker element. */
-const classNameRegex = new RegExp(`${className}`, 'g');
+const CLASS_NAME_REGEX = new RegExp(`${CLASS_NAME}`, 'g');
 
 /** @const @private Holds cached CSS properties of containers. */
-const lockerCache = new Map<Element, React.CSSProperties>();
+const LOCKER_CACHE = new Map<Element, React.CSSProperties>();
 
 /** @export Defines scrolling lock options. */
 export interface LockOptions {
@@ -69,7 +69,7 @@ export class Locker {
     if (hasBar(container))
       size = getBarSize();
 
-    lockerCache.set(
+    LOCKER_CACHE.set(
       container,
       CSS.set(
         {
@@ -82,8 +82,8 @@ export class Locker {
       ),
     );
 
-    if (!classNameRegex.test(container.className))
-      container.className = `${container.className} ${className}`.trim();
+    if (!CLASS_NAME_REGEX.test(container.className))
+      container.className = `${container.className} ${CLASS_NAME}`.trim();
 
     locks = [...locks, { target: this.target, options: this.options }];
   };
@@ -97,13 +97,13 @@ export class Locker {
       return;
 
     const container = this.options?.container || document.body;
-    if (!classNameRegex.test(container.className))
+    if (!CLASS_NAME_REGEX.test(container.className))
       return;
 
-    CSS.set(lockerCache.get(container), container);
-    lockerCache.delete(container);
+    CSS.set(LOCKER_CACHE.get(container), container);
+    LOCKER_CACHE.delete(container);
     container.className = container.className
-      .replace(classNameRegex, '')
+      .replace(CLASS_NAME_REGEX, '')
       .trim();
   };
 
@@ -214,7 +214,7 @@ export const isBodyOverflowing = (): boolean =>
    window.innerWidth > document.body.offsetWidth);
 
 /** @const @private Holds cached CSS properties of scroll effects. */
-let effectCache: React.CSSProperties = {};
+let EFFECT_CACHE: React.CSSProperties = {};
 
 /** Switched scrolling effects. */
 export const switchEffect = (close: boolean = false): void => {
@@ -223,23 +223,23 @@ export const switchEffect = (close: boolean = false): void => {
 
   const bodyClassName = document.body.className;
   if (close) {
-    if (!classNameRegex.test(bodyClassName))
+    if (!CLASS_NAME_REGEX.test(bodyClassName))
       return;
-    CSS.set(effectCache);
-    effectCache = {};
+    CSS.set(EFFECT_CACHE);
+    EFFECT_CACHE = {};
     document.body.className = bodyClassName
-      .replace(classNameRegex, '')
+      .replace(CLASS_NAME_REGEX, '')
       .trim();
     return;
   }
 
   const scrollBarSize = getBarSize();
   if (scrollBarSize) {
-    effectCache = CSS.set({
+    EFFECT_CACHE = CSS.set({
       position: 'relative',
       width: `calc(100% - ${scrollBarSize}px)`,
     });
-    if (!classNameRegex.test(bodyClassName))
-      document.body.className = `${bodyClassName} ${className}`.trim();
+    if (!CLASS_NAME_REGEX.test(bodyClassName))
+      document.body.className = `${bodyClassName} ${CLASS_NAME}`.trim();
   }
 };
