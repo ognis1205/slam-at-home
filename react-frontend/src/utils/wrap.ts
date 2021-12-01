@@ -35,4 +35,3 @@ export const withDefaultProps = <Props, Defaults, Ref, Ret>(
   (wrapper as any).displayName = `WithDefaultProps(${getDisplayName(Component)})`;
   return wrapper;
 };
-

@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import React from "react";
-import Head from "next/head";
-import * as NextApp from "next/app";
+import * as React from 'react';
+import * as NextApp from 'next/app';
+import Head from 'next/head';
 
 const SLAM: React.FC<NextApp.AppProps> = ({ Component, pageProps }) => {
   return (
@@ -23,8 +23,8 @@ const SLAM: React.FC<NextApp.AppProps> = ({ Component, pageProps }) => {
       <Head>
         <title>SLAM UI</title>
         <meta
-          name="viewport"
-          content="minimum-scale=1, initial-scale=1, width=device-width"
+          name='viewport'
+          content='minimum-scale=1, initial-scale=1, width=device-width'
         />
       </Head>
     </React.Fragment>

@@ -76,7 +76,7 @@ const isReactElement = (
 };
 
 /** @const Holds a current drawer flags. */
-const currentDrawer: Record<string, boolean> = {};
+const CURRENT_DRAWER: Record<string, boolean> = {};
 
 /**
  * Returns a `Content` component.
@@ -140,7 +140,7 @@ export const Component: React.FunctionComponent<Props.Content> = (props: Props.C
     const container = getContainer(props);
     if (props.open) {
       if (container && container.parentNode === document.body)
-        currentDrawer[id.current] = props.open;
+        CURRENT_DRAWER[id.current] = props.open;
       toggle();
       if (props.autoFocus)
         focus();
@@ -153,7 +153,7 @@ export const Component: React.FunctionComponent<Props.Content> = (props: Props.C
   Hook.useDidUpdate(() => {
     const container = getContainer(props);
     if (container && container.parentNode === document.body)
-      currentDrawer[id.current] = !!props.open;
+      CURRENT_DRAWER[id.current] = !!props.open;
     toggle();
     if (props.open) {
       if (props.autoFocus)
@@ -167,7 +167,7 @@ export const Component: React.FunctionComponent<Props.Content> = (props: Props.C
 
   /** `componentWillUnmount` */
   Hook.useWillUnmount(() => {
-    delete currentDrawer[id.current];
+    delete CURRENT_DRAWER[id.current];
     if (props.open) {
       props.open = false;
       setTransform();
@@ -178,7 +178,7 @@ export const Component: React.FunctionComponent<Props.Content> = (props: Props.C
 
   /** Checks if some drawers are opened. */
   const isSomeDrawerOpened = (): boolean =>
-    !Object.keys(currentDrawer).some(key => currentDrawer[key]);
+    !Object.keys(CURRENT_DRAWER).some(key => CURRENT_DRAWER[key]);
 
   /** Checks if the drawer is opened. */
   const isOpen = (): boolean =>

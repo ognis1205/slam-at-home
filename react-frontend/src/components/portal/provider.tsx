@@ -4,7 +4,7 @@
 import * as React from 'react';
 import * as Consumer from './consumer';
 import * as Props from './props';
-import * as RAF from '../../utils/animation';
+import * as Animation from '../../utils/animation';
 import * as CSS from '../../utils/css';
 import * as DOM from '../../utils/dom';
 import * as Hook from '../../utils/hook';
@@ -14,7 +14,7 @@ import * as Scroll from '../../utils/scroll';
 let openCount: number = 0;
 
 /** A chached CSS `overflow`properties. */
-let cachedOverflow: object = {};
+let overflowCache: object = {};
 
 /** Returns the container element of a portal provider. */
 const getContainer = ({container}: Props.Provider): HTMLElement => {
@@ -55,7 +55,7 @@ export const Component: React.FunctionComponent<Props.Provider> = (props: Props.
     updateOpenCount();
     setContainer();
     if (!hasContainer())
-      raf.current = RAF.submit(() => {
+      raf.current = Animation.request(() => {
         forceUpdate();
       });
   });
@@ -73,7 +73,7 @@ export const Component: React.FunctionComponent<Props.Provider> = (props: Props.
     if (DOM.isDefined() && getContainer(props) === document.body)
       openCount = props.visible && openCount ? openCount - 1 : openCount;
     removeContainer();
-    RAF.cancel(raf.current);
+    Animation.clear(raf.current);
   });
 
   /** Updates a scroll locker. */
@@ -143,16 +143,16 @@ export const Component: React.FunctionComponent<Props.Provider> = (props: Props.
     getOpenCount: () => openCount,
     scrollLocker: scrollLocker.current,
     switchScrollingEffect: () => {
-      if (openCount === 1 && !Object.keys(cachedOverflow).length) {
+      if (openCount === 1 && !Object.keys(overflowCache).length) {
         Scroll.switchEffect();
-        cachedOverflow = CSS.set({
+        overflowCache = CSS.set({
           overflow: 'hidden',
           overflowX: 'hidden',
           overflowY: 'hidden',
         });
       } else if (!openCount) {
-        CSS.set(cachedOverflow);
-        cachedOverflow = {};
+        CSS.set(overflowCache);
+        overflowCache = {};
         Scroll.switchEffect(true);
       }
     },

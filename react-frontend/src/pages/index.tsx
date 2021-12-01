@@ -13,8 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import React from "react";
-import * as Next from "next";
+import * as React from 'react';
+import * as Next from 'next';
 
 const Index: Next.NextPage = () => {
   return <React.Fragment />;

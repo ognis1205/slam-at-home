@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import React from "react";
-import Document from "next/document";
-import * as NextDocument from "next/document";
+import * as React from 'react';
+import * as NextDocument from 'next/document';
+import Document from 'next/document';
 
 export default class SLAMDocument extends Document {
   static async getInitialProps(
@@ -30,11 +30,11 @@ export default class SLAMDocument extends Document {
 
   render(): React.ReactElement {
     return (
-      <NextDocument.Html lang="en">
+      <NextDocument.Html lang='en'>
         <NextDocument.Head>
           <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+            rel='stylesheet'
+            href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap'
           />
         </NextDocument.Head>
         <body>

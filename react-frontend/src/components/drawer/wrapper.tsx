@@ -5,13 +5,39 @@ import * as React from 'react';
 import * as Content from './content';
 import * as Props from './props';
 import * as Portal from '../portal';
+import * as Wrap from '../../utils/wrap';
+
+const DEFAULT_PROPS: Props.Wrapper = {
+  prefixClass: 'drawer',
+  placement: 'left',
+  container: 'body',
+  defaultOpen: false,
+  drawLevel: 'all',
+  drawDuration: '.3s',
+  drawEase: 'cubic-bezier(0.78, 0.14, 0.15, 0.86)',
+  onChange: () => {},
+  afterVisibleChange: () => {},
+  handler: (
+    <div className="drawer-handle">
+      <i className="drawer-handle-icon" />
+    </div>
+  ),
+  showMask: true,
+  maskClosable: true,
+  maskStyle: {},
+  wrapperClass: '',
+  className: '',
+  keyboard: true,
+  forceRender: false,
+  autoFocus: true,
+};
 
 /**
  * Returns a `Wrapper` component.
  * @param {Wrapper} props Properties that defines a behaviour of this component.
  * @return {ReactElement} A rendered React element.
  */
-export const Component: React.FunctionComponent<Props.Wrapper> = (props: Props.Wrapper): React.ReactElement => {
+const Component: React.FunctionComponent<Props.Wrapper> = (props: Props.Wrapper): React.ReactElement => {
   /** @const Holds a open state. */
   const [open, setOpen] = React.useState<boolean>(
     typeof props.open !== 'undefined'
@@ -87,3 +113,8 @@ export const Component: React.FunctionComponent<Props.Wrapper> = (props: Props.W
       </Portal.Provider>
     );
 };
+
+export const WithDefaultComponent: React.FunctionComponent<Props.Wrapper> = Wrap.withDefaultProps(
+  Component, 
+  DEFAULT_PROPS
+);
