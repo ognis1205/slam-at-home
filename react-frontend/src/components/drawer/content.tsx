@@ -190,7 +190,7 @@ export const Component: React.FunctionComponent<Props.Content> = (props: Props.C
 
   /** Inits drawer item HTML elements. */
   const init = (): void => {
-    if (DOM.isWindowUndefined)
+    if (!DOM.isDefined())
       return;
 
     let passiveIsSupported = false;
@@ -238,7 +238,7 @@ export const Component: React.FunctionComponent<Props.Content> = (props: Props.C
       : 0;
     const size = (isHorizontal ? props.width : props.height) || rect;
 
-    if (!DOM.isWindowUndefined) {
+    if (DOM.isDefined()) {
       const right =
         document.body.scrollHeight >
           (window.innerHeight || document.documentElement.clientHeight) &&

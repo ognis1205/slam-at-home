@@ -3,13 +3,6 @@
  */
 import * as Misc from './misc';
 
-/** A boolean constant which specifies `window` is defined or not. */
-export const isWindowUndefined: boolean = !(
-  typeof window !== 'undefined' &&
-  window.document &&
-  window.document.createElement
-);
-
 /** Returns `true` if DOM APIs are available. */
 export const isDefined = (): boolean => {
   return !!(
