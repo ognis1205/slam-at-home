@@ -6,5 +6,5 @@ export type {
 } from "./props";
 
 export {
-  WithDefaultComponent as Drawer,
+  WithDefaultComponent as Component,
 } from './wrapper';

@@ -7,7 +7,7 @@ import * as Props from './props';
 import * as Portal from '../portal';
 import * as Wrap from '../../utils/wrap';
 
-const DEFAULT_PROPS: Props.Wrapper = {
+const DEFAULT_PROPS: Partial<Props.Wrapper> = {
   prefixClass: 'drawer',
   placement: 'left',
   container: 'body',
@@ -18,8 +18,8 @@ const DEFAULT_PROPS: Props.Wrapper = {
   onChange: () => {},
   afterVisibleChange: () => {},
   handler: (
-    <div className="drawer-handle">
-      <i className="drawer-handle-icon" />
+    <div className='drawer-handle'>
+      <i className='drawer-handle-icon'/>
     </div>
   ),
   showMask: true,
@@ -114,6 +114,7 @@ const Component: React.FunctionComponent<Props.Wrapper> = (props: Props.Wrapper)
     );
 };
 
+/** Returns a `Wrapper` component with default property values. */
 export const WithDefaultComponent: React.FunctionComponent<Props.Wrapper> = Wrap.withDefaultProps(
   Component, 
   DEFAULT_PROPS

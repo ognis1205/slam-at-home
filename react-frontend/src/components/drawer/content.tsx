@@ -475,40 +475,73 @@ export const Component: React.FunctionComponent<Props.Content> = (props: Props.C
       return null;
   };
 
+  /** Separates HTML attributes. */
+  const {
+    className,
+    children,
+    style,
+    width,
+    height,
+    defaultOpen,
+    open,
+    prefixClass,
+    placement,
+    drawLevel,
+    drawWidth,
+    drawEase,
+    drawDuration,
+    container,
+    handler,
+    onChange,
+    afterVisibleChange,
+    showMask,
+    maskClosable,
+    maskStyle,
+    onClose,
+    onHandleClick,
+    keyboard,
+    getOpenCount,
+    scrollLocker,
+    contentWrapperStyle,
+    switchScrollingEffect,
+    autoFocus,
+    ...htmlAttrs
+  } = props;
+
   return (
     <div
-      {...Misc.omit(props, ['switchScrollingEffect', 'autoFocus', 'onChange'])}
+      {...htmlAttrs}
       tabIndex={-1}
       className={getWrapperClass(props, isOpen())}
-      style={props.style}
+      style={style}
       ref={self}
-      onKeyDown={isOpen() && props.keyboard ? onKeyDown : undefined}
+      onKeyDown={isOpen() && keyboard ? onKeyDown : undefined}
       onTransitionEnd={onWrapperTransitionEnd}
     >
-      {props.showMask && (
+      {showMask && (
         <div
-          className={`${props.prefixClass}-mask`}
-          onClick={props.maskClosable ? props.onClose : undefined}
-          style={props.maskStyle}
+          className={`${prefixClass}-mask`}
+          onClick={maskClosable ? onClose : undefined}
+          style={maskStyle}
           ref={mask}
         />
       )}
       <div
-        className={`${props.prefixClass}-content-wrapper`}
+        className={`${prefixClass}-content-wrapper`}
         style={{
           transform: getTransform(props),
           msTransform: getTransform(props),
           width: getWidth(props),
           height: getHeight(props),
-          ...props.contentWrapperStyle,
+          ...contentWrapperStyle,
         }}
         ref={wrapper}
       >
         <div
-          className={`${props.prefixClass}-content`}
+          className={`${prefixClass}-content`}
           ref={content}
         >
-          {props.children}
+          {children}
         </div>
         {cloneHandlerElement()}
       </div>

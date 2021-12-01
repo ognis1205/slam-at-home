@@ -16,6 +16,7 @@
 import * as React from 'react';
 import * as NextApp from 'next/app';
 import Head from 'next/head';
+import * as Drawer from '../components/drawer';
 
 const SLAM: React.FC<NextApp.AppProps> = ({ Component, pageProps }) => {
   return (
@@ -27,6 +28,11 @@ const SLAM: React.FC<NextApp.AppProps> = ({ Component, pageProps }) => {
           content='minimum-scale=1, initial-scale=1, width=device-width'
         />
       </Head>
+      <Drawer.Component>
+        <ul>
+          <li>test</li>
+        </ul>
+      </Drawer.Component>
     </React.Fragment>
   );
 };

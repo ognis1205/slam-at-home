@@ -29,8 +29,10 @@ export const withDefaultProps = <Props, Defaults, Ref, Ret>(
   defaults: Defaults
 ): (props: WithDefaultProps<Props, Defaults>, ref?: Ref) => Ret => {
   function wrapper(props: WithDefaultProps<Props, Defaults>, ref?: Ref): Ret {
-    const np = (Object.assign({}, defaults, props) as unknown) as Props;
-    return Component(np, ref as Ref);
+    return Component(
+      (Object.assign({}, defaults, props) as unknown) as Props,
+      ref as Ref
+    );
   }
   (wrapper as any).displayName = `WithDefaultProps(${getDisplayName(Component)})`;
   return wrapper;
