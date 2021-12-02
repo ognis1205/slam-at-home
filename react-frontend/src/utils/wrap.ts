@@ -1,5 +1,5 @@
 /**
- * @fileoverview Defines scrolling helper classes/functions.
+ * @fileoverview Defines wrapper functions.
  */
 
 /** Removes optional keys from a given type. */
