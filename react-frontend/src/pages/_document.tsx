@@ -1,5 +1,6 @@
-/*
- * Copyright 2021 Shingo OKAWA
+/**
+ * @fileoverview
+ * @copyright Shingo OKAWA 2021
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +18,9 @@ import * as React from 'react';
 import * as NextDocument from 'next/document';
 import Document from 'next/document';
 
+/**
+ *
+ */
 export default class SLAMDocument extends Document {
   static async getInitialProps(
     ctx: NextDocument.DocumentContext

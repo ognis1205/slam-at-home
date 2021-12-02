@@ -1,5 +1,6 @@
-/*
- * Copyright 2021 Shingo OKAWA
+/**
+ * @fileoverview
+ * @copyright Shingo OKAWA 2021
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +19,9 @@ import * as NextApp from 'next/app';
 import Head from 'next/head';
 import * as Drawer from '../components/drawer';
 
+/**
+ *
+ */
 const SLAM: React.FC<NextApp.AppProps> = ({ Component, pageProps }) => {
   return (
     <React.Fragment>
