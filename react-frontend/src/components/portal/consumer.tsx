@@ -48,3 +48,6 @@ export const Component = React.forwardRef<Ref, Props.Consumer>((props: Props.Con
     ? ReactDOM.createPortal(props.children, container.current)
     : null;
 });
+
+/** Sets the component's display name. */
+Component.displayName = 'PortalConsumer';

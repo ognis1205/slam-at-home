@@ -40,7 +40,7 @@ const getHeight = ({height}: Props.Content): string => {
 };
 
 /** Returns a draw width. */
-const getDrawWidth = (
+const getDrawWidthIfOpened = (
   {open, drawWidth}: Props.Content,
   target: HTMLElement,
   size: string | number
@@ -105,7 +105,7 @@ export const Component: React.FunctionComponent<Props.Content> = (props: Props.C
   const startPosition = React.useRef<{x: number; y: number}>(null);
 
   /** @const Holds a after-scrolling effect. */
-  const afterScrolling = React.useRef<any>(null);
+  const timeout = React.useRef<any>(null);
 
   /** @const Holds a reference to the component itself. */
   const self = React.useRef<HTMLDivElement>(null);
@@ -170,14 +170,14 @@ export const Component: React.FunctionComponent<Props.Content> = (props: Props.C
     delete CURRENT_DRAWER[id.current];
     if (props.open) {
       props.open = false;
-      setTransform();
+      transform();
       document.body.style.touchAction = '';
     }
     props.scrollLocker?.unlock();
   });
 
   /** Checks if some drawers are opened. */
-  const isSomeDrawerOpened = (): boolean =>
+  const areAllDrawersClosed = (): boolean =>
     !Object.keys(CURRENT_DRAWER).some(key => CURRENT_DRAWER[key]);
 
   /** Checks if the drawer is opened. */
@@ -239,14 +239,14 @@ export const Component: React.FunctionComponent<Props.Content> = (props: Props.C
     const size = (isHorizontal ? props.width : props.height) || rect;
 
     if (DOM.isDefined()) {
-      const right =
+      const scrollBarSize =
         document.body.scrollHeight >
           (window.innerHeight || document.documentElement.clientHeight) &&
         window.innerWidth > document.body.offsetWidth
           ? Scroll.getBarSize(true)
           : 0;
-      setTransform(translateFunction, size, right);
-      toggleScrolling(right);
+      transform(translateFunction, size, scrollBarSize);
+      toggleScrolling(scrollBarSize);
     }
 
     if (props.onChange)
@@ -254,11 +254,11 @@ export const Component: React.FunctionComponent<Props.Content> = (props: Props.C
   };
 
   /** Sets a transform CSS function on assigned items. */
-  const setTransform = (translateFunction?: string, size?: string | number, right?: number): void => {
+  const transform = (translateFunction?: string, size?: string | number, scrollBarSize?: number): void => {
     items.current?.forEach(item => {
       item.style.transition = `transform ${props.drawDuration} ${props.drawEase}`;
       Event.addListener(item, Event.TRANSITION_END, onTransitionEnd);
-      const width = getDrawWidth(props, item, size);
+      const width = getDrawWidthIfOpened(props, item, size);
       const pixel = 
         typeof width === 'number'
         ? `${width}px`
@@ -268,8 +268,8 @@ export const Component: React.FunctionComponent<Props.Content> = (props: Props.C
         ? pixel
         : `-${pixel}`;
       position = 
-        props.showMask && props.placement === 'right' && right
-        ? `calc(${position} + ${right}px)`
+        props.showMask && props.placement === 'right' && scrollBarSize
+        ? `calc(${position} + ${scrollBarSize}px)`
         : position;
       item.style.transform =
         width
@@ -279,16 +279,18 @@ export const Component: React.FunctionComponent<Props.Content> = (props: Props.C
   };
 
   /** Toggles scrolling effects. */
-  const toggleScrolling = (right: number): void => {
+  const toggleScrolling = (scrollBarSize: number): void => {
     const container = getContainer(props);
     if (container && container.parentNode === document.body && props.showMask) {
       const events = ['touchstart'];
       const doms = [document.body, mask.current, button.current, content.current];
       if (props.open && document.body.style.overflow !== 'hidden') {
-        if (right) addScrolling(right);
+        if (scrollBarSize)
+          enableScrolling(scrollBarSize);
         document.body.style.touchAction = 'none';
         doms.forEach((item, i) => {
-          if (!item) return;
+          if (!item)
+            return;
           Event.addListener(
             item,
             events[i] || 'touchmove',
@@ -296,11 +298,13 @@ export const Component: React.FunctionComponent<Props.Content> = (props: Props.C
             passive,
           );
         });
-      } else if (isSomeDrawerOpened()) {
+      } else if (areAllDrawersClosed()) {
         document.body.style.touchAction = '';
-        if (right) removeScrolling(right);
+        if (scrollBarSize)
+          disableScrolling(scrollBarSize);
         doms.forEach((item, i) => {
-          if (!item) return;
+          if (!item)
+            return;
           Event.removeListener(
             item,
             events[i] || 'touchmove',
@@ -313,28 +317,28 @@ export const Component: React.FunctionComponent<Props.Content> = (props: Props.C
   };
 
   /** Adds scrolling effects. */
-  const addScrolling = (right: number): void => {
-    const widthTransition = `width ${props.drawDuration} ${props.drawEase}`;
+  const enableScrolling = (scrollBarSize: number): void => {
+    const xTransition = `width ${props.drawDuration} ${props.drawEase}`;
     const transformTransition = `transform ${props.drawDuration} ${props.drawEase}`;
 
     self.current.style.transition = 'none';
     switch (props.placement) {
       case 'right':
-        self.current.style.transform = `translateX(-${right}px)`;
+        self.current.style.transform = `translateX(-${scrollBarSize}px)`;
         break;
       case 'top':
       case 'bottom':
-        self.current.style.width = `calc(100% - ${right}px)`;
+        self.current.style.width = `calc(100% - ${scrollBarSize}px)`;
         self.current.style.transform = 'translateZ(0)';
         break;
       default:
         break;
     }
 
-    clearTimeout(afterScrolling.current);
-    afterScrolling.current = setTimeout(() => {
+    clearTimeout(timeout.current);
+    timeout.current = setTimeout(() => {
       if (self.current) {
-        self.current.style.transition = `${transformTransition},${widthTransition}`;
+        self.current.style.transition = `${transformTransition},${xTransition}`;
         self.current.style.width = '';
         self.current.style.transform = '';
       }
@@ -342,7 +346,7 @@ export const Component: React.FunctionComponent<Props.Content> = (props: Props.C
   };
 
   /** Removes scrolling effects. */
-  const removeScrolling = (right: number): void => {
+  const disableScrolling = (scrollBarSize: number): void => {
     if (Event.transitionEndKey)
       document.body.style.overflowX = 'hidden';
 
@@ -358,18 +362,18 @@ export const Component: React.FunctionComponent<Props.Content> = (props: Props.C
         break;
       }
       case 'right': {
-        self.current.style.transform = `translateX(${right}px)`;
+        self.current.style.transform = `translateX(${scrollBarSize}px)`;
         self.current.style.width = '100%';
         xTransition = `width 0s ${props.drawEase} ${props.drawDuration}`;
         if (mask.current) {
-          mask.current.style.left = `-${right}px`;
-          mask.current.style.width = `calc(100% + ${right}px)`;
+          mask.current.style.left = `-${scrollBarSize}px`;
+          mask.current.style.width = `calc(100% + ${scrollBarSize}px)`;
         }
         break;
       }
       case 'top':
       case 'bottom': {
-        self.current.style.width = `calc(100% + ${right}px)`;
+        self.current.style.width = `calc(100% + ${scrollBarSize}px)`;
         self.current.style.height = '100%';
         self.current.style.transform = 'translateZ(0)';
         yTransition = `height 0s ${props.drawEase} ${props.drawDuration}`;
@@ -379,11 +383,11 @@ export const Component: React.FunctionComponent<Props.Content> = (props: Props.C
         break;
     }
 
-    clearTimeout(afterScrolling.current);
-    afterScrolling.current = setTimeout(() => {
+    clearTimeout(timeout.current);
+    timeout.current = setTimeout(() => {
       if (self.current) {
         self.current.style.transition = `${transform},${
-          yTransition ? `${yTransition},` : ''
+          yTransition ? '${yTransition},' : ''
         }${xTransition}`;
         self.current.style.transform = '';
         self.current.style.width = '';
@@ -446,7 +450,7 @@ export const Component: React.FunctionComponent<Props.Content> = (props: Props.C
     if (e.target === wrapper.current && e.propertyName.match(/transform$/)) {
       if (self.current)
         self.current.style.transition = '';
-      if (!open && isSomeDrawerOpened()) {
+      if (!open && areAllDrawersClosed()) {
         document.body.style.overflowX = '';
         if (mask.current) {
           mask.current.style.left = '';
@@ -548,3 +552,6 @@ export const Component: React.FunctionComponent<Props.Content> = (props: Props.C
     </div>
   );
 };
+
+/** Sets the component's display name. */
+Component.displayName = 'DrawerContent';

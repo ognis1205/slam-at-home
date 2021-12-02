@@ -167,3 +167,6 @@ export const Component: React.FunctionComponent<Props.Provider> = (props: Props.
   else
     return null;
 };
+
+/** Sets the component's display name. */
+Component.displayName = 'PortalProvider';

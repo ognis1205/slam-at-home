@@ -114,6 +114,9 @@ const Component: React.FunctionComponent<Props.Wrapper> = (props: Props.Wrapper)
     );
 };
 
+/** Sets the component's display name. */
+Component.displayName = 'DrawerWrapper';
+
 /** Returns a `Wrapper` component with default property values. */
 export const WithDefaultComponent: React.FunctionComponent<Props.Wrapper> = Wrap.withDefaultProps(
   Component, 
