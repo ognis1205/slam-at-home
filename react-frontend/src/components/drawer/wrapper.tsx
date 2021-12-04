@@ -106,7 +106,7 @@ const Component: React.FunctionComponent<Props.Wrapper> = (props: Props.Wrapper)
     );
   else
     return (
-      <Portal.Provider
+      <Portal.Wrapper
         visible={open}
         forceRender={!!commonProps.handler || forceRender}
         container={container}
@@ -124,7 +124,7 @@ const Component: React.FunctionComponent<Props.Wrapper> = (props: Props.Wrapper)
             onHandleClick={onHandleClick}
           />
         )}
-      </Portal.Provider>
+      </Portal.Wrapper>
     );
 };
 

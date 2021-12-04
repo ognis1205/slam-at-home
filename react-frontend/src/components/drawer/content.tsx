@@ -186,7 +186,7 @@ export const Component: React.FunctionComponent<Props.Content> = (props: Props.C
     delete CURRENT_DRAWER[id.current];
     if (props.open) {
       props.open = false;
-      transformPanes();
+      togglePanes();
       document.body.style.touchAction = '';
     }
     props.scrollLocker?.unlock();
@@ -263,8 +263,8 @@ export const Component: React.FunctionComponent<Props.Content> = (props: Props.C
         window.innerWidth > document.body.offsetWidth
           ? Scroll.getBarSize(true)
           : 0;
-      transformPanes(translateFunction, size, scrollBarSize);
-      toggleScrolling(scrollBarSize);
+      togglePanes(translateFunction, size, scrollBarSize);
+      toggleEvents(scrollBarSize);
     }
 
     if (props.onChange)
@@ -272,39 +272,38 @@ export const Component: React.FunctionComponent<Props.Content> = (props: Props.C
   };
 
   /** Sets a transform CSS function on panes. */
-  const transformPanes = (translateFunction?: string, size?: string | number, scrollBarSize?: number): void => {
+  const togglePanes = (translateFunction?: string, size?: string | number, scrollBarSize?: number): void =>
     panes.current?.forEach(pane => {
       pane.style.transition = `transform ${props.drawDuration} ${props.drawEase}`;
       Event.addListener(pane, Event.TRANSITION_END, onTransitionEnd);
-      const width = getDrawWidthIfOpened(props, pane, size);
-      const pixel = 
-        typeof width === 'number'
-        ? `${width}px`
-        : width;
-      let position = 
+      let diff = getDrawWidthIfOpened(props, pane, size);
+      diff = 
+        typeof diff === 'number'
+        ? `${diff}px`
+        : diff;
+      diff = 
         props.placement === 'left' || props.placement === 'top'
-        ? pixel
-        : `-${pixel}`;
-      position = 
+        ? diff
+        : `-${diff}`;
+      diff = 
         props.showMask && props.placement === 'right' && scrollBarSize
-        ? `calc(${position} + ${scrollBarSize}px)`
-        : position;
+        ? `calc(${diff} + ${scrollBarSize}px)`
+        : diff;
       pane.style.transform =
-        width
-        ? `${translateFunction}(${position})`
+        diff
+        ? `${translateFunction}(${diff})`
         : '';
     });
-  };
 
-  /** Toggles scrolling effects. */
-  const toggleScrolling = (scrollBarSize: number): void => {
+  /** Toggles event listeners. */
+  const toggleEvents = (scrollBarSize: number): void => {
     const container = getContainer(props);
     if (container && container.parentNode === document.body && props.showMask) {
       const events = ['touchstart'];
       const doms = [document.body, mask.current, button.current, content.current];
       if (props.open && document.body.style.overflow !== 'hidden') {
         if (scrollBarSize)
-          enableScrolling(scrollBarSize);
+          showWithScrollBar(scrollBarSize);
         document.body.style.touchAction = 'none';
         doms.forEach((item, i) => {
           if (!item)
@@ -317,9 +316,9 @@ export const Component: React.FunctionComponent<Props.Content> = (props: Props.C
           );
         });
       } else if (areAllDrawersClosed()) {
-        document.body.style.touchAction = '';
         if (scrollBarSize)
-          disableScrolling(scrollBarSize);
+          hideWithScrollBar(scrollBarSize);
+        document.body.style.touchAction = '';
         doms.forEach((item, i) => {
           if (!item)
             return;
@@ -334,8 +333,8 @@ export const Component: React.FunctionComponent<Props.Content> = (props: Props.C
     }
   };
 
-  /** Adds scrolling effects. */
-  const enableScrolling = (scrollBarSize: number): void => {
+  /** Shows a drawer with a scroll bar size. */
+  const showWithScrollBar = (scrollBarSize: number): void => {
     const xTransition = `width ${props.drawDuration} ${props.drawEase}`;
     const transformTransition = `transform ${props.drawDuration} ${props.drawEase}`;
 
@@ -363,8 +362,8 @@ export const Component: React.FunctionComponent<Props.Content> = (props: Props.C
     });
   };
 
-  /** Removes scrolling effects. */
-  const disableScrolling = (scrollBarSize: number): void => {
+  /** Hides a drawer with a scroll bar size. */
+  const hideWithScrollBar = (scrollBarSize: number): void => {
     if (Event.transitionEndKey)
       document.body.style.overflowX = 'hidden';
 
