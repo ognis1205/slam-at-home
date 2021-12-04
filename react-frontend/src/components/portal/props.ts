@@ -1,5 +1,5 @@
 /**
- * @fileoverview Defines {Provider} and {Consumer} properties.
+ * @fileoverview Defines {Wrapper} and {Portal} properties.
  * @copyright Shingo OKAWA 2021
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,25 +18,28 @@ import type * as React from 'react';
 import * as DOM from '../../utils/dom';
 import * as Scroll from '../../utils/scroll';
 
-/** A {Consumer} component properties. */
-export interface Consumer {
+/** A type union of CSS position properties. */
+type Children = ((context: WrapperContext) => React.ReactNode) | React.ReactNode;
+
+/** A {Portal} component properties. */
+export interface Portal {
   container: DOM.Identifier;
   children?: React.ReactNode;
 }
 
 /** A {Content} component properties. */
-export interface Context {
+export interface WrapperContext {
   container?: DOM.Identifier;
   getOpenCount?: () => number;
   scrollLocker?: Scroll.Locker;
   switchScrollingEffect?: () => void;
 }
 
-/** A {Provider} component properties. */
-export interface Provider {
+/** A {Wrapper} component properties. */
+export interface Wrapper {
   container?: DOM.Identifier;
   wrapperClass?: string;
   visible?: boolean;
   forceRender?: boolean;
-  children: (content: Context) => React.ReactNode;
+  children: Children;
 }

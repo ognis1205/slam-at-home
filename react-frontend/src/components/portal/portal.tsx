@@ -1,5 +1,5 @@
 /**
- * @fileoverview Defines Consumer component.
+ * @fileoverview Defines Portal component.
  * @copyright Shingo OKAWA 2021
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,21 +20,21 @@ import * as Props from './props';
 import * as DOM from '../../utils/dom';
 import * as Hook from '../../utils/hook';
 
-/** Returns the container element of a portal consumer. */
-const getContainer = ({container}: Props.Consumer): HTMLElement => {
+/** Returns the container element of a portal. */
+const getContainer = ({container}: Props.Portal): HTMLElement => {
   return DOM.get(container);
 };
 
-/** Defines `Portal.Consumer` reference type. */
+/** Defines `Portal` reference type. */
 export type Ref = {};
 
 /**
- * Returns a `Consumer` component.
- * @param {Consumer} props Properties that defines a behaviour of this component.
+ * Returns a `Portal` component.
+ * @param {Portal} props Properties that defines a behaviour of this component.
  * @param {Ref} ref Dummy `ReactRef` object.
  * @return {ReactElement} A rendered React element.
  */
-export const Component = React.forwardRef<Ref, Props.Consumer>((props: Props.Consumer, ref): React.ReactElement => {
+export const Component = React.forwardRef<Ref, Props.Portal>((props: Props.Portal, ref): React.ReactElement => {
   /** Returns nothing but defines instance just for the existence check in a wrapper. */
   React.useImperativeHandle(ref, () => ({}));
   
@@ -58,4 +58,4 @@ export const Component = React.forwardRef<Ref, Props.Consumer>((props: Props.Con
 });
 
 /** Sets the component's display name. */
-Component.displayName = 'PortalConsumer';
+Component.displayName = 'Portal';

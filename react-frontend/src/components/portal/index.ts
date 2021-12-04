@@ -15,10 +15,10 @@
  * limitations under the License.
  */
 export type {
-  Provider as Props,
-  Context as Context,
+  Wrapper as Props,
+  WrapperContext as Context,
 } from "./props";
 
 export {
-  Component as Provider,
-} from './provider';
+  Component as Wrapper,
+} from './wrapper';

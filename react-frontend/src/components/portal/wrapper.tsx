@@ -1,5 +1,5 @@
 /**
- * @fileoverview Defines Provider component.
+ * @fileoverview Defines Wrapper component.
  * @copyright Shingo OKAWA 2021
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 import * as React from 'react';
-import * as Consumer from './consumer';
+import * as Portal from './portal';
 import * as Props from './props';
 import * as Animation from '../../utils/animation';
 import * as CSS from '../../utils/css';
@@ -29,8 +29,8 @@ let openCount: number = 0;
 /** A chached CSS `overflow`properties. */
 let overflowCache: object = {};
 
-/** Returns the container element of a portal provider. */
-const getContainer = ({container}: Props.Provider): HTMLElement => {
+/** Returns the container element of a portal wrapper. */
+const getContainer = ({container}: Props.Wrapper): HTMLElement => {
   const elems = DOM.select(container);
   return elems.length > 0 ? elems[0] : null;
 };
@@ -41,11 +41,11 @@ export const getOpenCount = (): number => {
 }
 
 /**
- * Returns a `Provider` component.
- * @param {Provider} props Properties that defines a behaviour of this component.
+ * Returns a `Wrapper` component.
+ * @param {Wrapper} props Properties that defines a behaviour of this component.
  * @return {ReactElement} A rendered React element.
  */
-export const Component: React.FunctionComponent<Props.Provider> = (props: Props.Provider): React.ReactElement => {
+export const Component: React.FunctionComponent<Props.Wrapper> = (props: Props.Wrapper): React.ReactElement => {
   /** @const Holds a force updater. */
   const forceUpdate = Hook.useForceUpdate();
 
@@ -55,8 +55,8 @@ export const Component: React.FunctionComponent<Props.Provider> = (props: Props.
   /** @const Holds a reference to the container element. */
   const container = React.useRef<HTMLElement>(null);
 
-  /** @const Holds a reference to the consumer element. */
-  const consumer = React.useRef<Consumer.Ref>(null);
+  /** @const Holds a reference to the portal element. */
+  const portal = React.useRef<Portal.Ref>(null);
 
   /** @const Holds a reference to the `requestAnimationFrame` identifier. */
   const raf = React.useRef<number>(null);
@@ -164,7 +164,7 @@ export const Component: React.FunctionComponent<Props.Provider> = (props: Props.
   };
 
   /** Holds a portal context. */
-  const context: Props.Context = {
+  const context: Props.WrapperContext = {
     container: getPortal,
     getOpenCount: () => openCount,
     scrollLocker: scrollLocker.current,
@@ -182,17 +182,17 @@ export const Component: React.FunctionComponent<Props.Provider> = (props: Props.
         Scroll.switchEffect(true);
       }
     },
-  } as Props.Context;
+  } as Props.WrapperContext;
 
-  if (props.forceRender || props.visible || consumer.current)
+  if (props.forceRender || props.visible || portal.current)
     return (
-      <Consumer.Component container={getPortal} ref={(el) => consumer.current = el}>
-        {props.children(context)}
-      </Consumer.Component>
+      <Portal.Component container={getPortal} ref={(el) => portal.current = el}>
+        {typeof props.children === 'function' ? props.children(context): props.children}
+      </Portal.Component>
     );
   else
     return null;
 };
 
 /** Sets the component's display name. */
-Component.displayName = 'PortalProvider';
+Component.displayName = 'PortalWrapper';
