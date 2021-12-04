@@ -176,8 +176,8 @@ export const Component: React.FunctionComponent<Props.Content> = (props: Props.C
         focus();
       if (props.showMask)
         props.scrollLocker?.lock();
-      else
-        props.scrollLocker?.unlock();
+    } else {
+      props.scrollLocker?.unlock();
     }
   }, [props.open]);
 

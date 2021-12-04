@@ -16,6 +16,7 @@
  */
 import * as React from 'react';
 import * as CSS from './css';
+import styles from '../assets/styles/utils/scroll.module.scss';
 
 /** Defines lock interface. */
 interface Lock {
@@ -30,7 +31,7 @@ let uuid: number = 0;
 let locks: Lock[] = [];
 
 /** @const @private Holds a class name for scroll locker element. */
-const CLASS_NAME = 'ognis1205-scrolling-effect';
+const CLASS_NAME = styles['scroll'];
 
 /** @const @private Holds a class name regexp for scroll locker element. */
 const CLASS_NAME_REGEX = new RegExp(`${CLASS_NAME}`, 'g');
