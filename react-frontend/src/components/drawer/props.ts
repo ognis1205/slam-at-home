@@ -1,5 +1,5 @@
 /**
- * @fileoverview Defines {Wrapper} and {Content} properties.
+ * @fileoverview Defines {Drawer} and {Content} properties.
  * @copyright Shingo OKAWA 2021
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -24,7 +24,7 @@ type Placement = 'left' | 'top' | 'right' | 'bottom';
 /** A type union of draw width definitions. */
 type DrawWidth = number | [number, number];
 
-/** A common properties shared by both {Wrapper} and {Content} components. */
+/** A common properties shared by both {Drawer} and {Content} components. */
 interface Common extends Omit<React.HTMLAttributes<unknown>, 'onChange'> {
   width?: string | number;
   height?: string | number;
@@ -50,15 +50,15 @@ interface Common extends Omit<React.HTMLAttributes<unknown>, 'onChange'> {
   autoFocus?: boolean;
 }
 
-/** A {Wrapper} component properties. */
-export interface Wrapper extends Common {
-  container?: DOM.Identifier;
-  wrapperClass?: string;
-  forceRender?: boolean;
-}
-
 /** A {Content} component properties. */
 export interface Content extends Common, Portal.Context {
   visible?: boolean;
   afterClose?: () => void;
+}
+
+/** A {Drawer} component properties. */
+export interface Drawer extends Common {
+  container?: DOM.Identifier;
+  wrapperClass?: string;
+  forceRender?: boolean;
 }

@@ -1,5 +1,5 @@
 /**
- * @fileoverview Defines Wrapper component.
+ * @fileoverview Defines Drawer component.
  * @copyright Shingo OKAWA 2021
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,7 +21,7 @@ import * as Portal from '../portal';
 import * as Wrap from '../../utils/wrap';
 import styles from '../../assets/styles/components/drawer.module.scss';
 
-const DEFAULT_PROPS: Partial<Props.Wrapper> = {
+const DEFAULT_PROPS: Partial<Props.Drawer> = {
   placement: 'left',
   container: 'body',
   defaultOpen: false,
@@ -46,11 +46,11 @@ const DEFAULT_PROPS: Partial<Props.Wrapper> = {
 };
 
 /**
- * Returns a `Wrapper` component.
- * @param {Wrapper} props Properties that defines a behaviour of this component.
+ * Returns a `Drawer` component.
+ * @param {Drawer} props Properties that defines a behaviour of this component.
  * @return {ReactElement} A rendered React element.
  */
-const Component: React.FunctionComponent<Props.Wrapper> = (props: Props.Wrapper): React.ReactElement => {
+const Component: React.FunctionComponent<Props.Drawer> = (props: Props.Drawer): React.ReactElement => {
   /** @const Holds a open state. */
   const [open, setOpen] = React.useState<boolean>(
     typeof props.open !== 'undefined'
@@ -129,10 +129,10 @@ const Component: React.FunctionComponent<Props.Wrapper> = (props: Props.Wrapper)
 };
 
 /** Sets the component's display name. */
-Component.displayName = 'DrawerWrapper';
+Component.displayName = 'Drawer';
 
-/** Returns a `Wrapper` component with default property values. */
-export const WithDefaultComponent: React.FunctionComponent<Props.Wrapper> = Wrap.withDefaultProps(
+/** Returns a `Drawer` component with default property values. */
+export const WithDefaultComponent: React.FunctionComponent<Props.Drawer> = Wrap.withDefaultProps(
   Component, 
   DEFAULT_PROPS
 );

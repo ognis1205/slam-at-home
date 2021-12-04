@@ -20,5 +20,9 @@ export type {
 } from "./props";
 
 export {
+  Component as Component,
+} from './portal';
+
+export {
   Component as Wrapper,
 } from './wrapper';

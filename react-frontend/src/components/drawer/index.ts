@@ -15,9 +15,9 @@
  * limitations under the License.
  */
 export type {
-  Wrapper as Props,
+  Drawer as Props,
 } from "./props";
 
 export {
   WithDefaultComponent as Component,
-} from './wrapper';
+} from './drawer';
