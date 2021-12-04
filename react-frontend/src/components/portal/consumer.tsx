@@ -52,11 +52,6 @@ export const Component = React.forwardRef<Ref, Props.Consumer>((props: Props.Con
     }
   });
 
-  /** `componentWillUnmount` */
-  Hook.useWillUnmount(() => {
-    container.current?.parentNode?.removeChild(container.current);
-  });
-
   return mounted
     ? ReactDOM.createPortal(props.children, container.current)
     : null;

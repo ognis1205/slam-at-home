@@ -26,7 +26,6 @@ type DrawWidth = number | [number, number];
 
 /** A common properties shared by both {Wrapper} and {Content} components. */
 interface Common extends Omit<React.HTMLAttributes<unknown>, 'onChange'> {
-  prefixClass?: string;
   width?: string | number;
   height?: string | number;
   open?: boolean;

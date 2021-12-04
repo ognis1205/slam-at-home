@@ -49,6 +49,9 @@ export const Component: React.FunctionComponent<Props.Provider> = (props: Props.
   /** @const Holds a force updater. */
   const forceUpdate = Hook.useForceUpdate();
 
+  /** @const Holds a previous container. */
+  const prevContainer = Hook.usePrevious(props.container);
+
   /** @const Holds a reference to the container element. */
   const container = React.useRef<HTMLElement>(null);
 
@@ -99,6 +102,16 @@ export const Component: React.FunctionComponent<Props.Provider> = (props: Props.
       });
   }, [props.visible]);
 
+  /** Returns `true` if container has changed. */
+  const isContainerDifferent = (): boolean => {
+    const isFunction =
+      typeof props.container === 'function' &&
+      typeof prevContainer === 'function';
+    return isFunction
+         ? props.container.toString() !== prevContainer.toString()
+         : props.container !== prevContainer;
+  };
+
   /** Updates open count. */
   const updateOpenCount = React.useCallback((): void => {
     if (DOM.isDefined() &&
@@ -108,7 +121,8 @@ export const Component: React.FunctionComponent<Props.Provider> = (props: Props.
       else
         openCount = openCount ? openCount - 1 : openCount;
     }
-    removeContainer();
+    if (isContainerDifferent())
+      removeContainer();
   }, [props.visible, props.container]);
 
   /** Sets a wrapper class name. */
@@ -134,9 +148,8 @@ export const Component: React.FunctionComponent<Props.Provider> = (props: Props.
   };
 
   /** Removes a container element. */
-  const removeContainer = (): void => {
+  const removeContainer = (): HTMLElement =>
     container.current?.parentNode?.removeChild(container.current);
-  };
 
   /** Returns a portal container. */
   const getPortal = (): HTMLElement => {
@@ -173,7 +186,7 @@ export const Component: React.FunctionComponent<Props.Provider> = (props: Props.
 
   if (props.forceRender || props.visible || consumer.current)
     return (
-      <Consumer.Component container={getPortal} ref={consumer}>
+      <Consumer.Component container={getPortal} ref={(el) => consumer.current = el}>
         {props.children(context)}
       </Consumer.Component>
     );

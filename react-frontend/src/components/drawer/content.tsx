@@ -22,24 +22,27 @@ import * as Hook from '../../utils/hook';
 import * as Misc from '../../utils/misc';
 import * as Scroll from '../../utils/scroll';
 import classnames from 'classnames';
+import styles from '../../assets/styles/components/drawer.module.scss';
 
 /** Returns the class name of the wrapper. */
 const getWrapperClass = (
-  {prefixClass, placement, className, showMask}: Props.Content,
+  {placement, className, showMask}: Props.Content,
   open: boolean
 ): string => {
-  return classnames(prefixClass, {
-    [`${prefixClass}-${placement}`]: true,
-    [`${prefixClass}-open`]: open,
+  return classnames(styles['drawer'], {
+    [styles[placement]]: true,
+    [styles['open']]: open,
+    [styles['no-mask']]: !showMask,
     [className || '']: !!className,
-    'no-mask': !showMask,
   });
 };
 
 /** Returns the `transform` CSS property. */
 const getTransform = ({open, placement}: Props.Content): string => {
   const position = placement === 'left' || placement === 'top' ? '-100%' : '100%';
-  return open ? '' : `${placement}(${position})`;
+  const isHorizontal = placement === 'left' || placement === 'right';
+  const translateFunction = `translate${isHorizontal ? 'X' : 'Y'}`;
+  return open ? '' : `${translateFunction}(${position})`;
 };
 
 /** Rerturns the width of the component. */
@@ -108,8 +111,8 @@ export const Component: React.FunctionComponent<Props.Content> = (props: Props.C
         .replace('.', Math.round(Math.random() * 9).toString()),
     ).toString(16)}`);
 
-  /** @const Holds drawer items. */
-  const items = React.useRef<HTMLElement[]>([]);
+  /** @const Holds panes other than a drawer. */
+  const panes = React.useRef<HTMLElement[]>([]);
 
   /** @const Holds a passive mode support flag. */
   const passive = React.useRef<{ passive: boolean } | boolean>(false);
@@ -183,7 +186,7 @@ export const Component: React.FunctionComponent<Props.Content> = (props: Props.C
     delete CURRENT_DRAWER[id.current];
     if (props.open) {
       props.open = false;
-      transform();
+      transformPanes();
       document.body.style.touchAction = '';
     }
     props.scrollLocker?.unlock();
@@ -198,8 +201,10 @@ export const Component: React.FunctionComponent<Props.Content> = (props: Props.C
     self.current ? props.open : false;
 
   /** Focuses on this component forcelly. */
-  const focus = (): void =>
-      self.current?.focus();
+  const focus = (): void => {
+    if (self.current)
+      self.current.focus();
+  };
 
   /** Inits drawer item HTML elements. */
   const init = (): void => {
@@ -224,7 +229,7 @@ export const Component: React.FunctionComponent<Props.Content> = (props: Props.C
     const container = getContainer(props);
     const parent = container ? (container.parentNode as HTMLElement) : null;
     const children = parent ? Array.prototype.slice.call(parent.children) : [];
-    items.current = [] as HTMLElement[];
+    panes.current = [] as HTMLElement[];
 
     if (props.drawLevel === 'all') {
       children.forEach((child: HTMLElement) => {
@@ -232,11 +237,11 @@ export const Component: React.FunctionComponent<Props.Content> = (props: Props.C
             child.nodeName !== 'STYLE' &&
             child.nodeName !== 'LINK' &&
             child !== container
-        ) items.current?.push(child);
+        ) panes.current?.push(child);
       });
     } else if (props.drawLevel) {
       Misc.toArray(props.drawLevel).forEach(key => {
-        document.querySelectorAll(key).forEach(item => items.current?.push(item));
+        document.querySelectorAll(key).forEach(item => panes.current?.push(item));
       });
     }
   };
@@ -258,7 +263,7 @@ export const Component: React.FunctionComponent<Props.Content> = (props: Props.C
         window.innerWidth > document.body.offsetWidth
           ? Scroll.getBarSize(true)
           : 0;
-      transform(translateFunction, size, scrollBarSize);
+      transformPanes(translateFunction, size, scrollBarSize);
       toggleScrolling(scrollBarSize);
     }
 
@@ -266,12 +271,12 @@ export const Component: React.FunctionComponent<Props.Content> = (props: Props.C
       props.onChange(props.open);
   };
 
-  /** Sets a transform CSS function on assigned items. */
-  const transform = (translateFunction?: string, size?: string | number, scrollBarSize?: number): void => {
-    items.current?.forEach(item => {
-      item.style.transition = `transform ${props.drawDuration} ${props.drawEase}`;
-      Event.addListener(item, Event.TRANSITION_END, onTransitionEnd);
-      const width = getDrawWidthIfOpened(props, item, size);
+  /** Sets a transform CSS function on panes. */
+  const transformPanes = (translateFunction?: string, size?: string | number, scrollBarSize?: number): void => {
+    panes.current?.forEach(pane => {
+      pane.style.transition = `transform ${props.drawDuration} ${props.drawEase}`;
+      Event.addListener(pane, Event.TRANSITION_END, onTransitionEnd);
+      const width = getDrawWidthIfOpened(props, pane, size);
       const pixel = 
         typeof width === 'number'
         ? `${width}px`
@@ -284,7 +289,7 @@ export const Component: React.FunctionComponent<Props.Content> = (props: Props.C
         props.showMask && props.placement === 'right' && scrollBarSize
         ? `calc(${position} + ${scrollBarSize}px)`
         : position;
-      item.style.transform =
+      pane.style.transform =
         width
         ? `${translateFunction}(${position})`
         : '';
@@ -486,7 +491,7 @@ export const Component: React.FunctionComponent<Props.Content> = (props: Props.C
           if (props.onHandleClick)
             props.onHandleClick(e);
         },
-        ref: button,
+        ref: (el: HTMLElement) => {button.current = el},
       });
     else
       return null;
@@ -501,7 +506,6 @@ export const Component: React.FunctionComponent<Props.Content> = (props: Props.C
     height,
     defaultOpen,
     open,
-    prefixClass,
     placement,
     drawLevel,
     drawWidth,
@@ -531,20 +535,20 @@ export const Component: React.FunctionComponent<Props.Content> = (props: Props.C
       tabIndex={-1}
       className={getWrapperClass(props, isOpen())}
       style={style}
-      ref={self}
+      ref={(el) => self.current = el}
       onKeyDown={isOpen() && keyboard ? onKeyDown : undefined}
       onTransitionEnd={onWrapperTransitionEnd}
     >
       {showMask && (
         <div
-          className={`${prefixClass}-mask`}
+          className={styles['mask']}
           onClick={maskClosable ? onClose : undefined}
           style={maskStyle}
-          ref={mask}
+          ref={(el) => mask.current = el}
         />
       )}
       <div
-        className={`${prefixClass}-content-wrapper`}
+        className={styles['wrapper']}
         style={{
           transform: getTransform(props),
           msTransform: getTransform(props),
@@ -552,11 +556,11 @@ export const Component: React.FunctionComponent<Props.Content> = (props: Props.C
           height: getHeight(props),
           ...contentWrapperStyle,
         }}
-        ref={wrapper}
+        ref={(el) => wrapper.current = el}
       >
         <div
-          className={`${prefixClass}-content`}
-          ref={content}
+          className={styles['content']}
+          ref={(el) => content.current = el}
         >
           {children}
         </div>

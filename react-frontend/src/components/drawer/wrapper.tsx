@@ -19,9 +19,9 @@ import * as Content from './content';
 import * as Props from './props';
 import * as Portal from '../portal';
 import * as Wrap from '../../utils/wrap';
+import styles from '../../assets/styles/components/drawer.module.scss';
 
 const DEFAULT_PROPS: Partial<Props.Wrapper> = {
-  prefixClass: 'drawer',
   placement: 'left',
   container: 'body',
   defaultOpen: false,
@@ -31,8 +31,8 @@ const DEFAULT_PROPS: Partial<Props.Wrapper> = {
   onChange: () => {},
   afterVisibleChange: () => {},
   handler: (
-    <div className='drawer-handle'>
-      <i className='drawer-handle-icon'/>
+    <div className={styles['handle']}>
+      <i className={styles['icon']}/>
     </div>
   ),
   showMask: true,
@@ -93,7 +93,7 @@ const Component: React.FunctionComponent<Props.Wrapper> = (props: Props.Wrapper)
     return (
       <div
         className={wrapperClass}
-        ref={self}
+        ref={(el) => self.current = el}
       >
         <Content.Component
           {...commonProps}
@@ -115,6 +115,7 @@ const Component: React.FunctionComponent<Props.Wrapper> = (props: Props.Wrapper)
         {({visible, afterClose, ...rest}: Props.Content) => (
           <Content.Component
             {...commonProps}
+            {...rest}
             open={visible !== undefined ? visible : open}
             afterVisibleChange={
               afterClose !== undefined ? afterClose : commonProps.afterVisibleChange
