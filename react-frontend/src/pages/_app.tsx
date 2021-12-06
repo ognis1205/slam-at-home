@@ -18,7 +18,8 @@ import * as React from 'react';
 import * as NextApp from 'next/app';
 import Head from 'next/head';
 import * as Drawer from '../components/drawer';
-//import styles from '../../assets/styles/Home.module.css';
+import * as Accordion from '../components/accordion';
+import menus from '../metadata/menu';
 
 /**
  *
@@ -34,9 +35,7 @@ const SLAM: React.FC<NextApp.AppProps> = ({ Component, pageProps }) => {
         />
       </Head>
       <Drawer.Component>
-        <ul>
-          <li>test</li>
-        </ul>
+        <Accordion.Component items={menus} rtl={true}/>
       </Drawer.Component>
     </React.Fragment>
   );

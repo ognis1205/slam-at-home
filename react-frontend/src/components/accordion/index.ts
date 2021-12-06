@@ -14,3 +14,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+export type {
+  Accordion as Props,
+  JSON as JSON,
+} from "./props";
+
+export {
+  Component as Component,
+} from './accordion';

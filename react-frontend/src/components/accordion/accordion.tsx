@@ -51,8 +51,6 @@ export const Component: React.FunctionComponent<Props.Accordion<unknown>> = <T e
   return (
     <div {...htmlAttrs} className={classnames(
       styles['accordion'],
-      styles['children'], 
-      styles['active'],
       {[styles['rtl']]: rtl}
     )}>
       {items?.map((item) =>

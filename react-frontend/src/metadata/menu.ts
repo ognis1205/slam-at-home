@@ -1,5 +1,5 @@
 /**
- * @fileoverview Scss Module for {Accordion} component.
+ * @fileoverview Defines menu.
  * @copyright Shingo OKAWA 2021
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,24 +14,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import type * as Accordion from '../components/accordion';
+import type * as JSON from '../utils/json';
 
-.accordion {
-  max-width: 400px;
-  width: auto;
-  width: 100%;
-  * {
-    box-sizing: border-box;
-  }
-  .divider {
-    height: 42px;
-    padding-top: 14px;
-    padding-left: 14px;
-    padding-right: 14px;
-    font-size: 12px;
-  }
-  &.rtl {
-    .divider {
-      text-align: right;
-    }
-  }
-}
+const items: Accordion.JSON<JSON.Primitive> = [
+  {divider: "Divider 1"},
+  {divider: "Divider 2"},
+  {divider: "Divider 3"},
+  {divider: "Divider 4"},
+  {divider: "Divider 5"},
+];
+
+export default items;
