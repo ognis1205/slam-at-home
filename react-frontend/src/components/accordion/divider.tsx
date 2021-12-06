@@ -27,9 +27,17 @@ import styles from '../../assets/styles/components/accordion.module.scss';
 export const Component: React.FunctionComponent<Props.Divider<unknown>> = <T extends unknown>(
   props: Props.Divider<T>
 ): React.ReactElement => {
+  /** Separates HTML attributes. */
+  const {
+    key,
+    level,
+    divider,
+    ...htmlAttrs
+  } = props;
+
   return (
-    <div key={props.key} className={classnames(styles['divider'], styles[`level-${props.level}`])}>
-      {props.divider}
+    <div {...htmlAttrs} key={key} className={classnames(styles['divider'], styles[`level-${level}`])}>
+      {divider}
     </div>
   )
 };

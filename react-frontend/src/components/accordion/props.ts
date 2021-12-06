@@ -18,18 +18,18 @@ import type * as React from 'react';
 
 /** Defines {Accordion} entries. */
 interface JSONEntry<T> {
-  value: T;
+  value?: T;
   icon?: React.ReactNode;
   options?: any;
 }
 
 /** Defines {Accordion} dividers. */
-interface DividerJSON<T> extends JSONEntry<T> {
+export interface DividerJSON<T> extends JSONEntry<T> {
   divider: string;
 }
 
 /** Defines {Accordion} items. */
-interface ItemJSON<T> extends JSONEntry<T> {
+export interface ItemJSON<T> extends JSONEntry<T> {
   label: string;
   children?: JSON<T>;
 }
@@ -50,3 +50,22 @@ export interface Item<T> extends Omit<ItemJSON<T>, 'children'>, Omit<React.HTMLA
   onClick?: (entry: JSONEntry<T>) => void;
   children?: Array<React.ReactNode>;
 }
+
+/** Defines {Accordion} properties. */
+export interface Accordion<T> extends React.HTMLAttributes<unknown> {
+  items: JSON<T>;
+  rtl: boolean;
+}
+
+/***/
+//export interface JSONStateTreeItem<T> {
+//  parent?: JSONStateTreeItem,
+//  active: ?boolean,
+//  value: string,
+//  children: ?Array<JSONStateTreeItem>,
+//  onClick: (any) => mixed,
+//  extras: any,
+//  icon: ?string,
+//  label: ?string,
+//  divider: ?boolean
+//}
