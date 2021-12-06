@@ -37,13 +37,16 @@ interface ItemJSON<T> extends JSONEntry<T> {
 /** Defines JSON values for accordions. */
 export type JSON<T> = Array<ItemJSON<T> | DividerJSON<T>>;
 
-/** Defines {Item} properties. */
+/** Defines {Divider} properties. */
 export interface Divider<T> extends DividerJSON<T>, React.HTMLAttributes<unknown> {
-  // Placeholder.
+  key: string;
+  level: number;
 }
 
 /** Defines {Item} properties. */
 export interface Item<T> extends Omit<ItemJSON<T>, 'children'>, Omit<React.HTMLAttributes<unknown>, 'onClick'> {
+  key: string;
+  level: number;
   onClick?: (entry: JSONEntry<T>) => void;
   children?: Array<React.ReactNode>;
 }

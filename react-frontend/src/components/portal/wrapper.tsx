@@ -36,9 +36,8 @@ const getContainer = ({container}: Props.Wrapper): HTMLElement => {
 };
 
 /** @private Test usage only */
-export const getOpenCount = (): number => {
-  return process.env.NODE_ENV === 'test' ? openCount : 0;
-}
+export const getOpenCount = (): number =>
+  process.env.NODE_ENV === 'test' ? openCount : 0;
 
 /**
  * Returns a `Wrapper` component.
@@ -59,7 +58,7 @@ export const Component: React.FunctionComponent<Props.Wrapper> = (props: Props.W
   const portal = React.useRef<Portal.Ref>(null);
 
   /** @const Holds a reference to the `requestAnimationFrame` identifier. */
-  const raf = React.useRef<number>(null);
+  const animation = React.useRef<number>(null);
 
   /** @const Holds a reference to the scroll locker. */
   const scrollLocker = React.useRef<Scroll.Locker>(new Scroll.Locker({
@@ -71,7 +70,7 @@ export const Component: React.FunctionComponent<Props.Wrapper> = (props: Props.W
     updateOpenCount();
     setContainer();
     if (!hasContainer())
-      raf.current = Animation.request(() => {
+      animation.current = Animation.request(() => {
         forceUpdate();
       });
   });
@@ -89,7 +88,7 @@ export const Component: React.FunctionComponent<Props.Wrapper> = (props: Props.W
     if (DOM.isDefined() && getContainer(props) === document.body)
       openCount = props.visible && openCount ? openCount - 1 : openCount;
     removeContainer();
-    Animation.clear(raf.current);
+    Animation.clear(animation.current);
   });
 
   /** Updates a scroll locker. */

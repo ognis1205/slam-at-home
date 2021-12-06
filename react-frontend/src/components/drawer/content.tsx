@@ -28,14 +28,13 @@ import styles from '../../assets/styles/components/drawer.module.scss';
 const getWrapperClass = (
   {placement, className, showMask}: Props.Content,
   open: boolean
-): string => {
-  return classnames(styles['drawer'], {
+): string =>
+  classnames(styles['drawer'], {
     [styles[placement]]: true,
     [styles['open']]: open,
     [styles['no-mask']]: !showMask,
     [className || '']: !!className,
   });
-};
 
 /** Returns the `transform` CSS property. */
 const getTransform = ({open, placement}: Props.Content): string => {
@@ -46,22 +45,20 @@ const getTransform = ({open, placement}: Props.Content): string => {
 };
 
 /** Rerturns the width of the component. */
-const getWidth = ({width}: Props.Content): string => {
-  return Misc.isNumeric(width) ? `${width}px` : width as string;
-};
+const getWidth = ({width}: Props.Content): string =>
+  Misc.isNumeric(width) ? `${width}px` : width as string;
 
 /** Rerturns the height of the component. */
-const getHeight = ({height}: Props.Content): string => {
-  return Misc.isNumeric(height) ? `${height}px` : height as string;
-};
+const getHeight = ({height}: Props.Content): string =>
+  Misc.isNumeric(height) ? `${height}px` : height as string;
 
 /** Returns a draw width. */
 const getDrawWidthIfOpened = (
   {open, drawWidth}: Props.Content,
   target: HTMLElement,
   size: string | number
-): string | number => {
-  let ret = open ? size : 0;
+): string | number | undefined => {
+  let ret = open ? size : undefined;
   if (drawWidth) {
     const width = (() => {
       const w =
@@ -80,16 +77,14 @@ const getDrawWidthIfOpened = (
 };
 
 /** Returns the container element of a drawer content. */
-const getContainer = ({container}: Props.Content): HTMLElement => {
-  return DOM.get(container);
-};
+const getContainer = ({container}: Props.Content): HTMLElement =>
+  DOM.get(container);
 
 /** Checks if a given handler is `ReactElement.` */
 const isReactElement = (
   handler: React.ReactElement | null | false
-): handler is React.ReactElement => {
-  return handler !== false && handler !== null;
-};
+): handler is React.ReactElement =>
+  handler !== false && handler !== null;
 
 /** @const Holds a current drawer flags. */
 const CURRENT_DRAWER: Record<string, boolean> = {};
@@ -153,9 +148,8 @@ export const Component: React.FunctionComponent<Props.Content> = (props: Props.C
   /** `componentDidMount` */
   Hook.useDidMount(() => {
     init();
-    const container = getContainer(props);
     if (props.open) {
-      if (container && container.parentNode === document.body)
+      if (getContainer(props)?.parentNode === document.body)
         CURRENT_DRAWER[id.current] = props.open;
       toggle();
       if (props.autoFocus)
@@ -167,8 +161,7 @@ export const Component: React.FunctionComponent<Props.Content> = (props: Props.C
 
   /** `componentDidUpdate` */
   Hook.useDidUpdate(() => {
-    const container = getContainer(props);
-    if (container && container.parentNode === document.body)
+    if (getContainer(props)?.parentNode === document.body)
       CURRENT_DRAWER[id.current] = !!props.open;
     toggle();
     if (props.open) {
@@ -201,10 +194,8 @@ export const Component: React.FunctionComponent<Props.Content> = (props: Props.C
     self.current ? props.open : false;
 
   /** Focuses on this component forcelly. */
-  const focus = (): void => {
-    if (self.current)
-      self.current.focus();
-  };
+  const focus = (): void =>
+    self.current?.focus();
 
   /** Inits drawer item HTML elements. */
   const init = (): void => {
@@ -297,9 +288,7 @@ export const Component: React.FunctionComponent<Props.Content> = (props: Props.C
 
   /** Toggles event listeners. */
   const toggleEvents = (scrollBarSize: number): void => {
-    const container = getContainer(props);
-    if (container && container.parentNode === document.body && props.showMask) {
-      const events = ['touchstart'];
+    if (getContainer(props)?.parentNode === document.body && props.showMask) {
       const doms = [document.body, mask.current, button.current, content.current];
       if (props.open && document.body.style.overflow !== 'hidden') {
         if (scrollBarSize)
@@ -310,7 +299,7 @@ export const Component: React.FunctionComponent<Props.Content> = (props: Props.C
             return;
           Event.addListener(
             item,
-            events[i] || 'touchmove',
+            i ? 'touchmove' : 'touchstart',
             i ? preventDefaultOnTouch : onTouchMove,
             passive,
           );
@@ -324,7 +313,7 @@ export const Component: React.FunctionComponent<Props.Content> = (props: Props.C
             return;
           Event.removeListener(
             item,
-            events[i] || 'touchmove',
+            i ? 'touchmove' : 'touchstart',
             i ? preventDefaultOnTouch : onTouchMove,
             passive,
           );
@@ -457,7 +446,8 @@ export const Component: React.FunctionComponent<Props.Content> = (props: Props.C
   const onKeyDown = (e: React.KeyboardEvent): void => {
     if (e.key === 'Escape') {
       e.stopPropagation();
-      if (props.onClose) props.onClose(e as any);
+      if (props.onClose)
+        props.onClose(e as any);
     }
   };
 
