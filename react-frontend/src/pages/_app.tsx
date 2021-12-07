@@ -34,7 +34,7 @@ const SLAM: React.FC<NextApp.AppProps> = ({ Component, pageProps }) => {
           content='minimum-scale=1, initial-scale=1, width=device-width'
         />
       </Head>
-      <Drawer.Component width="20vh">
+      <Drawer.Component width="30vh">
         <Collapse.Component items={menus} style={{
           height: '100%',
           paddingLeft: '10px',

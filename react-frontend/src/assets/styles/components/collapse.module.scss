@@ -19,8 +19,8 @@ $color-black: #000000;
 $color-white: #ffffff;
 $color-blue-darkest: #1A2226;
 $color-blue-dark: #222D32;
-$color-grey-light: #B8C7CE;
-$color-grey-dark: #4A636E;
+$color-grey-light: #EBECF0;
+$color-grey-dark: #949494;
 $color-blue-light: #C4EAF2;
 
 .collapse {
@@ -52,8 +52,8 @@ $color-blue-light: #C4EAF2;
 .divider {
   height: 42px;
   line-height: 42px;
-  text-align: center;
-  font-size: 12px;
+  text-align: left;
+  font-size: 15px;
   font-weight: bold;
   color: $color-grey-dark;
   background-color: $color-white;
