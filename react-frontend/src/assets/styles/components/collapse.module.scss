@@ -1,5 +1,5 @@
 /**
- * @fileoverview Scss Module for {Accordion} component.
+ * @fileoverview Scss Module for {Collapse} component.
  * @copyright Shingo OKAWA 2021
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,27 +15,22 @@
  * limitations under the License.
  */
 
+$color-black: #000000;
+$color-white: #ffffff;
 $color-blue-darkest: #1A2226;
 $color-blue-dark: #222D32;
 $color-grey-light: #B8C7CE;
 $color-grey-dark: #4A636E;
 $color-blue-light: #C4EAF2;
 
-.accordion {
+.collapse {
   max-width: 400px;
   width: auto;
-  background-color: $color-blue-light;
-  color: $color-grey-light;
+  color: $color-black;
+  background-color: $color-white;
   font-family: "Roboto","Arial",sans-serif;
-//  font-size: 1.4rem;
-//  line-height: 2rem;
-//  font-weight: 500;
   * {
     box-sizing: border-box;
-  }
-  *:not(i) {
-    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-    font-weight: 300;
   }
   &.rtl {
     .divider {
@@ -43,13 +38,32 @@ $color-blue-light: #C4EAF2;
     }
   }
 }
-.divider {
+.icon {
   height: 42px;
   padding-top: 14px;
   padding-left: 14px;
   padding-right: 14px;
   font-size: 12px;
+  font-weight: bold;
   background-color: $color-blue-darkest;
   color: $color-grey-dark;
   text-transform: uppercase;
+}
+.divider {
+  height: 42px;
+  line-height: 42px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: bold;
+  color: $color-grey-dark;
+  background-color: $color-white;
+  border-top: 1px solid $color-grey-light;
+  .content {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: normal;
+  }
+}
+.divider:first-child {
+  border-top: none;
 }

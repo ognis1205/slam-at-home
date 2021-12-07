@@ -18,7 +18,7 @@ import * as React from 'react';
 import * as NextApp from 'next/app';
 import Head from 'next/head';
 import * as Drawer from '../components/drawer';
-import * as Accordion from '../components/accordion';
+import * as Collapse from '../components/collapse';
 import menus from '../metadata/menu';
 
 /**
@@ -34,8 +34,12 @@ const SLAM: React.FC<NextApp.AppProps> = ({ Component, pageProps }) => {
           content='minimum-scale=1, initial-scale=1, width=device-width'
         />
       </Head>
-      <Drawer.Component>
-        <Accordion.Component items={menus} rtl={true} style={{height: '100%'}}/>
+      <Drawer.Component width="20vh">
+        <Collapse.Component items={menus} style={{
+          height: '100%',
+          paddingLeft: '10px',
+          paddingRight: '10px',
+        }}/>
       </Drawer.Component>
     </React.Fragment>
   );

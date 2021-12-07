@@ -58,7 +58,7 @@ export type Content = Types.Overwrite<Common, Portal.Context & {
 }>;
 
 /** A {Drawer} component properties. */
-export interface Drawer extends Common {
+export type Drawer = Types.Overwrite<Common, {
   container?: DOM.Identifier;
   forceRender?: boolean;
-}
+}>;

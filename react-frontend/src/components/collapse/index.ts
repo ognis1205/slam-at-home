@@ -1,5 +1,5 @@
 /**
- * @fileoverview Defines {Accordion} module.
+ * @fileoverview Defines {Collapse} module.
  * @copyright Shingo OKAWA 2021
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,10 +15,10 @@
  * limitations under the License.
  */
 export type {
-  Accordion as Props,
+  Collapse as Props,
   JSON as JSON,
 } from "./props";
 
 export {
   Component as Component,
-} from './accordion';
+} from './collapse';

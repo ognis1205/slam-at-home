@@ -1,5 +1,5 @@
 /**
- * @fileoverview Defines {Accordion} component.
+ * @fileoverview Defines {Collapse} component.
  * @copyright Shingo OKAWA 2021
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,13 +18,13 @@ import * as React from 'react';
 import * as Divider from './divider';
 import * as Props from './props';
 import classnames from 'classnames';
-import styles from '../../assets/styles/components/accordion.module.scss';
+import styles from '../../assets/styles/components/collapse.module.scss';
 
 /** Returns the class name of the wrapper. */
 const getClassName = <T extends unknown>(
-  {className, rtl}: Props.Accordion<T>,
+  {className, rtl}: Props.Collapse<T>,
 ): string =>
-  classnames(styles['accordion'], {
+  classnames(styles['collapse'], {
     [className || '']: !!className,
     [styles['rtl']]: rtl,
   });
@@ -36,14 +36,14 @@ const isDivider = <T extends unknown>(
   'divider' in item;
 
 /**
- * Returns a `Accordion` component.
- * @param {Accordion} props Properties that defines a behaviour of this component.
+ * Returns a `Collapse` component.
+ * @param {Collapse} props Properties that defines a behaviour of this component.
  * @return {ReactElement} A rendered React element.
  */
-export const Component: React.FunctionComponent<Props.Accordion<unknown>> = <T extends unknown>(
-  props: Props.Accordion<T>
+export const Component: React.FunctionComponent<Props.Collapse<unknown>> = <T extends unknown>(
+  props: Props.Collapse<T>
 ): React.ReactElement => {
-  /** Renders a specified accordion item. */
+  /** Renders a specified collapse item. */
   const render = (
     item: Props.ItemJSON<T> | Props.DividerJSON<T>,
     key: number,
@@ -72,4 +72,4 @@ export const Component: React.FunctionComponent<Props.Accordion<unknown>> = <T e
 };
 
 /** Sets the component's display name. */
-Component.displayName = 'Accordion';
+Component.displayName = 'Collapse';

@@ -19,9 +19,7 @@ import type * as Types from '../../utils/types';
 
 /** Defines {Accordion} entries. */
 interface JSONEntry<T> {
-  value?: T;
-  icon?: React.ReactNode;
-  options?: any;
+  style?: React.CSSProperties;
 }
 
 /** Defines {Accordion} dividers. */
@@ -31,7 +29,10 @@ export interface DividerJSON<T> extends JSONEntry<T> {
 
 /** Defines {Accordion} items. */
 export interface ItemJSON<T> extends JSONEntry<T> {
-  label: string;
+  item: string;
+  value?: T;
+  icon?: React.ReactNode;
+  options?: any;
   children?: JSON<T>;
 }
 
@@ -59,7 +60,7 @@ export type Item<T> =
   Types.Overwrite<React.HTMLAttributes<HTMLDivElement>, IntermediateItem<T>>;
 
 /** Defines {Accordion} properties. */
-export type Accordion<T> = Types.Overwrite<React.HTMLAttributes<HTMLDivElement>, {
+export type Collapse<T> = Types.Overwrite<React.HTMLAttributes<HTMLDivElement>, {
   items: JSON<T>;
-  rtl: boolean;
+  rtl?: boolean;
 }>;

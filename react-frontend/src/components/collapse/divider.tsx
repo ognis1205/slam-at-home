@@ -17,7 +17,7 @@
 import * as React from 'react';
 import * as Props from './props';
 import classnames from 'classnames';
-import styles from '../../assets/styles/components/accordion.module.scss';
+import styles from '../../assets/styles/components/collapse.module.scss';
 
 /** Returns the class name of the wrapper. */
 const getClassName = <T extends unknown>(
@@ -39,19 +39,23 @@ export const Component: React.FunctionComponent<Props.Divider<unknown>> = <T ext
   const {
     level,
     divider,
-    value,
-    icon,
-    options,
     className,
+    style,
     ...htmlAttrs
   } = props;
 
   return (
-    <div {...htmlAttrs} className={getClassName(props)}>
-      {divider}
+    <div
+      {...htmlAttrs}
+      className={getClassName(props)}
+      style={{
+        ...style,
+      }}
+    >
+      <span className={styles['content']}>{divider}</span>
     </div>
   )
 };
 
 /** Sets the component's display name. */
-Component.displayName = 'AccordionDivider';
+Component.displayName = 'CollapseDivider';
