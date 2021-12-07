@@ -19,10 +19,15 @@ import type * as JSON from '../utils/json';
 
 const items: Accordion.JSON<JSON.Primitive> = [
   {divider: "Divider 1"},
+  {label: "Item 1"},
   {divider: "Divider 2"},
+  {label: "Item 2"},
   {divider: "Divider 3"},
+  {label: "Item 3"},
   {divider: "Divider 4"},
+  {label: "Item 4"},
   {divider: "Divider 5"},
+  {label: "Item 5"},
 ];
 
 export default items;

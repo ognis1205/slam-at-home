@@ -19,6 +19,14 @@ import * as Props from './props';
 import classnames from 'classnames';
 import styles from '../../assets/styles/components/accordion.module.scss';
 
+/** Returns the class name of the wrapper. */
+const getClassName = <T extends unknown>(
+  {className, level}: Props.Divider<T>,
+): string =>
+  classnames(styles['divider'], styles[`level-${level}`], {
+    [className || '']: !!className,
+  });
+
 /**
  * Returns a `Divider` component.
  * @param {Divider} props Properties that defines a behaviour of this component.
@@ -29,14 +37,17 @@ export const Component: React.FunctionComponent<Props.Divider<unknown>> = <T ext
 ): React.ReactElement => {
   /** Separates HTML attributes. */
   const {
-    key,
     level,
     divider,
+    value,
+    icon,
+    options,
+    className,
     ...htmlAttrs
   } = props;
 
   return (
-    <div {...htmlAttrs} key={key} className={classnames(styles['divider'], styles[`level-${level}`])}>
+    <div {...htmlAttrs} className={getClassName(props)}>
       {divider}
     </div>
   )

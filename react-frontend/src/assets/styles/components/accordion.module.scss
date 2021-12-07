@@ -15,24 +15,41 @@
  * limitations under the License.
  */
 
+$color-blue-darkest: #1A2226;
+$color-blue-dark: #222D32;
+$color-grey-light: #B8C7CE;
+$color-grey-dark: #4A636E;
+$color-blue-light: #C4EAF2;
+
 .accordion {
   max-width: 400px;
   width: auto;
-  width: 100%;
-  background: #fff;
+  background-color: $color-blue-light;
+  color: $color-grey-light;
+  font-family: "Roboto","Arial",sans-serif;
+//  font-size: 1.4rem;
+//  line-height: 2rem;
+//  font-weight: 500;
   * {
     box-sizing: border-box;
   }
-  .divider {
-    height: 42px;
-    padding-top: 14px;
-    padding-left: 14px;
-    padding-right: 14px;
-    font-size: 12px;
+  *:not(i) {
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-weight: 300;
   }
   &.rtl {
     .divider {
       text-align: right;
     }
   }
+}
+.divider {
+  height: 42px;
+  padding-top: 14px;
+  padding-left: 14px;
+  padding-right: 14px;
+  font-size: 12px;
+  background-color: $color-blue-darkest;
+  color: $color-grey-dark;
+  text-transform: uppercase;
 }

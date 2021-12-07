@@ -25,7 +25,7 @@ import classnames from 'classnames';
 import styles from '../../assets/styles/components/drawer.module.scss';
 
 /** Returns the class name of the wrapper. */
-const getWrapperClass = (
+const getClassName = (
   {placement, className, showMask}: Props.Content,
   open: boolean
 ): string =>
@@ -493,28 +493,30 @@ export const Component: React.FunctionComponent<Props.Content> = (props: Props.C
     style,
     width,
     height,
-    defaultOpen,
     open,
+    defaultOpen,
+    handler,
     placement,
     drawLevel,
     drawWidth,
-    drawEase,
     drawDuration,
-    container,
-    handler,
-    onChange,
-    afterVisibleChange,
+    drawEase,
     showMask,
     maskClosable,
     maskStyle,
-    onClose,
+    onChange,
+    afterVisibleChange,
     onHandleClick,
+    onClose,
     keyboard,
+    wrapperStyle,
+    autoFocus,
+    container,
     getOpenCount,
     scrollLocker,
-    contentWrapperStyle,
     switchScrollingEffect,
-    autoFocus,
+    visible,
+    afterClose,
     ...htmlAttrs
   } = props;
 
@@ -522,7 +524,7 @@ export const Component: React.FunctionComponent<Props.Content> = (props: Props.C
     <div
       {...htmlAttrs}
       tabIndex={-1}
-      className={getWrapperClass(props, isOpen())}
+      className={getClassName(props, isOpen())}
       style={style}
       ref={(el) => self.current = el}
       onKeyDown={isOpen() && keyboard ? onKeyDown : undefined}
@@ -543,7 +545,7 @@ export const Component: React.FunctionComponent<Props.Content> = (props: Props.C
           msTransform: getTransform(props),
           width: getWidth(props),
           height: getHeight(props),
-          ...contentWrapperStyle,
+          ...wrapperStyle,
         }}
         ref={(el) => wrapper.current = el}
       >

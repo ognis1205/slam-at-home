@@ -35,7 +35,7 @@ const SLAM: React.FC<NextApp.AppProps> = ({ Component, pageProps }) => {
         />
       </Head>
       <Drawer.Component>
-        <Accordion.Component items={menus} rtl={true}/>
+        <Accordion.Component items={menus} rtl={true} style={{height: '100%'}}/>
       </Drawer.Component>
     </React.Fragment>
   );

@@ -14,23 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-/** Removes optional keys from a given type. */
-type NonOptionalKeys<T> = {
-  [K in keyof T]-?: {} extends { [K1 in K]: T[K] } ? never : K;
-}[keyof T];
-
-/** Properties without default values. */
-type NonDefaultProps<Props, Defaults> =
-  Pick<Props, Exclude<keyof Props, NonOptionalKeys<Defaults>>>;
-
-/** Properties with default values. */
-type OptionalProps<Defaults> =
-  { [P in NonOptionalKeys<Defaults>]?: Defaults[P] };
-
-/** Wrapped properties with default values. */
-type WithDefaultProps<Props, Defaults> =
-  NonDefaultProps<Props, Defaults> & OptionalProps<Defaults>;
+import * as Types from './types';
 
 /** Returns a given component's dispaly name. */
 const getDisplayName = (component: any): string =>
@@ -40,8 +24,8 @@ const getDisplayName = (component: any): string =>
 export const withDefaultProps = <Props, Defaults, Ref, Ret>(
   Component: (props: Props, ref: Ref) => Ret,
   defaults: Defaults
-): (props: WithDefaultProps<Props, Defaults>, ref?: Ref) => Ret => {
-  function wrapper(props: WithDefaultProps<Props, Defaults>, ref?: Ref): Ret {
+): (props: Types.WithDefaultProps<Props, Defaults>, ref?: Ref) => Ret => {
+  function wrapper(props: Types.WithDefaultProps<Props, Defaults>, ref?: Ref): Ret {
     return Component(
       (Object.assign({}, defaults, props) as unknown) as Props,
       ref as Ref

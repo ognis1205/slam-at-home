@@ -15,6 +15,7 @@
  * limitations under the License.
  */
 import type * as React from 'react';
+import type * as Types from '../../utils/types';
 
 /** Defines {Accordion} entries. */
 interface JSONEntry<T> {
@@ -37,35 +38,28 @@ export interface ItemJSON<T> extends JSONEntry<T> {
 /** Defines JSON values for accordions. */
 export type JSON<T> = Array<ItemJSON<T> | DividerJSON<T>>;
 
-/** Defines {Divider} properties. */
-export interface Divider<T> extends DividerJSON<T>, React.HTMLAttributes<unknown> {
-  key: string;
+/** Defines intermediate rendering nodes. */
+type IntermediateDivider<T> = Types.Overwrite<DividerJSON<T>, {
   level: number;
-}
+}>;
 
-/** Defines {Item} properties. */
-export interface Item<T> extends Omit<ItemJSON<T>, 'children'>, Omit<React.HTMLAttributes<unknown>, 'onClick'> {
-  key: string;
+/** Defines intermediate rendering nodes. */
+type IntermediateItem<T> = Types.Overwrite<ItemJSON<T>, {
   level: number;
   onClick?: (entry: JSONEntry<T>) => void;
   children?: Array<React.ReactNode>;
-}
+}>;
+
+/** Defines {Divider} properties. */
+export type Divider<T> =
+  Types.Overwrite<React.HTMLAttributes<HTMLDivElement>, IntermediateDivider<T>>;
+
+/** Defines {Item} properties. */
+export type Item<T> =
+  Types.Overwrite<React.HTMLAttributes<HTMLDivElement>, IntermediateItem<T>>;
 
 /** Defines {Accordion} properties. */
-export interface Accordion<T> extends React.HTMLAttributes<unknown> {
+export type Accordion<T> = Types.Overwrite<React.HTMLAttributes<HTMLDivElement>, {
   items: JSON<T>;
   rtl: boolean;
-}
-
-/***/
-//export interface JSONStateTreeItem<T> {
-//  parent?: JSONStateTreeItem,
-//  active: ?boolean,
-//  value: string,
-//  children: ?Array<JSONStateTreeItem>,
-//  onClick: (any) => mixed,
-//  extras: any,
-//  icon: ?string,
-//  label: ?string,
-//  divider: ?boolean
-//}
+}>;

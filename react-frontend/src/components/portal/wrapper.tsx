@@ -79,7 +79,7 @@ export const Component: React.FunctionComponent<Props.Wrapper> = (props: Props.W
   Hook.useDidUpdate(() => {
     updateOpenCount();
     updateScrollLocker();
-    setWrapperClass();
+    setClassName();
     setContainer();
   });
 
@@ -125,12 +125,12 @@ export const Component: React.FunctionComponent<Props.Wrapper> = (props: Props.W
   }, [props.visible, props.container]);
 
   /** Sets a wrapper class name. */
-  const setWrapperClass = (): void => {
+  const setClassName = (): void => {
     if (props.container &&
-        props.wrapperClass &&
+        props.className &&
         container.current &&
-        props.wrapperClass !== container.current.className)
-      container.current.className = props.wrapperClass;
+        props.className !== container.current.className)
+      container.current.className = props.className;
   };
 
   /** Returns `true` if the container is set already. */
@@ -158,7 +158,7 @@ export const Component: React.FunctionComponent<Props.Wrapper> = (props: Props.W
       container.current = document.createElement('div');
       setContainer(true);
     }
-    setWrapperClass();
+    setClassName();
     return container.current;
   };
 

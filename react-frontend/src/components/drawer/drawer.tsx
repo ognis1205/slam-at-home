@@ -19,8 +19,10 @@ import * as Content from './content';
 import * as Props from './props';
 import * as Portal from '../portal';
 import * as Wrap from '../../utils/wrap';
+import classnames from 'classnames';
 import styles from '../../assets/styles/components/drawer.module.scss';
 
+/** Default properties. */
 const DEFAULT_PROPS: Partial<Props.Drawer> = {
   placement: 'left',
   container: 'body',
@@ -38,12 +40,19 @@ const DEFAULT_PROPS: Partial<Props.Drawer> = {
   showMask: true,
   maskClosable: true,
   maskStyle: {},
-  wrapperClass: '',
   className: '',
   keyboard: true,
   forceRender: false,
   autoFocus: true,
 };
+
+/** Returns the class name of the wrapper. */
+const getClassName = (
+  {className}: Props.Drawer,
+): string =>
+  classnames({
+    [className || '']: !!className,
+  });
 
 /**
  * Returns a `Drawer` component.
@@ -83,8 +92,8 @@ const Component: React.FunctionComponent<Props.Drawer> = (props: Props.Drawer): 
 
   /** Separates commom properties. */
   const {
+    className,
     container,
-    wrapperClass,
     forceRender,
     ...commonProps
   } = props;
@@ -92,7 +101,7 @@ const Component: React.FunctionComponent<Props.Drawer> = (props: Props.Drawer): 
   if (!container)
     return (
       <div
-        className={wrapperClass}
+        className={getClassName(props)}
         ref={(el) => self.current = el}
       >
         <Content.Component
@@ -110,7 +119,7 @@ const Component: React.FunctionComponent<Props.Drawer> = (props: Props.Drawer): 
         visible={open}
         forceRender={!!commonProps.handler || forceRender}
         container={container}
-        wrapperClass={wrapperClass}
+        className={getClassName(props)}
       >
         {({visible, afterClose, ...rest}: Props.Content) => (
           <Content.Component

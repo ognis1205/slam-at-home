@@ -38,7 +38,7 @@ export interface WrapperContext {
 /** A {Wrapper} component properties. */
 export interface Wrapper {
   container?: DOM.Identifier;
-  wrapperClass?: string;
+  className?: string;
   visible?: boolean;
   forceRender?: boolean;
   children: Children;

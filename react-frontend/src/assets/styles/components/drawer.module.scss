@@ -44,18 +44,15 @@ $duration: 0.3s;
                 height 0s ease $duration;
   }
 }
-
 .wrapper {
   position: absolute;
   background: #fff;
 }
-
 .content {
   overflow: auto;
   z-index: 1;
   position: relative;
 }
-
 .handle {
   position: absolute;
   top: 72px;
@@ -71,7 +68,6 @@ $duration: 0.3s;
   align-items: center;
   background: #fff;
 }
-
 .icon {
   width: 14px;
   height: 2px;
@@ -94,7 +90,6 @@ $duration: 0.3s;
     top: 5px;
   }
 }
-
 .left, .right {
   width: 0%;
   height: 100%;
@@ -108,7 +103,6 @@ $duration: 0.3s;
     }
   }
 }
-
 .left {
   top: 0;
   left: 0;
@@ -123,7 +117,6 @@ $duration: 0.3s;
     }
   }
 }
-
 .right {
   top: 0;
   right: 0;
@@ -145,7 +138,6 @@ $duration: 0.3s;
     }
   }
 }
-
 .top, .bottom {
   width: 100%;
   height: 0%;
@@ -166,7 +158,6 @@ $duration: 0.3s;
     margin-left: -20px;
   }
 }
-
 .top {
   top: 0;
   left: 0;
@@ -182,7 +173,6 @@ $duration: 0.3s;
     }
   }
 }
-
 .bottom {
   bottom: 0;
   left: 0;
@@ -204,7 +194,6 @@ $duration: 0.3s;
     }
   }
 }
-
 .open {
   .mask {
     opacity: .3;

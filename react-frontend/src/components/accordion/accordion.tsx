@@ -20,6 +20,15 @@ import * as Props from './props';
 import classnames from 'classnames';
 import styles from '../../assets/styles/components/accordion.module.scss';
 
+/** Returns the class name of the wrapper. */
+const getClassName = <T extends unknown>(
+  {className, rtl}: Props.Accordion<T>,
+): string =>
+  classnames(styles['accordion'], {
+    [className || '']: !!className,
+    [styles['rtl']]: rtl,
+  });
+
 /** Checks if a given item is `DividerJSON.` */
 const isDivider = <T extends unknown>(
   item: Props.ItemJSON<T> | Props.DividerJSON<T>
@@ -35,9 +44,13 @@ export const Component: React.FunctionComponent<Props.Accordion<unknown>> = <T e
   props: Props.Accordion<T>
 ): React.ReactElement => {
   /** Renders a specified accordion item. */
-  const render = (item: Props.ItemJSON<T> | Props.DividerJSON<T>, level: number): React.ReactElement => {
+  const render = (
+    item: Props.ItemJSON<T> | Props.DividerJSON<T>,
+    key: number,
+    level: number
+  ): React.ReactElement => {
     if (isDivider(item))
-      return <Divider.Component key={item.divider} divider={item.divider} level={level}/>
+      return <Divider.Component key={key} divider={item.divider} level={level}/>
     return null;
   }
 
@@ -45,16 +58,14 @@ export const Component: React.FunctionComponent<Props.Accordion<unknown>> = <T e
   const {
     items,
     rtl,
+    className,
     ...htmlAttrs
   } = props;
 
   return (
-    <div {...htmlAttrs} className={classnames(
-      styles['accordion'],
-      {[styles['rtl']]: rtl}
-    )}>
-      {items?.map((item) =>
-        render(item, 0)
+    <div {...htmlAttrs} className={getClassName(props)}>
+      {items.map((item, index) =>
+        render(item, index, 0)
       )}
     </div>
   )

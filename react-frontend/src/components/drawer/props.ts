@@ -17,6 +17,7 @@
 import type * as React from 'react';
 import * as Portal from '../portal';
 import * as DOM from '../../utils/dom';
+import type * as Types from '../../utils/types';
 
 /** A type union of CSS position properties. */
 type Placement = 'left' | 'top' | 'right' | 'bottom';
@@ -25,7 +26,7 @@ type Placement = 'left' | 'top' | 'right' | 'bottom';
 type DrawWidth = number | [number, number];
 
 /** A common properties shared by both {Drawer} and {Content} components. */
-interface Common extends Omit<React.HTMLAttributes<unknown>, 'onChange'> {
+type Common = Types.Overwrite<React.HTMLAttributes<HTMLDivElement>, {
   width?: string | number;
   height?: string | number;
   open?: boolean;
@@ -46,19 +47,18 @@ interface Common extends Omit<React.HTMLAttributes<unknown>, 'onChange'> {
   onHandleClick?: (e: React.MouseEvent | React.KeyboardEvent) => void;
   onClose?: (e: React.MouseEvent | React.KeyboardEvent) => void;
   keyboard?: boolean;
-  contentWrapperStyle?: React.CSSProperties;
+  wrapperStyle?: React.CSSProperties;
   autoFocus?: boolean;
-}
+}>;
 
 /** A {Content} component properties. */
-export interface Content extends Common, Portal.Context {
+export type Content = Types.Overwrite<Common, Portal.Context & {
   visible?: boolean;
   afterClose?: () => void;
-}
+}>;
 
 /** A {Drawer} component properties. */
 export interface Drawer extends Common {
   container?: DOM.Identifier;
-  wrapperClass?: string;
   forceRender?: boolean;
 }
