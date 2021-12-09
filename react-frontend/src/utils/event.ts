@@ -15,24 +15,47 @@
  * limitations under the License.
  */
 
-/** A List of `transitionend` events with vendor prefixes. */
-const transitionEndWithVendorPrefix: Record<string, string> = {
-  transition: 'transitionend',
-  WebkitTransition: 'webkitTransitionEnd',
-  MozTransition: 'transitionend',
-  OTransition: 'oTransitionEnd otransitionend',
+/** Makes CSS property prefixes map. */
+const makePrefixMap = (style: string, event: string): Record<string, string> => {
+  const prefixes: Record<string, string> = {};
+  prefixes[style.toLowerCase()] = event.toLowerCase();
+  prefixes[`Webkit${style}`] = `webkit${event}`;
+  prefixes[`Moz${style}`] = `moz${event}`;
+  prefixes[`ms${style}`] = `MS${event}`;
+  prefixes[`O${style}`] = `o${event.toLowerCase()}`;
+  return prefixes;
 };
 
+/** Holds a `animationend` event key value. */
+export const ANIMATION_END_CSS: string =
+  Object.keys(makePrefixMap('Animation', 'AnimationEnd')).filter(key => {
+    if (typeof document === 'undefined')
+      return false;
+    const html = document.getElementsByTagName('html')[0];
+    return key in (html ? html.style : {});
+  })[0];
+
 /** Holds a `transitionend` event key value. */
-export const transitionEndKey: string = Object.keys(transitionEndWithVendorPrefix).filter(key => {
-  if (typeof document === 'undefined')
-    return false;
-  const html = document.getElementsByTagName('html')[0];
-  return key in (html ? html.style : {});
-})[0];
+export const TRANSITION_END_CSS: string =
+  Object.keys(makePrefixMap('Transition', 'TransitionEnd')).filter(key => {
+    if (typeof document === 'undefined')
+      return false;
+    const html = document.getElementsByTagName('html')[0];
+    return key in (html ? html.style : {});
+  })[0];
+
+/** A `animationend` event name. */
+export const ANIMATION_END: string =
+  makePrefixMap('Animation', 'AnimationEnd')[ANIMATION_END_CSS];
 
 /** A `transitionend` event name. */
-export const TRANSITION_END: string = transitionEndWithVendorPrefix[transitionEndKey];
+export const TRANSITION_END: string =
+  makePrefixMap('Transition', 'TransitionEnd')[TRANSITION_END_CSS];
+
+/** Checks if the environment supports transition events. */
+export const supportTransition = (): boolean => !!(
+  ANIMATION_END && TRANSITION_END
+);
 
 /** Assigns a given event handler to a specified DOM. */
 export const addListener = (
