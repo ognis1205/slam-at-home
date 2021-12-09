@@ -15,6 +15,8 @@
  * limitations under the License.
  */
 import * as React from 'react';
+import * as Animation from './animation';
+import * as DOM from './dom';
 import { dequal } from 'dequal';
 
 // `useEffect` parameters.
@@ -28,14 +30,14 @@ type UseEffectReturn = ReturnType<typeof React.useEffect>
 
 /**
  * Deeply compared version of `useMemo`.
- * @param {T} value the value to be memoized.
+ * @param {T} defaultValue the value to be memoized.
  * @returns a memoized version of the value as long as it remains deeply equal.
  */
-export const useDeepComparedMemo = <T>(value: T): T => {
-  const ref = React.useRef<T>(value);
+export const useDeepComparedMemo = <T>(defaultValue?: T): T => {
+  const ref = React.useRef<T>(defaultValue);
   const [sig, dispatch] = React.useState<{}>(Object.create(null));
-  if (!dequal(value, ref.current)) {
-    ref.current = value;
+  if (!dequal(defaultValue, ref.current)) {
+    ref.current = defaultValue;
     dispatch(Object.create(null));
   }
   return React.useMemo<T>(() => ref.current, [sig]);
@@ -103,13 +105,77 @@ export const useForceUpdate = (): () => void => {
 
 /**
  * Returns the previous value of a specified variable.
- * @param {T} value the value to be memoized.
+ * @param {T} defaultValue the value to be compared.
  * @returns a previously memoized version of the value..
  */
-export const usePrevious= <T>(value: T): T => {
+export const usePrevious= <T>(defaultValue?: T): T => {
   const ref = React.useRef<T>(null);
   React.useEffect(() => {
-    ref.current = value;
-  }, [value]);
+    ref.current = defaultValue;
+  }, [defaultValue]);
   return ref.current;
+};
+
+/**
+ * Returns the mount-safe value of a specified variable.
+ * @param {T} defaultValue the value to be compared.
+ * @returns a mount-safe version of the value.
+ */
+export const useMountedState = <T>(defaultValue?: T): [T, (next: T | (() => T)) => void] => {
+  const hasUnmounted = React.useRef(false);
+  const [value, dispatch] = React.useState<T>(defaultValue);
+  const setValue = (next: T | (() => T)): void => {
+    if (!hasUnmounted.current)
+      dispatch(next);
+  }
+  React.useEffect(
+    () => () => {
+      hasUnmounted.current = true;
+    },
+    [],
+  );
+  return [value, setValue];
+};
+
+/**
+ * Returns appropriate `useLayoutEffect` according to the environment.
+ */
+export const useLayoutEffect = 
+  DOM.isDefined() ? React.useLayoutEffect : React.useEffect;
+
+/**
+ * Returns the mount-safe frame request/clear functions.
+ * @returns a mount-safe frame request/clear functions.
+ */
+export const useFrame = (): [
+  (callback: (info: { isCanceled: () => boolean }) => void) => void,
+  () => void,
+] => {
+  const ref = React.useRef<number>(null);
+
+  const cancel = (): void =>
+    Animation.clear(ref.current);
+
+  const next = (
+    callback: (info: { isCanceled: () => boolean }) => void,
+    delay = 2,
+  ): void => {
+    cancel();
+    const id = Animation.request(() => {
+      if (delay <= 1)
+        callback({ isCanceled: () => id !== ref.current });
+      else
+        next(callback, delay - 1);
+    });
+    ref.current = id;
+  }
+
+  React.useEffect(
+    () => () => {
+      cancel();
+    },
+    [],
+  );
+
+  return [next, cancel];
 };
