@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import * as ReactDOM from 'react-dom';
 import * as Misc from './misc';
 
 /** Returns `true` if DOM APIs are available. */
@@ -54,4 +55,13 @@ export const select = (identifier: Identifier): HTMLElement[] => {
       return Misc.toArray(identifier());
   }
   return Misc.toArray(document.body);
+};
+
+/** Return if a node is a DOM node. Else will return by `findDOMNode`. */
+export const find = <T = Element | Text>(
+  node: React.ReactInstance | HTMLElement,
+): T => {
+  if (node instanceof HTMLElement)
+    return (node as unknown) as T;
+  return (ReactDOM.findDOMNode(node) as unknown) as T;
 };
