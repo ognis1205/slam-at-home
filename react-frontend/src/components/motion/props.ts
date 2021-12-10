@@ -16,12 +16,7 @@
  */
 import * as React from 'react';
 
-/**
- * Defines motion names.
- * - Appear: when you want transition on component first mount (like when you refresh a page).
- * - Enter : transition when a new element has mounted.
- * - Exit  : when element un-mounts.
- */
+/** Defines motion names. */
 export type Name = string | {
   appear?: string;
   enter?: string;
@@ -42,13 +37,17 @@ export type PrepareEventHandler = (
 ) => Promise<any> | void;
 
 /** Motion start handlers. */
-export type EventHandler = (
+export type StartEventHandler = (
   element: HTMLElement,
   event: Event,
 ) => React.CSSProperties | void;
 
+/** Motion active handlers. */
+export type ActiveEventHandler =
+  StartEventHandler;
+
 /** Motion end handlers. */
-export type EndEventHandler = (
+export type DoneEventHandler = (
   element: HTMLElement,
   event: Event,
 ) => boolean | void;
@@ -81,15 +80,15 @@ export interface Motion {
   onAppearPrepare?: PrepareEventHandler;
   onEnterPrepare?: PrepareEventHandler;
   onExitPrepare?: PrepareEventHandler;
-  onAppearStart?: EventHandler;
-  onEnterStart?: EventHandler;
-  onExitStart?: EventHandler;
-  onAppearActive?: EventHandler;
-  onEnterActive?: EventHandler;
-  onExitActive?: EventHandler;
-  onAppearEnd?: EndEventHandler;
-  onEnterEnd?: EndEventHandler;
-  onExitEnd?: EndEventHandler;
+  onAppearStart?: StartEventHandler;
+  onEnterStart?: StartEventHandler;
+  onExitStart?: StartEventHandler;
+  onAppearActive?: ActiveEventHandler;
+  onEnterActive?: ActiveEventHandler;
+  onExitActive?: ActiveEventHandler;
+  onAppearDone?: DoneEventHandler;
+  onEnterDone?: DoneEventHandler;
+  onExitDone?: DoneEventHandler;
   ref?: React.Ref<unknown>;
   children?: Children;
 }
