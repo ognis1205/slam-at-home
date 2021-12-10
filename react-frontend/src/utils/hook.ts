@@ -152,10 +152,8 @@ export const useFrame = (): [
   () => void,
 ] => {
   const ref = React.useRef<number>(null);
-
   const cancel = (): void =>
     Animation.clear(ref.current);
-
   const next = (
     callback: (info: { isCanceled: () => boolean }) => void,
     delay = 2,
