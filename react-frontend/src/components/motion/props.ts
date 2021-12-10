@@ -62,7 +62,7 @@ export interface Context {
 
 /** A type union of a component's children. */
 type Children =
-  ((context: Context, ref: (node: unknown) => void) => React.ReactNode) | React.ReactNode;
+  (context: Context, ref: (node: unknown) => void) => React.ReactNode;
 
 /** A {Motion} component properties. */
 export interface Motion {

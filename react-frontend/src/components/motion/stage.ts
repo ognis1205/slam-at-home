@@ -20,7 +20,7 @@ import * as Event from '../../utils/event';
 import * as Hook from '../../utils/hook';
 
 /** Defines motion cues. */
-const Cue = {
+export const Cue = {
   None: 'none',
   Prepare: 'prepare',
   Start: 'start',
@@ -28,7 +28,7 @@ const Cue = {
   Done: 'done',
 } as const;
  
-type Cue = typeof Cue[keyof typeof Cue];
+export type Cue = typeof Cue[keyof typeof Cue];
 
 const next = (cue: Cue): Cue => {
   switch (cue) {
@@ -39,6 +39,9 @@ const next = (cue: Cue): Cue => {
     case Cue.Done: return Cue.None;
   }
 };
+
+export const isActiveCue = (cue: Cue): boolean =>
+  cue === Cue.Active || cue === Cue.Done;
 
 /** Defines cue actions. */
 const Skip = false as const;
@@ -119,14 +122,14 @@ const useEventListener = (
 };
 
 /** Defines motion status. */
-const Status = {
+export const Status = {
   None: 'none',
   Appear: 'appear',
   Enter: 'enter',
   Exit: 'exit',
 } as const;
  
-type Status = typeof Status[keyof typeof Status];
+export type Status = typeof Status[keyof typeof Status];
 
 /** Returns stage status. */
 export const useStatus = (
@@ -255,7 +258,7 @@ export const useStatus = (
   });
 
   /** Sets cue activation state. */
-  hasActivated.current = cue === Cue.Active || cue === Cue.Done;
+  hasActivated.current = isActiveCue(cue);
 
   /** `componentDidMount` */
   Hook.useDidMount(() => {
