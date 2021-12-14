@@ -20,10 +20,10 @@ import classnames from 'classnames';
 import styles from '../../assets/styles/components/collapse.module.scss';
 
 /** Returns the class name of the wrapper. */
-const getClassName = <T extends unknown>(
-  {className, level}: Props.Divider<T>,
+const getClassName = (
+  {className, depth}: Props.Divider,
 ): string =>
-  classnames(styles['divider'], styles[`level-${level}`], {
+  classnames(styles['divider'], styles[`depth-${depth}`], {
     [className || '']: !!className,
   });
 
@@ -32,15 +32,14 @@ const getClassName = <T extends unknown>(
  * @param {Divider} props Properties that defines a behaviour of this component.
  * @return {ReactElement} A rendered React element.
  */
-export const Component: React.FunctionComponent<Props.Divider<unknown>> = <T extends unknown>(
-  props: Props.Divider<T>
+export const Component: React.FunctionComponent<Props.Divider> = (
+  props: Props.Divider
 ): React.ReactElement => {
   /** Separates HTML attributes. */
   const {
-    level,
+    depth,
     divider,
     className,
-    style,
     ...htmlAttrs
   } = props;
 
@@ -48,13 +47,10 @@ export const Component: React.FunctionComponent<Props.Divider<unknown>> = <T ext
     <div
       {...htmlAttrs}
       className={getClassName(props)}
-      style={{
-        ...style,
-      }}
     >
       <span className={styles['content']}>{divider}</span>
     </div>
-  )
+  );
 };
 
 /** Sets the component's display name. */

@@ -14,11 +14,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 export type {
-  Collapse as Props,
-  JSON as JSON,
+  Panel as PanelProps
 } from "./props";
 
 export {
-  Component as Component,
-} from './collapse';
+  Component as Panel,
+} from './panel';

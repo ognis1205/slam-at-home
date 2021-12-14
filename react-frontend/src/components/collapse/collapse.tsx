@@ -16,6 +16,7 @@
  */
 import * as React from 'react';
 import * as Divider from './divider';
+import * as Item from './item';
 import * as Props from './props';
 import classnames from 'classnames';
 import styles from '../../assets/styles/components/collapse.module.scss';
@@ -31,9 +32,15 @@ const getClassName = <T extends unknown>(
 
 /** Checks if a given item is `DividerJSON.` */
 const isDivider = <T extends unknown>(
-  item: Props.ItemJSON<T> | Props.DividerJSON<T>
-): item is Props.DividerJSON<T> =>
+  item: Props.ItemJSON<T> | Props.DividerJSON
+): item is Props.DividerJSON =>
   'divider' in item;
+
+/** Checks if a given item is `ItemJSON.` */
+const isItem = <T extends unknown>(
+  item: Props.ItemJSON<T> | Props.DividerJSON
+): item is Props.ItemJSON<T> =>
+  'item' in item;
 
 /**
  * Returns a `Collapse` component.
@@ -45,12 +52,18 @@ export const Component: React.FunctionComponent<Props.Collapse<unknown>> = <T ex
 ): React.ReactElement => {
   /** Renders a specified collapse item. */
   const render = (
-    item: Props.ItemJSON<T> | Props.DividerJSON<T>,
+    entry: Props.ItemJSON<T> | Props.DividerJSON,
     key: number,
-    level: number
+    depth: number
   ): React.ReactElement => {
-    if (isDivider(item))
-      return <Divider.Component key={key} divider={item.divider} level={level}/>
+    if (isDivider(entry))
+      return <Divider.Component key={key} divider={item.divider} depth={depth}/>;
+    if (isItem(entry))
+        return (
+          <Item.Component key={key} item={item.item} depth={depth}>
+            {item.children?.map((child, index) => render(child, index, depth + 1))}
+          </Item.Component>
+        );
     return null;
   }
 
