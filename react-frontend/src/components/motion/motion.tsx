@@ -53,22 +53,21 @@ const configure = (
   support: boolean
 ): React.ForwardRefExoticComponent<Props.Motion & { ref?: React.Ref<any> }> => {
   /** Returns `true` if the component supports transition. */
-  const supportTransition = (props: Props.Motion): boolean =>
-    !!(props.name && support);
+  const supportTransition = (name: Props.Name): boolean =>
+    !!(name && support);
 
   /** Defines {Motion} components. */
-  const Component = React.forwardRef<any, Props.Motion>((props: Props.Motion, ref: any) => {
-    /** Separates context attributes. */
-    const {
+  const Component = React.forwardRef<any, Props.Motion>(({
       name,
       visible = true,
       forceRender,
       removeOnExit = true,
       exitedClassName,
       children,
-      ...contextProps
-    } = props
-
+      ...rest
+    }: Props.Motion, 
+    ref: any
+  ) => {
     /** Holds a reference to the react node, it may be a HTMLElement. */
     const node = React.useRef<any>(null);
 
@@ -88,10 +87,10 @@ const configure = (
 
     /** Manages transition status by this hook. */
     const [status, cue, style, mergedVisible] = Stage.useStatus(
-      supportTransition(props),
+      supportTransition(name),
       visible,
       getElement,
-      props,
+      rest,
     );
 
     /** Record whether content has rendered. */
@@ -111,10 +110,10 @@ const configure = (
 
     // Dispatches motion.
     let motion: React.ReactNode;
-    const context = { visible, ...contextProps };
-    if (!props.children) {
+    const context = { visible, ...rest };
+    if (!children) {
       motion = null;
-    } else if (status === Stage.Status.None || !supportTransition(props)) {
+    } else if (status === Stage.Status.None || !supportTransition(name)) {
       if (mergedVisible) {
         motion = children(
           { ...context },
