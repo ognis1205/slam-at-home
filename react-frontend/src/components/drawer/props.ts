@@ -30,7 +30,6 @@ type Common = Types.Overwrite<React.HTMLAttributes<HTMLDivElement>, {
   width?: string | number;
   height?: string | number;
   open?: boolean;
-  defaultOpen?: boolean;
   handler?: React.ReactElement | null | false;
   placement?: Placement;
   drawLevel?: null | string | string[];
@@ -62,4 +61,5 @@ export type Drawer = Types.Overwrite<Common, {
   className?: string;
   container?: DOM.Identifier;
   forceRender?: boolean;
+  defaultOpen?: boolean;
 }>;

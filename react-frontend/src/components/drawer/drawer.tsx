@@ -28,7 +28,7 @@ const DEFAULT_PROPS: Partial<Props.Drawer> = {
   container: 'body',
   defaultOpen: false,
   drawLevel: 'all',
-  drawDuration: '.3s',
+  drawDuration: '.2s',
   drawEase: 'cubic-bezier(0.78, 0.14, 0.15, 0.86)',
   onChange: () => {},
   afterVisibleChange: () => {},
@@ -47,9 +47,7 @@ const DEFAULT_PROPS: Partial<Props.Drawer> = {
 };
 
 /** Returns the class name of the wrapper. */
-const getClassName = (
-  {className}: Props.Drawer,
-): string =>
+const getClassName = (className: string): string =>
   classnames({
     [className || '']: !!className,
   });
@@ -59,49 +57,50 @@ const getClassName = (
  * @param {Drawer} props Properties that defines a behaviour of this component.
  * @return {ReactElement} A rendered React element.
  */
-const Component: React.FunctionComponent<Props.Drawer> = (props: Props.Drawer): React.ReactElement => {
+const Component: React.FunctionComponent<Props.Drawer> = ({
+  className,
+  container,
+  forceRender,
+  defaultOpen,
+  open: propsOpen,
+  onClick: propsOnClick,
+  onClose: propsOnClose,
+  ...commonProps
+}: Props.Drawer): React.ReactElement => {
   /** @const Holds a open state. */
   const [open, setOpen] = React.useState<boolean>(
-    typeof props.open !== 'undefined'
-    ? props.open
-    : !!props.defaultOpen);
+    typeof propsOpen !== 'undefined'
+    ? propsOpen
+    : !!defaultOpen);
 
   /** @const Holds a reference to the component itself. */
   const self = React.useRef<HTMLDivElement>(null);
 
   /** `getDerivedStateFromProps` */
   React.useEffect(() => {
-    setOpen(props.open);
-  }, [props.open]);
+    setOpen(propsOpen);
+  }, [propsOpen]);
 
   /** An event handler called on 'clickevent' events. */
   const onClick = (e: React.MouseEvent | React.KeyboardEvent): void => {
-    if (props.onClick)
-      props.onClick(e);
-    if (typeof props.open === 'undefined')
+    if (propsOnClick)
+      propsOnClick(e);
+    if (typeof propsOpen === 'undefined')
       setOpen(!open);
   };
 
   /** An event handler called on 'clickevent' events. */
   const onClose = (e: React.MouseEvent | React.KeyboardEvent): void => {
-    if (props.onClose)
-      props.onClose(e);
-    if (typeof props.open === 'undefined')
+    if (propsOnClose)
+      propsOnClose(e);
+    if (typeof propsOpen === 'undefined')
       setOpen(false);
   };
-
-  /** Separates commom properties. */
-  const {
-    className,
-    container,
-    forceRender,
-    ...commonProps
-  } = props;
 
   if (!container)
     return (
       <div
-        className={getClassName(props)}
+        className={getClassName(className)}
         ref={(el) => self.current = el}
       >
         <Content.Component
@@ -119,7 +118,7 @@ const Component: React.FunctionComponent<Props.Drawer> = (props: Props.Drawer): 
         visible={open}
         forceRender={!!commonProps.handler || forceRender}
         container={container}
-        className={getClassName(props)}
+        className={getClassName(className)}
       >
         {({visible, afterClose, ...rest}: Props.Content) => (
           <Content.Component

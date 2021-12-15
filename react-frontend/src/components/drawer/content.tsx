@@ -112,7 +112,6 @@ export const Component: React.FunctionComponent<Props.Content> = ({
   width,
   height,
   open,
-  defaultOpen,
   handler,
   placement,
   drawLevel,
