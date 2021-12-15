@@ -75,9 +75,9 @@ const Component: React.FunctionComponent<Props.Drawer> = (props: Props.Drawer): 
   }, [props.open]);
 
   /** An event handler called on 'clickevent' events. */
-  const onHandleClick = (e: React.MouseEvent | React.KeyboardEvent): void => {
-    if (props.onHandleClick)
-      props.onHandleClick(e);
+  const onClick = (e: React.MouseEvent | React.KeyboardEvent): void => {
+    if (props.onClick)
+      props.onClick(e);
     if (typeof props.open === 'undefined')
       setOpen(!open);
   };
@@ -109,7 +109,7 @@ const Component: React.FunctionComponent<Props.Drawer> = (props: Props.Drawer): 
           open={open}
           container={() => self.current as HTMLElement}
           onClose={onClose}
-          onHandleClick={onHandleClick}
+          onClick={onClick}
         />
       </div>
     );
@@ -130,7 +130,7 @@ const Component: React.FunctionComponent<Props.Drawer> = (props: Props.Drawer): 
               afterClose !== undefined ? afterClose : commonProps.afterVisibleChange
             }
             onClose={onClose}
-            onHandleClick={onHandleClick}
+            onClick={onClick}
           />
         )}
       </Portal.Wrapper>

@@ -20,10 +20,10 @@ import * as DOM from '../../utils/dom';
 import type * as Types from '../../utils/types';
 
 /** A type union of CSS position properties. */
-type Placement = 'left' | 'top' | 'right' | 'bottom';
+export type Placement = 'left' | 'top' | 'right' | 'bottom';
 
 /** A type union of draw width definitions. */
-type DrawWidth = number | [number, number];
+export type DrawWidth = number | [number, number];
 
 /** A common properties shared by both {Drawer} and {Content} components. */
 type Common = Types.Overwrite<React.HTMLAttributes<HTMLDivElement>, {
@@ -44,7 +44,7 @@ type Common = Types.Overwrite<React.HTMLAttributes<HTMLDivElement>, {
   maskStyle?: React.CSSProperties;
   onChange?: (open?: boolean) => void;
   afterVisibleChange?: (open: boolean) => void;
-  onHandleClick?: (e: React.MouseEvent | React.KeyboardEvent) => void;
+  onClick?: (e: React.MouseEvent | React.KeyboardEvent) => void;
   onClose?: (e: React.MouseEvent | React.KeyboardEvent) => void;
   keyboard?: boolean;
   wrapperStyle?: React.CSSProperties;
@@ -59,6 +59,7 @@ export type Content = Types.Overwrite<Common, Portal.Context & {
 
 /** A {Drawer} component properties. */
 export type Drawer = Types.Overwrite<Common, {
+  className?: string;
   container?: DOM.Identifier;
   forceRender?: boolean;
 }>;
