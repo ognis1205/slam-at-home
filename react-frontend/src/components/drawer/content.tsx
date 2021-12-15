@@ -299,7 +299,7 @@ export const Component: React.FunctionComponent<Props.Content> = ({
   const togglePanes = (translateFunction?: string, size?: string | number, scrollBarSize?: number): void =>
     panes.current?.forEach(pane => {
       pane.style.transition = `transform ${drawDuration} ${drawEase}`;
-      Event.addListener(pane, Event.TRANSITION_END, onTransitionEnd);
+      Event.addListener(pane, Event.TRANSITION_END, handleTransitionEnd);
       let diff = getDrawWidthIfOpened(open, drawWidth, pane, size);
       diff = 
         typeof diff === 'number'
@@ -333,7 +333,7 @@ export const Component: React.FunctionComponent<Props.Content> = ({
           Event.addListener(
             item,
             i ? 'touchmove' : 'touchstart',
-            i ? preventDefaultOnTouch : onTouchMove,
+            i ? preventDefaultOnTouch : handleTouchMove,
             passive,
           );
         });
@@ -347,7 +347,7 @@ export const Component: React.FunctionComponent<Props.Content> = ({
           Event.removeListener(
             item,
             i ? 'touchmove' : 'touchstart',
-            i ? preventDefaultOnTouch : onTouchMove,
+            i ? preventDefaultOnTouch : handleTouchMove,
             passive,
           );
         });
@@ -458,7 +458,7 @@ export const Component: React.FunctionComponent<Props.Content> = ({
   };
 
   /** An event handler called on `touchmove` events. */
-  const onTouchMove = (e: React.TouchEvent | TouchEvent): void => {
+  const handleTouchMove = (e: React.TouchEvent | TouchEvent): void => {
     if (e.touches.length > 1)
       startPosition.current = null;
     else
@@ -469,14 +469,14 @@ export const Component: React.FunctionComponent<Props.Content> = ({
   };
 
   /** An event handler called on `transitionend` events. */
-  const onTransitionEnd = (e: TransitionEvent): void => {
+  const handleTransitionEnd = (e: TransitionEvent): void => {
     const target: HTMLElement = e.target as HTMLElement;
-    Event.removeListener(target, Event.TRANSITION_END, onTransitionEnd);
+    Event.removeListener(target, Event.TRANSITION_END, handleTransitionEnd);
     target.style.transition = '';
   };
 
   /** An event handler called on 'keyboardevent' events. */
-  const onKeyDown = (e: React.KeyboardEvent): void => {
+  const handleKeyDown = (e: React.KeyboardEvent): void => {
     if (e.key === 'Escape') {
       e.stopPropagation();
       if (onClose)
@@ -485,7 +485,7 @@ export const Component: React.FunctionComponent<Props.Content> = ({
   };
 
   /** An event handler called on 'transitionend' events of the wrapper. */
-  const onWrapperTransitionEnd = (e: React.TransitionEvent): void => {
+  const handleWrapperTransitionEnd = (e: React.TransitionEvent): void => {
     if (e.target === wrapper.current && e.propertyName.match(/transform$/)) {
       if (self.current)
         self.current.style.transition = '';
@@ -524,8 +524,8 @@ export const Component: React.FunctionComponent<Props.Content> = ({
       className={getClassName(className, placement, showMask, open)}
       style={style}
       ref={(el) => self.current = el}
-      onKeyDown={open && keyboard ? onKeyDown : undefined}
-      onTransitionEnd={onWrapperTransitionEnd}
+      onKeyDown={open && keyboard ? handleKeyDown : undefined}
+      onTransitionEnd={handleWrapperTransitionEnd}
     >
       {showMask && (
         <div

@@ -62,15 +62,15 @@ const Component: React.FunctionComponent<Props.Drawer> = ({
   container,
   forceRender,
   defaultOpen,
-  open: propsOpen,
-  onClick: propsOnClick,
-  onClose: propsOnClose,
+  onClick,
+  onClose,
+  open,
   ...commonProps
 }: Props.Drawer): React.ReactElement => {
   /** @const Holds a open state. */
-  const [open, setOpen] = React.useState<boolean>(
-    typeof propsOpen !== 'undefined'
-    ? propsOpen
+  const [isOpen, setOpen] = React.useState<boolean>(
+    typeof open !== 'undefined'
+    ? open
     : !!defaultOpen);
 
   /** @const Holds a reference to the component itself. */
@@ -78,22 +78,22 @@ const Component: React.FunctionComponent<Props.Drawer> = ({
 
   /** `getDerivedStateFromProps` */
   React.useEffect(() => {
-    setOpen(propsOpen);
-  }, [propsOpen]);
+    setOpen(open);
+  }, [open]);
 
   /** An event handler called on 'clickevent' events. */
-  const onClick = (e: React.MouseEvent | React.KeyboardEvent): void => {
-    if (propsOnClick)
-      propsOnClick(e);
-    if (typeof propsOpen === 'undefined')
-      setOpen(!open);
+  const handleClick = (e: React.MouseEvent | React.KeyboardEvent): void => {
+    if (onClick)
+      onClick(e);
+    if (typeof open === 'undefined')
+      setOpen(!isOpen);
   };
 
   /** An event handler called on 'clickevent' events. */
-  const onClose = (e: React.MouseEvent | React.KeyboardEvent): void => {
-    if (propsOnClose)
-      propsOnClose(e);
-    if (typeof propsOpen === 'undefined')
+  const handleClose = (e: React.MouseEvent | React.KeyboardEvent): void => {
+    if (onClose)
+      onClose(e);
+    if (typeof open === 'undefined')
       setOpen(false);
   };
 
@@ -105,17 +105,17 @@ const Component: React.FunctionComponent<Props.Drawer> = ({
       >
         <Content.Component
           {...commonProps}
-          open={open}
+          open={isOpen}
           container={() => self.current as HTMLElement}
-          onClose={onClose}
-          onClick={onClick}
+          onClose={handleClose}
+          onClick={handleClick}
         />
       </div>
     );
   else
     return (
       <Portal.Wrapper
-        visible={open}
+        visible={isOpen}
         forceRender={!!commonProps.handler || forceRender}
         container={container}
         className={getClassName(className)}
@@ -124,12 +124,12 @@ const Component: React.FunctionComponent<Props.Drawer> = ({
           <Content.Component
             {...commonProps}
             {...rest}
-            open={visible !== undefined ? visible : open}
+            open={visible !== undefined ? visible : isOpen}
             afterVisibleChange={
               afterClose !== undefined ? afterClose : commonProps.afterVisibleChange
             }
-            onClose={onClose}
-            onClick={onClick}
+            onClose={handleClose}
+            onClick={handleClick}
           />
         )}
       </Portal.Wrapper>
