@@ -88,16 +88,16 @@ const useEventListener = (
   callback: (event: Props.Event) => void,
 ): [(element: HTMLElement) => void, (element: HTMLElement) => void] => {
   const target = React.useRef<HTMLElement>(null);
-  const onMotionEnd = React.useRef(callback);
+  const handleMotionEnd = React.useRef(callback);
 
-  const onMotionEndOnce = React.useCallback((event: Props.Event) => {
-    onMotionEnd.current(event);
+  const handleMotionEndOnce = React.useCallback((event: Props.Event) => {
+    handleMotionEnd.current(event);
   }, []);
 
   const remove = (element: HTMLElement): void => {
     if (element) {
-      Event.removeListener(element, Event.TRANSITION_END, onMotionEndOnce);
-      Event.removeListener(element, Event.ANIMATION_END, onMotionEndOnce);
+      Event.removeListener(element, Event.TRANSITION_END, handleMotionEndOnce);
+      Event.removeListener(element, Event.ANIMATION_END, handleMotionEndOnce);
     }
   }
 
@@ -105,8 +105,8 @@ const useEventListener = (
     if (target.current && target.current !== element)
       remove(target.current);
     if (element && element !== target.current) {
-      Event.addListener(element, Event.TRANSITION_END, onMotionEndOnce);
-      Event.addListener(element, Event.ANIMATION_END, onMotionEndOnce);
+      Event.addListener(element, Event.TRANSITION_END, handleMotionEndOnce);
+      Event.addListener(element, Event.ANIMATION_END, handleMotionEndOnce);
       target.current = element;
     }
   }
@@ -178,7 +178,7 @@ export const useStatus = (
     hasActivated.current;
 
   /** Event listener which is responsible for `Cue.Done`. */
-  const onMotionEnd = (event: Props.Event): void => {
+  const handleMotionEnd = (event: Props.Event): void => {
     const element = getElement();
     if (event && !event.deadline && event.target !== element)
       return;
@@ -198,7 +198,7 @@ export const useStatus = (
   };
 
   /** Patches events to the referrenced HTML element. */
-  const [patchEvents,] = useEventListener(onMotionEnd);
+  const [patchEvents,] = useEventListener(handleMotionEnd);
 
   /** Holds event handlers according to the current status. */
   const handlers = React.useMemo<{
@@ -247,7 +247,7 @@ export const useStatus = (
       if (deadline > 0) {
         clearTimeout(timeout.current);
         timeout.current = setTimeout(() => {
-          onMotionEnd({
+          handleMotionEnd({
             deadline: true,
           } as Props.Event);
         }, deadline);
