@@ -21,7 +21,6 @@ import * as DOM from '../../utils/dom';
 import * as Event from '../../utils/event';
 import * as Ref from '../../utils/ref';
 import classnames from 'classnames';
-import styles from '../../assets/styles/components/motion.module.scss';
 
 /** TODO: Refactor this fragment into function component if possible. */
 class Fragment extends React.Component<{children: React.ReactNode}> {
@@ -81,7 +80,7 @@ const configure = (
   /** Defines {Motion} components. */
   const Component = React.forwardRef<any, Props.Motion>(({
       name,
-      exitedClassName = styles['hidden'],
+      exitedClassName,
       transition = getTransition,
       visible = true,
       forceRender,
