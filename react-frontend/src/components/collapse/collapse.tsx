@@ -15,74 +15,140 @@
  * limitations under the License.
  */
 import * as React from 'react';
-import * as Divider from './divider';
-import * as Item from './item';
 import * as Props from './props';
+import * as Misc from '../../utils/misc';
+import * as Wrap from '../../utils/wrap';
 import classnames from 'classnames';
 import styles from '../../assets/styles/components/collapse.module.scss';
 
+/** Default properties. */
+const DEFAULT_PROPS: Partial<Props.Wrapper> = {
+  onChange: () => {},
+  accordion: false,
+  destroyInactivePanel: false,
+};
+
 /** Returns the class name of the wrapper. */
-const getClassName = <T extends unknown>(
-  {className, rtl}: Props.Collapse<T>,
+const getClassName = (
+  className: string,
 ): string =>
   classnames(styles['collapse'], {
     [className || '']: !!className,
-    [styles['rtl']]: rtl,
   });
 
-/** Checks if a given item is `DividerJSON.` */
-const isDivider = <T extends unknown>(
-  item: Props.ItemJSON<T> | Props.DividerJSON
-): item is Props.DividerJSON =>
-  'divider' in item;
-
-/** Checks if a given item is `ItemJSON.` */
-const isItem = <T extends unknown>(
-  item: Props.ItemJSON<T> | Props.DividerJSON
-): item is Props.ItemJSON<T> =>
-  'item' in item;
+/** Returs active keys array according to a given React key. */
+const getActiveKeysArray = (activeKey: React.Key | React.Key[]): React.Key[] => {
+  let keys = activeKey;
+  if (!Array.isArray(keys))
+    keys = typeof keys === 'number' || typeof keys === 'string' ? [keys] : [];
+  return keys.map((key) => String(key));
+};
 
 /**
- * Returns a `Collapse` component.
- * @param {Collapse} props Properties that defines a behaviour of this component.
+ * Returns a `Wrapper` component.
+ * @param {Wrapper} props Properties that defines a behaviour of this component.
  * @return {ReactElement} A rendered React element.
  */
-export const Component: React.FunctionComponent<Props.Collapse<unknown>> = <T extends unknown>(
-  props: Props.Collapse<T>
-): React.ReactElement => {
-  /** Renders a specified collapse item. */
-  const render = (
-    entry: Props.ItemJSON<T> | Props.DividerJSON,
-    key: number,
-    depth: number
-  ): React.ReactElement => {
-    if (isDivider(entry))
-      return <Divider.Component key={key} divider={item.divider} depth={depth}/>;
-    if (isItem(entry))
-        return (
-          <Item.Component key={key} item={item.item} depth={depth}>
-            {item.children?.map((child, index) => render(child, index, depth + 1))}
-          </Item.Component>
-        );
-    return null;
-  }
+export const Component: React.FunctionComponent<Props.Wrapper> = ({
+  className,
+  style,
+  children,
+  onChange,
+  motion,
+  accordion,
+  activeKey,
+  defaultActiveKey,
+  destroyInactivePanel,
+  expand,
+  collapsible,
+  ...divAttrs
+}: Props.Wrapper): React.ReactElement => {
+  /** @const Holds a state */
+  const [activeKeys, setActiveKeys] = React.useState<React.Key[]>(
+    getActiveKeysArray(activeKey ?? defaultActiveKey)
+  );
 
-  /** Separates HTML attributes. */
-  const {
-    items,
-    rtl,
-    className,
-    ...htmlAttrs
-  } = props;
+  /** `getDerivedStateFromProps` */
+  React.useEffect(() => {
+    setActiveKeys(getActiveKeysArray(activeKey));
+  }, [activeKey]);
+
+  /** Clones child elements. Child elements are supposed to be {Panel} elements. */
+  const cloneElement = (child: React.ReactElement, index: number): React.ReactElement => {
+    if (!child)
+      return null;
+
+    const key = child.key || String(index);
+    let active = false;
+    if (accordion)
+      active = activeKeys[0] === key;
+    else
+      active = activeKeys.indexOf(key) > -1;
+
+    if (typeof child.type === 'string')
+      return child;
+    else
+      return React.cloneElement(child, {
+        key: key,
+        active: active,
+        onClick: (child.props.collapsible ?? collapsible) === 'disabled' ? null : handleClick,
+        panelKey: key,
+        //showArrow
+        collapsible: child.props.collapsible ?? collapsible,
+        //icon
+        accordion: accordion,
+        //extra
+        children: child.props.children,
+        header: child.props.header,
+        headerClassName: child.props.headerClassName,
+        destroyInactivePanel: child.props.destroyInactivePanel ?? destroyInactivePanel,
+        motion: motion,
+        //destroy
+        //expand: expand,
+      });
+  };
+
+  /** Activates panels specified with a given active key array. */
+  const activate = (keys: React.Key[]): void => {
+    if (!activeKey)
+      setActiveKeys(keys);
+    onChange(accordion ? keys[0] : keys);
+  };
+
+  /** An event handler called on `onclick` events. */
+  const handleClick = (key: React.Key): void => {
+    let keys: React.Key[] = [];
+    if (accordion) {
+      keys = activeKeys[0] === key ? [] : [key];
+    } else {
+      keys = [...activeKeys];
+      const index = keys.indexOf(key);
+      const isActive = index > -1;
+      if (isActive)
+        keys.splice(index, 1);
+      else
+        keys.push(key);
+    }
+    activate(keys);
+  };
 
   return (
-    <div {...htmlAttrs} className={getClassName(props)}>
-      {items.map((item, index) =>
-        render(item, index, 0)
-      )}
+    <div
+      {...divAttrs}
+      className={getClassName(className)}
+      style={style}
+      role={accordion ? 'tablist' : null}
+    >
+      {Misc.toArray(children).map(cloneElement)}
     </div>
-  )
+  );
 };
 
 /** Sets the component's display name. */
-Component.displayName = 'Collapse';
+Component.displayName = 'CollapseWrapper';
+
+/** Returns a `Drawer` component with default property values. */
+export const WithDefaultComponent: React.FunctionComponent<Props.Wrapper> = Wrap.withDefaultProps(
+  Component, 
+  DEFAULT_PROPS
+);

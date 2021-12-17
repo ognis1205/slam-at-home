@@ -1,5 +1,5 @@
 /**
- * @fileoverview Defines Drawer component.
+ * @fileoverview Defines Collapse Panel component.
  * @copyright Shingo OKAWA 2021
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,7 +17,6 @@
 import * as React from 'react';
 import * as Props from './props';
 import * as Motion from '../motion';
-//import * as Wrap from '../../utils/wrap';
 import classnames from 'classnames';
 import styles from '../../assets/styles/components/collapse.module.scss';
 
@@ -58,7 +57,7 @@ const Header: React.FunctionComponent<Props.Header & {children: React.ReactNode}
     ['aria-expanded']: props.active,
   };
 
-  if (props.showArrow && typeof props.icon)
+  if (props.showArrow && typeof props.icon === 'function')
     icon = props.icon(props);
 
   if (props.collapsible) {
@@ -136,11 +135,10 @@ Content.displayName = 'PanelContent';
 const getClassName = (
   {className, active, collapsible}: Props.Panel,
 ): string =>
-  classnames({
+  classnames(styles['panel'], {
     [className || '']: !!className,
-    [styles['panel']]: true,
     [styles['panel-active']]: active,
-    [styles['panel-disabled']]: collapsible === 'disabled',
+    [styles['panel-inactive']]: collapsible === 'disabled',
   });
 
 /**
@@ -148,66 +146,43 @@ const getClassName = (
  * @param {Panel} props Properties that defines a behaviour of this component.
  * @return {ReactElement} A rendered React element.
  */
-export const Component: React.FunctionComponent<Props.Panel> = (props: Props.Panel): React.ReactElement => {
-  const {
-    id,
-    children,
-    active,
-    motion,
-    destroyInactivePanel,
-    header,
-    headerClassName,
-    onClick,
-    panelKey,
-    showArrow,
-    collapsible,
-    icon,
-    accordion,
-    extra,
-    style,
-    forceRender,
-  } = props;
-  
-  return (
-    <div className={getClassName(props)} style={style} id={id}>
-      <Header
-        className={headerClassName}
-        active={active}
-        onClick={onClick}
-        panelKey={panelKey}
-        showArrow={showArrow}
-        collapsible={collapsible}
-        icon={icon}
-        accordion={accordion}
-        extra={extra}
-      >
-        {header}
-      </Header>
-      <Motion.Component
-        visible={active}
-        exitedClassName={styles['hidden']}
-        {...motion}
-        forceRender={forceRender}
-        removeOnExit={destroyInactivePanel}
-      >
-          {({className: motionClassName, style: motionStyle}, ref) => {
-            return (
-              <Content
-                className={motionClassName}
-                ref={ref}
-                style={motionStyle}
-                active={active}
-                forceRender={forceRender}
-                role={accordion ? 'tabpanel' : null}
-              >
-                {children}
-              </Content>
-            );
-          }}
-        </Motion.Component>
-      </div>
-    );
-};
+export const Component: React.FunctionComponent<Props.Panel> = (props: Props.Panel): React.ReactElement => (
+  <div className={getClassName(props)} style={props.style} id={props.id}>
+    <Header
+      className={props.headerClassName}
+      active={props.active}
+      onClick={props.onClick}
+      panelKey={props.panelKey}
+      showArrow={props.showArrow}
+      collapsible={props.collapsible}
+      icon={props.icon}
+      accordion={props.accordion}
+      extra={props.extra}
+    >
+      {props.header}
+    </Header>
+    <Motion.Component
+      visible={props.active}
+      forceRender={props.forceRender}
+      removeOnExit={props.destroyInactivePanel}
+      exitedClassName={styles['hidden']}
+      {...props.motion}
+    >
+      {({className: motionClassName, style: motionStyle}, ref) => (
+        <Content
+          className={motionClassName}
+          ref={ref}
+          style={motionStyle}
+          active={props.active}
+          forceRender={props.forceRender}
+          role={props.accordion ? 'tabpanel' : null}
+        >
+          {props.children}
+        </Content>
+      )}
+    </Motion.Component>
+  </div>
+);
 
 /** Sets the component's display name. */
 Component.displayName = 'Panel';

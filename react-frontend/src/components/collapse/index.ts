@@ -22,3 +22,7 @@ export type {
 export {
   Component as Panel,
 } from './panel';
+
+export {
+  WithDefaultComponent as Wrapper,
+} from './collapse';

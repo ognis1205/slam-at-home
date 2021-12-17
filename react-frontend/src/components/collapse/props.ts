@@ -18,58 +18,16 @@ import type * as React from 'react';
 import type * as Motion from '../motion';
 import type * as Types from '../../utils/types';
 
-/** Defines {Collapse} entries. */
-type JSONEntry = Types.Overwrite<React.HTMLAttributes<HTMLDivElement>, {
-  depth: number;
-}>;
-
-/** Defines {Collapse} dividers. */
-export type DividerJSON = Types.Overwrite<JSONEntry, {
-  divider: string;
-}>;
-
-/** Defines {Collapse} items. */
-export type ItemJSON<T> = Types.Overwrite<JSONEntry, {
-  item: string;
-  open?: boolean;
-  defaultOpen?: boolean;
-  value?: T;
-  icon?: React.ReactNode;
-  options?: any;
-  children?: JSON<T>;
-}>;
-
-/** Defines JSON values for collapses. */
-export type JSON<T> = Array<ItemJSON<T> | DividerJSON>;
-
-/** Defines {Divider} properties. */
-export type Divider = DividerJSON;
-
-/** Defines intermediate rendering nodes. */
-export type Item<T> = Types.Overwrite<ItemJSON<T>, {
-  onClick?: (value: T, options?: any) => void;
-  children?: Array<React.ReactNode>;
-}>;
-
-/** Defines {Collapse} properties. */
-export type Collapse<T> = Types.Overwrite<React.HTMLAttributes<HTMLDivElement>, {
-  items: JSON<T>;
-  rtl?: boolean;
-}>;
-
-
-
-
-/***/
+/** Defines collapsible types. */
 export type CollapsibleType = 'header' | 'disabled';
 
-/***/
+/** Defines common properties. */
 export interface Common {
   className?: string;
   active?: boolean;
 }
 
-/***/
+/** Defines {Panel.Header} properties. */
 export interface Header extends Common {
   onClick?: (key: string | number) => void;
   panelKey?: string | number;
@@ -80,19 +38,35 @@ export interface Header extends Common {
   extra?: string | React.ReactNode;
 }
 
-/***/
+/** Defines {Panel.Content} properties. */
 export interface Content extends Common {
   style?: object;
   role?: string;
   forceRender?: boolean;
 }
 
-/***/
-export type Panel = Types.Overwrite<React.HTMLAttributes<HTMLDivElement>, Header & Content & {
+/** Defines {Panel} properties. */
+export type Panel = Types.Overwrite<Header & Content, {
   id?: string;
   className?: string;
+  children?: React.ReactNode;
   header?: string | React.ReactNode;
   headerClassName?: string;
   motion?: Motion.Props;
   destroyInactivePanel?: boolean;
+}>;
+
+/** Defines {Wrapper} properties. */
+export type Wrapper = Types.Overwrite<React.HTMLAttributes<HTMLDivElement>, {
+  className?: string;
+  style?: object;
+  children?: React.ReactNode;
+  onChange?: (key: React.Key | React.Key[]) => void;
+  motion?: Motion.Props;
+  accordion?: boolean;
+  activeKey?: React.Key | React.Key[];
+  defaultActiveKey?: React.Key | React.Key[];
+  destroyInactivePanel?: boolean;
+  expand?: (props: object) => React.ReactNode;
+  collapsible?: CollapsibleType;
 }>;
