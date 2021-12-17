@@ -16,8 +16,20 @@
  */
 export type {
   Motion as Props,
+  Event,
+  PrepareEventHandler,
+  StartEventHandler,
+  ActiveEventHandler,
+  DoneEventHandler,
+  Config,
+  Transition,
 } from "./props";
 
 export {
   ExoticComponent as Component,
 } from './motion';
+
+export {
+  Cue,
+  Status,
+} from './stage';

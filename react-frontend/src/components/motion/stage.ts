@@ -88,16 +88,16 @@ const useEventListener = (
   callback: (event: Props.Event) => void,
 ): [(element: HTMLElement) => void, (element: HTMLElement) => void] => {
   const target = React.useRef<HTMLElement>(null);
-  const handleMotionEnd = React.useRef(callback);
+  const handle = React.useRef<(event: Props.Event) => void>(callback);
 
-  const handleMotionEndOnce = React.useCallback((event: Props.Event) => {
-    handleMotionEnd.current(event);
+  const handleOnce = React.useCallback((event: Props.Event) => {
+    handle.current(event);
   }, []);
 
   const remove = (element: HTMLElement): void => {
     if (element) {
-      Event.removeListener(element, Event.TRANSITION_END, handleMotionEndOnce);
-      Event.removeListener(element, Event.ANIMATION_END, handleMotionEndOnce);
+      Event.removeListener(element, Event.TRANSITION_END, handleOnce);
+      Event.removeListener(element, Event.ANIMATION_END, handleOnce);
     }
   }
 
@@ -105,8 +105,8 @@ const useEventListener = (
     if (target.current && target.current !== element)
       remove(target.current);
     if (element && element !== target.current) {
-      Event.addListener(element, Event.TRANSITION_END, handleMotionEndOnce);
-      Event.addListener(element, Event.ANIMATION_END, handleMotionEndOnce);
+      Event.addListener(element, Event.TRANSITION_END, handleOnce);
+      Event.addListener(element, Event.ANIMATION_END, handleOnce);
       target.current = element;
     }
   }

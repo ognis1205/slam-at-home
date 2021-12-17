@@ -29,20 +29,41 @@ class Fragment extends React.Component<{children: React.ReactNode}> {
   }
 }
 
-/** Returns a class name according to the transition type. */
-const getTransitionName = (
+/** Returns a status name according to the transition type. */
+const getStatus = (
   name: Props.Name,
-  status: string,
+  status: Stage.Status,
 ): string => {
   if (!name)
     return null;
   if (typeof name === 'object')
-    return name[status.replace(
-      /-\w/g,
-      match => match[1].toUpperCase()
-    )];
-  return `${name}-${status}`;
+    return name[status];
+  return status;
 };
+
+/** Returns a cue name according to the transition type. */
+const getCue = (
+  cue: Stage.Cue,
+): string => {
+  if (cue === Stage.Cue.Prepare)
+    return 'prepare';
+  else if (Stage.isActiveCue(cue))
+    return 'active';
+  else if (cue === Stage.Cue.Start)
+    return 'start';
+  else
+    return null;
+};
+
+/** Returns a class name according to the transition type. */
+const getTransition = (
+  name: Props.Name,
+  status: Stage.Status,
+  cue: Stage.Cue,
+): string =>
+  classnames(getStatus(name, status), getCue(cue), {
+    [name as string]: typeof name === 'string',
+  });
 
 /**
  * Configures and Returns a `Motion` component.
@@ -53,16 +74,17 @@ const configure = (
   support: boolean
 ): React.ForwardRefExoticComponent<Props.Motion & { ref?: React.Ref<any> }> => {
   /** Returns `true` if the component supports transition. */
-  const supportTransition = (name: Props.Name): boolean =>
+  const transitionIsDefined = (name: Props.Name): boolean =>
     !!(name && support);
 
   /** Defines {Motion} components. */
   const Component = React.forwardRef<any, Props.Motion>(({
       name,
+      exitedClassName,
+      transition = getTransition,
       visible = true,
       forceRender,
       removeOnExit = true,
-      exitedClassName,
       children,
       ...rest
     }: Props.Motion, 
@@ -87,7 +109,7 @@ const configure = (
 
     /** Manages transition status by this hook. */
     const [status, cue, style, mergedVisible] = Stage.useStatus(
-      supportTransition(name),
+      transitionIsDefined(name),
       visible,
       getElement,
       rest,
@@ -104,7 +126,6 @@ const configure = (
 
     /** Forwards ref. */
     const setRef = React.useCallback((node: any) => {
-      node.current = node;
       Ref.fill(ref, node);
     }, []);
 
@@ -113,7 +134,7 @@ const configure = (
     const context = { visible, ...rest };
     if (!children) {
       motion = null;
-    } else if (status === Stage.Status.None || !supportTransition(name)) {
+    } else if (status === Stage.Status.None || !transitionIsDefined(name)) {
       if (mergedVisible) {
         motion = children(
           { ...context },
@@ -133,22 +154,8 @@ const configure = (
         motion = null;
       }
     } else {
-      let suffix: string;
-      if (cue === Stage.Cue.Prepare)
-        suffix = 'prepare';
-      else if (Stage.isActiveCue(cue))
-        suffix = 'active';
-      else if (cue === Stage.Cue.Start)
-        suffix = 'start';
       motion = children(
-        {
-          ...context,
-          className: classnames(getTransitionName(name, status), {
-            [getTransitionName(name, `${status}-${suffix}`)]: suffix,
-            [name as string]: typeof name === 'string',
-          }),
-          style: style,
-        },
+        { ...context, className: transition(name, status, cue), style: style },
         setRef,
       );
     }
