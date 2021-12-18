@@ -27,7 +27,7 @@ const DEFAULT_PROPS: Partial<Props.Drawer> = {
   placement: 'left',
   container: 'body',
   defaultOpen: false,
-  drawLevel: 'all',
+  drawPane: 'all',
   drawDuration: '.2s',
   drawEase: 'cubic-bezier(0.78, 0.14, 0.15, 0.86)',
   onChange: () => {},

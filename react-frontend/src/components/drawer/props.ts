@@ -32,7 +32,7 @@ type Common = Types.Overwrite<React.HTMLAttributes<HTMLDivElement>, {
   open?: boolean;
   handler?: React.ReactElement | null | false;
   placement?: Placement;
-  drawLevel?: null | string | string[];
+  drawPane?: null | string | string[];
   drawWidth?:
     | DrawWidth
     | ((e: { target: HTMLElement; open: boolean }) => DrawWidth);

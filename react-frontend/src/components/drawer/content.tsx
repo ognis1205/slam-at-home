@@ -114,7 +114,7 @@ export const Component: React.FunctionComponent<Props.Content> = ({
   open,
   handler,
   placement,
-  drawLevel,
+  drawPane,
   drawWidth,
   drawDuration,
   drawEase,
@@ -178,7 +178,7 @@ export const Component: React.FunctionComponent<Props.Content> = ({
   React.useEffect(() => {
     init();
     forceUpdate();
-  }, [drawLevel]);
+  }, [drawPane]);
 
   /** `getDerivedStateFromProps` */
   React.useEffect(() => {
@@ -255,7 +255,7 @@ export const Component: React.FunctionComponent<Props.Content> = ({
 
     panes.current = [] as HTMLElement[];
     const siblings = getSiblings(container);
-    if (drawLevel === 'all') {
+    if (drawPane === 'all') {
       siblings.forEach((child: HTMLElement) => {
         if (child.nodeName !== 'SCRIPT' &&
             child.nodeName !== 'STYLE' &&
@@ -263,8 +263,8 @@ export const Component: React.FunctionComponent<Props.Content> = ({
             child !== getContainer(container)
         ) panes.current?.push(child);
       });
-    } else if (drawLevel) {
-      Misc.toArray(drawLevel).forEach(key => {
+    } else if (drawPane) {
+      Misc.toArray(drawPane).forEach(key => {
         document.querySelectorAll(key).forEach(item => panes.current?.push(item));
       });
     }
