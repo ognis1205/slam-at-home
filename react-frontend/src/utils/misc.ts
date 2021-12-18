@@ -39,3 +39,7 @@ export const toArray = (vars: any): any[] =>
 export const arrayFrom = (vars: any): any[] => {
   return Array.from(vars);
 };
+
+/** Converts a string to int. */
+export const toInt = (a: string): number =>
+  parseInt(a, 10);

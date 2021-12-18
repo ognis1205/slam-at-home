@@ -57,11 +57,57 @@ export const select = (identifier: Identifier): HTMLElement[] => {
   return Misc.toArray(document.body);
 };
 
-/** Return if a node is a DOM node. Else will return by `findDOMNode`. */
+/** Returns if a node is a DOM node. Else will return by `findDOMNode`. */
 export const find = <T = Element | Text>(
   node: React.ReactInstance | HTMLElement,
 ): T => {
+  if (!isDefined())
+    return undefined;
   if (node instanceof HTMLElement)
     return (node as unknown) as T;
   return (ReactDOM.findDOMNode(node) as unknown) as T;
+};
+
+/** Returns the outer height of the element. */
+export const getOuterHeight = (target: HTMLElement): number => {
+  if (!isDefined())
+    return undefined;
+  let height = target.clientHeight;
+  const computedStyle = target.ownerDocument.defaultView.getComputedStyle(target);
+  height += Misc.toInt(computedStyle.borderTopWidth);
+  height += Misc.toInt(computedStyle.borderBottomWidth);
+  return height;
+};
+
+/** Returns the outer width of the element. */
+export const getOuterWidth = (target: HTMLElement): number => {
+  if (!isDefined())
+    return undefined;
+  let width = target.clientWidth;
+  const computedStyle = target.ownerDocument.defaultView.getComputedStyle(target);
+  width += Misc.toInt(computedStyle.borderLeftWidth);
+  width += Misc.toInt(computedStyle.borderRightWidth);
+  return width;
+};
+
+/** Returns the inner height of the element. */
+export const getInnerHeight = (target: HTMLElement): number => {
+  if (!isDefined())
+    return undefined;
+  let height = target.clientHeight;
+  const computedStyle = target.ownerDocument.defaultView.getComputedStyle(target);
+  height -= Misc.toInt(computedStyle.paddingTop);
+  height -= Misc.toInt(computedStyle.paddingBottom);
+  return height;
+};
+
+/** Returns the inner width of the element. */
+export const getInnerWidth = (target: HTMLElement): number => {
+  if (!isDefined())
+    return undefined;
+  let width = target.clientWidth;
+  const computedStyle = target.ownerDocument.defaultView.getComputedStyle(target);
+  width -= Misc.toInt(computedStyle.paddingLeft);
+  width -= Misc.toInt(computedStyle.paddingRight);
+  return width;
 };

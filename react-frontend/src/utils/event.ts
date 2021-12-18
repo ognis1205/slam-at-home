@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import * as Types from './types';
 
 /** Makes CSS property prefixes map. */
 const makePrefixMap = (style: string, event: string): Record<string, string> => {
@@ -84,3 +85,22 @@ export const removeListener = (
     (target as any).detachEvent(`on${event}`, handler);
   }
 };
+
+/** Defines extended mouse events. */
+export type MouseTouch = MouseEvent & Types.Overwrite<TouchEvent, {
+  changedTouches: TouchList;
+  targetTouches: TouchList;
+}>;
+
+/** Finds `Touch` from a given `TouchList`. */
+export const findTouch = (array: TouchList, condition: Function): Touch => {
+  for (let i = 0, length = array.length; i < length; i++)
+    if (condition.apply(condition, [array[i], i, array]))
+      return array[i];
+  return undefined;
+};
+
+/** Returns a `Touch` from a given `MouseTouch` event which satisfies the condition. */
+export const getTouch = (e: MouseTouch, identifier: number): {clientX: number, clientY: number} =>
+  (e.targetTouches && findTouch(e.targetTouches, (t: Touch) => identifier === t.identifier))
+  || (e.changedTouches && findTouch(e.changedTouches, (t: Touch) => identifier === t.identifier));
