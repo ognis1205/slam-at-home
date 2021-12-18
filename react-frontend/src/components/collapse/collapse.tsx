@@ -93,7 +93,7 @@ export const Component: React.FunctionComponent<Props.Wrapper> = ({
         active: active,
         onClick: (child.props.collapsible ?? collapsible) === 'disabled' ? null : handleClick,
         panelKey: key,
-        //showArrow
+        showArrow: true,
         collapsible: child.props.collapsible ?? collapsible,
         //icon
         accordion: accordion,

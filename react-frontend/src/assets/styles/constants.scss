@@ -1,5 +1,5 @@
 /**
- * @fileoverview Defines menu.
+ * @fileoverview Scss Module for color definitions.
  * @copyright Shingo OKAWA 2021
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,20 +14,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import type * as Accordion from '../components/accordion';
-import type * as JSON from '../utils/json';
 
-const items: Accordion.JSON<JSON.Primitive> = [
-  {divider: "Divider 1"},
-  {label: "Item 1"},
-  {divider: "Divider 2"},
-  {label: "Item 2"},
-  {divider: "Divider 3"},
-  {label: "Item 3"},
-  {divider: "Divider 4"},
-  {label: "Item 4"},
-  {divider: "Divider 5"},
-  {label: "Item 5"},
-];
+/** Fonts. */
+$font-size: 16px;
+$font-color-highlight: #1890ff;
+$bold-font-size: 15.5px;
+$bold-weight: 450;
 
-export default items;
+/** Colors. */
+$color-black: #000000;
+$color-white: #ffffff;
+$color-off-white: #F6F9FC;
+$color-grey-light: #EBECF0;
+$color-grey-middle: #D4D4D4;
+$color-grey-dark: #999999;
+$color-background-highlight: #e6f7ff;
+$color-shadow: rgba(0, 0, 0, .15);
+
+/** Animations. */
+$duration: 0.2s;
+$ease-in-out-circ: cubic-bezier(0.78, 0.14, 0.15, 0.86);

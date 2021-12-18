@@ -46,11 +46,11 @@ export const TRANSITION_END_CSS: string =
 
 /** A `animationend` event name. */
 export const ANIMATION_END: string =
-  makePrefixMap('Animation', 'AnimationEnd')[ANIMATION_END_CSS];
+  makePrefixMap('Animation', 'AnimationEnd')[ANIMATION_END_CSS] || 'animationend';
 
 /** A `transitionend` event name. */
 export const TRANSITION_END: string =
-  makePrefixMap('Transition', 'TransitionEnd')[TRANSITION_END_CSS];
+  makePrefixMap('Transition', 'TransitionEnd')[TRANSITION_END_CSS] || 'transitionend';
 
 /** Checks if the environment supports transition events. */
 export const supportTransition = (): boolean => !!(

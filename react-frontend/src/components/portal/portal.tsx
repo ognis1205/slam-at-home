@@ -21,9 +21,8 @@ import * as DOM from '../../utils/dom';
 import * as Hook from '../../utils/hook';
 
 /** Returns the container element of a portal. */
-const getContainer = ({container}: Props.Portal): HTMLElement => {
-  return DOM.get(container);
-};
+const getContainer = ({container}: Props.Portal): HTMLElement =>
+  DOM.get(container);
 
 /** Defines `Portal` reference type. */
 export type Ref = {};

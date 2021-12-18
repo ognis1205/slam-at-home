@@ -15,8 +15,7 @@
  * limitations under the License.
  */
 
-$ease-in-out-circ: cubic-bezier(0.78, 0.14, 0.15, 0.86);
-$duration: 0.1s;
+@import '../constants.scss';
 
 .drawer {
   position: fixed;
@@ -46,7 +45,7 @@ $duration: 0.1s;
 }
 .wrapper {
   position: absolute;
-  background: #fff;
+  background: $color-white;
 }
 .content {
   overflow: auto;
@@ -66,19 +65,19 @@ $duration: 0.1s;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #fff;
+  background: $color-white;
 }
 .icon {
   width: 14px;
   height: 2px;
-  background: #333;
+  background: $color-grey-dark;
   position: relative;
   transition: background $duration $ease-in-out-circ;
   &:before, &:after {
     content: '';
     display: block;
     position: absolute;
-    background: #333;
+    background: $color-grey-dark;
     width: 100%;
     height: 2px;
     transition: transform $duration $ease-in-out-circ;
@@ -108,12 +107,12 @@ $duration: 0.1s;
   left: 0;
   .handle {
     right: -40px;
-    box-shadow: 2px 0 8px rgba(0, 0, 0, .15);
+    box-shadow: 2px 0 8px $color-shadow;
     border-radius: 0 4px 4px 0;
   }
   &.open {
     .wrapper {
-      box-shadow: 2px 0 8px rgba(0, 0, 0, .15);
+      box-shadow: 2px 0 8px $color-shadow;
     }
   }
 }
@@ -125,12 +124,12 @@ $duration: 0.1s;
   }
   .handle {
     left: -40px;
-    box-shadow: -2px 0 8px rgba(0, 0, 0, .15);
+    box-shadow: -2px 0 8px $color-shadow;
     border-radius: 4px 0 0 4px;
   }
   &.open {
     .wrapper {
-      box-shadow: -2px 0 8px rgba(0, 0, 0, .15);
+      box-shadow: -2px 0 8px $color-shadow;
     }
     &.no-mask {
       right: 1px;
@@ -164,12 +163,12 @@ $duration: 0.1s;
   .handle {
     top: auto;
     bottom: -40px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, .15);
+    box-shadow: 0 2px 8px $color-shadow;
     border-radius: 0 0 4px 4px;
   }
   &.open {
     .wrapper {
-      box-shadow: 0 2px 8px rgba(0, 0, 0, .15);
+      box-shadow: 0 2px 8px $color-shadow;
     }
   }
 }
@@ -181,12 +180,12 @@ $duration: 0.1s;
   }
   .handle {
     top: -40px;
-    box-shadow: 0 -2px 8px rgba(0, 0, 0, .15);
+    box-shadow: 0 -2px 8px $color-shadow;
     border-radius: 4px 4px 0 0;
   }
   &.open {
     .wrapper {
-      box-shadow: 0 -2px 8px rgba(0, 0, 0, .15);
+      box-shadow: 0 -2px 8px $color-shadow;
     }
     &.no-mask {
       bottom: 1px;
@@ -198,7 +197,7 @@ $duration: 0.1s;
   .mask {
     opacity: .3;
     height: 100%;
-    transition: opacity 0.3s $ease-in-out-circ;
+    transition: opacity $duration $ease-in-out-circ;
   }
   .handle {
     .icon {

@@ -15,55 +15,105 @@
  * limitations under the License.
  */
 
-$color-black: #000000;
-$color-white: #ffffff;
-$color-blue-darkest: #1A2226;
-$color-blue-dark: #222D32;
-$color-grey-light: #EBECF0;
-$color-grey-dark: #949494;
-$color-blue-light: #C4EAF2;
+@import '../constants.scss';
 
+.hidden {
+  display: none;
+}
 .collapse {
-  max-width: 400px;
-  width: auto;
   color: $color-black;
-  background-color: $color-white;
-  font-family: "Roboto","Arial",sans-serif;
-  * {
-    box-sizing: border-box;
+  background: $color-white;
+}
+.header {
+  user-select: none;
+  position: relative;
+  display: flex;
+  align-items: center;
+  line-height: 22px;
+  padding: 16px 16px;
+  cursor: pointer;
+  .extra {
+    margin: 0 16px 0 auto;
   }
-  &.rtl {
-    .divider {
-      text-align: right;
+  &:hover {
+    color: $font-color-highlight;
+  }
+  &:active {
+    background: $color-background-highlight;
+  }
+}
+.arrow {
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  width: 10px;
+  &:after {
+    position: absolute;
+    width: 6px;
+    height: 1.5px;
+    background-image: linear-gradient(90deg, rgba(0,0,0,.65), rgba(0,0,0,.65));
+    border-radius: 2px;
+    transform: rotate(45deg) translateX(-2px);
+    content: "";
+  }
+  &:before {
+    position: absolute;
+    width: 6px;
+    height: 1.5px;
+    background-image: linear-gradient(90deg, rgba(0,0,0,.65), rgba(0,0,0,.65));
+    border-radius: 2px;
+    transform: rotate(-45deg) translateX(2px);
+    content: "";
+    }
+    &:after, &:before {
+      box-sizing: border-box;
+      transition: background $duration $ease-in-out-circ,
+		  transform $duration $ease-in-out-circ,
+		  top $duration $ease-in-out-circ;
+    }
+  }
+.content {
+  user-select: none;
+  overflow: hidden;
+  color: $color-grey-middle;
+  padding-left: 16px;
+  & > &-box {
+    margin-top: 16px;
+    margin-bottom: 16px;
+  }
+}
+.panel-active {
+  & > .header {
+    font-size: $bold-font-size;
+    font-weight: $bold-weight;
+    & > .arrow {
+      &:after {
+        transform: rotate(-45deg) translateX(-2px);
+      }
+      &:before {
+        transform: rotate(45deg) translateX(2px);
+      }
     }
   }
 }
-.icon {
-  height: 42px;
-  padding-top: 14px;
-  padding-left: 14px;
-  padding-right: 14px;
-  font-size: 12px;
-  font-weight: bold;
-  background-color: $color-blue-darkest;
-  color: $color-grey-dark;
-  text-transform: uppercase;
+.panel-inactive {
+  // dummy properties.
+  min-width: 0;
+  min-height: 0;
 }
-.divider {
-  height: 42px;
-  line-height: 42px;
-  text-align: left;
-  font-size: 15px;
-  font-weight: bold;
-  color: $color-grey-dark;
-  background-color: $color-white;
-  border-top: 1px solid $color-grey-light;
-  .content {
-    display: inline-block;
-    vertical-align: middle;
-    line-height: normal;
+.collapsible-only {
+  cursor: default;
+  .text {
+    cursor: pointer;
   }
 }
-.divider:first-child {
-  border-top: none;
+.content-active {
+  // dummy properties.
+  min-width: 0;
+  min-height: 0;
+}
+.content-inactive {
+  // dummy properties.
+  min-width: 0;
+  min-height: 0;
 }
