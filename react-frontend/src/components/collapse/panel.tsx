@@ -74,8 +74,9 @@ const Header: React.FunctionComponent<Props.Header & {children: React.ReactNode}
 
   return (
     <div
-      {...headerProps}>
-      {props.showArrow && icon}
+      {...headerProps}
+    >
+      {props.extra && <span className={styles['extra']}>{props.extra}</span>}
       {props.collapsible ? (
         <span onClick={handleClick} className={styles['text']}>
           {props.children}
@@ -83,7 +84,7 @@ const Header: React.FunctionComponent<Props.Header & {children: React.ReactNode}
       ) : (
         props.children
       )}
-      {props.extra && <div className={styles['extra']}>{props.extra}</div>}
+      {props.showArrow && icon}
     </div>
   );
 };
