@@ -70,14 +70,14 @@
 .icon {
   width: 14px;
   height: 2px;
-  background: $color-grey-dark;
+  background: $color-icon;
   position: relative;
   transition: background $duration $ease-in-out-circ;
   &:before, &:after {
     content: '';
     display: block;
     position: absolute;
-    background: $color-grey-dark;
+    background: $color-icon;
     width: 100%;
     height: 2px;
     transition: transform $duration $ease-in-out-circ;

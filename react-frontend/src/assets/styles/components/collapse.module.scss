@@ -32,11 +32,16 @@
   line-height: 22px;
   padding: 16px 16px;
   cursor: pointer;
-  .extra {
-    margin: 0 16px 0 auto;
-  }
   &:hover {
     color: $font-color-highlight;
+    .arrow {
+      &:after, &:before {
+        background-image: linear-gradient(90deg, $font-color-highlight, $font-color-highlight);
+      }
+    }
+    .extra {
+      color: $font-color-highlight;
+    }
   }
   &:active {
     background: $color-background-highlight;
@@ -48,30 +53,28 @@
   right: 16px;
   width: 10px;
   &:after {
-    position: absolute;
-    width: 6px;
-    height: 1.5px;
-    background-image: linear-gradient(90deg, rgba(0,0,0,.65), rgba(0,0,0,.65));
-    border-radius: 2px;
     transform: rotate(45deg) translateX(-2px);
-    content: "";
   }
   &:before {
+    transform: rotate(-45deg) translateX(2px);
+  }
+  &:after, &:before {
     position: absolute;
+    content: "";
     width: 6px;
     height: 1.5px;
-    background-image: linear-gradient(90deg, rgba(0,0,0,.65), rgba(0,0,0,.65));
+    background: $color-white;
+    background-image: linear-gradient(90deg, $color-icon, $color-icon);
     border-radius: 2px;
-    transform: rotate(-45deg) translateX(2px);
-    content: "";
-    }
-    &:after, &:before {
-      box-sizing: border-box;
-      transition: background $duration $ease-in-out-circ,
-		  transform $duration $ease-in-out-circ,
-		  top $duration $ease-in-out-circ;
-    }
+    box-sizing: border-box;
+    transition: transform $duration $ease-in-out-circ;
   }
+}
+.extra {
+  color: $color-icon;
+  display: inline-block;
+  margin-right: 10px;
+}
 .content {
   user-select: none;
   overflow: hidden;
@@ -84,8 +87,6 @@
 }
 .panel-active {
   & > .header {
-    font-size: $bold-font-size;
-    font-weight: $bold-weight;
     & > .arrow {
       &:after {
         transform: rotate(-45deg) translateX(-2px);
