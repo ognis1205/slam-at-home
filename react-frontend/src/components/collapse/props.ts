@@ -33,9 +33,9 @@ export interface Header extends Common {
   panelKey?: string | number;
   showArrow?: boolean;
   collapsible?: CollapsibleType;
-  icon?: (props: Header) => React.ReactNode;
   accordion?: boolean;
-  extra?: string | React.ReactNode;
+  arrow?: (props: Header) => React.ReactNode;
+  icon?: string | React.ReactNode;
 }
 
 /** Defines {Panel.Content} properties. */

@@ -145,7 +145,7 @@ export const Component: React.FunctionComponent<Props.Wrapper> = ({
 };
 
 /** Sets the component's display name. */
-Component.displayName = 'CollapseWrapper';
+Component.displayName = 'Collapse';
 
 /** Returns a `Drawer` component with default property values. */
 export const WithDefaultComponent: React.FunctionComponent<Props.Wrapper> = Wrap.withDefaultProps(

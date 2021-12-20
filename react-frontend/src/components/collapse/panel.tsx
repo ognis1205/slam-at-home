@@ -47,8 +47,8 @@ const Header: React.FunctionComponent<Props.Header & {children: React.ReactNode}
       handleClick();
   };
 
-  /** Holds icon node. */
-  let icon: any = <i className={styles['arrow']} />;
+  /** Holds arrow node. */
+  let arrow: any = <i className={styles['arrow']} />;
 
   /** Holds header properties. */
   const headerProps: React.HTMLAttributes<HTMLDivElement> = {
@@ -57,13 +57,13 @@ const Header: React.FunctionComponent<Props.Header & {children: React.ReactNode}
     ['aria-expanded']: props.active,
   };
 
-  if (props.showArrow && typeof props.icon === 'function')
-    icon = props.icon(props);
+  if (props.showArrow && typeof props.arrow === 'function')
+    arrow = props.arrow(props);
 
   if (props.collapsible) {
-    icon = (
+    arrow = (
       <span style={{cursor: 'pointer'}} onClick={handleClick}>
-        {icon}
+        {arrow}
       </span>
     );
   } else {
@@ -76,7 +76,7 @@ const Header: React.FunctionComponent<Props.Header & {children: React.ReactNode}
     <div
       {...headerProps}
     >
-      {props.extra && <span className={styles['extra']}>{props.extra}</span>}
+      {props.icon && <span className={styles['extra']}>{props.icon}</span>}
       {props.collapsible ? (
         <span onClick={handleClick} className={styles['text']}>
           {props.children}
@@ -84,7 +84,7 @@ const Header: React.FunctionComponent<Props.Header & {children: React.ReactNode}
       ) : (
         props.children
       )}
-      {props.showArrow && icon}
+      {props.showArrow && arrow}
     </div>
   );
 };
@@ -156,13 +156,13 @@ export const Component: React.FunctionComponent<Props.Panel> = (props: Props.Pan
       panelKey={props.panelKey}
       showArrow={props.showArrow}
       collapsible={props.collapsible}
-      icon={props.icon}
+      arrow={props.arrow}
       accordion={props.accordion}
-      extra={props.extra}
+      icon={props.icon}
     >
       {props.header}
     </Header>
-    <Motion.Component
+    <Motion.Fragment
       visible={props.active}
       forceRender={props.forceRender}
       removeOnExit={props.destroyInactivePanel}
@@ -181,7 +181,7 @@ export const Component: React.FunctionComponent<Props.Panel> = (props: Props.Pan
           {props.children}
         </Content>
       )}
-    </Motion.Component>
+    </Motion.Fragment>
   </div>
 );
 
