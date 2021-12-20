@@ -39,7 +39,7 @@
         background-image: linear-gradient(90deg, $font-color-highlight, $font-color-highlight);
       }
     }
-    .extra {
+    .icon {
       color: $font-color-highlight;
     }
   }
@@ -70,7 +70,7 @@
     transition: transform $duration $ease-in-out-circ;
   }
 }
-.extra {
+.icon {
   color: $color-icon;
   display: inline-block;
   margin-right: 10px;
