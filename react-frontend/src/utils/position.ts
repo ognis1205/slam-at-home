@@ -38,6 +38,17 @@ export interface Bounds {
   bottom?: number;
 };
 
+/** Defines dragging context. */
+export interface Drag {
+  target: HTMLElement,
+  x: number,
+  y: number,
+  dx: number,
+  dy: number,
+  x0: number,
+  y0: number,
+}
+
 /** Returns the position of the element relative to the bound. */
 export const get = (
   target: HTMLElement,
@@ -95,6 +106,13 @@ export const get = (
   return {x: x, y: y};
 };
 
+/** Snaps a given coordinate to a specified grid. */
+export const snapTo = (grid: [number, number], pendingX: number, pendingY: number): [number, number] => {
+  const x = Math.round(pendingX / grid[0]) * grid[0];
+  const y = Math.round(pendingY / grid[1]) * grid[1];
+  return [x, y];
+};
+
 /** Returns the position of the event relative to the bound. */
 export const on = (
   event: Event.MouseTouch,
@@ -124,4 +142,27 @@ const offsetFromParent = (event: Offset, offsetParent: HTMLElement, scale: numbe
     x: (event.clientX + offsetParent.scrollLeft - rect.left) / scale,
     y: (event.clientY + offsetParent.scrollTop - rect.top) / scale,
   };
+};
+
+/** Returns dragging context. */
+export const drag = (
+  target: HTMLElement,
+  state: { x0: number, y0: number },
+  x: number,
+  y: number,
+): Drag => {
+  if (!Misc.isNumeric(state.x0) || !Misc.isNumeric(state.y0))
+    return {
+      target,
+      x, y,
+      dx: 0, dy: 0,
+      x0: x, y0: y,
+    };
+  else
+    return {
+      target,
+      x, y,
+      dx: x - state.x0, dy: y - state.y0,
+      x0: state.x0, y0: state.y0,
+    };
 };

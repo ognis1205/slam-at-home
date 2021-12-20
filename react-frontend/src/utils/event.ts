@@ -60,7 +60,7 @@ export const supportTransition = (): boolean => !!(
 
 /** Assigns a given event handler to a specified DOM. */
 export const addListener = (
-  target: HTMLElement,
+  target: Node,
   event: string,
   handler: (e: React.TouchEvent | TouchEvent | Event) => void,
   options?: any,
@@ -69,12 +69,14 @@ export const addListener = (
     target.addEventListener(event, handler, options);
   } else if ((target as any).attachEvent) {
     (target as any).attachEvent(`on${event}`, handler);
+  } else {
+    target[`on${event}`] = handler;
   }
 };
 
 /** Removes a given event handler from a apecified DOM. */
 export const removeListener = (
-  target: HTMLElement,
+  target: Node,
   event: string,
   handler: (e: React.TouchEvent | TouchEvent | Event) => void,
   options?: any,
@@ -83,6 +85,8 @@ export const removeListener = (
     target.removeEventListener(event, handler, options);
   } else if ((target as any).attachEvent) {
     (target as any).detachEvent(`on${event}`, handler);
+  } else {
+    target[`on${event}`] = null;
   }
 };
 
@@ -104,3 +108,11 @@ export const findTouch = (array: TouchList, condition: Function): Touch => {
 export const getTouch = (e: MouseTouch, identifier: number): {clientX: number, clientY: number} =>
   (e.targetTouches && findTouch(e.targetTouches, (t: Touch) => identifier === t.identifier))
   || (e.changedTouches && findTouch(e.changedTouches, (t: Touch) => identifier === t.identifier));
+
+/** Returns a `Touch` identifier from a given `MouseTouch` event. */
+export const getTouchIdentifier= (e: MouseTouch): number => {
+  if (e.targetTouches && e.targetTouches[0])
+    return e.targetTouches[0].identifier;
+  if (e.changedTouches && e.changedTouches[0])
+    return e.changedTouches[0].identifier;
+};

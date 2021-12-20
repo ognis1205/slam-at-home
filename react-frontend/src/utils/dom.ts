@@ -68,6 +68,43 @@ export const find = <T = Element | Text>(
   return (ReactDOM.findDOMNode(node) as unknown) as T;
 };
 
+/** A cached scroll bar size. */
+let selectorCache: string;
+
+/** Returns `true` if a given selector finds an element whithin a specified element. */
+export const match = (element: Node, selector: Identifier): boolean => {
+  if (!selector || !isDefined())
+    return false;
+  if (selector instanceof HTMLElement) {
+    return element === selector;
+  } else if (typeof selector === 'string') {
+    if (!selectorCache)
+      selectorCache = Misc.find([
+        'matches',
+        'webkitMatchesSelector',
+        'mozMatchesSelector',
+        'msMatchesSelector',
+        'oMatchesSelector'
+      ], (key: string) => Misc.isFunction(element[key]))
+    return !Misc.isFunction(element[selectorCache])
+         ? false
+         : element[selectorCache](selector);
+  } else {
+    return false;
+  }
+};
+
+/** Returns `true` if a given selector finds an element whithin a specified element. */
+export const matchRecursive = (element: Node, selector: Identifier, root: Node): boolean => {
+  let node = element;
+  do {
+    if (match(node, selector)) return true;
+    if (node === root) return false;
+    node = node.parentNode;
+  } while (node);
+  return false;
+};
+
 /** Returns the outer height of the element. */
 export const getOuterHeight = (target: HTMLElement): number => {
   if (!isDefined())
@@ -110,4 +147,21 @@ export const getInnerWidth = (target: HTMLElement): number => {
   width -= Misc.toInt(computedStyle.paddingLeft);
   width -= Misc.toInt(computedStyle.paddingRight);
   return width;
+};
+
+/** Adds `className` to a specified element. */
+export const addClassName = (target: HTMLElement, className: string): void => {
+  if (target.classList)
+    target.classList.add(className);
+  else
+    if (!target.className.match(new RegExp(`(?:^|\\s)${className}(?!\\S)`)))
+      target.className += ` ${className}`;
+};
+
+/** Removes `className` from a specified element. */
+export const removeClassName = (target: HTMLElement, className: string): void => {
+  if (target.classList)
+    target.classList.remove(className);
+  else
+    target.className = target.className.replace(new RegExp(`(?:^|\\s)${className}(?!\\S)`, 'g'), '');
 };

@@ -23,6 +23,10 @@ export const isNumeric = (value: string | number | undefined) =>
 export const isPrimitive = (value: unknown): boolean =>
   value == null || /^[sbn]/.test(typeof value)
 
+/** Checks if a given value is function. */
+export const isFunction = (value: unknown): boolean =>
+  typeof value === 'function' || Object.prototype.toString.call(value) === '[object Function]';
+
 /** Drops specified keys from a given target. */
 export const omit = <T extends object, K extends keyof T>(target: T, keys: K[]): Omit<T, K> => {
   const cloned = { ...target };
@@ -38,6 +42,13 @@ export const toArray = (vars: any): any[] =>
 /** Converts a given argument into array. */
 export const arrayFrom = (vars: any): any[] => {
   return Array.from(vars);
+};
+
+/** Finds an element which is specified with a given condition. */
+export const find = <T>(array: Array<T>, condition: Function): T => {
+  for (let i = 0, length = array.length; i < length; i++)
+    if (condition.apply(condition, [array[i], i, array]))
+      return array[i];
 };
 
 /** Converts a string to int. */
