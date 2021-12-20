@@ -21,9 +21,8 @@ import * as Drawer from '../components/drawer';
 import * as Collapse from '../components/collapse';
 import '../assets/styles/global.scss';
 
+import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-//import { faTwitter } from "@fortawesome/free-brands-svg-icons";
-//import { faGear } from "@fortawesome/free-regular-svg-icons";
 import { faCog } from "@fortawesome/free-solid-svg-icons";
 
 /***/
@@ -51,7 +50,7 @@ const SLAM: React.FC<NextApp.AppProps> = ({ Component, pageProps }) => {
       items.push(
         <Collapse.Panel
           header={`HEADER ${key}`}
-          extra={ <FontAwesomeIcon style={{}} icon={faCog} />}
+          icon={ <FontAwesomeIcon icon={faCog} />}
           key={key}
         >
           <p>{text}: {i}</p>
@@ -88,13 +87,14 @@ const SLAM: React.FC<NextApp.AppProps> = ({ Component, pageProps }) => {
   return (
     <React.Fragment>
       <Head>
-        <title>SLAM UI</title>
+        <title>SLAM</title>
         <meta
           name='viewport'
           content='minimum-scale=1, initial-scale=1, width=device-width'
         />
       </Head>
       <Drawer.Component width="30vh" drawPane={null}>
+        <Image src="/images/logo.png" width="128" height="64" />
         <Collapse.Wrapper
           accordion={accordion}
           onChange={handleChange}
