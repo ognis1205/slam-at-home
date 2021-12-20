@@ -26,7 +26,7 @@ export type {
 } from "./props";
 
 export {
-  ExoticComponent as Component,
+  Fragment,
 } from './motion';
 
 export {

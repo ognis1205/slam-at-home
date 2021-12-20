@@ -23,7 +23,7 @@ import * as Ref from '../../utils/ref';
 import classnames from 'classnames';
 
 /** TODO: Refactor this fragment into function component if possible. */
-class Fragment extends React.Component<{children: React.ReactNode}> {
+class Wrapper extends React.Component<{children: React.ReactNode}> {
   render() {
     return this.props.children;
   }
@@ -78,7 +78,7 @@ const configure = (
     !!(name && support);
 
   /** Defines {Motion} components. */
-  const Component = React.forwardRef<any, Props.Motion>(({
+  const Fragment = React.forwardRef<any, Props.Motion>(({
       name,
       exitedClassName,
       transition = getTransition,
@@ -89,19 +89,19 @@ const configure = (
       ...rest
     }: Props.Motion, 
     ref: any
-  ) => {
+  ): React.ReactElement => {
     /** Holds a reference to the react node, it may be a HTMLElement. */
     const node = React.useRef<any>(null);
 
     /** Holds a reference to the wrapper fragment. */
-    const fragment = React.useRef<Fragment>(null);
+    const wrapper = React.useRef<Wrapper>(null);
 
     /** Returns the DOM target element. */
     const getElement = (): HTMLElement => {
       try {
         return node.current instanceof HTMLElement
              ? node.current
-             : DOM.find<HTMLElement>(fragment.current);
+             : DOM.find<HTMLElement>(wrapper.current);
       } catch (e) {
         return null;
       }
@@ -125,15 +125,16 @@ const configure = (
       hasRendered.current;
 
     /** Forwards ref. */
-    const setRef = React.useCallback((node: any) => {
-      Ref.fill(ref, node);
+    const setRef = React.useCallback((element: any) => {
+      node.current = element;
+      Ref.fill(ref, element);
     }, []);
 
     // Dispatches motion.
     let motion: React.ReactNode;
     const context = { visible, ...rest };
     if (!children) {
-      motion = null;
+      motion = null as React.ReactNode;
     } else if (status === Stage.Status.None || !transitionIsDefined(name)) {
       if (mergedVisible) {
         motion = children(
@@ -160,14 +161,14 @@ const configure = (
       );
     }
 
-    return <Fragment ref={fragment}>{motion}</Fragment>;
+    return <Wrapper ref={wrapper}>{motion}</Wrapper>;
   });
 
   /** Sets the component's display name. */
-  Component.displayName = 'WithMotion';
+  Fragment.displayName = 'MotionFragment';
 
-  return Component;
+  return Fragment;
 };
 
 /** Exports configured exotic compoent. */
-export const ExoticComponent = configure(Event.supportTransition());
+export const Fragment = configure(Event.supportTransition());
