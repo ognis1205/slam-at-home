@@ -157,12 +157,25 @@ export const useStatus = (
     onVisibleChanged,
   }: Props.Motion,
 ): [Status, Cue, React.CSSProperties, boolean] => {
+  /** @const Holds an async visibility state. */
   const [asyncVisible, setAsyncVisible] = Hook.useMountedState<boolean>();
+
+  /** @const Holds a motion state. */
   const [status, setStatus] = Hook.useMountedState<Status>(Status.None);
+
+  /** @const Holds a motion style state. */
   const [style, setStyle] = Hook.useMountedState<React.CSSProperties | undefined>(null);
+
+  /** @const Holds a after-motion effect. */
   const timeout = React.useRef<any>(null);
+
+  /** @const Holds a mounted flag. */
   const hasMounted = React.useRef(false);
+
+  /** @const Holds a unmounted flag. */
   const hasUnmounted = React.useRef(false);
+
+  /** @const Holds a activation flag. */
   const hasActivated = React.useRef(false);
 
   /** Returns `true` if the component has mounted. */
