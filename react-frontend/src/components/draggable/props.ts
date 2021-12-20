@@ -15,6 +15,7 @@
  * limitations under the License.
  */
 import * as React from 'react';
+import * as DOM from '../../utils/dom';
 import * as Position from '../../utils/position';
 
 /** Drag event handlers. */
@@ -23,7 +24,9 @@ export type DragEventHandler =
 
 /** A {Context} component properties. */
 export interface Context {
-  className?: string;
+  onTouchEnd: (e: MouseEvent) => void,
+  onMouseDown: (e: MouseEvent) => void,
+  onMouseUp: (e: MouseEvent) => void,
   [key: string]: unknown;
 }
 
@@ -35,16 +38,12 @@ type Children =
 export interface Draggable {
   disabled: boolean;
   allowAnyClick: boolean;
-  enableUserSelectHack: boolean,
   onStart: DragEventHandler,
-  onDrag: DragEventHandler,
+  onMove: DragEventHandler,
   onStop: DragEventHandler,
   onMouseDown: (e: MouseEvent) => void,
-  scale: number,
-  cancel: string,
-  offsetParent: HTMLElement,
   grid: [number, number],
-  handler: React.ReactElement | null | false,
+  handler: DOM.Identifier,
+  canceler: DOM.Identifier,
   children: Children,
-//  nodeRef?: ?React.ElementRef<any>,
 }
