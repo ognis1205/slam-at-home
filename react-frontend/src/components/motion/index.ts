@@ -26,7 +26,7 @@ export type {
 } from "./props";
 
 export {
-  Fragment,
+  Component,
 } from './motion';
 
 export {

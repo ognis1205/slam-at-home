@@ -76,7 +76,7 @@ const Header: React.FunctionComponent<Props.Header & {children: React.ReactNode}
     <div
       {...headerProps}
     >
-      {props.icon && <span className={styles['extra']}>{props.icon}</span>}
+      {props.icon && <span className={styles['icon']}>{props.icon}</span>}
       {props.collapsible ? (
         <span onClick={handleClick} className={styles['text']}>
           {props.children}
@@ -162,7 +162,7 @@ export const Component: React.FunctionComponent<Props.Panel> = (props: Props.Pan
     >
       {props.header}
     </Header>
-    <Motion.Fragment
+    <Motion.Component
       visible={props.active}
       forceRender={props.forceRender}
       removeOnExit={props.destroyInactivePanel}
@@ -181,7 +181,7 @@ export const Component: React.FunctionComponent<Props.Panel> = (props: Props.Pan
           {props.children}
         </Content>
       )}
-    </Motion.Fragment>
+    </Motion.Component>
   </div>
 );
 

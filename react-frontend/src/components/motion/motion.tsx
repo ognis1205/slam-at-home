@@ -23,7 +23,7 @@ import * as Ref from '../../utils/ref';
 import classnames from 'classnames';
 
 /** TODO: Refactor this fragment into function component if possible. */
-class Wrapper extends React.Component<{children: React.ReactNode}> {
+class MotionFragment extends React.Component<{children: React.ReactNode}> {
   render() {
     return this.props.children;
   }
@@ -78,7 +78,7 @@ const configure = (
     !!(name && support);
 
   /** Defines {Motion} components. */
-  const Fragment = React.forwardRef<any, Props.Motion>(({
+  const Component = React.forwardRef<any, Props.Motion>(({
       name,
       exitedClassName,
       transition = getTransition,
@@ -93,15 +93,15 @@ const configure = (
     /** Holds a reference to the react node, it may be a HTMLElement. */
     const node = React.useRef<any>(null);
 
-    /** Holds a reference to the wrapper fragment. */
-    const wrapper = React.useRef<Wrapper>(null);
+    /** Holds a reference to the fragment fragment. */
+    const fragment = React.useRef<MotionFragment>(null);
 
     /** Returns the DOM target element. */
     const getElement = (): HTMLElement => {
       try {
         return node.current instanceof HTMLElement
              ? node.current
-             : DOM.find<HTMLElement>(wrapper.current);
+             : DOM.find<HTMLElement>(fragment.current);
       } catch (e) {
         return null;
       }
@@ -161,14 +161,14 @@ const configure = (
       );
     }
 
-    return <Wrapper ref={wrapper}>{motion}</Wrapper>;
+    return <MotionFragment ref={fragment}>{motion}</MotionFragment>;
   });
 
   /** Sets the component's display name. */
-  Fragment.displayName = 'MotionFragment';
+  Component.displayName = 'Motion';
 
-  return Fragment;
+  return Component;
 };
 
 /** Exports configured exotic compoent. */
-export const Fragment = configure(Event.supportTransition());
+export const Component = configure(Event.supportTransition());

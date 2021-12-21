@@ -25,7 +25,7 @@ import * as Wrap from '../../utils/wrap';
 import styles from '../../assets/styles/components/draggable.module.scss';
 
 /** TODO: Refactor this fragment into function component if possible. */
-class Wrapper extends React.Component<{children: React.ReactNode}> {
+class DraggableFragment extends React.Component<{children: React.ReactNode}> {
   render() {
     return this.props.children;
   }
@@ -78,7 +78,7 @@ const DEFAULT_PROPS: Partial<Props.Draggable> = {
  * @param {any} ref `ReactRef` object.
  * @return {ReactElement} A rendered React element.
  */
-const Fragment = React.forwardRef<any, Props.Draggable>(({
+const Component = React.forwardRef<any, Props.Draggable>(({
   disabled,
   allowAnyClick,
   onStart,
@@ -107,8 +107,8 @@ const Fragment = React.forwardRef<any, Props.Draggable>(({
   /** Holds a reference to the react node, it may be a HTMLElement. */
   const node = React.useRef<any>(null);
 
-  /** Holds a reference to the wrapper fragment. */
-  const wrapper = React.useRef<Wrapper>(null);
+  /** Holds a reference to the draggable fragment. */
+  const fragment = React.useRef<DraggableFragment>(null);
 
   /** Holds a reference to the current events. */
   const events = React.useRef<Events>(EVENTS.MOUSE);
@@ -122,7 +122,7 @@ const Fragment = React.forwardRef<any, Props.Draggable>(({
     try {
       return node.current instanceof HTMLElement
            ? node.current
-           : DOM.find<HTMLElement>(wrapper.current);
+           : DOM.find<HTMLElement>(fragment.current);
     } catch (e) {
       return null;
     }
@@ -258,20 +258,20 @@ const Fragment = React.forwardRef<any, Props.Draggable>(({
   };
 
   return (
-    <Wrapper ref={wrapper}>
+    <DraggableFragment ref={fragment}>
       {children(
         { onTouchEnd: handleTouchEnd, onMouseDown: handleMouseDown, onMouseUp: handleMouseUp }, 
         setRef,
       )}
-    </Wrapper>
+    </DraggableFragment>
   );
 });
 
 /** Sets the component's display name. */
-Fragment.displayName = 'DraggableFragment';
+Component.displayName = 'Draggable';
 
 /** Returns a `Draggable` component with default property values. */
-export const WithDefaultFragment: React.FunctionComponent<Props.Draggable> = Wrap.withDefaultProps(
-  Fragment, 
+export const WithDefaultComponent: React.FunctionComponent<Props.Draggable> = Wrap.withDefaultProps(
+  Component, 
   DEFAULT_PROPS
 );
