@@ -19,7 +19,7 @@ import * as Event from './event';
 import * as Misc from './misc';
 
 /** General purpose 2-D positions. */
-export interface Position {
+export interface Coord {
   x: number;
   y: number;
 };
@@ -55,7 +55,7 @@ export const get = (
   bounds: Bounds | string | false,
   x: number,
   y: number,
-): Position => {
+): Coord => {
   if (!bounds || !Object.keys(bounds).length) 
     return {x: x, y: y};
 
@@ -121,7 +121,7 @@ export const on = (
     scale: number,
     offsetParent?: HTMLElement,
   },
-): Position => {
+): Coord => {
   let position = undefined;
   if (typeof identifier === 'number') {
     position = Event.getTouch(event, identifier);
@@ -134,7 +134,7 @@ export const on = (
 };
 
 /** Returns the relative position from offsetParent. */
-const offsetFromParent = (event: Offset, offsetParent: HTMLElement, scale: number): Position => {
+const offsetFromParent = (event: Offset, offsetParent: HTMLElement, scale: number): Coord => {
   const rect = offsetParent === offsetParent.ownerDocument.body 
              ? {left: 0, top: 0}
              : offsetParent.getBoundingClientRect();
