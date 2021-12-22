@@ -26,6 +26,14 @@ export const isDefined = (): boolean => {
   );
 };
 
+/** Returns `true` if a specified element is SVG. */
+export const isSVG = (element: unknown): boolean => {
+  return (
+    typeof window.SVGElement !== 'undefined' &&
+    element instanceof window.SVGElement
+  );
+};
+
 /** A type union of HTML element identifiers. */
 export type Identifier = string | HTMLElement | (() => HTMLElement);
 
@@ -106,7 +114,7 @@ export const matchRecursive = (element: Node, selector: Identifier, root: Node):
 };
 
 /** Returns the outer height of the element. */
-export const getOuterHeight = (target: HTMLElement): number => {
+export const getOuterHeight = (target: HTMLElement | SVGElement): number => {
   if (!isDefined())
     return undefined;
   let height = target.clientHeight;
@@ -117,7 +125,7 @@ export const getOuterHeight = (target: HTMLElement): number => {
 };
 
 /** Returns the outer width of the element. */
-export const getOuterWidth = (target: HTMLElement): number => {
+export const getOuterWidth = (target: HTMLElement | SVGElement): number => {
   if (!isDefined())
     return undefined;
   let width = target.clientWidth;
@@ -128,7 +136,7 @@ export const getOuterWidth = (target: HTMLElement): number => {
 };
 
 /** Returns the inner height of the element. */
-export const getInnerHeight = (target: HTMLElement): number => {
+export const getInnerHeight = (target: HTMLElement | SVGElement): number => {
   if (!isDefined())
     return undefined;
   let height = target.clientHeight;
@@ -139,7 +147,7 @@ export const getInnerHeight = (target: HTMLElement): number => {
 };
 
 /** Returns the inner width of the element. */
-export const getInnerWidth = (target: HTMLElement): number => {
+export const getInnerWidth = (target: HTMLElement | SVGElement): number => {
   if (!isDefined())
     return undefined;
   let width = target.clientWidth;

@@ -24,6 +24,12 @@ export interface Coord {
   y: number;
 };
 
+/** General purpose 2-D positions. */
+export interface CSSCoord {
+  x: number | string;
+  y: number | string;
+};
+
 /** Offset information handled with `TouchEvent`. */
 export interface Offset {
   clientX: number;
