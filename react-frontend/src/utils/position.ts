@@ -55,6 +55,9 @@ export interface Drag {
   y0: number,
 }
 
+/** A type union of dragging axis. */
+export type Axis = 'both' | 'x' | 'y' | 'none';
+
 /** Returns the position of the element relative to the bound. */
 export const get = (
   target: HTMLElement,
@@ -172,3 +175,11 @@ export const drag = (
       x0: state.x0, y0: state.y0,
     };
 };
+
+/** Returns `true` if the axis is x-directional draggable. */
+export const canDragX = (axis: Axis): boolean =>
+  axis === 'both' || axis === 'x';
+
+/** Returns `true` if the axis is y-directional draggable. */
+export const canDragY = (axis: Axis): boolean =>
+  axis === 'both' || axis === 'y';
