@@ -49,7 +49,7 @@ const start = (document: Document): void => {
   if (!document || !DOM.isDefined())
     return;
   if (document.body)
-    DOM.addClassName(document.body, styles['draggable']);
+    DOM.addClassName(document.body, styles['body']);
 };
 
 /** Starts draggable mode. */
@@ -57,7 +57,7 @@ const stop = (document: Document): void => {
   if (!document || !DOM.isDefined())
     return;
   if (document.body)
-    DOM.removeClassName(document.body, styles['draggable']);
+    DOM.removeClassName(document.body, styles['body']);
   const selection = (document.defaultView || window).getSelection();
   if (selection && selection.type !== 'Caret')
     selection.removeAllRanges();
@@ -65,12 +65,12 @@ const stop = (document: Document): void => {
 
 
 /** Default properties. */
-const DEFAULT_PROPS: Partial<Props.Draggable> = {
-  disabled: false,
-  onStart: (event: MouseEvent, drag: Position.Drag) => {},
-  onMove: (event: MouseEvent, drag: Position.Drag) => {},
-  onStop: (event: MouseEvent, drag: Position.Drag) => {},
-};
+//const DEFAULT_PROPS: Partial<Props.Draggable> = {
+//  disabled: false,
+//  onStart: (event: MouseEvent, drag: Position.Drag) => {},
+//  onMove: (event: MouseEvent, drag: Position.Drag) => {},
+//  onStop: (event: MouseEvent, drag: Position.Drag) => {},
+//};
 
 /**
  * Returns a `Draggable` component.
@@ -78,7 +78,7 @@ const DEFAULT_PROPS: Partial<Props.Draggable> = {
  * @param {any} ref `ReactRef` object.
  * @return {ReactElement} A rendered React element.
  */
-const Component = React.forwardRef<any, Props.Draggable>(({
+export const Component = React.forwardRef<any, Props.Draggable>(({
   disabled,
   allowAnyClick,
   onStart,
@@ -93,10 +93,10 @@ const Component = React.forwardRef<any, Props.Draggable>(({
   ref: any
 ): React.ReactElement => {
   /** @const Holds the current touch event identifier state. */
-  const [identifier, setIdentifier] = Hook.useMountedState<number>(null);
+  const [identifier, setIdentifier] = React.useState<number>(null);
 
-  /** @const Holds an async visibility state. */
-  const [isDragging, setDragging] = Hook.useMountedState<boolean>(false);
+  /** @const Holds a dragging state. */
+  const [isDragging, setDragging] = React.useState<boolean>(false);
 
   /** @const Holds a dragging position. */
   const [position, setPosition] = React.useState<{x0: number; y0: number}>({x0: NaN, y0: NaN});
@@ -271,7 +271,7 @@ const Component = React.forwardRef<any, Props.Draggable>(({
 Component.displayName = 'Draggable';
 
 /** Returns a `Draggable` component with default property values. */
-export const WithDefaultComponent: React.FunctionComponent<Props.Draggable> = Wrap.withDefaultProps(
-  Component, 
-  DEFAULT_PROPS
-);
+//export const WithDefaultComponent: React.FunctionComponent<Props.Draggable> = Wrap.withDefaultProps(
+//  Component, 
+//  DEFAULT_PROPS
+//);

@@ -18,9 +18,6 @@ import * as React from 'react';
 import * as DOM from '../../utils/dom';
 import * as Position from '../../utils/position';
 
-/** A type union of dragging axis. */
-export type Axis = 'both' | 'x' | 'y' | 'none';
-
 /** Drag event handlers. */
 export type DragEventHandler =
   (event: MouseEvent, drag: Position.Drag) => void | false;
@@ -30,7 +27,7 @@ export interface Context {
   onTouchEnd: (e: MouseEvent) => void,
   onMouseDown: (e: MouseEvent) => void,
   onMouseUp: (e: MouseEvent) => void,
-  [key: string]: unknown;
+  [key: string]: unknown,
 }
 
 /** A type union of a component's children. */
@@ -42,14 +39,14 @@ interface Common {
   disabled: boolean;
   allowAnyClick: boolean;
   onStart: DragEventHandler;
-  onDrag: DragEventHandler;
+  onMove: DragEventHandler;
   onStop: DragEventHandler;
   onMouseDown: (e: MouseEvent) => void;
+  grid: [number, number];
 };
 
 /** A {Draggable} component properties. */
 export interface Draggable extends Common {
-  grid: [number, number];
   handler: DOM.Identifier;
   canceler: DOM.Identifier;
   children: Children;
@@ -57,8 +54,11 @@ export interface Draggable extends Common {
 
 /** A {Wrapper} component properties. */
 export interface Wrapper extends Common {
-  axis: Axis,
+  axis: Position.Axis,
+  scale: number,
   bounds: Position.Bounds | string | false,
-  className: string,
+  position: Position.Coord,
+  positionOffset: Position.CSSCoord,
   defaultPosition: Position.Coord,
+  children: React.ReactNode,
 };
