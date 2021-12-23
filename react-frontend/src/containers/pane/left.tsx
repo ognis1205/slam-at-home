@@ -20,8 +20,10 @@ import classnames from 'classnames';
 import styles from '../../assets/styles/containers/pane.module.scss';
 
 /** Returns the class name of the wrapper. */
-const getClassName = (): string =>
-  classnames(styles['left']);
+const getClassName = (className: string): string =>
+  classnames({
+    [className || '']: !!className,
+  });
 
 /**
  * Returns a `Left` component.
@@ -29,7 +31,7 @@ const getClassName = (): string =>
  * @return {ReactElement} A rendered React element.
  */
 export const Component: React.FunctionComponent<Props.Left> = (props: Props.Left): React.ReactElement =>
-  <div className={getClassName()}>{props.children}</div>;
+  <div id={styles['left']}>{props.children}</div>;
 
 /** Sets the component's display name. */
 Component.displayName = 'LeftPane';
