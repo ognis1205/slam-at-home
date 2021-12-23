@@ -14,7 +14,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 @mixin selection {
   ::-moz-selection {
     @content; 
@@ -23,7 +22,6 @@
     @content; 
   }
 }
-
 .body {
   // Add a style to the body to disable user-select.
   @include selection {
