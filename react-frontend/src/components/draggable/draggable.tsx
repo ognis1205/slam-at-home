@@ -76,10 +76,10 @@ export const Component = React.forwardRef<any, Props.Draggable>((
   const [identifier, setIdentifier] = React.useState<number>(null);
 
   /** @const Holds a dragging state. */
-  const [isDragging, setDragging] = React.useState<boolean>(false);
+  const isDragging = React.useRef<boolean>(false);
 
   /** @const Holds a dragging position. */
-  const [position, setPosition] = React.useState<{x0: number; y0: number}>({x0: NaN, y0: NaN});
+  const position = React.useRef<{x0: number; y0: number}>({x0: NaN, y0: NaN});
 
   /** @const Holds a mounted flag. */
   const hasMounted = React.useRef(false);
@@ -92,6 +92,30 @@ export const Component = React.forwardRef<any, Props.Draggable>((
 
   /** Holds a reference to the current events. */
   const events = React.useRef<Events>(EVENTS.MOUSE);
+
+  /** Returns `true` if the component is dragging. */
+  const checkIfDragging = (): boolean => 
+    isDragging.current;
+
+  /** Sets the dragging flag. */
+  const setDragging = (flag: boolean): boolean => 
+    isDragging.current = flag;
+
+  /** Returnss the current event position. */
+  const getPosition = (): {x0: number; y0: number} => 
+    position.current;
+
+  /** Returnss the current event position. */
+  const getX = (): number => 
+    position.current.x0;
+
+  /** Returnss the current event position. */
+  const getY = (): number => 
+    position.current.y0;
+
+  /** Sets the current event position. */
+  const setPosition = (value: {x0: number; y0: number}): {x0: number; y0: number} => 
+    position.current = value;
 
   /** Returns `true` if the component has mounted. */
   const isMounted = (): boolean =>
@@ -118,13 +142,8 @@ export const Component = React.forwardRef<any, Props.Draggable>((
   Hook.useDidMount(() => {
     hasMounted.current = true;
     const target = getElement();
-    console.log("DID MOUNT", target);
-    if (target) {
-//    start(target.ownerDocument);
-//      Event.addListener(target, events.current.start, handleTouchStart, { passive: false });
+    if (target)
       Event.addListener(target, EVENTS.TOUCH.start, handleTouchStart, { passive: false });
-//      Event.addListener(target, EVENTS.MOUSE.start, handleMouseDown, { passive: false });
-    }
   });
 
   /** `componentWillUnmount` */
@@ -159,7 +178,7 @@ export const Component = React.forwardRef<any, Props.Draggable>((
     setIdentifier(Event.getTouchIdentifier(e));
     const {x, y} = Position.on(e, target, identifier) || {};
     if ((!x || !y) ||
-        props.onStart(e, Position.drag(target, position, x, y)) === false ||
+        props.onStart(e, Position.drag(target, getPosition(), x, y)) === false ||
         !isMounted())
       return;
 
@@ -168,25 +187,23 @@ export const Component = React.forwardRef<any, Props.Draggable>((
     setPosition({ x0: x, y0: y });
     Event.addListener(target.ownerDocument, events.current.move, handleMove);
     Event.addListener(target.ownerDocument, events.current.stop, handleStop);
-    console.log("handleStart: ", x, y);
   };
 
   /** An event handler called on `move` events. */
   const handleMove = (e: Event.MouseTouch): void => {
     const target = getElement();
     let {x, y} = Position.on(e, target, identifier) || {};
-    console.log("handleMove: ", x, y);
     if (!x || !y)
       return;
     if (Array.isArray(props.grid)) {
-      let dx = x - position.x0, dy = y - position.y0;
+      let dx = x - getX(), dy = y - getY();
       [dx, dy] = Position.snapTo(props.grid, dx, dy);
       if (!dx && !dy)
         return;
-      x = position.x0 + dx, y = position.y0 + dy;
+      x = getX() + dx, y = getY() + dy;
     }
 
-    if (props.onMove(e, Position.drag(target, position, x, y)) === false ||
+    if (props.onMove(e, Position.drag(target, getPosition(), x, y)) === false ||
         !isMounted()) {
       try {
         handleStop(new MouseEvent('mouseup') as Event.MouseTouch);
@@ -203,58 +220,55 @@ export const Component = React.forwardRef<any, Props.Draggable>((
 
   /** An event handler called on `stop` events. */
   const handleStop = (e: Event.MouseTouch): void => {
-    if (!isDragging) 
+    if (!checkIfDragging()) 
       return;
 
     const target = getElement();
     const {x, y} = Position.on(e, target, identifier) || {};
     if ((!x || !y) ||
-        props.onStop(e, Position.drag(target, position, x, y)) === false ||
+        props.onStop(e, Position.drag(target, getPosition(), x, y)) === false ||
         !isMounted())
       return;
 
     stop(target.ownerDocument);
     setDragging(false);
-    setPosition({ x0: NaN, y0: NaN });
     Event.removeListener(target.ownerDocument, events.current.move, handleMove);
     Event.removeListener(target.ownerDocument, events.current.stop, handleStop);
   };
 
   /** An event handler called on `touch` events. */
   const handleTouchStart = (e: Event.MouseTouch): void => {
-    console.log("handleTouchStart");
     events.current = EVENTS.TOUCH;
     handleStart(e);
   };
 
   /** An event handler called on `touch` events. */
   const handleTouchEnd = (e: Event.MouseTouch): void => {
-    console.log("handleTouchEnd");
     events.current = EVENTS.TOUCH;
     handleStop(e);
   };
 
   /** An event handler called on `mouse` events. */
   const handleMouseDown = (e: Event.MouseTouch): void => {
-    console.log("handleMouseDown");
     events.current = EVENTS.MOUSE;
     handleStart(e);
   };
 
   /** An event handler called on `mouse` events. */
   const handleMouseUp = (e: Event.MouseTouch): void => {
-    console.log("handleMouseUp");
     events.current = EVENTS.MOUSE;
     handleStop(e);
   };
 
-  const children = React.cloneElement(React.Children.only(props.children), {
-    onTouchEnd: handleTouchEnd,
-    onMouseDown: handleMouseDown,
-    onMouseUp: handleMouseUp
-  }, setRef);
-
-  return <DraggableFragment ref={fragment}>{children}</DraggableFragment>;
+  return (
+    <DraggableFragment ref={fragment}>
+      {React.cloneElement(React.Children.only(props.children), {
+        onTouchEnd: handleTouchEnd,
+        onMouseDown: handleMouseDown,
+        onMouseUp: handleMouseUp,
+      }, setRef)}
+    </DraggableFragment>
+  );
 });
 
 /** Sets the component's display name. */

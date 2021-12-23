@@ -137,19 +137,19 @@ export const on = (
     if (!position)
       return null;
   } else {
-    const offsetParent = (identifier.offsetParent || target.offsetParent || target.ownerDocument.body) as HTMLElement;
-    return offsetFromParent(position || event, offsetParent, identifier.scale);
+    const offsetParent = (identifier?.offsetParent || target.offsetParent || target.ownerDocument.body) as HTMLElement;
+    return offsetFromParent(position || event, offsetParent, identifier?.scale);
   }
 };
 
 /** Returns the relative position from offsetParent. */
-const offsetFromParent = (event: Offset, offsetParent: HTMLElement, scale: number): Coord => {
+const offsetFromParent = (event: Offset, offsetParent: HTMLElement, scale?: number): Coord => {
   const rect = offsetParent === offsetParent.ownerDocument.body 
              ? {left: 0, top: 0}
              : offsetParent.getBoundingClientRect();
   return {
-    x: (event.clientX + offsetParent.scrollLeft - rect.left) / scale,
-    y: (event.clientY + offsetParent.scrollTop - rect.top) / scale,
+    x: (event.clientX + offsetParent.scrollLeft - rect.left) / (scale || 1),
+    y: (event.clientY + offsetParent.scrollTop - rect.top) / (scale || 1),
   };
 };
 

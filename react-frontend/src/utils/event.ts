@@ -16,6 +16,9 @@
  */
 import * as Types from './types';
 
+/** General purpose event handlers. */
+export type Handler<T> = (e: T) => void | false;
+
 /** Makes CSS property prefixes map. */
 const makePrefixMap = (style: string, event: string): Record<string, string> => {
   const prefixes: Record<string, string> = {};

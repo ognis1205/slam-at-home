@@ -78,13 +78,13 @@ const Drag = (drag: Position.Drag, position: {x: number, y: number}, scale: numb
  */
 const Component: React.FunctionComponent<Props.Wrapper> = (props: Props.Wrapper): React.ReactElement => {
   /** @const Holds a dragging state. */
-  const [isDragging, setDragging] = React.useState<boolean>(false);
+  const isDragging = React.useRef<boolean>(false);
 
   /** @const Holds a dragging state. */
-  const [isDragged, setDragged] = React.useState<boolean>(false);
+  const isDragged = React.useRef<boolean>(false);
 
   /** @const Holds a dragging position. */
-  const [coord, setCoord] = React.useState<{x: number; y: number}>({
+  const [position, setPosition] = React.useState<{x: number; y: number}>({
     x: props.position?.x || props.defaultPosition?.x || 0,
     y: props.position?.y || props.defaultPosition?.y,
   });
@@ -102,6 +102,22 @@ const Component: React.FunctionComponent<Props.Wrapper> = (props: Props.Wrapper)
   const getElement = (): HTMLElement => 
     component.current;
 
+  /** Returns `true` if the component is dragging. */
+  const checkIfDragging = (): boolean => 
+    isDragging.current;
+
+  /** Sets the dragging flag. */
+  const setDragging = (flag: boolean): boolean => 
+    isDragging.current = flag;
+
+  /** Returns `true` if the component is dragged. */
+  const checkIfDragged = (): boolean => 
+    isDragged.current;
+
+  /** Sets the dragging flag. */
+  const setDragged = (flag: boolean): boolean => 
+    isDragged.current = flag;
+
   /** `componentWillUnmount` */
   Hook.useWillUnmount(() => {
     setDragging(false);
@@ -109,62 +125,55 @@ const Component: React.FunctionComponent<Props.Wrapper> = (props: Props.Wrapper)
 
   /** An event handler called on `start` events. */
   const handleStart = (e: MouseEvent, drag: Position.Drag): void | false => {
-    console.log("START");
-    if (props.onStart(e, Drag(drag, coord, props.scale)) === false)
+    if (props.onStart(e, Drag(drag, position, props.scale)) === false)
       return false;
-    console.log("START CHECKED 0");
     setDragging(true);
-    console.log("START CHECKED 1: ", isDragging);
     setDragged(true);
-    console.log("START CHECKED 2: ", isDragged);
   };
 
   /** An event handler called on `move` events. */
   const handleMove = (e: MouseEvent, drag: Position.Drag): void | false => {
-    console.log("MOVE: ", isDragging, coord);
-    if (!isDragging)
+    if (!checkIfDragging())
       return false;
 
-    const scaled = Drag(drag, coord, props.scale);
-    const newPosition = { x: scaled.x, y: scaled.y };
+    const scaled = Drag(drag, position, props.scale);
+    const newPosition = { x: drag.x, y: drag.y };
     const newSlack = { x: slack.x, y: slack.y };
-    if (props.bounds) {
-      const {x, y} = newPosition;
-      newPosition.x += slack.x;
-      newPosition.y += slack.y;
-      const bound = Position.get(
-        getElement(), 
-        props.bounds, 
-        newPosition.x, 
-        newPosition.y
-      );
-      newPosition.x = bound.x;
-      newPosition.y = bound.y;
-      newSlack.x = slack.x + (x - newPosition.x);
-      newSlack.y = slack.y + (y - newPosition.y);
-      scaled.x = newPosition.x;
-      scaled.y = newPosition.y;
-      scaled.dx = newPosition.x - coord.x;
-      scaled.dy = newPosition.y - coord.y;
-    }
+//    const newPosition = { x: scaled.x, y: scaled.y };
+//    if (props.bounds) {
+//      const {x, y} = newPosition;
+//      newPosition.x += slack.x;
+//      newPosition.y += slack.y;
+//      const bound = Position.get(
+//        getElement(), 
+//        props.bounds, 
+//        newPosition.x, 
+//        newPosition.y
+//      );
+//      newPosition.x = bound.x;
+//      newPosition.y = bound.y;
+//      newSlack.x = slack.x + (x - newPosition.x);
+//      newSlack.y = slack.y + (y - newPosition.y);
+//      scaled.x = newPosition.x;
+//      scaled.y = newPosition.y;
+//      scaled.dx = newPosition.x - position.x;
+//      scaled.dy = newPosition.y - position.y;
+//    }
 
     if (props.onMove(e, scaled) === false)
       return false;
-    console.log("POSITION: ", newPosition);
-    setCoord(newPosition);
-    console.log("SLACK: ", newSlack);
+    setPosition(newPosition);
     setSlack(newSlack);
   };
 
   /** An event handler called on `stop` events. */
   const handleStop = (e: MouseEvent, drag: Position.Drag): void | false => {
-    console.log("STOP");
-    if (!isDragging)
+    if (!checkIfDragging())
       return false;
-    if (props.onStop(e, Drag(drag, coord, props.scale)) === false)
+    if (props.onStop(e, Drag(drag, position, props.scale)) === false)
       return false;
     if (props.position)
-      setCoord({ x: props.position.x, y: props.position.y });
+      setPosition({ x: props.position.x, y: props.position.y });
     setDragging(false);
     setSlack({ x: 0, y: 0 });
   };
@@ -174,22 +183,6 @@ const Component: React.FunctionComponent<Props.Wrapper> = (props: Props.Wrapper)
     style,
     ...rest
   } = props.children.props;
-
-  const children = React.cloneElement(props.children, {
-    className: getClassName(className, isDragging, isDragged),
-    style: {
-      ...style,
-      transform: getTransform({
-        x: Position.canDragX(props.axis) && (!props.position || isDragging)
-         ? coord.x
-         : (props.position || props.defaultPosition).x,
-        y: Position.canDragY(props.axis) && (!props.position || isDragging)
-         ? coord.y
-         : (props.position || props.defaultPosition).y
-      }),
-    },
-    ...rest,
-  });
 
   return (
     <Draggable.Component
@@ -204,7 +197,21 @@ const Component: React.FunctionComponent<Props.Wrapper> = (props: Props.Wrapper)
       handler={null}
       canceler={null}
     >
-      {children}
+      {React.cloneElement(props.children, {
+        className: getClassName(className, checkIfDragging(), checkIfDragged()),
+        style: {
+          ...style,
+          transform: getTransform({
+            x: Position.canDragX(props.axis) && (!props.position || checkIfDragging())
+             ? position.x
+             : (props.position || props.defaultPosition).x,
+            y: Position.canDragY(props.axis) && (!props.position || checkIfDragging())
+             ? position.y
+             : (props.position || props.defaultPosition).y
+          }),
+        },
+        ...rest,
+      })}
     </Draggable.Component>
   );
 };

@@ -138,6 +138,23 @@ export const useMountedState = <T>(defaultValue?: T): [T, (next: T | (() => T)) 
 };
 
 /**
+ * Returns the referrable value of a specified variable.
+ * @param {T} defaultValue the default value.
+ * @returns a referred state variables.
+ */
+export const useReferredState = <T>(
+  defaultValue: T = undefined
+): [T, React.MutableRefObject<T>, React.Dispatch<T>] => {
+    const [state, setState] = React.useState<T>(defaultValue);
+    const ref = React.useRef<T>(state);
+    const setReferredState = (value: T) => {
+        ref.current = value;
+        setState(value);
+    };
+    return [state, ref, setReferredState];
+};
+
+/**
  * Returns appropriate `useLayoutEffect` according to the environment.
  */
 export const useLayoutEffect = 

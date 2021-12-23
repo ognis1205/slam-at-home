@@ -19,6 +19,7 @@ import * as NextApp from 'next/app';
 import Head from 'next/head';
 import * as Drawer from '../components/drawer';
 import * as Collapse from '../components/collapse';
+import * as Pane from '../containers/pane';
 import '../assets/styles/global.scss';
 
 import Image from "next/image";
@@ -93,6 +94,7 @@ const SLAM: React.FC<NextApp.AppProps> = ({ Component, pageProps }) => {
           content='minimum-scale=1, initial-scale=1, width=device-width'
         />
       </Head>
+      <Pane.Divider/>
       <Drawer.Component width="30vh" drawPane={null}>
         <Image src="/images/logo.png" width="128" height="64" />
         <Collapse.Wrapper
