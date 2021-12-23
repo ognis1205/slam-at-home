@@ -19,5 +19,5 @@ export type {
 } from "./props";
 
 export {
-  Component as Wrapper,
+  WithDefaultComponent as Wrapper,
 } from './wrapper';

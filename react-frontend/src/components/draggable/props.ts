@@ -22,43 +22,31 @@ import * as Position from '../../utils/position';
 export type DragEventHandler =
   (event: MouseEvent, drag: Position.Drag) => void | false;
 
-/** A {Context} component properties. */
-export interface Context {
-  onTouchEnd: (e: MouseEvent) => void,
-  onMouseDown: (e: MouseEvent) => void,
-  onMouseUp: (e: MouseEvent) => void,
-  [key: string]: unknown,
-}
-
-/** A type union of a component's children. */
-type Children =
-  (context: Context, ref: (node: unknown) => void) => React.ReactNode;
-
 /** A common properties shared by both {Draggable} and {Wrapper} components. */
 interface Common {
-  disabled: boolean;
-  allowAnyClick: boolean;
-  onStart: DragEventHandler;
-  onMove: DragEventHandler;
-  onStop: DragEventHandler;
-  onMouseDown: (e: MouseEvent) => void;
-  grid: [number, number];
+  disabled?: boolean;
+  allowAnyClick?: boolean;
+  onStart?: DragEventHandler;
+  onMove?: DragEventHandler;
+  onStop?: DragEventHandler;
+  onMouseDown?: (e: MouseEvent) => void;
+  grid?: [number, number];
 };
 
 /** A {Draggable} component properties. */
 export interface Draggable extends Common {
-  handler: DOM.Identifier;
-  canceler: DOM.Identifier;
-  children: Children;
+  handler?: DOM.Identifier;
+  canceler?: DOM.Identifier;
+  children?: React.ReactElement;
 }
 
 /** A {Wrapper} component properties. */
 export interface Wrapper extends Common {
-  axis: Position.Axis,
-  scale: number,
-  bounds: Position.Bounds | string | false,
-  position: Position.Coord,
-  positionOffset: Position.CSSCoord,
-  defaultPosition: Position.Coord,
-  children: React.ReactNode,
+  axis?: Position.Axis;
+  scale?: number;
+  bounds?: Position.Bounds | string | false;
+  position?: Position.Coord;
+  positionOffset?: Position.CSSCoord;
+  defaultPosition?: Position.Coord;
+  children?: React.ReactElement;
 };

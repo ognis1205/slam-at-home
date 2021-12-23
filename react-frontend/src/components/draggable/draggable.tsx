@@ -21,11 +21,10 @@ import * as Event from '../../utils/event';
 import * as Hook from '../../utils/hook';
 import * as Position from '../../utils/position';
 import * as Ref from '../../utils/ref';
-import * as Wrap from '../../utils/wrap';
 import styles from '../../assets/styles/components/draggable.module.scss';
 
 /** TODO: Refactor this fragment into function component if possible. */
-class DraggableFragment extends React.Component<{children: React.ReactNode}> {
+class DraggableFragment extends React.Component<{children: React.ReactElement}> {
   render() {
     return this.props.children;
   }
@@ -63,33 +62,14 @@ const stop = (document: Document): void => {
     selection.removeAllRanges();
 };
 
-
-/** Default properties. */
-//const DEFAULT_PROPS: Partial<Props.Draggable> = {
-//  disabled: false,
-//  onStart: (event: MouseEvent, drag: Position.Drag) => {},
-//  onMove: (event: MouseEvent, drag: Position.Drag) => {},
-//  onStop: (event: MouseEvent, drag: Position.Drag) => {},
-//};
-
 /**
  * Returns a `Draggable` component.
  * @param {Draggable} props Properties that defines a behaviour of this component.
  * @param {any} ref `ReactRef` object.
  * @return {ReactElement} A rendered React element.
  */
-export const Component = React.forwardRef<any, Props.Draggable>(({
-  disabled,
-  allowAnyClick,
-  onStart,
-  onMove,
-  onStop,
-  onMouseDown,
-  grid,
-  handler,
-  canceler,
-  children,
-}: Props.Draggable,
+export const Component = React.forwardRef<any, Props.Draggable>((
+  props: Props.Draggable, 
   ref: any
 ): React.ReactElement => {
   /** @const Holds the current touch event identifier state. */
@@ -138,8 +118,13 @@ export const Component = React.forwardRef<any, Props.Draggable>(({
   Hook.useDidMount(() => {
     hasMounted.current = true;
     const target = getElement();
-    if (target)
+    console.log("DID MOUNT", target);
+    if (target) {
+//    start(target.ownerDocument);
+//      Event.addListener(target, events.current.start, handleTouchStart, { passive: false });
       Event.addListener(target, EVENTS.TOUCH.start, handleTouchStart, { passive: false });
+//      Event.addListener(target, EVENTS.MOUSE.start, handleMouseDown, { passive: false });
+    }
   });
 
   /** `componentWillUnmount` */
@@ -157,15 +142,15 @@ export const Component = React.forwardRef<any, Props.Draggable>(({
 
   /** An event handler called on `start` events. */
   const handleStart = (e: Event.MouseTouch): void => {
-    onMouseDown(e);
-    if (!allowAnyClick && typeof e.button === 'number' && e.button !== 0)
+    props.onMouseDown(e);
+    if (!props.allowAnyClick && typeof e.button === 'number' && e.button !== 0)
       return;
 
     const target = getElement();
-    if (disabled ||
+    if (props.disabled ||
         (!(e.target instanceof target.ownerDocument.defaultView.Node)) ||
-        (handler && !DOM.matchRecursive(e.target, handler, target)) ||
-        (canceler && DOM.matchRecursive(e.target, canceler, target)))
+        (props.handler && !DOM.matchRecursive(e.target, props.handler, target)) ||
+        (props.canceler && DOM.matchRecursive(e.target, props.canceler, target)))
       return;
 
     if (e.type === 'touchstart')
@@ -174,7 +159,7 @@ export const Component = React.forwardRef<any, Props.Draggable>(({
     setIdentifier(Event.getTouchIdentifier(e));
     const {x, y} = Position.on(e, target, identifier) || {};
     if ((!x || !y) ||
-        onStart(e, Position.drag(target, position, x, y)) === false ||
+        props.onStart(e, Position.drag(target, position, x, y)) === false ||
         !isMounted())
       return;
 
@@ -183,23 +168,25 @@ export const Component = React.forwardRef<any, Props.Draggable>(({
     setPosition({ x0: x, y0: y });
     Event.addListener(target.ownerDocument, events.current.move, handleMove);
     Event.addListener(target.ownerDocument, events.current.stop, handleStop);
+    console.log("handleStart: ", x, y);
   };
 
   /** An event handler called on `move` events. */
   const handleMove = (e: Event.MouseTouch): void => {
     const target = getElement();
     let {x, y} = Position.on(e, target, identifier) || {};
+    console.log("handleMove: ", x, y);
     if (!x || !y)
       return;
-    if (Array.isArray(grid)) {
+    if (Array.isArray(props.grid)) {
       let dx = x - position.x0, dy = y - position.y0;
-      [dx, dy] = Position.snapTo(grid, dx, dy);
+      [dx, dy] = Position.snapTo(props.grid, dx, dy);
       if (!dx && !dy)
         return;
       x = position.x0 + dx, y = position.y0 + dy;
     }
 
-    if (onMove(e, Position.drag(target, position, x, y)) === false ||
+    if (props.onMove(e, Position.drag(target, position, x, y)) === false ||
         !isMounted()) {
       try {
         handleStop(new MouseEvent('mouseup') as Event.MouseTouch);
@@ -222,7 +209,7 @@ export const Component = React.forwardRef<any, Props.Draggable>(({
     const target = getElement();
     const {x, y} = Position.on(e, target, identifier) || {};
     if ((!x || !y) ||
-        onStop(e, Position.drag(target, position, x, y)) === false ||
+        props.onStop(e, Position.drag(target, position, x, y)) === false ||
         !isMounted())
       return;
 
@@ -235,43 +222,40 @@ export const Component = React.forwardRef<any, Props.Draggable>(({
 
   /** An event handler called on `touch` events. */
   const handleTouchStart = (e: Event.MouseTouch): void => {
+    console.log("handleTouchStart");
     events.current = EVENTS.TOUCH;
     handleStart(e);
   };
 
   /** An event handler called on `touch` events. */
   const handleTouchEnd = (e: Event.MouseTouch): void => {
+    console.log("handleTouchEnd");
     events.current = EVENTS.TOUCH;
     handleStop(e);
   };
 
   /** An event handler called on `mouse` events. */
   const handleMouseDown = (e: Event.MouseTouch): void => {
+    console.log("handleMouseDown");
     events.current = EVENTS.MOUSE;
     handleStart(e);
   };
 
   /** An event handler called on `mouse` events. */
   const handleMouseUp = (e: Event.MouseTouch): void => {
+    console.log("handleMouseUp");
     events.current = EVENTS.MOUSE;
     handleStop(e);
   };
 
-  return (
-    <DraggableFragment ref={fragment}>
-      {children(
-        { onTouchEnd: handleTouchEnd, onMouseDown: handleMouseDown, onMouseUp: handleMouseUp }, 
-        setRef,
-      )}
-    </DraggableFragment>
-  );
+  const children = React.cloneElement(React.Children.only(props.children), {
+    onTouchEnd: handleTouchEnd,
+    onMouseDown: handleMouseDown,
+    onMouseUp: handleMouseUp
+  }, setRef);
+
+  return <DraggableFragment ref={fragment}>{children}</DraggableFragment>;
 });
 
 /** Sets the component's display name. */
 Component.displayName = 'Draggable';
-
-/** Returns a `Draggable` component with default property values. */
-//export const WithDefaultComponent: React.FunctionComponent<Props.Draggable> = Wrap.withDefaultProps(
-//  Component, 
-//  DEFAULT_PROPS
-//);
