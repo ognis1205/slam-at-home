@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1CF76CC32C35C7A20B9E755B /* Pods_SLAMCamera.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6EC0431A60171063900F962 /* Pods_SLAMCamera.framework */; };
+		27662278340A09F1FEEE8BA5 /* Pods_SLAMCamera_SLAMCameraUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 547BD3C4FD64017A36E2410F /* Pods_SLAMCamera_SLAMCameraUITests.framework */; };
+		3E74AF3F03CD48BD4B959745 /* Pods_SLAMCameraTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D91D9EB9ECD0A6FF0A748F6 /* Pods_SLAMCameraTests.framework */; };
+		540B26912775EBB3004C458D /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540B26902775EBB3004C458D /* Queue.swift */; };
+		540B269627761F82004C458D /* QueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540B269527761F82004C458D /* QueueTests.swift */; };
 		54E389E226E50C7A00A96B84 /* SLAMCameraApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E389E126E50C7A00A96B84 /* SLAMCameraApp.swift */; };
 		54E389E426E50C7A00A96B84 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E389E326E50C7A00A96B84 /* ContentView.swift */; };
 		54E389E626E50C7D00A96B84 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54E389E526E50C7D00A96B84 /* Assets.xcassets */; };
@@ -33,6 +38,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3ACF871514DDC1359B729ECA /* Pods-SLAMCamera-SLAMCameraUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SLAMCamera-SLAMCameraUITests.debug.xcconfig"; path = "Target Support Files/Pods-SLAMCamera-SLAMCameraUITests/Pods-SLAMCamera-SLAMCameraUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		540B26902775EBB3004C458D /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
+		540B269527761F82004C458D /* QueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueTests.swift; sourceTree = "<group>"; };
+		547BD3C4FD64017A36E2410F /* Pods_SLAMCamera_SLAMCameraUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SLAMCamera_SLAMCameraUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		54E389DE26E50C7A00A96B84 /* SLAMCamera.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SLAMCamera.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		54E389E126E50C7A00A96B84 /* SLAMCameraApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SLAMCameraApp.swift; sourceTree = "<group>"; };
 		54E389E326E50C7A00A96B84 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -45,6 +54,13 @@
 		54E389FA26E50C7E00A96B84 /* SLAMCameraUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SLAMCameraUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		54E389FE26E50C7E00A96B84 /* SLAMCameraUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SLAMCameraUITests.swift; sourceTree = "<group>"; };
 		54E38A0026E50C7E00A96B84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		624783186FA4E6B1FFDA48C6 /* Pods-SLAMCameraTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SLAMCameraTests.debug.xcconfig"; path = "Target Support Files/Pods-SLAMCameraTests/Pods-SLAMCameraTests.debug.xcconfig"; sourceTree = "<group>"; };
+		6D91D9EB9ECD0A6FF0A748F6 /* Pods_SLAMCameraTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SLAMCameraTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		82887FEE393CF2E1DC120D47 /* Pods-SLAMCameraTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SLAMCameraTests.release.xcconfig"; path = "Target Support Files/Pods-SLAMCameraTests/Pods-SLAMCameraTests.release.xcconfig"; sourceTree = "<group>"; };
+		B516427731B51B3B28C01D25 /* Pods-SLAMCamera.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SLAMCamera.debug.xcconfig"; path = "Target Support Files/Pods-SLAMCamera/Pods-SLAMCamera.debug.xcconfig"; sourceTree = "<group>"; };
+		D0582F0157B158A29224F383 /* Pods-SLAMCamera.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SLAMCamera.release.xcconfig"; path = "Target Support Files/Pods-SLAMCamera/Pods-SLAMCamera.release.xcconfig"; sourceTree = "<group>"; };
+		EE8074C632106DCF87F545BA /* Pods-SLAMCamera-SLAMCameraUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SLAMCamera-SLAMCameraUITests.release.xcconfig"; path = "Target Support Files/Pods-SLAMCamera-SLAMCameraUITests/Pods-SLAMCamera-SLAMCameraUITests.release.xcconfig"; sourceTree = "<group>"; };
+		F6EC0431A60171063900F962 /* Pods_SLAMCamera.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SLAMCamera.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +68,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1CF76CC32C35C7A20B9E755B /* Pods_SLAMCamera.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,6 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E74AF3F03CD48BD4B959745 /* Pods_SLAMCameraTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,12 +84,23 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27662278340A09F1FEEE8BA5 /* Pods_SLAMCamera_SLAMCameraUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		045C49F02B497C3A9207F5BB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F6EC0431A60171063900F962 /* Pods_SLAMCamera.framework */,
+				547BD3C4FD64017A36E2410F /* Pods_SLAMCamera_SLAMCameraUITests.framework */,
+				6D91D9EB9ECD0A6FF0A748F6 /* Pods_SLAMCameraTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		54E389D526E50C7A00A96B84 = {
 			isa = PBXGroup;
 			children = (
@@ -79,6 +108,8 @@
 				54E389F226E50C7E00A96B84 /* SLAMCameraTests */,
 				54E389FD26E50C7E00A96B84 /* SLAMCameraUITests */,
 				54E389DF26E50C7A00A96B84 /* Products */,
+				CC036194C8A11759F9379E4C /* Pods */,
+				045C49F02B497C3A9207F5BB /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -100,6 +131,7 @@
 				54E389E526E50C7D00A96B84 /* Assets.xcassets */,
 				54E389EA26E50C7D00A96B84 /* Info.plist */,
 				54E389E726E50C7D00A96B84 /* Preview Content */,
+				540B26902775EBB3004C458D /* Queue.swift */,
 			);
 			path = SLAMCamera;
 			sourceTree = "<group>";
@@ -117,6 +149,7 @@
 			children = (
 				54E389F326E50C7E00A96B84 /* SLAMCameraTests.swift */,
 				54E389F526E50C7E00A96B84 /* Info.plist */,
+				540B269527761F82004C458D /* QueueTests.swift */,
 			);
 			path = SLAMCameraTests;
 			sourceTree = "<group>";
@@ -130,6 +163,20 @@
 			path = SLAMCameraUITests;
 			sourceTree = "<group>";
 		};
+		CC036194C8A11759F9379E4C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B516427731B51B3B28C01D25 /* Pods-SLAMCamera.debug.xcconfig */,
+				D0582F0157B158A29224F383 /* Pods-SLAMCamera.release.xcconfig */,
+				3ACF871514DDC1359B729ECA /* Pods-SLAMCamera-SLAMCameraUITests.debug.xcconfig */,
+				EE8074C632106DCF87F545BA /* Pods-SLAMCamera-SLAMCameraUITests.release.xcconfig */,
+				624783186FA4E6B1FFDA48C6 /* Pods-SLAMCameraTests.debug.xcconfig */,
+				82887FEE393CF2E1DC120D47 /* Pods-SLAMCameraTests.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -137,9 +184,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 54E38A0326E50C7E00A96B84 /* Build configuration list for PBXNativeTarget "SLAMCamera" */;
 			buildPhases = (
+				0B88C4C57EF083C7953FE668 /* [CP] Check Pods Manifest.lock */,
 				54E389DA26E50C7A00A96B84 /* Sources */,
 				54E389DB26E50C7A00A96B84 /* Frameworks */,
 				54E389DC26E50C7A00A96B84 /* Resources */,
+				045DA8D6841C712BCA699CE3 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -154,6 +203,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 54E38A0626E50C7E00A96B84 /* Build configuration list for PBXNativeTarget "SLAMCameraTests" */;
 			buildPhases = (
+				BF786B72888A8CF3B646C621 /* [CP] Check Pods Manifest.lock */,
 				54E389EB26E50C7E00A96B84 /* Sources */,
 				54E389EC26E50C7E00A96B84 /* Frameworks */,
 				54E389ED26E50C7E00A96B84 /* Resources */,
@@ -172,9 +222,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 54E38A0926E50C7E00A96B84 /* Build configuration list for PBXNativeTarget "SLAMCameraUITests" */;
 			buildPhases = (
+				834ED21F9D18927D0AB6C76F /* [CP] Check Pods Manifest.lock */,
 				54E389F626E50C7E00A96B84 /* Sources */,
 				54E389F726E50C7E00A96B84 /* Frameworks */,
 				54E389F826E50C7E00A96B84 /* Resources */,
+				617F3180996B5053241D5701 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -254,12 +306,116 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		045DA8D6841C712BCA699CE3 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SLAMCamera/Pods-SLAMCamera-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SLAMCamera/Pods-SLAMCamera-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SLAMCamera/Pods-SLAMCamera-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		0B88C4C57EF083C7953FE668 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SLAMCamera-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		617F3180996B5053241D5701 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SLAMCamera-SLAMCameraUITests/Pods-SLAMCamera-SLAMCameraUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SLAMCamera-SLAMCameraUITests/Pods-SLAMCamera-SLAMCameraUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SLAMCamera-SLAMCameraUITests/Pods-SLAMCamera-SLAMCameraUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		834ED21F9D18927D0AB6C76F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SLAMCamera-SLAMCameraUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BF786B72888A8CF3B646C621 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SLAMCameraTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		54E389DA26E50C7A00A96B84 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				54E389E426E50C7A00A96B84 /* ContentView.swift in Sources */,
+				540B26912775EBB3004C458D /* Queue.swift in Sources */,
 				54E389E226E50C7A00A96B84 /* SLAMCameraApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -269,6 +425,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				54E389F426E50C7E00A96B84 /* SLAMCameraTests.swift in Sources */,
+				540B269627761F82004C458D /* QueueTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -414,6 +571,7 @@
 		};
 		54E38A0426E50C7E00A96B84 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B516427731B51B3B28C01D25 /* Pods-SLAMCamera.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -435,6 +593,7 @@
 		};
 		54E38A0526E50C7E00A96B84 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D0582F0157B158A29224F383 /* Pods-SLAMCamera.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -456,6 +615,7 @@
 		};
 		54E38A0726E50C7E00A96B84 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 624783186FA4E6B1FFDA48C6 /* Pods-SLAMCameraTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -477,6 +637,7 @@
 		};
 		54E38A0826E50C7E00A96B84 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 82887FEE393CF2E1DC120D47 /* Pods-SLAMCameraTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -498,6 +659,7 @@
 		};
 		54E38A0A26E50C7E00A96B84 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3ACF871514DDC1359B729ECA /* Pods-SLAMCamera-SLAMCameraUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -517,6 +679,7 @@
 		};
 		54E38A0B26E50C7E00A96B84 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EE8074C632106DCF87F545BA /* Pods-SLAMCamera-SLAMCameraUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
