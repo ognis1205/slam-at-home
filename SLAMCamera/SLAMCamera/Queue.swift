@@ -6,7 +6,6 @@
 //  Copyright © 2021 Shingo OKAWA. All rights reserved.
 //
 
-/// Represents `Queue` items.
 private class Entry<T> {
   /// Immutable assigned value of the item.
   fileprivate let value: T!
@@ -15,16 +14,18 @@ private class Entry<T> {
   fileprivate var next: Entry?
 
   /// Initializer.
-  ///
-  /// - Parameters:
-  ///   - value: The newly assigned value.
   init(_ value: T?) {
     self.value = value
   }
 }
 
-/// Represents general purpose queues.
 open class Queue<T> {
+  /// Peep operation types.
+  public enum PeepType {
+    case HEAD
+    case TAIL
+  }
+
   /// The head entry of the queue.
   fileprivate var head: Entry<T>
   
@@ -38,9 +39,6 @@ open class Queue<T> {
   fileprivate var length = 0
 
   /// Initializer.
-  ///
-  /// - Parameters:
-  ///   - capacity: The maximum capacity of the queue.
   public init(capacity: Int) {
     self.tail = Entry(nil)
     self.head = self.tail
@@ -48,9 +46,6 @@ open class Queue<T> {
   }
 
   /// Pushes a new item into the tail of the queue.
-  ///
-  /// - Parameters:
-  ///   - value: The newly assigned item to the queue.
   open func push(_ value: T) {
     if self.length >= self.capacity {
       self.tail = Entry(value)
@@ -62,8 +57,6 @@ open class Queue<T> {
   }
 
   /// Pops the oldest item from the head of the queue.
-  ///
-  /// - Returns: The oldest assigned item from the queue.
   open func pop() -> T? {
     if let new = self.head.next {
       self.head = new
@@ -75,9 +68,30 @@ open class Queue<T> {
     }
   }
 
+  /// Peeps the item from the queue.
+  open func peep(_ type: PeepType = PeepType.HEAD) -> T? {
+    switch type {
+    case .HEAD:
+      if let entry = self.head.next {
+        return entry.value
+      } else {
+        return nil
+      }
+    case .TAIL:
+      if let value = self.tail.value {
+        return value
+      } else {
+        return nil
+      }
+    }
+  }
+
+  /// Returns the current lenght of the queue.
+  open func getLength() -> Int {
+    return self.length
+  }
+
   /// Checks if the queue is empty or not.
-  ///
-  /// - Returns: `true` if the queue is empty.
   open func isEmpty() -> Bool {
     return self.head === self.tail
   }
