@@ -28,5 +28,5 @@ export {
 } from './right';
 
 export {
-  Component as Divider,
+  WithDefaultComponent as Divider,
 } from './divider';

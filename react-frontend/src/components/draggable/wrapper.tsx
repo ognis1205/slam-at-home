@@ -58,19 +58,6 @@ const getTransform = (
 ): string =>
   `translate(${x}px,${y}px)`;
 
-/** Scales dragging context. */
-const Drag = (drag: Position.Drag, position: {x: number, y: number}, scale: number): Position.Drag => {
-  return {
-    target: drag.target,
-    x: position.x + (drag.dx / scale),
-    y: position.y + (drag.dy / scale),
-    dx: (drag.dx / scale),
-    dy: (drag.dy / scale),
-    x0: position.x,
-    y0: position.y
-  };
-};
-
 /**
  * Returns a `Wrapper` component.
  * @param {Wrapper} props Properties that defines a behaviour of this component.
@@ -125,7 +112,7 @@ const Component: React.FunctionComponent<Props.Wrapper> = (props: Props.Wrapper)
 
   /** An event handler called on `start` events. */
   const handleStart = (e: MouseEvent, drag: Position.Drag): void | false => {
-    if (props.onStart(e, Drag(drag, position, props.scale)) === false)
+    if (props.onStart(e, drag) === false)
       return false;
     setDragging(true);
     setDragged(true);
@@ -135,32 +122,9 @@ const Component: React.FunctionComponent<Props.Wrapper> = (props: Props.Wrapper)
   const handleMove = (e: MouseEvent, drag: Position.Drag): void | false => {
     if (!checkIfDragging())
       return false;
-
-    const scaled = Drag(drag, position, props.scale);
     const newPosition = { x: drag.x, y: drag.y };
     const newSlack = { x: slack.x, y: slack.y };
-//    const newPosition = { x: scaled.x, y: scaled.y };
-//    if (props.bounds) {
-//      const {x, y} = newPosition;
-//      newPosition.x += slack.x;
-//      newPosition.y += slack.y;
-//      const bound = Position.get(
-//        getElement(), 
-//        props.bounds, 
-//        newPosition.x, 
-//        newPosition.y
-//      );
-//      newPosition.x = bound.x;
-//      newPosition.y = bound.y;
-//      newSlack.x = slack.x + (x - newPosition.x);
-//      newSlack.y = slack.y + (y - newPosition.y);
-//      scaled.x = newPosition.x;
-//      scaled.y = newPosition.y;
-//      scaled.dx = newPosition.x - position.x;
-//      scaled.dy = newPosition.y - position.y;
-//    }
-
-    if (props.onMove(e, scaled) === false)
+    if (props.onMove(e, drag) === false)
       return false;
     setPosition(newPosition);
     setSlack(newSlack);
@@ -170,7 +134,7 @@ const Component: React.FunctionComponent<Props.Wrapper> = (props: Props.Wrapper)
   const handleStop = (e: MouseEvent, drag: Position.Drag): void | false => {
     if (!checkIfDragging())
       return false;
-    if (props.onStop(e, Drag(drag, position, props.scale)) === false)
+    if (props.onStop(e, drag) === false)
       return false;
     if (props.position)
       setPosition({ x: props.position.x, y: props.position.y });

@@ -94,7 +94,35 @@ const SLAM: React.FC<NextApp.AppProps> = ({ Component, pageProps }) => {
           content='minimum-scale=1, initial-scale=1, width=device-width'
         />
       </Head>
+      <Pane.Left>
+        <ul>
+          <li>test</li>
+          <li>test</li>
+          <li>test</li>
+          <li>test</li>
+          <li>test</li>
+          <li>test</li>
+          <li>test</li>
+          <li>test</li>
+          <li>test</li>
+          <li>test</li>
+        </ul>
+      </Pane.Left>
       <Pane.Divider/>
+      <Pane.Right>
+        <ul>
+          <li>test</li>
+          <li>test</li>
+          <li>test</li>
+          <li>test</li>
+          <li>test</li>
+          <li>test</li>
+          <li>test</li>
+          <li>test</li>
+          <li>test</li>
+          <li>test</li>
+        </ul>
+      </Pane.Right>
       <Drawer.Component width="30vh" drawPane={null}>
         <Image src="/images/logo.png" width="128" height="64" />
         <Collapse.Wrapper
