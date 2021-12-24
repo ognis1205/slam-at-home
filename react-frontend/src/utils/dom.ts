@@ -113,6 +113,19 @@ export const matchRecursive = (element: Node, selector: Identifier, root: Node):
   return false;
 };
 
+/** Returns the window size. */
+export const getWindowSize = (): [number, number] => {
+  if (!isDefined())
+    return undefined;
+  const width  = window.innerWidth ||
+                 document.documentElement.clientWidth || 
+                 document.body.clientWidth;
+  const height = window.innerHeight || 
+                 document.documentElement.clientHeight|| 
+                 document.body.clientHeight;
+  return [width, height];
+};
+
 /** Returns the outer height of the element. */
 export const getOuterHeight = (target: HTMLElement | SVGElement): number => {
   if (!isDefined())
