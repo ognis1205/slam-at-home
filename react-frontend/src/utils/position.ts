@@ -183,3 +183,16 @@ export const canDragX = (axis: Axis): boolean =>
 /** Returns `true` if the axis is y-directional draggable. */
 export const canDragY = (axis: Axis): boolean =>
   axis === 'both' || axis === 'y';
+
+/** Scales dragging context. */
+export const scale = (drag: Drag, position: {x: number, y: number}, scale: number): Drag => {
+  return {
+    target: drag.target,
+    x: position.x + (drag.dx / scale),
+    y: position.y + (drag.dy / scale),
+    dx: (drag.dx / scale),
+    dy: (drag.dy / scale),
+    x0: position.x,
+    y0: position.y
+  };
+};
