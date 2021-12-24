@@ -15,7 +15,6 @@
  * limitations under the License.
  */
 import * as Draggable from '../../components/draggable';
-import * as Position from '../../utils/position';
 
 /** A {Left} component properties. */
 export interface Left {
@@ -29,7 +28,6 @@ export interface Right {
 
 /** A {Divider} component properties. */
 export interface Divider extends Draggable.Props {
-//  axis: Position.Axis,
-//  position?: Position.Coord;
-//  defaultPosition?: Position.Coord;
+  leftmost: number;
+  rightmost: number;
 }

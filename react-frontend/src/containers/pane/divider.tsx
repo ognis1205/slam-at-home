@@ -25,24 +25,12 @@ import * as Wrap from '../../utils/wrap';
 import classnames from 'classnames';
 import styles from '../../assets/styles/containers/pane.module.scss';
 
-/** The left most x-coord. */
-const LEFT_MIN_POS: number = 200;
-
 /** Default properties. */
 const DEFAULT_PROPS: Partial<Props.Divider> = {
-//  disabled: false,
-//  allowAnyClick: false,
-//  onStart: () => {},
-//  onMove: () => {},
-//  onStop: () => {},
-//  onMouseDown: () => {},
-//  grid: null,
   axis: 'x',
-//  scale: 1,
-//  bounds: false,
-//  position: null,
-//  positionOffset: null,
-  defaultPosition: {x: LEFT_MIN_POS, y: 0},
+  defaultPosition: {x: 200, y: 0},
+  leftmost: 200,
+  rightmost: 200,
 };
 
 /** Returns the class name of the wrapper. */
@@ -50,12 +38,6 @@ const getClassName = (className: string): string =>
   classnames({
     [className || '']: !!className,
   });
-
-/** Returns the `transform` CSS property. */
-const getLeftWidth = (
-  {x, y}: Position.Coord,
-): string =>
-  `${x}px`;
 
 /**
  * Returns a `Div` component.
@@ -76,7 +58,7 @@ export const Component: React.FunctionComponent<Props.Divider> = (props: Props.D
   /** @const Holds a dragging position. */
   const [position, setPosition] = React.useState<{x: number; y: number}>({
     x: props.position?.x || props.defaultPosition?.x || 0,
-    y: props.position?.y || props.defaultPosition?.y,
+    y: props.position?.y || props.defaultPosition?.y || 0,
   });
 
   /** @const Holds a reference to the component itself. */
@@ -136,7 +118,7 @@ export const Component: React.FunctionComponent<Props.Divider> = (props: Props.D
   /** Sets a CSS style on panes. */
   const resize = (): void => {
     const [left, right] = getPanes();
-    const [width, height] = DOM.getWindowSize();
+    const [width,] = DOM.getWindowSize();
     left.style.width = `${position.x}px`;
     right.style.left = `${position.x + 10}px`
     right.style.width = `${width - position.x - 10}px`
@@ -144,14 +126,16 @@ export const Component: React.FunctionComponent<Props.Divider> = (props: Props.D
 
   /** An event handler called on `start` events. */
   const handleStart = (e: MouseEvent, drag: Position.Drag): void | false => {
-    if (drag.x < LEFT_MIN_POS)
+    const [width,] = DOM.getWindowSize();
+    if (drag.x < props.leftmost || drag.x > width - props.rightmost)
       return false;
     setDragging(true);
   };
 
   /** An event handler called on `move` events. */
   const handleMove = (e: MouseEvent, drag: Position.Drag): void | false => {
-    if (!checkIfDragging() || drag.x < LEFT_MIN_POS)
+    const [width,] = DOM.getWindowSize();
+    if (!checkIfDragging() || drag.x < props.leftmost || drag.x > width - props.rightmost)
       return false;
     const newPosition = { x: drag.x, y: drag.y };
     setPosition(newPosition);
