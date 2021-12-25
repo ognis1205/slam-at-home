@@ -54,7 +54,7 @@ const getClassName = (
 
 /** Returns the `transform` CSS property. */
 const getTransform = (
-  {x, y}: Position.Coord,
+  {x, y}: Position.CSSCoord,
 ): string =>
   `translate(${x}px,${y}px)`;
 

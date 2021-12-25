@@ -126,6 +126,26 @@ export const getWindowSize = (): [number, number] => {
   return [width, height];
 };
 
+/** Returns the window size. */
+export const vw = (value: number): number => {
+  if (!isDefined())
+    return undefined;
+  const width  = window.innerWidth ||
+                 document.documentElement.clientWidth || 
+                 document.body.clientWidth;
+  return Math.floor(width * value / 100.0);
+};
+
+/** Returns the window size. */
+export const vh = (value: number): number => {
+  if (!isDefined())
+    return undefined;
+  const height = window.innerHeight || 
+                 document.documentElement.clientHeight|| 
+                 document.body.clientHeight;
+  return Math.floor(height * value / 100.0);
+};
+
 /** Returns the outer height of the element. */
 export const getOuterHeight = (target: HTMLElement | SVGElement): number => {
   if (!isDefined())
