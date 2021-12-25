@@ -12,7 +12,7 @@
 
 @implementation IP
 /// Returns the device IP address.
-+ (NSString *) get {
++ (NSString *) getAddress {
   NSString *address = @"ip_address_error";
   struct ifaddrs *interfaces = NULL;
   struct ifaddrs *addr = NULL;

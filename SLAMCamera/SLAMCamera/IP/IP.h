@@ -14,5 +14,5 @@
 
 @interface IP : NSObject
 /// Returns the device IP address.
-+ (NSString *) get;
++ (NSString *) getAddress;
 @end
