@@ -8,14 +8,14 @@
 import Foundation
 import CocoaAsyncSocket
 
-class Session {
+class Connection {
   /// Identifier.
   var id: Int
 
   /// Asyncronous socket.
   fileprivate var socket: GCDAsyncSocket
   
-  /// Cocoa async socket dispatch queue.
+  /// Worker queue.
   fileprivate var dispatchQueue: DispatchQueue
 
   /// Data stack to send.
@@ -48,9 +48,9 @@ class Session {
   /// - Parameters:
   ///   - id: The ideintifier of this session.
   ///   - socket: Cocoa asyncronous socket of this session.
-  ///   - dispatchQueue:Cocoa asyncronous socket dispatcher.
+  ///   - dispatchQueue:The worker queue.
   init(id: Int, socket: GCDAsyncSocket, dispatchQueue: DispatchQueue) {
-    print("Creating client: [#\(id)]")
+    print("Creating connection [#\(id)]")
     self.id = id
     self.socket = socket
     self.dispatchQueue = dispatchQueue
@@ -58,16 +58,16 @@ class Session {
 
   /// Closes the connection.
   func close() {
-    print("Closing client: [#\(self.id)]")
+    print("Closing connection [#\(self.id)]")
     self.isConnected = false
   }
 
   /// Starts the streaming session.
-  func start() {
+  func open() {
     self.dispatchQueue.async(execute: { [unowned self] in
       while self.isConnected {
         if !self.isStreaming {
-          print("Sending headers: [#\(self.id)]")
+          print("Sending header [#\(self.id)]")
           guard let header = [
             "HTTP/1.0 200 OK",
             "Connection: keep-alive",
@@ -82,7 +82,7 @@ class Session {
             "Content-type: multipart/x-mixed-replace; boundary=0123456789876543210",
             ""
           ].joined(separator: "\r\n").data(using: String.Encoding.utf8) else {
-            print("Could not make headers data [#\(self.id)]")
+            print("Could not make header data [#\(self.id)]")
             return
           }
           self.isStreaming = true
@@ -90,7 +90,7 @@ class Session {
         } else {
           if (self.socket.connectedPort.hashValue == 0 || !self.socket.isConnected) {
             self.close()
-            print("Dropping client [#\(self.id)]")
+            print("Dropping connection [#\(self.id)]")
           }
           if let data = self.dataStack.pop() {
             guard let header = [
@@ -101,7 +101,7 @@ class Session {
               "",
               ""
             ].joined(separator: "\r\n").data(using: String.Encoding.utf8) else {
-              print("Could not make frame headers data [#\(self.id)]")
+              print("Could not make frame header data [#\(self.id)]")
               return
             }
             self.socket.write(header, withTimeout: -1, tag: 0)
