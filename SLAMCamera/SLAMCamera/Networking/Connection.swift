@@ -1,5 +1,5 @@
 //
-//  Session.swift
+//  Connection.swift
 //  SLAMCamera
 //
 //  Created by Shingo OKAWA on 2021/12/24.

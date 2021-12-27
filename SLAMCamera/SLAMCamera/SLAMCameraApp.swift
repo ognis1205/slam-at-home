@@ -8,10 +8,10 @@
 import SwiftUI
 
 @main
-struct SLAMCameraApp: App {
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-        }
+struct SLAMCamera: App {
+  var body: some Scene {
+    WindowGroup {
+      ContentView()
     }
+  }
 }

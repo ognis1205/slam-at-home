@@ -17,7 +17,25 @@ private enum SessionSetupResult {
 
 public class StreamingService: NSObject {
   /// The service port number.
-  static let PORT: UInt16 = 10001
+  public static let PORT: UInt16 = 10001
+
+  /// $Observable state of URL.
+  @Published public var URL = ""
+
+  /// $Observable state of alert flag.
+  @Published public var shouldShowAlertView = false
+
+  /// $Observable state of camera availability.
+  @Published public var isCameraUnavailable = true
+
+  /// $Observable state of socket availability.
+  @Published public var isSocketUnavailable = true
+
+  /// The session so that the video preview layer can output what the camera is capturing.
+  public let avCaptureSession = AVCaptureSession()
+
+  /// Reference to the current alert.
+  public var alert: Alert = Alert()
 
   /// Stores the result of the setup process.
   fileprivate var setupResult: SessionSetupResult = .success
@@ -50,9 +68,6 @@ public class StreamingService: NSObject {
   fileprivate let connectionQueue = DispatchQueue(
     label: "connection queue",
     attributes: .concurrent)
-
-  /// The session so that the video preview layer can output what the camera is capturing.
-  fileprivate let avCaptureSession = AVCaptureSession()
   
   /// Reference to the camera device.
   @objc dynamic fileprivate var avDeviceInput: AVCaptureDeviceInput!
@@ -77,21 +92,6 @@ public class StreamingService: NSObject {
   
   /// Server start flag.
   fileprivate var isSocketListening = false
-
-  /// Reference to the current alert.
-  public var alert: Alert = Alert()
-
-  /// $Observable state of URL.
-  @Published public var URL = ""
-
-  /// $Observable state of alert flag.
-  @Published public var shouldShowAlertView = false
-
-  /// $Observable state of camera availability.
-  @Published public var isCameraUnavailable = true
-
-  /// $Observable state of socket availability.
-  @Published public var isSocketUnavailable = true
 
   /// Checks for user's permissions
   public func checkPermissions() {
@@ -125,6 +125,13 @@ public class StreamingService: NSObject {
           self.shouldShowAlertView = true
           self.isCameraUnavailable = true
         }
+    }
+  }
+
+  /// Configures the device and session.
+  public func start() {
+    self.sessionQueue.async {
+      self.setupAndStart()
     }
   }
 
