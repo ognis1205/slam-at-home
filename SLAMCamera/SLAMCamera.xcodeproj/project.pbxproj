@@ -10,13 +10,15 @@
 		010BD1DA3DC15CFEA5B4DD34 /* Pods_SLAMCameraTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9985B436AC999C7AEB2345 /* Pods_SLAMCameraTests.framework */; };
 		5489C9D42777AA45009DB2F2 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5489C9D32777AA45009DB2F2 /* Queue.swift */; };
 		5489C9D92777AA72009DB2F2 /* QueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5489C9D82777AA72009DB2F2 /* QueueTests.swift */; };
-		5489C9DE2777ADAA009DB2F2 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5489C9DD2777ADAA009DB2F2 /* Session.swift */; };
+		5489C9DE2777ADAA009DB2F2 /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5489C9DD2777ADAA009DB2F2 /* Connection.swift */; };
 		54C5CA6C2777863300893FD1 /* SLAMCameraApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C5CA6B2777863300893FD1 /* SLAMCameraApp.swift */; };
 		54C5CA6E2777863400893FD1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C5CA6D2777863400893FD1 /* ContentView.swift */; };
 		54C5CA702777863800893FD1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54C5CA6F2777863800893FD1 /* Assets.xcassets */; };
 		54C5CA732777863800893FD1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54C5CA722777863800893FD1 /* Preview Assets.xcassets */; };
 		54C5CA7E2777863800893FD1 /* SLAMCameraTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C5CA7D2777863800893FD1 /* SLAMCameraTests.swift */; };
 		54C5CA892777863800893FD1 /* SLAMCameraUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C5CA882777863800893FD1 /* SLAMCameraUITests.swift */; };
+		54C922612778974C001CA30D /* StreamingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C922602778974C001CA30D /* StreamingService.swift */; };
+		54C9226D2778C89B001CA30D /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C9226C2778C89B001CA30D /* Alert.swift */; };
 		54F426ED277799E7003B70BA /* IP.m in Sources */ = {isa = PBXBuildFile; fileRef = 54F426EC277799E7003B70BA /* IP.m */; };
 		54F426F427779A8C003B70BA /* IPTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F426F327779A8C003B70BA /* IPTests.swift */; };
 		B099DC3E54F460553127BD7B /* Pods_SLAMCamera_SLAMCameraUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1953E48178EBC7E6529E9476 /* Pods_SLAMCamera_SLAMCameraUITests.framework */; };
@@ -47,7 +49,7 @@
 		33EA1FA1E040F35A632E1B68 /* Pods-SLAMCameraTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SLAMCameraTests.release.xcconfig"; path = "Target Support Files/Pods-SLAMCameraTests/Pods-SLAMCameraTests.release.xcconfig"; sourceTree = "<group>"; };
 		5489C9D32777AA45009DB2F2 /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		5489C9D82777AA72009DB2F2 /* QueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueTests.swift; sourceTree = "<group>"; };
-		5489C9DD2777ADAA009DB2F2 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
+		5489C9DD2777ADAA009DB2F2 /* Connection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connection.swift; sourceTree = "<group>"; };
 		54C5CA682777863300893FD1 /* SLAMCamera.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SLAMCamera.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		54C5CA6B2777863300893FD1 /* SLAMCameraApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SLAMCameraApp.swift; sourceTree = "<group>"; };
 		54C5CA6D2777863400893FD1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -60,6 +62,8 @@
 		54C5CA842777863800893FD1 /* SLAMCameraUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SLAMCameraUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		54C5CA882777863800893FD1 /* SLAMCameraUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SLAMCameraUITests.swift; sourceTree = "<group>"; };
 		54C5CA8A2777863800893FD1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		54C922602778974C001CA30D /* StreamingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamingService.swift; sourceTree = "<group>"; };
+		54C9226C2778C89B001CA30D /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		54F426EB2777997F003B70BA /* IP.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IP.h; sourceTree = "<group>"; };
 		54F426EC277799E7003B70BA /* IP.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IP.m; sourceTree = "<group>"; };
 		54F426F127779A37003B70BA /* SLAMCamera-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SLAMCamera-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -124,6 +128,8 @@
 		54C5CA6A2777863300893FD1 /* SLAMCamera */ = {
 			isa = PBXGroup;
 			children = (
+				54C9226B2778C7AA001CA30D /* Models */,
+				54C9225F277896C6001CA30D /* Services */,
 				54F426E9277798D3003B70BA /* Networking */,
 				54C5CA6B2777863300893FD1 /* SLAMCameraApp.swift */,
 				54C5CA6D2777863400893FD1 /* ContentView.swift */,
@@ -162,12 +168,28 @@
 			path = SLAMCameraUITests;
 			sourceTree = "<group>";
 		};
+		54C9225F277896C6001CA30D /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				54C922602778974C001CA30D /* StreamingService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		54C9226B2778C7AA001CA30D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				54C9226C2778C89B001CA30D /* Alert.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		54F426E9277798D3003B70BA /* Networking */ = {
 			isa = PBXGroup;
 			children = (
 				54F426EA27779960003B70BA /* IP */,
 				5489C9D32777AA45009DB2F2 /* Queue.swift */,
-				5489C9DD2777ADAA009DB2F2 /* Session.swift */,
+				5489C9DD2777ADAA009DB2F2 /* Connection.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -451,11 +473,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5489C9DE2777ADAA009DB2F2 /* Session.swift in Sources */,
+				5489C9DE2777ADAA009DB2F2 /* Connection.swift in Sources */,
 				54C5CA6E2777863400893FD1 /* ContentView.swift in Sources */,
+				54C922612778974C001CA30D /* StreamingService.swift in Sources */,
 				54C5CA6C2777863300893FD1 /* SLAMCameraApp.swift in Sources */,
 				54F426ED277799E7003B70BA /* IP.m in Sources */,
 				5489C9D42777AA45009DB2F2 /* Queue.swift in Sources */,
+				54C9226D2778C89B001CA30D /* Alert.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
