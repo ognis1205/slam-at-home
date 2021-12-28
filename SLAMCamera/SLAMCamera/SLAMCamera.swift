@@ -1,5 +1,5 @@
 //
-//  SLAMCameraApp.swift
+//  SLAMCamera.swift
 //  SLAMCamera
 //
 //  Created by Shingo OKAWA on 2021/12/26.

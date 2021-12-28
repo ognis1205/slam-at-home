@@ -7,24 +7,24 @@
 //
 import Foundation
 
-public struct Alert {
+public class AlertModel {
   /// The alert title.
-  public var title: String = ""
+  private(set) var title: String = ""
 
   /// The alert message.
-  public var message: String = ""
+  private(set) var message: String = ""
 
   /// The alert primary button.
-  public var primaryButtonTitle = "Accept"
+  private(set) var primaryButtonTitle = "Accept"
 
   /// The alert secondary button.
-  public var secondaryButtonTitle: String?
+  private(set) var secondaryButtonTitle: String?
 
   /// Primary button event handler.
-  public var primaryAction: (() -> ())?
+  private(set) var primaryAction: (() -> ())?
 
   /// Secondary button event handler.
-  public var secondaryAction: (() -> ())?
+  private(set) var secondaryAction: (() -> ())?
 
   /// Initializer.
   public init(

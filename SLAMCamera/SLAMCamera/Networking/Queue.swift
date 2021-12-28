@@ -19,7 +19,7 @@ private class Entry<T> {
   }
 }
 
-open class Queue<T> {
+public class Queue<T> {
   /// Peep operation types.
   public enum PeepType {
     case HEAD
@@ -27,16 +27,16 @@ open class Queue<T> {
   }
 
   /// The head entry of the queue.
-  fileprivate var head: Entry<T>
+  private var head: Entry<T>
   
   /// The tail entry of the queue.
-  fileprivate var tail: Entry<T>
+  private var tail: Entry<T>
 
   /// The maximum capacity of the queue.
-  fileprivate var capacity: Int
+  private var capacity: Int
 
   /// The current size of the queue.
-  fileprivate var length = 0
+  private var length = 0
 
   /// Initializer.
   public init(capacity: Int) {
@@ -46,7 +46,7 @@ open class Queue<T> {
   }
 
   /// Pushes a new item into the tail of the queue.
-  open func push(_ value: T) {
+  public func push(_ value: T) {
     if self.length >= self.capacity {
       self.tail = Entry(value)
     } else {
@@ -57,7 +57,7 @@ open class Queue<T> {
   }
 
   /// Pops the oldest item from the head of the queue.
-  open func pop() -> T? {
+  public func pop() -> T? {
     if let new = self.head.next {
       self.head = new
       self.length -= 1
@@ -69,7 +69,7 @@ open class Queue<T> {
   }
 
   /// Peeps the item from the queue.
-  open func peep(_ type: PeepType = PeepType.HEAD) -> T? {
+  public func peep(_ type: PeepType = PeepType.HEAD) -> T? {
     switch type {
     case .HEAD:
       if let entry = self.head.next {
@@ -87,12 +87,12 @@ open class Queue<T> {
   }
 
   /// Returns the current lenght of the queue.
-  open func getLength() -> Int {
+  public func getLength() -> Int {
     return self.length
   }
 
   /// Checks if the queue is empty or not.
-  open func isEmpty() -> Bool {
+  public func isEmpty() -> Bool {
     return self.head === self.tail
   }
 }

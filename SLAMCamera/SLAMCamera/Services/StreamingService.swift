@@ -9,7 +9,7 @@ import Foundation
 import AVFoundation
 import CocoaAsyncSocket
 
-private enum SessionSetupResult {
+public enum SessionSetupResult {
   case success
   case notAuthorized
   case configurationFailed
@@ -23,7 +23,7 @@ public class StreamingService: NSObject {
   @Published public var URL = ""
 
   /// $Observable state of alert flag.
-  @Published public var shouldShowAlertView = false
+  @Published public var shouldShowAlert = false
 
   /// $Observable state of camera availability.
   @Published public var isCameraUnavailable = true
@@ -35,63 +35,63 @@ public class StreamingService: NSObject {
   public let avCaptureSession = AVCaptureSession()
 
   /// Reference to the current alert.
-  public var alert: Alert = Alert()
+  private(set) var alert: AlertModel = AlertModel()
 
   /// Stores the result of the setup process.
-  fileprivate var setupResult: SessionSetupResult = .success
-  
-  /// The IP address of this device.
-  fileprivate let ip = IP.getAddress()
-
-  /// The server socket.
-  fileprivate var socket: GCDAsyncSocket?
+  private(set) var setupResult: SessionSetupResult = .success
 
   /// The active sessions between clients.
-  fileprivate var connections = [Int: Connection]()
+  internal var connections = [Int: Connection]()
 
   /// The session GDC queue: AVCaptureSession
-  fileprivate let sessionQueue = DispatchQueue(
+  internal let sessionQueue = DispatchQueue(
     label: "session queue",
     attributes: [])
 
   /// The socket listening GDC queue.
-  fileprivate let socketListenQueue = DispatchQueue(
+  internal let socketListenQueue = DispatchQueue(
     label: "socket listen queue",
     attributes: [])
 
   /// The socket write GDC queue.
-  fileprivate let socketWriteQueue = DispatchQueue(
+  internal let socketWriteQueue = DispatchQueue(
     label: "socket write queue",
     attributes: .concurrent)
 
   /// The connection GDC queue.
-  fileprivate let connectionQueue = DispatchQueue(
+  internal let connectionQueue = DispatchQueue(
     label: "connection queue",
     attributes: .concurrent)
+
+  /// Reference to the CI context.
+  internal let context = CIContext(options: nil)
+
+  /// The IP address of this device.
+  private let ip = IP.getAddress()
+
+  /// The server socket.
+  private var socket: GCDAsyncSocket?
   
   /// Reference to the camera device.
-  @objc dynamic fileprivate var avDeviceInput: AVCaptureDeviceInput!
+  @objc dynamic private var avDeviceInput: AVCaptureDeviceInput!
   
   /// Reference to the video device.
-  fileprivate let avDeviceOutput = AVCaptureVideoDataOutput()
-  
-  /// Reference to the CI context.
-  fileprivate let context = CIContext(options: nil)
+  private let avDeviceOutput = AVCaptureVideoDataOutput()
 
   /// Reference to the video device discovery session.
-  fileprivate let avDiscoverySession = AVCaptureDevice.DiscoverySession(
+  private let avDiscoverySession = AVCaptureDevice.DiscoverySession(
     deviceTypes: [.builtInWideAngleCamera, .builtInDualCamera, .builtInTrueDepthCamera],
     mediaType: .video,
     position: .unspecified)
   
   /// Configuration flag.
-  fileprivate var isConfigured = false
+  private var isConfigured = false
 
   /// Session start flag.
-  fileprivate var isSessionRunning = false
+  private var isSessionRunning = false
   
   /// Server start flag.
-  fileprivate var isSocketListening = false
+  private var isSocketListening = false
 
   /// Checks for user's permissions
   public func checkPermissions() {
@@ -110,7 +110,7 @@ public class StreamingService: NSObject {
       default:
         self.setupResult = .notAuthorized
         DispatchQueue.main.async {
-          self.alert = Alert(
+          self.alert = AlertModel(
             title: "Camera Access",
             message: "SLAMCamera doesn't have access to use your camera, please update your privacy settings.",
             primaryButtonTitle: "Settings",
@@ -122,7 +122,7 @@ public class StreamingService: NSObject {
                 completionHandler: nil)
             },
             secondaryAction: nil)
-          self.shouldShowAlertView = true
+          self.shouldShowAlert = true
           self.isCameraUnavailable = true
         }
     }
@@ -204,14 +204,14 @@ public class StreamingService: NSObject {
         case .configurationFailed, .notAuthorized:
           print("Application not authorized to use camera for [\(String(describing: self.ip))]")
           DispatchQueue.main.async {
-            self.alert = Alert(
+            self.alert = AlertModel(
               title: "Camera Error",
               message: "Camera configuration failed. Either your device camera is not available or its missing permissions",
               primaryButtonTitle: "Accept",
               secondaryButtonTitle: nil,
               primaryAction: nil,
               secondaryAction: nil)
-            self.shouldShowAlertView = true
+            self.shouldShowAlert = true
             self.isCameraUnavailable = true
           }
       }
@@ -231,14 +231,14 @@ public class StreamingService: NSObject {
       } catch {
         print("Could not start listening on port \(StreamingService.PORT) (\(error))")
         DispatchQueue.main.async {
-          self.alert = Alert(
+          self.alert = AlertModel(
             title: "Socket Error",
             message: "Start listening socket failed. Either port number is not available or its missing permissions",
             primaryButtonTitle: "Accept",
             secondaryButtonTitle: nil,
             primaryAction: nil,
             secondaryAction: nil)
-          self.shouldShowAlertView = true
+          self.shouldShowAlert = true
           self.isSocketUnavailable = true
         }
         return
@@ -254,50 +254,5 @@ public class StreamingService: NSObject {
         // Camera view addGestureRecognizer here?
       }
     }
-  }
-}
-
-extension StreamingService: AVCaptureVideoDataOutputSampleBufferDelegate {
-  public func captureOutput(
-    _ output: AVCaptureOutput,
-    didOutput sampleBuffer: CMSampleBuffer,
-    from connection: AVCaptureConnection
-  ) {
-    if !self.connections.isEmpty {
-      guard let buffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return }
-      let capturedImage = CIImage(cvImageBuffer: buffer, options: nil)
-      guard let image = self.context.createCGImage(capturedImage, from: capturedImage.extent) else { return }
-      let jpeg = UIImage(cgImage: image).jpegData(compressionQuality: 0)
-
-      for (key, connection) in self.connections {
-        if connection.isConnected {
-          connection.dataToSend = (jpeg as NSData?)?.copy() as? Data
-        } else {
-          self.connections.removeValue(forKey: key)
-        }
-      }
-
-      if self.connections.isEmpty {
-        DispatchQueue.main.async(execute: {
-          // LED GRAY
-        })
-      }
-    }
-  }
-}
-
-extension StreamingService: GCDAsyncSocketDelegate {
-  public func socket(_ sock: GCDAsyncSocket, didAcceptNewSocket newSocket: GCDAsyncSocket) {
-    print("New connection from IP [\(newSocket.connectedHost ?? "unknown")]")
-    guard let id = newSocket.connectedAddress?.hashValue else { return }
-    let newConnection = Connection(
-      id: id,
-      socket: newSocket,
-      dispatchQueue: self.connectionQueue)
-    self.connections[id] = newConnection
-    newConnection.open()
-    DispatchQueue.main.async(execute: {
-      // LED Image RED.
-    })
   }
 }

@@ -8,33 +8,9 @@
 import Foundation
 import CocoaAsyncSocket
 
-class Connection {
-  /// Identifier.
-  var id: Int
-
-  /// Asyncronous socket.
-  fileprivate var socket: GCDAsyncSocket
-  
-  /// Worker queue.
-  fileprivate var dispatchQueue: DispatchQueue
-
-  /// Data stack to send.
-  fileprivate var dataStack = Queue<Data>(capacity: 1)
-
-  /// Specifies whether streaming is started or not.
-  fileprivate var isStreaming = false
-
-  /// Streaming footer.
-  fileprivate let footer = [
-    "",
-    ""
-  ].joined(separator: "\r\n").data(using: String.Encoding.utf8)
-
-  /// Specifies whether connection is established or not.
-  var isConnected = true
-
+public class Connection {
   /// Data to send.
-  var dataToSend: Data? {
+  public var dataToSend: Data? {
     didSet {
       guard let dataToSend = self.dataToSend else {
         return
@@ -43,13 +19,37 @@ class Connection {
     }
   }
 
+  /// Identifier.
+  private(set) var id: Int
+
+  /// Asyncronous socket.
+  private var socket: GCDAsyncSocket
+  
+  /// Worker queue.
+  private var dispatchQueue: DispatchQueue
+
+  /// Data stack to send.
+  private var dataStack = Queue<Data>(capacity: 1)
+
+  /// Specifies whether streaming is started or not.
+  private var isStreaming = false
+
+  /// Streaming footer.
+  private let footer = [
+    "",
+    ""
+  ].joined(separator: "\r\n").data(using: String.Encoding.utf8)
+
+  /// Specifies whether connection is established or not.
+  private(set) var isConnected = true
+
   /// Initializer.
   ///
   /// - Parameters:
   ///   - id: The ideintifier of this session.
   ///   - socket: Cocoa asyncronous socket of this session.
   ///   - dispatchQueue:The worker queue.
-  init(id: Int, socket: GCDAsyncSocket, dispatchQueue: DispatchQueue) {
+  public init(id: Int, socket: GCDAsyncSocket, dispatchQueue: DispatchQueue) {
     print("Creating connection [#\(id)]")
     self.id = id
     self.socket = socket
@@ -57,13 +57,13 @@ class Connection {
   }
 
   /// Closes the connection.
-  func close() {
+  public func close() {
     print("Closing connection [#\(self.id)]")
     self.isConnected = false
   }
 
   /// Starts the streaming session.
-  func open() {
+  public func open() {
     self.dispatchQueue.async(execute: { [unowned self] in
       while self.isConnected {
         if !self.isStreaming {

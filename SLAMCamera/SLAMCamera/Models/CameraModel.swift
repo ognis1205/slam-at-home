@@ -9,33 +9,34 @@ import SwiftUI
 import Combine
 import AVFoundation
 
-final class Camera: ObservableObject {
+public class CameraModel: ObservableObject {
   /// $Observable state of alert flag.
-  @Published var showAlertError = false
+  @Published var showAlert = false
 
   /// Reference to the current alert.
-  var alert: Alert!
+  private(set) var alert: AlertModel!
 
   /// The session so that the video preview layer can output what the camera is capturing.
-  var avCaptureSession: AVCaptureSession
+  private(set) var avCaptureSession: AVCaptureSession
   
   /// Reference to the streaming service.
   private let streaming = StreamingService()
 
-  ///
+  /// Combine subscriptions.
   private var subscriptions = Set<AnyCancellable>()
 
   /// Initializer.
-  init() {
+  public init() {
     self.avCaptureSession = self.streaming.avCaptureSession
-    self.streaming.$shouldShowAlertView.sink { [weak self] (val) in
+    self.streaming.$shouldShowAlert.sink { [weak self] (val) in
       self?.alert = self?.streaming.alert
-      self?.showAlertError = val
+      self?.showAlert = val
     }
     .store(in: &self.subscriptions)
   }
 
-  func configure() {
+  /// Configures and initiates the service.
+  public func configure() {
     self.streaming.checkPermissions()
     self.streaming.start()
   }
