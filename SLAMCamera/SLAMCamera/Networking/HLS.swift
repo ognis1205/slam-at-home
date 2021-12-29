@@ -1,5 +1,5 @@
 //
-//  Connection.swift
+//  HLS.swift
 //  SLAMCamera
 //
 //  Created by Shingo OKAWA on 2021/12/24.
@@ -8,7 +8,7 @@
 import Foundation
 import CocoaAsyncSocket
 
-public class Connection {
+public class HLS {
   /// Data to send.
   public var dataToSend: Data? {
     didSet {

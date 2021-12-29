@@ -3,14 +3,14 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 54;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		010BD1DA3DC15CFEA5B4DD34 /* Pods_SLAMCameraTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9985B436AC999C7AEB2345 /* Pods_SLAMCameraTests.framework */; };
 		5489C9D42777AA45009DB2F2 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5489C9D32777AA45009DB2F2 /* Queue.swift */; };
 		5489C9D92777AA72009DB2F2 /* QueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5489C9D82777AA72009DB2F2 /* QueueTests.swift */; };
-		5489C9DE2777ADAA009DB2F2 /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5489C9DD2777ADAA009DB2F2 /* Connection.swift */; };
+		5489C9DE2777ADAA009DB2F2 /* HLS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5489C9DD2777ADAA009DB2F2 /* HLS.swift */; };
 		54C5CA6C2777863300893FD1 /* SLAMCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C5CA6B2777863300893FD1 /* SLAMCamera.swift */; };
 		54C5CA6E2777863400893FD1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C5CA6D2777863400893FD1 /* ContentView.swift */; };
 		54C5CA702777863800893FD1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54C5CA6F2777863800893FD1 /* Assets.xcassets */; };
@@ -23,6 +23,7 @@
 		54C92280277A472D001CA30D /* CameraModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C9227F277A472D001CA30D /* CameraModel.swift */; };
 		54C92285277ABB66001CA30D /* StreamingService+AVCaptureVideoDataOutputSampleBufferDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C92284277ABB66001CA30D /* StreamingService+AVCaptureVideoDataOutputSampleBufferDelegate.swift */; };
 		54C9228A277AC1C6001CA30D /* StreamingService+GCDAsyncSocketDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C92289277AC1C6001CA30D /* StreamingService+GCDAsyncSocketDelegate.swift */; };
+		54E879E0277CA1E600411737 /* logo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 54E879DF277CA1E600411737 /* logo.jpg */; };
 		54F426ED277799E7003B70BA /* IP.m in Sources */ = {isa = PBXBuildFile; fileRef = 54F426EC277799E7003B70BA /* IP.m */; };
 		54F426F427779A8C003B70BA /* IPTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F426F327779A8C003B70BA /* IPTests.swift */; };
 		B099DC3E54F460553127BD7B /* Pods_SLAMCamera_SLAMCameraUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1953E48178EBC7E6529E9476 /* Pods_SLAMCamera_SLAMCameraUITests.framework */; };
@@ -53,7 +54,7 @@
 		33EA1FA1E040F35A632E1B68 /* Pods-SLAMCameraTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SLAMCameraTests.release.xcconfig"; path = "Target Support Files/Pods-SLAMCameraTests/Pods-SLAMCameraTests.release.xcconfig"; sourceTree = "<group>"; };
 		5489C9D32777AA45009DB2F2 /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		5489C9D82777AA72009DB2F2 /* QueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueTests.swift; sourceTree = "<group>"; };
-		5489C9DD2777ADAA009DB2F2 /* Connection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connection.swift; sourceTree = "<group>"; };
+		5489C9DD2777ADAA009DB2F2 /* HLS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HLS.swift; sourceTree = "<group>"; };
 		54C5CA682777863300893FD1 /* SLAMCamera.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SLAMCamera.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		54C5CA6B2777863300893FD1 /* SLAMCamera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SLAMCamera.swift; sourceTree = "<group>"; };
 		54C5CA6D2777863400893FD1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -72,6 +73,7 @@
 		54C9227F277A472D001CA30D /* CameraModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraModel.swift; sourceTree = "<group>"; };
 		54C92284277ABB66001CA30D /* StreamingService+AVCaptureVideoDataOutputSampleBufferDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StreamingService+AVCaptureVideoDataOutputSampleBufferDelegate.swift"; sourceTree = "<group>"; };
 		54C92289277AC1C6001CA30D /* StreamingService+GCDAsyncSocketDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StreamingService+GCDAsyncSocketDelegate.swift"; sourceTree = "<group>"; };
+		54E879DF277CA1E600411737 /* logo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = logo.jpg; sourceTree = "<group>"; };
 		54F426EB2777997F003B70BA /* IP.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IP.h; sourceTree = "<group>"; };
 		54F426EC277799E7003B70BA /* IP.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IP.m; sourceTree = "<group>"; };
 		54F426F127779A37003B70BA /* SLAMCamera-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SLAMCamera-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 				54C5CA6B2777863300893FD1 /* SLAMCamera.swift */,
 				54C5CA6F2777863800893FD1 /* Assets.xcassets */,
 				54C5CA742777863800893FD1 /* Info.plist */,
+				54E879DF277CA1E600411737 /* logo.jpg */,
 				54C5CA712777863800893FD1 /* Preview Content */,
 				54F426F127779A37003B70BA /* SLAMCamera-Bridging-Header.h */,
 			);
@@ -209,7 +212,7 @@
 			children = (
 				54F426EA27779960003B70BA /* IP */,
 				5489C9D32777AA45009DB2F2 /* Queue.swift */,
-				5489C9DD2777ADAA009DB2F2 /* Connection.swift */,
+				5489C9DD2777ADAA009DB2F2 /* HLS.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -340,7 +343,7 @@
 				};
 			};
 			buildConfigurationList = 54C5CA632777863300893FD1 /* Build configuration list for PBXProject "SLAMCamera" */;
-			compatibilityVersion = "Xcode 12.0";
+			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -365,6 +368,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				54C5CA732777863800893FD1 /* Preview Assets.xcassets in Resources */,
+				54E879E0277CA1E600411737 /* logo.jpg in Resources */,
 				54C5CA702777863800893FD1 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -494,7 +498,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				54C92285277ABB66001CA30D /* StreamingService+AVCaptureVideoDataOutputSampleBufferDelegate.swift in Sources */,
-				5489C9DE2777ADAA009DB2F2 /* Connection.swift in Sources */,
+				5489C9DE2777ADAA009DB2F2 /* HLS.swift in Sources */,
 				54C5CA6E2777863400893FD1 /* ContentView.swift in Sources */,
 				54C9227B277A317F001CA30D /* PreviewView.swift in Sources */,
 				54C922612778974C001CA30D /* StreamingService.swift in Sources */,
@@ -669,7 +673,7 @@
 				DEVELOPMENT_TEAM = CX5837YGS6;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = SLAMCamera/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -695,7 +699,7 @@
 				DEVELOPMENT_TEAM = CX5837YGS6;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = SLAMCamera/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -717,7 +721,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CX5837YGS6;
 				INFOPLIST_FILE = SLAMCameraTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -740,7 +744,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CX5837YGS6;
 				INFOPLIST_FILE = SLAMCameraTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

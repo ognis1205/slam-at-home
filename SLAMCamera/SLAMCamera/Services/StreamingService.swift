@@ -44,7 +44,7 @@ public class StreamingService: NSObject {
   private(set) var setupResult: SessionSetupResult = .success
 
   /// The active sessions between clients.
-  internal var connections = [Int: Connection]()
+  internal var connections = [Int: HLS]()
 
   /// The session GDC queue: AVCaptureSession
   internal let sessionQueue = DispatchQueue(
@@ -73,7 +73,7 @@ public class StreamingService: NSObject {
   private let ip = IP.getAddress()
 
   /// The server socket.
-  private var socket: GCDAsyncSocket?
+  private var server: GCDAsyncSocket?
   
   /// Reference to the camera device.
   @objc dynamic private var avDeviceInput: AVCaptureDeviceInput!
@@ -223,13 +223,12 @@ public class StreamingService: NSObject {
   private func startListening() {
     print("Starting service on \(String(describing: self.ip!)):\(StreamingService.PORT)")
     if !self.isSocketListening && self.isSessionRunning && self.isConfigured {
-      self.socket = GCDAsyncSocket(
+      self.server = GCDAsyncSocket(
         delegate: self,
         delegateQueue: self.socketListenQueue,
-//        delegateQueue: self.sessionQueue,
         socketQueue: self.socketWriteQueue)
       do {
-        try self.socket?.accept(onInterface: self.ip, port: StreamingService.PORT)
+        try self.server?.accept(onInterface: self.ip, port: StreamingService.PORT)
       } catch {
         print("Could not start listening on port \(StreamingService.PORT) (\(error))")
         DispatchQueue.main.async {
@@ -245,9 +244,9 @@ public class StreamingService: NSObject {
         }
         return
       }
-      self.isSocketListening = true
       DispatchQueue.main.async {
         self.isSocketUnavailable = false
+        self.isSocketListening = true
         if let ip = self.ip {
           self.URL = "http://\(ip):10001"
         } else {

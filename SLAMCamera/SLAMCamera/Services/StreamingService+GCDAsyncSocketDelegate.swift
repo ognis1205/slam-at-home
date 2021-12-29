@@ -13,7 +13,7 @@ extension StreamingService: GCDAsyncSocketDelegate {
   public func socket(_ sock: GCDAsyncSocket, didAcceptNewSocket newSocket: GCDAsyncSocket) {
     print("New connection from IP [\(newSocket.connectedHost ?? "unknown")]")
     guard let id = newSocket.connectedAddress?.hashValue else { return }
-    let newConnection = Connection(
+    let newConnection = HLS(
       id: id,
       socket: newSocket,
       dispatchQueue: self.connectionQueue)
