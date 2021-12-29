@@ -133,9 +133,7 @@ public class StreamingService: NSObject {
 
   /// Configures the device and session.
   public func start() {
-//    self.sessionQueue.async {
-      self.setupAndStart()
-//    }
+    self.setupAndStart()
   }
 
   /// Configures the device and the session.
@@ -223,11 +221,12 @@ public class StreamingService: NSObject {
 
   /// Start listening on socket.
   private func startListening() {
-    print("Starting service on [\(String(describing: self.ip!))]:\(StreamingService.PORT)")
+    print("Starting service on \(String(describing: self.ip!)):\(StreamingService.PORT)")
     if !self.isSocketListening && self.isSessionRunning && self.isConfigured {
       self.socket = GCDAsyncSocket(
         delegate: self,
         delegateQueue: self.socketListenQueue,
+//        delegateQueue: self.sessionQueue,
         socketQueue: self.socketWriteQueue)
       do {
         try self.socket?.accept(onInterface: self.ip, port: StreamingService.PORT)

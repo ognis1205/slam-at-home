@@ -9,7 +9,6 @@ import Foundation
 import AVFoundation
 import CocoaAsyncSocket
 
-
 extension StreamingService: GCDAsyncSocketDelegate {
   public func socket(_ sock: GCDAsyncSocket, didAcceptNewSocket newSocket: GCDAsyncSocket) {
     print("New connection from IP [\(newSocket.connectedHost ?? "unknown")]")
