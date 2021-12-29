@@ -21,8 +21,8 @@
 		54C9226D2778C89B001CA30D /* AlertModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C9226C2778C89B001CA30D /* AlertModel.swift */; };
 		54C9227B277A317F001CA30D /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C9227A277A317F001CA30D /* PreviewView.swift */; };
 		54C92280277A472D001CA30D /* CameraModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C9227F277A472D001CA30D /* CameraModel.swift */; };
-		54C92285277ABB66001CA30D /* StreamingService+GDAAsyncSocketDelegate_AVCaptureVideoDataOutputSampleBufferDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C92284277ABB66001CA30D /* StreamingService+GDAAsyncSocketDelegate_AVCaptureVideoDataOutputSampleBufferDelegate.swift */; };
-		54C9228A277AC1C6001CA30D /* StreamingService+AVCaptureVideoDataOutputSampleBufferDelegate_GCDAsyncSocketDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C92289277AC1C6001CA30D /* StreamingService+AVCaptureVideoDataOutputSampleBufferDelegate_GCDAsyncSocketDelegate.swift */; };
+		54C92285277ABB66001CA30D /* StreamingService+AVCaptureVideoDataOutputSampleBufferDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C92284277ABB66001CA30D /* StreamingService+AVCaptureVideoDataOutputSampleBufferDelegate.swift */; };
+		54C9228A277AC1C6001CA30D /* StreamingService+GCDAsyncSocketDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C92289277AC1C6001CA30D /* StreamingService+GCDAsyncSocketDelegate.swift */; };
 		54F426ED277799E7003B70BA /* IP.m in Sources */ = {isa = PBXBuildFile; fileRef = 54F426EC277799E7003B70BA /* IP.m */; };
 		54F426F427779A8C003B70BA /* IPTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F426F327779A8C003B70BA /* IPTests.swift */; };
 		B099DC3E54F460553127BD7B /* Pods_SLAMCamera_SLAMCameraUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1953E48178EBC7E6529E9476 /* Pods_SLAMCamera_SLAMCameraUITests.framework */; };
@@ -70,8 +70,8 @@
 		54C9226C2778C89B001CA30D /* AlertModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertModel.swift; sourceTree = "<group>"; };
 		54C9227A277A317F001CA30D /* PreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
 		54C9227F277A472D001CA30D /* CameraModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraModel.swift; sourceTree = "<group>"; };
-		54C92284277ABB66001CA30D /* StreamingService+GDAAsyncSocketDelegate_AVCaptureVideoDataOutputSampleBufferDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StreamingService+GDAAsyncSocketDelegate_AVCaptureVideoDataOutputSampleBufferDelegate.swift"; sourceTree = "<group>"; };
-		54C92289277AC1C6001CA30D /* StreamingService+AVCaptureVideoDataOutputSampleBufferDelegate_GCDAsyncSocketDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StreamingService+AVCaptureVideoDataOutputSampleBufferDelegate_GCDAsyncSocketDelegate.swift"; sourceTree = "<group>"; };
+		54C92284277ABB66001CA30D /* StreamingService+AVCaptureVideoDataOutputSampleBufferDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StreamingService+AVCaptureVideoDataOutputSampleBufferDelegate.swift"; sourceTree = "<group>"; };
+		54C92289277AC1C6001CA30D /* StreamingService+GCDAsyncSocketDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StreamingService+GCDAsyncSocketDelegate.swift"; sourceTree = "<group>"; };
 		54F426EB2777997F003B70BA /* IP.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IP.h; sourceTree = "<group>"; };
 		54F426EC277799E7003B70BA /* IP.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IP.m; sourceTree = "<group>"; };
 		54F426F127779A37003B70BA /* SLAMCamera-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SLAMCamera-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -180,8 +180,8 @@
 			isa = PBXGroup;
 			children = (
 				54C922602778974C001CA30D /* StreamingService.swift */,
-				54C92284277ABB66001CA30D /* StreamingService+GDAAsyncSocketDelegate_AVCaptureVideoDataOutputSampleBufferDelegate.swift */,
-				54C92289277AC1C6001CA30D /* StreamingService+AVCaptureVideoDataOutputSampleBufferDelegate_GCDAsyncSocketDelegate.swift */,
+				54C92284277ABB66001CA30D /* StreamingService+AVCaptureVideoDataOutputSampleBufferDelegate.swift */,
+				54C92289277AC1C6001CA30D /* StreamingService+GCDAsyncSocketDelegate.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -493,14 +493,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				54C92285277ABB66001CA30D /* StreamingService+GDAAsyncSocketDelegate_AVCaptureVideoDataOutputSampleBufferDelegate.swift in Sources */,
+				54C92285277ABB66001CA30D /* StreamingService+AVCaptureVideoDataOutputSampleBufferDelegate.swift in Sources */,
 				5489C9DE2777ADAA009DB2F2 /* Connection.swift in Sources */,
 				54C5CA6E2777863400893FD1 /* ContentView.swift in Sources */,
 				54C9227B277A317F001CA30D /* PreviewView.swift in Sources */,
 				54C922612778974C001CA30D /* StreamingService.swift in Sources */,
 				54C5CA6C2777863300893FD1 /* SLAMCamera.swift in Sources */,
 				54F426ED277799E7003B70BA /* IP.m in Sources */,
-				54C9228A277AC1C6001CA30D /* StreamingService+AVCaptureVideoDataOutputSampleBufferDelegate_GCDAsyncSocketDelegate.swift in Sources */,
+				54C9228A277AC1C6001CA30D /* StreamingService+GCDAsyncSocketDelegate.swift in Sources */,
 				5489C9D42777AA45009DB2F2 /* Queue.swift in Sources */,
 				54C9226D2778C89B001CA30D /* AlertModel.swift in Sources */,
 				54C92280277A472D001CA30D /* CameraModel.swift in Sources */,
