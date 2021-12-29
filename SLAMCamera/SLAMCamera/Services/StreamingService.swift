@@ -25,6 +25,9 @@ public class StreamingService: NSObject {
   /// $Observable state of alert flag.
   @Published public var shouldShowAlert = false
 
+  /// $Observable state of socket listening state.
+  @Published public var isConnected = false
+
   /// $Observable state of camera availability.
   @Published public var isCameraUnavailable = true
 
@@ -95,7 +98,7 @@ public class StreamingService: NSObject {
 
   /// Checks for user's permissions
   public func checkPermissions() {
-    print("Checking AV permissions for [\(String(describing: self.ip))]")
+    print("Checking AV permissions")
     switch AVCaptureDevice.authorizationStatus(for: .video) {
       case .authorized:
         break
@@ -130,17 +133,17 @@ public class StreamingService: NSObject {
 
   /// Configures the device and session.
   public func start() {
-    self.sessionQueue.async {
+//    self.sessionQueue.async {
       self.setupAndStart()
-    }
+//    }
   }
 
   /// Configures the device and the session.
   private func setupAndStart() {
-    print("Checking setup result for [\(String(describing: self.ip))]")
+    print("Checking setup result")
     if setupResult != .success { return }
 
-    print("Configuring video device for [\(String(describing: self.ip))]")
+    print("Configuring video device")
     self.avCaptureSession.beginConfiguration()
     self.avCaptureSession.sessionPreset = .medium
 
@@ -153,7 +156,7 @@ public class StreamingService: NSObject {
       }
 
       guard let videoDevice = defaultDevice else {
-        print("Default video device is unavailable for [\(String(describing: self.ip))]")
+        print("Default video device is unavailable")
         self.setupResult = .configurationFailed
         self.avCaptureSession.commitConfiguration()
         return
@@ -170,13 +173,13 @@ public class StreamingService: NSObject {
         self.avCaptureSession.addInput(self.avDeviceInput)
         self.avCaptureSession.addOutput(self.avDeviceOutput)
       } else {
-        print("Could not add video device input to the session for [\(String(describing: self.ip))]")
+        print("Could not add video device input to the session")
         self.setupResult = .configurationFailed
         self.avCaptureSession.commitConfiguration()
         return
       }
     } catch {
-      print("Could not create video device input for [\(String(describing: self.ip))]: \(error)")
+      print("Could not create video device input")
       self.setupResult = .configurationFailed
       self.avCaptureSession.commitConfiguration()
       return
@@ -190,7 +193,7 @@ public class StreamingService: NSObject {
 
   /// Start AVCaputureSession.
   private func startSession() {
-    print("Starting AV session for [\(String(describing: self.ip))]")
+    print("Starting AV session")
     if !self.isSessionRunning && self.isConfigured {
       switch self.setupResult {
         case .success:
@@ -202,7 +205,7 @@ public class StreamingService: NSObject {
             }
           }
         case .configurationFailed, .notAuthorized:
-          print("Application not authorized to use camera for [\(String(describing: self.ip))]")
+          print("Application not authorized to use camera")
           DispatchQueue.main.async {
             self.alert = AlertModel(
               title: "Camera Error",
@@ -220,7 +223,7 @@ public class StreamingService: NSObject {
 
   /// Start listening on socket.
   private func startListening() {
-    print("Creating service for [\(String(describing: self.ip))]")
+    print("Starting service on [\(String(describing: self.ip!))]:\(StreamingService.PORT)")
     if !self.isSocketListening && self.isSessionRunning && self.isConfigured {
       self.socket = GCDAsyncSocket(
         delegate: self,

@@ -13,6 +13,12 @@ public class CameraModel: ObservableObject {
   /// $Observable state of alert flag.
   @Published var showAlert = false
 
+  /// $Observable state of alert flag.
+  @Published var hasConnection = false
+
+  /// $Observable state of URL.
+  @Published var URL = "unknown"
+
   /// Reference to the current alert.
   private(set) var alert: AlertModel!
 
@@ -31,6 +37,14 @@ public class CameraModel: ObservableObject {
     self.streaming.$shouldShowAlert.sink { [weak self] (val) in
       self?.alert = self?.streaming.alert
       self?.showAlert = val
+    }
+    .store(in: &self.subscriptions)
+    self.streaming.$isConnected.sink { [weak self] (val) in
+      self?.hasConnection = val
+    }
+    .store(in: &self.subscriptions)
+    self.streaming.$URL.sink { [weak self] (val) in
+      self?.URL = val
     }
     .store(in: &self.subscriptions)
   }

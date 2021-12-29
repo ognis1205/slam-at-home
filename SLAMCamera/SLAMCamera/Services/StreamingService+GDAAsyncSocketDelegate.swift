@@ -30,8 +30,9 @@ extension StreamingService: AVCaptureVideoDataOutputSampleBufferDelegate {
       }
 
       if self.connections.isEmpty {
+        print("EMPTY")
         DispatchQueue.main.async(execute: {
-          // LED GRAY
+          self.isConnected = false
         })
       }
     }

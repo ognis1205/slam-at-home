@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -141,7 +141,6 @@
 				54C9225F277896C6001CA30D /* Services */,
 				54F426E9277798D3003B70BA /* Networking */,
 				54C5CA6B2777863300893FD1 /* SLAMCamera.swift */,
-				54C5CA6D2777863400893FD1 /* ContentView.swift */,
 				54C5CA6F2777863800893FD1 /* Assets.xcassets */,
 				54C5CA742777863800893FD1 /* Info.plist */,
 				54C5CA712777863800893FD1 /* Preview Content */,
@@ -199,6 +198,7 @@
 		54C92279277A315C001CA30D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				54C5CA6D2777863400893FD1 /* ContentView.swift */,
 				54C9227A277A317F001CA30D /* PreviewView.swift */,
 			);
 			path = Views;
@@ -340,7 +340,7 @@
 				};
 			};
 			buildConfigurationList = 54C5CA632777863300893FD1 /* Build configuration list for PBXProject "SLAMCamera" */;
-			compatibilityVersion = "Xcode 9.3";
+			compatibilityVersion = "Xcode 12.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -669,7 +669,7 @@
 				DEVELOPMENT_TEAM = CX5837YGS6;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = SLAMCamera/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -695,7 +695,7 @@
 				DEVELOPMENT_TEAM = CX5837YGS6;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = SLAMCamera/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

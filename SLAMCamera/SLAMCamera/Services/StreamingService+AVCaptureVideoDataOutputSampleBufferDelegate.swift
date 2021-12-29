@@ -21,7 +21,7 @@ extension StreamingService: GCDAsyncSocketDelegate {
     self.connections[id] = newConnection
     newConnection.open()
     DispatchQueue.main.async(execute: {
-      // LED Image RED.
+      self.isConnected = true
     })
   }
 }

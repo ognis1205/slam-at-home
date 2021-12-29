@@ -10,8 +10,8 @@ import AVFoundation
 
 public struct PreviewView: UIViewRepresentable {
   /// UIView wrapper of `AVCaptureVideoPreviewLayer`.
-  internal class Wrapper: UIView {
-    override class var layerClass: AnyClass {
+  public class Wrapper: UIView {
+    override public class var layerClass: AnyClass {
       AVCaptureVideoPreviewLayer.self
     }
         
@@ -21,14 +21,14 @@ public struct PreviewView: UIViewRepresentable {
   }
 
   /// Reference to the `AVCaptureSession` of `StreamingService`.
-  public let session: AVCaptureSession
+  public let avCaptureSession: AVCaptureSession
 
   /// Make `UIView`
   public func makeUIView(context: Context) -> Wrapper {
     let view = Wrapper()
     let bounds = view.bounds
     view.backgroundColor = .black
-    view.avPreviewLayer.session = session
+    view.avPreviewLayer.session = avCaptureSession
     view.avPreviewLayer.cornerRadius = 0
     view.avPreviewLayer.position = CGPoint(
       x: bounds.midX,
@@ -49,6 +49,6 @@ public struct PreviewView: UIViewRepresentable {
 
 public struct PreviewView_Previews: PreviewProvider {
   public static var previews: some View {
-    Wrapper(session: AVCaptureSession())
+    PreviewView(avCaptureSession: AVCaptureSession())
   }
 }
