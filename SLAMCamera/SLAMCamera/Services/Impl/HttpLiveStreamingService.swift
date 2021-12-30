@@ -1,5 +1,5 @@
 //
-//  HLSService.swift
+//  HttpLiveStreamingService.swift
 //  SLAMCamera
 //
 //  Created by Shingo OKAWA on 2021/12/24.
@@ -9,7 +9,7 @@ import Foundation
 import AVFoundation
 import CocoaAsyncSocket
 
-public class HLSService: NSObject, StreamingService {
+public class HttpLiveStreamingService: NSObject, StreamingService {
   /// The service port number.
   public static let PORT: UInt16 = 10001
 
@@ -225,16 +225,16 @@ public class HLSService: NSObject, StreamingService {
 
   /// Start listening on socket.
   private func startListening() -> Void {
-    debugPrint("Starting service on \(String(describing: self.ip!)):\(HLSService.PORT)")
+    debugPrint("Starting service on \(String(describing: self.ip!)):\(HttpLiveStreamingService.PORT)")
     if !self.isSocketListening && self.isSessionRunning && self.isConfigured {
       self.server = GCDAsyncSocket(
         delegate: self,
         delegateQueue: self.socketListenQueue,
         socketQueue: self.socketWriteQueue)
       do {
-        try self.server?.accept(onInterface: self.ip, port: HLSService.PORT)
+        try self.server?.accept(onInterface: self.ip, port: HttpLiveStreamingService.PORT)
       } catch {
-        debugPrint("Could not start listening on port \(HLSService.PORT) (\(error))")
+        debugPrint("Could not start listening on port \(HttpLiveStreamingService.PORT) (\(error))")
         DispatchQueue.main.async {
           self.alert = AlertModel(
             title: "Socket Error",

@@ -3,11 +3,12 @@
 //  SLAMCamera
 //
 //  Created by Shingo OKAWA on 2021/12/30.
+//  Copyright © 2021 Shingo OKAWA. All rights reserved.
 //
 import Foundation
 import WebRTC
 
-enum Message {
+public enum Message {
   case sdp(SessionDescription)
   case candidate(IceCandidate)
 }

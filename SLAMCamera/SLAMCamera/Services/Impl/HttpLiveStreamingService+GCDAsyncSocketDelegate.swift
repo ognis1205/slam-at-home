@@ -1,5 +1,5 @@
 //
-//  HLSService.swift
+//  HttpLiveStreamingService.swift
 //  SLAMCamera
 //
 //  Created by Shingo OKAWA on 2021/12/24.
@@ -9,7 +9,7 @@ import Foundation
 import AVFoundation
 import CocoaAsyncSocket
 
-extension HLSService: GCDAsyncSocketDelegate {
+extension HttpLiveStreamingService: GCDAsyncSocketDelegate {
   public func socket(
     _ sock: GCDAsyncSocket,
     didAcceptNewSocket newSocket: GCDAsyncSocket

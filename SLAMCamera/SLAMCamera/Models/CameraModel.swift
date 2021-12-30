@@ -26,7 +26,7 @@ public class CameraModel: ObservableObject {
   private(set) var avCaptureSession: AVCaptureSession
   
   /// Reference to the streaming service.
-  private let streaming: StreamingService = HLSService()
+  private let streaming: StreamingService = HttpLiveStreamingService()
 
   /// Combine subscriptions.
   private var subscriptions: Set<AnyCancellable> = Set<AnyCancellable>()
