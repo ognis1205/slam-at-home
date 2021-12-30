@@ -26,7 +26,7 @@ public class CameraModel: ObservableObject {
   private(set) var avCaptureSession: AVCaptureSession
   
   /// Reference to the streaming service.
-  private let streaming = StreamingService()
+  private let streaming: StreamingService = HLSService()
 
   /// Combine subscriptions.
   private var subscriptions = Set<AnyCancellable>()
@@ -34,23 +34,23 @@ public class CameraModel: ObservableObject {
   /// Initializer.
   public init() {
     self.avCaptureSession = self.streaming.avCaptureSession
-    self.streaming.$shouldShowAlert.sink { [weak self] (val) in
+    self.streaming.shouldShowAlertPublisher.sink { [weak self] (val) in
       self?.alert = self?.streaming.alert
       self?.showAlert = val
     }
     .store(in: &self.subscriptions)
-    self.streaming.$isConnected.sink { [weak self] (val) in
+    self.streaming.isConnectedPublisher.sink { [weak self] (val) in
       self?.hasConnection = val
     }
     .store(in: &self.subscriptions)
-    self.streaming.$URL.sink { [weak self] (val) in
+    self.streaming.URLPublisher.sink { [weak self] (val) in
       self?.URL = val
     }
     .store(in: &self.subscriptions)
   }
 
   /// Configures and initiates the service.
-  public func configure() {
+  public func start() {
     self.streaming.checkPermissions()
     self.streaming.start()
   }

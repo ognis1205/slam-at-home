@@ -20,7 +20,6 @@ struct ContentView: View {
           HStack {
             Button(
               action: {
-                //model.switchFlash()
               },
               label: {
                 Image(systemName: model.hasConnection ? "wifi.circle.fill" : "wifi.circle")
@@ -40,7 +39,7 @@ struct ContentView: View {
               }
             }))
             .onAppear {
-              model.configure()
+              model.start()
             }
             .alert(
               isPresented: $model.showAlert,

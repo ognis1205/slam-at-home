@@ -1,5 +1,5 @@
 //
-//  StreamingService.swift
+//  HLSService.swift
 //  SLAMCamera
 //
 //  Created by Shingo OKAWA on 2021/12/24.
@@ -9,7 +9,7 @@ import Foundation
 import AVFoundation
 import CocoaAsyncSocket
 
-extension StreamingService: AVCaptureVideoDataOutputSampleBufferDelegate {
+extension HLSService: AVCaptureVideoDataOutputSampleBufferDelegate {
   public func captureOutput(
     _ output: AVCaptureOutput,
     didOutput sampleBuffer: CMSampleBuffer,
