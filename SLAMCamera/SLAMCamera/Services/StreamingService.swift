@@ -41,8 +41,8 @@ public protocol StreamingService: AnyObject {
   var alert: AlertModel { get }
 
   /// Checks for user's permissions
-  func checkPermissions()
+  func checkPermissions() -> Void
 
   /// Configures the device and session.
-  func start()
+  func start() -> Void
 }

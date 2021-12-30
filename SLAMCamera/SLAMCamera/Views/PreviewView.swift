@@ -42,7 +42,7 @@ public struct PreviewView: UIViewRepresentable {
   }
 
   // Update `UIView`.
-  public func updateUIView(_ uiView: Wrapper, context: Context) {
+  public func updateUIView(_ uiView: Wrapper, context: Context) -> Void {
     // Placeholder.
   }
 }

@@ -11,13 +11,13 @@ import AVFoundation
 
 public class CameraModel: ObservableObject {
   /// $Observable state of alert flag.
-  @Published var showAlert = false
+  @Published var showAlert: Bool = false
 
   /// $Observable state of alert flag.
-  @Published var hasConnection = false
+  @Published var hasConnection: Bool = false
 
   /// $Observable state of URL.
-  @Published var URL = "unknown"
+  @Published var URL: String = "unknown"
 
   /// Reference to the current alert.
   private(set) var alert: AlertModel!
@@ -29,7 +29,7 @@ public class CameraModel: ObservableObject {
   private let streaming: StreamingService = HLSService()
 
   /// Combine subscriptions.
-  private var subscriptions = Set<AnyCancellable>()
+  private var subscriptions: Set<AnyCancellable> = Set<AnyCancellable>()
 
   /// Initializer.
   public init() {
@@ -50,7 +50,7 @@ public class CameraModel: ObservableObject {
   }
 
   /// Configures and initiates the service.
-  public func start() {
+  public func start() -> Void {
     self.streaming.checkPermissions()
     self.streaming.start()
   }

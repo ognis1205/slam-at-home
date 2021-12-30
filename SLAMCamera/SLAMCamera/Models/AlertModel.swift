@@ -15,7 +15,7 @@ public class AlertModel {
   private(set) var message: String = ""
 
   /// The alert primary button.
-  private(set) var primaryButtonTitle = "Accept"
+  private(set) var primaryButtonTitle: String = "Accept"
 
   /// The alert secondary button.
   private(set) var secondaryButtonTitle: String?

@@ -14,37 +14,37 @@ public class HLSService: NSObject, StreamingService {
   public static let PORT: UInt16 = 10001
 
   /// $Observable state of URL.
-  @Published public var URL = ""
+  @Published public var URL: String = ""
   public var URLPublisher: Published<String>.Publisher {
     $URL
   }
 
   /// $Observable state of alert flag.
-  @Published public var shouldShowAlert = false
+  @Published public var shouldShowAlert: Bool = false
   public var shouldShowAlertPublisher: Published<Bool>.Publisher {
     $shouldShowAlert
   }
 
   /// $Observable state of socket listening state.
-  @Published public var isConnected = false
+  @Published public var isConnected: Bool = false
   public var isConnectedPublisher: Published<Bool>.Publisher {
     $isConnected
   }
 
   /// $Observable state of camera availability.
-  @Published public var isCameraUnavailable = true
+  @Published public var isCameraUnavailable: Bool = true
   public var isCameraUnavailablePublisher: Published<Bool>.Publisher {
     $isCameraUnavailable
   }
 
   /// $Observable state of socket availability.
-  @Published public var isSocketUnavailable = true
+  @Published public var isSocketUnavailable: Bool = true
   public var isSocketUnavailablePublisher: Published<Bool>.Publisher {
     $isSocketUnavailable
   }
 
   /// The session so that the video preview layer can output what the camera is capturing.
-  public var avCaptureSession = AVCaptureSession()
+  public var avCaptureSession: AVCaptureSession = AVCaptureSession()
 
   /// Reference to the current alert.
   public var alert: AlertModel = AlertModel()
@@ -53,33 +53,33 @@ public class HLSService: NSObject, StreamingService {
   private(set) var setupResult: SessionSetupResult = .success
 
   /// The active sessions between clients.
-  internal var connections = [Int: HttpLiveStreaming]()
+  internal var connections: [Int: HttpLiveStreaming] = [Int: HttpLiveStreaming]()
 
   /// The session GDC queue: AVCaptureSession
-  internal let sessionQueue = DispatchQueue(
+  internal let sessionQueue: DispatchQueue = DispatchQueue(
     label: "session queue",
     attributes: [])
 
   /// The socket listening GDC queue.
-  internal let socketListenQueue = DispatchQueue(
+  internal let socketListenQueue: DispatchQueue = DispatchQueue(
     label: "socket listen queue",
     attributes: [])
 
   /// The socket write GDC queue.
-  internal let socketWriteQueue = DispatchQueue(
+  internal let socketWriteQueue: DispatchQueue = DispatchQueue(
     label: "socket write queue",
     attributes: .concurrent)
 
   /// The connection GDC queue.
-  internal let connectionQueue = DispatchQueue(
+  internal let connectionQueue: DispatchQueue = DispatchQueue(
     label: "connection queue",
     attributes: .concurrent)
 
   /// Reference to the CI context.
-  internal let context = CIContext(options: nil)
+  internal let context: CIContext = CIContext(options: nil)
 
   /// The IP address of this device.
-  private let ip = IP.getAddress()
+  private let ip: String? = IP.getAddress()
 
   /// The server socket.
   private var server: GCDAsyncSocket?
@@ -88,25 +88,25 @@ public class HLSService: NSObject, StreamingService {
   @objc dynamic private var avDeviceInput: AVCaptureDeviceInput!
   
   /// Reference to the video device.
-  private let avDeviceOutput = AVCaptureVideoDataOutput()
+  private let avDeviceOutput: AVCaptureVideoDataOutput = AVCaptureVideoDataOutput()
 
   /// Reference to the video device discovery session.
-  private let avDiscoverySession = AVCaptureDevice.DiscoverySession(
+  private let avDiscoverySession: AVCaptureDevice.DiscoverySession = AVCaptureDevice.DiscoverySession(
     deviceTypes: [.builtInWideAngleCamera, .builtInDualCamera, .builtInTrueDepthCamera],
     mediaType: .video,
     position: .unspecified)
   
   /// Configuration flag.
-  private var isConfigured = false
+  private var isConfigured: Bool = false
 
   /// Session start flag.
-  private var isSessionRunning = false
+  private var isSessionRunning: Bool = false
   
   /// Server start flag.
-  private var isSocketListening = false
+  private var isSocketListening: Bool = false
 
   /// Checks for user's permissions
-  public func checkPermissions() {
+  public func checkPermissions() -> Void {
     print("Checking AV permissions")
     switch AVCaptureDevice.authorizationStatus(for: .video) {
       case .authorized:
@@ -140,13 +140,8 @@ public class HLSService: NSObject, StreamingService {
     }
   }
 
-  /// Configures the device and session.
-  public func start() {
-    self.setupAndStart()
-  }
-
   /// Configures the device and the session.
-  private func setupAndStart() {
+  public func start() -> Void {
     print("Checking setup result")
     if setupResult != .success { return }
 
@@ -199,7 +194,7 @@ public class HLSService: NSObject, StreamingService {
   }
 
   /// Start AVCaputureSession.
-  private func startSession() {
+  private func startSession() -> Void {
     print("Starting AV session")
     if !self.isSessionRunning && self.isConfigured {
       switch self.setupResult {
@@ -229,7 +224,7 @@ public class HLSService: NSObject, StreamingService {
   }
 
   /// Start listening on socket.
-  private func startListening() {
+  private func startListening() -> Void {
     print("Starting service on \(String(describing: self.ip!)):\(HLSService.PORT)")
     if !self.isSocketListening && self.isSessionRunning && self.isConfigured {
       self.server = GCDAsyncSocket(
@@ -261,7 +256,6 @@ public class HLSService: NSObject, StreamingService {
         } else {
           self.URL = "IP address not available"
         }
-        // Camera view addGestureRecognizer here?
       }
     }
   }

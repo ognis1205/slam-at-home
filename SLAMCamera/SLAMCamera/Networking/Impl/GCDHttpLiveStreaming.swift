@@ -36,13 +36,13 @@ public class GCDHttpLiveStreaming: HttpLiveStreaming {
   private var dispatchQueue: DispatchQueue
 
   /// Data stack to send.
-  private var dataStack = Queue<Data>(capacity: 1)
+  private var dataStack: Queue<Data> = Queue<Data>(capacity: 1)
 
   /// Specifies whether streaming is started or not.
-  private var isStreaming = false
+  private var isStreaming: Bool = false
 
   /// Streaming footer.
-  private let footer = [
+  private let footer: Data? = [
     "",
     ""
   ].joined(separator: "\r\n").data(using: String.Encoding.utf8)
@@ -61,7 +61,7 @@ public class GCDHttpLiveStreaming: HttpLiveStreaming {
   }
 
   /// Starts the streaming session.
-  public func connect() {
+  public func connect() -> Void {
     self.dispatchQueue.async(execute: { [unowned self] in
       while self.isConnected {
         if !self.isStreaming {

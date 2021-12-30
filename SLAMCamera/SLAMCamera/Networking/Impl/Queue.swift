@@ -36,7 +36,7 @@ public class Queue<T> {
   private var capacity: Int
 
   /// The current size of the queue.
-  private var length = 0
+  private var length: Int = 0
 
   /// Initializer.
   public init(capacity: Int) {
@@ -46,7 +46,7 @@ public class Queue<T> {
   }
 
   /// Pushes a new item into the tail of the queue.
-  public func push(_ value: T) {
+  public func push(_ value: T) -> Void {
     if self.length >= self.capacity {
       self.tail = Entry(value)
     } else {

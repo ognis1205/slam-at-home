@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
   /// Business logics here.
-  @StateObject var model = CameraModel()
+  @StateObject var model: CameraModel = CameraModel()
 
   /// Content body.
   var body: some View {

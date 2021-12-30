@@ -10,7 +10,10 @@ import AVFoundation
 import CocoaAsyncSocket
 
 extension HLSService: GCDAsyncSocketDelegate {
-  public func socket(_ sock: GCDAsyncSocket, didAcceptNewSocket newSocket: GCDAsyncSocket) {
+  public func socket(
+    _ sock: GCDAsyncSocket,
+    didAcceptNewSocket newSocket: GCDAsyncSocket
+  ) -> Void {
     print("New connection from IP [\(newSocket.connectedHost ?? "unknown")]")
     guard let id = newSocket.connectedAddress?.hashValue else { return }
     let newConnection = GCDHttpLiveStreaming(

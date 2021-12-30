@@ -14,7 +14,7 @@ extension HLSService: AVCaptureVideoDataOutputSampleBufferDelegate {
     _ output: AVCaptureOutput,
     didOutput sampleBuffer: CMSampleBuffer,
     from connection: AVCaptureConnection
-  ) {
+  ) -> Void {
     if !self.connections.isEmpty {
       guard let buffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return }
       let capturedImage = CIImage(cvImageBuffer: buffer, options: nil)

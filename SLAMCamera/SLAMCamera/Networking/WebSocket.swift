@@ -12,19 +12,19 @@ public protocol WebSocket: AnyObject {
   var delegate: WebSocketDelegate? { get set }
 
   /// Starts the streaming session.
-  func connect()
+  func connect() -> Void
 
   /// Sends a data on the stream.
-  func send(data: Data)
+  func send(data: Data) -> Void
 }
 
 public protocol WebSocketDelegate: AnyObject {
   /// Called when connection has established.
-  func didConnect(_ socket: WebSocket)
+  func didConnect(_ socket: WebSocket) -> Void
 
   /// Called when connection has destroyed.
-  func didDisconnect(_ socket: WebSocket)
+  func didDisconnect(_ socket: WebSocket) -> Void
 
   /// Called when new connection has created.
-  func socket(_ socket: WebSocket, didReceiveData data: Data)
+  func socket(_ socket: WebSocket, didReceiveData data: Data) -> Void
 }
