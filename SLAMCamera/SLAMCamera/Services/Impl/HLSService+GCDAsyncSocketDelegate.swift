@@ -14,7 +14,7 @@ extension HLSService: GCDAsyncSocketDelegate {
     _ sock: GCDAsyncSocket,
     didAcceptNewSocket newSocket: GCDAsyncSocket
   ) -> Void {
-    print("New connection from IP [\(newSocket.connectedHost ?? "unknown")]")
+    debugPrint("New connection from IP [\(newSocket.connectedHost ?? "unknown")]")
     guard let id = newSocket.connectedAddress?.hashValue else { return }
     let newConnection = GCDHttpLiveStreaming(
       id: id,

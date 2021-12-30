@@ -54,7 +54,7 @@ public class GCDHttpLiveStreaming: HttpLiveStreaming {
   ///   - socket: Cocoa asyncronous socket of this session.
   ///   - dispatchQueue:The worker queue.
   public init(id: Int, socket: GCDAsyncSocket, dispatchQueue: DispatchQueue) {
-    print("Creating connection [#\(id)]")
+    debugPrint("Creating connection [#\(id)]")
     self.id = id
     self.socket = socket
     self.dispatchQueue = dispatchQueue
@@ -65,7 +65,7 @@ public class GCDHttpLiveStreaming: HttpLiveStreaming {
     self.dispatchQueue.async(execute: { [unowned self] in
       while self.isConnected {
         if !self.isStreaming {
-          print("Sending header [#\(self.id)]")
+          debugPrint("Sending header [#\(self.id)]")
           guard let header = [
             "HTTP/1.0 200 OK",
             "Connection: keep-alive",
@@ -80,7 +80,7 @@ public class GCDHttpLiveStreaming: HttpLiveStreaming {
             "Content-type: multipart/x-mixed-replace; boundary=0123456789876543210",
             ""
           ].joined(separator: "\r\n").data(using: String.Encoding.utf8) else {
-            print("Could not make header data [#\(self.id)]")
+            debugPrint("Could not make header data [#\(self.id)]")
             return
           }
           self.isStreaming = true
@@ -95,7 +95,7 @@ public class GCDHttpLiveStreaming: HttpLiveStreaming {
               "",
               ""
             ].joined(separator: "\r\n").data(using: String.Encoding.utf8) else {
-              print("Could not make frame header data [#\(self.id)]")
+              debugPrint("Could not make frame header data [#\(self.id)]")
               return
             }
             self.socket.write(header, withTimeout: -1, tag: 0)

@@ -107,7 +107,7 @@ public class HLSService: NSObject, StreamingService {
 
   /// Checks for user's permissions
   public func checkPermissions() -> Void {
-    print("Checking AV permissions")
+    debugPrint("Checking AV permissions")
     switch AVCaptureDevice.authorizationStatus(for: .video) {
       case .authorized:
         break
@@ -142,10 +142,10 @@ public class HLSService: NSObject, StreamingService {
 
   /// Configures the device and the session.
   public func start() -> Void {
-    print("Checking setup result")
+    debugPrint("Checking setup result")
     if setupResult != .success { return }
 
-    print("Configuring video device")
+    debugPrint("Configuring video device")
     self.avCaptureSession.beginConfiguration()
     self.avCaptureSession.sessionPreset = .medium
 
@@ -158,7 +158,7 @@ public class HLSService: NSObject, StreamingService {
       }
 
       guard let videoDevice = defaultDevice else {
-        print("Default video device is unavailable")
+        debugPrint("Default video device is unavailable")
         self.setupResult = .configurationFailed
         self.avCaptureSession.commitConfiguration()
         return
@@ -175,13 +175,13 @@ public class HLSService: NSObject, StreamingService {
         self.avCaptureSession.addInput(self.avDeviceInput)
         self.avCaptureSession.addOutput(self.avDeviceOutput)
       } else {
-        print("Could not add video device input to the session")
+        debugPrint("Could not add video device input to the session")
         self.setupResult = .configurationFailed
         self.avCaptureSession.commitConfiguration()
         return
       }
     } catch {
-      print("Could not create video device input")
+      debugPrint("Could not create video device input")
       self.setupResult = .configurationFailed
       self.avCaptureSession.commitConfiguration()
       return
@@ -195,7 +195,7 @@ public class HLSService: NSObject, StreamingService {
 
   /// Start AVCaputureSession.
   private func startSession() -> Void {
-    print("Starting AV session")
+    debugPrint("Starting AV session")
     if !self.isSessionRunning && self.isConfigured {
       switch self.setupResult {
         case .success:
@@ -207,7 +207,7 @@ public class HLSService: NSObject, StreamingService {
             }
           }
         case .configurationFailed, .notAuthorized:
-          print("Application not authorized to use camera")
+          debugPrint("Application not authorized to use camera")
           DispatchQueue.main.async {
             self.alert = AlertModel(
               title: "Camera Error",
@@ -225,7 +225,7 @@ public class HLSService: NSObject, StreamingService {
 
   /// Start listening on socket.
   private func startListening() -> Void {
-    print("Starting service on \(String(describing: self.ip!)):\(HLSService.PORT)")
+    debugPrint("Starting service on \(String(describing: self.ip!)):\(HLSService.PORT)")
     if !self.isSocketListening && self.isSessionRunning && self.isConfigured {
       self.server = GCDAsyncSocket(
         delegate: self,
@@ -234,7 +234,7 @@ public class HLSService: NSObject, StreamingService {
       do {
         try self.server?.accept(onInterface: self.ip, port: HLSService.PORT)
       } catch {
-        print("Could not start listening on port \(HLSService.PORT) (\(error))")
+        debugPrint("Could not start listening on port \(HLSService.PORT) (\(error))")
         DispatchQueue.main.async {
           self.alert = AlertModel(
             title: "Socket Error",

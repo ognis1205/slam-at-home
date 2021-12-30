@@ -10,9 +10,15 @@
 		010BD1DA3DC15CFEA5B4DD34 /* Pods_SLAMCameraTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9985B436AC999C7AEB2345 /* Pods_SLAMCameraTests.framework */; };
 		54881571277D8C7D00AC1107 /* WebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54881570277D8C7D00AC1107 /* WebSocket.swift */; };
 		54881573277DA26E00AC1107 /* HttpLiveStreaming.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54881572277DA26E00AC1107 /* HttpLiveStreaming.swift */; };
+		54881575277DED2300AC1107 /* NativeWebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54881574277DED2200AC1107 /* NativeWebSocket.swift */; };
+		54881577277DEEB200AC1107 /* NativeWebSocket+URLSessionWebSocketDelegate+URLSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54881576277DEEB200AC1107 /* NativeWebSocket+URLSessionWebSocketDelegate+URLSessionDelegate.swift */; };
+		5488157A277E065E00AC1107 /* IceCandicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54881579277E065E00AC1107 /* IceCandicate.swift */; };
+		5488157C277E09E400AC1107 /* RTCStates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5488157B277E09E400AC1107 /* RTCStates.swift */; };
+		5488157E277E10D000AC1107 /* SessionDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5488157D277E10D000AC1107 /* SessionDescription.swift */; };
 		5489C9D42777AA45009DB2F2 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5489C9D32777AA45009DB2F2 /* Queue.swift */; };
 		5489C9D92777AA72009DB2F2 /* QueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5489C9D82777AA72009DB2F2 /* QueueTests.swift */; };
 		5489C9DE2777ADAA009DB2F2 /* GCDHttpLiveStreaming.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5489C9DD2777ADAA009DB2F2 /* GCDHttpLiveStreaming.swift */; };
+		54A0552C277E25D20054CA7B /* WebRTCSignaling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54A0552B277E25D10054CA7B /* WebRTCSignaling.swift */; };
 		54C5CA6C2777863300893FD1 /* SLAMCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C5CA6B2777863300893FD1 /* SLAMCamera.swift */; };
 		54C5CA6E2777863400893FD1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C5CA6D2777863400893FD1 /* ContentView.swift */; };
 		54C5CA702777863800893FD1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54C5CA6F2777863800893FD1 /* Assets.xcassets */; };
@@ -57,9 +63,15 @@
 		33EA1FA1E040F35A632E1B68 /* Pods-SLAMCameraTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SLAMCameraTests.release.xcconfig"; path = "Target Support Files/Pods-SLAMCameraTests/Pods-SLAMCameraTests.release.xcconfig"; sourceTree = "<group>"; };
 		54881570277D8C7D00AC1107 /* WebSocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocket.swift; sourceTree = "<group>"; };
 		54881572277DA26E00AC1107 /* HttpLiveStreaming.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpLiveStreaming.swift; sourceTree = "<group>"; };
+		54881574277DED2200AC1107 /* NativeWebSocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeWebSocket.swift; sourceTree = "<group>"; };
+		54881576277DEEB200AC1107 /* NativeWebSocket+URLSessionWebSocketDelegate+URLSessionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NativeWebSocket+URLSessionWebSocketDelegate+URLSessionDelegate.swift"; sourceTree = "<group>"; };
+		54881579277E065E00AC1107 /* IceCandicate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IceCandicate.swift; sourceTree = "<group>"; };
+		5488157B277E09E400AC1107 /* RTCStates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RTCStates.swift; sourceTree = "<group>"; };
+		5488157D277E10D000AC1107 /* SessionDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDescription.swift; sourceTree = "<group>"; };
 		5489C9D32777AA45009DB2F2 /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		5489C9D82777AA72009DB2F2 /* QueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueTests.swift; sourceTree = "<group>"; };
 		5489C9DD2777ADAA009DB2F2 /* GCDHttpLiveStreaming.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GCDHttpLiveStreaming.swift; sourceTree = "<group>"; };
+		54A0552B277E25D10054CA7B /* WebRTCSignaling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebRTCSignaling.swift; sourceTree = "<group>"; };
 		54C5CA682777863300893FD1 /* SLAMCamera.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SLAMCamera.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		54C5CA6B2777863300893FD1 /* SLAMCamera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SLAMCamera.swift; sourceTree = "<group>"; };
 		54C5CA6D2777863400893FD1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -119,6 +131,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		54881578277E063900AC1107 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				54881579277E065E00AC1107 /* IceCandicate.swift */,
+				5488157B277E09E400AC1107 /* RTCStates.swift */,
+				5488157D277E10D000AC1107 /* SessionDescription.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		54C5CA5F2777863300893FD1 = {
 			isa = PBXGroup;
 			children = (
@@ -228,6 +250,8 @@
 				5489C9DD2777ADAA009DB2F2 /* GCDHttpLiveStreaming.swift */,
 				5489C9D32777AA45009DB2F2 /* Queue.swift */,
 				54F426EC277799E7003B70BA /* IP.m */,
+				54881574277DED2200AC1107 /* NativeWebSocket.swift */,
+				54881576277DEEB200AC1107 /* NativeWebSocket+URLSessionWebSocketDelegate+URLSessionDelegate.swift */,
 			);
 			path = Impl;
 			sourceTree = "<group>";
@@ -235,10 +259,12 @@
 		54F426E9277798D3003B70BA /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				54881578277E063900AC1107 /* Extensions */,
 				54E879E4277D7E2400411737 /* Impl */,
 				54F426EB2777997F003B70BA /* IP.h */,
 				54881570277D8C7D00AC1107 /* WebSocket.swift */,
 				54881572277DA26E00AC1107 /* HttpLiveStreaming.swift */,
+				54A0552B277E25D10054CA7B /* WebRTCSignaling.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -516,18 +542,24 @@
 			files = (
 				54C92285277ABB66001CA30D /* HLSService+AVCaptureVideoDataOutputSampleBufferDelegate.swift in Sources */,
 				5489C9DE2777ADAA009DB2F2 /* GCDHttpLiveStreaming.swift in Sources */,
+				5488157C277E09E400AC1107 /* RTCStates.swift in Sources */,
+				54A0552C277E25D20054CA7B /* WebRTCSignaling.swift in Sources */,
 				54C5CA6E2777863400893FD1 /* ContentView.swift in Sources */,
 				54C9227B277A317F001CA30D /* PreviewView.swift in Sources */,
 				54E879E2277D5BC100411737 /* StreamingService.swift in Sources */,
 				54C922612778974C001CA30D /* HLSService.swift in Sources */,
 				54C5CA6C2777863300893FD1 /* SLAMCamera.swift in Sources */,
+				5488157A277E065E00AC1107 /* IceCandicate.swift in Sources */,
 				54F426ED277799E7003B70BA /* IP.m in Sources */,
 				54C9228A277AC1C6001CA30D /* HLSService+GCDAsyncSocketDelegate.swift in Sources */,
 				54881571277D8C7D00AC1107 /* WebSocket.swift in Sources */,
 				54881573277DA26E00AC1107 /* HttpLiveStreaming.swift in Sources */,
 				5489C9D42777AA45009DB2F2 /* Queue.swift in Sources */,
+				54881575277DED2300AC1107 /* NativeWebSocket.swift in Sources */,
 				54C9226D2778C89B001CA30D /* AlertModel.swift in Sources */,
+				54881577277DEEB200AC1107 /* NativeWebSocket+URLSessionWebSocketDelegate+URLSessionDelegate.swift in Sources */,
 				54C92280277A472D001CA30D /* CameraModel.swift in Sources */,
+				5488157E277E10D000AC1107 /* SessionDescription.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
