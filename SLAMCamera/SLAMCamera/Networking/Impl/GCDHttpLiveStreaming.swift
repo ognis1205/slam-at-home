@@ -1,5 +1,5 @@
 //
-//  HLS.swift
+//  GCDHttpLiveStreaming.swift
 //  SLAMCamera
 //
 //  Created by Shingo OKAWA on 2021/12/24.
@@ -8,7 +8,10 @@
 import Foundation
 import CocoaAsyncSocket
 
-public class HLS {
+public class GCDHttpLiveStreaming: HttpLiveStreaming {
+  /// Identifier.
+  public var id: Int
+
   /// Data to send.
   public var dataToSend: Data? {
     didSet {
@@ -18,9 +21,13 @@ public class HLS {
       self.dataStack.push(dataToSend)
     }
   }
-
-  /// Identifier.
-  private(set) var id: Int
+  
+  /// Specifies whether connection is established or not.
+  public var isConnected: Bool {
+    get {
+      return !(self.socket.connectedPort.hashValue == 0 || !self.socket.isConnected)
+    }
+  }
 
   /// Asyncronous socket.
   private var socket: GCDAsyncSocket
@@ -40,9 +47,6 @@ public class HLS {
     ""
   ].joined(separator: "\r\n").data(using: String.Encoding.utf8)
 
-  /// Specifies whether connection is established or not.
-  private(set) var isConnected = true
-
   /// Initializer.
   ///
   /// - Parameters:
@@ -56,14 +60,8 @@ public class HLS {
     self.dispatchQueue = dispatchQueue
   }
 
-  /// Closes the connection.
-  public func close() {
-    print("Closing connection [#\(self.id)]")
-    self.isConnected = false
-  }
-
   /// Starts the streaming session.
-  public func open() {
+  public func connect() {
     self.dispatchQueue.async(execute: { [unowned self] in
       while self.isConnected {
         if !self.isStreaming {
@@ -88,10 +86,6 @@ public class HLS {
           self.isStreaming = true
           self.socket.write(header, withTimeout: -1, tag: 0)
         } else {
-          if (self.socket.connectedPort.hashValue == 0 || !self.socket.isConnected) {
-            self.close()
-            print("Dropping connection [#\(self.id)]")
-          }
           if let data = self.dataStack.pop() {
             guard let header = [
               "",

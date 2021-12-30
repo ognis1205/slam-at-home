@@ -1,6 +1,7 @@
 target 'SLAMCamera' do
   use_frameworks!
-  pod 'CocoaAsyncSocket' 
+  pod 'CocoaAsyncSocket'
+  pod 'GoogleWebRTC'
 
   target 'SLAMCameraTests' do
     inherit! :search_paths

@@ -8,9 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		010BD1DA3DC15CFEA5B4DD34 /* Pods_SLAMCameraTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9985B436AC999C7AEB2345 /* Pods_SLAMCameraTests.framework */; };
+		54881571277D8C7D00AC1107 /* WebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54881570277D8C7D00AC1107 /* WebSocket.swift */; };
+		54881573277DA26E00AC1107 /* HttpLiveStreaming.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54881572277DA26E00AC1107 /* HttpLiveStreaming.swift */; };
 		5489C9D42777AA45009DB2F2 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5489C9D32777AA45009DB2F2 /* Queue.swift */; };
 		5489C9D92777AA72009DB2F2 /* QueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5489C9D82777AA72009DB2F2 /* QueueTests.swift */; };
-		5489C9DE2777ADAA009DB2F2 /* HLS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5489C9DD2777ADAA009DB2F2 /* HLS.swift */; };
+		5489C9DE2777ADAA009DB2F2 /* GCDHttpLiveStreaming.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5489C9DD2777ADAA009DB2F2 /* GCDHttpLiveStreaming.swift */; };
 		54C5CA6C2777863300893FD1 /* SLAMCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C5CA6B2777863300893FD1 /* SLAMCamera.swift */; };
 		54C5CA6E2777863400893FD1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C5CA6D2777863400893FD1 /* ContentView.swift */; };
 		54C5CA702777863800893FD1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54C5CA6F2777863800893FD1 /* Assets.xcassets */; };
@@ -53,9 +55,11 @@
 		1953E48178EBC7E6529E9476 /* Pods_SLAMCamera_SLAMCameraUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SLAMCamera_SLAMCameraUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B09D4141BB81D68534A29AA /* Pods-SLAMCamera-SLAMCameraUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SLAMCamera-SLAMCameraUITests.debug.xcconfig"; path = "Target Support Files/Pods-SLAMCamera-SLAMCameraUITests/Pods-SLAMCamera-SLAMCameraUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		33EA1FA1E040F35A632E1B68 /* Pods-SLAMCameraTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SLAMCameraTests.release.xcconfig"; path = "Target Support Files/Pods-SLAMCameraTests/Pods-SLAMCameraTests.release.xcconfig"; sourceTree = "<group>"; };
+		54881570277D8C7D00AC1107 /* WebSocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocket.swift; sourceTree = "<group>"; };
+		54881572277DA26E00AC1107 /* HttpLiveStreaming.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpLiveStreaming.swift; sourceTree = "<group>"; };
 		5489C9D32777AA45009DB2F2 /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		5489C9D82777AA72009DB2F2 /* QueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueTests.swift; sourceTree = "<group>"; };
-		5489C9DD2777ADAA009DB2F2 /* HLS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HLS.swift; sourceTree = "<group>"; };
+		5489C9DD2777ADAA009DB2F2 /* GCDHttpLiveStreaming.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GCDHttpLiveStreaming.swift; sourceTree = "<group>"; };
 		54C5CA682777863300893FD1 /* SLAMCamera.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SLAMCamera.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		54C5CA6B2777863300893FD1 /* SLAMCamera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SLAMCamera.swift; sourceTree = "<group>"; };
 		54C5CA6D2777863400893FD1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -218,23 +222,25 @@
 			path = Impl;
 			sourceTree = "<group>";
 		};
+		54E879E4277D7E2400411737 /* Impl */ = {
+			isa = PBXGroup;
+			children = (
+				5489C9DD2777ADAA009DB2F2 /* GCDHttpLiveStreaming.swift */,
+				5489C9D32777AA45009DB2F2 /* Queue.swift */,
+				54F426EC277799E7003B70BA /* IP.m */,
+			);
+			path = Impl;
+			sourceTree = "<group>";
+		};
 		54F426E9277798D3003B70BA /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				54F426EA27779960003B70BA /* IP */,
-				5489C9D32777AA45009DB2F2 /* Queue.swift */,
-				5489C9DD2777ADAA009DB2F2 /* HLS.swift */,
+				54E879E4277D7E2400411737 /* Impl */,
+				54F426EB2777997F003B70BA /* IP.h */,
+				54881570277D8C7D00AC1107 /* WebSocket.swift */,
+				54881572277DA26E00AC1107 /* HttpLiveStreaming.swift */,
 			);
 			path = Networking;
-			sourceTree = "<group>";
-		};
-		54F426EA27779960003B70BA /* IP */ = {
-			isa = PBXGroup;
-			children = (
-				54F426EB2777997F003B70BA /* IP.h */,
-				54F426EC277799E7003B70BA /* IP.m */,
-			);
-			path = IP;
 			sourceTree = "<group>";
 		};
 		54F426F227779A61003B70BA /* Networking */ = {
@@ -509,7 +515,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				54C92285277ABB66001CA30D /* HLSService+AVCaptureVideoDataOutputSampleBufferDelegate.swift in Sources */,
-				5489C9DE2777ADAA009DB2F2 /* HLS.swift in Sources */,
+				5489C9DE2777ADAA009DB2F2 /* GCDHttpLiveStreaming.swift in Sources */,
 				54C5CA6E2777863400893FD1 /* ContentView.swift in Sources */,
 				54C9227B277A317F001CA30D /* PreviewView.swift in Sources */,
 				54E879E2277D5BC100411737 /* StreamingService.swift in Sources */,
@@ -517,6 +523,8 @@
 				54C5CA6C2777863300893FD1 /* SLAMCamera.swift in Sources */,
 				54F426ED277799E7003B70BA /* IP.m in Sources */,
 				54C9228A277AC1C6001CA30D /* HLSService+GCDAsyncSocketDelegate.swift in Sources */,
+				54881571277D8C7D00AC1107 /* WebSocket.swift in Sources */,
+				54881573277DA26E00AC1107 /* HttpLiveStreaming.swift in Sources */,
 				5489C9D42777AA45009DB2F2 /* Queue.swift in Sources */,
 				54C9226D2778C89B001CA30D /* AlertModel.swift in Sources */,
 				54C92280277A472D001CA30D /* CameraModel.swift in Sources */,
@@ -592,6 +600,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -653,6 +662,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;

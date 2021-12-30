@@ -53,7 +53,7 @@ public class HLSService: NSObject, StreamingService {
   private(set) var setupResult: SessionSetupResult = .success
 
   /// The active sessions between clients.
-  internal var connections = [Int: HLS]()
+  internal var connections = [Int: HttpLiveStreaming]()
 
   /// The session GDC queue: AVCaptureSession
   internal let sessionQueue = DispatchQueue(

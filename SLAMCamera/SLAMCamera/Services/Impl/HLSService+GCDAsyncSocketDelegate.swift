@@ -13,12 +13,12 @@ extension HLSService: GCDAsyncSocketDelegate {
   public func socket(_ sock: GCDAsyncSocket, didAcceptNewSocket newSocket: GCDAsyncSocket) {
     print("New connection from IP [\(newSocket.connectedHost ?? "unknown")]")
     guard let id = newSocket.connectedAddress?.hashValue else { return }
-    let newConnection = HLS(
+    let newConnection = GCDHttpLiveStreaming(
       id: id,
       socket: newSocket,
       dispatchQueue: self.connectionQueue)
     self.connections[id] = newConnection
-    newConnection.open()
+    newConnection.connect()
     DispatchQueue.main.async(execute: {
       self.isConnected = true
     })

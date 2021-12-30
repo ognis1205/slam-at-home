@@ -27,8 +27,8 @@
       addr = addr->ifa_next;
     }
   }
-    freeifaddrs(interfaces);
-    return address;
+  freeifaddrs(interfaces);
+  return address;
 }
 @end
 

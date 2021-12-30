@@ -25,6 +25,7 @@ extension HLSService: AVCaptureVideoDataOutputSampleBufferDelegate {
         if connection.isConnected {
           connection.dataToSend = (jpeg as NSData?)?.copy() as? Data
         } else {
+          print("Dropping connection [#\(connection.id)]")
           self.connections.removeValue(forKey: key)
         }
       }
