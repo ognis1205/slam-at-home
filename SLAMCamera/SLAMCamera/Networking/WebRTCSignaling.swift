@@ -60,3 +60,20 @@ public protocol WebRTCSignaling: AnyObject {
   /// Sends WebRTC ICE candidate to the server.
   func send(candidate rtcIceCandidate: RTCIceCandidate) -> Void
 }
+
+public protocol WebRTCSignalingDelegate: AnyObject {
+  /// Called when new connection has created.
+  func socket(_ socket: WebSocket, didReceiveData data: Data) -> Void
+  
+  /// Called when connection has established.
+  func didConnect(_ signal: WebRTCSignaling)
+
+  /// Called when connection has destroyed.
+  func didDisconnect(_ signal: WebRTCSignaling)
+
+  /// Called when SDP request are sent.
+  func signal(_ signal: WebRTCSignaling, didReceiveRemoteSdp sdp: RTCSessionDescription)
+
+  /// Called when ICE request are sent.
+  func signal(_ signal: WebRTCSignaling, didReceiveCandidate candidate: RTCIceCandidate)
+}

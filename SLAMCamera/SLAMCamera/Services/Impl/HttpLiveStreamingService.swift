@@ -14,7 +14,7 @@ public class HttpLiveStreamingService: NSObject, StreamingService {
   public static let PORT: UInt16 = 10001
 
   /// $Observable state of URL.
-  @Published public var URL: String = ""
+  @Published public var URL: String = "Not Available"
   public var URLPublisher: Published<String>.Publisher {
     $URL
   }
@@ -232,6 +232,9 @@ public class HttpLiveStreamingService: NSObject, StreamingService {
         delegateQueue: self.socketListenQueue,
         socketQueue: self.socketWriteQueue)
       do {
+        if let ip = self.ip {
+          if !ip.isEmpty { self.URL = "http://\(ip):10001" }
+        }
         try self.server?.accept(onInterface: self.ip, port: HttpLiveStreamingService.PORT)
       } catch {
         debugPrint("Could not start listening on port \(HttpLiveStreamingService.PORT) (\(error))")
@@ -251,11 +254,6 @@ public class HttpLiveStreamingService: NSObject, StreamingService {
       DispatchQueue.main.async {
         self.isSocketUnavailable = false
         self.isSocketListening = true
-        if let ip = self.ip {
-          self.URL = "http://\(ip):10001"
-        } else {
-          self.URL = "IP address not available"
-        }
       }
     }
   }
