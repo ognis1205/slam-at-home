@@ -18,6 +18,7 @@
 		5489C9DE2777ADAA009DB2F2 /* GCDHttpLiveStreaming.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5489C9DD2777ADAA009DB2F2 /* GCDHttpLiveStreaming.swift */; };
 		54A0552C277E25D20054CA7B /* WebRTCSignaling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54A0552B277E25D10054CA7B /* WebRTCSignaling.swift */; };
 		54A0552E277E2D1F0054CA7B /* GoogleWebRTCSignaling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54A0552D277E2D1F0054CA7B /* GoogleWebRTCSignaling.swift */; };
+		54A055302780014F0054CA7B /* GoogleWebRTCSignaling+WebSocketDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54A0552F2780014F0054CA7B /* GoogleWebRTCSignaling+WebSocketDelegate.swift */; };
 		54C5CA6C2777863300893FD1 /* SLAMCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C5CA6B2777863300893FD1 /* SLAMCamera.swift */; };
 		54C5CA6E2777863400893FD1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C5CA6D2777863400893FD1 /* ContentView.swift */; };
 		54C5CA702777863800893FD1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54C5CA6F2777863800893FD1 /* Assets.xcassets */; };
@@ -70,6 +71,7 @@
 		5489C9DD2777ADAA009DB2F2 /* GCDHttpLiveStreaming.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GCDHttpLiveStreaming.swift; sourceTree = "<group>"; };
 		54A0552B277E25D10054CA7B /* WebRTCSignaling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebRTCSignaling.swift; sourceTree = "<group>"; };
 		54A0552D277E2D1F0054CA7B /* GoogleWebRTCSignaling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleWebRTCSignaling.swift; sourceTree = "<group>"; };
+		54A0552F2780014F0054CA7B /* GoogleWebRTCSignaling+WebSocketDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GoogleWebRTCSignaling+WebSocketDelegate.swift"; sourceTree = "<group>"; };
 		54C5CA682777863300893FD1 /* SLAMCamera.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SLAMCamera.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		54C5CA6B2777863300893FD1 /* SLAMCamera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SLAMCamera.swift; sourceTree = "<group>"; };
 		54C5CA6D2777863400893FD1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -250,6 +252,7 @@
 				54881574277DED2200AC1107 /* NativeWebSocket.swift */,
 				54881576277DEEB200AC1107 /* NativeWebSocket+URLSessionWebSocketDelegate+URLSessionDelegate.swift */,
 				54A0552D277E2D1F0054CA7B /* GoogleWebRTCSignaling.swift */,
+				54A0552F2780014F0054CA7B /* GoogleWebRTCSignaling+WebSocketDelegate.swift */,
 			);
 			path = Impl;
 			sourceTree = "<group>";
@@ -544,6 +547,7 @@
 				54A0552C277E25D20054CA7B /* WebRTCSignaling.swift in Sources */,
 				54C5CA6E2777863400893FD1 /* ContentView.swift in Sources */,
 				54C9227B277A317F001CA30D /* PreviewView.swift in Sources */,
+				54A055302780014F0054CA7B /* GoogleWebRTCSignaling+WebSocketDelegate.swift in Sources */,
 				54E879E2277D5BC100411737 /* StreamingService.swift in Sources */,
 				54C922612778974C001CA30D /* HttpLiveStreamingService.swift in Sources */,
 				54C5CA6C2777863300893FD1 /* SLAMCamera.swift in Sources */,

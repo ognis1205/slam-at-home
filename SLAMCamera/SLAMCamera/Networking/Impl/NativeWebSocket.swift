@@ -24,7 +24,7 @@ public class NativeWebSocket: NSObject, WebSocket {
     delegateQueue: nil)
 
   /// Initializer.
-  init(url: URL) {
+  public init(url: URL) {
     self.url = url
     super.init()
   }

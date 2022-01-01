@@ -25,6 +25,6 @@ public protocol WebSocketDelegate: AnyObject {
   /// Called when connection has destroyed.
   func didDisconnect(_ socket: WebSocket) -> Void
 
-  /// Called when new connection has created.
+  /// Called when new message has arrived.
   func socket(_ socket: WebSocket, didReceiveData data: Data) -> Void
 }

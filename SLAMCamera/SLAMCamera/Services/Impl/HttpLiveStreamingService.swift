@@ -241,7 +241,7 @@ public class HttpLiveStreamingService: NSObject, StreamingService {
         DispatchQueue.main.async {
           self.alert = AlertModel(
             title: "Socket Error",
-            message: "Start listening socket failed. Either port number is not available or its missing permissions",
+            message: "Start listening socket failed. Either port number is not available or device is not connected to WiFi network",
             primaryButtonTitle: "Accept",
             secondaryButtonTitle: nil,
             primaryAction: nil,

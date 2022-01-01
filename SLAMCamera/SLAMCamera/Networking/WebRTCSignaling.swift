@@ -51,7 +51,7 @@ extension Message: Codable {
 }
 
 public protocol WebRTCSignaling: AnyObject {
-  ///  Connects to the signaling server.
+  /// Connects to the signaling server.
   func connect() -> Void
 
   /// Sends WebRTC SDP to the server.
