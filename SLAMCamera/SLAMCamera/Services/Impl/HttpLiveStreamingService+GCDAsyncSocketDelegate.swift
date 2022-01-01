@@ -16,7 +16,7 @@ extension HttpLiveStreamingService: GCDAsyncSocketDelegate {
   ) -> Void {
     debugPrint("New connection from IP [\(newSocket.connectedHost ?? "unknown")]")
     guard let id = newSocket.connectedAddress?.hashValue else { return }
-    let newConnection = GCDHttpLiveStreaming(
+    let newConnection = NativeHttpLiveStreaming(
       id: id,
       socket: newSocket,
       dispatchQueue: self.connectionQueue)

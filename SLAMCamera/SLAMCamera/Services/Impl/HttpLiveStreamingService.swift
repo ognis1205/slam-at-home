@@ -225,7 +225,7 @@ public class HttpLiveStreamingService: NSObject, StreamingService {
 
   /// Start listening on socket.
   private func startListening() -> Void {
-    debugPrint("Starting service on \(String(describing: self.ip!)):\(HttpLiveStreamingService.PORT)")
+    debugPrint("Starting network service")
     if !self.isSocketListening && self.isSessionRunning && self.isConfigured {
       self.server = GCDAsyncSocket(
         delegate: self,

@@ -23,8 +23,13 @@ public class NativeWebSocket: NSObject, WebSocket {
     delegate: self,
     delegateQueue: nil)
 
+  @available(*, unavailable)
+  override init() {
+    fatalError("NativeWebSocket:init is unavailable")
+  }
+
   /// Initializer.
-  public init(url: URL) {
+  public required init(url: URL) {
     self.url = url
     super.init()
   }

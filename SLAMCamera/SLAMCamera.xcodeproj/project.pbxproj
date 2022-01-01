@@ -15,10 +15,10 @@
 		5488157A277E065E00AC1107 /* IceCandicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54881579277E065E00AC1107 /* IceCandicate.swift */; };
 		5488157C277E09E400AC1107 /* RTCStates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5488157B277E09E400AC1107 /* RTCStates.swift */; };
 		5488157E277E10D000AC1107 /* SessionDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5488157D277E10D000AC1107 /* SessionDescription.swift */; };
-		5489C9DE2777ADAA009DB2F2 /* GCDHttpLiveStreaming.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5489C9DD2777ADAA009DB2F2 /* GCDHttpLiveStreaming.swift */; };
+		5489C9DE2777ADAA009DB2F2 /* NativeHttpLiveStreaming.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5489C9DD2777ADAA009DB2F2 /* NativeHttpLiveStreaming.swift */; };
 		54A0552C277E25D20054CA7B /* WebRTCSignaling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54A0552B277E25D10054CA7B /* WebRTCSignaling.swift */; };
-		54A0552E277E2D1F0054CA7B /* GoogleWebRTCSignaling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54A0552D277E2D1F0054CA7B /* GoogleWebRTCSignaling.swift */; };
-		54A055302780014F0054CA7B /* GoogleWebRTCSignaling+WebSocketDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54A0552F2780014F0054CA7B /* GoogleWebRTCSignaling+WebSocketDelegate.swift */; };
+		54A0552E277E2D1F0054CA7B /* NativeWebRTCSignaling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54A0552D277E2D1F0054CA7B /* NativeWebRTCSignaling.swift */; };
+		54A055302780014F0054CA7B /* NativeWebRTCSignaling+WebSocketDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54A0552F2780014F0054CA7B /* NativeWebRTCSignaling+WebSocketDelegate.swift */; };
 		54C5CA6C2777863300893FD1 /* SLAMCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C5CA6B2777863300893FD1 /* SLAMCamera.swift */; };
 		54C5CA6E2777863400893FD1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C5CA6D2777863400893FD1 /* ContentView.swift */; };
 		54C5CA702777863800893FD1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54C5CA6F2777863800893FD1 /* Assets.xcassets */; };
@@ -31,6 +31,12 @@
 		54C92280277A472D001CA30D /* CameraModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C9227F277A472D001CA30D /* CameraModel.swift */; };
 		54C92285277ABB66001CA30D /* HttpLiveStreamingService+AVCaptureVideoDataOutputSampleBufferDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C92284277ABB66001CA30D /* HttpLiveStreamingService+AVCaptureVideoDataOutputSampleBufferDelegate.swift */; };
 		54C9228A277AC1C6001CA30D /* HttpLiveStreamingService+GCDAsyncSocketDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C92289277AC1C6001CA30D /* HttpLiveStreamingService+GCDAsyncSocketDelegate.swift */; };
+		54DBFB022780092C007BA5F2 /* WebRTC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54DBFB012780092C007BA5F2 /* WebRTC.swift */; };
+		54DBFB0427803093007BA5F2 /* NativeWebRTC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54DBFB0327803093007BA5F2 /* NativeWebRTC.swift */; };
+		54DBFB062780B828007BA5F2 /* NativeWebRTC+RTCPeerConnectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54DBFB052780B828007BA5F2 /* NativeWebRTC+RTCPeerConnectionDelegate.swift */; };
+		54DBFB082780D37E007BA5F2 /* NativeWebRTC+RTCDataChannelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54DBFB072780D37E007BA5F2 /* NativeWebRTC+RTCDataChannelDelegate.swift */; };
+		54DBFB0B2780E11B007BA5F2 /* RGB.m in Sources */ = {isa = PBXBuildFile; fileRef = 54DBFB0A2780E11B007BA5F2 /* RGB.m */; };
+		54DBFB0D2780E447007BA5F2 /* NativeWebRTC+RTCVideoCapturerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54DBFB0C2780E447007BA5F2 /* NativeWebRTC+RTCVideoCapturerDelegate.swift */; };
 		54E879E0277CA1E600411737 /* logo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 54E879DF277CA1E600411737 /* logo.jpg */; };
 		54E879E2277D5BC100411737 /* StreamingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E879E1277D5BC100411737 /* StreamingService.swift */; };
 		54F426ED277799E7003B70BA /* IP.m in Sources */ = {isa = PBXBuildFile; fileRef = 54F426EC277799E7003B70BA /* IP.m */; };
@@ -68,10 +74,10 @@
 		54881579277E065E00AC1107 /* IceCandicate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IceCandicate.swift; sourceTree = "<group>"; };
 		5488157B277E09E400AC1107 /* RTCStates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RTCStates.swift; sourceTree = "<group>"; };
 		5488157D277E10D000AC1107 /* SessionDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDescription.swift; sourceTree = "<group>"; };
-		5489C9DD2777ADAA009DB2F2 /* GCDHttpLiveStreaming.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GCDHttpLiveStreaming.swift; sourceTree = "<group>"; };
+		5489C9DD2777ADAA009DB2F2 /* NativeHttpLiveStreaming.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeHttpLiveStreaming.swift; sourceTree = "<group>"; };
 		54A0552B277E25D10054CA7B /* WebRTCSignaling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebRTCSignaling.swift; sourceTree = "<group>"; };
-		54A0552D277E2D1F0054CA7B /* GoogleWebRTCSignaling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleWebRTCSignaling.swift; sourceTree = "<group>"; };
-		54A0552F2780014F0054CA7B /* GoogleWebRTCSignaling+WebSocketDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GoogleWebRTCSignaling+WebSocketDelegate.swift"; sourceTree = "<group>"; };
+		54A0552D277E2D1F0054CA7B /* NativeWebRTCSignaling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeWebRTCSignaling.swift; sourceTree = "<group>"; };
+		54A0552F2780014F0054CA7B /* NativeWebRTCSignaling+WebSocketDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NativeWebRTCSignaling+WebSocketDelegate.swift"; sourceTree = "<group>"; };
 		54C5CA682777863300893FD1 /* SLAMCamera.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SLAMCamera.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		54C5CA6B2777863300893FD1 /* SLAMCamera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SLAMCamera.swift; sourceTree = "<group>"; };
 		54C5CA6D2777863400893FD1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -90,6 +96,13 @@
 		54C9227F277A472D001CA30D /* CameraModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraModel.swift; sourceTree = "<group>"; };
 		54C92284277ABB66001CA30D /* HttpLiveStreamingService+AVCaptureVideoDataOutputSampleBufferDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HttpLiveStreamingService+AVCaptureVideoDataOutputSampleBufferDelegate.swift"; sourceTree = "<group>"; };
 		54C92289277AC1C6001CA30D /* HttpLiveStreamingService+GCDAsyncSocketDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HttpLiveStreamingService+GCDAsyncSocketDelegate.swift"; sourceTree = "<group>"; };
+		54DBFB012780092C007BA5F2 /* WebRTC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebRTC.swift; sourceTree = "<group>"; };
+		54DBFB0327803093007BA5F2 /* NativeWebRTC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeWebRTC.swift; sourceTree = "<group>"; };
+		54DBFB052780B828007BA5F2 /* NativeWebRTC+RTCPeerConnectionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NativeWebRTC+RTCPeerConnectionDelegate.swift"; sourceTree = "<group>"; };
+		54DBFB072780D37E007BA5F2 /* NativeWebRTC+RTCDataChannelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NativeWebRTC+RTCDataChannelDelegate.swift"; sourceTree = "<group>"; };
+		54DBFB092780D466007BA5F2 /* RGB.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RGB.h; sourceTree = "<group>"; };
+		54DBFB0A2780E11B007BA5F2 /* RGB.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RGB.m; sourceTree = "<group>"; };
+		54DBFB0C2780E447007BA5F2 /* NativeWebRTC+RTCVideoCapturerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NativeWebRTC+RTCVideoCapturerDelegate.swift"; sourceTree = "<group>"; };
 		54E879DF277CA1E600411737 /* logo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = logo.jpg; sourceTree = "<group>"; };
 		54E879E1277D5BC100411737 /* StreamingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamingService.swift; sourceTree = "<group>"; };
 		54F426EB2777997F003B70BA /* IP.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IP.h; sourceTree = "<group>"; };
@@ -247,12 +260,17 @@
 		54E879E4277D7E2400411737 /* Impl */ = {
 			isa = PBXGroup;
 			children = (
-				5489C9DD2777ADAA009DB2F2 /* GCDHttpLiveStreaming.swift */,
+				5489C9DD2777ADAA009DB2F2 /* NativeHttpLiveStreaming.swift */,
 				54F426EC277799E7003B70BA /* IP.m */,
 				54881574277DED2200AC1107 /* NativeWebSocket.swift */,
 				54881576277DEEB200AC1107 /* NativeWebSocket+URLSessionWebSocketDelegate+URLSessionDelegate.swift */,
-				54A0552D277E2D1F0054CA7B /* GoogleWebRTCSignaling.swift */,
-				54A0552F2780014F0054CA7B /* GoogleWebRTCSignaling+WebSocketDelegate.swift */,
+				54A0552D277E2D1F0054CA7B /* NativeWebRTCSignaling.swift */,
+				54A0552F2780014F0054CA7B /* NativeWebRTCSignaling+WebSocketDelegate.swift */,
+				54DBFB0327803093007BA5F2 /* NativeWebRTC.swift */,
+				54DBFB052780B828007BA5F2 /* NativeWebRTC+RTCPeerConnectionDelegate.swift */,
+				54DBFB072780D37E007BA5F2 /* NativeWebRTC+RTCDataChannelDelegate.swift */,
+				54DBFB0A2780E11B007BA5F2 /* RGB.m */,
+				54DBFB0C2780E447007BA5F2 /* NativeWebRTC+RTCVideoCapturerDelegate.swift */,
 			);
 			path = Impl;
 			sourceTree = "<group>";
@@ -266,6 +284,8 @@
 				54881570277D8C7D00AC1107 /* WebSocket.swift */,
 				54881572277DA26E00AC1107 /* HttpLiveStreaming.swift */,
 				54A0552B277E25D10054CA7B /* WebRTCSignaling.swift */,
+				54DBFB012780092C007BA5F2 /* WebRTC.swift */,
+				54DBFB092780D466007BA5F2 /* RGB.h */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -540,14 +560,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				54A0552E277E2D1F0054CA7B /* GoogleWebRTCSignaling.swift in Sources */,
+				54DBFB0D2780E447007BA5F2 /* NativeWebRTC+RTCVideoCapturerDelegate.swift in Sources */,
+				54A0552E277E2D1F0054CA7B /* NativeWebRTCSignaling.swift in Sources */,
 				54C92285277ABB66001CA30D /* HttpLiveStreamingService+AVCaptureVideoDataOutputSampleBufferDelegate.swift in Sources */,
-				5489C9DE2777ADAA009DB2F2 /* GCDHttpLiveStreaming.swift in Sources */,
+				5489C9DE2777ADAA009DB2F2 /* NativeHttpLiveStreaming.swift in Sources */,
 				5488157C277E09E400AC1107 /* RTCStates.swift in Sources */,
 				54A0552C277E25D20054CA7B /* WebRTCSignaling.swift in Sources */,
+				54DBFB0427803093007BA5F2 /* NativeWebRTC.swift in Sources */,
 				54C5CA6E2777863400893FD1 /* ContentView.swift in Sources */,
+				54DBFB022780092C007BA5F2 /* WebRTC.swift in Sources */,
+				54DBFB062780B828007BA5F2 /* NativeWebRTC+RTCPeerConnectionDelegate.swift in Sources */,
+				54DBFB082780D37E007BA5F2 /* NativeWebRTC+RTCDataChannelDelegate.swift in Sources */,
 				54C9227B277A317F001CA30D /* PreviewView.swift in Sources */,
-				54A055302780014F0054CA7B /* GoogleWebRTCSignaling+WebSocketDelegate.swift in Sources */,
+				54A055302780014F0054CA7B /* NativeWebRTCSignaling+WebSocketDelegate.swift in Sources */,
 				54E879E2277D5BC100411737 /* StreamingService.swift in Sources */,
 				54C922612778974C001CA30D /* HttpLiveStreamingService.swift in Sources */,
 				54C5CA6C2777863300893FD1 /* SLAMCamera.swift in Sources */,
@@ -561,6 +586,7 @@
 				54881577277DEEB200AC1107 /* NativeWebSocket+URLSessionWebSocketDelegate+URLSessionDelegate.swift in Sources */,
 				54C92280277A472D001CA30D /* CameraModel.swift in Sources */,
 				5488157E277E10D000AC1107 /* SessionDescription.swift in Sources */,
+				54DBFB0B2780E11B007BA5F2 /* RGB.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

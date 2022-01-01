@@ -1,5 +1,5 @@
 //
-//  GCDHttpLiveStreaming.swift
+//  NativeHttpLiveStreaming.swift
 //  SLAMCamera
 //
 //  Created by Shingo OKAWA on 2021/12/24.
@@ -100,7 +100,7 @@ private class Queue<T> {
 }
 
 
-public class GCDHttpLiveStreaming: HttpLiveStreaming {
+public class NativeHttpLiveStreaming: HttpLiveStreaming {
   /// Identifier.
   public var id: Int
 

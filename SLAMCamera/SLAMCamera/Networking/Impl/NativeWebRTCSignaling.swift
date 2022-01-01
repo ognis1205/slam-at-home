@@ -1,5 +1,5 @@
 //
-//  GoogleWebRTCSignaling.swift
+//  NativeWebRTCSignaling.swift
 //  SLAMCamera
 //
 //  Created by Shingo OKAWA on 2021/12/31.
@@ -8,7 +8,7 @@
 import Foundation
 import WebRTC
 
-final class GoogleWebRTCSignaling: WebRTCSignaling {
+public class NativeWebRTCSignaling: WebRTCSignaling {
   /// SDP/ICE message decoder.
   internal let decoder = JSONDecoder()
 

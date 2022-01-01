@@ -1,5 +1,5 @@
 //
-//  GoogleWebRTCSignaling+WebSocketDelegate.swift
+//  NativeWebRTCSignaling+WebSocketDelegate.swift
 //  SLAMCamera
 //
 //  Created by Shingo OKAWA on 2022/01/01.
@@ -8,7 +8,7 @@
 import Foundation
 import WebRTC
 
-extension GoogleWebRTCSignaling: WebSocketDelegate {
+extension NativeWebRTCSignaling: WebSocketDelegate {
   /// Called when connection has established.
   public func didConnect(_ webSocket: WebSocket) {
     self.delegate?.didConnect(self)
