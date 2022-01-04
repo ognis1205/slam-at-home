@@ -12,13 +12,18 @@ setup(
     version="1.0.0",
     description="PydNet: Single inference using TensorFlow 2 and python 3.x.",
     author="Shingo OKAWA",
-    python_requires=">=3.5",
+    python_requires=">=3.8",
     install_requires=required,
     extras_require = {
         "test": [
             "pytest",
             "notebook"
         ]
+    },
+    entry_points={
+        "console_scripts": [
+            "mem_usage = src.cli.mem_usage:main"
+        ],
     },
     packages=find_packages(exclude=["test", "test.*"]),
     test_suite="test")
