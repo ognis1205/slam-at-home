@@ -1,9 +1,11 @@
 """Command Line Interface.
 """
 
-from src.cli.mem_usage import MemUsage
+from src.cli.download import download
+from src.cli.mem_usage import mem_usage
 
 
 __all__ = [
-    "MemUsage"
+    "download",
+    "mem_usage"
 ]
