@@ -1,7 +1,6 @@
 """ Tensorflow Functions.
 """
 
-from __future__ import division
 import tensorflow.compat.v1 as tf1
 import tensorflow as tf2
 import numpy as np
