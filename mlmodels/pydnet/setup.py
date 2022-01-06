@@ -14,11 +14,4 @@ setup(
     author="Shingo OKAWA",
     python_requires=">=3.8",
     install_requires=required,
-    extras_require = {
-        "test": [
-            "pytest",
-            "notebook"
-        ]
-    },
-    packages=find_packages(exclude=["test", "test.*"]),
-    test_suite="test")
+    packages=find_packages(exclude=["test", "test.*"]))

@@ -1,4 +1,4 @@
-.PHONY: clean data help install lint requirements pretrained kitti
+.PHONY: clean help install lint requirements pretrained kitti
 .DEFAULT_GOAL := help
 ROOT := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 
@@ -6,10 +6,6 @@ ROOT := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 requirements:
 	pip install -U pip setuptools wheel
 	pip install -r requirements.txt
-
-## Make Dataset
-data: requirements
-	python src/data/make_dataset.py $(ROOT)/data/raw $(ROOT)/data/processed
 
 ## Delete all compiled Python files
 clean:
@@ -30,10 +26,14 @@ pretrained: requirements
 
 ## Download KITTI-360 dataset
 kitti: requirements
-	for ENTRY in "2013_05_28_drive_0000_sync" "2013_05_28_drive_0002_sync" "2013_05_28_drive_0003_sync" "2013_05_28_drive_0004_sync" "2013_05_28_drive_0005_sync" "2013_05_28_drive_0006_sync" "2013_05_28_drive_0007_sync" "2013_05_28_drive_0009_sync" "2013_05_28_drive_0010_sync"; do\
+	for ENTRY in "2013_05_28_drive_0000_sync" "2013_05_28_drive_0002_sync" "2013_05_28_drive_0004_sync" "2013_05_28_drive_0005_sync" "2013_05_28_drive_0006_sync" "2013_05_28_drive_0007_sync" "2013_05_28_drive_0009_sync" "2013_05_28_drive_0010_sync"; do\
 		FILE=$${ENTRY}_velodyne.zip;\
 		python ./src/cli/download_aws_s3.py s3.eu-central-1.amazonaws.com avg-projects/KITTI-360/data_3d_raw/$${FILE} $(ROOT)/data/mount/KITTI-360/data_3d_raw/;\
-	done\
+		for CAMERA in "00" "01"; do\
+			FILE=$${ENTRY}_image_$${CAMERA}.zip;\
+			python ./src/cli/download_aws_s3.py s3.eu-central-1.amazonaws.com avg-projects/KITTI-360/data_2d_raw/$${FILE} $(ROOT)/data/mount/KITTI-360/data_2d_raw/;\
+		done;\
+	done;\
 	python ./src/cli/download_aws_s3.py s3.eu-central-1.amazonaws.com avg-projects/KITTI-360/data_3d_raw/data_timestamps_velodyne.zip $(ROOT)/data/mount/KITTI-360/data_3d_raw/
 
 help:
