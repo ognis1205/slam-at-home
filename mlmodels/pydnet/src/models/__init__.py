@@ -1,9 +1,9 @@
 """ML Models.
 """
 
-from src.cli.models import Pydmodel
+from src.models.pydnet import Pydnet
 
 
 __all__ = [
-    "Pydmodel"
+    "Pydnet"
 ]

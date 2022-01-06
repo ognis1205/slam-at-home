@@ -1,4 +1,4 @@
-"""Download Module.
+"""Google Drive Download Module.
 """
 
 import sys
@@ -9,7 +9,7 @@ from pathlib import Path
 from tempfile import NamedTemporaryFile
 from zipfile import ZipFile
 
-def download(id, destination):
+def download_google_drive(id, destination):
     """Downloads a content from Google drive specified by a given id.
     Args:
         id (str): The Google drive identifier.
@@ -17,11 +17,16 @@ def download(id, destination):
     """
     URL = "https://docs.google.com/uc?export=download"
     session = requests.Session()
-    response = session.get(URL, params = { 'id' : id }, stream = True)
+    response = session.get(
+        URL,
+        params = { 'id' : id },
+        stream = True)
     token = get_token(response)
     if token:
-        params = { 'id' : id, 'confirm' : token }
-        response = session.get(URL, params = params, stream = True)
+        response = session.get(
+            URL, 
+            params = { 'id' : id, 'confirm' : token },
+            stream = True)
     save(response, Path(destination))
 
 
@@ -39,13 +44,12 @@ def get_token(response):
 
 
 def save(response, path):
-    """Returns the confirmation token.
+    """Saves downloaded content.
     Args:
         response (requests.Responce): GET response.
         path (pathlib.Path): The path to the output file.
     """
     CHUNK_SIZE = 32768
-#    with path.open("wb") as f, NamedTemporaryFile() as tmp:
     with NamedTemporaryFile() as tmp:
         for chunk in response.iter_content(CHUNK_SIZE):
             if chunk:
@@ -55,10 +59,10 @@ def save(response, path):
             zipped.extractall(path)
 
 
-def main():
+if __name__ == "__main__":
     """A CLI entry point.
     """
     try:
-        fire.Fire(download)
+        fire.Fire(download_google_drive)
     except Exception:
         print(format_exc(), file=sys.stderr)

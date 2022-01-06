@@ -20,11 +20,5 @@ setup(
             "notebook"
         ]
     },
-    entry_points={
-        "console_scripts": [
-            "download = src.cli.download:main",
-            "mem_usage = src.cli.mem_usage:main"
-        ],
-    },
     packages=find_packages(exclude=["test", "test.*"]),
     test_suite="test")

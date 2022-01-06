@@ -1,15 +1,15 @@
-.PHONY: clean data help install lint requirements
+.PHONY: clean data help install lint requirements pretrained kitti
 .DEFAULT_GOAL := help
-PYTHON = python3
+ROOT := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 
 ## Install Python Dependencies
 requirements:
-	$(PYTHON) -m pip install -U pip setuptools wheel
-	$(PYTHON) -m pip install -r requirements.txt
+	pip install -U pip setuptools wheel
+	pip install -r requirements.txt
 
 ## Make Dataset
 data: requirements
-	$(PYTHON) src/data/make_dataset.py data/raw data/processed
+	python src/data/make_dataset.py $(ROOT)/data/raw $(ROOT)/data/processed
 
 ## Delete all compiled Python files
 clean:
@@ -22,11 +22,18 @@ lint:
 
 ## Install PyDNet package
 install: requirements
-	$(PYTHON) -m pip install .
+	pip install .
 
 ## Download pretrained PyDNet
-download: install
-	download 1Zu41tHv89q_F7N5KFigzyUY5vAc8ufQL data/checkpoint/pydnet
+pretrained: requirements
+	python ./src/cli/download_google_drive.py 1Zu41tHv89q_F7N5KFigzyUY5vAc8ufQL $(ROOT)/data/checkpoint/pydnet
+
+## Download KITTI-360 dataset
+kitti: requirements
+	for ENTRY in "2013_05_28_drive_0000_sync" "2013_05_28_drive_0002_sync" "2013_05_28_drive_0003_sync" "2013_05_28_drive_0004_sync" "2013_05_28_drive_0005_sync" "2013_05_28_drive_0006_sync" "2013_05_28_drive_0007_sync" "2013_05_28_drive_0009_sync" "2013_05_28_drive_0010_sync"; do\
+		FILE=$${ENTRY}_velodyne.zip;\
+		python ./src/cli/download_aws_s3.py s3.eu-central-1.amazonaws.com avg-projects/KITTI-360/data_3d_raw/$${FILE} $(ROOT)/data/mount/KITTI-360/data_3d_raw/;\
+	done
 
 help:
 	@echo "$$(tput bold)Available rules:$$(tput sgr0)"

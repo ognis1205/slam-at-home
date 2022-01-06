@@ -31,7 +31,7 @@ def with_si_unit(bytes):
     return "{} {}".format(s, units[i])
 
 
-def main():
+if __name__ == "__main__":
     """A CLI entry point.
     """
     try:
