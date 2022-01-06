@@ -1,4 +1,4 @@
-"""Memory Usage Module.
+"""Memory Usage CLI.
 """
 
 import math
@@ -6,6 +6,7 @@ import sys
 import fire
 import psutil
 from traceback import format_exc
+
 
 def mem_usage():
     """Snapshot of memory usage.

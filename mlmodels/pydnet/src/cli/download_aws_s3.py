@@ -1,4 +1,4 @@
-"""AWS S3 Download Module.
+"""AWS S3 Download CLI.
 """
 
 import sys
@@ -10,19 +10,20 @@ from tqdm import tqdm
 from tempfile import NamedTemporaryFile
 from zipfile import ZipFile
 
-def download_aws_s3(region, path, destination):
+
+def download_aws_s3(s3_region, s3_path, path):
     """Downloads a content from AWS S3 specified by a given path.
     Args:
-        region (str): AWS S3 region.
-        path (str): path to the target file.
-        destination (str): The path to the output file.
+        s3_region (str): The AWS S3 region.
+        s3_path (str): The path to the target file.
+        path (str): The path to the output file.
     """
-    URL = f"https://{region}/{path}"
+    URL = f"https://{s3_region}/{s3_path}"
     session = requests.Session()
     response = session.get(
         URL,
         stream = True)
-    save(response, Path(destination))
+    save(response, Path(path))
 
 
 def save(response, path):

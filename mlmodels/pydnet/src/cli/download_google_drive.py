@@ -1,4 +1,4 @@
-"""Google Drive Download Module.
+"""Google Drive Download CLI.
 """
 
 import sys
@@ -10,25 +10,26 @@ from tqdm import tqdm
 from tempfile import NamedTemporaryFile
 from zipfile import ZipFile
 
-def download_google_drive(id, destination):
+
+def download_google_drive(drive_id, path):
     """Downloads a content from Google drive specified by a given id.
     Args:
-        id (str): The Google drive identifier.
-        destination (str): The path to the output file.
+        drive_id (str): The Google drive identifier.
+        path (str): The path to the output file.
     """
     URL = "https://docs.google.com/uc?export=download"
     session = requests.Session()
     response = session.get(
         URL,
-        params = { 'id' : id },
+        params = { "id" : drive_id },
         stream = True)
     token = get_token(response)
     if token:
         response = session.get(
             URL, 
-            params = { 'id' : id, 'confirm' : token },
+            params = { "id" : drive_id, 'confirm' : token },
             stream = True)
-    save(response, Path(destination))
+    save(response, Path(path))
 
 
 def get_token(response):

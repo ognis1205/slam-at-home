@@ -33,7 +33,8 @@ kitti: requirements
 	for ENTRY in "2013_05_28_drive_0000_sync" "2013_05_28_drive_0002_sync" "2013_05_28_drive_0003_sync" "2013_05_28_drive_0004_sync" "2013_05_28_drive_0005_sync" "2013_05_28_drive_0006_sync" "2013_05_28_drive_0007_sync" "2013_05_28_drive_0009_sync" "2013_05_28_drive_0010_sync"; do\
 		FILE=$${ENTRY}_velodyne.zip;\
 		python ./src/cli/download_aws_s3.py s3.eu-central-1.amazonaws.com avg-projects/KITTI-360/data_3d_raw/$${FILE} $(ROOT)/data/mount/KITTI-360/data_3d_raw/;\
-	done
+	done\
+	python ./src/cli/download_aws_s3.py s3.eu-central-1.amazonaws.com avg-projects/KITTI-360/data_3d_raw/data_timestamps_velodyne.zip $(ROOT)/data/mount/KITTI-360/data_3d_raw/
 
 help:
 	@echo "$$(tput bold)Available rules:$$(tput sgr0)"
