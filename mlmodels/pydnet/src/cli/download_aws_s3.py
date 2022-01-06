@@ -32,8 +32,10 @@ def save(response, path):
         path (pathlib.Path): The path to the output file.
     """
     CHUNK_SIZE = 32768
-    total_size = int(response.headers.get('content-length', 0))
-    progress = tqdm(total=total_size, unit="iB", unit_scale=True)
+    progress = tqdm(
+        total=int(response.headers.get('content-length', 0)),
+        unit="iB",
+        unit_scale=True)
     with NamedTemporaryFile() as tmp:
         for chunk in response.iter_content(CHUNK_SIZE):
             if chunk:

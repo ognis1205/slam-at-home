@@ -6,6 +6,7 @@ import fire
 import requests
 from traceback import format_exc
 from pathlib import Path
+from tqdm import tqdm
 from tempfile import NamedTemporaryFile
 from zipfile import ZipFile
 
@@ -50,9 +51,14 @@ def save(response, path):
         path (pathlib.Path): The path to the output file.
     """
     CHUNK_SIZE = 32768
+    progress = tqdm(
+        total=int(response.headers.get('content-length', 0)),
+        unit="iB",
+        unit_scale=True)
     with NamedTemporaryFile() as tmp:
         for chunk in response.iter_content(CHUNK_SIZE):
             if chunk:
+                progress.update(len(chunk))
                 tmp.write(chunk)
         with ZipFile(Path(tmp.name), "r") as zipped:
             path.mkdir(parents=True, exist_ok=True)
