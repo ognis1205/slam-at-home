@@ -11,12 +11,11 @@ from tqdm import tqdm
 from src.data import generate_depth_map
 
 
-def generate_kitti_ground_truth(path_to_kitti, path_to_split, path):
+def generate_kitti_ground_truth(path_to_kitti, path_to_split):
     """Generates ground truth depth maps from KITTI-360 dataset.
     Args:
         path_to_kitti (str): The path to the KITTI dataset.
         path_to_split (str): The path to the split index.
-        path (str): The path to the output file.
     """
     path_to_kitti = Path(path_to_kitti)
     path_to_split = Path(path_to_split)
