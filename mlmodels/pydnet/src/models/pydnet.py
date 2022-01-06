@@ -15,9 +15,8 @@ class Pydnet(object):
     def __init__(self, params):
         """Inits `Pydnet` with `params`.
         """
-        self.params = params
-        self.height = params["height"]
-        self.width = params["width"]
+        self.h = params["h"]
+        self.w = params["w"]
         self.is_training = params["is_training"]
         self.output_nodes = None
         if self.is_training:
@@ -130,13 +129,11 @@ class Pydnet(object):
                     conv1 = self.build_estimator(feat[1], upconv2)
                     pred1 = self.get_disp(conv1)
 
-            size = [self.height, self.width]
-
+            size = [self.h, self.w]
             if not self.is_training:
                 with tf1.variable_scope("half"):
                     pred1 = tf1.image.resize_images(pred1, size)
                 return pred1
-
             pred1 = tf1.image.resize_images(pred1, size)
             pred2 = tf1.image.resize_images(pred2, size)
             pred3 = tf1.image.resize_images(pred3, size)
