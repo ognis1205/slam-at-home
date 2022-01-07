@@ -40,33 +40,39 @@ export interface Header extends Common {
 
 /** Defines {Panel.Content} properties. */
 export interface Content extends Common {
-  style?: object;
+  style?: React.CSSProperties;
   role?: string;
   forceRender?: boolean;
 }
 
 /** Defines {Panel} properties. */
-export type Panel = Types.Overwrite<Header & Content, {
-  id?: string;
-  className?: string;
-  children?: React.ReactNode;
-  header?: string | React.ReactNode;
-  headerClassName?: string;
-  motion?: Motion.Props;
-  destroyInactivePanel?: boolean;
-}>;
+export type Panel = Types.Overwrite<
+  Header & Content,
+  {
+    id?: string;
+    className?: string;
+    children?: React.ReactNode;
+    header?: string | React.ReactNode;
+    headerClassName?: string;
+    motion?: Motion.Props;
+    destroyInactivePanel?: boolean;
+  }
+>;
 
 /** Defines {Wrapper} properties. */
-export type Wrapper = Types.Overwrite<React.HTMLAttributes<HTMLDivElement>, {
-  className?: string;
-  style?: object;
-  children?: React.ReactNode;
-  onChange?: (key: React.Key | React.Key[]) => void;
-  motion?: Motion.Props;
-  accordion?: boolean;
-  activeKey?: React.Key | React.Key[];
-  defaultActiveKey?: React.Key | React.Key[];
-  destroyInactivePanel?: boolean;
-  expand?: (props: object) => React.ReactNode;
-  collapsible?: CollapsibleType;
-}>;
+export type Wrapper = Types.Overwrite<
+  React.HTMLAttributes<HTMLDivElement>,
+  {
+    className?: string;
+    style?: React.CSSProperties;
+    children?: React.ReactNode;
+    onChange?: (key: React.Key | React.Key[]) => void;
+    motion?: Motion.Props;
+    accordion?: boolean;
+    activeKey?: React.Key | React.Key[];
+    defaultActiveKey?: React.Key | React.Key[];
+    destroyInactivePanel?: boolean;
+    //expand?: (props: unknown) => React.ReactNode;
+    collapsible?: CollapsibleType;
+  }
+>;

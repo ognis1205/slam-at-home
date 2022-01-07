@@ -22,9 +22,9 @@ import * as Collapse from '../components/collapse';
 import * as Pane from '../containers/pane';
 import '../assets/styles/global.scss';
 
-import Image from "next/image";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCog } from "@fortawesome/free-solid-svg-icons";
+import Image from 'next/image';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCog } from '@fortawesome/free-solid-svg-icons';
 
 /***/
 const text = `
@@ -36,12 +36,12 @@ content content content content content
 `;
 
 /***/
-const SLAM: React.FC<NextApp.AppProps> = ({ Component, pageProps }) => {
+const SLAM: React.FC<NextApp.AppProps> = ({}) => {
   /** @const */
   const [accordion] = React.useState<boolean>(false);
 
   /** @const */
-  const [activeKey, setActiveKey] = React.useState<any>(['4']);
+  const [activeKey, setActiveKey] = React.useState<string[] | string>(['4']);
 
   /** @const */
   const getItems = (): React.ReactElement[] => {
@@ -51,11 +51,13 @@ const SLAM: React.FC<NextApp.AppProps> = ({ Component, pageProps }) => {
       items.push(
         <Collapse.Panel
           header={`HEADER ${key}`}
-          icon={ <FontAwesomeIcon icon={faCog} />}
+          icon={<FontAwesomeIcon icon={faCog} />}
           key={key}
         >
-          <p>{text}: {i}</p>
-        </Collapse.Panel>,
+          <p>
+            {text}: {i}
+          </p>
+        </Collapse.Panel>
       );
     }
     items.push(
@@ -65,7 +67,7 @@ const SLAM: React.FC<NextApp.AppProps> = ({ Component, pageProps }) => {
             <p>header panel 4</p>
           </Collapse.Panel>
         </Collapse.Wrapper>
-      </Collapse.Panel>,
+      </Collapse.Panel>
     );
     items.push(
       <Collapse.Panel header="HEADER 5" key="5">
@@ -77,21 +79,20 @@ const SLAM: React.FC<NextApp.AppProps> = ({ Component, pageProps }) => {
             </form>
           </Collapse.Panel>
         </Collapse.Wrapper>
-      </Collapse.Panel>,
+      </Collapse.Panel>
     );
     return items;
-  }
+  };
 
-  const handleChange = (activeKey: string): void =>
-    setActiveKey(activeKey);
+  const handleChange = (activeKey: string): void => setActiveKey(activeKey);
 
   return (
     <React.Fragment>
       <Head>
         <title>SLAM</title>
         <meta
-          name='viewport'
-          content='minimum-scale=1, initial-scale=1, width=device-width'
+          name="viewport"
+          content="minimum-scale=1, initial-scale=1, width=device-width"
         />
       </Head>
       <Pane.Left>
@@ -108,7 +109,7 @@ const SLAM: React.FC<NextApp.AppProps> = ({ Component, pageProps }) => {
           <li>test</li>
         </ul>
       </Pane.Left>
-      <Pane.Divider/>
+      <Pane.Divider />
       <Pane.Right>
         <ul>
           <li>test</li>

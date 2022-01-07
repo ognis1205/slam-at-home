@@ -21,9 +21,7 @@ import classnames from 'classnames';
 import styles from '../../assets/styles/components/collapse.module.scss';
 
 /** Returns the class name of the header. */
-const getHeaderClassName = (
-  {className, collapsible}: Props.Header,
-): string =>
+const getHeaderClassName = ({ className, collapsible }: Props.Header): string =>
   classnames(styles['header'], {
     [className || '']: !!className,
     [styles['collapsible-only']]: collapsible,
@@ -34,21 +32,21 @@ const getHeaderClassName = (
  * @param {Header} props Properties that defines a behaviour of this component.
  * @return {ReactElement} A rendered React element.
  */
-const Header: React.FunctionComponent<Props.Header & {children: React.ReactNode}> = (
-  props: Props.Header & {children: React.ReactNode}
+const Header: React.FunctionComponent<
+  Props.Header & { children: React.ReactNode }
+> = (
+  props: Props.Header & { children: React.ReactNode }
 ): React.ReactElement => {
   /** An event handler called on `click` events. */
-  const handleClick = (): void =>
-    props.onClick?.(props.panelKey);
+  const handleClick = (): void => props.onClick?.(props.panelKey);
 
   /** An event handler called on `keypress` events. */
   const handleKeyPress = (e: React.KeyboardEvent): void => {
-    if (e.key === 'Enter')
-      handleClick();
+    if (e.key === 'Enter') handleClick();
   };
 
   /** Holds arrow node. */
-  let arrow: any = <i className={styles['arrow']} />;
+  let arrow: React.ReactNode = <i className={styles['arrow']} />;
 
   /** Holds header properties. */
   const headerProps: React.HTMLAttributes<HTMLDivElement> = {
@@ -62,7 +60,7 @@ const Header: React.FunctionComponent<Props.Header & {children: React.ReactNode}
 
   if (props.collapsible) {
     arrow = (
-      <span style={{cursor: 'pointer'}} onClick={handleClick}>
+      <span style={{ cursor: 'pointer' }} onClick={handleClick}>
         {arrow}
       </span>
     );
@@ -73,9 +71,7 @@ const Header: React.FunctionComponent<Props.Header & {children: React.ReactNode}
   }
 
   return (
-    <div
-      {...headerProps}
-    >
+    <div {...headerProps}>
       {props.icon && <span className={styles['icon']}>{props.icon}</span>}
       {props.collapsible ? (
         <span onClick={handleClick} className={styles['text']}>
@@ -93,9 +89,7 @@ const Header: React.FunctionComponent<Props.Header & {children: React.ReactNode}
 Header.displayName = 'PanelHeader';
 
 /** Returns the class name of the content. */
-const getContentClassName = (
-  {className, active}: Props.Content,
-): string =>
+const getContentClassName = ({ className, active }: Props.Content): string =>
   classnames(styles['content'], {
     [className || '']: !!className,
     [styles['content-active']]: active,
@@ -107,14 +101,18 @@ const getContentClassName = (
  * @param {Content} props Properties that defines a behaviour of this component.
  * @return {ReactElement} A rendered React element.
  */
-const Content = React.forwardRef<HTMLDivElement, Props.Content & {children: React.ReactNode}>((props, ref) => {
+const Content = React.forwardRef<
+  HTMLDivElement,
+  Props.Content & { children: React.ReactNode }
+>((props: Props.Content & { children: React.ReactNode }, ref) => {
   /** @const Holds a component's rendering state. */
-  const [rendered, setRendered] = React.useState(props.active || props.forceRender);
+  const [rendered, setRendered] = React.useState(
+    props.active || props.forceRender
+  );
 
   /** `getDerivedStateFromProps` */
   React.useEffect(() => {
-    if (props.forceRender || props.active)
-      setRendered(true);
+    if (props.forceRender || props.active) setRendered(true);
   }, [props.forceRender, props.active]);
 
   return rendered ? (
@@ -133,9 +131,11 @@ const Content = React.forwardRef<HTMLDivElement, Props.Content & {children: Reac
 Content.displayName = 'PanelContent';
 
 /** Returns the class name of the content. */
-const getClassName = (
-  {className, active, collapsible}: Props.Panel,
-): string =>
+const getClassName = ({
+  className,
+  active,
+  collapsible,
+}: Props.Panel): string =>
   classnames(styles['panel'], {
     [className || '']: !!className,
     [styles['panel-active']]: active,
@@ -147,7 +147,9 @@ const getClassName = (
  * @param {Panel} props Properties that defines a behaviour of this component.
  * @return {ReactElement} A rendered React element.
  */
-export const Component: React.FunctionComponent<Props.Panel> = (props: Props.Panel): React.ReactElement => (
+export const Component: React.FunctionComponent<Props.Panel> = (
+  props: Props.Panel
+): React.ReactElement => (
   <div className={getClassName(props)} style={props.style} id={props.id}>
     <Header
       className={props.headerClassName}
@@ -169,7 +171,7 @@ export const Component: React.FunctionComponent<Props.Panel> = (props: Props.Pan
       exitedClassName={styles['hidden']}
       {...props.motion}
     >
-      {({className: motionClassName, style: motionStyle}, ref) => (
+      {({ className: motionClassName, style: motionStyle }, ref) => (
         <Content
           className={motionClassName}
           ref={ref}

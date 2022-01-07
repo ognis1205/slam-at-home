@@ -14,10 +14,5 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export type {
-  Wrapper as Props,
-} from "./props";
-
-export {
-  WithDefaultComponent as Wrapper,
-} from './wrapper';
+export type { Wrapper as Props } from './props';
+export { WithDefaultComponent as Wrapper } from './wrapper';

@@ -22,22 +22,25 @@ import classnames from 'classnames';
 import styles from '../../assets/styles/components/collapse.module.scss';
 
 /** Default properties. */
-const DEFAULT_PROPS: Partial<Props.Wrapper> = {
-  onChange: () => {},
+const DEFAULT_PROPS = {
+  /* eslint-disable */
+  onChange: (activeKey: string) => {
+    /* Do nothing. */
+  },
   accordion: false,
   destroyInactivePanel: false,
 };
 
 /** Returns the class name of the wrapper. */
-const getClassName = (
-  className: string,
-): string =>
+const getClassName = (className: string): string =>
   classnames(styles['collapse'], {
     [className || '']: !!className,
   });
 
 /** Returs active keys array according to a given React key. */
-const getActiveKeysArray = (activeKey: React.Key | React.Key[]): React.Key[] => {
+const getActiveKeysArray = (
+  activeKey: React.Key | React.Key[]
+): React.Key[] => {
   let keys = activeKey;
   if (!Array.isArray(keys))
     keys = typeof keys === 'number' || typeof keys === 'string' ? [keys] : [];
@@ -59,7 +62,7 @@ export const Component: React.FunctionComponent<Props.Wrapper> = ({
   activeKey,
   defaultActiveKey,
   destroyInactivePanel,
-  expand,
+  //expand,
   collapsible,
   ...divAttrs
 }: Props.Wrapper): React.ReactElement => {
@@ -74,24 +77,26 @@ export const Component: React.FunctionComponent<Props.Wrapper> = ({
   }, [activeKey]);
 
   /** Clones child elements. Child elements are supposed to be {Panel} elements. */
-  const cloneElement = (child: React.ReactElement, index: number): React.ReactElement => {
-    if (!child)
-      return null;
+  const cloneElement = (
+    child: React.ReactElement,
+    index: number
+  ): React.ReactElement => {
+    if (!child) return null;
 
     const key = child.key || String(index);
     let active = false;
-    if (accordion)
-      active = activeKeys[0] === key;
-    else
-      active = activeKeys.indexOf(key) > -1;
+    if (accordion) active = activeKeys[0] === key;
+    else active = activeKeys.indexOf(key) > -1;
 
-    if (typeof child.type === 'string')
-      return child;
+    if (typeof child.type === 'string') return child;
     else
       return React.cloneElement(child, {
         key: key,
         active: active,
-        onClick: (child.props.collapsible ?? collapsible) === 'disabled' ? null : handleClick,
+        onClick:
+          (child.props.collapsible ?? collapsible) === 'disabled'
+            ? null
+            : handleClick,
         panelKey: key,
         showArrow: true,
         collapsible: child.props.collapsible ?? collapsible,
@@ -101,7 +106,8 @@ export const Component: React.FunctionComponent<Props.Wrapper> = ({
         children: child.props.children,
         header: child.props.header,
         headerClassName: child.props.headerClassName,
-        destroyInactivePanel: child.props.destroyInactivePanel ?? destroyInactivePanel,
+        destroyInactivePanel:
+          child.props.destroyInactivePanel ?? destroyInactivePanel,
         motion: motion,
         //destroy
         //expand: expand,
@@ -110,8 +116,7 @@ export const Component: React.FunctionComponent<Props.Wrapper> = ({
 
   /** Activates panels specified with a given active key array. */
   const activate = (keys: React.Key[]): void => {
-    if (!activeKey)
-      setActiveKeys(keys);
+    if (!activeKey) setActiveKeys(keys);
     onChange(accordion ? keys[0] : keys);
   };
 
@@ -124,10 +129,8 @@ export const Component: React.FunctionComponent<Props.Wrapper> = ({
       keys = [...activeKeys];
       const index = keys.indexOf(key);
       const isActive = index > -1;
-      if (isActive)
-        keys.splice(index, 1);
-      else
-        keys.push(key);
+      if (isActive) keys.splice(index, 1);
+      else keys.push(key);
     }
     activate(keys);
   };
@@ -148,7 +151,7 @@ export const Component: React.FunctionComponent<Props.Wrapper> = ({
 Component.displayName = 'Collapse';
 
 /** Returns a `Drawer` component with default property values. */
-export const WithDefaultComponent: React.FunctionComponent<Props.Wrapper> = Wrap.withDefaultProps(
-  Component, 
+export const WithDefaultComponent = Wrap.withDefaultProps(
+  Component,
   DEFAULT_PROPS
 );

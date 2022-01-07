@@ -34,11 +34,11 @@ export default class SLAMDocument extends Document {
 
   render(): React.ReactElement {
     return (
-      <NextDocument.Html lang='en'>
+      <NextDocument.Html lang="en">
         <NextDocument.Head>
           <link
-            rel='stylesheet'
-            href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap'
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
           />
         </NextDocument.Head>
         <body>
