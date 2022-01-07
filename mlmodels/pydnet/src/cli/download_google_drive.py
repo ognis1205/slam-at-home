@@ -61,6 +61,7 @@ def save(response, path):
             if chunk:
                 progress.update(len(chunk))
                 tmp.write(chunk)
+        tmp.flush()
         with ZipFile(Path(tmp.name), "r") as zipped:
             path.mkdir(parents=True, exist_ok=True)
             zipped.extractall(path)
