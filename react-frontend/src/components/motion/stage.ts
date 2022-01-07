@@ -27,16 +27,21 @@ export const Cue = {
   Active: 'active',
   Done: 'done',
 } as const;
- 
+
 export type Cue = typeof Cue[keyof typeof Cue];
 
 const next = (cue: Cue): Cue => {
   switch (cue) {
-    case Cue.None: return Cue.Prepare;
-    case Cue.Prepare: return Cue.Start;
-    case Cue.Start: return Cue.Active;
-    case Cue.Active: return Cue.Done;
-    case Cue.Done: return Cue.None;
+    case Cue.None:
+      return Cue.Prepare;
+    case Cue.Prepare:
+      return Cue.Start;
+    case Cue.Start:
+      return Cue.Active;
+    case Cue.Active:
+      return Cue.Done;
+    case Cue.Done:
+      return Cue.None;
   }
 };
 
@@ -56,19 +61,15 @@ const useCue = (status: Status, action: Action): [Cue, () => void] => {
   Hook.useLayoutEffect(() => {
     if (cue !== Cue.None && cue !== Cue.Done) {
       const result = action(cue);
-      if (result === Skip)
-        setCue(next(cue));
+      if (result === Skip) setCue(next(cue));
       else
         nextFrame((info) => {
           const doNext = (): void => {
-            if (info.isCanceled())
-              return;
+            if (info.isCanceled()) return;
             setCue(next(cue));
-          }
-          if (result === true)
-            doNext();
-          else
-            Promise.resolve(result).then(doNext);
+          };
+          if (result === true) doNext();
+          else Promise.resolve(result).then(doNext);
         });
     }
   }, [cue, status]);
@@ -77,7 +78,7 @@ const useCue = (status: Status, action: Action): [Cue, () => void] => {
     () => () => {
       cancelFrame();
     },
-    [],
+    []
   );
 
   return [cue, (): void => setCue(Cue.Prepare)];
@@ -85,8 +86,9 @@ const useCue = (status: Status, action: Action): [Cue, () => void] => {
 
 /** Returns event listener related functions. */
 const useEventListener = (
-  callback: (event: Props.Event) => void,
-): [(element: HTMLElement) => void, (element: HTMLElement) => void] => {
+  callback: (event: Props.Event) => void
+  //): [(element: HTMLElement) => void, (element: HTMLElement) => void] => {
+): ((element: HTMLElement) => void) => {
   const target = React.useRef<HTMLElement>(null);
   const handle = React.useRef<(event: Props.Event) => void>(callback);
 
@@ -99,26 +101,26 @@ const useEventListener = (
       Event.removeListener(element, Event.TRANSITION_END, handleOnce);
       Event.removeListener(element, Event.ANIMATION_END, handleOnce);
     }
-  }
+  };
 
   const add = (element: HTMLElement): void => {
-    if (target.current && target.current !== element)
-      remove(target.current);
+    if (target.current && target.current !== element) remove(target.current);
     if (element && element !== target.current) {
       Event.addListener(element, Event.TRANSITION_END, handleOnce);
       Event.addListener(element, Event.ANIMATION_END, handleOnce);
       target.current = element;
     }
-  }
+  };
 
   React.useEffect(
     () => () => {
       remove(target.current);
     },
-    [],
+    []
   );
 
-  return [add, remove];
+  //return [add, remove];
+  return add;
 };
 
 /** Defines motion status. */
@@ -128,7 +130,7 @@ export const Status = {
   Enter: 'enter',
   Exit: 'exit',
 } as const;
- 
+
 export type Status = typeof Status[keyof typeof Status];
 
 /** Returns stage status. */
@@ -155,7 +157,7 @@ export const useStatus = (
     onEnterDone,
     onExitDone,
     onVisibleChanged,
-  }: Props.Motion,
+  }: Props.Motion
 ): [Status, Cue, React.CSSProperties, boolean] => {
   /** @const Holds an async visibility state. */
   const [asyncVisible, setAsyncVisible] = Hook.useMountedState<boolean>();
@@ -164,10 +166,12 @@ export const useStatus = (
   const [status, setStatus] = Hook.useMountedState<Status>(Status.None);
 
   /** @const Holds a motion style state. */
-  const [style, setStyle] = Hook.useMountedState<React.CSSProperties | undefined>(null);
+  const [style, setStyle] = Hook.useMountedState<
+    React.CSSProperties | undefined
+  >(null);
 
   /** @const Holds a after-motion effect. */
-  const timeout = React.useRef<any>(null);
+  const timeout = React.useRef<ReturnType<typeof setTimeout>>(null);
 
   /** @const Holds a mounted flag. */
   const hasMounted = React.useRef(false);
@@ -179,22 +183,18 @@ export const useStatus = (
   const hasActivated = React.useRef(false);
 
   /** Returns `true` if the component has mounted. */
-  const isMounted = (): boolean =>
-    hasMounted.current;
+  const isMounted = (): boolean => hasMounted.current;
 
   /** Returns `true` if the component has unmounted. */
-  const isUnmounted = (): boolean =>
-    hasUnmounted.current;
+  const isUnmounted = (): boolean => hasUnmounted.current;
 
   /** Returns `true` if the motion status has been set active. */
-  const isActive = (): boolean =>
-    hasActivated.current;
+  const isActive = (): boolean => hasActivated.current;
 
   /** Event listener which is responsible for `Cue.Done`. */
   const handleMotionEnd = (event: Props.Event): void => {
     const element = getElement();
-    if (event && !event.deadline && event.target !== element)
-      return;
+    if (event && !event.deadline && event.target !== element) return;
 
     let canBeDone: boolean | void;
     if (status === Status.Appear && isActive())
@@ -211,7 +211,8 @@ export const useStatus = (
   };
 
   /** Patches events to the referrenced HTML element. */
-  const [patchEvents,] = useEventListener(handleMotionEnd);
+  //const [patchEvents,] = useEventListener(handleMotionEnd);
+  const patchEvents = useEventListener(handleMotionEnd);
 
   /** Holds event handlers according to the current status. */
   const handlers = React.useMemo<{
@@ -247,13 +248,11 @@ export const useStatus = (
   const [cue, start] = useCue(status, (onCue) => {
     if (onCue === Cue.Prepare) {
       const onPrepare = handlers[Cue.Prepare];
-      if (!onPrepare)
-        return Skip;
+      if (!onPrepare) return Skip;
       return onPrepare(getElement());
     }
 
-    if (cue in handlers)
-      setStyle(handlers[cue]?.(getElement(), null) || null);
+    if (cue in handlers) setStyle(handlers[cue]?.(getElement(), null) || null);
 
     if (cue === Cue.Active) {
       patchEvents(getElement());
@@ -287,14 +286,14 @@ export const useStatus = (
   /** Starts effects when `visible` is changed. */
   Hook.useLayoutEffect(() => {
     setAsyncVisible(visible);
-    if (!supportTransition)
-      return;
+    if (!supportTransition) return;
     let next: Status;
-    if (!isMounted() && visible && appear)
-      next = Status.Appear;
-    if (isMounted() && visible && enter)
-      next = Status.Enter;
-    if ((isMounted() && !visible && exit) || (!isMounted() && exitImmediately && !visible && exit))
+    if (!isMounted() && visible && appear) next = Status.Appear;
+    if (isMounted() && visible && enter) next = Status.Enter;
+    if (
+      (isMounted() && !visible && exit) ||
+      (!isMounted() && exitImmediately && !visible && exit)
+    )
       next = Status.Exit;
     if (next) {
       setStatus(next);
@@ -304,10 +303,12 @@ export const useStatus = (
 
   /** Resets when motion changed. */
   React.useEffect(() => {
-    if ((status === Status.Appear && !appear) ||
-        (status === Status.Enter && !enter) ||
-        (status === Status.Exit && !exit)
-    ) setStatus(Status.None);
+    if (
+      (status === Status.Appear && !appear) ||
+      (status === Status.Enter && !enter) ||
+      (status === Status.Exit && !exit)
+    )
+      setStatus(Status.None);
   }, [appear, enter, exit]);
 
   /** Triggers `onVisibleChanged`. */

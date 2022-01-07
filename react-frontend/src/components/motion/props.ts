@@ -18,11 +18,13 @@ import * as React from 'react';
 import * as Stage from './stage';
 
 /** Defines motion names. */
-export type Name = string | {
-  appear?: string;
-  enter?: string;
-  exit?: string;
-};
+export type Name =
+  | string
+  | {
+      appear?: string;
+      enter?: string;
+      exit?: string;
+    };
 
 /** Motion events. */
 export type Event = (TransitionEvent | AnimationEvent) & {
@@ -31,28 +33,30 @@ export type Event = (TransitionEvent | AnimationEvent) & {
 
 /** Motion prepare handlers. */
 export type PrepareEventHandler = (
-  element: HTMLElement,
-) => Promise<any> | void;
+  element: HTMLElement
+) => Promise<void> | void;
 
 /** Motion start handlers. */
 export type StartEventHandler = (
   element: HTMLElement,
-  event: Event,
+  event: Event
 ) => React.CSSProperties | void;
 
 /** Motion active handlers. */
-export type ActiveEventHandler =
-  StartEventHandler;
+export type ActiveEventHandler = StartEventHandler;
 
 /** Motion end handlers. */
 export type DoneEventHandler = (
   element: HTMLElement,
-  event: Event,
+  event: Event
 ) => boolean | void;
 
 /** Transition name mapper. */
-export type Transition =
-  (name: Name, status: Stage.Status, cue: Stage.Cue) => string;
+export type Transition = (
+  name: Name,
+  status: Stage.Status,
+  cue: Stage.Cue
+) => string;
 
 /** A {Motion} configs. */
 export interface Config {
@@ -83,8 +87,10 @@ export interface Context {
 }
 
 /** A type union of a component's children. */
-type Children =
-  (context: Context, ref: (node: unknown) => void) => React.ReactNode;
+type Children = (
+  context: Context,
+  ref: (node: unknown) => void
+) => React.ReactNode;
 
 /** A {Motion} component properties. */
 export interface Motion extends Partial<Config> {

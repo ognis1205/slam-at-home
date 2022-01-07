@@ -19,8 +19,10 @@ import * as DOM from '../../utils/dom';
 import * as Position from '../../utils/position';
 
 /** Drag event handlers. */
-export type DragEventHandler =
-  (event: MouseEvent, drag: Position.Drag) => void | false;
+export type DragEventHandler = (
+  event: MouseEvent,
+  drag: Position.Drag
+) => void | false;
 
 /** A common properties shared by both {Draggable} and {Wrapper} components. */
 interface Common {
@@ -31,7 +33,7 @@ interface Common {
   onStop?: DragEventHandler;
   onMouseDown?: (e: MouseEvent) => void;
   grid?: [number, number];
-};
+}
 
 /** A {Draggable} component properties. */
 export interface Draggable extends Common {
@@ -49,4 +51,4 @@ export interface Wrapper extends Common {
   positionOffset?: Position.CSSCoord;
   defaultPosition?: Position.Coord;
   children?: React.ReactElement;
-};
+}

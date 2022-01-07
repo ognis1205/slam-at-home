@@ -24,38 +24,48 @@ import classnames from 'classnames';
 import styles from '../../assets/styles/components/draggable.module.scss';
 
 /** Default properties. */
-const DEFAULT_PROPS: Partial<Props.Wrapper> = {
+const DEFAULT_PROPS = {
   disabled: false,
   allowAnyClick: false,
-  onStart: () => {},
-  onMove: () => {},
-  onStop: () => {},
-  onMouseDown: () => {},
+  /* eslint-disable */ 
+  onStart: (e: MouseEvent, drag: Position.Drag) => {
+    /* Do nothing. */
+  },
+  /* eslint-disable */ 
+  onMove: (e: MouseEvent, drag: Position.Drag) => {
+    /* Do nothing. */
+  },
+  /* eslint-disable */ 
+  onStop: (e: MouseEvent, drag: Position.Drag) => {
+    /* Do nothing. */
+  },
+  /* eslint-disable */ 
+  onMouseDown: (e: MouseEvent) => {
+    /* Do nothing. */
+  },
   grid: null,
   axis: 'both',
   scale: 1,
   bounds: false,
   position: null,
   positionOffset: null,
-  defaultPosition: {x: 0, y: 0},
+  defaultPosition: { x: 0, y: 0 },
 };
 
 /** Returns the class name of the wrapper. */
 const getClassName = (
   className: string,
   isDragging: boolean,
-  isDragged: boolean,
+  isDragged: boolean
 ): string =>
   classnames(styles['draggable'], {
     [className || '']: !!className,
     [styles['dragging']]: isDragging,
-    [styles['dragged']]: isDragged
+    [styles['dragged']]: isDragged,
   });
 
 /** Returns the `transform` CSS property. */
-const getTransform = (
-  {x, y}: Position.CSSCoord,
-): string =>
+const getTransform = ({ x, y }: Position.CSSCoord): string =>
   `translate(${x}px,${y}px)`;
 
 /**
@@ -63,7 +73,9 @@ const getTransform = (
  * @param {Wrapper} props Properties that defines a behaviour of this component.
  * @return {ReactElement} A rendered React element.
  */
-const Component: React.FunctionComponent<Props.Wrapper> = (props: Props.Wrapper): React.ReactElement => {
+const Component: React.FunctionComponent<Props.Wrapper> = (
+  props: Props.Wrapper
+): React.ReactElement => {
   /** @const Holds a dragging state. */
   const isDragging = React.useRef<boolean>(false);
 
@@ -71,13 +83,13 @@ const Component: React.FunctionComponent<Props.Wrapper> = (props: Props.Wrapper)
   const isDragged = React.useRef<boolean>(false);
 
   /** @const Holds a dragging position. */
-  const [position, setPosition] = React.useState<{x: number; y: number}>({
+  const [position, setPosition] = React.useState<{ x: number; y: number }>({
     x: props.position?.x || props.defaultPosition?.x || 0,
     y: props.position?.y || props.defaultPosition?.y,
   });
 
   /** @const Holds a compensating slack. */
-  const [slack, setSlack] = React.useState<{x: number; y: number}>({
+  const [slack, setSlack] = React.useState<{ x: number; y: number }>({
     x: 0,
     y: 0,
   });
@@ -85,25 +97,17 @@ const Component: React.FunctionComponent<Props.Wrapper> = (props: Props.Wrapper)
   /** Holds a reference to the draggable fragment. */
   const component = React.useRef<HTMLElement>(null);
 
-  /** Returns the DOM target element. */
-  const getElement = (): HTMLElement => 
-    component.current;
-
   /** Returns `true` if the component is dragging. */
-  const checkIfDragging = (): boolean => 
-    isDragging.current;
+  const checkIfDragging = (): boolean => isDragging.current;
 
   /** Sets the dragging flag. */
-  const setDragging = (flag: boolean): boolean => 
-    isDragging.current = flag;
+  const setDragging = (flag: boolean): boolean => (isDragging.current = flag);
 
   /** Returns `true` if the component is dragged. */
-  const checkIfDragged = (): boolean => 
-    isDragged.current;
+  const checkIfDragged = (): boolean => isDragged.current;
 
   /** Sets the dragging flag. */
-  const setDragged = (flag: boolean): boolean => 
-    isDragged.current = flag;
+  const setDragged = (flag: boolean): boolean => (isDragged.current = flag);
 
   /** `componentWillUnmount` */
   Hook.useWillUnmount(() => {
@@ -112,30 +116,25 @@ const Component: React.FunctionComponent<Props.Wrapper> = (props: Props.Wrapper)
 
   /** An event handler called on `start` events. */
   const handleStart = (e: MouseEvent, drag: Position.Drag): void | false => {
-    if (props.onStart(e, drag) === false)
-      return false;
+    if (props.onStart(e, drag) === false) return false;
     setDragging(true);
     setDragged(true);
   };
 
   /** An event handler called on `move` events. */
   const handleMove = (e: MouseEvent, drag: Position.Drag): void | false => {
-    if (!checkIfDragging())
-      return false;
+    if (!checkIfDragging()) return false;
     const newPosition = { x: drag.x, y: drag.y };
     const newSlack = { x: slack.x, y: slack.y };
-    if (props.onMove(e, drag) === false)
-      return false;
+    if (props.onMove(e, drag) === false) return false;
     setPosition(newPosition);
     setSlack(newSlack);
   };
 
   /** An event handler called on `stop` events. */
   const handleStop = (e: MouseEvent, drag: Position.Drag): void | false => {
-    if (!checkIfDragging())
-      return false;
-    if (props.onStop(e, drag) === false)
-      return false;
+    if (!checkIfDragging()) return false;
+    if (props.onStop(e, drag) === false) return false;
     if (props.position)
       setPosition({ x: props.position.x, y: props.position.y });
     setDragging(false);
@@ -166,12 +165,16 @@ const Component: React.FunctionComponent<Props.Wrapper> = (props: Props.Wrapper)
         style: {
           ...style,
           transform: getTransform({
-            x: Position.canDragX(props.axis) && (!props.position || checkIfDragging())
-             ? position.x
-             : (props.position || props.defaultPosition).x,
-            y: Position.canDragY(props.axis) && (!props.position || checkIfDragging())
-             ? position.y
-             : (props.position || props.defaultPosition).y
+            x:
+              Position.canDragX(props.axis) &&
+              (!props.position || checkIfDragging())
+                ? position.x
+                : (props.position || props.defaultPosition).x,
+            y:
+              Position.canDragY(props.axis) &&
+              (!props.position || checkIfDragging())
+                ? position.y
+                : (props.position || props.defaultPosition).y,
           }),
         },
         ...rest,
@@ -184,7 +187,7 @@ const Component: React.FunctionComponent<Props.Wrapper> = (props: Props.Wrapper)
 Component.displayName = 'DraggableWrapper';
 
 /** Returns a `Draggable` component with default property values. */
-export const WithDefaultComponent: React.FunctionComponent<Props.Wrapper> = Wrap.withDefaultProps(
-  Component, 
+export const WithDefaultComponent = Wrap.withDefaultProps(
+  Component,
   DEFAULT_PROPS
 );

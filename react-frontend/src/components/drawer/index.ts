@@ -14,10 +14,5 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export type {
-  Drawer as Props,
-} from "./props";
-
-export {
-  WithDefaultComponent as Component,
-} from './drawer';
+export type { Drawer as Props } from './props';
+export { WithDefaultComponent as Component } from './drawer';

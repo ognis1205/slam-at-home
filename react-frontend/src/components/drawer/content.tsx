@@ -39,11 +39,9 @@ const getClassName = (
   });
 
 /** Returns the `transform` CSS property. */
-const getTransform = (
-  open: boolean,
-  placement: Props.Placement
-): string => {
-  const position = placement === 'left' || placement === 'top' ? '-100%' : '100%';
+const getTransform = (open: boolean, placement: Props.Placement): string => {
+  const position =
+    placement === 'left' || placement === 'top' ? '-100%' : '100%';
   const isHorizontal = placement === 'left' || placement === 'right';
   const translateFunction = `translate${isHorizontal ? 'X' : 'Y'}`;
   return open ? '' : `${translateFunction}(${position})`;
@@ -51,17 +49,18 @@ const getTransform = (
 
 /** Rerturns the width of the component. */
 const getWidth = (width: React.Key): string =>
-  Misc.isNumeric(width) ? `${width}px` : width as string;
+  Misc.isNumeric(width) ? `${width}px` : (width as string);
 
 /** Rerturns the height of the component. */
 const getHeight = (height: React.Key): string =>
-  Misc.isNumeric(height) ? `${height}px` : height as string;
+  Misc.isNumeric(height) ? `${height}px` : (height as string);
 
 /** Returns a draw width. */
 const getDrawWidthIfOpened = (
   open: boolean,
-  drawWidth: Props.DrawWidth
-           | ((e: { target: HTMLElement; open: boolean }) => Props.DrawWidth),
+  drawWidth:
+    | Props.DrawWidth
+    | ((e: { target: HTMLElement; open: boolean }) => Props.DrawWidth),
   target: HTMLElement,
   size: string | number
 ): string | number | undefined => {
@@ -70,15 +69,11 @@ const getDrawWidthIfOpened = (
     const width = (() => {
       const w =
         typeof drawWidth === 'function'
-        ? drawWidth({target: target, open: open})
-        : drawWidth;
-      return Array.isArray(w)
-           ? (w.length === 2 ? w : [w[0], w[1]])
-           : [w];
+          ? drawWidth({ target: target, open: open })
+          : drawWidth;
+      return Array.isArray(w) ? (w.length === 2 ? w : [w[0], w[1]]) : [w];
     })();
-    ret = open
-        ? width[0]
-        : width[1] || 0;
+    ret = open ? width[0] : width[1] || 0;
   }
   return ret;
 };
@@ -94,8 +89,7 @@ const getSiblings = (container: DOM.Identifier): HTMLElement[] =>
 /** Checks if a given handler is `ReactElement.` */
 const isReactElement = (
   handler: React.ReactElement | null | false
-): handler is React.ReactElement =>
-  handler !== false && handler !== null;
+): handler is React.ReactElement => handler !== false && handler !== null;
 
 /** @const Holds a current drawer flags. */
 const CURRENT_DRAWER: Record<string, boolean> = {};
@@ -129,10 +123,14 @@ export const Component: React.FunctionComponent<Props.Content> = ({
   wrapperStyle,
   autoFocus,
   container,
+  /* eslint-disable */ 
   getOpenCount,
   scrollLocker,
+  /* eslint-disable */ 
   switchScrollingEffect,
+  /* eslint-disable */ 
   visible,
+  /* eslint-disable */ 
   afterClose,
   ...divAttrs
 }: Props.Content): React.ReactElement => {
@@ -144,8 +142,9 @@ export const Component: React.FunctionComponent<Props.Content> = ({
     `drawer_id_${Number(
       (Date.now() + Math.random())
         .toString()
-        .replace('.', Math.round(Math.random() * 9).toString()),
-    ).toString(16)}`);
+        .replace('.', Math.round(Math.random() * 9).toString())
+    ).toString(16)}`
+  );
 
   /** @const Holds panes other than a drawer. */
   const panes = React.useRef<HTMLElement[]>([]);
@@ -154,10 +153,10 @@ export const Component: React.FunctionComponent<Props.Content> = ({
   const passive = React.useRef<{ passive: boolean } | boolean>(false);
 
   /** @const Holds a drawing start position. */
-  const startPosition = React.useRef<{x: number; y: number}>(null);
+  const startPosition = React.useRef<{ x: number; y: number }>(null);
 
   /** @const Holds a after-scrolling effect. */
-  const timeout = React.useRef<any>(null);
+  const timeout = React.useRef<ReturnType<typeof setTimeout>>(null);
 
   /** @const Holds a reference to the component itself. */
   const self = React.useRef<HTMLDivElement>(null);
@@ -193,10 +192,8 @@ export const Component: React.FunctionComponent<Props.Content> = ({
       if (getContainer(container)?.parentNode === document.body)
         CURRENT_DRAWER[id.current] = open;
       toggle();
-      if (autoFocus)
-        focus();
-      if (showMask)
-        scrollLocker?.lock();
+      if (autoFocus) focus();
+      if (showMask) scrollLocker?.lock();
     }
   });
 
@@ -206,10 +203,8 @@ export const Component: React.FunctionComponent<Props.Content> = ({
       CURRENT_DRAWER[id.current] = !!open;
     toggle();
     if (open) {
-      if (autoFocus)
-        focus();
-      if (showMask)
-        scrollLocker?.lock();
+      if (autoFocus) focus();
+      if (showMask) scrollLocker?.lock();
     } else {
       scrollLocker?.unlock();
     }
@@ -227,16 +222,14 @@ export const Component: React.FunctionComponent<Props.Content> = ({
 
   /** Checks if some drawers are opened. */
   const areAllDrawersClosed = (): boolean =>
-    !Object.keys(CURRENT_DRAWER).some(key => CURRENT_DRAWER[key]);
+    !Object.keys(CURRENT_DRAWER).some((key) => CURRENT_DRAWER[key]);
 
   /** Focuses on this component forcelly. */
-  const focus = (): void =>
-    self.current?.focus();
+  const focus = (): void => self.current?.focus();
 
   /** Inits drawer item HTML elements. */
   const init = (): void => {
-    if (!DOM.isDefined())
-      return;
+    if (!DOM.isDefined()) return;
 
     let passiveIsSupported = false;
     try {
@@ -246,9 +239,9 @@ export const Component: React.FunctionComponent<Props.Content> = ({
         Object.defineProperty({}, 'passive', {
           get: () => {
             passiveIsSupported = true;
-            return null
+            return null;
           },
-        }),
+        })
       );
     } catch (_) {}
     passive.current = passiveIsSupported ? { passive: false } : false;
@@ -257,15 +250,19 @@ export const Component: React.FunctionComponent<Props.Content> = ({
     const siblings = getSiblings(container);
     if (drawPane === 'all') {
       siblings.forEach((child: HTMLElement) => {
-        if (child.nodeName !== 'SCRIPT' &&
-            child.nodeName !== 'STYLE' &&
-            child.nodeName !== 'LINK' &&
-            child !== getContainer(container)
-        ) panes.current?.push(child);
+        if (
+          child.nodeName !== 'SCRIPT' &&
+          child.nodeName !== 'STYLE' &&
+          child.nodeName !== 'LINK' &&
+          child !== getContainer(container)
+        )
+          panes.current?.push(child);
       });
     } else if (drawPane) {
-      Misc.toArray(drawPane).forEach(key => {
-        document.querySelectorAll(key).forEach(item => panes.current?.push(item));
+      Misc.toArray(drawPane).forEach((key) => {
+        document
+          .querySelectorAll(key)
+          .forEach((item) => panes.current?.push(item));
       });
     }
   };
@@ -274,9 +271,10 @@ export const Component: React.FunctionComponent<Props.Content> = ({
   const toggle = (): void => {
     const isHorizontal = placement === 'left' || placement === 'right';
     const translateFunction = `translate${isHorizontal ? 'X' : 'Y'}`;
-    const rect = 
-      content.current
-      ? content.current.getBoundingClientRect()[isHorizontal ? 'width' : 'height']
+    const rect = content.current
+      ? content.current.getBoundingClientRect()[
+          isHorizontal ? 'width' : 'height'
+        ]
       : 0;
     const size = (isHorizontal ? width : height) || rect;
 
@@ -291,64 +289,59 @@ export const Component: React.FunctionComponent<Props.Content> = ({
       toggleEvents(scrollBarSize);
     }
 
-    if (onChange)
-      onChange(open);
+    if (onChange) onChange(open);
   };
 
   /** Sets a transform CSS function on panes. */
-  const togglePanes = (translateFunction?: string, size?: string | number, scrollBarSize?: number): void =>
-    panes.current?.forEach(pane => {
+  const togglePanes = (
+    translateFunction?: string,
+    size?: string | number,
+    scrollBarSize?: number
+  ): void =>
+    panes.current?.forEach((pane) => {
       pane.style.transition = `transform ${drawDuration} ${drawEase}`;
       Event.addListener(pane, Event.TRANSITION_END, handleTransitionEnd);
       let diff = getDrawWidthIfOpened(open, drawWidth, pane, size);
-      diff = 
-        typeof diff === 'number'
-        ? `${diff}px`
-        : diff;
-      diff = 
-        placement === 'left' || placement === 'top'
-        ? diff
-        : `-${diff}`;
-      diff = 
+      diff = typeof diff === 'number' ? `${diff}px` : diff;
+      diff = placement === 'left' || placement === 'top' ? diff : `-${diff}`;
+      diff =
         showMask && placement === 'right' && scrollBarSize
-        ? `calc(${diff} + ${scrollBarSize}px)`
-        : diff;
-      pane.style.transform =
-        diff
-        ? `${translateFunction}(${diff})`
-        : '';
+          ? `calc(${diff} + ${scrollBarSize}px)`
+          : diff;
+      pane.style.transform = diff ? `${translateFunction}(${diff})` : '';
     });
 
   /** Toggles event listeners. */
   const toggleEvents = (scrollBarSize: number): void => {
     if (getContainer(container)?.parentNode === document.body && showMask) {
-      const doms = [document.body, mask.current, button.current, content.current];
+      const doms = [
+        document.body,
+        mask.current,
+        button.current,
+        content.current,
+      ];
       if (open && document.body.style.overflow !== 'hidden') {
-        if (scrollBarSize)
-          showWithScrollBar(scrollBarSize);
+        if (scrollBarSize) showWithScrollBar(scrollBarSize);
         document.body.style.touchAction = 'none';
         doms.forEach((item, i) => {
-          if (!item)
-            return;
+          if (!item) return;
           Event.addListener(
             item,
             i ? 'touchmove' : 'touchstart',
             i ? preventDefaultOnTouch : handleTouchMove,
-            passive,
+            passive
           );
         });
       } else if (areAllDrawersClosed()) {
-        if (scrollBarSize)
-          hideWithScrollBar(scrollBarSize);
+        if (scrollBarSize) hideWithScrollBar(scrollBarSize);
         document.body.style.touchAction = '';
         doms.forEach((item, i) => {
-          if (!item)
-            return;
+          if (!item) return;
           Event.removeListener(
             item,
             i ? 'touchmove' : 'touchstart',
             i ? preventDefaultOnTouch : handleTouchMove,
-            passive,
+            passive
           );
         });
       }
@@ -386,8 +379,7 @@ export const Component: React.FunctionComponent<Props.Content> = ({
 
   /** Hides a drawer with a scroll bar size. */
   const hideWithScrollBar = (scrollBarSize: number): void => {
-    if (Event.TRANSITION_END_CSS)
-      document.body.style.overflowX = 'hidden';
+    if (Event.TRANSITION_END_CSS) document.body.style.overflowX = 'hidden';
 
     self.current.style.transition = 'none';
     let yTransition: string;
@@ -437,30 +429,25 @@ export const Component: React.FunctionComponent<Props.Content> = ({
 
   /** Removes touch event handlers. */
   const preventDefaultOnTouch = (e: React.TouchEvent | TouchEvent): void => {
-    if (e.changedTouches.length > 1 || !startPosition.current)
-      return;
+    if (e.changedTouches.length > 1 || !startPosition.current) return;
 
     const el = e.currentTarget as HTMLElement;
     const dx = e.changedTouches[0].clientX - startPosition.current?.x;
     const dy = e.changedTouches[0].clientY - startPosition.current?.y;
 
-    const isMaskTouched =
-      el === mask.current;
-    const isButtonTouched =
-      el === button.current;
-    const isContentTouched = 
-      el === content.current && Scroll.isScrolling(el, e.target as HTMLElement, dx, dy);
-    const isTouched =
-      isMaskTouched || isButtonTouched || isContentTouched;
+    const isMaskTouched = el === mask.current;
+    const isButtonTouched = el === button.current;
+    const isContentTouched =
+      el === content.current &&
+      Scroll.isScrolling(el, e.target as HTMLElement, dx, dy);
+    const isTouched = isMaskTouched || isButtonTouched || isContentTouched;
 
-    if (isTouched && e.cancelable)
-      e.preventDefault();
+    if (isTouched && e.cancelable) e.preventDefault();
   };
 
   /** An event handler called on `touchmove` events. */
   const handleTouchMove = (e: React.TouchEvent | TouchEvent): void => {
-    if (e.touches.length > 1)
-      startPosition.current = null;
+    if (e.touches.length > 1) startPosition.current = null;
     else
       startPosition.current = {
         x: e.touches[0].clientX,
@@ -479,16 +466,14 @@ export const Component: React.FunctionComponent<Props.Content> = ({
   const handleKeyDown = (e: React.KeyboardEvent): void => {
     if (e.key === 'Escape') {
       e.stopPropagation();
-      if (onClose)
-        onClose(e as any);
+      if (onClose) onClose(e);
     }
   };
 
   /** An event handler called on 'transitionend' events of the wrapper. */
   const handleWrapperTransitionEnd = (e: React.TransitionEvent): void => {
     if (e.target === wrapper.current && e.propertyName.match(/transform$/)) {
-      if (self.current)
-        self.current.style.transition = '';
+      if (self.current) self.current.style.transition = '';
       if (!open && areAllDrawersClosed()) {
         document.body.style.overflowX = '';
         if (mask.current) {
@@ -496,8 +481,7 @@ export const Component: React.FunctionComponent<Props.Content> = ({
           mask.current.style.width = '';
         }
       }
-      if (afterVisibleChange)
-        afterVisibleChange(!!open);
+      if (afterVisibleChange) afterVisibleChange(!!open);
     }
   };
 
@@ -506,15 +490,14 @@ export const Component: React.FunctionComponent<Props.Content> = ({
     if (isReactElement(handler))
       return React.cloneElement(handler, {
         onClick: (e: React.MouseEvent): void => {
-          if (handler.props.onClick)
-            handler.props.onClick();
-          if (onClick)
-            onClick(e);
+          if (handler.props.onClick) handler.props.onClick();
+          if (onClick) onClick(e);
         },
-        ref: (el: HTMLElement) => {button.current = el},
+        ref: (el: HTMLElement) => {
+          button.current = el;
+        },
       });
-    else
-      return null;
+    else return null;
   };
 
   return (
@@ -523,7 +506,7 @@ export const Component: React.FunctionComponent<Props.Content> = ({
       tabIndex={-1}
       className={getClassName(className, placement, showMask, open)}
       style={style}
-      ref={(el) => self.current = el}
+      ref={(el) => (self.current = el)}
       onKeyDown={open && keyboard ? handleKeyDown : undefined}
       onTransitionEnd={handleWrapperTransitionEnd}
     >
@@ -532,7 +515,7 @@ export const Component: React.FunctionComponent<Props.Content> = ({
           className={styles['mask']}
           onClick={maskClosable ? onClose : undefined}
           style={maskStyle}
-          ref={(el) => mask.current = el}
+          ref={(el) => (mask.current = el)}
         />
       )}
       <div
@@ -544,12 +527,9 @@ export const Component: React.FunctionComponent<Props.Content> = ({
           height: getHeight(height),
           ...wrapperStyle,
         }}
-        ref={(el) => wrapper.current = el}
+        ref={(el) => (wrapper.current = el)}
       >
-        <div
-          className={styles['content']}
-          ref={(el) => content.current = el}
-        >
+        <div className={styles['content']} ref={(el) => (content.current = el)}>
           {children}
         </div>
         {cloneHandlerElement()}

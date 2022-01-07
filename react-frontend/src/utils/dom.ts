@@ -67,12 +67,10 @@ export const select = (identifier: Identifier): HTMLElement[] => {
 
 /** Returns if a node is a DOM node. Else will return by `findDOMNode`. */
 export const find = <T = Element | Text>(
-  node: React.ReactInstance | HTMLElement,
+  node: React.ReactInstance | HTMLElement
 ): T => {
-  if (!isDefined())
-    return undefined;
-  if (node instanceof HTMLElement)
-    return (node as unknown) as T;
+  if (!isDefined()) return undefined;
+  if (node instanceof HTMLElement) return node as unknown as T;
   return (ReactDOM.findDOMNode(node) as unknown) as T;
 };
 

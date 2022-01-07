@@ -26,7 +26,7 @@ import classnames from 'classnames';
 import styles from '../../assets/styles/containers/pane.module.scss';
 
 /** Default properties. */
-const DEFAULT_PROPS: Partial<Props.Divider> = {
+const DEFAULT_PROPS = {
   axis: 'x',
   defaultPosition: {x: 200, y: 0},
   leftmost: 200,
@@ -154,7 +154,7 @@ export const Component: React.FunctionComponent<Props.Divider> = (props: Props.D
       onMove={handleMove}
       onStop={handleStop}
     >
-      <Div id={styles['divider']} ref={self}/>
+      <Div id={styles['divider']} ref={self} />
     </Draggable.Wrapper>
   );
 };
@@ -163,7 +163,7 @@ export const Component: React.FunctionComponent<Props.Divider> = (props: Props.D
 Component.displayName = 'Divider';
 
 /** Returns a `Draggable` component with default property values. */
-export const WithDefaultComponent: React.FunctionComponent<Props.Divider> = Wrap.withDefaultProps(
+export const WithDefaultComponent = Wrap.withDefaultProps(
   Component, 
   DEFAULT_PROPS
 );

@@ -23,13 +23,6 @@ export type {
   DoneEventHandler,
   Config,
   Transition,
-} from "./props";
-
-export {
-  Component,
-} from './motion';
-
-export {
-  Cue,
-  Status,
-} from './stage';
+} from './props';
+export { Component } from './motion';
+export { Cue, Status } from './stage';

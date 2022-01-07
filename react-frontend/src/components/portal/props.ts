@@ -19,7 +19,9 @@ import * as DOM from '../../utils/dom';
 import * as Scroll from '../../utils/scroll';
 
 /** A type union of CSS position properties. */
-type Children = ((context: WrapperContext) => React.ReactNode) | React.ReactNode;
+type Children =
+  | ((context: WrapperContext) => React.ReactNode)
+  | React.ReactNode;
 
 /** A {Portal} component properties. */
 export interface Portal {
