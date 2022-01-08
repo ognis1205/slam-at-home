@@ -22,13 +22,13 @@ import * as Misc from './misc';
 export interface Coord {
   x: number;
   y: number;
-};
+}
 
 /** General purpose 2-D positions. */
 export interface CSSCoord {
   x: number | string;
   y: number | string;
-};
+}
 
 /** Offset information handled with `TouchEvent`. */
 export interface Offset {
@@ -42,17 +42,17 @@ export interface Bounds {
   top?: number;
   right?: number;
   bottom?: number;
-};
+}
 
 /** Defines dragging context. */
 export interface Drag {
-  target: HTMLElement,
-  x: number,
-  y: number,
-  dx: number,
-  dy: number,
-  x0: number,
-  y0: number,
+  target: HTMLElement;
+  x: number;
+  y: number;
+  dx: number;
+  dy: number;
+  x0: number;
+  y0: number;
 }
 
 /** A type union of dragging axis. */
@@ -63,60 +63,65 @@ export const get = (
   target: HTMLElement,
   bounds: Bounds | string | false,
   x: number,
-  y: number,
+  y: number
 ): Coord => {
-  if (!bounds || !Object.keys(bounds).length) 
-    return {x: x, y: y};
+  if (!bounds || !Object.keys(bounds).length) return { x: x, y: y };
 
-  bounds = typeof bounds === 'string'
-         ? bounds
-         : {
-           left: bounds.left,
-           top: bounds.top,
-           right: bounds.right,
-           bottom: bounds.bottom
-         } as Bounds;
+  bounds =
+    typeof bounds === 'string'
+      ? bounds
+      : ({
+          left: bounds.left,
+          top: bounds.top,
+          right: bounds.right,
+          bottom: bounds.bottom,
+        } as Bounds);
 
   if (typeof bounds === 'string') {
-    const outer = bounds === 'parent'
-                ? target.parentNode as HTMLElement
-                : target.ownerDocument.querySelector(bounds) as HTMLElement;
+    const outer =
+      bounds === 'parent'
+        ? (target.parentNode as HTMLElement)
+        : (target.ownerDocument.querySelector(bounds) as HTMLElement);
     const style = target.ownerDocument.defaultView.getComputedStyle(target);
     const outerStyle = target.ownerDocument.defaultView.getComputedStyle(outer);
     bounds = {
-      left: Misc.toInt(outerStyle.paddingLeft)
-        + Misc.toInt(style.marginLeft)
-        - target.offsetLeft,
-      top: Misc.toInt(outerStyle.paddingTop)
-        + Misc.toInt(style.marginTop)
-        - target.offsetTop,
-      right: DOM.getInnerWidth(outer)
-        + Misc.toInt(outerStyle.paddingRight)
-        - DOM.getOuterWidth(target)
-        - target.offsetLeft
-        - Misc.toInt(style.marginRight),
-      bottom: DOM.getInnerHeight(outer)
-        + Misc.toInt(outerStyle.paddingBottom)
-        - DOM.getOuterHeight(target)
-        - target.offsetTop
-        - Misc.toInt(style.marginBottom)
+      left:
+        Misc.toInt(outerStyle.paddingLeft) +
+        Misc.toInt(style.marginLeft) -
+        target.offsetLeft,
+      top:
+        Misc.toInt(outerStyle.paddingTop) +
+        Misc.toInt(style.marginTop) -
+        target.offsetTop,
+      right:
+        DOM.getInnerWidth(outer) +
+        Misc.toInt(outerStyle.paddingRight) -
+        DOM.getOuterWidth(target) -
+        target.offsetLeft -
+        Misc.toInt(style.marginRight),
+      bottom:
+        DOM.getInnerHeight(outer) +
+        Misc.toInt(outerStyle.paddingBottom) -
+        DOM.getOuterHeight(target) -
+        target.offsetTop -
+        Misc.toInt(style.marginBottom),
     };
   }
 
-  if (Misc.isNumeric(bounds.right))
-    x = Math.min(x, bounds.right);
-  if (Misc.isNumeric(bounds.bottom))
-    y = Math.min(y, bounds.bottom);
-  if (Misc.isNumeric(bounds.left))
-    x = Math.max(x, bounds.left);
-  if (Misc.isNumeric(bounds.top))
-    y = Math.max(y, bounds.top);
+  if (Misc.isNumeric(bounds.right)) x = Math.min(x, bounds.right);
+  if (Misc.isNumeric(bounds.bottom)) y = Math.min(y, bounds.bottom);
+  if (Misc.isNumeric(bounds.left)) x = Math.max(x, bounds.left);
+  if (Misc.isNumeric(bounds.top)) y = Math.max(y, bounds.top);
 
-  return {x: x, y: y};
+  return { x: x, y: y };
 };
 
 /** Snaps a given coordinate to a specified grid. */
-export const snapTo = (grid: [number, number], pendingX: number, pendingY: number): [number, number] => {
+export const snapTo = (
+  grid: [number, number],
+  pendingX: number,
+  pendingY: number
+): [number, number] => {
   const x = Math.round(pendingX / grid[0]) * grid[0];
   const y = Math.round(pendingY / grid[1]) * grid[1];
   return [x, y];
@@ -126,27 +131,35 @@ export const snapTo = (grid: [number, number], pendingX: number, pendingY: numbe
 export const on = (
   event: Event.MouseTouch,
   target: HTMLElement,
-  identifier: number | {
-    scale: number,
-    offsetParent?: HTMLElement,
-  },
+  identifier:
+    | number
+    | {
+        scale: number;
+        offsetParent?: HTMLElement;
+      }
 ): Coord => {
   let position = undefined;
   if (typeof identifier === 'number') {
     position = Event.getTouch(event, identifier);
-    if (!position)
-      return null;
+    if (!position) return null;
   } else {
-    const offsetParent = (identifier?.offsetParent || target.offsetParent || target.ownerDocument.body) as HTMLElement;
+    const offsetParent = (identifier?.offsetParent ||
+      target.offsetParent ||
+      target.ownerDocument.body) as HTMLElement;
     return offsetFromParent(position || event, offsetParent, identifier?.scale);
   }
 };
 
 /** Returns the relative position from offsetParent. */
-const offsetFromParent = (event: Offset, offsetParent: HTMLElement, scale?: number): Coord => {
-  const rect = offsetParent === offsetParent.ownerDocument.body 
-             ? {left: 0, top: 0}
-             : offsetParent.getBoundingClientRect();
+const offsetFromParent = (
+  event: Offset,
+  offsetParent: HTMLElement,
+  scale?: number
+): Coord => {
+  const rect =
+    offsetParent === offsetParent.ownerDocument.body
+      ? { left: 0, top: 0 }
+      : offsetParent.getBoundingClientRect();
   return {
     x: (event.clientX + offsetParent.scrollLeft - rect.left) / (scale || 1),
     y: (event.clientY + offsetParent.scrollTop - rect.top) / (scale || 1),
@@ -158,21 +171,27 @@ export const drag = (
   target: HTMLElement,
   state: { x0: number, y0: number },
   x: number,
-  y: number,
+  y: number
 ): Drag => {
   if (!Misc.isNumeric(state.x0) || !Misc.isNumeric(state.y0))
     return {
       target,
-      x, y,
-      dx: 0, dy: 0,
-      x0: x, y0: y,
+      x,
+      y,
+      dx: 0,
+      dy: 0,
+      x0: x,
+      y0: y,
     };
   else
     return {
       target,
-      x, y,
-      dx: x - state.x0, dy: y - state.y0,
-      x0: state.x0, y0: state.y0,
+      x,
+      y,
+      dx: x - state.x0,
+      dy: y - state.y0,
+      x0: state.x0,
+      y0: state.y0,
     };
 };
 
@@ -185,14 +204,18 @@ export const canDragY = (axis: Axis): boolean =>
   axis === 'both' || axis === 'y';
 
 /** Scales dragging context. */
-export const scale = (drag: Drag, position: {x: number, y: number}, scale: number): Drag => {
+export const scale = (
+  drag: Drag,
+  position: { x: number; y: number },
+  scale: number
+): Drag => {
   return {
     target: drag.target,
-    x: position.x + (drag.dx / scale),
-    y: position.y + (drag.dy / scale),
-    dx: (drag.dx / scale),
-    dy: (drag.dy / scale),
+    x: position.x + drag.dx / scale,
+    y: position.y + drag.dy / scale,
+    dx: drag.dx / scale,
+    dy: drag.dy / scale,
     x0: position.x,
-    y0: position.y
+    y0: position.y,
   };
 };

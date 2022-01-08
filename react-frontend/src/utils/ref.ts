@@ -20,6 +20,6 @@ import * as React from 'react';
 export const fill = <T>(ref: React.Ref<T>, node: T): void => {
   if (typeof ref === 'function') ref(node);
   else if (typeof ref === 'object' && ref && 'current' in ref)
-    /* eslint-disable */ 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (ref as any).current = node;
 };

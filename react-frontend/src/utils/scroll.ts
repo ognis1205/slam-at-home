@@ -25,7 +25,7 @@ interface Lock {
 }
 
 /** Holds the current global unique id. */
-let uuid: number = 0;
+let uuid = 0;
 
 /** Holds created locks so far. */
 let locks: Lock[] = [];
@@ -70,18 +70,20 @@ export class Locker {
 
   /** Locks a specified HTML element. */
   public lock = (): void => {
-    if (locks.some(({target}: Lock) => target === this.target))
-      return;
+    if (locks.some(({ target }: Lock) => target === this.target)) return;
 
-    if (locks.some(({options}: Lock) => options?.container === this.options?.container)) {
+    if (
+      locks.some(
+        ({ options }: Lock) => options?.container === this.options?.container
+      )
+    ) {
       locks = [...locks, { target: this.target, options: this.options }];
       return;
     }
 
     const container = this.options?.container || document.body;
     let size = 0;
-    if (hasBar(container))
-      size = getBarSize();
+    if (hasBar(container)) size = getBarSize();
 
     LOCKER_CACHE.set(
       container,
@@ -92,8 +94,8 @@ export class Locker {
           overflowX: 'hidden',
           overflowY: 'hidden',
         } as React.CSSProperties,
-        container,
-      ),
+        container
+      )
     );
 
     if (!CLASS_NAME_REGEX.test(container.className))
@@ -104,15 +106,19 @@ export class Locker {
 
   /** Unlocks a specified HTML element. */
   public unlock = (): void => {
-    const found = locks.find(({target}: Lock) => target === this.target);
-    locks = locks.filter(({target}: Lock) => target !== this.target);
+    const found = locks.find(({ target }: Lock) => target === this.target);
+    locks = locks.filter(({ target }: Lock) => target !== this.target);
 
-    if (!found || locks.some(({options}: Lock) => options?.container === found.options?.container))
+    if (
+      !found ||
+      locks.some(
+        ({ options }: Lock) => options?.container === found.options?.container
+      )
+    )
       return;
 
     const container = this.options?.container || document.body;
-    if (!CLASS_NAME_REGEX.test(container.className))
-      return;
+    if (!CLASS_NAME_REGEX.test(container.className)) return;
 
     CSS.set(LOCKER_CACHE.get(container), container);
     LOCKER_CACHE.delete(container);
@@ -124,8 +130,7 @@ export class Locker {
   /** Updates lock options. */
   public relock = (options?: LockOptions): void => {
     const found = locks.find(({ target }) => target === this.target);
-    if (found)
-      this.unlock();
+    if (found) this.unlock();
 
     this.options = options;
     if (found) {
@@ -137,9 +142,11 @@ export class Locker {
 
 /** Returns `true` if the `container` has a scrolling bar. */
 export const hasBar = (container: HTMLElement): boolean => {
-  return (container === document.body &&
-          window.innerWidth - document.documentElement.clientWidth > 0) ||
-         container.scrollHeight > container.clientHeight;
+  const bodyHasScrollBar =
+    container === document.body &&
+    window.innerWidth - document.documentElement.clientWidth > 0;
+  const containerHasScrollBar = container.scrollHeight > container.clientHeight;
+  return bodyHasScrollBar || containerHasScrollBar;
 };
 
 /** A cached scroll bar size. */
@@ -189,8 +196,7 @@ export const isScrolling = (
   if (!target || target === document || target instanceof Document)
     return false;
 
-  if (target === root.parentNode)
-    return true;
+  if (target === root.parentNode) return true;
 
   const scrollTop = target.scrollHeight - target.clientHeight;
   const scrollLeft = target.scrollWidth - target.clientWidth;
@@ -198,22 +204,20 @@ export const isScrolling = (
   const overflowY = style.overflowY === 'auto' || style.overflowY === 'scroll';
   const overflowX = style.overflowX === 'auto' || style.overflowX === 'scroll';
 
-  const isY =
-    Math.max(Math.abs(dx), Math.abs(dy)) === Math.abs(dy);
-  const isX =
-    Math.max(Math.abs(dx), Math.abs(dy)) === Math.abs(dx);
-  const isScrollableY =
-    scrollTop && overflowY;
-  const isScrollableX =
-    scrollLeft && overflowX;
+  const isY = Math.max(Math.abs(dx), Math.abs(dy)) === Math.abs(dy);
+  const isX = Math.max(Math.abs(dx), Math.abs(dy)) === Math.abs(dx);
+  const isScrollableY = scrollTop && overflowY;
+  const isScrollableX = scrollLeft && overflowX;
   const isExceedingY =
-    isScrollableY && ((target.scrollTop >= scrollTop && dy < 0) || (target.scrollTop <= 0 && dy > 0));
+    isScrollableY &&
+    ((target.scrollTop >= scrollTop && dy < 0) ||
+      (target.scrollTop <= 0 && dy > 0));
   const isExceedingX =
-    isScrollableX && ((target.scrollLeft >= scrollLeft && dy < 0) || (target.scrollLeft <= 0 && dx > 0));
-  const isParentScrollingY =
-    isY && (!isScrollableY || isExceedingY);
-  const isParentScrollingX =
-    isX && (!isScrollableX || isExceedingX);
+    isScrollableX &&
+    ((target.scrollLeft >= scrollLeft && dy < 0) ||
+      (target.scrollLeft <= 0 && dx > 0));
+  const isParentScrollingY = isY && (!isScrollableY || isExceedingY);
+  const isParentScrollingX = isX && (!isScrollableX || isExceedingX);
 
   if (isParentScrollingY || isParentScrollingX)
     return isScrolling(root, target.parentNode as HTMLElement, dx, dy);
@@ -222,23 +226,24 @@ export const isScrolling = (
 };
 
 /** Returns `true` if `body` is overflowing. */
-export const isBodyOverflowing = (): boolean =>
-  (document.body.scrollHeight >
-    (window.innerHeight || document.documentElement.clientHeight) &&
-   window.innerWidth > document.body.offsetWidth);
+export const isBodyOverflowing = (): boolean => {
+  const bodyHasExcessHeight =
+    document.body.scrollHeight >
+    (window.innerHeight || document.documentElement.clientHeight);
+  const bodyHasScrollBar = window.innerWidth > document.body.offsetWidth;
+  return bodyHasExcessHeight && bodyHasScrollBar;
+};
 
 /** @const @private Holds cached CSS properties of scroll effects. */
 let EFFECT_CACHE: React.CSSProperties = {};
 
 /** Switched scrolling effects. */
-export const switchEffect = (close: boolean = false): void => {
-  if (!isBodyOverflowing() && !close)
-    return;
+export const switchEffect = (close = false): void => {
+  if (!isBodyOverflowing() && !close) return;
 
   const bodyClassName = document.body.className;
   if (close) {
-    if (!CLASS_NAME_REGEX.test(bodyClassName))
-      return;
+    if (!CLASS_NAME_REGEX.test(bodyClassName)) return;
     CSS.set(EFFECT_CACHE);
     EFFECT_CACHE = {};
     document.body.className = bodyClassName
