@@ -331,7 +331,7 @@ export const Component: React.FunctionComponent<Props.Content> = ({
             item,
             i ? 'touchmove' : 'touchstart',
             i ? preventDefaultOnTouch : handleTouchMove,
-            passive
+            passive.current as EventListenerOptions
           );
         });
       } else if (areAllDrawersClosed()) {
@@ -343,7 +343,7 @@ export const Component: React.FunctionComponent<Props.Content> = ({
             item,
             i ? 'touchmove' : 'touchstart',
             i ? preventDefaultOnTouch : handleTouchMove,
-            passive
+            passive.current as EventListenerOptions
           );
         });
       }

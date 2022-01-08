@@ -26,7 +26,7 @@ type UseEffectCallback = UseEffectParams[0];
 // `useEffect` dependencies list.
 type UseEffectDeps = UseEffectParams[1];
 // `useEffect` return..
-type UseEffectReturn = ReturnType<typeof React.useEffect>
+type UseEffectReturn = ReturnType<typeof React.useEffect>;
 
 /**
  * Deeply compared version of `useMemo`.

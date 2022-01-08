@@ -22,26 +22,26 @@ const IS_RAF_AVAILABLE: boolean =
 /** Animation request/clear functions. */
 const requestFrame: (callback: FrameRequestCallback) => number = (() => {
   return IS_RAF_AVAILABLE
-       ? (callback: FrameRequestCallback): number => window.requestAnimationFrame(callback)
-       : (callback: FrameRequestCallback): number => +setTimeout(callback, 16);
+    ? (callback: FrameRequestCallback): number =>
+        window.requestAnimationFrame(callback)
+    : (callback: FrameRequestCallback): number => +setTimeout(callback, 16);
 })();
 
 /** Animation request/clear functions. */
 const clearFrame: (identifier: number) => void = (() => {
   return IS_RAF_AVAILABLE
-       ? (identifier: number): void => window.cancelAnimationFrame(identifier)
-       : (identifier: number): void => clearTimeout(identifier);
+    ? (identifier: number): void => window.cancelAnimationFrame(identifier)
+    : (identifier: number): void => clearTimeout(identifier);
 })();
 
 /** Holds the current global unique id. */
-let uuid: number = 0;
+let uuid = 0;
 
 /** Holds created locks so far. */
 const IDS = new Map<number, number>();
 
 /** Deletes from `ids`. */
-const cleanup = (id: number): boolean =>
-  IDS.delete(id);
+const cleanup = (id: number): boolean => IDS.delete(id);
 
 /** Cancels an event which is specified by a given identifier. */
 export const clear = (identifier: number): void => {
@@ -51,7 +51,7 @@ export const clear = (identifier: number): void => {
 };
 
 /** Submits an event. */
-export const request = (callback: () => void, trial: number = 1): number => {
+export const request = (callback: () => void, trial = 1): number => {
   uuid += 1;
   const identifier = uuid;
   function loop(ttl: number): void {

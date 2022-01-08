@@ -143,7 +143,7 @@ export const Component = React.forwardRef<unknown, Props.Draggable>(
       if (target)
         Event.addListener(target, EVENTS.TOUCH.start, handleTouchStart, {
           passive: false,
-        });
+        } as EventListenerOptions);
     });
 
     /** `componentWillUnmount` */
@@ -172,7 +172,7 @@ export const Component = React.forwardRef<unknown, Props.Draggable>(
         );
         Event.removeListener(target, EVENTS.TOUCH.start, handleTouchStart, {
           passive: false,
-        });
+        } as EventListenerOptions);
         stop(target.ownerDocument);
       }
     });
