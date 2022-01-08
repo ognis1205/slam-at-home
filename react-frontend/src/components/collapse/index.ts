@@ -14,7 +14,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 export type { Panel as PanelProps } from './props';
 export { Component as Panel } from './panel';
 export { WithDefaultComponent as Wrapper } from './collapse';

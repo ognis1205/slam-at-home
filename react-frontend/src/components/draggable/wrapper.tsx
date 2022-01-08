@@ -27,19 +27,19 @@ import styles from '../../assets/styles/components/draggable.module.scss';
 const DEFAULT_PROPS = {
   disabled: false,
   allowAnyClick: false,
-  /* eslint-disable */ 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   onStart: (e: MouseEvent, drag: Position.Drag) => {
     /* Do nothing. */
   },
-  /* eslint-disable */ 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   onMove: (e: MouseEvent, drag: Position.Drag) => {
     /* Do nothing. */
   },
-  /* eslint-disable */ 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   onStop: (e: MouseEvent, drag: Position.Drag) => {
     /* Do nothing. */
   },
-  /* eslint-disable */ 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   onMouseDown: (e: MouseEvent) => {
     /* Do nothing. */
   },
@@ -141,11 +141,7 @@ const Component: React.FunctionComponent<Props.Wrapper> = (
     setSlack({ x: 0, y: 0 });
   };
 
-  const {
-    className,
-    style,
-    ...rest
-  } = props.children.props;
+  const { className, style, ...rest } = props.children.props;
 
   return (
     <Draggable.Component

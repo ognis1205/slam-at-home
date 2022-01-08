@@ -23,7 +23,7 @@ import styles from '../../assets/styles/components/collapse.module.scss';
 
 /** Default properties. */
 const DEFAULT_PROPS = {
-  /* eslint-disable */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   onChange: (activeKey: string) => {
     /* Do nothing. */
   },

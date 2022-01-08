@@ -78,6 +78,7 @@ const useCue = (status: Status, action: Action): [Cue, () => void] => {
     () => () => {
       cancelFrame();
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     []
   );
 
@@ -116,6 +117,7 @@ const useEventListener = (
     () => () => {
       remove(target.current);
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     []
   );
 
@@ -242,6 +244,7 @@ export const useStatus = (
       default:
         return {};
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [status]);
 
   /** Sets the motion cue and its starter function. */
@@ -309,12 +312,14 @@ export const useStatus = (
       (status === Status.Exit && !exit)
     )
       setStatus(Status.None);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [appear, enter, exit]);
 
   /** Triggers `onVisibleChanged`. */
   React.useEffect(() => {
     if (asyncVisible !== undefined && status === Status.None)
       onVisibleChanged?.(asyncVisible);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [asyncVisible, status]);
 
   let mergedStyle = style;

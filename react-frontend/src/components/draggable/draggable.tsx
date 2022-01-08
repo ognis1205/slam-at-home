@@ -133,6 +133,7 @@ export const Component = React.forwardRef<unknown, Props.Draggable>(
     const setRef = React.useCallback((element: unknown) => {
       node.current = element;
       Ref.fill(ref, element);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     /** `componentDidMount` */

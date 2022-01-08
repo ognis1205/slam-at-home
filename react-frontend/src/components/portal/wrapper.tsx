@@ -105,17 +105,17 @@ export const Component: React.FunctionComponent<Props.Wrapper> = (
       scrollLocker.current?.relock({
         container: getContainer(props) as HTMLElement,
       });
-  }, [props.visible]);
+  }, [props]);
 
   /** Returns `true` if container has changed. */
-  const isContainerDifferent = (): boolean => {
+  const isContainerDifferent = React.useCallback((): boolean => {
     const isFunction =
       typeof props.container === 'function' &&
       typeof prevContainer === 'function';
     return isFunction
       ? props.container.toString() !== prevContainer.toString()
       : props.container !== prevContainer;
-  };
+  }, [props, prevContainer]);
 
   /** Updates open count. */
   const updateOpenCount = React.useCallback((): void => {
@@ -124,7 +124,7 @@ export const Component: React.FunctionComponent<Props.Wrapper> = (
       else openCount = openCount ? openCount - 1 : openCount;
     }
     if (isContainerDifferent()) removeContainer();
-  }, [props.visible, props.container]);
+  }, [props, isContainerDifferent]);
 
   /** Sets a wrapper class name. */
   const setClassName = (): void => {

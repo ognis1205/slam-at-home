@@ -123,14 +123,14 @@ export const Component: React.FunctionComponent<Props.Content> = ({
   wrapperStyle,
   autoFocus,
   container,
-  /* eslint-disable */ 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   getOpenCount,
   scrollLocker,
-  /* eslint-disable */ 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   switchScrollingEffect,
-  /* eslint-disable */ 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   visible,
-  /* eslint-disable */ 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   afterClose,
   ...divAttrs
 }: Props.Content): React.ReactElement => {
@@ -177,12 +177,14 @@ export const Component: React.FunctionComponent<Props.Content> = ({
   React.useEffect(() => {
     init();
     forceUpdate();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [drawPane]);
 
   /** `getDerivedStateFromProps` */
   React.useEffect(() => {
     content.current = null;
     forceUpdate();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [placement]);
 
   /** `componentDidMount` */

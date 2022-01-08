@@ -125,7 +125,7 @@ const SLAM: React.FC<NextApp.AppProps> = ({}) => {
         </ul>
       </Pane.Right>
       <Drawer.Component width="30vh" drawPane={null}>
-        <Image src="/images/logo.png" width="128" height="64" />
+        <Image src="/images/logo.png" alt="SLAM@Home" width="128" height="64" />
         <Collapse.Wrapper
           accordion={accordion}
           onChange={handleChange}
