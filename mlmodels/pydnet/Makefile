@@ -65,7 +65,7 @@ kitti360: requirements
 
 ## Generate ground truth depth maps of KITTI-360
 groundtruth: install
-	python ./src/cli/generate_kitti_ground_truth.py $(ROOT)/data/mount/KITTI-360/data_3d_raw $(ROOT)/data/slices
+	python ./src/cli/generate_kitti_ground_truth.py $(ROOT)/data/mount/KITTI/raw_data $(ROOT)/data/slices
 
 help:
 	@echo "$$(tput bold)Available rules:$$(tput sgr0)"
