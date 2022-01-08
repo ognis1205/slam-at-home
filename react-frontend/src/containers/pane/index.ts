@@ -14,19 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export type {
-  Left as LeftProps,
-  Right as RightProps,
-} from './props';
-
-export {
-  Component as Left,
-} from './left';
-
-export {
-  Component as Right,
-} from './right';
-
-export {
-  WithDefaultComponent as Divider,
-} from './divider';
+export type { Left as LeftProps, Right as RightProps } from './props';
+export { Component as Left } from './left';
+export { Component as Right } from './right';
+export { WithDefaultComponent as Divider } from './divider';
