@@ -34,10 +34,10 @@ class KITTI(object):
         self.batch = iterator.get_next()
 
     def _imread(self, filename: str) -> np.ndarray:
-        """Read jpeg file from file system.
+        """Read png file from file system.
         """
-        img = tf1.image.decode_jpeg(
-            tf1.io.read_file(str(self.path.resolve() / f"{filename}.jpg")),
+        img = tf1.image.decode_png(
+            tf1.io.read_file(str(self.path.resolve() / f"{filename}.png")),
             channels=3)
         img = tf1.cast(img, tf1.float32)
         return img

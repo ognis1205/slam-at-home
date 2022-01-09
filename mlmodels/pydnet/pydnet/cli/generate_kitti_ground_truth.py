@@ -20,14 +20,15 @@ def generate_kitti_ground_truth(path_to_kitti, path_to_split):
     path_to_split = Path(path_to_split)
     ground = []
     for line in tqdm(readlines(path_to_split / "test_files.txt")):
-        date, frame = line.split()
-        frame = int(frame)
-        calibration = path_to_kitti / date.split("/")[0]
+        date, drive_id, image_id, _, frame_id = line.split("/")
+        frame_id = int(frame_id)
+        calibration = path_to_kitti / date
         velodyne = path_to_kitti\
             / date\
+            / drive_id\
             / "velodyne_points"\
             / "data"\
-            / "{:010d}.bin".format(frame)
+            / "{:010d}.bin".format(frame_id)
         ground.append(
             generate_depth_map(
                 calibration,
