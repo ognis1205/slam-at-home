@@ -17,18 +17,15 @@ Installation
  $ make pretrained
 ```
 
- - If you want to test the model on the KITTI dataset, you can download it by running the following command:
+ - If you want to test the model on the KITTI dataset, you can download it by running the following command.
+   **This operation may take a long time, say, hours and eats up your storage (184 GB).**:
 
 ```bash
  $ make kitti
  $ make groundtruth
 ```
 
-**This operation may take a long time, say, hours and eats up your storage (184 GB).**
-
-
-some useful utility commands are installed
-along with the package. [This notebook](./notebook/large_file_test.ipynb) illustrates how to use them.
+[This notebook](./notebook/large_file_test.ipynb) illustrates how to use them.
 
 Export Model
 ------------
