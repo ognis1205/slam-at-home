@@ -1,17 +1,31 @@
 pydnet
 ==============================
 
-PydNet: Single inference using TensorFlow 1.15 and python 3.x.
+PydNet: Single inference using TensorFlow 2.7.0 and python 3.x.
 
 Installation
 ------------
-You can install *pydnet* with *pip*, run the following command in the project root directory:
+ - You can install *pydnet* with *pip*, run the following command in the project root directory:
 
 ```bash
  $ make install
 ```
 
-If you want to test the solution on large files, some useful utility commands are installed
+ - If you want to use the official pretrained model, you can download it by running the following command:
+
+```bash
+ $ make pretrained
+```
+
+ - If you want to test the solution on the KITTI dataset, you can download it by running the following command:
+
+```bash
+ $ make kitti
+ $ make groundtruth
+```
+
+
+some useful utility commands are installed
 along with the package. [This notebook](./notebook/large_file_test.ipynb) illustrates how to use them.
 
 Export Model
