@@ -2,8 +2,7 @@
 """
 
 import tensorflow.compat.v1 as tf1
-import tensorflow as tf2
-from functions import leaky_conv2d, bilinear_upsampling_by_convolution
+from .functions import leaky_conv2d, bilinear_upsampling_by_convolution
 
 
 class Pydnet(object):
@@ -89,43 +88,43 @@ class Pydnet(object):
         """Creates PyDNet decoder.
         """
         with tf1.variable_scope("decoder"):
-            with tf1.variable_scope("L6") as scope:
-                with tf1.variable_scope("estimator") as scope:
+            with tf1.variable_scope("L6"):
+                with tf1.variable_scope("estimator"):
                     conv6 = self.build_estimator(feat[6])
-                    pred6 = self.get_disp(conv6)
-                with tf1.variable_scope("upsampler") as scope:
+                    # pred6 = self.get_disp(conv6)
+                with tf1.variable_scope("upsampler"):
                     upconv6 = bilinear_upsampling_by_convolution(conv6)
 
-            with tf1.variable_scope("L5") as scope:
-                with tf1.variable_scope("estimator") as scope:
+            with tf1.variable_scope("L5"):
+                with tf1.variable_scope("estimator"):
                     conv5 = self.build_estimator(feat[5], upconv6)
-                    pred5 = self.get_disp(conv5)
-                with tf1.variable_scope("upsampler") as scope:
+                    # pred5 = self.get_disp(conv5)
+                with tf1.variable_scope("upsampler"):
                     upconv5 = bilinear_upsampling_by_convolution(conv5)
 
-            with tf1.variable_scope("L4") as scope:
-                with tf1.variable_scope("estimator") as scope:
+            with tf1.variable_scope("L4"):
+                with tf1.variable_scope("estimator"):
                     conv4 = self.build_estimator(feat[4], upconv5)
-                    pred4 = self.get_disp(conv4)
-                with tf1.variable_scope("upsampler") as scope:
+                    # pred4 = self.get_disp(conv4)
+                with tf1.variable_scope("upsampler"):
                     upconv4 = bilinear_upsampling_by_convolution(conv4)
 
-            with tf1.variable_scope("L3") as scope:
-                with tf1.variable_scope("estimator") as scope:
+            with tf1.variable_scope("L3"):
+                with tf1.variable_scope("estimator"):
                     conv3 = self.build_estimator(feat[3], upconv4)
                     pred3 = self.get_disp(conv3)
-                with tf1.variable_scope("upsampler") as scope:
+                with tf1.variable_scope("upsampler"):
                     upconv3 = bilinear_upsampling_by_convolution(conv3)
 
-            with tf1.variable_scope("L2") as scope:
-                with tf1.variable_scope("estimator") as scope:
+            with tf1.variable_scope("L2"):
+                with tf1.variable_scope("estimator"):
                     conv2 = self.build_estimator(feat[2], upconv3)
                     pred2 = self.get_disp(conv2)
-                with tf1.variable_scope("upsampler") as scope:
+                with tf1.variable_scope("upsampler"):
                     upconv2 = bilinear_upsampling_by_convolution(conv2)
 
-            with tf1.variable_scope("L1") as scope:
-                with tf1.variable_scope("estimator") as scope:
+            with tf1.variable_scope("L1"):
+                with tf1.variable_scope("estimator"):
                     conv1 = self.build_estimator(feat[1], upconv2)
                     pred1 = self.get_disp(conv1)
 
@@ -154,12 +153,32 @@ class Pydnet(object):
                 disp2 = tf1.concat([feat, upsampled_disp], -1)
             else:
                 disp2 = feat
-            with tf1.variable_scope("disp-3") as scope:
-                disp3 = leaky_conv2d(disp2, [3, 3, disp2.shape[3], 96], [96], 1, True)
-            with tf1.variable_scope("disp-4") as scope:
-                disp4 = leaky_conv2d(disp3, [3, 3, disp3.shape[3], 64], [64], 1, True)
-            with tf1.variable_scope("disp-5") as scope:
-                disp5 = leaky_conv2d(disp4, [3, 3, disp4.shape[3], 32], [32], 1, True)
-            with tf1.variable_scope("disp-6") as scope:
-                disp6 = leaky_conv2d(disp5, [3, 3, disp5.shape[3], 8], [8], 1, True)
+            with tf1.variable_scope("disp-3"):
+                disp3 = leaky_conv2d(
+                    disp2,
+                    [3, 3, disp2.shape[3], 96],
+                    [96],
+                    1,
+                    True)
+            with tf1.variable_scope("disp-4"):
+                disp4 = leaky_conv2d(
+                    disp3,
+                    [3, 3, disp3.shape[3], 64],
+                    [64],
+                    1,
+                    True)
+            with tf1.variable_scope("disp-5"):
+                disp5 = leaky_conv2d(
+                    disp4,
+                    [3, 3, disp4.shape[3], 32],
+                    [32],
+                    1,
+                    True)
+            with tf1.variable_scope("disp-6"):
+                disp6 = leaky_conv2d(
+                    disp5,
+                    [3, 3, disp5.shape[3], 8],
+                    [8],
+                    1,
+                    True)
             return disp6

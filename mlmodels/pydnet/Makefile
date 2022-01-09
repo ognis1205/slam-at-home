@@ -18,7 +18,7 @@ clean:
 
 ## Lint using flake8
 lint:
-	@flake8 src
+	@flake8 pydnet
 
 ## Install PyDNet package
 install: requirements
@@ -27,7 +27,7 @@ install: requirements
 ## Download pretrained PyDNet
 pretrained: requirements
 	@echo "Downloading pretrained model"
-	@python ./src/cli/download_google_drive.py 1Zu41tHv89q_F7N5KFigzyUY5vAc8ufQL $(ROOT)/data/checkpoint/pydnet
+	@python ./bin/download_google_drive.py 1Zu41tHv89q_F7N5KFigzyUY5vAc8ufQL $(ROOT)/data/checkpoint/pydnet
 	@echo "Downloaded pretrained model: "$(ROOT)/data/checkpoint/pydnet
 
 ## Download KITTI dataset
@@ -40,7 +40,7 @@ kitti: requirements
 			FILE=$${ENTRY};\
 		fi;\
 		echo "Downloading: "$${FILE};\
-		python ./src/cli/download_aws_s3.py ${S3_REGION} avg-kitti/${KITTI}/$${FILE} $(ROOT)/data/mount/KITTI/${KITTI}/;\
+		python ./bin/download_aws_s3.py ${S3_REGION} avg-kitti/${KITTI}/$${FILE} $(ROOT)/data/mount/KITTI/${KITTI}/;\
 	done < ./data/kitti/files.txt
 	@echo "Downloaded KITTI: "$(ROOT)/data/mount/KITTI/${KITTI}
 
@@ -52,16 +52,16 @@ kitti360: requirements
 			FILE=$${ENTRY}'/'$${ENTRY}'_sync.zip';\
 			FILE=$${ENTRY}_velodyne.zip;\
 			echo "Downloading: "$${FILE};\
-			python ./src/cli/download_aws_s3.py ${S3_REGION} avg-projects/${KITTI_360_3D}/$${FILE} $(ROOT)/data/mount/${KITTI_360_3D}/;\
+			python ./bin/download_aws_s3.py ${S3_REGION} avg-projects/${KITTI_360_3D}/$${FILE} $(ROOT)/data/mount/${KITTI_360_3D}/;\
 			for CAMERA in 00 01; do\
 				FILE=$${ENTRY}_image_$${CAMERA}.zip;\
 				echo "Downloading: "$${FILE};\
-				python ./src/cli/download_aws_s3.py ${S3_REGION} avg-projects/${KITTI_360_2D}/$${FILE} $(ROOT)/data/mount/${KITTI_360_2D}/;\
+				python ./bin/download_aws_s3.py ${S3_REGION} avg-projects/${KITTI_360_2D}/$${FILE} $(ROOT)/data/mount/${KITTI_360_2D}/;\
 			done;\
 		else\
 			FILE=$${ENTRY};\
 			echo "Downloading: "$${FILE};\
-			python ./src/cli/download_aws_s3.py ${S3_REGION} avg-projects/${KITTI_360_3D}/$${FILE} $(ROOT)/data/mount/${KITTI_360_3D}/;\
+			python ./bin/download_aws_s3.py ${S3_REGION} avg-projects/${KITTI_360_3D}/$${FILE} $(ROOT)/data/mount/${KITTI_360_3D}/;\
 		fi;\
 	done < ./data/kitti/files_360.txt
 	@echo "Downloaded KITTI-360: "$(ROOT)/data/mount/${KITTI_360_2D}
@@ -70,7 +70,7 @@ kitti360: requirements
 ## Generate ground truth depth maps of KITTI-360
 groundtruth: install
 	@echo "Generating ground truht of KITTI dataset"
-	@python ./src/cli/generate_kitti_ground_truth.py $(ROOT)/data/mount/KITTI/raw_data $(ROOT)/data/slices
+	@pydnet_kitti_ground_truth $(ROOT)/data/mount/KITTI/raw_data $(ROOT)/data/slices
 	@echo "Generated ground truth of KITTI: "$(ROOT)/data/slices
 
 help:

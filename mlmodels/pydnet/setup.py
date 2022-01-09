@@ -14,4 +14,9 @@ setup(
     author="Shingo OKAWA",
     python_requires=">=3.8",
     install_requires=required,
+    entry_points={
+        "console_scripts": [
+            "pydnet_kitti_ground_truth = pydnet.cli.generate_kitti_ground_truth:main",
+        ],
+    },
     packages=find_packages(exclude=["test", "test.*"]))

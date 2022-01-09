@@ -18,7 +18,7 @@ Installation
 ```
 
  - If you want to test the model on the KITTI dataset, you can download it by running the following command.
-   **This operation may take a long time, say, hours and eats up your storage (184 GB).**:
+   **This operation may take a long time, say, hours and eats up your storage (184 GB)**:
 
 ```bash
  $ make kitti

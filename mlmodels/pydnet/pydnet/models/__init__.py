@@ -1,7 +1,7 @@
 """ML Models.
 """
 
-from src.models.pydnet import Pydnet
+from .pydnet import Pydnet
 
 
 __all__ = [

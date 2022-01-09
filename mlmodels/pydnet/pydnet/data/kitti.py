@@ -2,9 +2,7 @@
 """
 
 import tensorflow.compat.v1 as tf1
-import tensorflow as tf2
 import numpy as np
-import numpy.typing as npt
 
 
 class KITTI(object):

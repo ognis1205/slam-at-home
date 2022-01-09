@@ -4,11 +4,10 @@
 import sys
 import fire
 import numpy as np
-import PIL.Image as pil
 from traceback import format_exc
 from pathlib import Path
 from tqdm import tqdm
-from src.data import generate_depth_map
+from pydnet.data import generate_depth_map
 
 
 def generate_kitti_ground_truth(path_to_kitti, path_to_split):
@@ -24,14 +23,20 @@ def generate_kitti_ground_truth(path_to_kitti, path_to_split):
         date, frame = line.split()
         frame = int(frame)
         calibration = path_to_kitti / date.split("/")[0]
-        velodyne = path_to_kitti / date / "velodyne_points" / "data" / "{:010d}.bin".format(frame)
+        velodyne = path_to_kitti\
+            / date\
+            / "velodyne_points"\
+            / "data"\
+            / "{:010d}.bin".format(frame)
         ground.append(
             generate_depth_map(
                 calibration,
                 velodyne,
                 2,
                 True).astype(np.float32))
-    np.savez_compressed(path_to_split / "depths.npz", data=np.array(ground, dtype=object))
+    np.savez_compressed(
+        path_to_split / "depths.npz",
+        data=np.array(ground, dtype=object))
 
 
 def readlines(path):
@@ -44,7 +49,7 @@ def readlines(path):
     return lines
 
 
-if __name__ == "__main__":
+def main():
     """A CLI entry point.
     """
     try:

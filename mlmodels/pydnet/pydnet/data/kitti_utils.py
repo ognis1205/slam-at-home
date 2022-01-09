@@ -1,12 +1,11 @@
 """KITTI-360 utility functions.
 """
 
-import os
-from pathlib import Path
 import numpy as np
 import numpy.typing as npt
+from pathlib import Path
 from collections import Counter
-from typing import IO, Union
+from typing import Union
 
 
 def read_velodyne_points(path: Union[str, Path]) -> np.ndarray:
@@ -53,8 +52,10 @@ def generate_depth_map(
     # Read calibration files.
     cam2cam = read_calibration(calibration / "calib_cam_to_cam.txt")
     vel2cam = read_calibration(calibration / "calib_velo_to_cam.txt")
-    vel2cam = np.hstack((vel2cam['R'].reshape(3, 3), vel2cam['T'][..., np.newaxis]))
-    vel2cam = np.vstack((vel2cam, np.array([0, 0, 0, 1.0])))
+    vel2cam = np.hstack(
+        (vel2cam['R'].reshape(3, 3), vel2cam['T'][..., np.newaxis]))
+    vel2cam = np.vstack(
+        (vel2cam, np.array([0, 0, 0, 1.0])))
 
     # Get image shape.
     im_shape = cam2cam["S_rect_02"][::-1].astype(np.int32)
@@ -72,7 +73,8 @@ def generate_depth_map(
 
     # Project the points to the camera.
     velo_pts_im = np.dot(P_vel2im, velo.T).T
-    velo_pts_im[:, :2] = velo_pts_im[:, :2] / velo_pts_im[:, 2][..., np.newaxis]
+    velo_pts_im[:, :2] =\
+        velo_pts_im[:, :2] / velo_pts_im[:, 2][..., np.newaxis]
     if vel_depth:
         velo_pts_im[:, 2] = velo[:, 0]
 
@@ -81,12 +83,18 @@ def generate_depth_map(
     velo_pts_im[:, 0] = np.round(velo_pts_im[:, 0]) - 1
     velo_pts_im[:, 1] = np.round(velo_pts_im[:, 1]) - 1
     val_inds = (velo_pts_im[:, 0] >= 0) & (velo_pts_im[:, 1] >= 0)
-    val_inds = val_inds & (velo_pts_im[:, 0] < im_shape[1]) & (velo_pts_im[:, 1] < im_shape[0])
+    val_inds =\
+        val_inds\
+        & (velo_pts_im[:, 0] < im_shape[1])\
+        & (velo_pts_im[:, 1] < im_shape[0])
     velo_pts_im = velo_pts_im[val_inds, :]
 
     # Project to image.
     depth = np.zeros((im_shape[:2]))
-    depth[velo_pts_im[:, 1].astype(np.int), velo_pts_im[:, 0].astype(np.int)] = velo_pts_im[:, 2]
+    depth[
+        velo_pts_im[:, 1].astype(np.int),
+        velo_pts_im[:, 0].astype(np.int)
+    ] = velo_pts_im[:, 2]
 
     # Find the duplicate points and choose the closest depth.
     inds = sub2ind(depth.shape, velo_pts_im[:, 1], velo_pts_im[:, 0])

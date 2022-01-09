@@ -104,7 +104,7 @@ def leaky_dilated_conv2d(
         biases = tf1.get_variable(
             "biases",
             bias_shape,
-            initializer=tf1.truncated_normal_initializer()
+            initializer=tf1.truncated_normal_initializer())
         output = tf1.nn.atrous_conv2d(
             input,
             weights,
