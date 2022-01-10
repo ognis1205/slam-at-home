@@ -3,6 +3,10 @@ pydnet
 
 PydNet: Single inference using TensorFlow 2.7.0 and python 3.x.
 
+* [Real-time single image depth perception in the wild with handheld devices, Arxiv](https://arxiv.org/pdf/2006.05724.pdf)
+* [PyDNet paper](https://arxiv.org/pdf/1806.11430.pdf)
+* [PyDNet code](https://github.com/mattpoggi/pydnet)
+
 Installation
 ------------
  - You can install *pydnet* with *pip*, run the following command in the project root directory:
@@ -25,7 +29,7 @@ Installation
  $ make groundtruth
 ```
 
-[This notebook](./notebook/large_file_test.ipynb) illustrates how to use them.
+ - After installing the model and downloading the dataset, you can run evaluation scripts like [this notebook](./notebooks/Test%20KITTI%20Dataset.ipynb).
 
 Export Model
 ------------
