@@ -37,7 +37,8 @@ class KITTI(object):
         """Read png file from file system.
         """
         image = tf1.image.decode_png(
-            tf1.io.read_file(str(self.path.resolve() / f"{filename}.png")),
+            tf1.io.read_file(
+                tf1.strings.join([str(self.path.resolve()), "/", filename, ".png"])),
             channels=3)
         image = tf1.cast(image, tf1.float32)
         return image
