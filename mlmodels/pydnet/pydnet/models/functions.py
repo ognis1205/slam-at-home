@@ -7,14 +7,12 @@ import numpy as np
 import numpy.typing as npt
 
 
-@tf2.function
 def leaky_relu(x: npt.ArrayLike, alpha: float = 0.2) -> np.ndarray:
-    """ Default valued `tf.nn.leaky_relu'.
+    """Default valued `tf.nn.leaky_relu'.
     """
     return tf1.nn.leaky_relu(x, alpha=alpha)
 
 
-@tf2.function
 def leaky_conv2d(
     input: tf1.Tensor,
     kernel_shape: npt.ArrayLike,
@@ -24,7 +22,7 @@ def leaky_conv2d(
     padding: str = "SAME",
     dil: int = 1
 ) -> np.ndarray:
-    """ 2-D convolution with a Leaky ReLU activation function.
+    """2-D convolution with a Leaky ReLU activation function.
     """
     weights = tf1.get_variable(
         "weights",
@@ -49,7 +47,6 @@ def leaky_conv2d(
     return output
 
 
-@tf2.function
 def leaky_deconv2d(
     input: tf1.Tensor,
     kernel_shape: npt.ArrayLike,
@@ -59,7 +56,7 @@ def leaky_deconv2d(
     with_relu: bool = True,
     padding: str = "SAME"
 ) -> np.ndarray:
-    """ 2-D deconvolution with a Leaky ReLU activation function.
+    """2-D deconvolution with a Leaky ReLU activation function.
     """
     weights = tf1.get_variable(
         "weights",
@@ -84,7 +81,6 @@ def leaky_deconv2d(
     return output
 
 
-@tf2.function
 def leaky_dilated_conv2d(
     input: tf1.Tensor,
     kernel_shape: npt.ArrayLike,
@@ -94,7 +90,7 @@ def leaky_dilated_conv2d(
     with_relu: bool = True,
     padding: str = "SAME"
 ) -> np.ndarray:
-    """ 2-D dilated convolution with a Leaky ReLU activation function.
+    """2-D dilated convolution with a Leaky ReLU activation function.
     """
     with tf1.variable_scope(scope_name):
         weights = tf1.get_variable(
@@ -117,7 +113,6 @@ def leaky_dilated_conv2d(
         return output
 
 
-@tf2.function
 def bilinear_upsampling_by_deconvolution(input: tf1.Tensor) -> np.ndarray:
     """ Bilinear upsampling with deconvolution.
     """
@@ -133,7 +128,6 @@ def bilinear_upsampling_by_deconvolution(input: tf1.Tensor) -> np.ndarray:
         True)
 
 
-@tf2.function
 def bilinear_upsampling_by_convolution(input: tf1.Tensor) -> np.ndarray:
     """ Bilinear upsampling with convolution.
     """

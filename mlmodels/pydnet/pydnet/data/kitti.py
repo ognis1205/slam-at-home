@@ -29,27 +29,27 @@ class KITTI(object):
             num_parallel_calls=self.workers)
         dataset = dataset.batch(1)
         dataset = dataset.repeat()
-        iterator = dataset.make_initializable_iterator()
+        iterator = tf1.data.make_initializable_iterator(dataset)
         self.initializer = iterator.initializer
         self.batch = iterator.get_next()
 
     def _imread(self, filename: str) -> np.ndarray:
         """Read png file from file system.
         """
-        img = tf1.image.decode_png(
+        image = tf1.image.decode_png(
             tf1.io.read_file(str(self.path.resolve() / f"{filename}.png")),
             channels=3)
-        img = tf1.cast(img, tf1.float32)
-        return img
+        image = tf1.cast(image, tf1.float32)
+        return image
 
     def _reshape(self, filename: str) -> np.ndarray:
         """Prepare single image at testing time.
         """
-        img = self._imread(filename)
-        img = tf1.image.resize_images(
-            img,
+        image = self._imread(filename)
+        image = tf1.image.resize_images(
+            image,
             [self.h, self.w],
             tf1.image.ResizeMethod.AREA)
-        img.set_shape([self.h, self.w, 3])
-        img = img / 255.0
-        return img
+        image.set_shape([self.h, self.w, 3])
+        image = image / 255.0
+        return image
