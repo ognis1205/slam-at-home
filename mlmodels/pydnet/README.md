@@ -29,7 +29,7 @@ Installation
  $ make groundtruth
 ```
 
- - After installing the model and downloading the dataset, you can run evaluation scripts like [this notebook](./notebooks/Test%20KITTI%20Dataset.ipynb).
+ - After installing the model and downloading the dataset, you can run evaluation scripts like [this notebook](./notebooks/Test%20KITTI%20Dataset.ipynb) and [this notebook](./notebooks/Test%20Pexel%20Images.ipynb).
 
 Export Model
 ------------
