@@ -1,7 +1,7 @@
 pydnet
 ==============================
 
-PydNet: Single inference using TensorFlow 2.7.0 and python 3.x.
+PydNet: Single inference using TensorFlow 1.15.0 and python 3.7.
 
 * [Real-time single image depth perception in the wild with handheld devices, Arxiv](https://arxiv.org/pdf/2006.05724.pdf)
 * [PyDNet paper](https://arxiv.org/pdf/1806.11430.pdf)
@@ -33,6 +33,11 @@ Installation
 
 Export Model
 ------------
+ - To export the PyDnet model into CoreML, run the following command in the project root directory:
+ 
+ ```bash
+ $ make mlmodel
+```
 
 Project Organization
 ------------
