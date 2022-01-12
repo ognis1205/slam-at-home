@@ -2,12 +2,12 @@
 """
 
 import tensorflow.compat.v1 as tf1
-import tensorflow as tf2
+#import tensorflow as tf2
 import numpy as np
-import numpy.typing as npt
+from typing import Sequence
 
 
-def leaky_relu(x: npt.ArrayLike, alpha: float = 0.2) -> np.ndarray:
+def leaky_relu(x: Sequence, alpha: float = 0.2) -> np.ndarray:
     """Default valued `tf.nn.leaky_relu'.
     """
     return tf1.nn.leaky_relu(x, alpha=alpha)
@@ -15,8 +15,8 @@ def leaky_relu(x: npt.ArrayLike, alpha: float = 0.2) -> np.ndarray:
 
 def leaky_conv2d(
     input: tf1.Tensor,
-    kernel_shape: npt.ArrayLike,
-    bias_shape: npt.ArrayLike,
+    kernel_shape: Sequence,
+    bias_shape: Sequence,
     strides: int = 1,
     with_relu: bool = True,
     padding: str = "SAME",
@@ -27,12 +27,14 @@ def leaky_conv2d(
     weights = tf1.get_variable(
         "weights",
         kernel_shape,
-        initializer=tf2.initializers.GlorotUniform(),
+#        initializer=tf2.initializers.GlorotUniform(),
+        initializer=tf1.initializers.glorot_normal(),
         dtype=tf1.float32)
     biases = tf1.get_variable(
         "biases",
         bias_shape,
-        initializer=tf1.truncated_normal_initializer(),
+#        initializer=tf1.truncated_normal_initializer(),
+        initializer=tf1.initializers.truncated_normal(),
         dtype=tf1.float32)
     output = tf1.nn.conv2d(
         input,
@@ -49,9 +51,9 @@ def leaky_conv2d(
 
 def leaky_deconv2d(
     input: tf1.Tensor,
-    kernel_shape: npt.ArrayLike,
-    bias_shape: npt.ArrayLike,
-    output_shape: npt.ArrayLike,
+    kernel_shape: Sequence,
+    bias_shape: Sequence,
+    output_shape: Sequence,
     strides: int = 1,
     with_relu: bool = True,
     padding: str = "SAME"
@@ -61,12 +63,14 @@ def leaky_deconv2d(
     weights = tf1.get_variable(
         "weights",
         kernel_shape,
-        initializer=tf2.keras.initializers.GlorotNormal(),
+#        initializer=tf2.keras.initializers.GlorotNormal(),
+        initializer=tf1.initializers.glorot_normal(),
         dtype=tf1.float32)
     biases = tf1.get_variable(
         "biases",
         bias_shape,
-        initializer=tf1.truncated_normal_initializer(),
+#        initializer=tf1.truncated_normal_initializer(),
+        initializer=tf1.initializers.truncated_normal(),
         dtype=tf1.float32)
     output = tf1.nn.conv2d_transpose(
         input,
@@ -83,8 +87,8 @@ def leaky_deconv2d(
 
 def leaky_dilated_conv2d(
     input: tf1.Tensor,
-    kernel_shape: npt.ArrayLike,
-    bias_shape: npt.ArrayLike,
+    kernel_shape: Sequence,
+    bias_shape: Sequence,
     scope_name: str,
     rate: int = 1,
     with_relu: bool = True,
@@ -96,11 +100,13 @@ def leaky_dilated_conv2d(
         weights = tf1.get_variable(
             "weights",
             kernel_shape,
-            initializer=tf2.keras.initializers.GlorotNormal())
+#            initializer=tf2.keras.initializers.GlorotNormal())
+            initializer=tf1.initializers.glorot_normal())
         biases = tf1.get_variable(
             "biases",
             bias_shape,
-            initializer=tf1.truncated_normal_initializer())
+#            initializer=tf1.truncated_normal_initializer())
+            initializer=tf1.initializers.truncated_normal())
         output = tf1.nn.atrous_conv2d(
             input,
             weights,
