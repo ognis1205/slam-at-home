@@ -9,7 +9,7 @@ with open('requirements.txt') as f:
 
 setup(
     name="pydnet",
-    version="1.0.0",
+    version="0.1.0",
     description="PydNet: Single inference using TensorFlow-1.15 and python 3.7.",
     author="Shingo OKAWA",
     python_requires="==3.7.*",
