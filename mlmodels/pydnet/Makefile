@@ -77,6 +77,7 @@ groundtruth: install
 mlmodel: install pretrained
 	@echo "Exporting PyDnet MLModel."
 	@pydnet_mlmodel pydnet 384 640 $(ROOT)/data/checkpoint/pydnet/pydnet $(ROOT)/models
+	@echo "Exported MLModel: "$(ROOT)/models
 
 help:
 	@echo "$$(tput bold)Available rules:$$(tput sgr0)"
