@@ -1,8 +1,7 @@
 """ Tensorflow Functions.
 """
 
-import tensorflow.compat.v1 as tf1
-#import tensorflow as tf2
+import tensorflow as tf
 import numpy as np
 from typing import Sequence
 
@@ -10,11 +9,11 @@ from typing import Sequence
 def leaky_relu(x: Sequence, alpha: float = 0.2) -> np.ndarray:
     """Default valued `tf.nn.leaky_relu'.
     """
-    return tf1.nn.leaky_relu(x, alpha=alpha)
+    return tf.nn.leaky_relu(x, alpha=alpha)
 
 
 def leaky_conv2d(
-    input: tf1.Tensor,
+    input: tf.Tensor,
     kernel_shape: Sequence,
     bias_shape: Sequence,
     strides: int = 1,
@@ -24,25 +23,23 @@ def leaky_conv2d(
 ) -> np.ndarray:
     """2-D convolution with a Leaky ReLU activation function.
     """
-    weights = tf1.get_variable(
+    weights = tf.get_variable(
         "weights",
         kernel_shape,
-#        initializer=tf2.initializers.GlorotUniform(),
-        initializer=tf1.initializers.glorot_normal(),
-        dtype=tf1.float32)
-    biases = tf1.get_variable(
+        initializer=tf.contrib.layers.xavier_initializer(),
+        dtype=tf.float32)
+    biases = tf.get_variable(
         "biases",
         bias_shape,
-#        initializer=tf1.truncated_normal_initializer(),
-        initializer=tf1.initializers.truncated_normal(),
-        dtype=tf1.float32)
-    output = tf1.nn.conv2d(
+        initializer=tf.truncated_normal_initializer(),
+        dtype=tf.float32)
+    output = tf.nn.conv2d(
         input,
         weights,
         strides=[1, strides, strides, 1],
         padding=padding,
         dilations=[1, dil, dil, 1])
-    output = tf1.nn.bias_add(output, biases)
+    output = tf.nn.bias_add(output, biases)
     if not with_relu:
         return output
     output = leaky_relu(output, 0.2)
@@ -50,7 +47,7 @@ def leaky_conv2d(
 
 
 def leaky_deconv2d(
-    input: tf1.Tensor,
+    input: tf.Tensor,
     kernel_shape: Sequence,
     bias_shape: Sequence,
     output_shape: Sequence,
@@ -60,25 +57,23 @@ def leaky_deconv2d(
 ) -> np.ndarray:
     """2-D deconvolution with a Leaky ReLU activation function.
     """
-    weights = tf1.get_variable(
+    weights = tf.get_variable(
         "weights",
         kernel_shape,
-#        initializer=tf2.keras.initializers.GlorotNormal(),
-        initializer=tf1.initializers.glorot_normal(),
-        dtype=tf1.float32)
-    biases = tf1.get_variable(
+        initializer=tf.contrib.layers.xavier_initializer(),
+        dtype=tf.float32)
+    biases = tf.get_variable(
         "biases",
         bias_shape,
-#        initializer=tf1.truncated_normal_initializer(),
-        initializer=tf1.initializers.truncated_normal(),
-        dtype=tf1.float32)
-    output = tf1.nn.conv2d_transpose(
+        initializer=tf.truncated_normal_initializer(),
+        dtype=tf.float32)
+    output = tf.nn.conv2d_transpose(
         input,
         weights,
         output_shape=output_shape,
         strides=[1, strides, strides, 1],
         padding=padding)
-    output = tf1.nn.bias_add(output, biases)
+    output = tf.nn.bias_add(output, biases)
     if not with_relu:
         return output
     output = leaky_relu(output, 0.2)
@@ -86,7 +81,7 @@ def leaky_deconv2d(
 
 
 def leaky_dilated_conv2d(
-    input: tf1.Tensor,
+    input: tf.Tensor,
     kernel_shape: Sequence,
     bias_shape: Sequence,
     scope_name: str,
@@ -96,30 +91,28 @@ def leaky_dilated_conv2d(
 ) -> np.ndarray:
     """2-D dilated convolution with a Leaky ReLU activation function.
     """
-    with tf1.variable_scope(scope_name):
-        weights = tf1.get_variable(
+    with tf.variable_scope(scope_name):
+        weights = tf.get_variable(
             "weights",
             kernel_shape,
-#            initializer=tf2.keras.initializers.GlorotNormal())
-            initializer=tf1.initializers.glorot_normal())
-        biases = tf1.get_variable(
+            initializer=tf.contrib.layers.xavier_initializer())
+        biases = tf.get_variable(
             "biases",
             bias_shape,
-#            initializer=tf1.truncated_normal_initializer())
-            initializer=tf1.initializers.truncated_normal())
-        output = tf1.nn.atrous_conv2d(
+            initializer=tf.truncated_normal_initializer())
+        output = tf.nn.atrous_conv2d(
             input,
             weights,
             rate=rate,
             padding=padding)
-        output = tf1.nn.bias_add(output, biases)
+        output = tf.nn.bias_add(output, biases)
         if not with_relu:
             return output
         output = leaky_relu(output, 0.2)
         return output
 
 
-def bilinear_upsampling_by_deconvolution(input: tf1.Tensor) -> np.ndarray:
+def bilinear_upsampling_by_deconvolution(input: tf.Tensor) -> np.ndarray:
     """ Bilinear upsampling with deconvolution.
     """
     shape = input.get_shape().as_list()
@@ -134,15 +127,15 @@ def bilinear_upsampling_by_deconvolution(input: tf1.Tensor) -> np.ndarray:
         True)
 
 
-def bilinear_upsampling_by_convolution(input: tf1.Tensor) -> np.ndarray:
+def bilinear_upsampling_by_convolution(input: tf.Tensor) -> np.ndarray:
     """ Bilinear upsampling with convolution.
     """
-    with tf1.variable_scope("bilinear_upsampling_by_convolution"):
+    with tf.variable_scope("bilinear_upsampling_by_convolution"):
         shape = input.get_shape().as_list()
         h = shape[1] * 2
         w = shape[2] * 2
         channels = shape[3]
-        output = tf1.image.resize(input, [h, w])
+        output = tf.image.resize(input, [h, w])
         return leaky_conv2d(
             output,
             [2, 2, channels, channels],

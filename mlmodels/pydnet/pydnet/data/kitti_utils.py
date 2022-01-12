@@ -2,10 +2,9 @@
 """
 
 import numpy as np
-import numpy.typing as npt
 from pathlib import Path
 from collections import Counter
-from typing import Union
+from typing import Union, Sequence
 
 
 def read_velodyne_points(path: Union[str, Path]) -> np.ndarray:
@@ -34,7 +33,7 @@ def read_calibration(path: Union[str, Path]) -> object:
     return calibration
 
 
-def sub2ind(shape: npt.ArrayLike, row: int, col: int) -> int:
+def sub2ind(shape: Sequence, row: int, col: int) -> int:
     """Converts row, col matrix subscripts to linear indices.
     """
     m, n = shape

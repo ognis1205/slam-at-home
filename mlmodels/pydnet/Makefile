@@ -1,4 +1,4 @@
-.PHONY: clean groundtruth help install lint requirements pretrained kitti
+.PHONY: clean groundtruth help install kitti lint pretrained requirements
 .DEFAULT_GOAL := help
 ROOT := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 S3_REGION := s3.eu-central-1.amazonaws.com
@@ -72,6 +72,11 @@ groundtruth: install
 	@echo "Generating ground truht of KITTI dataset"
 	@pydnet_kitti_ground_truth $(ROOT)/data/mount/KITTI/raw_data $(ROOT)/data/slices
 	@echo "Generated ground truth of KITTI: "$(ROOT)/data/slices
+
+## Export PyDnet MLModel.
+mlmodel: install pretrained
+	@echo "Exporting PyDnet MLModel."
+	@pydnet_mlmodel pydnet 384 640 $(ROOT)/data/checkpoint/pydnet/pydnet $(ROOT)/models
 
 help:
 	@echo "$$(tput bold)Available rules:$$(tput sgr0)"

@@ -1,6 +1,6 @@
 Pillow==9.0.0
 opencv-python==4.5.5.62
-tensorflow==2.7.0
+tensorflow==1.15.0
 coremltools==5.1.0
 tf2onnx==1.9.3
 onnx==1.10.2
