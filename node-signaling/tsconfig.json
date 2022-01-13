@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "es2020",
     "lib": [
-      "es2020",
+      "es2020"
     ],
     "allowJs": true,
     "skipLibCheck": true,
@@ -13,12 +13,12 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "sourceMap": true,
-    "outDir": "./dist"
+    "outDir": "./dist",
   },
   "include": [
     "**/*.ts",
   ],
   "exclude": [
-    "node_modules"
-  ]
+    "node_modules",
+  ],
 }
