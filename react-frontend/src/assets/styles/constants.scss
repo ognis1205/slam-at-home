@@ -1,12 +1,10 @@
 /**
- * @fileoverview Scss Module for color definitions.
+ * @fileoverview SCSS Module Constants.
  * @copyright Shingo OKAWA 2021
  */
-/** Fonts. */
 $font-size: 14px;
 $font-color-logo: #080d79;
 $font-color-highlight: #1890ff;
-/** Colors. */
 $color-black: #000000;
 $color-white: #ffffff;
 $color-off-white: #F6F9FC;
@@ -16,6 +14,5 @@ $color-grey-dark: #999999;
 $color-background-highlight: #e6f7ff;
 $color-shadow: rgba(0, 0, 0, .15);
 $color-icon: rgba(0,0,0,.65);
-/** Animations. */
 $duration: 0.2s;
 $ease-in-out-circ: cubic-bezier(0.78, 0.14, 0.15, 0.86);

@@ -1,18 +1,6 @@
 /**
  * @fileoverview Defines lagacy React life-cycle method equivalents.
  * @copyright Shingo OKAWA 2021
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
  */
 import * as React from 'react';
 import * as Animation from './animation';
@@ -28,11 +16,7 @@ type UseEffectDeps = UseEffectParams[1];
 // `useEffect` return..
 type UseEffectReturn = ReturnType<typeof React.useEffect>;
 
-/**
- * Deeply compared version of `useMemo`.
- * @param {T} defaultValue the value to be memoized.
- * @returns a memoized version of the value as long as it remains deeply equal.
- */
+/** Deeply compared version of `useMemo`. */
 export const useDeepComparedMemo = <T>(defaultValue?: T): T => {
   const ref = React.useRef<T>(defaultValue);
   const [sig, dispatch] = React.useState<Record<string, unknown>>(
@@ -46,11 +30,7 @@ export const useDeepComparedMemo = <T>(defaultValue?: T): T => {
   return React.useMemo<T>(() => ref.current, [sig]);
 };
 
-/**
- * Deeply compared version of `useEffect`.
- * @param {() => void} callback The callback function.
- * @param {any[]} dependencies The dependencies.
- */
+/** Deeply compared version of `useEffect`. */
 export const useDeepComparedEffect = (
   callback: UseEffectCallback,
   deps: UseEffectDeps
@@ -58,10 +38,7 @@ export const useDeepComparedEffect = (
   // eslint-disable-next-line react-hooks/exhaustive-deps
   React.useEffect(callback, useDeepComparedMemo(deps));
 
-/**
- * An equivalent for the legacy `componentDidMount` life-cycle method.
- * @param {() => void} callback The callback function.
- */
+/** An equivalent for the legacy `componentDidMount` life-cycle method. */
 export const useDidMount = (callback: () => void): void => {
   React.useEffect(() => {
     callback();
@@ -69,16 +46,12 @@ export const useDidMount = (callback: () => void): void => {
   }, []);
 };
 
-/**
- * An equivalent for the legacy `componentDidUpdate` life-cycle method.
- * @param {() => void} callback The callback function.
- * @param {any[]} dependencies The dependencies.
- */
+/** An equivalent for the legacy `componentDidUpdate` life-cycle method. */
 export const useDidUpdate = (
   callback: () => void,
   dependencies?: unknown[]
 ): void => {
-  const hasMounted = React.useRef(false)
+  const hasMounted = React.useRef(false);
   React.useEffect(() => {
     if (hasMounted.current) callback();
     else hasMounted.current = true;
@@ -86,10 +59,7 @@ export const useDidUpdate = (
   }, dependencies);
 };
 
-/**
- * An equivalent for the legacy `componentWillUnmount` life-cycle method.
- * @param {() => void} callback The callback function.
- */
+/** An equivalent for the legacy `componentWillUnmount` life-cycle method. */
 export const useWillUnmount = (callback: () => void): void => {
   React.useEffect(() => {
     return () => {
@@ -99,9 +69,7 @@ export const useWillUnmount = (callback: () => void): void => {
   }, []);
 };
 
-/**
- * An equivalent for the legacy `forceUpdate` life-cycle method.
- */
+/** An equivalent for the legacy `forceUpdate` life-cycle method. */
 export const useForceUpdate = (): (() => void) => {
   const [, dispatch] = React.useState<Record<string, unknown>>(
     Object.create(null)
@@ -112,12 +80,8 @@ export const useForceUpdate = (): (() => void) => {
   return memoizedDispatch;
 };
 
-/**
- * Returns the previous value of a specified variable.
- * @param {T} defaultValue the value to be compared.
- * @returns a previously memoized version of the value..
- */
-export const usePrevious= <T>(defaultValue?: T): T => {
+/** Returns the previous value of a specified variable. */
+export const usePrevious = <T>(defaultValue?: T): T => {
   const ref = React.useRef<T>(null);
   React.useEffect(() => {
     ref.current = defaultValue;
@@ -125,11 +89,7 @@ export const usePrevious= <T>(defaultValue?: T): T => {
   return ref.current;
 };
 
-/**
- * Returns the mount-safe value of a specified variable.
- * @param {T} defaultValue the value to be compared.
- * @returns a mount-safe version of the value.
- */
+/** Returns the mount-safe value of a specified variable. */
 export const useMountedState = <T>(
   defaultValue?: T
 ): [T, (next: T | (() => T)) => void] => {
@@ -147,11 +107,7 @@ export const useMountedState = <T>(
   return [value, setValue];
 };
 
-/**
- * Returns the referrable value of a specified variable.
- * @param {T} defaultValue the default value.
- * @returns a referred state variables.
- */
+/** Returns the referrable value of a specified variable. */
 export const useReferredState = <T>(
   defaultValue: T = undefined
 ): [T, React.MutableRefObject<T>, React.Dispatch<T>] => {
@@ -164,17 +120,12 @@ export const useReferredState = <T>(
   return [state, ref, setReferredState];
 };
 
-/**
- * Returns appropriate `useLayoutEffect` according to the environment.
- */
+/** Returns appropriate `useLayoutEffect` according to the environment. */
 export const useLayoutEffect = DOM.isDefined()
   ? React.useLayoutEffect
   : React.useEffect;
 
-/**
- * Returns the mount-safe frame request/clear functions.
- * @returns a mount-safe frame request/clear functions.
- */
+/** Returns the mount-safe frame request/clear functions. */
 export const useFrame = (): [
   (callback: (info: { isCanceled: () => boolean }) => void) => void,
   () => void

@@ -1,5 +1,5 @@
 /**
- * @fileoverview Scss Module for {Collapse} component.
+ * @fileoverview SCSS Module for {Collapse} component.
  * @copyright Shingo OKAWA 2021
  */
 @import '../constants.scss';
@@ -85,7 +85,6 @@
   }
 }
 .panel-inactive {
-  // dummy properties.
   min-width: 0;
   min-height: 0;
 }
@@ -96,12 +95,10 @@
   }
 }
 .content-active {
-  // dummy properties.
   min-width: 0;
   min-height: 0;
 }
 .content-inactive {
-  // dummy properties.
   min-width: 0;
   min-height: 0;
 }

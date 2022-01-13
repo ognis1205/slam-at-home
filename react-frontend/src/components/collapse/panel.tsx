@@ -1,18 +1,6 @@
 /**
  * @fileoverview Defines Collapse Panel component.
  * @copyright Shingo OKAWA 2021
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
  */
 import * as React from 'react';
 import * as Props from './props';
@@ -27,11 +15,7 @@ const getHeaderClassName = ({ className, collapsible }: Props.Header): string =>
     [styles['collapsible-only']]: collapsible,
   });
 
-/**
- * Returns a `PanelHeader` component.
- * @param {Header} props Properties that defines a behaviour of this component.
- * @return {ReactElement} A rendered React element.
- */
+/** Returns a `PanelHeader` component. */
 const Header: React.FunctionComponent<
   Props.Header & { children: React.ReactNode }
 > = (
@@ -96,11 +80,7 @@ const getContentClassName = ({ className, active }: Props.Content): string =>
     [styles['content-inactive']]: !active,
   });
 
-/**
- * Returns a `PanelContent` component.
- * @param {Content} props Properties that defines a behaviour of this component.
- * @return {ReactElement} A rendered React element.
- */
+/** Returns a `PanelContent` component. */
 const Content = React.forwardRef<
   HTMLDivElement,
   Props.Content & { children: React.ReactNode }
@@ -142,11 +122,7 @@ const getClassName = ({
     [styles['panel-inactive']]: collapsible === 'disabled',
   });
 
-/**
- * Returns a `Panel` component.
- * @param {Panel} props Properties that defines a behaviour of this component.
- * @return {ReactElement} A rendered React element.
- */
+/** Returns a `Panel` component. */
 export const Component: React.FunctionComponent<Props.Panel> = (
   props: Props.Panel
 ): React.ReactElement => (

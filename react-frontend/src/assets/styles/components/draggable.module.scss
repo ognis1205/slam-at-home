@@ -1,5 +1,5 @@
 /**
- * @fileoverview Scss Module for {Scroll} utility functions.
+ * @fileoverview SCSS Module for {Scroll} utility functions.
  * @copyright Shingo OKAWA 2021
  */
 @mixin selection {
@@ -11,23 +11,19 @@
   }
 }
 .body {
-  // Add a style to the body to disable user-select.
   @include selection {
     all: inherit;
   }
 }
 .draggable {
-  // dummy properties.
   min-width: 0;
   min-height: 0;
 }
 .dragging {
-  // dummy properties.
   min-width: 0;
   min-height: 0;
 }
 .dragged {
-  // dummy properties.
   min-width: 0;
   min-height: 0;
 }
