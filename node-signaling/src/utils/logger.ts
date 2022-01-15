@@ -2,7 +2,7 @@
  * @fileoverview Defines logger class.
  * @copyright Shingo OKAWA 2022
  */
-import chalk from 'chalk';
+import Chalk from 'chalk';
 
 /** Defines a logger class. */
 class Logger {
@@ -21,36 +21,24 @@ class Logger {
   };
 
   /** Logs a given message. */
-  public log = (header: string, message = ""): void =>
+  public log = (header: string, message = ''): void =>
     console.log(`${header} ${message}`);
 
   /** Logs info of a given message. */
   public info = (value: Error | string): void =>
-    this.log(
-      chalk.blue('[INFO]'),
-      chalk.blue(this.getMessage(value))
-    );
+    this.log(Chalk.blue('[INFO]'), Chalk.blue(this.getMessage(value)));
 
   /** Logs success of a given message. */
   public success = (value: Error | string): void =>
-    this.log(
-      chalk.green("[SUCCESS]"),
-      chalk.green(this.getMessage(value))
-    );
+    this.log(Chalk.green('[SUCCESS]'), Chalk.green(this.getMessage(value)));
 
   /** Logs warn of a given message. */
   public warn = (value: Error | string): void =>
-    this.log(
-      chalk.yellow("[WARN]"),
-      chalk.yellow(this.getMessage(value))
-    );
+    this.log(Chalk.yellow('[WARN]'), Chalk.yellow(this.getMessage(value)));
 
   /** Logs error of a given message. */
   public error = (value: Error | string): void =>
-    this.log(
-      chalk.red("[ERROR]"),
-      chalk.red(this.getMessage(value))
-    );
+    this.log(Chalk.red('[ERROR]'), Chalk.red(this.getMessage(value)));
 }
 
 /** Logger singleton. */
