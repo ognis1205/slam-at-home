@@ -22,7 +22,7 @@ const handleEvents = (): void => {
 };
 
 /** Starts up asynchronously. */
-const startupAsync = async (
+const setupAsync = async (
   resolve: (value: unknown) => void,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   reject: (reason?: any) => void
@@ -40,6 +40,6 @@ export default () =>
   new Promise(
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (resolve: (value: unknown) => void, reject: (reason?: any) => void) => {
-      startupAsync(resolve, reject);
+      setupAsync(resolve, reject);
     }
   );

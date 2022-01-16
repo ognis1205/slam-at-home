@@ -21,4 +21,14 @@
   "exclude": [
     "node_modules",
   ],
+  "typeRoots": [
+    "./src/types",
+    "./node_modules/@types",
+  ],
+  "paths": {
+    "*": [
+      "src/types/*",
+      "node_modules/*",
+    ]
+  },
 }

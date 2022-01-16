@@ -4,8 +4,8 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "dev": "ts-node src/index.ts",
-    "dev:watch": "ts-node-dev --respawn src/index.ts",
+    "dev": "ts-node --files src/index.ts",
+    "dev:watch": "ts-node-dev --respawn --files src/index.ts",
     "clean": "rimraf dist/*",
     "webpack": "webpack --config ./webpack/prod.config.ts",
     "webpack:dev": "webpack --config ./webpack/dev.config.ts",
@@ -40,10 +40,12 @@
     "webpack-node-externals": "^3.0.0"
   },
   "dependencies": {
+    "@types/express-session": "^1.17.4",
     "@types/ip": "^1.1.0",
     "@types/ws": "^8.2.2",
     "chalk": "^4.1.2",
     "express": "^4.17.2",
+    "express-session": "^1.17.2",
     "node-ip": "^0.1.2",
     "query-string": "^7.1.0",
     "ws": "^8.4.0"
