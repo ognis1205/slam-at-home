@@ -2,27 +2,20 @@
  * @fileoverview Defines websocket server.
  * @copyright Shingo OKAWA 2021
  */
-import * as express from 'express';
-//import * as http from 'http';
+import * as Express from 'express';
 import * as ip from 'ip';
+import WebSocket from './api/websocket';
 import Logger from './utils/logger';
 import Startup from './utils/startup';
 
 /** Starts up services. */
 Startup()
   .then(() => {
-    const app = express.default();
     const port = process.env.PORT || 4000;
-
-    app.listen(port, () => {
+    const server = Express.default().listen(port, () => {
       Logger.info(`Server running at http://${ip.address()}:${port}\n\n`);
-      if (process.send)
-        process.send(`Server running at http://${ip.address()}:${port}\n\n`);
     });
-
-    process.on('message', (message: string) => {
-      Logger.info(message);
-    });
+    WebSocket(server);
   })
   .catch((error: Error) => {
     Logger.error(error);

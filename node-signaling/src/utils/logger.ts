@@ -26,19 +26,19 @@ class Logger {
 
   /** Logs info of a given message. */
   public info = (value: Error | string): void =>
-    this.log(Chalk.blue('[INFO]'), Chalk.blue(this.getMessage(value)));
+    this.log(Chalk.blue('[INFO]'), this.getMessage(value));
 
   /** Logs success of a given message. */
   public success = (value: Error | string): void =>
-    this.log(Chalk.green('[SUCCESS]'), Chalk.green(this.getMessage(value)));
+    this.log(Chalk.green('[SUCCESS]'), this.getMessage(value));
 
   /** Logs warn of a given message. */
   public warn = (value: Error | string): void =>
-    this.log(Chalk.yellow('[WARN]'), Chalk.yellow(this.getMessage(value)));
+    this.log(Chalk.yellow('[WARN]'), this.getMessage(value));
 
   /** Logs error of a given message. */
   public error = (value: Error | string): void =>
-    this.log(Chalk.red('[ERROR]'), Chalk.red(this.getMessage(value)));
+    this.log(Chalk.red('[ERROR]'), this.getMessage(value));
 }
 
 /** Logger singleton. */
