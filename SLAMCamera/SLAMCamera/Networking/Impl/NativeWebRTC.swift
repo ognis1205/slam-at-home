@@ -37,13 +37,10 @@ public class NativeWebRTC: NSObject, WebRTC {
   /// WebRTC peer connection.
   internal let connection: RTCPeerConnection
 
-  ///
+  /// WebRTC audio session.
   internal let rtcAudioSession =  RTCAudioSession.sharedInstance()
 
-  ///
-  internal let audioQueue = DispatchQueue(label: "audio")
-
-  ///
+  /// WebRTC media constraints.
   internal let mediaConstrains = [
     kRTCMediaConstraintsOfferToReceiveAudio: kRTCMediaConstraintsValueTrue,
     kRTCMediaConstraintsOfferToReceiveVideo: kRTCMediaConstraintsValueTrue

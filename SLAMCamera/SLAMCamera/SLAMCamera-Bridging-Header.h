@@ -1,5 +1,5 @@
 //
 //  Use this file to import your target's public headers that you would like to expose to Swift.
 //
-#import "Networking/IP.h"
-#import "Networking/RGB.h"
+#import "Utils/IP.h"
+#import "Utils/RGB.h"
