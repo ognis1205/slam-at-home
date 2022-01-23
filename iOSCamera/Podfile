@@ -1,0 +1,12 @@
+target 'iOSCamera' do
+  use_frameworks!
+  pod 'CocoaAsyncSocket'
+  pod 'GoogleWebRTC'
+
+  target 'iOSCameraTests' do
+    inherit! :search_paths
+  end
+
+  target 'iOSCameraUITests' do
+  end
+end
