@@ -12,7 +12,7 @@ Setting up Project
  $ pod install
 ```
 
- 2. Open the [iOSCamera.xcworkspace](./iOSCamera.xcworkspace) file with your [Xcode](https://developer.apple.com/xcode/).
+ 2. Open the *iOSCamera.xcworkspace* file with your [Xcode](https://developer.apple.com/xcode/).
 
 Installation
 ------------
