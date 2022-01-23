@@ -1,6 +1,7 @@
 # SwiftLintFramework Docs: https://realm.github.io/SwiftLint/index.html
 
 disabled_rules:
+- type_name
 - trailing_whitespace
 - force_cast
 - unused_closure_parameter
