@@ -13,7 +13,6 @@
 #define clamp(a) (a>255?255:(a<0?0:a))
 
 @implementation RGB
-/// Converts sample buffer to RGB.
 + (UIImage *)fromBuffer:(CMSampleBufferRef)sampleBuffer {
   CVImageBufferRef imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
   CVPixelBufferLockBaseAddress(imageBuffer, 0);
@@ -72,7 +71,6 @@
   return image;
 }
 
-/// Converts video frame to RGB.
 + (UIImage *)fromFrame:(RTCVideoFrame *)frame {
   RTCI420Buffer *buffer = (RTCI420Buffer *)frame.buffer;
 

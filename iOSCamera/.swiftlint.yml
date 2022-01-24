@@ -5,6 +5,8 @@ disabled_rules:
 - trailing_whitespace
 - force_cast
 - unused_closure_parameter
+- function_body_length
+- function_parameter_count
 
 opt_in_rules:
 - closure_end_indentation
@@ -17,7 +19,6 @@ opt_in_rules:
 - first_where
 - force_unwrapping
 - implicitly_unwrapped_optional
-- missing_docs
 - nimble_operator
 - number_separator
 - operator_usage_whitespace
