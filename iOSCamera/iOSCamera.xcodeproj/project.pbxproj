@@ -15,6 +15,10 @@
 		54677E49279E777400419FBB /* AlertReporting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54677E48279E777400419FBB /* AlertReporting.swift */; };
 		54677E4C279E77BC00419FBB /* AlertModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54677E4B279E77BC00419FBB /* AlertModel.swift */; };
 		54677E4E279E809A00419FBB /* VideoCapturing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54677E4D279E809A00419FBB /* VideoCapturing.swift */; };
+		54677E51279E869800419FBB /* HLSModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54677E50279E869800419FBB /* HLSModel.swift */; };
+		54677E54279ED58700419FBB /* HLSModel+AVCaptureVideoDataOutputSampleBufferDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54677E53279ED58700419FBB /* HLSModel+AVCaptureVideoDataOutputSampleBufferDelegate.swift */; };
+		54677E56279EEA8200419FBB /* HSLConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54677E55279EEA8200419FBB /* HSLConstants.swift */; };
+		54677E58279F407500419FBB /* HLSModel+GCDAsyncSocketDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54677E57279F407500419FBB /* HLSModel+GCDAsyncSocketDelegate.swift */; };
 		54F9A829279CFE9900E994A1 /* iOSCameraApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F9A828279CFE9900E994A1 /* iOSCameraApp.swift */; };
 		54F9A82B279CFE9900E994A1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F9A82A279CFE9900E994A1 /* ContentView.swift */; };
 		54F9A82D279CFE9C00E994A1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54F9A82C279CFE9C00E994A1 /* Assets.xcassets */; };
@@ -55,6 +59,10 @@
 		54677E48279E777400419FBB /* AlertReporting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertReporting.swift; sourceTree = "<group>"; };
 		54677E4B279E77BC00419FBB /* AlertModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertModel.swift; sourceTree = "<group>"; };
 		54677E4D279E809A00419FBB /* VideoCapturing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCapturing.swift; sourceTree = "<group>"; };
+		54677E50279E869800419FBB /* HLSModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HLSModel.swift; sourceTree = "<group>"; };
+		54677E53279ED58700419FBB /* HLSModel+AVCaptureVideoDataOutputSampleBufferDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HLSModel+AVCaptureVideoDataOutputSampleBufferDelegate.swift"; sourceTree = "<group>"; };
+		54677E55279EEA8200419FBB /* HSLConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSLConstants.swift; sourceTree = "<group>"; };
+		54677E57279F407500419FBB /* HLSModel+GCDAsyncSocketDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HLSModel+GCDAsyncSocketDelegate.swift"; sourceTree = "<group>"; };
 		54F9A825279CFE9900E994A1 /* iOSCamera.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSCamera.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		54F9A828279CFE9900E994A1 /* iOSCameraApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSCameraApp.swift; sourceTree = "<group>"; };
 		54F9A82A279CFE9900E994A1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -168,9 +176,28 @@
 		54677E4A279E778300419FBB /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				54677E4F279E863C00419FBB /* HLS */,
 				54677E4B279E77BC00419FBB /* AlertModel.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		54677E4F279E863C00419FBB /* HLS */ = {
+			isa = PBXGroup;
+			children = (
+				54677E50279E869800419FBB /* HLSModel.swift */,
+				54677E53279ED58700419FBB /* HLSModel+AVCaptureVideoDataOutputSampleBufferDelegate.swift */,
+				54677E57279F407500419FBB /* HLSModel+GCDAsyncSocketDelegate.swift */,
+			);
+			path = HLS;
+			sourceTree = "<group>";
+		};
+		54677E52279EC61100419FBB /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				54677E55279EEA8200419FBB /* HSLConstants.swift */,
+			);
+			path = Constants;
 			sourceTree = "<group>";
 		};
 		54F9A81C279CFE9900E994A1 = {
@@ -198,6 +225,7 @@
 		54F9A827279CFE9900E994A1 /* iOSCamera */ = {
 			isa = PBXGroup;
 			children = (
+				54677E52279EC61100419FBB /* Constants */,
 				54677E4A279E778300419FBB /* Models */,
 				54677E47279E775C00419FBB /* Services */,
 				54677E41279DCF6700419FBB /* Networking */,
@@ -511,9 +539,13 @@
 				54F9A82B279CFE9900E994A1 /* ContentView.swift in Sources */,
 				54677E49279E777400419FBB /* AlertReporting.swift in Sources */,
 				54F9A829279CFE9900E994A1 /* iOSCameraApp.swift in Sources */,
+				54677E54279ED58700419FBB /* HLSModel+AVCaptureVideoDataOutputSampleBufferDelegate.swift in Sources */,
 				54677E4E279E809A00419FBB /* VideoCapturing.swift in Sources */,
 				54677E39279D8C4700419FBB /* IP.m in Sources */,
+				54677E51279E869800419FBB /* HLSModel.swift in Sources */,
+				54677E58279F407500419FBB /* HLSModel+GCDAsyncSocketDelegate.swift in Sources */,
 				54677E4C279E77BC00419FBB /* AlertModel.swift in Sources */,
+				54677E56279EEA8200419FBB /* HSLConstants.swift in Sources */,
 				54677E40279DCDEC00419FBB /* RGB.m in Sources */,
 				54677E44279DD1CE00419FBB /* HLSStream.swift in Sources */,
 			);
