@@ -1,5 +1,5 @@
 //
-//  HSLConstants.swift
+//  HLSConstants.swift
 //  iOSCamera
 //
 //  Created by Shingo OKAWA on 2022/01/24.
