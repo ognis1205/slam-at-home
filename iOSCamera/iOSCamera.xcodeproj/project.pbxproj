@@ -19,8 +19,9 @@
 		54677E54279ED58700419FBB /* HLSModel+AVCaptureVideoDataOutputSampleBufferDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54677E53279ED58700419FBB /* HLSModel+AVCaptureVideoDataOutputSampleBufferDelegate.swift */; };
 		54677E56279EEA8200419FBB /* HSLConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54677E55279EEA8200419FBB /* HSLConstants.swift */; };
 		54677E58279F407500419FBB /* HLSModel+GCDAsyncSocketDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54677E57279F407500419FBB /* HLSModel+GCDAsyncSocketDelegate.swift */; };
+		54677E5B279FAE2700419FBB /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54677E5A279FAE2700419FBB /* CameraView.swift */; };
 		54F9A829279CFE9900E994A1 /* iOSCameraApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F9A828279CFE9900E994A1 /* iOSCameraApp.swift */; };
-		54F9A82B279CFE9900E994A1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F9A82A279CFE9900E994A1 /* ContentView.swift */; };
+		54F9A82B279CFE9900E994A1 /* HLSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F9A82A279CFE9900E994A1 /* HLSView.swift */; };
 		54F9A82D279CFE9C00E994A1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54F9A82C279CFE9C00E994A1 /* Assets.xcassets */; };
 		54F9A830279CFE9C00E994A1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54F9A82F279CFE9C00E994A1 /* Preview Assets.xcassets */; };
 		54F9A83A279CFE9C00E994A1 /* iOSCameraTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F9A839279CFE9C00E994A1 /* iOSCameraTests.swift */; };
@@ -63,9 +64,10 @@
 		54677E53279ED58700419FBB /* HLSModel+AVCaptureVideoDataOutputSampleBufferDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HLSModel+AVCaptureVideoDataOutputSampleBufferDelegate.swift"; sourceTree = "<group>"; };
 		54677E55279EEA8200419FBB /* HSLConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSLConstants.swift; sourceTree = "<group>"; };
 		54677E57279F407500419FBB /* HLSModel+GCDAsyncSocketDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HLSModel+GCDAsyncSocketDelegate.swift"; sourceTree = "<group>"; };
+		54677E5A279FAE2700419FBB /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 		54F9A825279CFE9900E994A1 /* iOSCamera.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSCamera.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		54F9A828279CFE9900E994A1 /* iOSCameraApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSCameraApp.swift; sourceTree = "<group>"; };
-		54F9A82A279CFE9900E994A1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		54F9A82A279CFE9900E994A1 /* HLSView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HLSView.swift; sourceTree = "<group>"; };
 		54F9A82C279CFE9C00E994A1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		54F9A82F279CFE9C00E994A1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		54F9A835279CFE9C00E994A1 /* iOSCameraTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iOSCameraTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -200,6 +202,15 @@
 			path = Constants;
 			sourceTree = "<group>";
 		};
+		54677E59279FAE0900419FBB /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				54F9A82A279CFE9900E994A1 /* HLSView.swift */,
+				54677E5A279FAE2700419FBB /* CameraView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		54F9A81C279CFE9900E994A1 = {
 			isa = PBXGroup;
 			children = (
@@ -225,13 +236,13 @@
 		54F9A827279CFE9900E994A1 /* iOSCamera */ = {
 			isa = PBXGroup;
 			children = (
+				54677E59279FAE0900419FBB /* Views */,
 				54677E52279EC61100419FBB /* Constants */,
 				54677E4A279E778300419FBB /* Models */,
 				54677E47279E775C00419FBB /* Services */,
 				54677E41279DCF6700419FBB /* Networking */,
 				54677E36279D8BCC00419FBB /* Utilities */,
 				54F9A828279CFE9900E994A1 /* iOSCameraApp.swift */,
-				54F9A82A279CFE9900E994A1 /* ContentView.swift */,
 				54F9A82C279CFE9C00E994A1 /* Assets.xcassets */,
 				54F9A82E279CFE9C00E994A1 /* Preview Content */,
 				54677E3D279DB65600419FBB /* iOSCamera-Bridging-Header.h */,
@@ -536,8 +547,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				54F9A82B279CFE9900E994A1 /* ContentView.swift in Sources */,
+				54F9A82B279CFE9900E994A1 /* HLSView.swift in Sources */,
 				54677E49279E777400419FBB /* AlertReporting.swift in Sources */,
+				54677E5B279FAE2700419FBB /* CameraView.swift in Sources */,
 				54F9A829279CFE9900E994A1 /* iOSCameraApp.swift in Sources */,
 				54677E54279ED58700419FBB /* HLSModel+AVCaptureVideoDataOutputSampleBufferDelegate.swift in Sources */,
 				54677E4E279E809A00419FBB /* VideoCapturing.swift in Sources */,
@@ -716,6 +728,7 @@
 				ENABLE_BITCODE = NO;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Need camera access for streaming videos";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -752,6 +765,7 @@
 				DEVELOPMENT_TEAM = CX5837YGS6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Need camera access for streaming videos";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

@@ -13,7 +13,7 @@ import SwiftUI
 struct iOSCameraApp: App {
   var body: some Scene {
     WindowGroup {
-      ContentView()
+      HLSView()
     }
   }
 }

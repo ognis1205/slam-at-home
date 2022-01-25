@@ -10,6 +10,8 @@ import Foundation
 
 public protocol AlertReporting: AnyObject {
   var alertModel: AlertModel? { get set }
+  
+  var showAlert: Bool { get set }
 
   func reportAlert(
     title: String,
@@ -37,8 +39,8 @@ public extension AlertReporting {
         primaryButtonTitle: primaryButtonTitle,
         secondaryButtonTitle: secondaryButtonTitle,
         primaryAction: primaryAction,
-        secondaryAction: secondaryAction
-      )
+        secondaryAction: secondaryAction)
+      self.showAlert = true
     }
   }
 }

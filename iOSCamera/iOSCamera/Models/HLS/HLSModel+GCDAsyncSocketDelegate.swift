@@ -16,11 +16,17 @@ extension HLSModel: GCDAsyncSocketDelegate {
     didAcceptNewSocket newSocket: GCDAsyncSocket
   ) {
     debugPrint("New connection from IP [\(newSocket.connectedHost ?? "unknown")]")
-    guard let id = newSocket.connectedAddress?.hashValue else { return }
+    guard
+      let id = newSocket.connectedAddress?.hashValue
+    else {
+      return
+    }
     let newStream = HLSStream(
       id: id,
       socket: newSocket,
-      dispatchQueue: self.streamQueue)
+      dispatchQueue: DispatchQueue(
+        label: "stream",
+        attributes: .concurrent))
     self.streams[id] = newStream
     newStream.open()
     DispatchQueue.main.async(execute: {

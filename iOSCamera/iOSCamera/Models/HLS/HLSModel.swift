@@ -12,76 +12,68 @@ import Combine
 import SwiftUI
 
 public class HLSModel: NSObject, ObservableObject, VideoCapturing {
-  @Published public var alertModel: AlertModel?
-  
   @Published public var isConnected: Bool = false
   
   @Published public var URL: String = "Not Available"
 
-  public var showAlert: Bool {
-    alertModel != nil
-  }
+  @Published public var showAlert: Bool = false
+  
+  public var alertModel: AlertModel?
 
   public var videoSetupResult: VideoSetupResult = .ready
 
   public var isVideoCapturing: Bool = false
 
-  internal let videoCapturingContext: VideoCapturingContext = VideoCapturingContext(
+  public let videoCapturingContext: VideoCapturingContext = VideoCapturingContext(
     avCaptureSession: AVCaptureSession(),
     avCaptureVideoDataOutput: AVCaptureVideoDataOutput(),
-    ciContext: CIContext(options: nil),
-    dispatchQueue: DispatchQueue(
-      label: "video capturing queue",
-      attributes: []))
+    ciContext: CIContext(options: nil))
 
   internal var streams: [Int: HLSStream] = [Int: HLSStream]()
-  
-  internal let streamQueue: DispatchQueue = DispatchQueue(
-    label: "stream queue",
-    attributes: .concurrent)
-  
-  private let ip: String? = IP.getAddress()
 
   private var socket: GCDAsyncSocket?
-
-  private let socketListenQueue: DispatchQueue = DispatchQueue(
-    label: "socket listen queue",
-    attributes: [])
-
-  private let socketWriteQueue: DispatchQueue = DispatchQueue(
-    label: "socket write queue",
-    attributes: .concurrent)
-
-  private var isSocketListening: Bool = false
 
   private var subscriptions: Set<AnyCancellable> = Set<AnyCancellable>()
 
   public func start() {
     self.startVideoCapturing(videoCapturingContext)
     debugPrint("Starting network service")
-    if !self.isSocketListening && self.isVideoCapturing {
+    if self.isVideoCapturing {
       self.socket = GCDAsyncSocket(
         delegate: self,
-        delegateQueue: self.socketListenQueue,
-        socketQueue: self.socketWriteQueue)
+        delegateQueue: DispatchQueue(
+          label: "server",
+          attributes: []),
+        socketQueue: DispatchQueue(
+          label: "socket",
+          attributes: .concurrent))
       do {
-        if let ip = self.ip {
-          if !ip.isEmpty { self.URL = "http://\(ip):\(HLSConstants.PORT)" }
+        if let ip = IP.getAddress() {
+          if !ip.isEmpty {
+            self.URL = "http://\(ip):\(HLSConstants.PORT)"
+            try self.socket?.accept(onInterface: ip, port: HLSConstants.PORT)
+          } else {
+            debugPrint("Could not get IP address")
+            self.reportAlert(
+              title: "Network Error",
+              message: "Device is not connected to WiFi network",
+              primaryButtonTitle: "Accept",
+              secondaryButtonTitle: nil,
+              primaryAction: nil,
+              secondaryAction: nil)
+            return
+          }
         }
-        try self.socket?.accept(onInterface: self.ip, port: HLSConstants.PORT)
       } catch {
         debugPrint("Could not start listening on port \(HLSConstants.PORT) (\(error))")
         self.reportAlert(
           title: "Socket Error",
-          message: "Either port number is not available or device is not connected to WiFi network",
+          message: "Port number is not available",
           primaryButtonTitle: "Accept",
           secondaryButtonTitle: nil,
           primaryAction: nil,
           secondaryAction: nil)
         return
-      }
-      DispatchQueue.main.async {
-        self.isSocketListening = true
       }
     }
   }

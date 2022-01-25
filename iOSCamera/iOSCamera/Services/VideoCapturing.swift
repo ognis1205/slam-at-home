@@ -22,8 +22,6 @@ public struct VideoCapturingContext {
   public let avCaptureVideoDataOutput: AVCaptureVideoDataOutput
 
   public let ciContext: CIContext
-
-  public let dispatchQueue: DispatchQueue
 }
 
 public protocol VideoCapturing: AVCaptureVideoDataOutputSampleBufferDelegate, AlertReporting {
@@ -36,21 +34,23 @@ public protocol VideoCapturing: AVCaptureVideoDataOutputSampleBufferDelegate, Al
 
 private extension VideoCapturing {
   func checkPermissions() {
-    debugPrint("Checking video capture session permissions")
+    debugPrint("Checking video device permissions")
     switch AVCaptureDevice.authorizationStatus(for: .video) {
     case .authorized:
-      break
+      self.videoSetupResult = .success
     case .notDetermined:
       AVCaptureDevice.requestAccess(for: .video, completionHandler: { granted in
         if !granted {
           self.videoSetupResult = .notAuthorized
+          return
         }
       })
+      self.videoSetupResult = .success
     default:
       self.videoSetupResult = .notAuthorized
       self.reportAlert(
         title: "Camera Access",
-        message: "SLAMCamera doesn't have access to use your camera, please update your privacy settings.",
+        message: "iOSCamera doesn't have access to use your camera, please update your privacy settings.",
         primaryButtonTitle: "Settings",
         secondaryButtonTitle: nil,
         primaryAction: {
@@ -97,7 +97,9 @@ private extension VideoCapturing {
       if context.avCaptureSession.canAddInput(videoDeviceInput) {
         context.avCaptureVideoDataOutput.setSampleBufferDelegate(
           self,
-          queue: context.dispatchQueue)
+          queue: DispatchQueue(
+            label: "video",
+            attributes: []))
         context.avCaptureSession.addInput(videoDeviceInput)
         context.avCaptureSession.addOutput(context.avCaptureVideoDataOutput)
       } else {
@@ -111,6 +113,8 @@ private extension VideoCapturing {
       self.videoSetupResult = .configurationFailed
     }
 
+    debugPrint("Configured video device")
+    self.videoSetupResult = .success
     context.avCaptureSession.commitConfiguration()
   }
 }
