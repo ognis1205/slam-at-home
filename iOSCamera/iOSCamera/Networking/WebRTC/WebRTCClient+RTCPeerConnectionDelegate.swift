@@ -71,6 +71,6 @@ extension WebRTCClient: RTCPeerConnectionDelegate {
     didOpen dataChannel: RTCDataChannel
   ) {
     debugPrint("peerConnection did open data channel")
-    self.recieverDataChannel = dataChannel
+    self.dataChannel.reciever = dataChannel
   }
 }

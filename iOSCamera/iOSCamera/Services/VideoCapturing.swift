@@ -16,12 +16,72 @@ public enum VideoSetupResult {
   case configurationFailed
 }
 
-public struct VideoCapturingContext {
-  public let avCaptureSession: AVCaptureSession
+public struct VideoCapture {
+  public let session: AVCaptureSession
 
-  public let avCaptureVideoDataOutput: AVCaptureVideoDataOutput
+  public let output: AVCaptureVideoDataOutput
 
-  public let ciContext: CIContext
+  public let context: CIContext
+  
+  fileprivate func configure(_ capturing: VideoCapturing) {
+    debugPrint("Checking video setup result")
+    if capturing.videoSetupResult != .success {
+      return
+    }
+
+    debugPrint("Configuring video device")
+    self.session.beginConfiguration()
+    self.session.sessionPreset = .medium
+
+    do {
+      var defaultDevice: AVCaptureDevice?
+      if let backCamera = AVCaptureDevice.default(
+        .builtInWideAngleCamera,
+        for: .video,
+        position: .back) {
+        defaultDevice = backCamera
+      } else if let frontCamera = AVCaptureDevice.default(
+        .builtInWideAngleCamera,
+        for: .video,
+        position: .front) {
+        defaultDevice = frontCamera
+      }
+
+      guard let videoDevice = defaultDevice else {
+        debugPrint("Default video device is unavailable")
+        capturing.videoSetupResult = .configurationFailed
+        self.session.commitConfiguration()
+        return
+      }
+
+      try videoDevice.lockForConfiguration()
+      videoDevice.focusMode = .continuousAutoFocus
+      videoDevice.unlockForConfiguration()
+      let videoDeviceInput = try AVCaptureDeviceInput(device: videoDevice)
+
+      if self.session.canAddInput(videoDeviceInput) {
+        self.output.setSampleBufferDelegate(
+          capturing,
+          queue: DispatchQueue(
+            label: "video",
+            attributes: []))
+        self.session.addInput(videoDeviceInput)
+        self.session.addOutput(self.output)
+      } else {
+        debugPrint("Could not add video device input to the session")
+        capturing.videoSetupResult = .configurationFailed
+        self.session.commitConfiguration()
+        return
+      }
+    } catch {
+      debugPrint("Could not create video device input")
+      capturing.videoSetupResult = .configurationFailed
+    }
+
+    debugPrint("Configured video device")
+    capturing.videoSetupResult = .success
+    self.session.commitConfiguration()
+  }
 }
 
 public protocol VideoCapturing: AVCaptureVideoDataOutputSampleBufferDelegate, AlertReporting {
@@ -29,7 +89,7 @@ public protocol VideoCapturing: AVCaptureVideoDataOutputSampleBufferDelegate, Al
 
   var isVideoCapturing: Bool { get set }
 
-  func startVideoCapturing(_ context: VideoCapturingContext)
+  func startVideoCapturing(_ capture: VideoCapture)
 }
 
 private extension VideoCapturing {
@@ -65,70 +125,18 @@ private extension VideoCapturing {
         secondaryAction: nil)
     }
   }
-
-  func commitConfigurations(_ context: VideoCapturingContext) {
-    debugPrint("Checking video setup result")
-    if self.videoSetupResult != .success { return }
-
-    debugPrint("Configuring video device")
-    context.avCaptureSession.beginConfiguration()
-    context.avCaptureSession.sessionPreset = .medium
-
-    do {
-      var defaultDevice: AVCaptureDevice?
-      if let backCamera = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back) {
-        defaultDevice = backCamera
-      } else if let frontCamera = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .front) {
-        defaultDevice = frontCamera
-      }
-
-      guard let videoDevice = defaultDevice else {
-        debugPrint("Default video device is unavailable")
-        self.videoSetupResult = .configurationFailed
-        context.avCaptureSession.commitConfiguration()
-        return
-      }
-
-      try videoDevice.lockForConfiguration()
-      videoDevice.focusMode = .continuousAutoFocus
-      videoDevice.unlockForConfiguration()
-      let videoDeviceInput = try AVCaptureDeviceInput(device: videoDevice)
-
-      if context.avCaptureSession.canAddInput(videoDeviceInput) {
-        context.avCaptureVideoDataOutput.setSampleBufferDelegate(
-          self,
-          queue: DispatchQueue(
-            label: "video",
-            attributes: []))
-        context.avCaptureSession.addInput(videoDeviceInput)
-        context.avCaptureSession.addOutput(context.avCaptureVideoDataOutput)
-      } else {
-        debugPrint("Could not add video device input to the session")
-        self.videoSetupResult = .configurationFailed
-        context.avCaptureSession.commitConfiguration()
-        return
-      }
-    } catch {
-      debugPrint("Could not create video device input")
-      self.videoSetupResult = .configurationFailed
-    }
-
-    debugPrint("Configured video device")
-    self.videoSetupResult = .success
-    context.avCaptureSession.commitConfiguration()
-  }
 }
 
 public extension VideoCapturing {
-  func startVideoCapturing(_ context: VideoCapturingContext) {
+  func startVideoCapturing(_ capture: VideoCapture) {
     self.checkPermissions()
-    self.commitConfigurations(context)
+    capture.configure(self)
     debugPrint("Starting video session")
     if !self.isVideoCapturing {
       switch self.videoSetupResult {
       case .success:
-        context.avCaptureSession.startRunning()
-        self.isVideoCapturing = context.avCaptureSession.isRunning
+        capture.session.startRunning()
+        self.isVideoCapturing = capture.session.isRunning
       case .ready, .configurationFailed, .notAuthorized:
         debugPrint("Application not authorized to use camera")
         self.reportAlert(

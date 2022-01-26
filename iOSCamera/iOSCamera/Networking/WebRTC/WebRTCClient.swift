@@ -9,6 +9,56 @@
 import Foundation
 import WebRTC
 
+public struct VideoTrack {
+  public var source: RTCVideoSource
+
+  public var capturer: RTCVideoCapturer?
+
+  public var frame: RTCVideoFrame?
+
+  public var sender: RTCVideoTrack?
+
+  public var reciever: RTCVideoTrack?
+  
+  fileprivate mutating func configure(_ client: WebRTCClient) {
+    debugPrint("Configuring WebRTC video track.")
+    #if TARGET_OS_SIMULATOR
+      self.capturer = RTCFileVideoCapturer(
+        delegate: self.source)
+    #else
+      self.capturer = RTCCameraVideoCapturer(
+        delegate: client)
+    #endif
+    self.sender = WebRTCClient.factory.videoTrack(
+      with: self.source,
+      trackId: client.videoTrackId)
+    self.reciever = client.connection.transceivers.first {
+      $0.mediaType == .video
+    }?.receiver.track as? RTCVideoTrack
+    debugPrint("Configured WebRTC video track.")
+  }
+}
+
+public struct DataChannel {
+  public var sender: RTCDataChannel?
+
+  public var reciever: RTCDataChannel?
+  
+  fileprivate mutating func configure(_ client: WebRTCClient) {
+    debugPrint("Configuring WebRTC data channel.")
+    let config = RTCDataChannelConfiguration()
+    if let channel = client.connection.dataChannel(
+      forLabel: "WebRTCData",
+      configuration: config) {
+      channel.delegate = client
+      self.sender = channel
+    } else {
+      debugPrint("Warning: Couldn't create data channel.")
+    }
+    debugPrint("Configured WebRTC data channel.")
+  }
+}
+
 public protocol WebRTCClientDelegate: AnyObject {
   func webRTC(_ client: WebRTCClient, didDiscoverLocalCandidate candidate: RTCIceCandidate)
 
@@ -18,7 +68,7 @@ public protocol WebRTCClientDelegate: AnyObject {
 }
 
 public class WebRTCClient: NSObject {
-  private static let factory: RTCPeerConnectionFactory = {
+  fileprivate static let factory: RTCPeerConnectionFactory = {
     RTCInitializeSSL()
     let videoEncoderFactory = RTCDefaultVideoEncoderFactory()
     let videoDecoderFactory = RTCDefaultVideoDecoderFactory()
@@ -28,6 +78,10 @@ public class WebRTCClient: NSObject {
   }()
 
   public var id: String
+  
+  internal let connection: RTCPeerConnection
+  
+  internal weak var delegate: WebRTCClientDelegate?
 
   public var streamId: String {
     return "stream-\(self.id)"
@@ -37,30 +91,15 @@ public class WebRTCClient: NSObject {
     return "video-\(self.id)"
   }
 
-  internal weak var delegate: WebRTCClientDelegate?
-
-  internal let connection: RTCPeerConnection
-
-  internal let rtcAudioSession = RTCAudioSession.sharedInstance()
-
   internal let mediaConstrains = [
-    kRTCMediaConstraintsOfferToReceiveAudio: kRTCMediaConstraintsValueTrue,
+    kRTCMediaConstraintsOfferToReceiveAudio: kRTCMediaConstraintsValueFalse,
     kRTCMediaConstraintsOfferToReceiveVideo: kRTCMediaConstraintsValueTrue
   ]
+  
+  internal var videoTrack = VideoTrack(
+    source: WebRTCClient.factory.videoSource())
 
-  internal var videoSource: RTCVideoSource
-
-  internal var videoCapturer: RTCVideoCapturer?
-
-  internal var videoFrame: RTCVideoFrame?
-
-  internal var videoTrack: RTCVideoTrack?
-
-  internal var recieverVideoTrack: RTCVideoTrack?
-
-  internal var dataChannel: RTCDataChannel?
-
-  internal var recieverDataChannel: RTCDataChannel?
+  internal var dataChannel = DataChannel()
 
   @available(*, unavailable)
   override init() {
@@ -76,13 +115,13 @@ public class WebRTCClient: NSObject {
     let constraints = RTCMediaConstraints(
       mandatoryConstraints: nil,
       optionalConstraints: ["DtlsSrtpKeyAgreement": kRTCMediaConstraintsValueTrue])
-    self.videoSource = WebRTCClient.factory.videoSource()
     self.connection = WebRTCClient.factory.peerConnection(
       with: config,
       constraints: constraints,
       delegate: nil)
     super.init()
-    self.createMediaSenders()
+    self.videoTrack.configure(self)
+    self.dataChannel.configure(self)
     self.connection.delegate = self
   }
 
@@ -124,12 +163,12 @@ public class WebRTCClient: NSObject {
 
   public func send(_ data: Data) {
     let buffer = RTCDataBuffer(data: data, isBinary: true)
-    self.recieverDataChannel?.sendData(buffer)
+    self.dataChannel.reciever?.sendData(buffer)
   }
 
   public func add(renderer: RTCVideoRenderer, videoDevice: AVCaptureDevice) {
     guard
-      let capturer = self.videoCapturer as? RTCCameraVideoCapturer
+      let capturer = self.videoTrack.capturer as? RTCCameraVideoCapturer
     else {
       return
     }
@@ -149,44 +188,6 @@ public class WebRTCClient: NSObject {
       with: videoDevice,
       format: format,
       fps: Int(fps.maxFrameRate))
-    self.videoTrack?.add(renderer)
-  }
-
-  private func createMediaSenders() {
-    if let videoTrack = self.createVideoTrack() {
-      self.connection.add(videoTrack, streamIds: [self.streamId])
-      self.recieverVideoTrack = self.connection.transceivers.first {
-        $0.mediaType == .video
-      }?.receiver.track as? RTCVideoTrack
-      self.videoTrack = videoTrack
-    }
-    if let dataChannel = createDataChannel() {
-      dataChannel.delegate = self
-      self.dataChannel = dataChannel
-    }
-  }
-
-  private func createVideoTrack() -> RTCVideoTrack? {
-    #if TARGET_OS_SIMULATOR
-      self.videoCapturer = RTCFileVideoCapturer(
-        delegate: self.videoSource)
-    #else
-      self.videoCapturer = RTCCameraVideoCapturer(
-        delegate: self)
-    #endif
-    return WebRTCClient.factory.videoTrack(
-      with: self.videoSource,
-      trackId: self.videoTrackId)
-  }
-
-  private func createDataChannel() -> RTCDataChannel? {
-    let config = RTCDataChannelConfiguration()
-    guard
-      let channel = self.connection.dataChannel(forLabel: "WebRTCData", configuration: config)
-    else {
-      debugPrint("Warning: Couldn't create data channel.")
-      return nil
-    }
-    return channel
+    self.videoTrack.sender?.add(renderer)
   }
 }

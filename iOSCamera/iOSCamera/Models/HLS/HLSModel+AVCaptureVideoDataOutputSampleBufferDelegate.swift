@@ -20,7 +20,7 @@ extension HLSModel: AVCaptureVideoDataOutputSampleBufferDelegate {
       guard let buffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return }
       let capturedImage = CIImage(cvImageBuffer: buffer, options: nil)
       guard
-        let image = self.videoCapturingContext.ciContext.createCGImage(
+        let image = self.videoCapture.context.createCGImage(
         capturedImage,
         from: capturedImage.extent)
       else {

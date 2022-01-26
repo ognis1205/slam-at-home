@@ -24,10 +24,10 @@ public class HLSModel: NSObject, ObservableObject, VideoCapturing {
 
   public var isVideoCapturing: Bool = false
 
-  public let videoCapturingContext: VideoCapturingContext = VideoCapturingContext(
-    avCaptureSession: AVCaptureSession(),
-    avCaptureVideoDataOutput: AVCaptureVideoDataOutput(),
-    ciContext: CIContext(options: nil))
+  public let videoCapture: VideoCapture = VideoCapture(
+    session: AVCaptureSession(),
+    output: AVCaptureVideoDataOutput(),
+    context: CIContext(options: nil))
 
   internal var streams: [Int: HLSStream] = [Int: HLSStream]()
 
@@ -36,7 +36,7 @@ public class HLSModel: NSObject, ObservableObject, VideoCapturing {
   private var subscriptions: Set<AnyCancellable> = Set<AnyCancellable>()
 
   public func start() {
-    self.startVideoCapturing(videoCapturingContext)
+    self.startVideoCapturing(self.videoCapture)
     debugPrint("Starting network service")
     if self.isVideoCapturing {
       self.socket = GCDAsyncSocket(

@@ -28,7 +28,7 @@ struct HLSView: View {
             .accentColor(model.isConnected ? .red : .white)
             Text(model.URL)
           }
-          CameraView(avCaptureSession: model.videoCapturingContext.avCaptureSession)
+          CameraView(avCaptureSession: model.videoCapture.session)
             .onAppear {
               model.start()
             }

@@ -11,6 +11,6 @@ import WebRTC
 
 extension WebRTCClient: RTCVideoCapturerDelegate {
   public func capturer(_ capturer: RTCVideoCapturer, didCapture frame: RTCVideoFrame) {
-    self.videoSource.capturer(capturer, didCapture: frame)
+    self.videoTrack.source.capturer(capturer, didCapture: frame)
   }
 }
