@@ -27,6 +27,10 @@
 		54677E6727A02E6B00419FBB /* SessionDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54677E6627A02E6B00419FBB /* SessionDescription.swift */; };
 		54677E6927A02ED000419FBB /* WebRTCSignal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54677E6827A02ED000419FBB /* WebRTCSignal.swift */; };
 		54677E6B27A0319E00419FBB /* WebRTCSignal+WebSocketDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54677E6A27A0319E00419FBB /* WebRTCSignal+WebSocketDelegate.swift */; };
+		54677E6D27A036F500419FBB /* WebRTCClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54677E6C27A036F500419FBB /* WebRTCClient.swift */; };
+		54677E7027A0699E00419FBB /* WebRTCClient+RTCDataChannelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54677E6F27A0699E00419FBB /* WebRTCClient+RTCDataChannelDelegate.swift */; };
+		54677E7227A0755500419FBB /* WebRTCClient+RTCPeerConnectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54677E7127A0755500419FBB /* WebRTCClient+RTCPeerConnectionDelegate.swift */; };
+		54677E7427A08BEB00419FBB /* WebRTCClient+RTCVideoCapturerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54677E7327A08BEB00419FBB /* WebRTCClient+RTCVideoCapturerDelegate.swift */; };
 		54F9A829279CFE9900E994A1 /* iOSCameraApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F9A828279CFE9900E994A1 /* iOSCameraApp.swift */; };
 		54F9A82B279CFE9900E994A1 /* HLSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F9A82A279CFE9900E994A1 /* HLSView.swift */; };
 		54F9A82D279CFE9C00E994A1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54F9A82C279CFE9C00E994A1 /* Assets.xcassets */; };
@@ -79,6 +83,10 @@
 		54677E6627A02E6B00419FBB /* SessionDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDescription.swift; sourceTree = "<group>"; };
 		54677E6827A02ED000419FBB /* WebRTCSignal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebRTCSignal.swift; sourceTree = "<group>"; };
 		54677E6A27A0319E00419FBB /* WebRTCSignal+WebSocketDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WebRTCSignal+WebSocketDelegate.swift"; sourceTree = "<group>"; };
+		54677E6C27A036F500419FBB /* WebRTCClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebRTCClient.swift; sourceTree = "<group>"; };
+		54677E6F27A0699E00419FBB /* WebRTCClient+RTCDataChannelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WebRTCClient+RTCDataChannelDelegate.swift"; sourceTree = "<group>"; };
+		54677E7127A0755500419FBB /* WebRTCClient+RTCPeerConnectionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WebRTCClient+RTCPeerConnectionDelegate.swift"; sourceTree = "<group>"; };
+		54677E7327A08BEB00419FBB /* WebRTCClient+RTCVideoCapturerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WebRTCClient+RTCVideoCapturerDelegate.swift"; sourceTree = "<group>"; };
 		54F9A825279CFE9900E994A1 /* iOSCamera.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSCamera.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		54F9A828279CFE9900E994A1 /* iOSCameraApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSCameraApp.swift; sourceTree = "<group>"; };
 		54F9A82A279CFE9900E994A1 /* HLSView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HLSView.swift; sourceTree = "<group>"; };
@@ -180,6 +188,10 @@
 			children = (
 				54677E6827A02ED000419FBB /* WebRTCSignal.swift */,
 				54677E6A27A0319E00419FBB /* WebRTCSignal+WebSocketDelegate.swift */,
+				54677E6C27A036F500419FBB /* WebRTCClient.swift */,
+				54677E6F27A0699E00419FBB /* WebRTCClient+RTCDataChannelDelegate.swift */,
+				54677E7127A0755500419FBB /* WebRTCClient+RTCPeerConnectionDelegate.swift */,
+				54677E7327A08BEB00419FBB /* WebRTCClient+RTCVideoCapturerDelegate.swift */,
 			);
 			path = WebRTC;
 			sourceTree = "<group>";
@@ -196,6 +208,7 @@
 		54677E4A279E778300419FBB /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				54677E6E27A0372B00419FBB /* WebRTC */,
 				54677E4F279E863C00419FBB /* HLS */,
 				54677E4B279E77BC00419FBB /* AlertModel.swift */,
 			);
@@ -246,6 +259,13 @@
 				54677E6627A02E6B00419FBB /* SessionDescription.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		54677E6E27A0372B00419FBB /* WebRTC */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = WebRTC;
 			sourceTree = "<group>";
 		};
 		54F9A81C279CFE9900E994A1 = {
@@ -592,18 +612,22 @@
 				54677E54279ED58700419FBB /* HLSModel+AVCaptureVideoDataOutputSampleBufferDelegate.swift in Sources */,
 				54677E4E279E809A00419FBB /* VideoCapturing.swift in Sources */,
 				54677E6927A02ED000419FBB /* WebRTCSignal.swift in Sources */,
+				54677E7427A08BEB00419FBB /* WebRTCClient+RTCVideoCapturerDelegate.swift in Sources */,
+				54677E7227A0755500419FBB /* WebRTCClient+RTCPeerConnectionDelegate.swift in Sources */,
 				54677E39279D8C4700419FBB /* IP.m in Sources */,
 				54677E51279E869800419FBB /* HLSModel.swift in Sources */,
 				54677E58279F407500419FBB /* HLSModel+GCDAsyncSocketDelegate.swift in Sources */,
 				54677E4C279E77BC00419FBB /* AlertModel.swift in Sources */,
 				54677E56279EEA8200419FBB /* HLSConstants.swift in Sources */,
 				54677E6B27A0319E00419FBB /* WebRTCSignal+WebSocketDelegate.swift in Sources */,
+				54677E7027A0699E00419FBB /* WebRTCClient+RTCDataChannelDelegate.swift in Sources */,
 				54677E6327A015E500419FBB /* IceCandidate.swift in Sources */,
 				54677E6727A02E6B00419FBB /* SessionDescription.swift in Sources */,
 				54677E60279FE53500419FBB /* WebSocket+URLSessionWebSocketDelegate+URLSessionDelegate.swift in Sources */,
 				54677E40279DCDEC00419FBB /* RGB.m in Sources */,
 				54677E44279DD1CE00419FBB /* HLSStream.swift in Sources */,
 				54677E5E279FE43500419FBB /* WebSocket.swift in Sources */,
+				54677E6D27A036F500419FBB /* WebRTCClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
