@@ -9,9 +9,11 @@
 import Foundation
 
 public protocol WebRTCSignaling: WebRTCSignalDelegate, WebRTCClientDelegate, AlertReporting {
-  var client: WebRTCClient { get set }
+  var client: WebRTCClient? { get set }
 
-  var signal: WebRTCSignal { get set }
+  var signal: WebRTCSignal? { get set }
+  
+  var URL: URL? { get set }
   
   var status: String { get set }
   
@@ -23,7 +25,9 @@ public protocol WebRTCSignaling: WebRTCSignalDelegate, WebRTCClientDelegate, Ale
   
   var numberOfRemoteCandidate: Int { get set }
   
-  func connect(_ capture: VideoCapture)
+  func connect()
+  
+  func disconnect()
 }
 
 public extension WebRTCSignaling {
@@ -37,7 +41,7 @@ public extension WebRTCSignaling {
   
   func signal(_ signal: WebRTCSignal, didReceiveRemoteSdp sdp: RTCSessionDescription) {
     debugPrint("Received remote sdp")
-    self.client.set(remoteSdp: sdp) { (error) in
+    self.client?.set(remoteSdp: sdp) { (error) in
       self.hasRemoteSdp = true
     }
   }
@@ -45,18 +49,19 @@ public extension WebRTCSignaling {
   func signal(_ signal: WebRTCSignal, didReceiveCandidate candidate: RTCIceCandidate) {
     debugPrint("Received remote candidate")
     self.numberOfRemoteCandidate += 1
-    self.client.set(remoteIce: candidate)
+    self.client?.set(remoteIce: candidate)
   }
 }
 
 public extension WebRTCSignaling {
   func webRTC(_ client: WebRTCClient, didDiscoverLocalCandidate candidate: RTCIceCandidate) {
-    print("Discovered local candidate")
+    debugPrint("Discovered local candidate")
     self.numberOfLocalCandidate += 1
-    self.signal.send(candidate: candidate)
+    self.signal?.send(candidate: candidate)
   }
     
   func webRTC(_ client: WebRTCClient, didChangeConnectionState state: RTCIceConnectionState) {
+    debugPrint("Changed connection state")
     DispatchQueue.main.async {
       self.status = state.description.capitalized
     }
@@ -70,5 +75,31 @@ public extension WebRTCSignaling {
       secondaryButtonTitle: nil,
       primaryAction: nil,
       secondaryAction: nil)
+  }
+}
+
+public extension WebRTCSignaling {
+  func connect() {
+    guard
+      let URL = self.URL
+    else {
+      debugPrint("URL of signaling server is not set")
+      return
+    }
+    self.client = WebRTCClient(
+      iceServers: WebRTCConstants.ICE_SERVERS)
+    self.signal = WebRTCSignal(
+      webSocket: WebSocket(URL: URL))
+    self.client?.delegate = self
+    self.signal?.delegate = self
+    self.signal?.connect()
+  }
+  
+  func disconnect() {
+    self.signal?.disconnect()
+    self.signal?.delegate = nil
+    self.client?.delegate = nil
+    self.signal = nil
+    self.client = nil
   }
 }

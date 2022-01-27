@@ -76,6 +76,11 @@ public class WebRTCSignal {
     self.webSocket.delegate = self
     self.webSocket.connect()
   }
+  
+  public func disconnect() {
+    self.webSocket.disconnect(force: true)
+    self.webSocket.delegate = nil
+  }
 
   public func send(sdp rtcSdp: RTCSessionDescription) {
     let message = Message.sdp(SessionDescription(from: rtcSdp))

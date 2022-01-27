@@ -8,6 +8,6 @@
 
 import Foundation
 
-struct HLSConstants {
-  static let PORT: UInt16 = 10_001
+public struct HLSConstants {
+  public static let PORT: UInt16 = 10_001
 }

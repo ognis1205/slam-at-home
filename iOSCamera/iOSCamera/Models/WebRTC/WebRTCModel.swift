@@ -8,14 +8,24 @@
 
 import Foundation
 
-public class WebRTCModel: NSObject, ObservableObject {
-//  private let signal: WebRTCSignal
-
-//  private let client: WebRTCClient
+public class WebRTCModel: NSObject, ObservableObject, WebRTCSignaling {
+  @Published public var showAlert: Bool = false
   
-//  init(signal: Signal, webRTCClient: WebRTCClient) {
-//      self.signalClient = signalClient
-//      self.webRTCClient = webRTCClient
-//      super.init(nibName: String(describing: MainViewController.self), bundle: Bundle.main)
-//  }
+  @Published public var status: String = "disconnected"
+  
+  @Published public var isConnected: Bool = false
+  
+  @Published public var hasRemoteSdp: Bool = false
+  
+  @Published public var numberOfLocalCandidate: Int = 0
+  
+  @Published public var numberOfRemoteCandidate: Int = 0
+  
+  public var alertModel: AlertModel?
+
+  public var signal: WebRTCSignal?
+
+  public var client: WebRTCClient?
+  
+  public var URL: URL?
 }

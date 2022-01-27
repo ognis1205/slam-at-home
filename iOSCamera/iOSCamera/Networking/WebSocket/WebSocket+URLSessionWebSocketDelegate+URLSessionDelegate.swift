@@ -23,6 +23,6 @@ extension WebSocket: URLSessionWebSocketDelegate, URLSessionDelegate {
     didCloseWith closeCode: URLSessionWebSocketTask.CloseCode,
     reason: Data?
   ) {
-    self.disconnect()
+    self.disconnect(force: true)
   }
 }

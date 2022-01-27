@@ -11,13 +11,13 @@ import Foundation
 public protocol WebSocketDelegate: AnyObject {
   func didConnect(_ socket: WebSocket)
 
-  func didDisconnect(_ socket: WebSocket)
+  func didDisconnect(_ socket: WebSocket, force: Bool)
 
   func socket(_ socket: WebSocket, didReceiveData data: Data)
 }
 
 public class WebSocket: NSObject {
-  private let url: URL
+  private let URL: URL
 
   private var socket: URLSessionWebSocketTask?
 
@@ -33,22 +33,22 @@ public class WebSocket: NSObject {
     fatalError("NativeWebSocket:init is unavailable")
   }
 
-  public required init(url: URL) {
-    self.url = url
+  public required init(URL: URL) {
+    self.URL = URL
     super.init()
   }
 
   public func connect() {
-    let socket = urlSession.webSocketTask(with: url)
+    let socket = urlSession.webSocketTask(with: self.URL)
     socket.resume()
     self.socket = socket
     self.receive()
   }
-
-  internal func disconnect() {
+  
+  public func disconnect(force: Bool) {
     self.socket?.cancel()
     self.socket = nil
-    self.delegate?.didDisconnect(self)
+    self.delegate?.didDisconnect(self, force: force)
   }
 
   public func send(data: Data) {
@@ -66,7 +66,7 @@ public class WebSocket: NSObject {
         debugPrint("Warning: Expected to receive data format but received a string.")
         self.receive()
       case .failure:
-        self.disconnect()
+        self.disconnect(force: false)
       }
     }
   }

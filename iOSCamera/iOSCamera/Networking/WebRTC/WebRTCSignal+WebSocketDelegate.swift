@@ -14,11 +14,13 @@ extension WebRTCSignal: WebSocketDelegate {
     self.delegate?.didConnect(self)
   }
 
-  public func didDisconnect(_ webSocket: WebSocket) {
+  public func didDisconnect(_ webSocket: WebSocket, force: Bool) {
     self.delegate?.didDisconnect(self)
-    DispatchQueue.global().asyncAfter(deadline: .now() + 2) {
-      debugPrint("Trying to reconnect to signaling server...")
-      self.webSocket.connect()
+    if !force {
+      DispatchQueue.global().asyncAfter(deadline: .now() + 2) {
+        debugPrint("Trying to reconnect to signaling server...")
+        self.webSocket.connect()
+      }
     }
   }
 
