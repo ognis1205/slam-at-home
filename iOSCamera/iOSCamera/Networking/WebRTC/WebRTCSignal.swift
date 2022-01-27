@@ -50,8 +50,6 @@ extension Message: Codable {
 }
 
 public protocol WebRTCSignalDelegate: AnyObject {
-  func socket(_ socket: WebSocket, didReceiveData data: Data)
-  
   func didConnect(_ signal: WebRTCSignal)
 
   func didDisconnect(_ signal: WebRTCSignal)

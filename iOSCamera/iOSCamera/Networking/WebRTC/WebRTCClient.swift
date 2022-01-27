@@ -166,7 +166,7 @@ public class WebRTCClient: NSObject {
     self.dataChannel.reciever?.sendData(buffer)
   }
 
-  public func add(renderer: RTCVideoRenderer, videoDevice: AVCaptureDevice) {
+  public func capture(renderer: RTCVideoRenderer, videoDevice: AVCaptureDevice) {
     guard
       let capturer = self.videoTrack.capturer as? RTCCameraVideoCapturer
     else {
