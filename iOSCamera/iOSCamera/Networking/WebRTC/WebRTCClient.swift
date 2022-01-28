@@ -9,16 +9,16 @@
 import Foundation
 import WebRTC
 
-public struct VideoTrack {
-  public var source: RTCVideoSource
+struct VideoTrack {
+  var source: RTCVideoSource
 
-  public var capturer: RTCVideoCapturer?
+  var capturer: RTCVideoCapturer?
 
-  public var frame: RTCVideoFrame?
+  var frame: RTCVideoFrame?
 
-  public var sender: RTCVideoTrack?
+  var sender: RTCVideoTrack?
 
-  public var reciever: RTCVideoTrack?
+  var reciever: RTCVideoTrack?
   
   fileprivate mutating func configure(_ client: WebRTCClient) {
     debugPrint("Configuring WebRTC video track.")
@@ -39,10 +39,10 @@ public struct VideoTrack {
   }
 }
 
-public struct DataChannel {
-  public var sender: RTCDataChannel?
+struct DataChannel {
+  var sender: RTCDataChannel?
 
-  public var reciever: RTCDataChannel?
+  var reciever: RTCDataChannel?
   
   fileprivate mutating func configure(_ client: WebRTCClient) {
     debugPrint("Configuring WebRTC data channel.")
@@ -59,7 +59,7 @@ public struct DataChannel {
   }
 }
 
-public protocol WebRTCClientDelegate: AnyObject {
+protocol WebRTCClientDelegate: AnyObject {
   func webRTC(_ client: WebRTCClient, didDiscoverLocalCandidate candidate: RTCIceCandidate)
 
   func webRTC(_ client: WebRTCClient, didChangeConnectionState state: RTCIceConnectionState)
@@ -67,7 +67,7 @@ public protocol WebRTCClientDelegate: AnyObject {
   func webRTC(_ client: WebRTCClient, didReceiveData data: Data)
 }
 
-public class WebRTCClient: NSObject {
+class WebRTCClient: NSObject {
   fileprivate static let factory: RTCPeerConnectionFactory = {
     RTCInitializeSSL()
     let videoEncoderFactory = RTCDefaultVideoEncoderFactory()
@@ -77,36 +77,36 @@ public class WebRTCClient: NSObject {
       decoderFactory: videoDecoderFactory)
   }()
 
-  public var id: String
+  var id: String
   
-  internal let connection: RTCPeerConnection
+  let connection: RTCPeerConnection
   
-  internal weak var delegate: WebRTCClientDelegate?
+  weak var delegate: WebRTCClientDelegate?
 
-  public var streamId: String {
+  var streamId: String {
     return "stream-\(self.id)"
   }
 
-  public var videoTrackId: String {
+  var videoTrackId: String {
     return "video-\(self.id)"
   }
 
-  internal let mediaConstrains = [
+  let mediaConstrains = [
     kRTCMediaConstraintsOfferToReceiveAudio: kRTCMediaConstraintsValueFalse,
     kRTCMediaConstraintsOfferToReceiveVideo: kRTCMediaConstraintsValueTrue
   ]
   
-  internal var videoTrack = VideoTrack(
+  var videoTrack = VideoTrack(
     source: WebRTCClient.factory.videoSource())
 
-  internal var dataChannel = DataChannel()
+  var dataChannel = DataChannel()
 
   @available(*, unavailable)
   override init() {
     fatalError("WebRTCClient:init is unavailable")
   }
 
-  public required init(iceServers: [String]) {
+  required init(iceServers: [String]) {
     self.id = UUID().uuidString
     let config = RTCConfiguration()
     config.iceServers = [RTCIceServer(urlStrings: iceServers)]
@@ -125,7 +125,7 @@ public class WebRTCClient: NSObject {
     self.connection.delegate = self
   }
 
-  public func offer(didComplete: @escaping (_ sdp: RTCSessionDescription) -> Void) {
+  func offer(didComplete: @escaping (_ sdp: RTCSessionDescription) -> Void) {
     let constrains = RTCMediaConstraints(
       mandatoryConstraints: self.mediaConstrains,
       optionalConstraints: nil)
@@ -139,7 +139,7 @@ public class WebRTCClient: NSObject {
     }
   }
 
-  public func answer(didComplete: @escaping (_ sdp: RTCSessionDescription) -> Void) {
+  func answer(didComplete: @escaping (_ sdp: RTCSessionDescription) -> Void) {
     let constrains = RTCMediaConstraints(
       mandatoryConstraints: self.mediaConstrains,
       optionalConstraints: nil)
@@ -153,20 +153,20 @@ public class WebRTCClient: NSObject {
     }
   }
 
-  public func set(remoteSdp: RTCSessionDescription, didComplete: @escaping (Error?) -> Void) {
+  func set(remoteSdp: RTCSessionDescription, didComplete: @escaping (Error?) -> Void) {
     self.connection.setRemoteDescription(remoteSdp, completionHandler: didComplete)
   }
 
-  public func set(remoteIce: RTCIceCandidate) {
+  func set(remoteIce: RTCIceCandidate) {
     self.connection.add(remoteIce)
   }
 
-  public func send(_ data: Data) {
+  func send(_ data: Data) {
     let buffer = RTCDataBuffer(data: data, isBinary: true)
     self.dataChannel.reciever?.sendData(buffer)
   }
 
-  public func capture(renderer: RTCVideoRenderer, videoDevice: AVCaptureDevice) {
+  func capture(renderer: RTCVideoRenderer, videoDevice: AVCaptureDevice) {
     guard
       let capturer = self.videoTrack.capturer as? RTCCameraVideoCapturer
     else {

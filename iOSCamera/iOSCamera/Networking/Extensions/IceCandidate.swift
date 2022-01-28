@@ -9,12 +9,12 @@
 import Foundation
 import WebRTC
 
-public struct IceCandidate: Codable {
-  public let sdp: String
+struct IceCandidate: Codable {
+  let sdp: String
 
-  public let sdpMLineIndex: Int32
+  let sdpMLineIndex: Int32
 
-  public let sdpMid: String?
+  let sdpMid: String?
     
   init(from iceCandidate: RTCIceCandidate) {
     self.sdpMLineIndex = iceCandidate.sdpMLineIndex

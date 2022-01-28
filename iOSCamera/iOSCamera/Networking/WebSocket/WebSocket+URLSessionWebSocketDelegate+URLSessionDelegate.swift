@@ -9,7 +9,7 @@
 import Foundation
 
 extension WebSocket: URLSessionWebSocketDelegate, URLSessionDelegate {
-  public func urlSession(
+  func urlSession(
     _ session: URLSession,
     webSocketTask: URLSessionWebSocketTask,
     didOpenWithProtocol protocol: String?
@@ -17,7 +17,7 @@ extension WebSocket: URLSessionWebSocketDelegate, URLSessionDelegate {
     self.delegate?.didConnect(self)
   }
     
-  public func urlSession(
+  func urlSession(
     _ session: URLSession,
     webSocketTask: URLSessionWebSocketTask,
     didCloseWith closeCode: URLSessionWebSocketTask.CloseCode,

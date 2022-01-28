@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol WebSocketDelegate: AnyObject {
+protocol WebSocketDelegate: AnyObject {
   func didConnect(_ socket: WebSocket)
 
   func didDisconnect(_ socket: WebSocket, force: Bool)
@@ -16,12 +16,12 @@ public protocol WebSocketDelegate: AnyObject {
   func socket(_ socket: WebSocket, didReceiveData data: Data)
 }
 
-public class WebSocket: NSObject {
+class WebSocket: NSObject {
+  weak var delegate: WebSocketDelegate?
+
   private let URL: URL
 
   private var socket: URLSessionWebSocketTask?
-
-  public weak var delegate: WebSocketDelegate?
 
   private lazy var urlSession: URLSession = URLSession(
     configuration: .default,
@@ -33,25 +33,25 @@ public class WebSocket: NSObject {
     fatalError("NativeWebSocket:init is unavailable")
   }
 
-  public required init(URL: URL) {
+  required init(URL: URL) {
     self.URL = URL
     super.init()
   }
 
-  public func connect() {
+  func connect() {
     let socket = urlSession.webSocketTask(with: self.URL)
     socket.resume()
     self.socket = socket
     self.receive()
   }
   
-  public func disconnect(force: Bool) {
+  func disconnect(force: Bool) {
     self.socket?.cancel()
     self.socket = nil
     self.delegate?.didDisconnect(self, force: force)
   }
 
-  public func send(data: Data) {
+  func send(data: Data) {
     self.socket?.send(.data(data)) { _ in }
   }
 

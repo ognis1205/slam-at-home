@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol AlertReporting: AnyObject {
+protocol AlertReporting: AnyObject {
   var alertModel: AlertModel? { get set }
   
   var showAlert: Bool { get set }
@@ -23,7 +23,7 @@ public protocol AlertReporting: AnyObject {
   )
 }
 
-public extension AlertReporting {
+extension AlertReporting {
   func reportAlert(
     title: String = "",
     message: String = "",

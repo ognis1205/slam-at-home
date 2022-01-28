@@ -9,19 +9,19 @@
 import AVFoundation
 import Foundation
 
-public enum VideoSetupResult {
+enum VideoSetupResult {
   case ready
   case success
   case notAuthorized
   case configurationFailed
 }
 
-public struct VideoCapture {
-  public let session: AVCaptureSession
+struct VideoCapture {
+  let session: AVCaptureSession
 
-  public let output: AVCaptureVideoDataOutput
+  let output: AVCaptureVideoDataOutput
 
-  public let context: CIContext
+  let context: CIContext
   
   fileprivate func configure(_ capturing: VideoCapturing) {
     debugPrint("Checking video setup result")
@@ -84,7 +84,7 @@ public struct VideoCapture {
   }
 }
 
-public protocol VideoCapturing: AVCaptureVideoDataOutputSampleBufferDelegate, AlertReporting {
+protocol VideoCapturing: AVCaptureVideoDataOutputSampleBufferDelegate, AlertReporting {
   var videoSetupResult: VideoSetupResult { get set }
 
   var isVideoCapturing: Bool { get set }
@@ -127,7 +127,7 @@ private extension VideoCapturing {
   }
 }
 
-public extension VideoCapturing {
+extension VideoCapturing {
   func startVideoCapturing(_ capture: VideoCapture) {
     self.checkPermissions()
     capture.configure(self)

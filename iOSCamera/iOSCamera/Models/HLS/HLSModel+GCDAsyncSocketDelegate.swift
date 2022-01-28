@@ -11,7 +11,7 @@ import CocoaAsyncSocket
 import Foundation
 
 extension HLSModel: GCDAsyncSocketDelegate {
-  public func socket(
+  func socket(
     _ sock: GCDAsyncSocket,
     didAcceptNewSocket newSocket: GCDAsyncSocket
   ) {

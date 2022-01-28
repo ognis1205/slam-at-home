@@ -10,9 +10,9 @@ import CocoaAsyncSocket
 import Foundation
 
 private class Entry<T> {
-  fileprivate let value: T?
+  let value: T?
 
-  fileprivate var next: Entry?
+  var next: Entry?
 
   init(_ value: T?) {
     self.value = value
@@ -20,26 +20,26 @@ private class Entry<T> {
 }
 
 private class Queue<T> {
-  public enum PeepType {
+  enum PeepType {
     case HEAD
     case TAIL
   }
 
-  private var head: Entry<T>
+  var head: Entry<T>
 
-  private var tail: Entry<T>
+  var tail: Entry<T>
 
-  private var capacity: Int
+  var capacity: Int
 
-  private var length: Int = 0
+  var length: Int = 0
 
-  public init(capacity: Int) {
+  init(capacity: Int) {
     self.tail = Entry(nil)
     self.head = self.tail
     self.capacity = capacity
   }
 
-  public func push(_ value: T) {
+  func push(_ value: T) {
     if self.length >= self.capacity {
       self.tail = Entry(value)
     } else {
@@ -51,7 +51,7 @@ private class Queue<T> {
     }
   }
 
-  public func pop() -> T? {
+  func pop() -> T? {
     if let new = self.head.next {
       self.head = new
       self.length -= 1
@@ -62,7 +62,7 @@ private class Queue<T> {
     }
   }
 
-  public func peep(_ type: PeepType = PeepType.HEAD) -> T? {
+  func peep(_ type: PeepType = PeepType.HEAD) -> T? {
     switch type {
     case .HEAD:
       if let entry = self.head.next {
@@ -79,19 +79,19 @@ private class Queue<T> {
     }
   }
 
-  public func getLength() -> Int {
+  func getLength() -> Int {
     return self.length
   }
 
-  public func isEmpty() -> Bool {
+  func isEmpty() -> Bool {
     return self.head === self.tail
   }
 }
 
-public class HLSStream {
-  public var id: Int
+class HLSStream {
+  var id: Int
 
-  public var dataToSend: Data? {
+  var dataToSend: Data? {
     didSet {
       guard let dataToSend = self.dataToSend else {
         return
@@ -100,7 +100,7 @@ public class HLSStream {
     }
   }
   
-  public var isConnected: Bool {
+  var isConnected: Bool {
     return !(self.socket.connectedPort.hashValue == 0 || !self.socket.isConnected)
   }
   
@@ -112,14 +112,14 @@ public class HLSStream {
 
   private var dataStack: Queue<Data> = Queue<Data>(capacity: 1)
 
-  public init(id: Int, socket: GCDAsyncSocket, dispatchQueue: DispatchQueue) {
+  init(id: Int, socket: GCDAsyncSocket, dispatchQueue: DispatchQueue) {
     debugPrint("Creating connection [#\(id)]")
     self.id = id
     self.socket = socket
     self.dispatchQueue = dispatchQueue
   }
 
-  public func open() {
+  func open() {
     self.dispatchQueue.async(execute: { [unowned self] in
       while self.isConnected {
         if !self.isStreaming {

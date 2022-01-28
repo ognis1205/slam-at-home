@@ -9,7 +9,7 @@
 import Foundation
 import WebRTC
 
-public enum SdpType: String, Codable {
+enum SdpType: String, Codable {
   case offer
   case prAnswer
   case answer
@@ -26,10 +26,10 @@ public enum SdpType: String, Codable {
   }
 }
 
-public struct SessionDescription: Codable {
-  public let sdp: String
+struct SessionDescription: Codable {
+  let sdp: String
 
-  public let type: SdpType
+  let type: SdpType
     
   init(from rtcSessionDescription: RTCSessionDescription) {
     self.sdp = rtcSessionDescription.sdp

@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol WebRTCSignaling: WebRTCSignalDelegate, WebRTCClientDelegate, AlertReporting {
+protocol WebRTCSignaling: WebRTCSignalDelegate, WebRTCClientDelegate, AlertReporting {
   var client: WebRTCClient? { get set }
 
   var signal: WebRTCSignal? { get set }
@@ -30,7 +30,7 @@ public protocol WebRTCSignaling: WebRTCSignalDelegate, WebRTCClientDelegate, Ale
   func disconnect()
 }
 
-public extension WebRTCSignaling {
+extension WebRTCSignaling {
   func didConnect(_ signal: WebRTCSignal) {
     self.isConnected = true
   }
@@ -53,7 +53,7 @@ public extension WebRTCSignaling {
   }
 }
 
-public extension WebRTCSignaling {
+extension WebRTCSignaling {
   func webRTC(_ client: WebRTCClient, didDiscoverLocalCandidate candidate: RTCIceCandidate) {
     debugPrint("Discovered local candidate")
     self.numberOfLocalCandidate += 1
@@ -78,7 +78,7 @@ public extension WebRTCSignaling {
   }
 }
 
-public extension WebRTCSignaling {
+extension WebRTCSignaling {
   func connect() {
     guard
       let URL = self.URL

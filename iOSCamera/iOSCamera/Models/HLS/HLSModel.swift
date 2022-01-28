@@ -11,31 +11,31 @@ import CocoaAsyncSocket
 import Combine
 import SwiftUI
 
-public class HLSModel: NSObject, ObservableObject, VideoCapturing {
-  @Published public var isConnected: Bool = false
+class HLSModel: NSObject, ObservableObject, VideoCapturing {
+  @Published var isConnected: Bool = false
   
-  @Published public var URL: String = "Not Available"
+  @Published var URL: String = "Not Available"
 
-  @Published public var showAlert: Bool = false
+  @Published var showAlert: Bool = false
   
-  public var alertModel: AlertModel?
+  var alertModel: AlertModel?
 
-  public var videoSetupResult: VideoSetupResult = .ready
+  var videoSetupResult: VideoSetupResult = .ready
 
-  public var isVideoCapturing: Bool = false
+  var isVideoCapturing: Bool = false
 
-  public let videoCapture: VideoCapture = VideoCapture(
+  let videoCapture: VideoCapture = VideoCapture(
     session: AVCaptureSession(),
     output: AVCaptureVideoDataOutput(),
     context: CIContext(options: nil))
 
-  internal var streams: [Int: HLSStream] = [Int: HLSStream]()
+  var streams: [Int: HLSStream] = [Int: HLSStream]()
 
   private var socket: GCDAsyncSocket?
 
   private var subscriptions: Set<AnyCancellable> = Set<AnyCancellable>()
 
-  public func start() {
+  func start() {
     self.startVideoCapturing(self.videoCapture)
     debugPrint("Starting network service")
     if self.isVideoCapturing {

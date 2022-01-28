@@ -11,7 +11,7 @@ import CocoaAsyncSocket
 import Foundation
 
 extension HLSModel: AVCaptureVideoDataOutputSampleBufferDelegate {
-  public func captureOutput(
+  func captureOutput(
     _ output: AVCaptureOutput,
     didOutput sampleBuffer: CMSampleBuffer,
     from connection: AVCaptureConnection

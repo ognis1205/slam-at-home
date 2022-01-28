@@ -8,24 +8,24 @@
 
 import Foundation
 
-public class WebRTCModel: NSObject, ObservableObject, WebRTCSignaling {
-  @Published public var showAlert: Bool = false
+class WebRTCModel: NSObject, ObservableObject, WebRTCSignaling {
+  @Published var showAlert: Bool = false
   
-  @Published public var status: String = "disconnected"
+  @Published var status: String = "disconnected"
   
-  @Published public var isConnected: Bool = false
+  @Published var isConnected: Bool = false
   
-  @Published public var hasRemoteSdp: Bool = false
+  @Published var hasRemoteSdp: Bool = false
   
-  @Published public var numberOfLocalCandidate: Int = 0
+  @Published var numberOfLocalCandidate: Int = 0
   
-  @Published public var numberOfRemoteCandidate: Int = 0
+  @Published var numberOfRemoteCandidate: Int = 0
   
-  public var alertModel: AlertModel?
+  var alertModel: AlertModel?
 
-  public var signal: WebRTCSignal?
+  var signal: WebRTCSignal?
 
-  public var client: WebRTCClient?
+  var client: WebRTCClient?
   
-  public var URL: URL?
+  var URL: URL?
 }

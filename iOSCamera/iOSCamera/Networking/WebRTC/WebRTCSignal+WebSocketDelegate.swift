@@ -10,11 +10,11 @@ import Foundation
 import WebRTC
 
 extension WebRTCSignal: WebSocketDelegate {
-  public func didConnect(_ webSocket: WebSocket) {
+  func didConnect(_ webSocket: WebSocket) {
     self.delegate?.didConnect(self)
   }
 
-  public func didDisconnect(_ webSocket: WebSocket, force: Bool) {
+  func didDisconnect(_ webSocket: WebSocket, force: Bool) {
     self.delegate?.didDisconnect(self)
     if !force {
       DispatchQueue.global().asyncAfter(deadline: .now() + 2) {
@@ -24,7 +24,7 @@ extension WebRTCSignal: WebSocketDelegate {
     }
   }
 
-  public func socket(_ webSocket: WebSocket, didReceiveData data: Data) {
+  func socket(_ webSocket: WebSocket, didReceiveData data: Data) {
     let message: Message
     do {
       message = try self.decoder.decode(Message.self, from: data)

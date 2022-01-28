@@ -9,13 +9,13 @@
 import Foundation
 import WebRTC
 
-public enum Message {
+enum Message {
   case sdp(SessionDescription)
   case candidate(IceCandidate)
 }
 
 extension Message: Codable {
-  public init(from decoder: Decoder) throws {
+  init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     let type = try container.decode(String.self, forKey: .type)
     switch type {
@@ -28,7 +28,7 @@ extension Message: Codable {
     }
   }
 
-  public func encode(to encoder: Encoder) throws {
+  func encode(to encoder: Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     switch self {
     case .sdp(let sessionDescription):
@@ -49,7 +49,7 @@ extension Message: Codable {
   }
 }
 
-public protocol WebRTCSignalDelegate: AnyObject {
+protocol WebRTCSignalDelegate: AnyObject {
   func didConnect(_ signal: WebRTCSignal)
 
   func didDisconnect(_ signal: WebRTCSignal)
@@ -59,30 +59,30 @@ public protocol WebRTCSignalDelegate: AnyObject {
   func signal(_ signal: WebRTCSignal, didReceiveCandidate candidate: RTCIceCandidate)
 }
 
-public class WebRTCSignal {
-  internal let decoder = JSONDecoder()
+class WebRTCSignal {
+  let decoder = JSONDecoder()
 
-  internal let encoder = JSONEncoder()
+  let encoder = JSONEncoder()
 
-  internal let webSocket: WebSocket
+  let webSocket: WebSocket
 
-  public weak var delegate: WebRTCSignalDelegate?
+  weak var delegate: WebRTCSignalDelegate?
 
-  public init(webSocket: WebSocket) {
+  init(webSocket: WebSocket) {
     self.webSocket = webSocket
   }
 
-  public func connect() {
+  func connect() {
     self.webSocket.delegate = self
     self.webSocket.connect()
   }
   
-  public func disconnect() {
+  func disconnect() {
     self.webSocket.disconnect(force: true)
     self.webSocket.delegate = nil
   }
 
-  public func send(sdp rtcSdp: RTCSessionDescription) {
+  func send(sdp rtcSdp: RTCSessionDescription) {
     let message = Message.sdp(SessionDescription(from: rtcSdp))
     do {
       let data = try self.encoder.encode(message)
@@ -92,7 +92,7 @@ public class WebRTCSignal {
     }
   }
 
-  public func send(candidate rtcIceCandidate: RTCIceCandidate) {
+  func send(candidate rtcIceCandidate: RTCIceCandidate) {
     let message = Message.candidate(IceCandidate(from: rtcIceCandidate))
     do {
       let data = try self.encoder.encode(message)

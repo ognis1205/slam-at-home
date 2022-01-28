@@ -9,8 +9,8 @@
 import AVFoundation
 import SwiftUI
 
-public struct CameraView: UIViewRepresentable {
-  public class Wrapper: UIView {
+struct CameraView: UIViewRepresentable {
+  class Wrapper: UIView {
     override public class var layerClass: AnyClass {
       AVCaptureVideoPreviewLayer.self
     }
@@ -20,9 +20,9 @@ public struct CameraView: UIViewRepresentable {
     }
   }
 
-  public let avCaptureSession: AVCaptureSession
+  let avCaptureSession: AVCaptureSession
 
-  public func makeUIView(context: Context) -> Wrapper {
+  func makeUIView(context: Context) -> Wrapper {
     let view = Wrapper()
     let bounds = view.bounds
     view.backgroundColor = .black
@@ -39,13 +39,13 @@ public struct CameraView: UIViewRepresentable {
     return view
   }
 
-  public func updateUIView(_ uiView: Wrapper, context: Context) {
+  func updateUIView(_ uiView: Wrapper, context: Context) {
     // Placeholder.
   }
 }
 
-public struct CameraView_Previews: PreviewProvider {
-  public static var previews: some View {
+struct CameraView_Previews: PreviewProvider {
+  static var previews: some View {
     CameraView(avCaptureSession: AVCaptureSession())
   }
 }
