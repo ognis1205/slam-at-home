@@ -10,6 +10,8 @@ import SwiftUI
 
 struct HLSView: View {
   @StateObject var model: HLSModel = HLSModel()
+  
+  @State private var showSettings: Bool = false
 
   var body: some View {
     GeometryReader { reader in
@@ -27,6 +29,20 @@ struct HLSView: View {
             )
             .accentColor(model.isConnected ? .red : .white)
             Text(model.URL)
+            Spacer()
+            Button(
+              action: {
+                self.showSettings.toggle()
+              },
+              label: {
+                Image(systemName: "gearshape")
+                  .font(.system(size: 20, weight: .medium, design: .default))
+              }
+            )
+            .accentColor(.white)
+            .sheet(isPresented: self.$showSettings) {
+              WebRTCSettingsView()
+            }
           }
           CameraView(avCaptureSession: model.videoCapture.session)
             .onAppear {
