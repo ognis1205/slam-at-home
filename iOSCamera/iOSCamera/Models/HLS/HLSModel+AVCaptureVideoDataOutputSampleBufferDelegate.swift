@@ -39,7 +39,7 @@ extension HLSModel: AVCaptureVideoDataOutputSampleBufferDelegate {
 
       if self.streams.isEmpty {
         DispatchQueue.main.async(execute: {
-          self.isConnected = false
+          self.delegate?.didDisconnect()
         })
       }
     }

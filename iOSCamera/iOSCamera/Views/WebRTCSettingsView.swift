@@ -19,9 +19,9 @@ class URLValidator: ObservableObject {
 }
 
 struct WebRTCSettingsView: View {
-//  let model: WebRTCModel
+  @StateObject var model: WebRTCModel
   
-  @State var isConnected: Bool = false
+//  @State var isConnected: Bool = false
   
   @ObservedObject var urlValidator = URLValidator()
 
@@ -32,31 +32,32 @@ struct WebRTCSettingsView: View {
           HStack {
             TextField("ws://0.0.0.0:10000", text: $urlValidator.value)
               .multilineTextAlignment(.leading)
-              .onReceive(Just(urlValidator.value)) { newValue in
-                let value = newValue.replacingOccurrences(
-                  of: "\\W", with: "", options: .regularExpression)
-                if value != newValue {
-                  self.urlValidator.value = value
-                }
-                print(newValue)
-              }
-            Spacer()
-            Toggle("", isOn: $isConnected)
-              .toggleStyle(WiFiToggleStyle())
-              .onChange(of: isConnected) { value in
-                print(value)
-              }
+//              .onReceive(Just(urlValidator.value)) { newValue in
+//                let value = newValue.replacingOccurrences(
+//                  of: "\\W", with`: "", options: .regularExpression)
+//                if value != newValue {
+//                  self.urlValidator.value = value
+//                }
+//                print(newValue)
+//              }
+//            Spacer()
+//            Toggle("", isOn: model.isConnected)
+//              .toggleStyle(WiFiToggleStyle())
+//              .onChange(of: model.isConnected) { value in
+//                print(value)
+//                print(urlValidator.value)
+//              }
           }
         }
         Text("Settings screen")
       }
-      .navigationTitle("Settings")
+//      .navigationTitle("Settings", displayMode: .inline)
     }
   }
 }
 
-struct WebRTCSettingsView_Previews: PreviewProvider {
-  static var previews: some View {
-    WebRTCSettingsView()
-  }
-}
+//struct WebRTCSettingsView_Previews: PreviewProvider {
+//  static var previews: some View {
+//    WebRTCSettingsView()
+//  }
+//}

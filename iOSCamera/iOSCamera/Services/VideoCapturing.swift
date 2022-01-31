@@ -89,11 +89,11 @@ protocol VideoCapturing: AVCaptureVideoDataOutputSampleBufferDelegate, AlertRepo
 
   var isVideoCapturing: Bool { get set }
 
-  func startVideoCapturing(_ capture: VideoCapture)
+  func startVideoCapturing(_ capture: VideoCapture, delegate: AlertReportingDelegate)
 }
 
 private extension VideoCapturing {
-  func checkPermissions() {
+  func checkPermissions(_ delegate: AlertReportingDelegate) {
     debugPrint("Checking video device permissions")
     switch AVCaptureDevice.authorizationStatus(for: .video) {
     case .authorized:
@@ -109,6 +109,7 @@ private extension VideoCapturing {
     default:
       self.videoSetupResult = .notAuthorized
       self.reportAlert(
+        delegate,
         title: "Camera Access",
         message: "iOSCamera doesn't have access to use your camera, please update your privacy settings.",
         primaryButtonTitle: "Settings",
@@ -128,8 +129,8 @@ private extension VideoCapturing {
 }
 
 extension VideoCapturing {
-  func startVideoCapturing(_ capture: VideoCapture) {
-    self.checkPermissions()
+  func startVideoCapturing(_ capture: VideoCapture, delegate: AlertReportingDelegate) {
+    self.checkPermissions(delegate)
     capture.configure(self)
     debugPrint("Starting video session")
     if !self.isVideoCapturing {
@@ -140,6 +141,7 @@ extension VideoCapturing {
       case .ready, .configurationFailed, .notAuthorized:
         debugPrint("Application not authorized to use camera")
         self.reportAlert(
+          delegate,
           title: "Camera Error",
           message: "Camera configuration failed. Either your device camera is not available or its missing permissions",
           primaryButtonTitle: "Accept",

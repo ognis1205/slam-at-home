@@ -8,15 +8,22 @@
 
 import AVFoundation
 import CocoaAsyncSocket
-import Combine
-import SwiftUI
 
-class HLSModel: NSObject, ObservableObject, VideoCapturing {
-  @Published var isConnected: Bool = false
+protocol HLSModelDelegate: AlertReportingDelegate {
+  func didConnect()
   
-  @Published var URL: String = "Not Available"
+  func didDisconnect()
+  
+  func ip(_ ip: String)
+}
 
-  @Published var showAlert: Bool = false
+class HLSModel: NSObject, VideoCapturing {
+  let videoCapture: VideoCapture = VideoCapture(
+    session: AVCaptureSession(),
+    output: AVCaptureVideoDataOutput(),
+    context: CIContext(options: nil))
+  
+  weak var delegate: HLSModelDelegate?
   
   var alertModel: AlertModel?
 
@@ -24,19 +31,18 @@ class HLSModel: NSObject, ObservableObject, VideoCapturing {
 
   var isVideoCapturing: Bool = false
 
-  let videoCapture: VideoCapture = VideoCapture(
-    session: AVCaptureSession(),
-    output: AVCaptureVideoDataOutput(),
-    context: CIContext(options: nil))
-
   var streams: [Int: HLSStream] = [Int: HLSStream]()
 
-  private var socket: GCDAsyncSocket?
-
-  private var subscriptions: Set<AnyCancellable> = Set<AnyCancellable>()
+  var socket: GCDAsyncSocket?
 
   func start() {
-    self.startVideoCapturing(self.videoCapture)
+    guard
+      let delegate = self.delegate
+    else {
+      debugPrint("HLSModels requires its delegation")
+      return
+    }
+    self.startVideoCapturing(self.videoCapture, delegate: delegate)
     debugPrint("Starting network service")
     if self.isVideoCapturing {
       self.socket = GCDAsyncSocket(
@@ -50,11 +56,12 @@ class HLSModel: NSObject, ObservableObject, VideoCapturing {
       do {
         if let ip = IP.getAddress() {
           if !ip.isEmpty {
-            self.URL = "http://\(ip):\(HLSConstants.PORT)"
+            delegate.ip(ip)
             try self.socket?.accept(onInterface: ip, port: HLSConstants.PORT)
           } else {
             debugPrint("Could not get IP address")
             self.reportAlert(
+              delegate,
               title: "Network Error",
               message: "Device is not connected to WiFi network",
               primaryButtonTitle: "Accept",
@@ -67,6 +74,7 @@ class HLSModel: NSObject, ObservableObject, VideoCapturing {
       } catch {
         debugPrint("Could not start listening on port \(HLSConstants.PORT) (\(error))")
         self.reportAlert(
+          delegate,
           title: "Socket Error",
           message: "Port number is not available",
           primaryButtonTitle: "Accept",

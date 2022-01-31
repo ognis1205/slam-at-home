@@ -68,13 +68,14 @@ extension WebRTCSignaling {
   }
     
   func webRTC(_ client: WebRTCClient, didReceiveData data: Data) {
-    self.reportAlert(
-      title: "Message from WebRTC",
-      message: String(data: data, encoding: .utf8) ?? "(Binary: \(data.count) bytes)",
-      primaryButtonTitle: "OK",
-      secondaryButtonTitle: nil,
-      primaryAction: nil,
-      secondaryAction: nil)
+    debugPrint("Message from WebRTC: \(String(data: data, encoding: .utf8) ?? "(Binary: \(data.count) bytes)")")
+//    self.reportAlert(
+//      title: "Message from WebRTC",
+//      message: String(data: data, encoding: .utf8) ?? "(Binary: \(data.count) bytes)",
+//      primaryButtonTitle: "OK",
+//      secondaryButtonTitle: nil,
+//      primaryAction: nil,
+//      secondaryAction: nil)
   }
 }
 

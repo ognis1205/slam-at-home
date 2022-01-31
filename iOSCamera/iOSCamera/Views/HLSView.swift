@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct HLSView: View {
-  @StateObject var model: HLSModel = HLSModel()
+  @ObservedObject var viewModel: HLSViewModel = HLSViewModel()
   
   @State private var showSettings: Bool = false
 
@@ -21,14 +21,14 @@ struct HLSView: View {
           HStack {
             Button(
               action: {
+                // Do nothing.
               },
               label: {
-                Image(systemName: model.isConnected ? "wifi.circle.fill" : "wifi.circle")
+                Image(systemName: self.viewModel.connectionLabel)
                   .font(.system(size: 20, weight: .medium, design: .default))
-              }
-            )
-            .accentColor(model.isConnected ? .red : .white)
-            Text(model.URL)
+              })
+              .accentColor(self.viewModel.connectionColor)
+            Text(self.viewModel.URL)
             Spacer()
             Button(
               action: {
@@ -41,26 +41,14 @@ struct HLSView: View {
             )
             .accentColor(.white)
             .sheet(isPresented: self.$showSettings) {
-              WebRTCSettingsView()
+//              WebRTCSettingsView(nil)
             }
           }
-          CameraView(avCaptureSession: model.videoCapture.session)
+          CameraView(avCaptureSession: viewModel.session)
             .onAppear {
-              model.start()
+              viewModel.start()
             }
-            .alert(
-              isPresented: $model.showAlert,
-              content: {
-                Alert(
-                  title: Text(model.alertModel?.title ?? ""),
-                  message: Text(model.alertModel?.message ?? ""),
-                  dismissButton: .default(
-                    Text(model.alertModel?.primaryButtonTitle ?? ""),
-                    action: { model.alertModel?.primaryAction?() }
-                  )
-                )
-              }
-            )
+            .alert(isPresented: $viewModel.showAlert, content: { self.viewModel.alert })
         }
       }
     }

@@ -36,6 +36,8 @@
 		54677E7A27A3264300419FBB /* WebRTCConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54677E7927A3264300419FBB /* WebRTCConstants.swift */; };
 		54677E7C27A3BB5000419FBB /* WebRTCSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54677E7B27A3BB5000419FBB /* WebRTCSettingsView.swift */; };
 		54677E7F27A673BB00419FBB /* WiFiToggleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54677E7E27A673BA00419FBB /* WiFiToggleStyle.swift */; };
+		54677E8227A85DAC00419FBB /* HLSViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54677E8127A85DAC00419FBB /* HLSViewModel.swift */; };
+		54677E8427A891FC00419FBB /* HLSViewModel+HLSModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54677E8327A891FC00419FBB /* HLSViewModel+HLSModelDelegate.swift */; };
 		54F9A829279CFE9900E994A1 /* iOSCameraApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F9A828279CFE9900E994A1 /* iOSCameraApp.swift */; };
 		54F9A82B279CFE9900E994A1 /* HLSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F9A82A279CFE9900E994A1 /* HLSView.swift */; };
 		54F9A82D279CFE9C00E994A1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54F9A82C279CFE9C00E994A1 /* Assets.xcassets */; };
@@ -97,6 +99,8 @@
 		54677E7927A3264300419FBB /* WebRTCConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebRTCConstants.swift; sourceTree = "<group>"; };
 		54677E7B27A3BB5000419FBB /* WebRTCSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebRTCSettingsView.swift; sourceTree = "<group>"; };
 		54677E7E27A673BA00419FBB /* WiFiToggleStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WiFiToggleStyle.swift; sourceTree = "<group>"; };
+		54677E8127A85DAC00419FBB /* HLSViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HLSViewModel.swift; sourceTree = "<group>"; };
+		54677E8327A891FC00419FBB /* HLSViewModel+HLSModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HLSViewModel+HLSModelDelegate.swift"; sourceTree = "<group>"; };
 		54F9A825279CFE9900E994A1 /* iOSCamera.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSCamera.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		54F9A828279CFE9900E994A1 /* iOSCameraApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSCameraApp.swift; sourceTree = "<group>"; };
 		54F9A82A279CFE9900E994A1 /* HLSView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HLSView.swift; sourceTree = "<group>"; };
@@ -291,6 +295,15 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		54677E8027A8563500419FBB /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				54677E8127A85DAC00419FBB /* HLSViewModel.swift */,
+				54677E8327A891FC00419FBB /* HLSViewModel+HLSModelDelegate.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		54F9A81C279CFE9900E994A1 = {
 			isa = PBXGroup;
 			children = (
@@ -316,6 +329,7 @@
 		54F9A827279CFE9900E994A1 /* iOSCamera */ = {
 			isa = PBXGroup;
 			children = (
+				54677E8027A8563500419FBB /* ViewModels */,
 				54677E59279FAE0900419FBB /* Views */,
 				54677E52279EC61100419FBB /* Constants */,
 				54677E4A279E778300419FBB /* Models */,
@@ -641,6 +655,7 @@
 				54677E7227A0755500419FBB /* WebRTCClient+RTCPeerConnectionDelegate.swift in Sources */,
 				54677E39279D8C4700419FBB /* IP.m in Sources */,
 				54677E51279E869800419FBB /* HLSModel.swift in Sources */,
+				54677E8427A891FC00419FBB /* HLSViewModel+HLSModelDelegate.swift in Sources */,
 				54677E58279F407500419FBB /* HLSModel+GCDAsyncSocketDelegate.swift in Sources */,
 				54677E4C279E77BC00419FBB /* AlertModel.swift in Sources */,
 				54677E56279EEA8200419FBB /* HLSConstants.swift in Sources */,
@@ -655,6 +670,7 @@
 				54677E44279DD1CE00419FBB /* HLSStream.swift in Sources */,
 				54677E7827A1CED700419FBB /* WebRTCSignaling.swift in Sources */,
 				54677E5E279FE43500419FBB /* WebSocket.swift in Sources */,
+				54677E8227A85DAC00419FBB /* HLSViewModel.swift in Sources */,
 				54677E6D27A036F500419FBB /* WebRTCClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -30,7 +30,7 @@ extension HLSModel: GCDAsyncSocketDelegate {
     self.streams[id] = newStream
     newStream.open()
     DispatchQueue.main.async(execute: {
-      self.isConnected = true
+      self.delegate?.didConnect()
     })
   }
 }

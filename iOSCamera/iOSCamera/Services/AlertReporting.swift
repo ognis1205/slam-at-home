@@ -8,12 +8,15 @@
 
 import Foundation
 
+protocol AlertReportingDelegate: AnyObject {
+  func didReport()
+}
+
 protocol AlertReporting: AnyObject {
   var alertModel: AlertModel? { get set }
   
-  var showAlert: Bool { get set }
-
   func reportAlert(
+    _ delegate: AlertReportingDelegate,
     title: String,
     message: String,
     primaryButtonTitle: String,
@@ -25,6 +28,7 @@ protocol AlertReporting: AnyObject {
 
 extension AlertReporting {
   func reportAlert(
+    _ delegate: AlertReportingDelegate,
     title: String = "",
     message: String = "",
     primaryButtonTitle: String = "Accept",
@@ -40,7 +44,7 @@ extension AlertReporting {
         secondaryButtonTitle: secondaryButtonTitle,
         primaryAction: primaryAction,
         secondaryAction: secondaryAction)
-      self.showAlert = true
+      delegate.didReport()
     }
   }
 }
