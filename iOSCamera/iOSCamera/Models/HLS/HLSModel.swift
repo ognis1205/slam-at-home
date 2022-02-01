@@ -18,18 +18,15 @@ protocol HLSModelDelegate: AlertReportingDelegate {
 }
 
 class HLSModel: NSObject, VideoCapturing {
+  weak var delegate: HLSModelDelegate?
+
+  var alert: AlertModel?
+
   let videoCapture: VideoCapture = VideoCapture(
     session: AVCaptureSession(),
     output: AVCaptureVideoDataOutput(),
-    context: CIContext(options: nil))
-  
-  weak var delegate: HLSModelDelegate?
-  
-  var alertModel: AlertModel?
-
-  var videoSetupResult: VideoSetupResult = .ready
-
-  var isVideoCapturing: Bool = false
+    context: CIContext(options: nil),
+    state: .ready)
 
   var streams: [Int: HLSStream] = [Int: HLSStream]()
 
@@ -39,12 +36,12 @@ class HLSModel: NSObject, VideoCapturing {
     guard
       let delegate = self.delegate
     else {
-      debugPrint("HLSModels requires its delegation")
+      debugPrint("HLSModel requires delegation")
       return
     }
-    self.startVideoCapturing(self.videoCapture, delegate: delegate)
+    self.capture(self.videoCapture, delegate: delegate)
     debugPrint("Starting network service")
-    if self.isVideoCapturing {
+    if self.videoCapture.state == .running {
       self.socket = GCDAsyncSocket(
         delegate: self,
         delegateQueue: DispatchQueue(
@@ -60,7 +57,7 @@ class HLSModel: NSObject, VideoCapturing {
             try self.socket?.accept(onInterface: ip, port: HLSConstants.PORT)
           } else {
             debugPrint("Could not get IP address")
-            self.reportAlert(
+            self.alert(
               delegate,
               title: "Network Error",
               message: "Device is not connected to WiFi network",
@@ -73,7 +70,7 @@ class HLSModel: NSObject, VideoCapturing {
         }
       } catch {
         debugPrint("Could not start listening on port \(HLSConstants.PORT) (\(error))")
-        self.reportAlert(
+        self.alert(
           delegate,
           title: "Socket Error",
           message: "Port number is not available",

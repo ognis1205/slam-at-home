@@ -7,25 +7,46 @@
 //
 
 import AVFoundation
+import CoreImage
 import Foundation
 
-enum VideoSetupResult {
+enum CaptureState {
   case ready
-  case success
+  case authorized
   case notAuthorized
+  case configured
   case configurationFailed
+  case running
 }
 
-struct VideoCapture {
+class VideoCapture {
   let session: AVCaptureSession
 
   let output: AVCaptureVideoDataOutput
 
   let context: CIContext
   
+  var state: CaptureState
+  
+  init(
+    session: AVCaptureSession,
+    output: AVCaptureVideoDataOutput,
+    context: CIContext,
+    state: CaptureState
+  ) {
+    self.session = session
+    self.output = output
+    self.context = context
+    self.state = state
+  }
+  
+  fileprivate func state(_ state: CaptureState) {
+    self.state = state
+  }
+  
   fileprivate func configure(_ capturing: VideoCapturing) {
     debugPrint("Checking video setup result")
-    if capturing.videoSetupResult != .success {
+    if self.state != .authorized {
       return
     }
 
@@ -49,7 +70,7 @@ struct VideoCapture {
 
       guard let videoDevice = defaultDevice else {
         debugPrint("Default video device is unavailable")
-        capturing.videoSetupResult = .configurationFailed
+        self.state(.configurationFailed)
         self.session.commitConfiguration()
         return
       }
@@ -69,46 +90,42 @@ struct VideoCapture {
         self.session.addOutput(self.output)
       } else {
         debugPrint("Could not add video device input to the session")
-        capturing.videoSetupResult = .configurationFailed
+        self.state(.configurationFailed)
         self.session.commitConfiguration()
         return
       }
     } catch {
       debugPrint("Could not create video device input")
-      capturing.videoSetupResult = .configurationFailed
+      self.state(.configurationFailed)
     }
 
     debugPrint("Configured video device")
-    capturing.videoSetupResult = .success
+    self.state(.configured)
     self.session.commitConfiguration()
   }
 }
 
 protocol VideoCapturing: AVCaptureVideoDataOutputSampleBufferDelegate, AlertReporting {
-  var videoSetupResult: VideoSetupResult { get set }
-
-  var isVideoCapturing: Bool { get set }
-
-  func startVideoCapturing(_ capture: VideoCapture, delegate: AlertReportingDelegate)
+  func capture(_ capture: VideoCapture, delegate: AlertReportingDelegate)
 }
 
 private extension VideoCapturing {
-  func checkPermissions(_ delegate: AlertReportingDelegate) {
+  func checkPermissions(_ capture: VideoCapture, delegate: AlertReportingDelegate) {
     debugPrint("Checking video device permissions")
     switch AVCaptureDevice.authorizationStatus(for: .video) {
     case .authorized:
-      self.videoSetupResult = .success
+      capture.state(.authorized)
     case .notDetermined:
       AVCaptureDevice.requestAccess(for: .video, completionHandler: { granted in
         if !granted {
-          self.videoSetupResult = .notAuthorized
+          capture.state(.notAuthorized)
           return
         }
       })
-      self.videoSetupResult = .success
+      capture.state(.authorized)
     default:
-      self.videoSetupResult = .notAuthorized
-      self.reportAlert(
+      capture.state(.notAuthorized)
+      self.alert(
         delegate,
         title: "Camera Access",
         message: "iOSCamera doesn't have access to use your camera, please update your privacy settings.",
@@ -129,26 +146,28 @@ private extension VideoCapturing {
 }
 
 extension VideoCapturing {
-  func startVideoCapturing(_ capture: VideoCapture, delegate: AlertReportingDelegate) {
-    self.checkPermissions(delegate)
+  func capture(_ capture: VideoCapture, delegate: AlertReportingDelegate) {
+    self.checkPermissions(capture, delegate: delegate)
     capture.configure(self)
     debugPrint("Starting video session")
-    if !self.isVideoCapturing {
-      switch self.videoSetupResult {
-      case .success:
-        capture.session.startRunning()
-        self.isVideoCapturing = capture.session.isRunning
-      case .ready, .configurationFailed, .notAuthorized:
-        debugPrint("Application not authorized to use camera")
-        self.reportAlert(
-          delegate,
-          title: "Camera Error",
-          message: "Camera configuration failed. Either your device camera is not available or its missing permissions",
-          primaryButtonTitle: "Accept",
-          secondaryButtonTitle: nil,
-          primaryAction: nil,
-          secondaryAction: nil)
+    switch capture.state {
+    case .running:
+      break
+    case .configured:
+      capture.session.startRunning()
+      if capture.session.isRunning {
+        capture.state(.running)
       }
+    default:
+      debugPrint("Application not authorized nor configured")
+      self.alert(
+        delegate,
+        title: "Camera Error",
+        message: "Camera configuration failed. Either your device camera is not available or its missing permissions",
+        primaryButtonTitle: "Accept",
+        secondaryButtonTitle: nil,
+        primaryAction: nil,
+        secondaryAction: nil)
     }
   }
 }

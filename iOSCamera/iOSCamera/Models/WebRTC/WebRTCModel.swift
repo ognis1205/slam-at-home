@@ -21,7 +21,7 @@ class WebRTCModel: NSObject, ObservableObject, WebRTCSignaling {
   
   @Published var numberOfRemoteCandidate: Int = 0
   
-  var alertModel: AlertModel?
+  var alert: AlertModel?
 
   var signal: WebRTCSignal?
 

@@ -48,7 +48,7 @@ struct HLSView: View {
             .onAppear {
               viewModel.start()
             }
-            .alert(isPresented: $viewModel.showAlert, content: { self.viewModel.alert })
+            .alert(isPresented: $viewModel.showAlert, content: { self.viewModel.dialog })
         }
       }
     }

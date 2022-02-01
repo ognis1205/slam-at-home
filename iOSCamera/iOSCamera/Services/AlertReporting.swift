@@ -9,13 +9,13 @@
 import Foundation
 
 protocol AlertReportingDelegate: AnyObject {
-  func didReport()
+  func alert()
 }
 
 protocol AlertReporting: AnyObject {
-  var alertModel: AlertModel? { get set }
+  var alert: AlertModel? { get set }
   
-  func reportAlert(
+  func alert(
     _ delegate: AlertReportingDelegate,
     title: String,
     message: String,
@@ -27,7 +27,7 @@ protocol AlertReporting: AnyObject {
 }
 
 extension AlertReporting {
-  func reportAlert(
+  func alert(
     _ delegate: AlertReportingDelegate,
     title: String = "",
     message: String = "",
@@ -37,14 +37,14 @@ extension AlertReporting {
     secondaryAction: (() -> Void)? = nil
   ) {
     DispatchQueue.main.async {
-      self.alertModel = AlertModel(
+      self.alert = AlertModel(
         title: title,
         message: message,
         primaryButtonTitle: primaryButtonTitle,
         secondaryButtonTitle: secondaryButtonTitle,
         primaryAction: primaryAction,
         secondaryAction: secondaryAction)
-      delegate.didReport()
+      delegate.alert()
     }
   }
 }
