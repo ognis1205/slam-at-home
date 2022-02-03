@@ -21,7 +21,8 @@ extension HLSViewModel: HLSModelDelegate {
     self.URL = "http://\(ip):\(HLSConstants.PORT)"
   }
   
-  func alert() {
+  func alert(_ alert: AlertModel) {
     self.showAlert = true
+    self.alert = alert
   }
 }

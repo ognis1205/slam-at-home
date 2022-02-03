@@ -17,6 +17,8 @@ class HLSViewModel: ObservableObject {
   @Published var showAlert: Bool = false
 
   var model: HLSModel = HLSModel()
+  
+  var alert: AlertModel?
 
   var label: String {
     return self.isConnected ? "wifi.circle.fill" : "wifi.circle"
@@ -27,16 +29,16 @@ class HLSViewModel: ObservableObject {
   }
 
   var session: AVCaptureSession {
-    return self.model.videoCapture.session
+    return self.model.capture.session
   }
   
   var dialog: Alert {
     return Alert(
-      title: Text(self.model.alert?.title ?? ""),
-      message: Text(self.model.alert?.message ?? ""),
+      title: Text(self.alert?.title ?? ""),
+      message: Text(self.alert?.message ?? ""),
       dismissButton: .default(
-        Text(self.model.alert?.primaryButtonTitle ?? ""),
-        action: { self.model.alert?.primaryAction?() }
+        Text(self.alert?.primaryButtonTitle ?? ""),
+        action: { self.alert?.primaryAction?() }
       )
     )
   }
