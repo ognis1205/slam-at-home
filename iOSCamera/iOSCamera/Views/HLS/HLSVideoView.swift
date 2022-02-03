@@ -1,5 +1,5 @@
 //
-//  CameraView.swift
+//  HLSVideoView.swift
 //  iOSCamera
 //
 //  Created by Shingo OKAWA on 2022/01/25.
@@ -9,7 +9,7 @@
 import AVFoundation
 import SwiftUI
 
-struct CameraView: UIViewRepresentable {
+struct HLSVideoView: UIViewRepresentable {
   class Wrapper: UIView {
     override public class var layerClass: AnyClass {
       AVCaptureVideoPreviewLayer.self
@@ -20,7 +20,7 @@ struct CameraView: UIViewRepresentable {
     }
   }
 
-  let avCaptureSession: AVCaptureSession
+  var avCaptureSession: AVCaptureSession
 
   func makeUIView(context: Context) -> Wrapper {
     let view = Wrapper()
@@ -44,8 +44,8 @@ struct CameraView: UIViewRepresentable {
   }
 }
 
-struct CameraView_Previews: PreviewProvider {
+struct HLSVideoView_Previews: PreviewProvider {
   static var previews: some View {
-    CameraView(avCaptureSession: AVCaptureSession())
+    HLSVideoView(avCaptureSession: AVCaptureSession())
   }
 }

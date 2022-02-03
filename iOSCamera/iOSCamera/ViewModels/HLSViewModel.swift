@@ -16,13 +16,13 @@ class HLSViewModel: ObservableObject {
 
   @Published var showAlert: Bool = false
 
-  let model: HLSModel = HLSModel()
+  var model: HLSModel = HLSModel()
 
-  var connectionLabel: String {
+  var label: String {
     return self.isConnected ? "wifi.circle.fill" : "wifi.circle"
   }
 
-  var connectionColor: Color {
+  var color: Color {
     return self.isConnected ? .red : .white
   }
 
