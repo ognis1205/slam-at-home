@@ -19,7 +19,7 @@ class URLValidator: ObservableObject {
 }
 
 struct WebRTCSettingsView: View {
-  @StateObject var model: WebRTCModel
+//  @StateObject var model: WebRTCModel
   
 //  @State var isConnected: Bool = false
   

@@ -26,7 +26,14 @@ extension WebRTCModel: WebRTCClientDelegate {
   func webRTC(_ client: WebRTCClient, didReceiveData data: Data) {
     debugPrint(
       "Message from WebRTC: \(String(data: data, encoding: .utf8) ?? "(Binary: \(data.count) bytes)")")
-//    self.reportAlert(
+    self.delegate?.webRTC(didReceiveData: data)
+//    guard
+//      let delegate = self.delegate
+//    else {
+//      return
+//    }
+//    self.alert(
+//      delegate,
 //      title: "Message from WebRTC",
 //      message: String(data: data, encoding: .utf8) ?? "(Binary: \(data.count) bytes)",
 //      primaryButtonTitle: "OK",
