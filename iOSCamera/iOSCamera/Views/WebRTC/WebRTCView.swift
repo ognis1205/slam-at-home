@@ -1,33 +1,33 @@
 //
-//  HLSView.swift
+//  WebRTCView.swift
 //  iOSCamera
 //
-//  Created by Shingo OKAWA on 2022/01/23.
+//  Created by Shingo OKAWA on 2022/02/07.
 //  Copyright © 2022 Shingo OKAWA. All rights reserved.
 //
 
 import SwiftUI
 import WebRTC
 
-struct HLSView: View {
-  @ObservedObject var viewModel: HLSViewModel = HLSViewModel()
+struct WebRTCView: View {
+  @ObservedObject var viewModel: WebRTCViewModel = WebRTCViewModel()
   
   @State private var showSettings: Bool = false
 
   // swiftlint:disable identifier_name
-  func Connection() -> some View {
-    return Button(
-      action: { /* Do nothing. */ },
-      label: {
-        Image(systemName: self.viewModel.label)
-          .font(.system(size: 20, weight: .medium, design: .default))
-      })
-      .accentColor(self.viewModel.color)
-  }
+//  func Connection() -> some View {
+//    return Button(
+//      action: { /* Do nothing. */ },
+//      label: {
+//        Image(systemName: self.viewModel.label)
+//          .font(.system(size: 20, weight: .medium, design: .default))
+//      })
+//      .accentColor(self.viewModel.color)
+//  }
 
-  func URL() -> some View {
-    return Text(self.viewModel.URL)
-  }
+//  func URL() -> some View {
+//    return Text(self.viewModel.URL)
+//  }
 
   var body: some View {
     GeometryReader { reader in
@@ -35,9 +35,9 @@ struct HLSView: View {
         Color.black.edgesIgnoringSafeArea(.all)
         VStack {
           HStack {
-            Connection()
-            URL()
-            Spacer()
+//            Connection()
+//            URL()
+//            Spacer()
             Button(
               action: {
                 self.showSettings.toggle()
@@ -52,8 +52,7 @@ struct HLSView: View {
 //              WebRTCSettingsView(nil)
             }
           }
-//          RTCCameraPreviewView()
-          HLSVideoView(model: viewModel.model)
+          WebRTCEAGLVideoView(model: viewModel.model)
             .onAppear { viewModel.start() }
             .alert(isPresented: $viewModel.showAlert, content: { self.viewModel.dialog })
         }
@@ -62,8 +61,8 @@ struct HLSView: View {
   }
 }
 
-struct HLSView_Previews: PreviewProvider {
+struct WebRTCView_Previews: PreviewProvider {
   static var previews: some View {
-    HLSView()
+    WebRTCView()
   }
 }

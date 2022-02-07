@@ -26,8 +26,6 @@ protocol WebRTCModelDelegate: AlertReportingDelegate {
 
 class WebRTCCapture: VideoConfigure {
   var device: AVCaptureDevice?
-
-  var renderer: RTCVideoRenderer?
 }
 
 class WebRTCModel: VideoConfiguring {
@@ -41,7 +39,7 @@ class WebRTCModel: VideoConfiguring {
   let capture: WebRTCCapture = WebRTCCapture(
     state: .ready)
   
-  func start() {
+  func ready() {
     guard
       let delegate = self.delegate
     else {

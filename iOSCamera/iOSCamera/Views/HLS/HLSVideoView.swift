@@ -20,13 +20,13 @@ struct HLSVideoView: UIViewRepresentable {
     }
   }
 
-  var avCaptureSession: AVCaptureSession
+  var model: HLSModel
 
   func makeUIView(context: Context) -> Wrapper {
     let view = Wrapper()
     let bounds = view.bounds
     view.backgroundColor = .black
-    view.avCaptureVideoPreviewLayer.session = avCaptureSession
+    view.avCaptureVideoPreviewLayer.session = model.capture.session
     view.avCaptureVideoPreviewLayer.cornerRadius = 0
     view.avCaptureVideoPreviewLayer.position = CGPoint(
       x: bounds.midX,
@@ -46,6 +46,6 @@ struct HLSVideoView: UIViewRepresentable {
 
 struct HLSVideoView_Previews: PreviewProvider {
   static var previews: some View {
-    HLSVideoView(avCaptureSession: AVCaptureSession())
+    HLSVideoView(model: HLSModel())
   }
 }

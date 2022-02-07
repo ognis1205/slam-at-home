@@ -168,11 +168,7 @@ class WebRTCClient: NSObject {
 
   func capture(renderer: RTCVideoRenderer, videoDevice: AVCaptureDevice) {
     guard
-      let capturer = self.videoTrack.capturer as? RTCCameraVideoCapturer
-    else {
-      return
-    }
-    guard
+      let capturer = self.videoTrack.capturer as? RTCCameraVideoCapturer,
       let format = (RTCCameraVideoCapturer.supportedFormats(for: videoDevice).sorted {
         let lhs = CMVideoFormatDescriptionGetDimensions($0.formatDescription).width
         let rhs = CMVideoFormatDescriptionGetDimensions($1.formatDescription).width

@@ -42,9 +42,13 @@ class HLSViewModel: ObservableObject {
       )
     )
   }
-  
-  func start() {
+
+  init() {
     self.model.delegate = self
+    self.model.ready()
+  }
+
+  func start() {
     self.model.start()
   }
 }
