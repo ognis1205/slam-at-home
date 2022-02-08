@@ -37,7 +37,7 @@ struct WebRTCView: View {
           HStack {
 //            Connection()
 //            URL()
-//            Spacer()
+            Spacer()
             Button(
               action: {
                 self.showSettings.toggle()
@@ -49,12 +49,18 @@ struct WebRTCView: View {
             )
             .accentColor(.white)
             .sheet(isPresented: self.$showSettings) {
-//              WebRTCSettingsView(nil)
+              WebRTCSettingsView(viewModel: self.viewModel)
             }
           }
+#if arch(arm64)
+          WebRTCMTLVideoView(model: viewModel.model)
+            .onAppear { viewModel.start() }
+            .alert(isPresented: $viewModel.showAlert, content: { self.viewModel.dialog })
+#else
           WebRTCEAGLVideoView(model: viewModel.model)
             .onAppear { viewModel.start() }
             .alert(isPresented: $viewModel.showAlert, content: { self.viewModel.dialog })
+#endif
         }
       }
     }

@@ -37,22 +37,7 @@ struct HLSView: View {
           HStack {
             Connection()
             URL()
-            Spacer()
-            Button(
-              action: {
-                self.showSettings.toggle()
-              },
-              label: {
-                Image(systemName: "gearshape")
-                  .font(.system(size: 20, weight: .medium, design: .default))
-              }
-            )
-            .accentColor(.white)
-            .sheet(isPresented: self.$showSettings) {
-//              WebRTCSettingsView(nil)
-            }
           }
-//          RTCCameraPreviewView()
           HLSVideoView(model: viewModel.model)
             .onAppear { viewModel.start() }
             .alert(isPresented: $viewModel.showAlert, content: { self.viewModel.dialog })
