@@ -45,7 +45,7 @@ class HLSViewModel: ObservableObject {
 
   init() {
     self.model.delegate = self
-    self.model.ready()
+    self.model.prepare()
   }
 
   func start() {

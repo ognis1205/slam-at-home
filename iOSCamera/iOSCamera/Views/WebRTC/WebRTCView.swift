@@ -15,43 +15,31 @@ struct WebRTCView: View {
   @State private var showSettings: Bool = false
 
   // swiftlint:disable identifier_name
-//  func Connection() -> some View {
-//    return Button(
-//      action: { /* Do nothing. */ },
-//      label: {
-//        Image(systemName: self.viewModel.label)
-//          .font(.system(size: 20, weight: .medium, design: .default))
-//      })
-//      .accentColor(self.viewModel.color)
-//  }
-
-//  func URL() -> some View {
-//    return Text(self.viewModel.URL)
-//  }
+  func Settings() -> some View {
+    return HStack {
+      Spacer()
+      Button(
+        action: {
+          self.showSettings.toggle()
+        },
+        label: {
+          Image(systemName: "gearshape")
+            .font(.system(size: 20, weight: .medium, design: .default))
+        }
+      )
+      .accentColor(.white)
+      .sheet(isPresented: self.$showSettings) {
+        WebRTCSettingsView(viewModel: self.viewModel)
+      }
+    }
+  }
 
   var body: some View {
     GeometryReader { reader in
       ZStack {
         Color.black.edgesIgnoringSafeArea(.all)
         VStack {
-          HStack {
-//            Connection()
-//            URL()
-            Spacer()
-            Button(
-              action: {
-                self.showSettings.toggle()
-              },
-              label: {
-                Image(systemName: "gearshape")
-                  .font(.system(size: 20, weight: .medium, design: .default))
-              }
-            )
-            .accentColor(.white)
-            .sheet(isPresented: self.$showSettings) {
-              WebRTCSettingsView(viewModel: self.viewModel)
-            }
-          }
+          Settings()
 #if arch(arm64)
           WebRTCMTLVideoView(model: viewModel.model)
             .onAppear { viewModel.start() }

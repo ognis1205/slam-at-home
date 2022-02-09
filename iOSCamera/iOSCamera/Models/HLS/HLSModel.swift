@@ -50,7 +50,7 @@ class HLSModel: NSObject, VideoConfiguring {
 
   var socket: GCDAsyncSocket?
   
-  func ready() {
+  func prepare() {
     guard
       let delegate = self.delegate
     else {
@@ -67,13 +67,13 @@ class HLSModel: NSObject, VideoConfiguring {
       debugPrint("HLSModel requires delegation")
       return
     }
-    self.capture(self.capture, alert: delegate)
+    self.capture(alert: delegate)
     self.listen(delegate: delegate)
   }
 
-  func capture(_ capture: HLSCapture, alert: AlertReportingDelegate) {
+  func capture(alert: AlertReportingDelegate) {
     debugPrint("Starting video session")
-    switch capture.state {
+    switch self.capture.state {
     case .running:
       break
     case .configured:

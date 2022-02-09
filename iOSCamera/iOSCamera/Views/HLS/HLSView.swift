@@ -15,18 +15,17 @@ struct HLSView: View {
   @State private var showSettings: Bool = false
 
   // swiftlint:disable identifier_name
-  func Connection() -> some View {
-    return Button(
-      action: { /* Do nothing. */ },
-      label: {
-        Image(systemName: self.viewModel.label)
-          .font(.system(size: 20, weight: .medium, design: .default))
-      })
-      .accentColor(self.viewModel.color)
-  }
-
-  func URL() -> some View {
-    return Text(self.viewModel.URL)
+  func Status() -> some View {
+    return HStack {
+      Button(
+        action: { /* Do nothing. */ },
+        label: {
+          Image(systemName: self.viewModel.label)
+            .font(.system(size: 20, weight: .medium, design: .default))
+        })
+        .accentColor(self.viewModel.color)
+      Text(self.viewModel.URL)
+    }
   }
 
   var body: some View {
@@ -34,10 +33,7 @@ struct HLSView: View {
       ZStack {
         Color.black.edgesIgnoringSafeArea(.all)
         VStack {
-          HStack {
-            Connection()
-            URL()
-          }
+          Status()
           HLSVideoView(model: viewModel.model)
             .onAppear { viewModel.start() }
             .alert(isPresented: $viewModel.showAlert, content: { self.viewModel.dialog })

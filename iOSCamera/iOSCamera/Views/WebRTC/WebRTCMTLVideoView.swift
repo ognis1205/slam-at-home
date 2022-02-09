@@ -16,6 +16,7 @@ struct WebRTCMTLVideoView: UIViewRepresentable {
     let view = RTCMTLVideoView(frame: CGRect.zero)
     if let device = self.model.capture.device {
       debugPrint("Start capturing on MTL video device")
+      self.model.capture.state(.running)
       self.model.client.capture(renderer: view, videoDevice: device)
     }
     return view

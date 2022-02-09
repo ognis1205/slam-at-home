@@ -16,6 +16,7 @@ struct WebRTCEAGLVideoView: UIViewRepresentable {
     let view = RTCEAGLVideoView(frame: CGRect.zero)
     if let device = self.model.capture.device {
       debugPrint("Start capturing on EAGL video device")
+      self.model.capture.state(.running)
       self.model.client.capture(renderer: view, videoDevice: device)
     }
     return view

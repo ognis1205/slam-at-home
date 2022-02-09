@@ -18,27 +18,11 @@ extension WebRTCModel: WebRTCClientDelegate {
   func webRTC(_ client: WebRTCClient, didChangeConnectionState state: RTCIceConnectionState) {
     debugPrint("Changed connection state")
     self.delegate?.webRTC(didChangeConnectionState: state)
-//    DispatchQueue.main.async {
-//      self.status = state.description.capitalized
-//    }
   }
     
   func webRTC(_ client: WebRTCClient, didReceiveData data: Data) {
     debugPrint(
       "Message from WebRTC: \(String(data: data, encoding: .utf8) ?? "(Binary: \(data.count) bytes)")")
     self.delegate?.webRTC(didReceiveData: data)
-//    guard
-//      let delegate = self.delegate
-//    else {
-//      return
-//    }
-//    self.alert(
-//      delegate,
-//      title: "Message from WebRTC",
-//      message: String(data: data, encoding: .utf8) ?? "(Binary: \(data.count) bytes)",
-//      primaryButtonTitle: "OK",
-//      secondaryButtonTitle: nil,
-//      primaryAction: nil,
-//      secondaryAction: nil)
   }
 }

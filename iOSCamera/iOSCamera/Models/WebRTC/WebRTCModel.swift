@@ -39,7 +39,7 @@ class WebRTCModel: VideoConfiguring {
   let capture: WebRTCCapture = WebRTCCapture(
     state: .ready)
   
-  func ready() {
+  func prepare() {
     guard
       let delegate = self.delegate
     else {
@@ -51,15 +51,21 @@ class WebRTCModel: VideoConfiguring {
   }
   
   func connect(URL: URL) {
-    self.signal = WebRTCSignal(
-      webSocket: WebSocket(URL: URL))
-    self.signal?.delegate = self
-    self.signal?.connect()
+    debugPrint("Connecting to signaling server")
+    if self.capture.state == .running {
+      self.signal = WebRTCSignal(
+        webSocket: WebSocket(URL: URL))
+      self.signal?.delegate = self
+      self.signal?.connect()
+    }
   }
   
   func disconnect() {
-    self.signal?.disconnect()
-    self.signal?.delegate = nil
-    self.signal = nil
+    debugPrint("Disconnecting from signaling server")
+    if self.capture.state == .running {
+      self.signal?.disconnect()
+      self.signal?.delegate = nil
+      self.signal = nil
+    }
   }
 }

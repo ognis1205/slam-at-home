@@ -20,6 +20,8 @@ class WebRTCViewModel: ObservableObject {
     
   @Published var numberOfRemoteCandidate: Int = 0
   
+  @Published var URL: String = ""
+  
   @Published var showAlert: Bool = false
     
   var alert: AlertModel?
@@ -39,11 +41,10 @@ class WebRTCViewModel: ObservableObject {
 
   init() {
     self.model.delegate = self
-    self.model.ready()
+    self.model.prepare()
   }
   
   func start() {
-//    self.model.delegate = self
-//    self.model.start()
+    // Do nothing.
   }
 }

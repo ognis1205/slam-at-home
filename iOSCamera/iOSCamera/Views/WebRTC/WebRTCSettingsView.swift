@@ -31,19 +31,19 @@ struct WebRTCSettingsView: View {
   // swiftlint:disable identifier_name
   func Connect() -> some View {
     return HStack {
-      TextField("ws://0.0.0.0:10000", text: $urlValidator.value)
+      TextField("ws://0.0.0.0:10000", text: $viewModel.URL)
         .textInputAutocapitalization(.never)
         .disableAutocorrection(true)
         .disabled(viewModel.isConnected)
-        .multilineTextAlignment(.leading)
+//        .multilineTextAlignment(.leading)
         .onTapGesture {}
-      Toggle("", isOn: $viewModel.isConnected)
-        .toggleStyle(WiFiToggleStyle())
-        .disabled(!urlValidator.isValid())
-        .onChange(of: viewModel.isConnected) { value in
-          print(value)
-          print(urlValidator.value)
-        }
+//      Toggle("", isOn: $viewModel.isConnected)
+//        .toggleStyle(WiFiToggleStyle())
+//        .disabled(!urlValidator.isValid())
+//        .onChange(of: viewModel.isConnected) { value in
+//          print(value)
+//          print(urlValidator.value)
+//        }
     }
   }
 
@@ -55,7 +55,7 @@ struct WebRTCSettingsView: View {
         }
         Text("Settings screen")
       }
-      .navigationTitle("Settings")
+//      .navigationTitle("Settings")
     }
     .navigationViewStyle(StackNavigationViewStyle())
   }
