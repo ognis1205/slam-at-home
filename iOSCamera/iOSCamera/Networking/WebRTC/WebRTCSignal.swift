@@ -97,7 +97,7 @@ class WebRTCSignal: Debuggable {
   }
 
   func send(sdp rtcSdp: RTCSessionDescription) {
-    self.info("send WebRTC session description...")
+    self.info("send session description...")
     let message = Message.sdp(SessionDescription(from: rtcSdp))
     do {
       let data = try self.encoder.encode(message)
@@ -108,6 +108,7 @@ class WebRTCSignal: Debuggable {
   }
 
   func send(candidate rtcIceCandidate: RTCIceCandidate) {
+    self.info("send ice candidate...")
     let message = Message.candidate(IceCandidate(from: rtcIceCandidate))
     do {
       let data = try self.encoder.encode(message)

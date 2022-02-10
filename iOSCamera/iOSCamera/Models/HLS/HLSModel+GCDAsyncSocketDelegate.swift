@@ -15,7 +15,7 @@ extension HLSModel: GCDAsyncSocketDelegate {
     _ sock: GCDAsyncSocket,
     didAcceptNewSocket newSocket: GCDAsyncSocket
   ) {
-    debugPrint("New connection from IP [\(newSocket.connectedHost ?? "unknown")]")
+    self.info("new connection from IP [\(newSocket.connectedHost ?? "unknown")]...")
     guard
       let id = newSocket.connectedAddress?.hashValue
     else {
@@ -30,6 +30,7 @@ extension HLSModel: GCDAsyncSocketDelegate {
     self.streams[id] = newStream
     newStream.open()
     DispatchQueue.main.async(execute: {
+      self.info("connect...")
       self.delegate?.didConnect()
     })
   }

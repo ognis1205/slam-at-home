@@ -16,7 +16,9 @@ protocol WebSocketDelegate: AnyObject {
   func socket(_ socket: WebSocket, didReceiveData data: Data)
 }
 
-class WebSocket: NSObject {
+class WebSocket: NSObject, Debuggable {
+  // MARK: Properties
+
   weak var delegate: WebSocketDelegate?
 
   private let URL: URL
@@ -27,18 +29,23 @@ class WebSocket: NSObject {
     configuration: .default,
     delegate: self,
     delegateQueue: nil)
+  
+  // MARK: Init
 
   @available(*, unavailable)
   override init() {
-    fatalError("NativeWebSocket:init is unavailable")
+    fatalError("init() is unavailable...")
   }
 
   required init(URL: URL) {
     self.URL = URL
     super.init()
   }
+  
+  // MARK: Methods
 
   func connect() {
+    self.info("connect to socket server...")
     let socket = urlSession.webSocketTask(with: self.URL)
     socket.resume()
     self.socket = socket
@@ -46,16 +53,19 @@ class WebSocket: NSObject {
   }
   
   func disconnect(force: Bool) {
+    self.info("disconnect from socket server...")
     self.socket?.cancel()
     self.socket = nil
     self.delegate?.didDisconnect(self, force: force)
   }
 
   func send(data: Data) {
+    self.info("send data...")
     self.socket?.send(.data(data)) { _ in }
   }
 
   private func receive() {
+    self.info("receive data...")
     self.socket?.receive { [weak self] message in
       guard let self = self else { return }
       switch message {
@@ -63,7 +73,7 @@ class WebSocket: NSObject {
         self.delegate?.socket(self, didReceiveData: data)
         self.receive()
       case .success:
-        debugPrint("Warning: Expected to receive data format but received a string.")
+        self.warn("expected to receive data format but received a string...")
         self.receive()
       case .failure:
         self.disconnect(force: false)

@@ -10,15 +10,18 @@ import Foundation
 
 extension HLSModel: VideoConfiguringDelegate {
   func willConfigure() {
+    self.info("will configure...")
     self.capture.session.beginConfiguration()
     self.capture.session.sessionPreset = .medium
   }
 
   func didNotFindDevice() {
+    self.info("did not find device...")
     self.capture.session.commitConfiguration()
   }
 
   func didFindDevice(_ device: AVCaptureDevice) throws {
+    self.info("did find device...")
     try device.lockForConfiguration()
     device.focusMode = .continuousAutoFocus
     device.unlockForConfiguration()
@@ -39,6 +42,7 @@ extension HLSModel: VideoConfiguringDelegate {
   }
   
   func didConfigure() {
+    self.info("did configure...")
     self.capture.session.commitConfiguration()
   }
 }

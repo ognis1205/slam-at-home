@@ -11,6 +11,8 @@ import CocoaAsyncSocket
 import Foundation
 
 extension HLSModel: AVCaptureVideoDataOutputSampleBufferDelegate {
+  // MARK: Methods
+
   func captureOutput(
     _ output: AVCaptureOutput,
     didOutput sampleBuffer: CMSampleBuffer,
@@ -32,13 +34,14 @@ extension HLSModel: AVCaptureVideoDataOutputSampleBufferDelegate {
         if stream.isConnected {
           stream.dataToSend = (jpeg as NSData?)?.copy() as? Data
         } else {
-          debugPrint("Dropping connection [#\(stream.id)]")
+          self.info("drop connection [#\(stream.id)]...")
           self.streams.removeValue(forKey: key)
         }
       }
 
       if self.streams.isEmpty {
         DispatchQueue.main.async(execute: {
+          self.info("disconnect...")
           self.delegate?.didDisconnect()
         })
       }

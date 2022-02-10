@@ -9,11 +9,14 @@
 import Foundation
 
 extension WebSocket: URLSessionWebSocketDelegate, URLSessionDelegate {
+  // MARK: Methods
+
   func urlSession(
     _ session: URLSession,
     webSocketTask: URLSessionWebSocketTask,
     didOpenWithProtocol protocol: String?
   ) {
+    self.info("urlSession did open...")
     self.delegate?.didConnect(self)
   }
     
@@ -23,6 +26,7 @@ extension WebSocket: URLSessionWebSocketDelegate, URLSessionDelegate {
     didCloseWith closeCode: URLSessionWebSocketTask.CloseCode,
     reason: Data?
   ) {
+    self.info("urlSession did close...")
     self.disconnect(force: true)
   }
 }
