@@ -9,7 +9,9 @@
 import Foundation
 import WebRTC
 
-struct VideoTrack {
+struct VideoTrack: Debuggable {
+  // MARK: Properties
+
   var source: RTCVideoSource
 
   var capturer: RTCVideoCapturer?
@@ -20,8 +22,10 @@ struct VideoTrack {
 
   var reciever: RTCVideoTrack?
   
+  // MARK: Methods
+  
   fileprivate mutating func configure(_ client: WebRTCClient) {
-    debugPrint("Configuring WebRTC video track.")
+    self.info("configure video track...")
     #if TARGET_OS_SIMULATOR
       self.capturer = RTCFileVideoCapturer(
         delegate: self.source)
@@ -35,17 +39,20 @@ struct VideoTrack {
     self.reciever = client.connection.transceivers.first {
       $0.mediaType == .video
     }?.receiver.track as? RTCVideoTrack
-    debugPrint("Configured WebRTC video track.")
   }
 }
 
-struct DataChannel {
+struct DataChannel: Debuggable {
+  // MARK: Properties
+
   var sender: RTCDataChannel?
 
   var reciever: RTCDataChannel?
   
+  // MARK: Methods
+  
   fileprivate mutating func configure(_ client: WebRTCClient) {
-    debugPrint("Configuring WebRTC data channel.")
+    self.info("configure data channel...")
     let config = RTCDataChannelConfiguration()
     if let channel = client.connection.dataChannel(
       forLabel: "WebRTCData",
@@ -53,13 +60,14 @@ struct DataChannel {
       channel.delegate = client
       self.sender = channel
     } else {
-      debugPrint("Warning: Couldn't create data channel.")
+      self.warn("could not create data channel...")
     }
-    debugPrint("Configured WebRTC data channel.")
   }
 }
 
 protocol WebRTCClientDelegate: AnyObject {
+  // MARK: Methods
+
   func webRTC(_ client: WebRTCClient, didDiscoverLocalCandidate candidate: RTCIceCandidate)
 
   func webRTC(_ client: WebRTCClient, didChangeConnectionState state: RTCIceConnectionState)
@@ -67,7 +75,9 @@ protocol WebRTCClientDelegate: AnyObject {
   func webRTC(_ client: WebRTCClient, didReceiveData data: Data)
 }
 
-class WebRTCClient: NSObject {
+class WebRTCClient: NSObject, Debuggable {
+  // MARK: Properties
+
   fileprivate static let factory: RTCPeerConnectionFactory = {
     RTCInitializeSSL()
     let videoEncoderFactory = RTCDefaultVideoEncoderFactory()
@@ -100,10 +110,12 @@ class WebRTCClient: NSObject {
     source: WebRTCClient.factory.videoSource())
 
   var dataChannel = DataChannel()
+  
+  // MARK: Init
 
   @available(*, unavailable)
   override init() {
-    fatalError("WebRTCClient:init is unavailable")
+    fatalError("init() is unavailable...")
   }
 
   required init(iceServers: [String]) {
@@ -124,13 +136,17 @@ class WebRTCClient: NSObject {
     self.dataChannel.configure(self)
     self.connection.delegate = self
   }
+  
+  // MARK: Methods
 
   func offer(didComplete: @escaping (_ sdp: RTCSessionDescription) -> Void) {
+    self.info("offer...")
     let constrains = RTCMediaConstraints(
       mandatoryConstraints: self.mediaConstrains,
       optionalConstraints: nil)
     self.connection.offer(for: constrains) { (sdp, error) in
       guard let sdp = sdp else {
+        self.warn("failed to offer...")
         return
       }
       self.connection.setLocalDescription(sdp, completionHandler: { (error) in
@@ -140,11 +156,13 @@ class WebRTCClient: NSObject {
   }
 
   func answer(didComplete: @escaping (_ sdp: RTCSessionDescription) -> Void) {
+    self.info("answer...")
     let constrains = RTCMediaConstraints(
       mandatoryConstraints: self.mediaConstrains,
       optionalConstraints: nil)
     self.connection.answer(for: constrains) { (sdp, error) in
       guard let sdp = sdp else {
+        self.warn("failed to answer...")
         return
       }
       self.connection.setLocalDescription(sdp, completionHandler: { (error) in
@@ -154,19 +172,23 @@ class WebRTCClient: NSObject {
   }
 
   func set(remoteSdp: RTCSessionDescription, didComplete: @escaping (Error?) -> Void) {
+    self.info("set remote sdp...")
     self.connection.setRemoteDescription(remoteSdp, completionHandler: didComplete)
   }
 
   func set(remoteIce: RTCIceCandidate) {
+    self.info("set remote ice...")
     self.connection.add(remoteIce)
   }
 
   func send(_ data: Data) {
+    self.info("send data...")
     let buffer = RTCDataBuffer(data: data, isBinary: true)
     self.dataChannel.reciever?.sendData(buffer)
   }
 
   func capture(renderer: RTCVideoRenderer, videoDevice: AVCaptureDevice) {
+    self.info("capture video device...")
     guard
       let capturer = self.videoTrack.capturer as? RTCCameraVideoCapturer,
       let format = (RTCCameraVideoCapturer.supportedFormats(for: videoDevice).sorted {
@@ -178,6 +200,7 @@ class WebRTCClient: NSObject {
         return $0.maxFrameRate < $1.maxFrameRate
       }.last)
     else {
+      self.warn("failed to start capturing...")
       return
     }
     capturer.startCapture(

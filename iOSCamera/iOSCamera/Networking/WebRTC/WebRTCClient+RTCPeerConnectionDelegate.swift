@@ -10,38 +10,40 @@ import Foundation
 import WebRTC
 
 extension WebRTCClient: RTCPeerConnectionDelegate {
+  // MARK: Methods
+
   func peerConnection(
     _ peerConnection: RTCPeerConnection,
     didChange stateChanged: RTCSignalingState
   ) {
-    debugPrint("peerConnection new signaling state: \(stateChanged)")
+    self.info("peerConnection new signaling state: \(stateChanged)...")
   }
 
   func peerConnection(
     _ peerConnection: RTCPeerConnection,
     didAdd stream: RTCMediaStream
   ) {
-    debugPrint("peerConnection did add stream")
+    self.info("peerConnection did add stream...")
   }
 
   func peerConnection(
     _ peerConnection: RTCPeerConnection,
     didRemove stream: RTCMediaStream
   ) {
-    debugPrint("peerConnection did remote stream")
+    self.info("peerConnection did remote stream...")
   }
 
   func peerConnectionShouldNegotiate(
     _ peerConnection: RTCPeerConnection
   ) {
-    debugPrint("peerConnection should negotiate")
+    self.info("peerConnection should negotiate...")
   }
 
   func peerConnection(
     _ peerConnection: RTCPeerConnection,
     didChange newState: RTCIceConnectionState
   ) {
-    debugPrint("peerConnection new connection state: \(newState)")
+    self.info("peerConnection new connection state: \(newState)...")
     self.delegate?.webRTC(self, didChangeConnectionState: newState)
   }
 
@@ -49,13 +51,14 @@ extension WebRTCClient: RTCPeerConnectionDelegate {
     _ peerConnection: RTCPeerConnection,
     didChange newState: RTCIceGatheringState
   ) {
-    debugPrint("peerConnection new gathering state: \(newState)")
+    self.info("peerConnection new gathering state: \(newState)...")
   }
 
   func peerConnection(
     _ peerConnection: RTCPeerConnection,
     didGenerate candidate: RTCIceCandidate
   ) {
+    self.info("peerConnection new ice candidate: \(candidate)...")
     self.delegate?.webRTC(self, didDiscoverLocalCandidate: candidate)
   }
 
@@ -63,14 +66,14 @@ extension WebRTCClient: RTCPeerConnectionDelegate {
     _ peerConnection: RTCPeerConnection,
     didRemove candidates: [RTCIceCandidate]
   ) {
-    debugPrint("peerConnection did remove candidate(s)")
+    self.info("peerConnection did remove candidate(s)...")
   }
 
   func peerConnection(
     _ peerConnection: RTCPeerConnection,
     didOpen dataChannel: RTCDataChannel
   ) {
-    debugPrint("peerConnection did open data channel")
+    self.info("peerConnection did open data channel...")
     self.dataChannel.reciever = dataChannel
   }
 }

@@ -15,6 +15,18 @@ enum Message {
 }
 
 extension Message: Codable {
+  // MARK: Properties
+
+  enum DecodeError: Error {
+    case unknownType
+  }
+    
+  enum CodingKeys: String, CodingKey {
+    case type, payload
+  }
+
+  // MARK: Init
+
   init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     let type = try container.decode(String.self, forKey: .type)
@@ -27,6 +39,8 @@ extension Message: Codable {
       throw DecodeError.unknownType
     }
   }
+  
+  // MARK: Methods
 
   func encode(to encoder: Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
@@ -39,17 +53,11 @@ extension Message: Codable {
       try container.encode(String(describing: IceCandidate.self), forKey: .type)
     }
   }
-
-  enum DecodeError: Error {
-    case unknownType
-  }
-    
-  enum CodingKeys: String, CodingKey {
-    case type, payload
-  }
 }
 
 protocol WebRTCSignalDelegate: AnyObject {
+  // MARK: Methods
+
   func didConnect(_ signal: WebRTCSignal)
 
   func didDisconnect(_ signal: WebRTCSignal)
@@ -59,7 +67,9 @@ protocol WebRTCSignalDelegate: AnyObject {
   func signal(_ signal: WebRTCSignal, didReceiveCandidate candidate: RTCIceCandidate)
 }
 
-class WebRTCSignal {
+class WebRTCSignal: Debuggable {
+  // MARK: Properties
+
   let decoder = JSONDecoder()
 
   let encoder = JSONEncoder()
@@ -67,10 +77,14 @@ class WebRTCSignal {
   let webSocket: WebSocket
 
   weak var delegate: WebRTCSignalDelegate?
+  
+  // MARK: Init
 
   init(webSocket: WebSocket) {
     self.webSocket = webSocket
   }
+  
+  // MARK: Methods
 
   func connect() {
     self.webSocket.delegate = self
@@ -83,12 +97,13 @@ class WebRTCSignal {
   }
 
   func send(sdp rtcSdp: RTCSessionDescription) {
+    self.info("send WebRTC session description...")
     let message = Message.sdp(SessionDescription(from: rtcSdp))
     do {
       let data = try self.encoder.encode(message)
       self.webSocket.send(data: data)
     } catch {
-      debugPrint("Warning: Could not encode sdp: \(error)")
+      self.warn("could not encode sdp: \(error)...")
     }
   }
 
@@ -98,7 +113,7 @@ class WebRTCSignal {
       let data = try self.encoder.encode(message)
       self.webSocket.send(data: data)
     } catch {
-      debugPrint("Warning: Could not encode candidate: \(error)")
+      self.warn("could not encode candidate: \(error)...")
     }
   }
 }

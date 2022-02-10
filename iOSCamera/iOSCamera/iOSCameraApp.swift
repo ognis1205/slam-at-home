@@ -11,6 +11,8 @@ import SwiftUI
 // swiftlint:disable type_name
 @main
 struct iOSCameraApp: App {
+  // MARK: Body
+
   var body: some Scene {
     WindowGroup {
       WebRTCView()

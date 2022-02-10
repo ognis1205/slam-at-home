@@ -10,6 +10,8 @@ import Foundation
 import WebRTC
 
 extension WebRTCClient: RTCVideoCapturerDelegate {
+  // MARK: Methods
+
   func capturer(_ capturer: RTCVideoCapturer, didCapture frame: RTCVideoFrame) {
     self.videoTrack.source.capturer(capturer, didCapture: frame)
   }

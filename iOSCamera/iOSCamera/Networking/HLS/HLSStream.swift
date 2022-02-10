@@ -10,9 +10,13 @@ import CocoaAsyncSocket
 import Foundation
 
 private class Entry<T> {
+  // MARK: Properties
+
   let value: T?
 
   var next: Entry?
+
+  // MARK: Init
 
   init(_ value: T?) {
     self.value = value
@@ -20,6 +24,8 @@ private class Entry<T> {
 }
 
 private class Queue<T> {
+  // MARK: Properties
+
   enum PeepType {
     case HEAD
     case TAIL
@@ -32,12 +38,16 @@ private class Queue<T> {
   var capacity: Int
 
   var length: Int = 0
+  
+  // MARK: Init
 
   init(capacity: Int) {
     self.tail = Entry(nil)
     self.head = self.tail
     self.capacity = capacity
   }
+  
+  // MARK: Methods
 
   func push(_ value: T) {
     if self.length >= self.capacity {
@@ -88,7 +98,9 @@ private class Queue<T> {
   }
 }
 
-class HLSStream {
+class HLSStream: Debuggable {
+  // MARK: Properties
+
   var id: Int
 
   var dataToSend: Data? {
@@ -111,19 +123,22 @@ class HLSStream {
   private var dispatchQueue: DispatchQueue
 
   private var dataStack: Queue<Data> = Queue<Data>(capacity: 1)
+  
+  // MARK: Init
 
   init(id: Int, socket: GCDAsyncSocket, dispatchQueue: DispatchQueue) {
-    debugPrint("Creating connection [#\(id)]")
     self.id = id
     self.socket = socket
     self.dispatchQueue = dispatchQueue
   }
+  
+  // MARK: Methods
 
   func open() {
+    self.info("open http live streaming [#\(self.id)]...")
     self.dispatchQueue.async(execute: { [unowned self] in
       while self.isConnected {
         if !self.isStreaming {
-          debugPrint("Sending header [#\(self.id)]")
           guard let header = [
             "HTTP/1.0 200 OK",
             "Connection: keep-alive",
@@ -138,7 +153,7 @@ class HLSStream {
             "Content-type: multipart/x-mixed-replace; boundary=0123456789876543210",
             ""
           ].joined(separator: "\r\n").data(using: String.Encoding.utf8) else {
-            debugPrint("Could not make header data [#\(self.id)]")
+            self.warn("could not make header data [#\(self.id)]...")
             return
           }
           self.isStreaming = true
@@ -159,7 +174,7 @@ class HLSStream {
                 ""
               ].joined(separator: "\r\n").data(using: String.Encoding.utf8)
             else {
-              debugPrint("Could not make frame header/footer data [#\(self.id)]")
+              self.warn("could not make frame header/footer data [#\(self.id)]...")
               return
             }
             self.socket.write(header, withTimeout: -1, tag: 0)

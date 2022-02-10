@@ -36,6 +36,8 @@ protocol Debuggable: Describable {
   func warn(_ message: String)
   
   func error(_ message: String)
+  
+  func fatal(_ message: String)
 }
 
 extension Debuggable {
@@ -51,5 +53,9 @@ extension Debuggable {
   
   func error(_ message: String) {
     print("[ERROR] \(self.typeName): \(message)")
+  }
+  
+  func fatal(_ message: String) {
+    fatalError("[FATAL] \(self.typeName): \(message)")
   }
 }
