@@ -9,6 +9,8 @@
 import Foundation
 
 extension HLSViewModel: HLSModelDelegate {
+  // MARK: Methods
+
   func didConnect() {
     self.isConnected = true
   }

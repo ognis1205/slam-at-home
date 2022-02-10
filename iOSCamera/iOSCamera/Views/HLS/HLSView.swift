@@ -10,9 +10,13 @@ import SwiftUI
 import WebRTC
 
 struct HLSView: View {
+  // MARK: Properties
+
   @ObservedObject var viewModel: HLSViewModel = HLSViewModel()
   
   @State private var showSettings: Bool = false
+  
+  // MARK: Components
 
   // swiftlint:disable identifier_name
   func Status() -> some View {
@@ -27,6 +31,8 @@ struct HLSView: View {
       Text(self.viewModel.URL)
     }
   }
+  
+  // MARK: Body
 
   var body: some View {
     GeometryReader { reader in

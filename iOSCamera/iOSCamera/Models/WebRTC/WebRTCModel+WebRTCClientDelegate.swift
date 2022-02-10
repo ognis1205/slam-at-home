@@ -9,20 +9,22 @@
 import Foundation
 
 extension WebRTCModel: WebRTCClientDelegate {
+  // MARK: Methods
+
   func webRTC(_ client: WebRTCClient, didDiscoverLocalCandidate candidate: RTCIceCandidate) {
-    debugPrint("Discovered local candidate")
+    self.info("webRTC did discover local candidate...")
     self.signal?.send(candidate: candidate)
     self.delegate?.webRTC(didDiscoverLocalCandidate: candidate)
   }
     
   func webRTC(_ client: WebRTCClient, didChangeConnectionState state: RTCIceConnectionState) {
-    debugPrint("Changed connection state")
+    self.info("webRTC did change connection state...")
     self.delegate?.webRTC(didChangeConnectionState: state)
   }
     
   func webRTC(_ client: WebRTCClient, didReceiveData data: Data) {
-    debugPrint(
-      "Message from WebRTC: \(String(data: data, encoding: .utf8) ?? "(Binary: \(data.count) bytes)")")
+    self.info(
+      "webRTC did recieve data: \(String(data: data, encoding: .utf8) ?? "(Binary: \(data.count) bytes)")...")
     self.delegate?.webRTC(didReceiveData: data)
   }
 }

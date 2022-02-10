@@ -9,13 +9,17 @@
 import SwiftUI
 import WebRTC
 
-struct WebRTCMTLVideoView: UIViewRepresentable {
+struct WebRTCMTLVideoView: UIViewRepresentable, Debuggable {
+  // MARK: Properties
+
   var model: WebRTCModel
+  
+  // MARK: Methods
 
   func makeUIView(context: Context) -> RTCMTLVideoView {
     let view = RTCMTLVideoView(frame: CGRect.zero)
     if let device = self.model.capture.device {
-      debugPrint("Start capturing on MTL video device")
+      self.info("found metal video device...")
       self.model.capture.state(.running)
       self.model.client.capture(renderer: view, videoDevice: device)
     }
@@ -28,6 +32,8 @@ struct WebRTCMTLVideoView: UIViewRepresentable {
 }
 
 struct WebRTCMTLVideoView_Preview: PreviewProvider {
+  // MARK: Previews
+
   static var previews: some View {
     WebRTCMTLVideoView(model: WebRTCModel())
   }

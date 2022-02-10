@@ -9,6 +9,8 @@
 import Foundation
 
 extension WebRTCViewModel: WebRTCModelDelegate {
+  // MARK: Methods
+
   func didConnect() {
     self.isConnected = true
   }

@@ -9,13 +9,17 @@
 import SwiftUI
 import WebRTC
 
-struct WebRTCEAGLVideoView: UIViewRepresentable {
+struct WebRTCEAGLVideoView: UIViewRepresentable, Debuggable {
+  // MARK: Properties
+
   var model: WebRTCModel
+  
+  // MARK: Methods
 
   func makeUIView(context: Context) -> RTCEAGLVideoView {
     let view = RTCEAGLVideoView(frame: CGRect.zero)
     if let device = self.model.capture.device {
-      debugPrint("Start capturing on EAGL video device")
+      self.info("found opengl video device...")
       self.model.capture.state(.running)
       self.model.client.capture(renderer: view, videoDevice: device)
     }
@@ -28,6 +32,8 @@ struct WebRTCEAGLVideoView: UIViewRepresentable {
 }
 
 struct WebRTCEAGLVideoView_Preview: PreviewProvider {
+  // MARK: Previews
+
   static var previews: some View {
     WebRTCEAGLVideoView(model: WebRTCModel())
   }

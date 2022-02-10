@@ -10,6 +10,8 @@ import Foundation
 import SwiftUI
 
 class WebRTCViewModel: ObservableObject {
+  // MARK: Properties
+
   @Published var isConnected: Bool = false
 
   @Published var status: String = "disconnected"
@@ -38,11 +40,15 @@ class WebRTCViewModel: ObservableObject {
       )
     )
   }
+  
+  // MARK: Init
 
   init() {
     self.model.delegate = self
     self.model.prepare()
   }
+  
+  // MARK: Methods
   
   func start() {
     // Do nothing.

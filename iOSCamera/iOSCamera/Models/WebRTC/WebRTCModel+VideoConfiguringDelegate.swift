@@ -9,15 +9,18 @@
 import Foundation
 
 extension WebRTCModel: VideoConfiguringDelegate {
+  // MARK: Methods
+
   func willConfigure() {
-    // Do nothing.
+    self.info("will configure...")
   }
 
   func didNotFindDevice() {
-    // Do nothing.
+    self.info("did not find device...")
   }
 
   func didFindDevice(_ device: AVCaptureDevice) throws {
+    self.info("did find device...")
     try device.lockForConfiguration()
     device.focusMode = .continuousAutoFocus
     device.unlockForConfiguration()
@@ -25,6 +28,6 @@ extension WebRTCModel: VideoConfiguringDelegate {
   }
   
   func didConfigure() {
-    // Do nothing.
+    self.info("did configure...")
   }
 }

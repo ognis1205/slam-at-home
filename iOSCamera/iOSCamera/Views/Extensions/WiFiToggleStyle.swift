@@ -9,9 +9,13 @@
 import SwiftUI
 
 struct WiFiToggleStyle: ToggleStyle {
+  // MARK: Properties
+
   static let backgroundColor = Color(.label)
   
   static let switchColor = Color(.systemBackground)
+  
+  // MARK: Methods
 
   func makeBody(configuration: Configuration) -> some View {
     HStack {

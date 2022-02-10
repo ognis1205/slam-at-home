@@ -18,6 +18,12 @@ class URLValidator: ObservableObject {
   }
 }
 
+extension UIApplication {
+    func endEditing() {
+        sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+}
+
 struct WebRTCSettingsView: View {
   @ObservedObject var viewModel: WebRTCViewModel
   
@@ -32,11 +38,13 @@ struct WebRTCSettingsView: View {
   func Connect() -> some View {
     return HStack {
       TextField("ws://0.0.0.0:10000", text: $viewModel.URL)
-        .textInputAutocapitalization(.never)
-        .disableAutocorrection(true)
-        .disabled(viewModel.isConnected)
+//        .textInputAutocapitalization(.never)
+//        .disableAutocorrection(true)
+//        .disabled(viewModel.isConnected)
 //        .multilineTextAlignment(.leading)
-        .onTapGesture {}
+        .onTapGesture {
+          UIApplication.shared.endEditing()
+        }
 //      Toggle("", isOn: $viewModel.isConnected)
 //        .toggleStyle(WiFiToggleStyle())
 //        .disabled(!urlValidator.isValid())
@@ -52,11 +60,13 @@ struct WebRTCSettingsView: View {
       Form {
         Section(header: Text("Signaling Server")) {
           Connect()
+          Text("text1")
+          Text("text2")
+          Text("text3")
         }
-        Text("Settings screen")
       }
-//      .navigationTitle("Settings")
     }
+    .navigationTitle("WebRTC Settings")
     .navigationViewStyle(StackNavigationViewStyle())
   }
 }

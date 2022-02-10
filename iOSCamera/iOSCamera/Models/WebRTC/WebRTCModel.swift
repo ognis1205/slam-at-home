@@ -9,6 +9,8 @@
 import Foundation
 
 protocol WebRTCModelDelegate: AlertReportingDelegate {
+  // MARK: Methods
+
   func didConnect()
   
   func didDisconnect()
@@ -25,10 +27,14 @@ protocol WebRTCModelDelegate: AlertReportingDelegate {
 }
 
 class WebRTCCapture: VideoConfigure {
+  // MARK: Properties
+
   var device: AVCaptureDevice?
 }
 
 class WebRTCModel: VideoConfiguring {
+  // MARK: Properties
+
   weak var delegate: WebRTCModelDelegate?
   
   var signal: WebRTCSignal?
@@ -39,11 +45,14 @@ class WebRTCModel: VideoConfiguring {
   let capture: WebRTCCapture = WebRTCCapture(
     state: .ready)
   
+  // MARK: Methods
+  
   func prepare() {
+    self.info("prepare...")
     guard
       let delegate = self.delegate
     else {
-      debugPrint("WebRTCModel requires delegation")
+      self.warn("requires delegation...")
       return
     }
     self.client.delegate = self
@@ -51,7 +60,7 @@ class WebRTCModel: VideoConfiguring {
   }
   
   func connect(URL: URL) {
-    debugPrint("Connecting to signaling server")
+    self.info("connect...")
     if self.capture.state == .running {
       self.signal = WebRTCSignal(
         webSocket: WebSocket(URL: URL))
@@ -61,7 +70,7 @@ class WebRTCModel: VideoConfiguring {
   }
   
   func disconnect() {
-    debugPrint("Disconnecting from signaling server")
+    self.info("disconnect...")
     if self.capture.state == .running {
       self.signal?.disconnect()
       self.signal?.delegate = nil

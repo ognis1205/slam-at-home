@@ -10,6 +10,8 @@ import Foundation
 import SwiftUI
 
 class HLSViewModel: ObservableObject {
+  // MARK: Properties
+
   @Published var isConnected: Bool = false
 
   @Published var URL: String = "Not Available"
@@ -42,11 +44,15 @@ class HLSViewModel: ObservableObject {
       )
     )
   }
+  
+  // MARK: Init
 
   init() {
     self.model.delegate = self
     self.model.prepare()
   }
+  
+  // MARK: Methods
 
   func start() {
     self.model.start()

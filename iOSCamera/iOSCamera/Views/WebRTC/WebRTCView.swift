@@ -10,9 +10,15 @@ import SwiftUI
 import WebRTC
 
 struct WebRTCView: View {
+  // MARK: Properties
+
+  @Environment(\.presentationMode) var presentationMode
+
   @ObservedObject var viewModel: WebRTCViewModel = WebRTCViewModel()
   
   @State private var showSettings: Bool = false
+  
+  // MARK: Components
 
   // swiftlint:disable identifier_name
   func Settings() -> some View {
@@ -33,6 +39,8 @@ struct WebRTCView: View {
       }
     }
   }
+  
+  // MARK: Body
 
   var body: some View {
     GeometryReader { reader in
@@ -56,6 +64,8 @@ struct WebRTCView: View {
 }
 
 struct WebRTCView_Previews: PreviewProvider {
+  // MARK: Previews
+
   static var previews: some View {
     WebRTCView()
   }

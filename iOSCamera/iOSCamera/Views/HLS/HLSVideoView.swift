@@ -10,6 +10,8 @@ import AVFoundation
 import SwiftUI
 
 struct HLSVideoView: UIViewRepresentable {
+  // MARK: Properties
+
   class Wrapper: UIView {
     override public class var layerClass: AnyClass {
       AVCaptureVideoPreviewLayer.self
@@ -21,6 +23,8 @@ struct HLSVideoView: UIViewRepresentable {
   }
 
   var model: HLSModel
+  
+  // MARK: Methods
 
   func makeUIView(context: Context) -> Wrapper {
     let view = Wrapper()
@@ -45,6 +49,8 @@ struct HLSVideoView: UIViewRepresentable {
 }
 
 struct HLSVideoView_Previews: PreviewProvider {
+  // MARK: Previews
+
   static var previews: some View {
     HLSVideoView(model: HLSModel())
   }
