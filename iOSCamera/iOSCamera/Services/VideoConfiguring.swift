@@ -24,6 +24,8 @@ enum VideoConfigureError: Error {
 }
 
 protocol VideoConfiguringDelegate: AnyObject {
+  // MARK: Methods
+
   func willConfigure()
   
   func didNotFindDevice()
@@ -33,27 +35,31 @@ protocol VideoConfiguringDelegate: AnyObject {
   func didConfigure()
 }
 
-class VideoConfigure {
+class VideoConfigure: Debuggable {
+  // MARK: Properties
+
   var state: VideoConfigureState
-  
+
+  // MARK: Init
+
   init(state: VideoConfigureState) {
     self.state = state
   }
+  
+  // MARK: Methods
   
   func state(_ state: VideoConfigureState) {
     self.state = state
   }
   
   func configure(_ delegate: VideoConfiguringDelegate) {
-    debugPrint("Checking video setup result")
+    self.info("configure video device...")
     if self.state != .authorized {
       return
+    } else {
+      delegate.willConfigure()
     }
 
-    debugPrint("Configuring video device")
-    delegate.willConfigure()
-
-    debugPrint("Searching avalable video device")
     do {
       var defaultDevice: AVCaptureDevice?
       if let backCamera = AVCaptureDevice.default(
@@ -67,28 +73,27 @@ class VideoConfigure {
         position: .front) {
         defaultDevice = frontCamera
       }
-
       guard let videoDevice = defaultDevice else {
-        debugPrint("Default video device is unavailable")
+        self.warn("video device is unavailable...")
         self.state(.configurationFailed)
         delegate.didNotFindDevice()
         return
       }
-
       try delegate.didFindDevice(videoDevice)
     } catch {
-      debugPrint("Could not create video device input")
+      self.warn("could not create video device input...")
       self.state(.configurationFailed)
       return
     }
 
-    debugPrint("Configured video device")
     self.state(.configured)
     delegate.didConfigure()
   }
 }
 
-protocol VideoConfiguring: AlertReporting {
+protocol VideoConfiguring: AlertReporting, Debuggable {
+  // MARK: Methods
+
   func configure(
     _ configure: VideoConfigure,
     configure: VideoConfiguringDelegate,
@@ -96,8 +101,10 @@ protocol VideoConfiguring: AlertReporting {
 }
 
 private extension VideoConfiguring {
+  // MARK: Methods
+
   func checkPermissions(_ configure: VideoConfigure, delegate: AlertReportingDelegate) {
-    debugPrint("Checking video device permissions")
+    self.info("checkPermissions of video device...")
     switch AVCaptureDevice.authorizationStatus(for: .video) {
     case .authorized:
       configure.state(.authorized)
@@ -132,6 +139,8 @@ private extension VideoConfiguring {
 }
 
 extension VideoConfiguring {
+  // MARK: Methods
+
   func configure(
     _ video: VideoConfigure,
     configure: VideoConfiguringDelegate,
