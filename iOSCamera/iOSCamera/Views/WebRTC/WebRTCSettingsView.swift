@@ -25,14 +25,22 @@ extension UIApplication {
 }
 
 struct WebRTCSettingsView: View {
+  // MARK: Properties
+
+  @Environment(\.presentationMode) var presentationMode
+
   @ObservedObject var viewModel: WebRTCViewModel
   
   @ObservedObject var urlValidator = URLValidator()
+  
+  // MARK: Methods
   
   func isValidURL(_ value: String?) -> Bool {
     let url = "(ws|wss)://((\\w)*|([0-9]*)|([-|_])*)+([\\.|/]((\\w)*|([0-9]*)|([-|_])*))+"
     return NSPredicate(format: "SELF MATCHES %@", url).evaluate(with: value)
   }
+  
+  // MARK: Components
   
   // swiftlint:disable identifier_name
   func Connect() -> some View {
@@ -54,6 +62,8 @@ struct WebRTCSettingsView: View {
 //        }
     }
   }
+  
+  // MARK: Body
 
   var body: some View {
     NavigationView {
