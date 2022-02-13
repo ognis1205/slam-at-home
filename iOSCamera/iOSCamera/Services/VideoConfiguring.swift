@@ -73,6 +73,10 @@ class VideoConfigure: Debuggable {
         position: .front) {
         defaultDevice = frontCamera
       }
+//      defaultDevice = AVCaptureDevice.default(
+//        .builtInWideAngleCamera,
+//        for: .video,
+//        position: .front)
       guard let videoDevice = defaultDevice else {
         self.warn("video device is unavailable...")
         self.state(.configurationFailed)

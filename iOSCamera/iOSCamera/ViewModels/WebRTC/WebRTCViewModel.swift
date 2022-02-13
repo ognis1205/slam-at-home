@@ -51,6 +51,6 @@ class WebRTCViewModel: ObservableObject {
   // MARK: Methods
   
   func start() {
-    // Do nothing.
+    self.model.start()
   }
 }

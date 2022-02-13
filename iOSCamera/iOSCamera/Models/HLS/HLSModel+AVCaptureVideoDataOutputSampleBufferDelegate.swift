@@ -19,6 +19,7 @@ extension HLSModel: AVCaptureVideoDataOutputSampleBufferDelegate {
     from connection: AVCaptureConnection
   ) {
     if !self.streams.isEmpty {
+      connection.videoOrientation = AVCaptureVideoOrientation.portrait
       guard let buffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return }
       let capturedImage = CIImage(cvImageBuffer: buffer, options: nil)
       guard

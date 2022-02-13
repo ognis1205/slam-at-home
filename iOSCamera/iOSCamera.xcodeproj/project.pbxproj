@@ -47,6 +47,8 @@
 		54677E9C27B12A1500419FBB /* WebRTCView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54677E9B27B12A1500419FBB /* WebRTCView.swift */; };
 		54677E9E27B1A09000419FBB /* WebRTCMTLVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54677E9D27B1A09000419FBB /* WebRTCMTLVideoView.swift */; };
 		54677EA027B4FEB200419FBB /* Debuggable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54677E9F27B4FEB100419FBB /* Debuggable.swift */; };
+		54695CFD27B7377700CF78F2 /* UIInterfaceOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54695CFC27B7377700CF78F2 /* UIInterfaceOrientation.swift */; };
+		54695CFF27B79B4400CF78F2 /* WebRTCVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54695CFE27B79B4400CF78F2 /* WebRTCVideoView.swift */; };
 		54F9A829279CFE9900E994A1 /* iOSCameraApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F9A828279CFE9900E994A1 /* iOSCameraApp.swift */; };
 		54F9A82B279CFE9900E994A1 /* HLSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F9A82A279CFE9900E994A1 /* HLSView.swift */; };
 		54F9A82D279CFE9C00E994A1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54F9A82C279CFE9C00E994A1 /* Assets.xcassets */; };
@@ -119,6 +121,8 @@
 		54677E9B27B12A1500419FBB /* WebRTCView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebRTCView.swift; sourceTree = "<group>"; };
 		54677E9D27B1A09000419FBB /* WebRTCMTLVideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebRTCMTLVideoView.swift; sourceTree = "<group>"; };
 		54677E9F27B4FEB100419FBB /* Debuggable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debuggable.swift; sourceTree = "<group>"; };
+		54695CFC27B7377700CF78F2 /* UIInterfaceOrientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIInterfaceOrientation.swift; sourceTree = "<group>"; };
+		54695CFE27B79B4400CF78F2 /* WebRTCVideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebRTCVideoView.swift; sourceTree = "<group>"; };
 		54F9A825279CFE9900E994A1 /* iOSCamera.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSCamera.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		54F9A828279CFE9900E994A1 /* iOSCameraApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSCameraApp.swift; sourceTree = "<group>"; };
 		54F9A82A279CFE9900E994A1 /* HLSView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HLSView.swift; sourceTree = "<group>"; };
@@ -185,6 +189,7 @@
 				54677E3E279DC48500419FBB /* RGB.h */,
 				54677E3F279DCDEC00419FBB /* RGB.m */,
 				54677E9F27B4FEB100419FBB /* Debuggable.swift */,
+				54695CFC27B7377700CF78F2 /* UIInterfaceOrientation.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -341,6 +346,7 @@
 				54677E9B27B12A1500419FBB /* WebRTCView.swift */,
 				54677E9D27B1A09000419FBB /* WebRTCMTLVideoView.swift */,
 				54677E7B27A3BB5000419FBB /* WebRTCSettingsView.swift */,
+				54695CFE27B79B4400CF78F2 /* WebRTCVideoView.swift */,
 			);
 			path = WebRTC;
 			sourceTree = "<group>";
@@ -724,6 +730,7 @@
 				54677E6327A015E500419FBB /* IceCandidate.swift in Sources */,
 				54677E8C27ABB68300419FBB /* VideoConfiguring.swift in Sources */,
 				54677E9227AF000300419FBB /* WebRTCModel+WebRTCSignalDelegate.swift in Sources */,
+				54695CFD27B7377700CF78F2 /* UIInterfaceOrientation.swift in Sources */,
 				54677E8E27AC526F00419FBB /* HLSModel+VideoConfiguringDelegate.swift in Sources */,
 				54677E6727A02E6B00419FBB /* SessionDescription.swift in Sources */,
 				54677E7C27A3BB5000419FBB /* WebRTCSettingsView.swift in Sources */,
@@ -740,6 +747,7 @@
 				54677E8227A85DAC00419FBB /* HLSViewModel.swift in Sources */,
 				54677E6D27A036F500419FBB /* WebRTCClient.swift in Sources */,
 				54677E9A27B02CD900419FBB /* WebRTCViewModel+WebRTCModelDelegate.swift in Sources */,
+				54695CFF27B79B4400CF78F2 /* WebRTCVideoView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -916,9 +924,10 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchImage;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -956,9 +965,10 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchImage;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

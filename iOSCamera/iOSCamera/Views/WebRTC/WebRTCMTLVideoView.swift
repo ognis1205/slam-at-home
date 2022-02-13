@@ -18,6 +18,7 @@ struct WebRTCMTLVideoView: UIViewRepresentable, Debuggable {
 
   func makeUIView(context: Context) -> RTCMTLVideoView {
     let view = RTCMTLVideoView(frame: CGRect.zero)
+    view.contentMode = .scaleAspectFill
     if let device = self.model.capture.device {
       self.info("found metal video device...")
       self.model.capture.state(.running)

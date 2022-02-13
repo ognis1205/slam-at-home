@@ -48,13 +48,30 @@ struct WebRTCView: View {
         Color.black.edgesIgnoringSafeArea(.all)
         VStack {
           Settings()
+//          WebRTCVideoView(model: viewModel.model)
+//            .onAppear {
+//              viewModel.start()
+//            }
+//            .alert(isPresented: $viewModel.showAlert, content: { self.viewModel.dialog })
 #if arch(arm64)
           WebRTCMTLVideoView(model: viewModel.model)
-            .onAppear { viewModel.start() }
+            .onAppear {
+              UIDevice.current.setValue(
+                UIInterfaceOrientation.portrait.rawValue,
+                forKey: "orientation")
+              AppDelegate.orientationLock = .portrait
+              viewModel.start()
+            }
             .alert(isPresented: $viewModel.showAlert, content: { self.viewModel.dialog })
 #else
           WebRTCEAGLVideoView(model: viewModel.model)
-            .onAppear { viewModel.start() }
+            .onAppear {
+              UIDevice.current.setValue(
+                UIInterfaceOrientation.portrait.rawValue,
+                forKey: "orientation")
+              AppDelegate.orientationLock = .portrait
+              viewModel.start()
+            }
             .alert(isPresented: $viewModel.showAlert, content: { self.viewModel.dialog })
 #endif
         }

@@ -16,11 +16,11 @@ struct VideoTrack: Debuggable {
 
   var capturer: RTCVideoCapturer?
 
-  var frame: RTCVideoFrame?
+//  var frame: RTCVideoFrame?
 
   var sender: RTCVideoTrack?
 
-  var reciever: RTCVideoTrack?
+//  var reciever: RTCVideoTrack?
   
   // MARK: Methods
   
@@ -36,9 +36,9 @@ struct VideoTrack: Debuggable {
     self.sender = WebRTCClient.factory.videoTrack(
       with: self.source,
       trackId: client.videoTrackId)
-    self.reciever = client.connection.transceivers.first {
-      $0.mediaType == .video
-    }?.receiver.track as? RTCVideoTrack
+//    self.reciever = client.connection.transceivers.first {
+//      $0.mediaType == .video
+//    }?.receiver.track as? RTCVideoTrack
   }
 }
 
@@ -78,7 +78,7 @@ protocol WebRTCClientDelegate: AnyObject {
 class WebRTCClient: NSObject, Debuggable {
   // MARK: Properties
 
-  fileprivate static let factory: RTCPeerConnectionFactory = {
+  static let factory: RTCPeerConnectionFactory = {
     RTCInitializeSSL()
     let videoEncoderFactory = RTCDefaultVideoEncoderFactory()
     let videoDecoderFactory = RTCDefaultVideoDecoderFactory()
@@ -103,7 +103,7 @@ class WebRTCClient: NSObject, Debuggable {
 
   let mediaConstrains = [
     kRTCMediaConstraintsOfferToReceiveAudio: kRTCMediaConstraintsValueFalse,
-    kRTCMediaConstraintsOfferToReceiveVideo: kRTCMediaConstraintsValueTrue
+    kRTCMediaConstraintsOfferToReceiveVideo: kRTCMediaConstraintsValueFalse
   ]
   
   var videoTrack = VideoTrack(

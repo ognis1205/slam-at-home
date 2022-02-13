@@ -19,7 +19,7 @@ struct WebRTCVideoView: UIViewRepresentable {
   func makeUIView(context: Context) -> RTCCameraPreviewView {
     let view = RTCCameraPreviewView()
     let bounds = view.bounds
-    view.captureSession = model.capture.session
+//    view.captureSession = model.capture.session
 //    view.captureSession = (model.videoTrack.source as! RTCAVFoundationVideoSource).AVCaptureSession
 //    view.captureSession = model.client.videoTrack.sender.AVCaptureSession
     view.backgroundColor = .black
@@ -32,7 +32,7 @@ struct WebRTCVideoView: UIViewRepresentable {
       size: CGSize(width: bounds.width, height: bounds.height))
     (view.layer as! AVCaptureVideoPreviewLayer).videoGravity = .resize
     (view.layer as! AVCaptureVideoPreviewLayer).connection?.videoOrientation = .portrait
-    debugPrint((view.layer as! AVCaptureVideoPreviewLayer).videoGravity)
+//    debugPrint((view.layer as! AVCaptureVideoPreviewLayer).)
 //    previewLayer.videoGravity = .resize
 //    previewLayer.connection?.videoOrientation = .portrait
     return view
@@ -50,4 +50,3 @@ struct WebRTCVideoView_Previews: PreviewProvider {
     WebRTCVideoView(model: WebRTCModel())
   }
 }
-

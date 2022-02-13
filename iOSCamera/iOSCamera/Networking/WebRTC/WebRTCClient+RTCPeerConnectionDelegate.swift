@@ -24,6 +24,7 @@ extension WebRTCClient: RTCPeerConnectionDelegate {
     didAdd stream: RTCMediaStream
   ) {
     self.info("peerConnection did add stream...")
+//    peerConnection.add(stream)
   }
 
   func peerConnection(
@@ -31,6 +32,7 @@ extension WebRTCClient: RTCPeerConnectionDelegate {
     didRemove stream: RTCMediaStream
   ) {
     self.info("peerConnection did remote stream...")
+//    peerConnection.remove(stream)
   }
 
   func peerConnectionShouldNegotiate(
