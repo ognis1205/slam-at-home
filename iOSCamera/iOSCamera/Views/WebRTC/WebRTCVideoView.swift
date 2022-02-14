@@ -32,9 +32,6 @@ struct WebRTCVideoView: UIViewRepresentable {
       size: CGSize(width: bounds.width, height: bounds.height))
     (view.layer as! AVCaptureVideoPreviewLayer).videoGravity = .resize
     (view.layer as! AVCaptureVideoPreviewLayer).connection?.videoOrientation = .portrait
-//    debugPrint((view.layer as! AVCaptureVideoPreviewLayer).)
-//    previewLayer.videoGravity = .resize
-//    previewLayer.connection?.videoOrientation = .portrait
     return view
   }
 

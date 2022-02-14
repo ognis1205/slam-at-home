@@ -67,21 +67,84 @@ struct WebRTCSettingsView: View {
 
   var body: some View {
     NavigationView {
-      Form {
-        Section(header: Text("Signaling Server")) {
-          Connect()
-          Text("text1")
-          Text("text2")
-          Text("text3")
+      ScrollView(.vertical, showsIndicators: false) {
+        VStack(spacing: 20) {
+          GroupBox(
+            label:
+              WebRTCSettingsLabelView(
+              labelText: "Signaling Server",
+              labelImage: "info.circle")
+          ) {
+            Divider().padding(.vertical, 4)
+            HStack(alignment: .center, spacing: 10) {
+              Image(systemName: "network")
+                .resizable()
+                .scaledToFit()
+                .foregroundColor(.white)
+                .padding()
+                .background(.green)
+                .frame(width: 80, height: 80)
+                .cornerRadius(9)
+              // swiftlint:disable line_length
+              Text("Establishing a WebRTC connection between two devices requires the use of a signaling server to resolve how to connect them over the internet.")
+                .font(.footnote)
+            }
+          }
+          GroupBox(
+            label:
+              WebRTCSettingsLabelView(
+              labelText: "Application",
+              labelImage: "apps.iphone")
+          ) {
+            WebRTCSettingsRowView(
+              name: "Developer",
+              content: "Shingo OKAWA")
+            WebRTCSettingsRowView(
+              name: "Compatibility",
+              content: "iOS 15.1")
+            WebRTCSettingsRowView(
+              name: "Website",
+              linkLabel: "slam-at-home",
+              linkDestination: "github.com/ognis1205/slam-at-home")
+            WebRTCSettingsRowView(
+              name: "SwiftUI",
+              content: "2.0")
+            WebRTCSettingsRowView(
+              name: "Version",
+              content: "1.0.0")
+          }
+        }
+        .navigationTitle(Text("Settings"))
+        .padding()
+        .toolbar {
+          ToolbarItem(placement: .primaryAction) {
+            Button(
+              action: {
+                self.presentationMode.wrappedValue.dismiss()
+              },
+              label: {
+                Image(systemName: "xmark")
+//                  .font(.system(size: 20, weight: .medium, design: .default))
+              })
+              .accentColor(.white)
+          }
         }
       }
     }
-    .navigationTitle("WebRTC Settings")
-    .navigationViewStyle(StackNavigationViewStyle())
   }
+//      Form {
+//        Section(header: Text("Signaling Server")) {
+//          Connect()
+//          Text("text1")
+//          Text("text2")
+//          Text("text3")
+//        }
+//      }
 }
 
 struct WebRTCSettingsView_Previews: PreviewProvider {
+  // MARK: Previews
+
   static var previews: some View {
     WebRTCSettingsView(viewModel: WebRTCViewModel())
   }
