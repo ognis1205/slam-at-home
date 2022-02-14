@@ -72,30 +72,35 @@ struct WebRTCSettingsView: View {
           GroupBox(
             label:
               WebRTCSettingsLabelView(
-              labelText: "Signaling Server",
-              labelImage: "info.circle")
+                labelText: "Signaling Server",
+                labelImage: "info.circle")
           ) {
-            Divider().padding(.vertical, 4)
-            HStack(alignment: .center, spacing: 10) {
-              Image(systemName: "network")
-                .resizable()
-                .scaledToFit()
-                .foregroundColor(.white)
-                .padding()
-                .background(.green)
-                .frame(width: 80, height: 80)
-                .cornerRadius(9)
-              // swiftlint:disable line_length
-              Text("Establishing a WebRTC connection between two devices requires the use of a signaling server to resolve how to connect them over the internet.")
-                .font(.footnote)
-            }
+            // swiftlint:disable line_length
+            WebRTCSettingsHeaderView(
+              labelImage: "network",
+              labelColor: .green,
+              content: "Establishing a WebRTC connection between two devices requires the use of a signaling server to resolve how to connect them over the internet.")
+            WebRTCSettingsRowView(
+              name: "Status",
+              content: viewModel.status)
+            WebRTCSettingsRowView(
+              name: "Local Candidates",
+              content: String(viewModel.numberOfLocalCandidate))
+            WebRTCSettingsRowView(
+              name: "Remote Candidates",
+              content: String(viewModel.numberOfRemoteCandidate))
           }
           GroupBox(
             label:
               WebRTCSettingsLabelView(
-              labelText: "Application",
-              labelImage: "apps.iphone")
+                labelText: "Application",
+                labelImage: "apps.iphone")
           ) {
+            // swiftlint:disable line_length
+            WebRTCSettingsHeaderView(
+              labelImage: "video.circle",
+              labelColor: .blue,
+              content: "This application is a part of SLAM@Home project. For more details such as usage restrictions, please refer to the link below.")
             WebRTCSettingsRowView(
               name: "Developer",
               content: "Shingo OKAWA")
@@ -124,7 +129,6 @@ struct WebRTCSettingsView: View {
               },
               label: {
                 Image(systemName: "xmark")
-//                  .font(.system(size: 20, weight: .medium, design: .default))
               })
               .accentColor(.white)
           }
@@ -132,14 +136,6 @@ struct WebRTCSettingsView: View {
       }
     }
   }
-//      Form {
-//        Section(header: Text("Signaling Server")) {
-//          Connect()
-//          Text("text1")
-//          Text("text2")
-//          Text("text3")
-//        }
-//      }
 }
 
 struct WebRTCSettingsView_Previews: PreviewProvider {

@@ -33,8 +33,8 @@ struct WebRTCSettingsRowView: View {
           let linkLabel = linkLabel,
           let linkDestination = linkDestination,
           let destination = URL(string: "https://\(linkDestination)") {
-          Link(linkLabel, destination: destination)
-          Image(systemName: "arrow.up.right.square").foregroundColor(.pink)
+          Link(linkLabel, destination: destination).foregroundColor(.white)
+          Image(systemName: "arrow.up.right.square")
         } else {
           EmptyView()
         }
