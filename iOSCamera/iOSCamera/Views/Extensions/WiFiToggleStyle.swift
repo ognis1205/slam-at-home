@@ -11,7 +11,7 @@ import SwiftUI
 struct WiFiToggleStyle: ToggleStyle {
   // MARK: Properties
 
-  static let backgroundColor = Color(.label)
+  static let backgroundColor = Color.secondary
   
   static let switchColor = Color(.systemBackground)
   
@@ -20,6 +20,7 @@ struct WiFiToggleStyle: ToggleStyle {
   func makeBody(configuration: Configuration) -> some View {
     HStack {
       configuration.label
+      Spacer()
       RoundedRectangle(cornerRadius: 25.0)
         .frame(width: 50, height: 30, alignment: .center)
         .overlay((

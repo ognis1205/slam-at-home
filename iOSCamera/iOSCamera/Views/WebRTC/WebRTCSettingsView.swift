@@ -40,29 +40,6 @@ struct WebRTCSettingsView: View {
     return NSPredicate(format: "SELF MATCHES %@", url).evaluate(with: value)
   }
   
-  // MARK: Components
-  
-  // swiftlint:disable identifier_name
-  func Connect() -> some View {
-    return HStack {
-      TextField("ws://0.0.0.0:10000", text: $viewModel.URL)
-//        .textInputAutocapitalization(.never)
-//        .disableAutocorrection(true)
-//        .disabled(viewModel.isConnected)
-//        .multilineTextAlignment(.leading)
-        .onTapGesture {
-          UIApplication.shared.endEditing()
-        }
-//      Toggle("", isOn: $viewModel.isConnected)
-//        .toggleStyle(WiFiToggleStyle())
-//        .disabled(!urlValidator.isValid())
-//        .onChange(of: viewModel.isConnected) { value in
-//          print(value)
-//          print(urlValidator.value)
-//        }
-    }
-  }
-  
   // MARK: Body
 
   var body: some View {
@@ -73,16 +50,23 @@ struct WebRTCSettingsView: View {
             label:
               WebRTCSettingsLabelView(
                 labelText: "Signaling Server",
-                labelImage: "info.circle")
+                labelImage: "personalhotspot")
           ) {
             // swiftlint:disable line_length
             WebRTCSettingsHeaderView(
               labelImage: "network",
               labelColor: .green,
               content: "Establishing a WebRTC connection between two devices requires the use of a signaling server to resolve how to connect them over the internet.")
+            WebRTCURLTextFieldView(
+              viewModel: viewModel)
+            WebRTCConnectToggleView(
+              viewModel: viewModel)
             WebRTCSettingsRowView(
               name: "Status",
               content: viewModel.status)
+            WebRTCSettingsRowView(
+              name: "Remote SDP",
+              content: viewModel.hasRemoteSdp ? "Yes" : "No")
             WebRTCSettingsRowView(
               name: "Local Candidates",
               content: String(viewModel.numberOfLocalCandidate))
@@ -130,7 +114,7 @@ struct WebRTCSettingsView: View {
               label: {
                 Image(systemName: "xmark")
               })
-              .accentColor(.white)
+              .accentColor(.primary)
           }
         }
       }
