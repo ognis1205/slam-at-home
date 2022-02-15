@@ -53,9 +53,6 @@ struct WebRTCSettingsView: View {
             WebRTCConnectToggleView(
               viewModel: viewModel)
             WebRTCSettingsRowView(
-              name: "Status",
-              content: viewModel.status)
-            WebRTCSettingsRowView(
               name: "Remote SDP",
               content: viewModel.hasRemoteSdp ? "Yes" : "No")
             WebRTCSettingsRowView(

@@ -65,6 +65,7 @@ struct WebRTCView: View {
             }
         }
         Spacer()
+        WebRTCStatus(viewModel: self.viewModel)
       }
     }
   }

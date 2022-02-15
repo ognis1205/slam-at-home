@@ -30,17 +30,17 @@ extension WebRTCViewModel: WebRTCModelDelegate {
   func webRTC(didDiscoverLocalCandidate candidate: RTCIceCandidate) {
     self.numberOfLocalCandidate += 1
   }
-    
+
   func webRTC(didChangeConnectionState state: RTCIceConnectionState) {
     DispatchQueue.main.async {
       self.status = state.description.capitalized
     }
   }
-    
+
   func webRTC(didReceiveData data: Data) {
     // Do nothing.
   }
-  
+
   func alert(_ alert: AlertModel) {
     self.showAlert = true
     self.alert = alert
