@@ -9,12 +9,17 @@
 import Foundation
 import SwiftUI
 
+enum WebRTCStatus: String {
+  case connected
+  case disconnected
+}
+
 class WebRTCViewModel: ObservableObject {
   // MARK: Properties
 
   @Published var isConnected: Bool = false
 
-  @Published var status: String = "disconnected"
+  @Published var status: String = WebRTCStatus.disconnected.rawValue.capitalized
 
   @Published var hasRemoteSdp: Bool = false
     

@@ -1,5 +1,5 @@
 //
-//  WebRTCStatus.swift
+//  WebRTCStatusView.swift
 //  iOSCamera
 //
 //  Created by Shingo OKAWA on 2022/02/16.
@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct WebRTCStatus: View {
+struct WebRTCStatusView: View {
   // MARK: Properties
   
   @ObservedObject var viewModel: WebRTCViewModel
@@ -23,7 +23,7 @@ struct WebRTCStatus: View {
         action: { /* Do nothing. */ },
         label: {
           Text(viewModel.status)
-            .foregroundColor(.black.opacity(opacity))
+            .foregroundColor(.black)
             .fontWeight(.semibold)
             .padding(.vertical, 10)
             .padding(.horizontal, 20)
@@ -46,10 +46,10 @@ struct WebRTCStatus: View {
   }
 }
 
-struct WebRTCStatus_Previews: PreviewProvider {
+struct WebRTCStatusView_Previews: PreviewProvider {
   // MARK: Previews
 
   static var previews: some View {
-    WebRTCStatus(viewModel: WebRTCViewModel())
+    WebRTCStatusView(viewModel: WebRTCViewModel())
   }
 }

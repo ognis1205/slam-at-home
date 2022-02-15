@@ -25,14 +25,16 @@ struct WebRTCConnectToggleView: View, Debuggable {
         .disabled(!viewModel.URL.isValid(.URL))
         .onChange(of: viewModel.isConnected) { connecting in
           if connecting {
+            self.info("connect to URL ws://\(viewModel.URL)/connect...")
             guard
-              let url = URL(string: viewModel.URL)
+              let url = URL(string: "ws://\(viewModel.URL)/connect")
             else {
-              self.warn("failed to parse URL \(viewModel.URL)...")
+              self.warn("failed to parse URL ws://\(viewModel.URL)/connect...")
               return
             }
             viewModel.model.connect(URL: url)
           } else {
+            self.info("disconnect from URL ws://\(viewModel.URL)/connect...")
             viewModel.model.disconnect()
           }
         }

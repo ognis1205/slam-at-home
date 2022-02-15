@@ -12,23 +12,35 @@ extension WebRTCViewModel: WebRTCModelDelegate {
   // MARK: Methods
 
   func didConnect() {
-    self.isConnected = true
+    DispatchQueue.main.async {
+      self.isConnected = true
+      self.status = WebRTCStatus.connected.rawValue.capitalized
+    }
   }
 
   func didDisconnect() {
-    self.isConnected = false
+    DispatchQueue.main.async {
+      self.isConnected = false
+      self.status = WebRTCStatus.disconnected.rawValue.capitalized
+    }
   }
 
   func signal(didReceiveRemoteSdp sdp: RTCSessionDescription) {
-    self.hasRemoteSdp = true
+    DispatchQueue.main.async {
+      self.hasRemoteSdp = true
+    }
   }
 
   func signal(didReceiveCandidate candidate: RTCIceCandidate) {
-    self.numberOfRemoteCandidate += 1
+    DispatchQueue.main.async {
+      self.numberOfRemoteCandidate += 1
+    }
   }
 
   func webRTC(didDiscoverLocalCandidate candidate: RTCIceCandidate) {
-    self.numberOfLocalCandidate += 1
+    DispatchQueue.main.async {
+      self.numberOfLocalCandidate += 1
+    }
   }
 
   func webRTC(didChangeConnectionState state: RTCIceConnectionState) {
