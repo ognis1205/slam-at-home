@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct WebRTCConnectToggleView: View {
+struct WebRTCConnectToggleView: View, Debuggable {
   // MARK: Properties
   
   @ObservedObject var viewModel: WebRTCViewModel
@@ -22,10 +22,19 @@ struct WebRTCConnectToggleView: View {
         Text("Connect").foregroundColor(.gray)
       }
         .toggleStyle(WiFiToggleStyle())
-//                .disabled(urlValidator.isValid())
-        .onChange(of: viewModel.isConnected) { value in
-          print(value)
-//          print(urlValidator.value)
+        .disabled(!viewModel.URL.isValid(.URL))
+        .onChange(of: viewModel.isConnected) { connecting in
+          if connecting {
+            guard
+              let url = URL(string: viewModel.URL)
+            else {
+              self.warn("failed to parse URL \(viewModel.URL)...")
+              return
+            }
+            viewModel.model.connect(URL: url)
+          } else {
+            viewModel.model.disconnect()
+          }
         }
     }
   }

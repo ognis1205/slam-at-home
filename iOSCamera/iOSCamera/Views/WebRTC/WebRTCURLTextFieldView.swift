@@ -20,6 +20,7 @@ struct WebRTCURLTextFieldView: View {
     HStack {
       Image(systemName: "wifi").foregroundColor(.secondary)
       TextField("ws://0.0.0.0:10000", text: $viewModel.URL)
+        .disableAutocorrection(true)
     }
       .padding()
       .disabled(viewModel.isConnected)

@@ -9,19 +9,12 @@
 import Combine
 import SwiftUI
 
-class URLValidator: ObservableObject {
-  @Published var value = ""
-
-  func isValid() -> Bool {
-    let url = "((?:ws|wss|http|https)://)?(?:www\\.)?[\\w\\d\\-_]+\\.\\w{2,3}(\\.\\w{2})?(/(?<=/)(?:[\\w\\d\\-./_]+)?)?"
-    return NSPredicate(format: "SELF MATCHES %@", url).evaluate(with: self.value)
-  }
-}
-
 extension UIApplication {
-    func endEditing() {
-        sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-    }
+  // MARK: Methods
+
+  func endEditing() {
+    sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+  }
 }
 
 struct WebRTCSettingsView: View {
@@ -30,8 +23,6 @@ struct WebRTCSettingsView: View {
   @Environment(\.presentationMode) var presentationMode
 
   @ObservedObject var viewModel: WebRTCViewModel
-  
-  @ObservedObject var urlValidator = URLValidator()
   
   // MARK: Methods
   
