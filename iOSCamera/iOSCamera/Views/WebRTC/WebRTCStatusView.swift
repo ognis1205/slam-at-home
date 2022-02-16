@@ -13,36 +13,36 @@ struct WebRTCStatusView: View {
   
   @ObservedObject var viewModel: WebRTCViewModel
 
-  @State private var opacity: CGFloat = 0.0
+  @State private var opacity: CGFloat = 0.5
   
   // MARK: Body
 
   var body: some View {
-    HStack {
-      Button(
-        action: { /* Do nothing. */ },
-        label: {
-          Text(viewModel.status)
-            .foregroundColor(.black)
-            .fontWeight(.semibold)
-            .padding(.vertical, 10)
-            .padding(.horizontal, 20)
-            .background(.white.opacity(opacity))
-            .clipShape(Capsule())
-            .onAppear {
-              withAnimation {
-                opacity = 0.5
+      HStack {
+        Button(
+          action: { /* Do nothing. */ },
+          label: {
+            Text(viewModel.status)
+              .foregroundColor(viewModel.isConnected ? .red : .gray)
+              .fontWeight(.semibold)
+              .padding(.vertical, 10)
+              .padding(.horizontal, 20)
+              .background(.white.opacity(opacity))
+              .clipShape(Capsule())
+              .onAppear {
+                withAnimation {
+                  opacity = 0.0
+                }
               }
-            }
-            .animation(
-              Animation.easeInOut(duration: 1).repeatForever(autoreverses: true),
-              value: opacity)
-        })
-        .disabled(true)
-        .padding(.leading)
-      Spacer()
-    }
-    .frame(height: 75)
+              .animation(
+                Animation.easeInOut(duration: 1).repeatForever(autoreverses: true),
+                value: opacity)
+          })
+          .disabled(true)
+          .padding(.leading)
+        Spacer()
+      }
+      .frame(height: 75)
   }
 }
 

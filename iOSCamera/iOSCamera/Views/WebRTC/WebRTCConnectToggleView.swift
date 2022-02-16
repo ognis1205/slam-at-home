@@ -27,9 +27,10 @@ struct WebRTCConnectToggleView: View, Debuggable {
           if connecting {
             self.info("connect to URL ws://\(viewModel.URL)/connect...")
             guard
-              let url = URL(string: "ws://\(viewModel.URL)/connect")
+              let id = UIDevice.current.identifierForVendor,
+              let url = URL(string: "ws://\(viewModel.URL)/connect?id=\(id.uuidString)")
             else {
-              self.warn("failed to parse URL ws://\(viewModel.URL)/connect...")
+              self.warn("failed to parse URL...")
               return
             }
             viewModel.model.connect(URL: url)

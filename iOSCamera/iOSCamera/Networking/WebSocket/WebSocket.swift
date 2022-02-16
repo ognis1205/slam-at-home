@@ -70,6 +70,7 @@ class WebSocket: NSObject, Debuggable {
       guard let self = self else { return }
       switch message {
       case .success(.data(let data)):
+        self.info("recieve data \(data)...")
         self.delegate?.socket(self, didReceiveData: data)
         self.receive()
       case .success:

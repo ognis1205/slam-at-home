@@ -29,9 +29,7 @@ extension HLSModel: GCDAsyncSocketDelegate {
         attributes: .concurrent))
     self.streams[id] = newStream
     newStream.open()
-    DispatchQueue.main.async(execute: {
-      self.info("connect...")
-      self.delegate?.didConnect()
-    })
+    self.info("connect...")
+    self.delegate?.didConnect()
   }
 }

@@ -54,7 +54,9 @@ extension WebRTCViewModel: WebRTCModelDelegate {
   }
 
   func alert(_ alert: AlertModel) {
-    self.showAlert = true
-    self.alert = alert
+    DispatchQueue.main.async {
+      self.showAlert = true
+      self.alert = alert
+    }
   }
 }

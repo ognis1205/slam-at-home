@@ -24,13 +24,6 @@ struct WebRTCSettingsView: View {
 
   @ObservedObject var viewModel: WebRTCViewModel
   
-  // MARK: Methods
-  
-  func isValidURL(_ value: String?) -> Bool {
-    let url = "(ws|wss)://((\\w)*|([0-9]*)|([-|_])*)+([\\.|/]((\\w)*|([0-9]*)|([-|_])*))+"
-    return NSPredicate(format: "SELF MATCHES %@", url).evaluate(with: value)
-  }
-  
   // MARK: Body
 
   var body: some View {

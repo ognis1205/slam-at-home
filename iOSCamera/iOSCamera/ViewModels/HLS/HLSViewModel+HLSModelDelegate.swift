@@ -12,19 +12,27 @@ extension HLSViewModel: HLSModelDelegate {
   // MARK: Methods
 
   func didConnect() {
-    self.isConnected = true
+    DispatchQueue.main.async {
+      self.isConnected = true
+    }
   }
   
   func didDisconnect() {
-    self.isConnected = false
+    DispatchQueue.main.async {
+      self.isConnected = false
+    }
   }
   
   func ip(_ ip: String) {
-    self.URL = "http://\(ip):\(HLSConstants.PORT)"
+    DispatchQueue.main.async {
+      self.URL = "http://\(ip):\(HLSConstants.PORT)"
+    }
   }
   
   func alert(_ alert: AlertModel) {
-    self.showAlert = true
-    self.alert = alert
+    DispatchQueue.main.async {
+      self.showAlert = true
+      self.alert = alert
+    }
   }
 }

@@ -34,14 +34,12 @@ extension AlertReporting {
     primaryAction: (() -> Void)? = nil,
     secondaryAction: (() -> Void)? = nil
   ) {
-    DispatchQueue.main.async {
-      delegate.alert(AlertModel(
-        title: title,
-        message: message,
-        primaryButtonTitle: primaryButtonTitle,
-        secondaryButtonTitle: secondaryButtonTitle,
-        primaryAction: primaryAction,
-        secondaryAction: secondaryAction))
-    }
+    delegate.alert(AlertModel(
+      title: title,
+      message: message,
+      primaryButtonTitle: primaryButtonTitle,
+      secondaryButtonTitle: secondaryButtonTitle,
+      primaryAction: primaryAction,
+      secondaryAction: secondaryAction))
   }
 }
