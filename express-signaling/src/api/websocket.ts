@@ -51,16 +51,18 @@ export default async (
 
       // Listening on messages.
       conn.on('message', (message: WebSocket.RawData): void => {
-        const signal = SafeJSON.safeParse(Signaling.isValid)(Payload.toString(message));
+        const signal = SafeJSON.safeParse(Signaling.isValid)(
+          Payload.toString(message)
+        );
         if (signal.hasError) {
-          Logger.warn("Recieved malformed signal from client")
+          Logger.warn('Recieved malformed signal from client');
         } else {
           if (clients.has(signal.json.to)) {
             Logger.info(`Recieved message ${JSON.stringify(signal.json)}`);
-            let client = clients.get(signal.json.to);
-            client.send(Buffer.from(JSON.stringify(signal.json), 'utf-8'))
+            const client = clients.get(signal.json.to);
+            client.send(Buffer.from(JSON.stringify(signal.json), 'utf-8'));
           } else {
-            Logger.warn(`Destination client is not defined $(signal.json.to)`)
+            Logger.warn(`Destination client is not defined $(signal.json.to)`);
           }
         }
       });
