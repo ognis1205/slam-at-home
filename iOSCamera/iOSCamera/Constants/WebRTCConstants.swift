@@ -16,4 +16,6 @@ struct WebRTCConstants {
     "stun:stun3.l.google.com:19302",
     "stun:stun4.l.google.com:19302"
   ]
+  
+  static let SIGNALING_ENDPOINT: String = "ws://%@/connect?id=%@"
 }
