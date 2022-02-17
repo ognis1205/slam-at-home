@@ -4,7 +4,9 @@
  */
 import * as HTTP from 'http';
 import * as Stream from 'stream';
+import * as SafeJSON from '../utils/json';
 import * as Payload from '../utils/payload';
+import * as Signaling from '../utils/signaling';
 import WebSocket from 'ws';
 import QueryString from 'query-string';
 import Logger from '../utils/logger';
@@ -41,27 +43,32 @@ export default async (
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const [path, params] = req?.url?.split('?');
       const query = QueryString.parse(params);
-//      const clientId = query.clientId[0];
-//      clients.set(clientId, conn);
-      console.log(req.headers);
-      console.log(req.socket.remoteAddress);
+      const id = typeof query.id === 'string' ? query.id : query.id[0];
+      clients.set(id, conn);
       Logger.info(
-        `Connected from client with query ${QueryString.stringify(
-          query
-        )}`
+        `Connected from client with query ${QueryString.stringify(query)}`
       );
 
       // Listening on messages.
       conn.on('message', (message: WebSocket.RawData): void => {
-        const json = JSON.parse(Payload.toString(message));
-        Logger.info(
-          `Recieved message ${JSON.stringify(json)} from client`
-        );
+        const signal = SafeJSON.safeParse(Signaling.isValid)(Payload.toString(message));
+        if (signal.hasError) {
+          Logger.warn("Recieved malformed signal from client")
+        } else {
+          if (clients.has(signal.json.to)) {
+            Logger.info(`Recieved message ${JSON.stringify(signal.json)}`);
+            let client = clients.get(signal.json.to);
+            client.send(Buffer.from(JSON.stringify(signal.json), 'utf-8'))
+          } else {
+            Logger.warn(`Destination client is not defined $(signal.json.to)`)
+          }
+        }
       });
 
       // Close the connection.
       conn.on('close', (): void => {
-//        clients.delete(clientId);
+        Logger.info(`Disconnected from client ${id}`);
+        clients.delete(id);
       });
     }
   );

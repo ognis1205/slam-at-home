@@ -4,7 +4,6 @@
  */
 import * as Express from 'express';
 import * as ip from 'ip';
-import * as uuid from 'uuid';
 import WebSocket from 'ws';
 import StartListening from './api/websocket';
 import Logger from './utils/logger';
