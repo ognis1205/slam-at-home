@@ -13,7 +13,16 @@ extension WebRTCModel: WebRTCClientDelegate {
 
   func webRTC(_ client: WebRTCClient, didDiscoverLocalCandidate candidate: RTCIceCandidate) {
     self.info("webRTC did discover local candidate...")
-    self.signal?.send(candidate: candidate)
+    guard
+      let remoteId = self.client.remoteId
+    else {
+      self.warn("webRTC did discover local candidate failed, remoteId is not ready...")
+      return
+    }
+    self.signal?.send(
+      candidate: candidate,
+      signalFrom: self.client.id,
+      signalTo: remoteId)
     self.delegate?.webRTC(didDiscoverLocalCandidate: candidate)
   }
     
@@ -26,5 +35,10 @@ extension WebRTCModel: WebRTCClientDelegate {
     self.info(
       "webRTC did recieve data: \(String(data: data, encoding: .utf8) ?? "(Binary: \(data.count) bytes)")...")
     self.delegate?.webRTC(didReceiveData: data)
+  }
+  
+  func webRTC(_ client: WebRTCClient, didChangeSignalingState state: RTCSignalingState) {
+    self.info("webRTC did change signaling state...")
+    self.delegate?.webRTC(didChangeSignalingState: state)
   }
 }

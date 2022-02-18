@@ -22,7 +22,7 @@ struct WebRTCStatusView: View {
         Button(
           action: { /* Do nothing. */ },
           label: {
-            Text(viewModel.status)
+            Text(viewModel.signalingState)
               .foregroundColor(viewModel.isConnected ? .red : .gray)
               .fontWeight(.semibold)
               .padding(.vertical, 10)

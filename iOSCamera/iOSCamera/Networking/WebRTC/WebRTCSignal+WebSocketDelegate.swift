@@ -17,30 +17,24 @@ extension WebRTCSignal: WebSocketDelegate {
     self.delegate?.didConnect(self)
   }
 
-  func didDisconnect(_ webSocket: WebSocket, force: Bool) {
+  func didDisconnect(_ webSocket: WebSocket) {
     self.info("didDisconnect web socket...")
     self.delegate?.didDisconnect(self)
-    if !force {
-      DispatchQueue.global().asyncAfter(deadline: .now() + 2) {
-        self.info("try to reconnect to signaling server...")
-        self.webSocket.connect()
-      }
-    }
   }
 
   func socket(_ webSocket: WebSocket, didReceiveData data: Data) {
     self.info("socket did recieve data...")
-    let message: Message
+    let signal: Signal
     do {
-      message = try self.decoder.decode(Message.self, from: data)
+      signal = try self.decoder.decode(Signal.self, from: data)
     } catch {
-      self.warn("could not decode incoming message: \(error)...")
+      self.warn("could not decode incoming signal: \(error)...")
       return
     }
-    switch message {
-    case .candidate(let iceCandidate):
+    switch signal {
+    case let .candidate(iceCandidate, _, _):
       self.delegate?.signal(self, didReceiveCandidate: iceCandidate.rtcIceCandidate)
-    case .sdp(let sessionDescription):
+    case let .sdp(sessionDescription, _, _):
       self.delegate?.signal(self, didReceiveRemoteSdp: sessionDescription.rtcSessionDescription)
     }
   }

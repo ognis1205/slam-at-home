@@ -12,18 +12,20 @@ protocol WebRTCModelDelegate: AlertReportingDelegate {
   // MARK: Methods
 
   func didConnect()
-  
+
   func didDisconnect()
-  
+
   func signal(didReceiveRemoteSdp sdp: RTCSessionDescription)
-  
+
   func signal(didReceiveCandidate candidate: RTCIceCandidate)
-  
+
   func webRTC(didDiscoverLocalCandidate candidate: RTCIceCandidate)
-    
+
   func webRTC(didChangeConnectionState state: RTCIceConnectionState)
-    
+
   func webRTC(didReceiveData data: Data)
+
+  func webRTC(didChangeSignalingState state: RTCSignalingState)
 }
 
 class WebRTCCapture: VideoConfigure {
@@ -31,30 +33,6 @@ class WebRTCCapture: VideoConfigure {
 
   var device: AVCaptureDevice?
 }
-
-// class WebRTCCapture: VideoConfigure {
-//   // MARK: Properties
-//
-//   let session: AVCaptureSession
-//
-//   let output: AVCaptureVideoDataOutput
-//
-//   let context: CIContext
-//
-//   // MARK: Init
-//
-//   init(
-//     session: AVCaptureSession,
-//     output: AVCaptureVideoDataOutput,
-//     context: CIContext,
-//     state: VideoConfigureState
-//   ) {
-//     self.session = session
-//     self.output = output
-//     self.context = context
-//     super.init(state: state)
-//   }
-// }
 
 class WebRTCModel: VideoConfiguring {
   // MARK: Properties
@@ -68,12 +46,6 @@ class WebRTCModel: VideoConfiguring {
   
   let capture: WebRTCCapture = WebRTCCapture(
     state: .ready)
-  
-//   let capture: WebRTCCapture = WebRTCCapture(
-//     session: AVCaptureSession(),
-//     output: AVCaptureVideoDataOutput(),
-//     context: CIContext(options: nil),
-//     state: .ready)
   
   // MARK: Methods
   
@@ -102,35 +74,13 @@ class WebRTCModel: VideoConfiguring {
 
   func capture(alert: AlertReportingDelegate) {
     self.info("capture...")
-//    let stream = WebRTCClient.factory.mediaStream(
-//      withStreamId: self.client.streamId)
     guard
       let sender = self.client.videoTrack.sender
     else {
       self.warn("failed to retrieve sender...")
       return
     }
-//    stream.addVideoTarack(sender)
     self.client.connection.add(sender, streamIds: [self.client.streamId])
-//    switch self.capture.state {
-//    case .running:
-//      break
-//    case .configured:
-//      capture.session.startRunning()
-//      if capture.session.isRunning {
-//        capture.state(.running)
-//      }
-//    default:
-//      self.warn("not authorized nor configured...")
-//      self.alert(
-//        alert,
-//        title: "Camera Error",
-//        message: "Camera configuration failed. Either your device camera is not available or its missing permissions",
-//        primaryButtonTitle: "Accept",
-//        secondaryButtonTitle: nil,
-//        primaryAction: nil,
-//        secondaryAction: nil)
-//    }
   }
   
   func connect(URL: URL) {

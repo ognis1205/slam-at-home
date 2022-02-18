@@ -9,17 +9,12 @@
 import Foundation
 import SwiftUI
 
-enum WebRTCStatus: String {
-  case connected
-  case disconnected
-}
-
 class WebRTCViewModel: ObservableObject {
   // MARK: Properties
 
   @Published var isConnected: Bool = false
 
-  @Published var status: String = WebRTCStatus.disconnected.rawValue.capitalized
+  @Published var signalingState: String = RTCSignalingState.stable.description
 
   @Published var hasRemoteSdp: Bool = false
     
@@ -33,7 +28,7 @@ class WebRTCViewModel: ObservableObject {
     
   var alert: AlertModel?
   
-  var model: WebRTCModel = WebRTCModel()
+  var model: WebRTCModel
 
   var dialog: Alert {
     return Alert(
@@ -49,6 +44,7 @@ class WebRTCViewModel: ObservableObject {
   // MARK: Init
 
   init() {
+    self.model = WebRTCModel()
     self.model.delegate = self
     self.model.prepare()
   }
@@ -57,5 +53,11 @@ class WebRTCViewModel: ObservableObject {
   
   func start() {
     self.model.start()
+  }
+  
+  func restart() async {
+    self.model = WebRTCModel()
+    self.model.delegate = self
+    self.model.prepare()
   }
 }

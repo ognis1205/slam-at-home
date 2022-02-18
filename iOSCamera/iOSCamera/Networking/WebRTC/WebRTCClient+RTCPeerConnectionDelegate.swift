@@ -17,6 +17,7 @@ extension WebRTCClient: RTCPeerConnectionDelegate {
     didChange stateChanged: RTCSignalingState
   ) {
     self.info("peerConnection new signaling state: \(stateChanged)...")
+    self.delegate?.webRTC(self, didChangeSignalingState: stateChanged)
   }
 
   func peerConnection(

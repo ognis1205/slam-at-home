@@ -24,18 +24,21 @@ struct WebRTCConnectToggleView: View, Debuggable {
         .toggleStyle(WiFiToggleStyle())
         .disabled(!viewModel.URL.isValid(.URL))
         .onChange(of: viewModel.isConnected) { connecting in
+          let endpoint = String(
+            format: WebRTCConstants.SIGNALING_ENDPOINT,
+            viewModel.URL,
+            viewModel.model.client.id)
           if connecting {
-            self.info("connect to URL ws://\(viewModel.URL)/connect...")
+            self.info("connect to URL \(endpoint)...")
             guard
-              let id = UIDevice.current.identifierForVendor,
-              let url = URL(string: "ws://\(viewModel.URL)/connect?id=\(id.uuidString)")
+              let url = URL(string: endpoint)
             else {
               self.warn("failed to parse URL...")
               return
             }
             viewModel.model.connect(URL: url)
           } else {
-            self.info("disconnect from URL ws://\(viewModel.URL)/connect...")
+            self.info("disconnect from URL \(endpoint)...")
             viewModel.model.disconnect()
           }
         }

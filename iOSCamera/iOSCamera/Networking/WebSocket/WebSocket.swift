@@ -8,10 +8,15 @@
 
 import Foundation
 
+enum WebSocketError: Error {
+  case failedToSend
+  case failedToRecieve
+}
+
 protocol WebSocketDelegate: AnyObject {
   func didConnect(_ socket: WebSocket)
 
-  func didDisconnect(_ socket: WebSocket, force: Bool)
+  func didDisconnect(_ socket: WebSocket)
 
   func socket(_ socket: WebSocket, didReceiveData data: Data)
 }
@@ -56,7 +61,7 @@ class WebSocket: NSObject, Debuggable {
     self.info("disconnect from socket server...")
     self.socket?.cancel()
     self.socket = nil
-    self.delegate?.didDisconnect(self, force: force)
+    self.delegate?.didDisconnect(self)
   }
 
   func send(data: Data) {
@@ -70,14 +75,15 @@ class WebSocket: NSObject, Debuggable {
       guard let self = self else { return }
       switch message {
       case .success(.data(let data)):
-        self.info("recieve data \(data)...")
+        self.info("recieve data \(String(describing: data))...")
         self.delegate?.socket(self, didReceiveData: data)
         self.receive()
       case .success:
         self.warn("expected to receive data format but received a string...")
         self.receive()
       case .failure:
-        self.disconnect(force: false)
+        self.warn("failed to recieve data...")
+        self.disconnect(force: true)
       }
     }
   }

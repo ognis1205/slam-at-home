@@ -16,12 +16,8 @@ struct VideoTrack: Debuggable {
 
   var capturer: RTCVideoCapturer?
 
-//  var frame: RTCVideoFrame?
-
   var sender: RTCVideoTrack?
 
-//  var reciever: RTCVideoTrack?
-  
   // MARK: Methods
   
   fileprivate mutating func configure(_ client: WebRTCClient) {
@@ -36,9 +32,6 @@ struct VideoTrack: Debuggable {
     self.sender = WebRTCClient.factory.videoTrack(
       with: self.source,
       trackId: client.videoTrackId)
-//    self.reciever = client.connection.transceivers.first {
-//      $0.mediaType == .video
-//    }?.receiver.track as? RTCVideoTrack
   }
 }
 
@@ -73,6 +66,8 @@ protocol WebRTCClientDelegate: AnyObject {
   func webRTC(_ client: WebRTCClient, didChangeConnectionState state: RTCIceConnectionState)
 
   func webRTC(_ client: WebRTCClient, didReceiveData data: Data)
+
+  func webRTC(_ client: WebRTCClient, didChangeSignalingState state: RTCSignalingState)
 }
 
 class WebRTCClient: NSObject, Debuggable {
@@ -89,6 +84,8 @@ class WebRTCClient: NSObject, Debuggable {
 
   var id: String
   
+  var remoteId: String?
+  
   let connection: RTCPeerConnection
   
   weak var delegate: WebRTCClientDelegate?
@@ -101,15 +98,15 @@ class WebRTCClient: NSObject, Debuggable {
     return "video-\(self.id)"
   }
 
-  let mediaConstrains = [
+  let mediaConstrains: [String: String] = [
     kRTCMediaConstraintsOfferToReceiveAudio: kRTCMediaConstraintsValueFalse,
     kRTCMediaConstraintsOfferToReceiveVideo: kRTCMediaConstraintsValueFalse
   ]
   
-  var videoTrack = VideoTrack(
+  var videoTrack: VideoTrack = VideoTrack(
     source: WebRTCClient.factory.videoSource())
 
-  var dataChannel = DataChannel()
+  var dataChannel: DataChannel = DataChannel()
   
   // MARK: Init
 
@@ -119,7 +116,11 @@ class WebRTCClient: NSObject, Debuggable {
   }
 
   required init(iceServers: [String]) {
-    self.id = UUID().uuidString
+    if let id = UIDevice.current.identifierForVendor {
+      self.id = id.uuidString
+    } else {
+      self.id = UUID().uuidString
+    }
     let config = RTCConfiguration()
     config.iceServers = [RTCIceServer(urlStrings: iceServers)]
     config.sdpSemantics = .unifiedPlan
@@ -169,6 +170,11 @@ class WebRTCClient: NSObject, Debuggable {
         didComplete(sdp)
       })
     }
+  }
+  
+  func set(remoteId: String) {
+    self.info("set remote id...")
+    self.remoteId = remoteId
   }
 
   func set(remoteSdp: RTCSessionDescription, didComplete: @escaping (Error?) -> Void) {

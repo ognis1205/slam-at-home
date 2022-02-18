@@ -10,7 +10,7 @@ import Foundation
 import WebRTC
 
 struct IceCandidate: Codable {
-  let sdp: String
+  let candidate: String
 
   let sdpMLineIndex: Int32
 
@@ -19,12 +19,12 @@ struct IceCandidate: Codable {
   init(from iceCandidate: RTCIceCandidate) {
     self.sdpMLineIndex = iceCandidate.sdpMLineIndex
     self.sdpMid = iceCandidate.sdpMid
-    self.sdp = iceCandidate.sdp
+    self.candidate = iceCandidate.sdp
   }
     
   var rtcIceCandidate: RTCIceCandidate {
     return RTCIceCandidate(
-      sdp: self.sdp,
+      sdp: self.candidate,
       sdpMLineIndex: self.sdpMLineIndex,
       sdpMid: self.sdpMid)
   }

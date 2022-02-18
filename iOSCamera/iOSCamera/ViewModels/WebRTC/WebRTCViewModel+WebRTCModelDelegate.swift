@@ -14,14 +14,14 @@ extension WebRTCViewModel: WebRTCModelDelegate {
   func didConnect() {
     DispatchQueue.main.async {
       self.isConnected = true
-      self.status = WebRTCStatus.connected.rawValue.capitalized
+//      self.status = WebRTCStatus.connected.rawValue.capitalized
     }
   }
 
   func didDisconnect() {
     DispatchQueue.main.async {
       self.isConnected = false
-      self.status = WebRTCStatus.disconnected.rawValue.capitalized
+//      self.status = WebRTCStatus.disconnected.rawValue.capitalized
     }
   }
 
@@ -45,12 +45,18 @@ extension WebRTCViewModel: WebRTCModelDelegate {
 
   func webRTC(didChangeConnectionState state: RTCIceConnectionState) {
     DispatchQueue.main.async {
-      self.status = state.description.capitalized
+//      self.status = state.description.capitalized
     }
   }
 
   func webRTC(didReceiveData data: Data) {
     // Do nothing.
+  }
+  
+  func webRTC(didChangeSignalingState state: RTCSignalingState) {
+    DispatchQueue.main.async {
+      self.signalingState = state.description.capitalized
+    }
   }
 
   func alert(_ alert: AlertModel) {

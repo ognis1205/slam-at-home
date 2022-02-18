@@ -9,12 +9,16 @@
 import Foundation
 import WebRTC
 
-enum Message {
-  case sdp(SessionDescription)
-  case candidate(IceCandidate)
+typealias SignalFrom = String
+
+typealias SignalTo = String
+
+enum Signal {
+  case sdp(SessionDescription, SignalFrom, SignalTo)
+  case candidate(IceCandidate, SignalFrom, SignalTo)
 }
 
-extension Message: Codable {
+extension Signal: Codable {
   // MARK: Properties
 
   enum DecodeError: Error {
@@ -22,7 +26,7 @@ extension Message: Codable {
   }
     
   enum CodingKeys: String, CodingKey {
-    case type, payload
+    case from, to, type, payload
   }
 
   // MARK: Init
@@ -32,9 +36,15 @@ extension Message: Codable {
     let type = try container.decode(String.self, forKey: .type)
     switch type {
     case String(describing: SessionDescription.self):
-      self = .sdp(try container.decode(SessionDescription.self, forKey: .payload))
+      self = .sdp(
+        try container.decode(SessionDescription.self, forKey: .payload),
+        try container.decode(String.self, forKey: .from),
+        try container.decode(String.self, forKey: .to))
     case String(describing: IceCandidate.self):
-      self = .candidate(try container.decode(IceCandidate.self, forKey: .payload))
+      self = .candidate(
+        try container.decode(IceCandidate.self, forKey: .payload),
+        try container.decode(String.self, forKey: .from),
+        try container.decode(String.self, forKey: .to))
     default:
       throw DecodeError.unknownType
     }
@@ -45,12 +55,16 @@ extension Message: Codable {
   func encode(to encoder: Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     switch self {
-    case .sdp(let sessionDescription):
+    case .sdp(let sessionDescription, let from, let to):
       try container.encode(sessionDescription, forKey: .payload)
       try container.encode(String(describing: SessionDescription.self), forKey: .type)
-    case .candidate(let iceCandidate):
+      try container.encode(to, forKey: .to)
+      try container.encode(from, forKey: .from)
+    case .candidate(let iceCandidate, let from, let to):
       try container.encode(iceCandidate, forKey: .payload)
       try container.encode(String(describing: IceCandidate.self), forKey: .type)
+      try container.encode(to, forKey: .to)
+      try container.encode(from, forKey: .from)
     }
   }
 }
@@ -96,22 +110,36 @@ class WebRTCSignal: Debuggable {
     self.webSocket.delegate = nil
   }
 
-  func send(sdp rtcSdp: RTCSessionDescription) {
+  func send(
+    sdp rtcSdp: RTCSessionDescription,
+    signalFrom from: SignalFrom,
+    signalTo to: SignalTo
+  ) {
     self.info("send session description...")
-    let message = Message.sdp(SessionDescription(from: rtcSdp))
+    let signal = Signal.sdp(
+      SessionDescription(from: rtcSdp),
+      from,
+      to)
     do {
-      let data = try self.encoder.encode(message)
+      let data = try self.encoder.encode(signal)
       self.webSocket.send(data: data)
     } catch {
       self.warn("could not encode sdp: \(error)...")
     }
   }
 
-  func send(candidate rtcIceCandidate: RTCIceCandidate) {
+  func send(
+    candidate rtcIceCandidate: RTCIceCandidate,
+    signalFrom from: SignalFrom,
+    signalTo to: SignalTo
+  ) {
     self.info("send ice candidate...")
-    let message = Message.candidate(IceCandidate(from: rtcIceCandidate))
+    let signal = Signal.candidate(
+      IceCandidate(from: rtcIceCandidate),
+      from,
+      to)
     do {
-      let data = try self.encoder.encode(message)
+      let data = try self.encoder.encode(signal)
       self.webSocket.send(data: data)
     } catch {
       self.warn("could not encode candidate: \(error)...")

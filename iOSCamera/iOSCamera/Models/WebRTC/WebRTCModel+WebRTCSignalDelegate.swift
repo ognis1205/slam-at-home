@@ -24,7 +24,11 @@ extension WebRTCModel: WebRTCSignalDelegate {
   func signal(_ signal: WebRTCSignal, didReceiveRemoteSdp sdp: RTCSessionDescription) {
     self.info("signal did recieve remote sdp...")
     self.client.set(remoteSdp: sdp) { (error) in
-      self.delegate?.signal(didReceiveRemoteSdp: sdp)
+      if let error = error {
+        self.warn("failed to set remote sdp \(String(describing: error))...")
+      } else {
+        self.delegate?.signal(didReceiveRemoteSdp: sdp)
+      }
     }
   }
   
