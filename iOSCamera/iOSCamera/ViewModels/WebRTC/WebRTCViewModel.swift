@@ -12,9 +12,9 @@ import SwiftUI
 class WebRTCViewModel: ObservableObject {
   // MARK: Properties
 
-  @Published var isConnected: Bool = false
+  @Published var isSignaling: Bool = false
 
-  @Published var signalingState: String = RTCSignalingState.stable.description
+  @Published var signalingState: String = RTCSignalingState.stable.description.capitalized
 
   @Published var hasRemoteSdp: Bool = false
     

@@ -18,12 +18,12 @@ struct WebRTCConnectToggleView: View, Debuggable {
   var body: some View {
     VStack {
       Divider().padding(.vertical, 4)
-      Toggle(isOn: $viewModel.isConnected) {
+      Toggle(isOn: $viewModel.isSignaling) {
         Text("Connect").foregroundColor(.gray)
       }
         .toggleStyle(WiFiToggleStyle())
         .disabled(!viewModel.URL.isValid(.URL))
-        .onChange(of: viewModel.isConnected) { connecting in
+        .onChange(of: viewModel.isSignaling) { connecting in
           let endpoint = String(
             format: WebRTCConstants.SIGNALING_ENDPOINT,
             viewModel.URL,

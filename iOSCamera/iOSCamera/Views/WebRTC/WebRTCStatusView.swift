@@ -23,11 +23,12 @@ struct WebRTCStatusView: View {
           action: { /* Do nothing. */ },
           label: {
             Text(viewModel.signalingState)
-              .foregroundColor(viewModel.isConnected ? .red : .gray)
+              .foregroundColor(viewModel.isSignaling ? .white : .gray)
               .fontWeight(.semibold)
               .padding(.vertical, 10)
               .padding(.horizontal, 20)
-              .background(.white.opacity(opacity))
+              .background(
+                viewModel.isSignaling ? .green.opacity(opacity) : .white.opacity(opacity))
               .clipShape(Capsule())
               .onAppear {
                 withAnimation {

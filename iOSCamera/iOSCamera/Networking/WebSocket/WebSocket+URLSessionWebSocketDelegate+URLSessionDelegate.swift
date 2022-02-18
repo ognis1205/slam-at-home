@@ -27,6 +27,6 @@ extension WebSocket: URLSessionWebSocketDelegate, URLSessionDelegate {
     reason: Data?
   ) {
     self.info("urlSession did close...")
-    self.disconnect(force: true)
+    self.disconnect(didFail: nil)
   }
 }

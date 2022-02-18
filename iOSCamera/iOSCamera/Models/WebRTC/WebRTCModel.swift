@@ -96,7 +96,7 @@ class WebRTCModel: VideoConfiguring {
   func disconnect() {
     self.info("disconnect...")
     if self.capture.state == .running {
-      self.signal?.disconnect()
+      self.signal?.disconnect(didFail: nil)
       self.signal?.delegate = nil
       self.signal = nil
     }

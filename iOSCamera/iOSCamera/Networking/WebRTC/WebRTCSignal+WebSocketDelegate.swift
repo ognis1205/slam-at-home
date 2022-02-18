@@ -17,9 +17,9 @@ extension WebRTCSignal: WebSocketDelegate {
     self.delegate?.didConnect(self)
   }
 
-  func didDisconnect(_ webSocket: WebSocket) {
+  func didDisconnect(_ webSocket: WebSocket, didFail error: Error?) {
     self.info("didDisconnect web socket...")
-    self.delegate?.didDisconnect(self)
+    self.delegate?.didDisconnect(self, didFail: error)
   }
 
   func socket(_ webSocket: WebSocket, didReceiveData data: Data) {

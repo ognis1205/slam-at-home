@@ -16,9 +16,18 @@ extension WebRTCModel: WebRTCSignalDelegate {
     self.delegate?.didConnect()
   }
   
-  func didDisconnect(_ signal: WebRTCSignal) {
+  func didDisconnect(_ signal: WebRTCSignal, didFail error: Error?) {
     self.info("did disconnect...")
     self.delegate?.didDisconnect()
+    if
+      let error = error,
+      let delegate = self.delegate {
+      self.alert(
+        delegate,
+        title: "Signaling Error",
+        message: error.localizedDescription,
+        primaryButtonTitle: "Accept")
+    }
   }
   
   func signal(_ signal: WebRTCSignal, didReceiveRemoteSdp sdp: RTCSessionDescription) {

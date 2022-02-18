@@ -23,7 +23,7 @@ struct WebRTCURLTextFieldView: View {
         .disableAutocorrection(true)
     }
       .padding()
-      .disabled(viewModel.isConnected)
+      .disabled(viewModel.isSignaling)
       .background(Capsule().fill(.gray))
     }
 }

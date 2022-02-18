@@ -74,7 +74,7 @@ protocol WebRTCSignalDelegate: AnyObject {
 
   func didConnect(_ signal: WebRTCSignal)
 
-  func didDisconnect(_ signal: WebRTCSignal)
+  func didDisconnect(_ signal: WebRTCSignal, didFail error: Error?)
 
   func signal(_ signal: WebRTCSignal, didReceiveRemoteSdp sdp: RTCSessionDescription)
 
@@ -105,8 +105,8 @@ class WebRTCSignal: Debuggable {
     self.webSocket.connect()
   }
   
-  func disconnect() {
-    self.webSocket.disconnect(force: true)
+  func disconnect(didFail error: Error?) {
+    self.webSocket.disconnect(didFail: error)
     self.webSocket.delegate = nil
   }
 

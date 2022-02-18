@@ -13,15 +13,13 @@ extension WebRTCViewModel: WebRTCModelDelegate {
 
   func didConnect() {
     DispatchQueue.main.async {
-      self.isConnected = true
-//      self.status = WebRTCStatus.connected.rawValue.capitalized
+      self.isSignaling = true
     }
   }
 
   func didDisconnect() {
     DispatchQueue.main.async {
-      self.isConnected = false
-//      self.status = WebRTCStatus.disconnected.rawValue.capitalized
+      self.isSignaling = false
     }
   }
 
