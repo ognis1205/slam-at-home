@@ -30,7 +30,6 @@ extension WebRTCViewModel: WebRTCModelDelegate {
     DispatchQueue.main.async {
       self.remoteId = from
       self.hasRemoteSdp = true
-      // TODO: check
       self.model.client.answer(didComplete: { sdp in
         guard
           let remoteId = self.model.client.remoteId
