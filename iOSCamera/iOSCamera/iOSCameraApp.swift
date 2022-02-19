@@ -29,13 +29,18 @@ struct iOSCameraApp: App {
   // MARK: Properties
 
   @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+  
+  @State private var isRecording = false
 
   // MARK: Body
 
   var body: some Scene {
     WindowGroup {
-//      HLSView()
-      WebRTCView()
+      if isRecording {
+        WebRTCView(isRecording: $isRecording)
+      } else {
+        StartView(isRecording: $isRecording)
+      }
     }
   }
 }

@@ -11,4 +11,6 @@ import SwiftUI
 
 extension Color {
   // MARK: Properties
+  
+  static let themeColor = Color("ThemeColor")
 }

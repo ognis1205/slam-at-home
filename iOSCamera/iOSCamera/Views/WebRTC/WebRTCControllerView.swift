@@ -1,5 +1,5 @@
 //
-//  WebRTCStatusView.swift
+//  WebRTCControllerView.swift
 //  iOSCamera
 //
 //  Created by Shingo OKAWA on 2022/02/16.
@@ -8,8 +8,10 @@
 
 import SwiftUI
 
-struct WebRTCStatusView: View {
+struct WebRTCControllerView: View {
   // MARK: Properties
+  
+  @Binding var isRecording: Bool
   
   @ObservedObject var viewModel: WebRTCViewModel
 
@@ -42,15 +44,27 @@ struct WebRTCStatusView: View {
           .disabled(true)
           .padding(.leading)
         Spacer()
+        Button(
+          action: {
+            isRecording = false
+          },
+          label: {
+            Image(systemName: "video.slash.fill")
+              .foregroundColor(.white)
+              .padding(10)
+              .background(Color.themeColor)
+              .clipShape(RoundedRectangle(cornerRadius: 10))
+          })
+          .padding(.trailing, 15)
       }
-      .frame(height: 75)
+      .frame(height: 75, alignment: .center)
   }
 }
 
-struct WebRTCStatusView_Previews: PreviewProvider {
+struct WebRTCControllerView_Previews: PreviewProvider {
   // MARK: Previews
 
   static var previews: some View {
-    WebRTCStatusView(viewModel: WebRTCViewModel())
+    WebRTCControllerView(isRecording: .constant(true), viewModel: WebRTCViewModel())
   }
 }

@@ -13,6 +13,8 @@ struct WebRTCView: View {
   // MARK: Properties
 
   @Environment(\.presentationMode) var presentationMode
+  
+  @Binding var isRecording: Bool
 
   @ObservedObject var viewModel: WebRTCViewModel = WebRTCViewModel()
   
@@ -54,9 +56,9 @@ struct WebRTCView: View {
             },
             label: {
               Image(systemName: "slider.horizontal.3")
-                .foregroundColor(.black)
+                .foregroundColor(.white)
                 .padding()
-                .background(.white)
+                .background(Color.themeColor)
                 .clipShape(Circle())
             })
             .padding(.trailing, 10)
@@ -65,7 +67,7 @@ struct WebRTCView: View {
             }
         }
         Spacer()
-        WebRTCStatusView(viewModel: self.viewModel)
+        WebRTCControllerView(isRecording: $isRecording, viewModel: self.viewModel)
       }
     }
   }
@@ -75,6 +77,6 @@ struct WebRTCView_Previews: PreviewProvider {
   // MARK: Previews
 
   static var previews: some View {
-    WebRTCView()
+    WebRTCView(isRecording: .constant(true))
   }
 }

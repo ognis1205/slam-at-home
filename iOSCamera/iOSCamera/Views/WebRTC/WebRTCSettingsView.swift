@@ -64,7 +64,7 @@ struct WebRTCSettingsView: View {
             // swiftlint:disable line_length
             WebRTCSettingsHeaderView(
               labelImage: "video.circle",
-              labelColor: .blue,
+              labelColor: .themeColor,
               content: "This application is a part of SLAM@Home project. For more details such as usage restrictions, please refer to the link below.")
             WebRTCSettingsRowView(
               name: "Developer",
