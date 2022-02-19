@@ -15,9 +15,15 @@ protocol WebRTCModelDelegate: AlertReportingDelegate {
 
   func didDisconnect()
 
-  func signal(didReceiveRemoteSdp sdp: RTCSessionDescription)
+  func signal(
+    signalFrom from: SignalFrom,
+    signalTo to: SignalTo,
+    didReceiveRemoteSdp sdp: RTCSessionDescription)
 
-  func signal(didReceiveCandidate candidate: RTCIceCandidate)
+  func signal(
+    signalFrom from: SignalFrom,
+    signalTo to: SignalTo,
+    didReceiveCandidate candidate: RTCIceCandidate)
 
   func webRTC(didDiscoverLocalCandidate candidate: RTCIceCandidate)
 

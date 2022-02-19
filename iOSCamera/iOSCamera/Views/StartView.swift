@@ -13,7 +13,7 @@ struct StartView: View {
   
   @Binding var isRecording: Bool
 
-  @State private var opacity: CGFloat = 0.5
+  @State private var opacity: CGFloat = 1.0
 
   // MARK: Body
 

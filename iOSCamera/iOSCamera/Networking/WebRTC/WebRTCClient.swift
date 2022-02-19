@@ -190,7 +190,7 @@ class WebRTCClient: NSObject, Debuggable {
   func send(_ data: Data) {
     self.info("send data...")
     let buffer = RTCDataBuffer(data: data, isBinary: true)
-    self.dataChannel.reciever?.sendData(buffer)
+    self.dataChannel.sender?.sendData(buffer)
   }
 
   func capture(renderer: RTCVideoRenderer, videoDevice: AVCaptureDevice) {

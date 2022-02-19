@@ -29,7 +29,7 @@ extension RTCIceConnectionState: CustomStringConvertible {
     case .count:
       return "count"
     @unknown default:
-      return "Unknown \(self.rawValue)"
+      return "unknown \(self.rawValue)"
     }
   }
 }
@@ -40,17 +40,17 @@ extension RTCSignalingState: CustomStringConvertible {
     case .stable:
       return "stable"
     case .haveLocalOffer:
-      return "haveLocalOffer"
+      return "have local offer"
     case .haveLocalPrAnswer:
-      return "haveLocalPrAnswer"
+      return "have local pranswer"
     case .haveRemoteOffer:
-      return "haveRemoteOffer"
+      return "have remote offer"
     case .haveRemotePrAnswer:
-      return "haveRemotePrAnswer"
+      return "have remote pranswer"
     case .closed:
       return "closed"
     @unknown default:
-      return "Unknown \(self.rawValue)"
+      return "unknown \(self.rawValue)"
     }
   }
 }
@@ -65,7 +65,7 @@ extension RTCIceGatheringState: CustomStringConvertible {
     case .complete:
       return "complete"
     @unknown default:
-      return "Unknown \(self.rawValue)"
+      return "unknown \(self.rawValue)"
     }
   }
 }
@@ -82,7 +82,7 @@ extension RTCDataChannelState: CustomStringConvertible {
     case .closed:
       return "closed"
     @unknown default:
-      return "Unknown \(self.rawValue)"
+      return "unknown \(self.rawValue)"
     }
   }
 }

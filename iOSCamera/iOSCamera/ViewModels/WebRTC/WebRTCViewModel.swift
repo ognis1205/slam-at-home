@@ -14,7 +14,11 @@ class WebRTCViewModel: ObservableObject {
 
   @Published var isSignaling: Bool = false
 
-  @Published var signalingState: String = RTCSignalingState.stable.description.capitalized
+  @Published var signalingState: String = RTCSignalingState.stable.description
+  
+  @Published var remoteId: String = "Not specified"
+  
+  @Published var hasLocalSdp: Bool = false
 
   @Published var hasRemoteSdp: Bool = false
     

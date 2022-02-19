@@ -23,13 +23,36 @@ extension WebRTCViewModel: WebRTCModelDelegate {
     }
   }
 
-  func signal(didReceiveRemoteSdp sdp: RTCSessionDescription) {
+  func signal(
+    signalFrom from: SignalFrom,
+    signalTo to: SignalTo,
+    didReceiveRemoteSdp sdp: RTCSessionDescription) {
     DispatchQueue.main.async {
+      self.remoteId = from
       self.hasRemoteSdp = true
+      // TODO: check
+      self.model.client.answer(didComplete: { sdp in
+        guard
+          let remoteId = self.model.client.remoteId
+        else {
+          self.model.warn("did not set remote id...")
+          return
+        }
+        self.model.signal?.send(
+          sdp: sdp,
+          signalFrom: self.model.client.id,
+          signalTo: remoteId)
+        DispatchQueue.main.async {
+          self.hasLocalSdp = true
+        }
+      })
     }
   }
 
-  func signal(didReceiveCandidate candidate: RTCIceCandidate) {
+  func signal(
+    signalFrom from: SignalFrom,
+    signalTo to: SignalTo,
+    didReceiveCandidate candidate: RTCIceCandidate) {
     DispatchQueue.main.async {
       self.numberOfRemoteCandidate += 1
     }
@@ -53,7 +76,7 @@ extension WebRTCViewModel: WebRTCModelDelegate {
   
   func webRTC(didChangeSignalingState state: RTCSignalingState) {
     DispatchQueue.main.async {
-      self.signalingState = state.description.capitalized
+      self.signalingState = state.description
     }
   }
 

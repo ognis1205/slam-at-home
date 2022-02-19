@@ -30,20 +30,37 @@ extension WebRTCModel: WebRTCSignalDelegate {
     }
   }
   
-  func signal(_ signal: WebRTCSignal, didReceiveRemoteSdp sdp: RTCSessionDescription) {
+  func signal(
+    _ signal: WebRTCSignal,
+    signalFrom from: SignalFrom,
+    signalTo to: SignalTo,
+    didReceiveRemoteSdp sdp: RTCSessionDescription
+  ) {
     self.info("signal did recieve remote sdp...")
     self.client.set(remoteSdp: sdp) { (error) in
       if let error = error {
         self.warn("failed to set remote sdp \(String(describing: error))...")
       } else {
-        self.delegate?.signal(didReceiveRemoteSdp: sdp)
+        self.client.set(remoteId: from)
+        self.delegate?.signal(
+          signalFrom: from,
+          signalTo: to,
+          didReceiveRemoteSdp: sdp)
       }
     }
   }
   
-  func signal(_ signal: WebRTCSignal, didReceiveCandidate candidate: RTCIceCandidate) {
+  func signal(
+    _ signal: WebRTCSignal,
+    signalFrom from: SignalFrom,
+    signalTo to: SignalTo,
+    didReceiveCandidate candidate: RTCIceCandidate
+  ) {
     self.info("signal did recieve candidate...")
     self.client.set(remoteIce: candidate)
-    self.delegate?.signal(didReceiveCandidate: candidate)
+    self.delegate?.signal(
+      signalFrom: from,
+      signalTo: to,
+      didReceiveCandidate: candidate)
   }
 }

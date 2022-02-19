@@ -32,10 +32,18 @@ extension WebRTCSignal: WebSocketDelegate {
       return
     }
     switch signal {
-    case let .candidate(iceCandidate, _, _):
-      self.delegate?.signal(self, didReceiveCandidate: iceCandidate.rtcIceCandidate)
-    case let .sdp(sessionDescription, _, _):
-      self.delegate?.signal(self, didReceiveRemoteSdp: sessionDescription.rtcSessionDescription)
+    case let .candidate(iceCandidate, signalFrom, signalTo):
+      self.delegate?.signal(
+        self,
+        signalFrom: signalFrom,
+        signalTo: signalTo,
+        didReceiveCandidate: iceCandidate.rtcIceCandidate)
+    case let .sdp(sessionDescription, signalFrom, signalTo):
+      self.delegate?.signal(
+        self,
+        signalFrom: signalFrom,
+        signalTo: signalTo,
+        didReceiveRemoteSdp: sessionDescription.rtcSessionDescription)
     }
   }
 }
