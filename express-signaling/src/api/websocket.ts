@@ -44,6 +44,10 @@ export default async (
       const [path, params] = req?.url?.split('?');
       const query = QueryString.parse(params);
       const id = typeof query.id === 'string' ? query.id : query.id[0];
+      if (clients.has(id)) {
+        Logger.info(`Disconnected from client ${id}`);
+        clients.delete(id);
+      }
       clients.set(id, conn);
       Logger.info(
         `Connected from client with query ${QueryString.stringify(query)}`
@@ -62,7 +66,7 @@ export default async (
             const client = clients.get(signal.json.to);
             client.send(Buffer.from(JSON.stringify(signal.json), 'utf-8'));
           } else {
-            Logger.warn(`Destination client is not defined $(signal.json.to)`);
+            Logger.warn(`Destination client is not defined ${signal.json.to}`);
           }
         }
       });
