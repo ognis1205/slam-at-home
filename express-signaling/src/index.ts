@@ -4,7 +4,7 @@
  */
 import * as Express from 'express';
 import * as ip from 'ip';
-import WebSocket from 'ws';
+import * as Signaling from './utils/signaling';
 import StartListening from './api/websocket';
 import Logger from './utils/logger';
 import Startup from './utils/startup';
@@ -15,9 +15,6 @@ Startup()
     /** The port number. */
     const port = process.env.PORT || 4000;
 
-    /** References to the websocket connections. */
-    const clients = new Map<string, WebSocket.WebSocket>();
-
     /** The express server. */
     const app = Express.default();
 
@@ -27,13 +24,19 @@ Startup()
       res.send({ uptime: process.uptime() });
     });
 
+    // For pinging.
+    app.get('/peers', (req: Express.Request, res: Express.Response): void => {
+      Logger.info(`Pinged`);
+      res.send({ peers: Signaling.listClients() });
+    });
+
     /** Start listening on a given port. */
     const server = app.listen(port, () => {
       Logger.info(`Server running at http://${ip.address()}:${port}`);
     });
 
     /** Start listening websockets on a given port. */
-    StartListening(server, clients);
+    StartListening(server);
   })
   .catch((error: Error) => {
     Logger.error(error);
