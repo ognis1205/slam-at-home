@@ -81,10 +81,10 @@ mlmodel: install pretrained
 	@echo "Exported MLModel: "$(ROOT)/models
 
 ## Update PyDnet MLModel.
-#update: mlmodel
-#	@echo "Updating PyDnet MLModel."
-#	@pydnet_update_mlmodel $(ROOT)/models/pydnet.mlmodel $(ROOT)/models/updated_pydnet.mlmodel 
-#	@echo "Updated MLModel: "$(ROOT)/models
+update: mlmodel
+	@echo "Updating PyDnet MLModel."
+	@pydnet_update_mlmodel pydnet 384 640 $(ROOT)/models/pydnet.mlmodel $(ROOT)/models/updated_pydnet.mlmodel 
+	@echo "Updated MLModel: "$(ROOT)/models
 
 help:
 	@echo "$$(tput bold)Available rules:$$(tput sgr0)"
