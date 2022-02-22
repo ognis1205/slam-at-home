@@ -15,6 +15,7 @@
 #import <WebRTC/WebRTC.h>
 
 @interface RGB : NSObject
-+ (UIImage *)fromBuffer:(CMSampleBufferRef)buffer;
-+ (UIImage *)fromFrame:(RTCVideoFrame *)frame;
++ (UIImage *)fromCMSampleBuffer:(CMSampleBufferRef)buffer;
++ (UIImage *)fromRTCVideoFrame:(RTCVideoFrame *)frame;
++ (UIImage *)fromRTCI420Buffer:(RTCI420Buffer *)buffer;
 @end

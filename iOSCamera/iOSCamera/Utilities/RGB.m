@@ -13,7 +13,7 @@
 #define clamp(a) (a>255?255:(a<0?0:a))
 
 @implementation RGB
-+ (UIImage *)fromBuffer:(CMSampleBufferRef)sampleBuffer {
++ (UIImage *)fromCMSampleBuffer:(CMSampleBufferRef)sampleBuffer {
   CVImageBufferRef imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
   CVPixelBufferLockBaseAddress(imageBuffer, 0);
 
@@ -71,9 +71,51 @@
   return image;
 }
 
-+ (UIImage *)fromFrame:(RTCVideoFrame *)frame {
++ (UIImage *)fromRTCVideoFrame:(RTCVideoFrame *)frame {
   RTCI420Buffer *buffer = (RTCI420Buffer *)frame.buffer;
 
+  int width = buffer.width;
+  int height = buffer.height;
+  int bytesPerPixel = 4;
+  uint8_t *rgbBuffer = malloc(width * height * bytesPerPixel);
+
+  for (int row = 0; row < height; row++) {
+    const uint8_t *yLine = &buffer.dataY[row * buffer.strideY];
+    const uint8_t *uLine = &buffer.dataU[(row >> 1) * buffer.strideU];
+    const uint8_t *vLine = &buffer.dataV[(row >> 1) * buffer.strideV];
+
+    for (int x = 0; x < width; x++) {
+      int16_t y = yLine[x];
+      int16_t u = uLine[x >> 1] - 128;
+      int16_t v = vLine[x >> 1] - 128;
+
+      int16_t r = roundf(y + v * 1.4);
+      int16_t g = roundf(y + u * -0.343 + v * -0.711);
+      int16_t b = roundf(y + u * 1.765);
+
+      uint8_t *rgb = &rgbBuffer[(row * width + x) * bytesPerPixel];
+      rgb[0] = 0xff;
+      rgb[1] = clamp(b);
+      rgb[2] = clamp(g);
+      rgb[3] = clamp(r);
+    }
+  }
+
+  CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+  CGContextRef context = CGBitmapContextCreate(rgbBuffer, width, height, 8, width * bytesPerPixel, colorSpace, kCGBitmapByteOrder32Little | kCGImageAlphaNoneSkipLast);
+
+  CGImageRef cgImage = CGBitmapContextCreateImage(context);
+  CGContextRelease(context);
+  CGColorSpaceRelease(colorSpace);
+  free(rgbBuffer);
+
+  UIImage *image = [UIImage imageWithCGImage:cgImage];
+  CGImageRelease(cgImage);
+
+  return image;
+}
+
++ (UIImage *)fromRTCI420Buffer:(RTCI420Buffer *)buffer {
   int width = buffer.width;
   int height = buffer.height;
   int bytesPerPixel = 4;
