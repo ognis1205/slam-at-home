@@ -11,7 +11,7 @@ import SwiftUI
 class AppDelegate: NSObject, UIApplicationDelegate {
   // MARK: Properties
         
-  static var orientationLock: UIInterfaceOrientationMask = .portrait
+  static var orientationLock: UIInterfaceOrientationMask = .landscapeRight
   
   // MARK: Methods
 

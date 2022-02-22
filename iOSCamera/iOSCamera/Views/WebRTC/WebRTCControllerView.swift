@@ -24,7 +24,7 @@ struct WebRTCControllerView: View {
         Button(
           action: { /* Do nothing. */ },
           label: {
-            Text(viewModel.signalingState)
+            Text("\(viewModel.ip) \(viewModel.signalingState)")
               .foregroundColor(viewModel.isSignaling ? .white : .gray)
               .fontWeight(.semibold)
               .padding(.vertical, 10)

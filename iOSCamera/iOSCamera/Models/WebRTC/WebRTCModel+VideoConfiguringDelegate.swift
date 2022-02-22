@@ -22,6 +22,7 @@ extension WebRTCModel: VideoConfiguringDelegate {
   func didFindDevice(_ device: AVCaptureDevice) throws {
     self.info("did find device...")
     try device.lockForConfiguration()
+    device.focusMode = .continuousAutoFocus
     device.unlockForConfiguration()
     self.capture.device = device
     try device.lockForConfiguration()

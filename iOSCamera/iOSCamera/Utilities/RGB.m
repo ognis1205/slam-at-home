@@ -144,7 +144,13 @@
   }
 
   CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-  CGContextRef context = CGBitmapContextCreate(rgbBuffer, width, height, 8, width * bytesPerPixel, colorSpace, kCGBitmapByteOrder32Little | kCGImageAlphaNoneSkipLast);
+  CGContextRef context = CGBitmapContextCreate(rgbBuffer,
+                                               width,
+                                               height,
+                                               8,
+                                               width * bytesPerPixel,
+                                               colorSpace,
+                                               kCGBitmapByteOrder32Little | kCGImageAlphaNoneSkipLast);
 
   CGImageRef cgImage = CGBitmapContextCreateImage(context);
   CGContextRelease(context);

@@ -9,10 +9,18 @@
 import Foundation
 import WebRTC
 
+import VideoToolbox
+
 extension WebRTCClient: RTCVideoCapturerDelegate {
   // MARK: Methods
 
   func capturer(_ capturer: RTCVideoCapturer, didCapture frame: RTCVideoFrame) {
-    self.videoTrack.source.capturer(capturer, didCapture: frame)
+    guard
+      let newFrame = self.delegate?.webRTC(self, didCapture: frame)
+    else {
+      self.videoTrack.source.capturer(capturer, didCapture: frame)
+      return
+    }
+    self.videoTrack.source.capturer(capturer, didCapture: newFrame)
   }
 }

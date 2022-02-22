@@ -6,6 +6,7 @@
 //  Copyright © 2022 Shingo OKAWA. All rights reserved.
 //
 
+import CoreML
 import Foundation
 
 protocol WebRTCModelDelegate: AlertReportingDelegate {
@@ -52,6 +53,8 @@ class WebRTCModel: VideoConfiguring {
   
   let capture: WebRTCCapture = WebRTCCapture(
     state: .ready)
+  
+  let mlModel: Pydnet? = try? Pydnet(configuration: MLModelConfiguration())
   
   // MARK: Methods
   

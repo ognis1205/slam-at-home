@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		2C4823D6E8907508916AE7AD /* Pods_iOSCamera.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E49116D3EC0803640AB47C35 /* Pods_iOSCamera.framework */; };
 		541BA07727C0742800E995CA /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541BA07627C0742800E995CA /* StartView.swift */; };
+		541BA07C27C2D20A00E995CA /* CVPixelBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541BA07B27C2D20A00E995CA /* CVPixelBuffer.swift */; };
+		541BA08627C4E25700E995CA /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541BA08527C4E25600E995CA /* UIImage.swift */; };
+		541BA09627C51F8B00E995CA /* Pydnet.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 541BA09527C51F8B00E995CA /* Pydnet.mlmodel */; };
+		541BA09827C544FA00E995CA /* PydnetConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541BA09727C544FA00E995CA /* PydnetConstants.swift */; };
 		54677E39279D8C4700419FBB /* IP.m in Sources */ = {isa = PBXBuildFile; fileRef = 54677E38279D8C4700419FBB /* IP.m */; };
 		54677E3C279DB60900419FBB /* IPTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54677E3B279DB60900419FBB /* IPTests.swift */; };
 		54677E40279DCDEC00419FBB /* RGB.m in Sources */ = {isa = PBXBuildFile; fileRef = 54677E3F279DCDEC00419FBB /* RGB.m */; };
@@ -89,6 +93,10 @@
 /* Begin PBXFileReference section */
 		03798A83EB2C456012957177 /* Pods-iOSCamera.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSCamera.release.xcconfig"; path = "Target Support Files/Pods-iOSCamera/Pods-iOSCamera.release.xcconfig"; sourceTree = "<group>"; };
 		541BA07627C0742800E995CA /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
+		541BA07B27C2D20A00E995CA /* CVPixelBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVPixelBuffer.swift; sourceTree = "<group>"; };
+		541BA08527C4E25600E995CA /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
+		541BA09527C51F8B00E995CA /* Pydnet.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = Pydnet.mlmodel; sourceTree = "<group>"; };
+		541BA09727C544FA00E995CA /* PydnetConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PydnetConstants.swift; sourceTree = "<group>"; };
 		54677E37279D8BEF00419FBB /* IP.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IP.h; sourceTree = "<group>"; };
 		54677E38279D8C4700419FBB /* IP.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IP.m; sourceTree = "<group>"; };
 		54677E3B279DB60900419FBB /* IPTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPTests.swift; sourceTree = "<group>"; };
@@ -199,6 +207,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		541BA07827C2B80600E995CA /* MLModels */ = {
+			isa = PBXGroup;
+			children = (
+				541BA09527C51F8B00E995CA /* Pydnet.mlmodel */,
+			);
+			path = MLModels;
+			sourceTree = "<group>";
+		};
 		54677E36279D8BCC00419FBB /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
@@ -209,6 +225,8 @@
 				54677E9F27B4FEB100419FBB /* Debuggable.swift */,
 				54695CFC27B7377700CF78F2 /* UIInterfaceOrientation.swift */,
 				54695D0227BA0F7100CF78F2 /* Color.swift */,
+				541BA07B27C2D20A00E995CA /* CVPixelBuffer.swift */,
+				541BA08527C4E25600E995CA /* UIImage.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -288,6 +306,7 @@
 			children = (
 				54677E55279EEA8200419FBB /* HLSConstants.swift */,
 				54677E7927A3264300419FBB /* WebRTCConstants.swift */,
+				541BA09727C544FA00E995CA /* PydnetConstants.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -421,6 +440,7 @@
 		54F9A827279CFE9900E994A1 /* iOSCamera */ = {
 			isa = PBXGroup;
 			children = (
+				541BA07827C2B80600E995CA /* MLModels */,
 				54677E8027A8563500419FBB /* ViewModels */,
 				54677E59279FAE0900419FBB /* Views */,
 				54677E52279EC61100419FBB /* Constants */,
@@ -734,6 +754,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				541BA07727C0742800E995CA /* StartView.swift in Sources */,
+				541BA08627C4E25700E995CA /* UIImage.swift in Sources */,
+				541BA09627C51F8B00E995CA /* Pydnet.mlmodel in Sources */,
 				54F9A82B279CFE9900E994A1 /* HLSView.swift in Sources */,
 				54695D0727BAAAEE00CF78F2 /* WebRTCSettingsHeaderView.swift in Sources */,
 				54677E49279E777400419FBB /* AlertReporting.swift in Sources */,
@@ -753,6 +775,7 @@
 				54695D0327BA0F7100CF78F2 /* Color.swift in Sources */,
 				54677E39279D8C4700419FBB /* IP.m in Sources */,
 				54677E51279E869800419FBB /* HLSModel.swift in Sources */,
+				541BA07C27C2D20A00E995CA /* CVPixelBuffer.swift in Sources */,
 				54677E8427A891FC00419FBB /* HLSViewModel+HLSModelDelegate.swift in Sources */,
 				54677E58279F407500419FBB /* HLSModel+GCDAsyncSocketDelegate.swift in Sources */,
 				54677E4C279E77BC00419FBB /* AlertModel.swift in Sources */,
@@ -774,6 +797,7 @@
 				54677E60279FE53500419FBB /* WebSocket+URLSessionWebSocketDelegate+URLSessionDelegate.swift in Sources */,
 				54677E7F27A673BB00419FBB /* WiFiToggleStyle.swift in Sources */,
 				54677E40279DCDEC00419FBB /* RGB.m in Sources */,
+				541BA09827C544FA00E995CA /* PydnetConstants.swift in Sources */,
 				54695D0F27BBF94300CF78F2 /* WebRTCControllerView.swift in Sources */,
 				54677E44279DD1CE00419FBB /* HLSStream.swift in Sources */,
 				54677E8827A9200200419FBB /* WebRTCEAGLVideoView.swift in Sources */,

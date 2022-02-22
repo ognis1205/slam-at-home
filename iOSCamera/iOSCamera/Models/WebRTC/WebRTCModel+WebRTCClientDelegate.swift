@@ -41,4 +41,26 @@ extension WebRTCModel: WebRTCClientDelegate {
     self.info("webRTC did change signaling state...")
     self.delegate?.webRTC(didChangeSignalingState: state)
   }
+  
+  func webRTC(_ client: WebRTCClient, didCapture frame: RTCVideoFrame) -> RTCVideoFrame? {
+    guard
+      let i420 = RGB.fromRTCI420Buffer(frame.buffer.toI420() as? RTCI420Buffer),
+      let buffer = i420.pixelBuffer,
+      let resizedBuffer = buffer.resize(
+        width: PydnetConstants.INPUT_SHAPE.width,
+        height: PydnetConstants.INPUT_SHAPE.height),
+      let depth = try? self.mlModel?.prediction(In: resizedBuffer).Out,
+      let resizedDepth = depth.resize(
+        width: WebRTCConstants.CAMERA_RESOLUTION.width,
+        height: WebRTCConstants.CAMERA_RESOLUTION.height),
+      let depthImage = UIImage(pixelBuffer: resizedDepth),
+      let depthBuffer = depthImage.pixelBuffer
+    else {
+      return nil
+    }
+    return RTCVideoFrame(
+      buffer: RTCCVPixelBuffer(pixelBuffer: depthBuffer),
+      rotation: RTCVideoRotation._0,
+      timeStampNs: Int64(Date().timeIntervalSince1970 * 1_000_000_000))
+  }
 }

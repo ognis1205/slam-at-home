@@ -28,24 +28,26 @@ struct WebRTCView: View {
         WebRTCMTLVideoView(model: viewModel.model)
           .onAppear {
             UIDevice.current.setValue(
-              UIInterfaceOrientation.portrait.rawValue,
+              UIInterfaceOrientation.landscapeRight.rawValue,
               forKey: "orientation")
-            AppDelegate.orientationLock = .portrait
+            AppDelegate.orientationLock = .landscapeRight
             viewModel.start()
           }
           .ignoresSafeArea(.all, edges: .all)
           .alert(isPresented: $viewModel.showAlert, content: { self.viewModel.dialog })
       #else
-        WebRTCEAGLVideoView(model: viewModel.model)
-          .onAppear {
-            UIDevice.current.setValue(
-              UIInterfaceOrientation.portrait.rawValue,
-              forKey: "orientation")
-            AppDelegate.orientationLock = .portrait
-            viewModel.start()
-          }
-          .ignoresSafeArea(.all, edges: .all)
-          .alert(isPresented: $viewModel.showAlert, content: { self.viewModel.dialog })
+        // TODO: resolve OpenGL compatibility
+        #error("This project must target ONLY arm64 so far")
+//        WebRTCEAGLVideoView(model: viewModel.model)
+//          .onAppear {
+//            UIDevice.current.setValue(
+//              UIInterfaceOrientation.landscapeRight.rawValue,
+//              forKey: "orientation")
+//            AppDelegate.orientationLock = .landscapeRight
+//            viewModel.start()
+//          }
+//          .ignoresSafeArea(.all, edges: .all)
+//          .alert(isPresented: $viewModel.showAlert, content: { self.viewModel.dialog })
       #endif
       VStack {
         HStack {
@@ -62,6 +64,7 @@ struct WebRTCView: View {
                 .clipShape(Circle())
             })
             .padding(.trailing, 10)
+            .padding(.top, 10)
             .sheet(isPresented: self.$showSettings) {
               WebRTCSettingsView(viewModel: self.viewModel)
             }

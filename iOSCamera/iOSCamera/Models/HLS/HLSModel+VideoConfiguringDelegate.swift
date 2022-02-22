@@ -23,7 +23,7 @@ extension HLSModel: VideoConfiguringDelegate {
   func didFindDevice(_ device: AVCaptureDevice) throws {
     self.info("did find device...")
     try device.lockForConfiguration()
-//    device.focusMode = .continuousAutoFocus
+    device.focusMode = .continuousAutoFocus
     device.unlockForConfiguration()
     let input = try AVCaptureDeviceInput(device: device)
     if self.capture.session.canAddInput(input) {

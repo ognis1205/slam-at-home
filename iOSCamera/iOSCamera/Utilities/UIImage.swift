@@ -15,14 +15,32 @@ extension UIImage {
   var pixelBuffer: CVPixelBuffer? {
     return getPixelBuffer()
   }
+  
+  public convenience init?(pixelBuffer: CVPixelBuffer) {
+    var cgImage: CGImage?
+    VTCreateCGImageFromCVPixelBuffer(pixelBuffer, options: nil, imageOut: &cgImage)
+    guard let cgImage = cgImage else {
+      return nil
+    }
+    self.init(cgImage: cgImage)
+  }
 
   func getPixelBuffer() -> CVPixelBuffer? {
     var pixelBuffer: CVPixelBuffer?
 
-    let attrs = [
-      kCVPixelBufferMetalCompatibilityKey: kCFBooleanTrue,
-      kCVPixelBufferCGImageCompatibilityKey: kCFBooleanTrue,
-      kCVPixelBufferCGBitmapContextCompatibilityKey: kCFBooleanTrue] as CFDictionary
+    #if arch(arm64)
+      let attrs = [
+        kCVPixelBufferMetalCompatibilityKey: kCFBooleanTrue,
+        kCVPixelBufferCGImageCompatibilityKey: kCFBooleanTrue,
+        kCVPixelBufferCGBitmapContextCompatibilityKey: kCFBooleanTrue] as CFDictionary
+    #else
+      // TODO: resolve OpenGL compatibility
+      #error("This project must target ONLY arm64 so far")
+//      let attrs = [
+//        kCVPixelBufferOpenGLCompatibilityKey: kCFBooleanTrue,
+//        kCVPixelBufferCGImageCompatibilityKey: kCFBooleanTrue,
+//        kCVPixelBufferCGBitmapContextCompatibilityKey: kCFBooleanTrue] as CFDictionary
+    #endif
 
     let status = CVPixelBufferCreate(
       kCFAllocatorDefault,

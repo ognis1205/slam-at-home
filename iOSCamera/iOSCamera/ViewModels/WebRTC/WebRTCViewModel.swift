@@ -29,6 +29,8 @@ class WebRTCViewModel: ObservableObject {
   @Published var URL: String = ""
   
   @Published var showAlert: Bool = false
+  
+  var ip: String = "Not applicable"
     
   var alert: AlertModel?
   
@@ -48,6 +50,11 @@ class WebRTCViewModel: ObservableObject {
   // MARK: Init
 
   init() {
+    if let ip = IP.getAddress() {
+      if !ip.isEmpty {
+        self.ip = ip
+      }
+    }
     self.model = WebRTCModel()
     self.model.delegate = self
     self.model.prepare()
@@ -57,11 +64,5 @@ class WebRTCViewModel: ObservableObject {
   
   func start() {
     self.model.start()
-  }
-  
-  func restart() async {
-    self.model = WebRTCModel()
-    self.model.delegate = self
-    self.model.prepare()
   }
 }

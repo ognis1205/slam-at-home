@@ -65,7 +65,7 @@ extension WebRTCViewModel: WebRTCModelDelegate {
 
   func webRTC(didChangeConnectionState state: RTCIceConnectionState) {
     DispatchQueue.main.async {
-//      self.status = state.description.capitalized
+      // Placeholder.
     }
   }
 

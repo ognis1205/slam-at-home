@@ -14,10 +14,10 @@ extension UIInterfaceOrientation {
 
   var videoOrientation: AVCaptureVideoOrientation? {
     switch self {
-    case .portraitUpsideDown: return .portrait
-    case .landscapeRight: return .portrait
-    case .landscapeLeft: return .portrait
-    case .portrait: return .portrait
+    case .portraitUpsideDown: return .landscapeRight
+    case .landscapeRight: return .landscapeRight
+    case .landscapeLeft: return .landscapeRight
+    case .portrait: return .landscapeRight
     default: return nil
     }
   }

@@ -64,6 +64,7 @@ struct WebRTCSettingsView: View {
               name: "Remote Candidates",
               content: String(viewModel.numberOfRemoteCandidate))
           }
+          //                    let ip = IP.getAddress() {
           GroupBox(
             label:
               WebRTCSettingsLabelView(
