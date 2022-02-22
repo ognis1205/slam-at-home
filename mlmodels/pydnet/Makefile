@@ -76,14 +76,13 @@ groundtruth: install
 ## Export PyDnet MLModel.
 mlmodel: install pretrained
 	@echo "Exporting PyDnet MLModel."
-	@pydnet_mlmodel pydnet 384 640 $(ROOT)/data/checkpoint/pydnet/pydnet $(ROOT)/models
-#	@pydnet_mlmodel pydnet 1920 1080 $(ROOT)/data/checkpoint/pydnet/pydnet $(ROOT)/models
+	@pydnet_mlmodel Pydnet 384 640 $(ROOT)/data/checkpoint/pydnet/pydnet $(ROOT)/models
 	@echo "Exported MLModel: "$(ROOT)/models
 
 ## Update PyDnet MLModel.
 update: mlmodel
 	@echo "Updating PyDnet MLModel."
-	@pydnet_update_mlmodel pydnet 384 640 $(ROOT)/models/pydnet.mlmodel $(ROOT)/models/updated_pydnet.mlmodel 
+	@pydnet_update_mlmodel Pydnet 384 640 $(ROOT)/models/pydnet.mlmodel $(ROOT)/models/Pydnet.mlmodel 
 	@echo "Updated MLModel: "$(ROOT)/models
 
 help:
