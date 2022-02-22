@@ -3,6 +3,10 @@ iOSCamera
 
 iOSCamera: Monoclular Depth Estimater using iOS 15.
 
+Notice
+------------
+Only supports 640 x 480
+
 Setting up Project
 ------------
  0. This application requires [CocoaPods](https://cocoapods.org/) for its dependency management. Please install [CocoaPods](https://cocoapods.org/) before proceeding the following instructions.
