@@ -30,7 +30,7 @@ def freeze_pydnet(
         placeholder = tf.placeholder(
             tf.float32,
             [1, h, w, 3],
-            name="im0",
+            name="In",
         )
         network = Pydnet({
             "h": h,

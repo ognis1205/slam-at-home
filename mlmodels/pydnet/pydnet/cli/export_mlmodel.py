@@ -24,7 +24,7 @@ def export_mlmodel(name, h, w, path_to_checkpoint, path_to_output):
         int(w),
         Path(path_to_checkpoint),
         Path(path_to_output))
-    model = ct.convert(str(path_to_pb))
+    model = ct.convert(str(path_to_pb), inputs=[ct.ImageType()])
     model.save(str(path_to_pb).replace("pb", "mlmodel"))
 
 

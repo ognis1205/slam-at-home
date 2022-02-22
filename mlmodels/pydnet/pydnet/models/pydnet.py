@@ -18,12 +18,11 @@ class Pydnet(object):
         self.w = params["w"]
         self.is_training = params["is_training"]
         self.output_nodes = None
-        if self.is_training:
-            self.scales = params["scales"]
 
     def forward(self, image):
         """Single forward of the network.
         """
+        image = image / 255.0
         feat = self.encoder(image)
         pred = self.decoder(feat)
         if not self.is_training:
@@ -33,11 +32,11 @@ class Pydnet(object):
     def make_visual(self, pred):
         """Makes visual ouput nodes of the model.
         """
-        pred = tf.nn.relu(pred)
+        pred = tf.squeeze(tf.nn.relu(pred))
         min_depth = tf.reduce_min(pred)
         max_depth = tf.reduce_max(pred)
         pred = (pred - min_depth) / (max_depth - min_depth)
-        return pred
+        return pred * 255.0
 
     def encoder(self, image):
         """Creates PyDNet feature extractor.
@@ -133,6 +132,7 @@ class Pydnet(object):
                 with tf.variable_scope("half"):
                     pred1 = tf.image.resize_images(pred1, size)
                 return pred1
+ 
             pred1 = tf.image.resize_images(pred1, size)
             pred2 = tf.image.resize_images(pred2, size)
             pred3 = tf.image.resize_images(pred3, size)

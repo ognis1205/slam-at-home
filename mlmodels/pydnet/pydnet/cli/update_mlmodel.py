@@ -20,18 +20,17 @@ def update_mlmodel(name, h, w, path_to_mlmodel, path_to_output):
     spec = ct.utils.load_spec(path_to_mlmodel)
     for input in spec.description.input:
         input.type.imageType.colorSpace = ft.ImageFeatureType.RGB
-        input.type.imageType.height = int(h)
         input.type.imageType.width  = int(w)
+        input.type.imageType.height = int(h)
     for output in spec.description.output:
-#        shape = tuple(output.type.multiArrayType.shape)
-#        c, h, w = shape
+        ct.utils.rename_feature(spec, output.name, "Out")
         output.type.imageType.colorSpace = ft.ImageFeatureType.ColorSpace.Value(
             "GRAYSCALE"
         )
         output.type.imageType.width  = int(w)
         output.type.imageType.height = int(h)
     updated = ct.models.MLModel(spec)
-    updated.author  = "Filippo Aleotti"
+    updated.author  = "Shingo OKAWA, Filippo Aleotti"
     updated.license = "Apache v2"
     updated.short_description = name
     updated.save(path_to_output)
