@@ -18,6 +18,7 @@ setup(
         "console_scripts": [
             "pydnet_kitti_ground_truth = pydnet.cli.generate_kitti_ground_truth:main",
             "pydnet_mlmodel = pydnet.cli.export_mlmodel:main",
+            "pydnet_update_mlmodel = pydnet.cli.update_mlmodel:main",
         ],
     },
     packages=find_packages(exclude=["test", "test.*"]))
