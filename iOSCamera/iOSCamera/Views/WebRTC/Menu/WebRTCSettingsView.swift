@@ -63,8 +63,9 @@ struct WebRTCSettingsView: View {
             name: "Remote Candidates",
             content: String(viewModel.numberOfRemoteCandidate))
         }
-        .padding()
+        .cornerRadius(5)
       }
+      .cornerRadius(5)
       .frame(
         width: UIScreen.main.bounds.width - 250,
         height: UIScreen.main.bounds.height - 40)

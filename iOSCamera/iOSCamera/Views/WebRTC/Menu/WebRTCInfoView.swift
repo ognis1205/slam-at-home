@@ -54,8 +54,9 @@ struct WebRTCInfoView: View {
             name: "Developer",
             content: "Shingo OKAWA")
         }
-        .padding()
+        .cornerRadius(5)
       }
+      .cornerRadius(5)
       .frame(
         width: UIScreen.main.bounds.width - 250,
         height: UIScreen.main.bounds.height - 40)
