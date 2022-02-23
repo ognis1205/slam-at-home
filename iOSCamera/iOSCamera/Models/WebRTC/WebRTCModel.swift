@@ -41,7 +41,7 @@ class WebRTCCapture: VideoConfigure {
   var device: AVCaptureDevice?
 }
 
-class WebRTCModel: VideoConfiguring {
+class WebRTCModel: VideoConfiguring, PydnetPredicting {
   // MARK: Properties
 
   weak var delegate: WebRTCModelDelegate?
@@ -53,8 +53,6 @@ class WebRTCModel: VideoConfiguring {
   
   let capture: WebRTCCapture = WebRTCCapture(
     state: .ready)
-  
-  let mlModel: Pydnet? = try? Pydnet(configuration: MLModelConfiguration())
   
   // MARK: Methods
   

@@ -45,21 +45,16 @@ extension WebRTCModel: WebRTCClientDelegate {
   func webRTC(_ client: WebRTCClient, didCapture frame: RTCVideoFrame) -> RTCVideoFrame? {
     guard
       let i420 = RGB.fromRTCI420Buffer(frame.buffer.toI420() as? RTCI420Buffer),
-      let buffer = i420.pixelBuffer,
-      let resizedBuffer = buffer.resize(
-        width: PydnetConstants.INPUT_SHAPE.width,
-        height: PydnetConstants.INPUT_SHAPE.height),
-      let depth = try? self.mlModel?.prediction(In: resizedBuffer).Out,
-      let resizedDepth = depth.resize(
+      let depth = self.predict(
+        i420,
         width: WebRTCConstants.CAMERA_RESOLUTION.width,
         height: WebRTCConstants.CAMERA_RESOLUTION.height),
-      let depthImage = UIImage(pixelBuffer: resizedDepth),
-      let depthBuffer = depthImage.pixelBuffer
+      let buffer = depth.pixelBuffer
     else {
       return nil
     }
     return RTCVideoFrame(
-      buffer: RTCCVPixelBuffer(pixelBuffer: depthBuffer),
+      buffer: RTCCVPixelBuffer(pixelBuffer: buffer),
       rotation: RTCVideoRotation._0,
       timeStampNs: Int64(Date().timeIntervalSince1970 * 1_000_000_000))
   }

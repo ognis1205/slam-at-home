@@ -20,6 +20,7 @@
 		541BD1A227C5EC6100B8C69C /* WebRTCInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541BD1A127C5EC6100B8C69C /* WebRTCInfoView.swift */; };
 		541BD1A427C5FAC300B8C69C /* WebRTCSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541BD1A327C5FAC300B8C69C /* WebRTCSettingsView.swift */; };
 		541BD1A627C5FF1500B8C69C /* WebRTCTopNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541BD1A527C5FF1500B8C69C /* WebRTCTopNavigationView.swift */; };
+		545699AC27C64CE40076B192 /* PydnetPredicting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 545699AB27C64CE40076B192 /* PydnetPredicting.swift */; };
 		54677E39279D8C4700419FBB /* IP.m in Sources */ = {isa = PBXBuildFile; fileRef = 54677E38279D8C4700419FBB /* IP.m */; };
 		54677E3C279DB60900419FBB /* IPTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54677E3B279DB60900419FBB /* IPTests.swift */; };
 		54677E40279DCDEC00419FBB /* RGB.m in Sources */ = {isa = PBXBuildFile; fileRef = 54677E3F279DCDEC00419FBB /* RGB.m */; };
@@ -107,6 +108,7 @@
 		541BD1A127C5EC6100B8C69C /* WebRTCInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebRTCInfoView.swift; sourceTree = "<group>"; };
 		541BD1A327C5FAC300B8C69C /* WebRTCSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebRTCSettingsView.swift; sourceTree = "<group>"; };
 		541BD1A527C5FF1500B8C69C /* WebRTCTopNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebRTCTopNavigationView.swift; sourceTree = "<group>"; };
+		545699AB27C64CE40076B192 /* PydnetPredicting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PydnetPredicting.swift; sourceTree = "<group>"; };
 		54677E37279D8BEF00419FBB /* IP.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IP.h; sourceTree = "<group>"; };
 		54677E38279D8C4700419FBB /* IP.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IP.m; sourceTree = "<group>"; };
 		54677E3B279DB60900419FBB /* IPTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPTests.swift; sourceTree = "<group>"; };
@@ -314,6 +316,7 @@
 			children = (
 				54677E48279E777400419FBB /* AlertReporting.swift */,
 				54677E8B27ABB68300419FBB /* VideoConfiguring.swift */,
+				545699AB27C64CE40076B192 /* PydnetPredicting.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -831,6 +834,7 @@
 				54677E9E27B1A09000419FBB /* WebRTCMTLVideoView.swift in Sources */,
 				54677E60279FE53500419FBB /* WebSocket+URLSessionWebSocketDelegate+URLSessionDelegate.swift in Sources */,
 				54677E7F27A673BB00419FBB /* WiFiToggleStyle.swift in Sources */,
+				545699AC27C64CE40076B192 /* PydnetPredicting.swift in Sources */,
 				54677E40279DCDEC00419FBB /* RGB.m in Sources */,
 				541BA09827C544FA00E995CA /* PydnetConstants.swift in Sources */,
 				541BD19C27C5E99B00B8C69C /* WebRTCMenuHeaderView.swift in Sources */,
