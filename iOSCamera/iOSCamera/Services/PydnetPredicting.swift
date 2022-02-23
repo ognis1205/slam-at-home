@@ -8,6 +8,7 @@
 
 import CoreML
 import Foundation
+import VideoToolbox
 
 final class PydnetModel {
   // MARK: Properties
@@ -28,6 +29,53 @@ final class PydnetModel {
   }
 }
 
+final class MetalColorMap {
+  // MARK: Properties
+  
+  static let shared: MetalColorMapApplier = MetalColorMapApplier()
+
+  // MARK: Init
+
+  private init() {
+    // Not allowed.
+  }
+  
+  // MARK: Methods
+  
+  static func apply(_ image: CGImage, filter: ColorFilter) -> CGImage? {
+    shared.prepare(filter: filter)
+    return shared.render(image: image)
+  }
+}
+
+final class SharpenFilter {
+  // MARK: Properties
+  
+  static let shared: CIFilter? = CIFilter(name: "CISharpenLuminance")
+
+  // MARK: Init
+
+  private init() {
+    // Not allowed.
+  }
+  
+  // MARK: Methods
+  
+  static func apply(_ image: CGImage, sharpness: Int) -> CGImage? {
+    shared?.setValue(CIImage(cgImage: image), forKey: kCIInputImageKey)
+    shared?.setValue(2, forKey: kCIInputSharpnessKey)
+    guard
+      let filtered = shared?.outputImage
+    else {
+      return nil
+    }
+    let context = CIContext(options: nil)
+    return context.createCGImage(
+      filtered,
+      from: filtered.extent)
+  }
+}
+
 protocol PydnetPredicting {
   // MARK: Methods
   
@@ -38,6 +86,8 @@ extension PydnetPredicting {
   // MARK: Methods
   
   func predict(_ input: UIImage, width: Int, height: Int) -> UIImage? {
+    var cgImage: CGImage?
+
     guard
       let buffer = input.pixelBuffer?.resize(
         width: PydnetConstants.INPUT_SHAPE.width,
@@ -48,6 +98,17 @@ extension PydnetPredicting {
     else {
       return nil
     }
-    return UIImage(pixelBuffer: depth)
+
+    VTCreateCGImageFromCVPixelBuffer(depth, options: nil, imageOut: &cgImage)
+    
+    guard
+      let cgImage = cgImage,
+      let heat = MetalColorMap.apply(cgImage, filter: .magma),
+      let filtered = SharpenFilter.apply(heat, sharpness: PydnetConstants.SHARPNESS)
+    else {
+      return nil
+    }
+
+    return UIImage(cgImage: filtered)
   }
 }

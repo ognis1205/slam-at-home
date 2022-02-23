@@ -12,4 +12,6 @@ struct PydnetConstants {
   // MARK: Properties
 
   static let INPUT_SHAPE: (height: Int, width: Int) = (height: 384, width: 640)
+  
+  static let SHARPNESS: Int = 5
 }

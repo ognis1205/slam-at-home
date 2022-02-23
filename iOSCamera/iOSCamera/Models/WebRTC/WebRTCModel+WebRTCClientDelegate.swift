@@ -53,7 +53,17 @@ extension WebRTCModel: WebRTCClientDelegate {
     else {
       return nil
     }
+//    let filter = CIFilter(name: "CISharpenLuminance")!
+//    filter.setValue(depth.ciImage, forKey: kCIInputImageKey)
+//    filter.setValue(0.8, forKey: kCIInputSharpnessKey)
+//    let context = CIContext(options: nil)
+//    let cgimg = context.createCGImage(
+//      filter.outputImage!,
+//      from: filter.outputImage!.extent)
+//    let finalImage = UIImage(ciImage: filter.outputImage!)
+
     return RTCVideoFrame(
+//      buffer: RTCCVPixelBuffer(pixelBuffer: finalImage.pixelBuffer!),
       buffer: RTCCVPixelBuffer(pixelBuffer: buffer),
       rotation: RTCVideoRotation._0,
       timeStampNs: Int64(Date().timeIntervalSince1970 * 1_000_000_000))

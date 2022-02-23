@@ -6,5 +6,5 @@
 //  Copyright © 2022 Shingo OKAWA. All rights reserved.
 //
 
-#import "Utilities/IP.h"
-#import "Utilities/RGB.h"
+#import "Networking/Extensions/IP.h"
+#import "Graphics/Extensions/RGB.h"
