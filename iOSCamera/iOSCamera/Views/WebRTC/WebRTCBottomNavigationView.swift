@@ -1,5 +1,5 @@
 //
-//  WebRTCControllerView.swift
+//  WebRTCBottomNavigationView.swift
 //  iOSCamera
 //
 //  Created by Shingo OKAWA on 2022/02/16.
@@ -8,12 +8,12 @@
 
 import SwiftUI
 
-struct WebRTCControllerView: View {
+struct WebRTCBottomNavigationView: View {
   // MARK: Properties
   
-  @Binding var isRecording: Bool
-  
   @ObservedObject var viewModel: WebRTCViewModel
+  
+  @Binding var isRecording: Bool
 
   @State private var opacity: CGFloat = 0.5
   
@@ -61,10 +61,12 @@ struct WebRTCControllerView: View {
   }
 }
 
-struct WebRTCControllerView_Previews: PreviewProvider {
+struct WebRTCBottomNavigationView_Previews: PreviewProvider {
   // MARK: Previews
 
   static var previews: some View {
-    WebRTCControllerView(isRecording: .constant(true), viewModel: WebRTCViewModel())
+    WebRTCBottomNavigationView(
+      viewModel: WebRTCViewModel(),
+      isRecording: .constant(true))
   }
 }

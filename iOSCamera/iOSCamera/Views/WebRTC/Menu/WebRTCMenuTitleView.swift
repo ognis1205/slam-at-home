@@ -1,14 +1,14 @@
 //
-//  WebRTCSettingsLabelView.swift
+//  WebRTCMenuTitleView.swift
 //  iOSCamera
 //
-//  Created by Shingo OKAWA on 2022/02/14.
+//  Created by Shingo OKAWA on 2022/02/23.
 //  Copyright © 2022 Shingo OKAWA. All rights reserved.
 //
 
 import SwiftUI
 
-struct WebRTCSettingsLabelView: View {
+struct WebRTCMenuTitleView: View {
   // MARK: Properties
   
   var labelText: String
@@ -19,17 +19,20 @@ struct WebRTCSettingsLabelView: View {
 
   var body: some View {
     HStack {
-      Text(labelText.uppercased()).fontWeight(.bold)
+      Text(labelText.uppercased())
+        .fontWeight(.bold)
       Spacer()
       Image(systemName: labelImage)
     }
   }
 }
 
-struct WebRTCSettingsLabelView_Previews: PreviewProvider {
+struct WebRTCMenuTitleView_Previews: PreviewProvider {
   // MARK: Previews
 
   static var previews: some View {
-    WebRTCSettingsLabelView(labelText: "Fructus", labelImage: "info.circle")
+    WebRTCMenuTitleView(
+      labelText: "Fructus",
+      labelImage: "info.circle")
   }
 }

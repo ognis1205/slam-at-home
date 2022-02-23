@@ -9,5 +9,7 @@
 import Foundation
 
 struct HLSConstants {
+  // MARK: Properties
+
   static let PORT: UInt16 = 10_001
 }

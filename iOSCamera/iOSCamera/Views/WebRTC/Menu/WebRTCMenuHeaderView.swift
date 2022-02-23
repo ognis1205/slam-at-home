@@ -1,13 +1,14 @@
 //
-//  WebRTCSettingsHeaderView.swift
+//  WebRTCMenuHeaderView.swift
 //  iOSCamera
 //
-//  Created by Shingo OKAWA on 2022/02/15.
+//  Created by Shingo OKAWA on 2022/02/23.
+//  Copyright © 2022 Shingo OKAWA. All rights reserved.
 //
 
 import SwiftUI
 
-struct WebRTCSettingsHeaderView: View {
+struct WebRTCMenuHeaderView: View {
   // MARK: Properties
   
   var labelImage: String
@@ -19,7 +20,8 @@ struct WebRTCSettingsHeaderView: View {
   // MARK: Body
 
   var body: some View {
-    Divider().padding(.vertical, 4)
+    Divider()
+      .padding(.vertical, 4)
     HStack(alignment: .center, spacing: 10) {
       Image(systemName: labelImage)
         .resizable()
@@ -35,10 +37,13 @@ struct WebRTCSettingsHeaderView: View {
   }
 }
 
-struct WebRTCSettingsHeaderView_Previews: PreviewProvider {
+struct WebRTCMenuHeaderView_Previews: PreviewProvider {
   // MARK: Previews
 
   static var previews: some View {
-    WebRTCSettingsHeaderView(labelImage: "network", labelColor: .green, content: "FOOBAR")
+    WebRTCMenuHeaderView(
+      labelImage: "network",
+      labelColor: .green,
+      content: "FOOBAR")
   }
 }

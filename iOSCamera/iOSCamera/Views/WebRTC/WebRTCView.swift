@@ -11,14 +11,14 @@ import WebRTC
 
 struct WebRTCView: View {
   // MARK: Properties
-
-  @Environment(\.presentationMode) var presentationMode
   
   @Binding var isRecording: Bool
 
   @ObservedObject var viewModel: WebRTCViewModel = WebRTCViewModel()
-  
-  @State private var showSettings: Bool = false
+
+  @State var showInfo: Bool = false
+
+  @State var showSettings: Bool = false
   
   // MARK: Body
 
@@ -50,27 +50,26 @@ struct WebRTCView: View {
 //          .alert(isPresented: $viewModel.showAlert, content: { self.viewModel.dialog })
       #endif
       VStack {
-        HStack {
-          Spacer()
-          Button(
-            action: {
-              self.showSettings.toggle()
-            },
-            label: {
-              Image(systemName: "slider.horizontal.3")
-                .foregroundColor(.white)
-                .padding()
-                .background(Color.themeColor)
-                .clipShape(Circle())
-            })
-            .padding(.trailing, 10)
-            .padding(.top, 10)
-            .sheet(isPresented: self.$showSettings) {
-              WebRTCSettingsView(viewModel: self.viewModel)
-            }
-        }
+        WebRTCTopNavigationView(
+          viewModel: self.viewModel,
+          showInfo: self.$showInfo,
+          showSettings: self.$showSettings)
         Spacer()
-        WebRTCControllerView(isRecording: $isRecording, viewModel: self.viewModel)
+        WebRTCBottomNavigationView(
+          viewModel: self.viewModel,
+          isRecording: self.$isRecording)
+      }
+      if self.showInfo {
+        WebRTCInfoView(
+          viewModel: self.viewModel,
+          isOpen: self.$showInfo,
+          onToggle: { self.showInfo.toggle() })
+      }
+      if self.showSettings {
+        WebRTCSettingsView(
+          viewModel: self.viewModel,
+          isOpen: self.$showSettings,
+          onToggle: { self.showSettings.toggle() })
       }
     }
   }

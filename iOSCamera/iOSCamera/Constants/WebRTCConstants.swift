@@ -9,6 +9,8 @@
 import Foundation
 
 struct WebRTCConstants {
+  // MARK: Properties
+
   static let ICE_SERVERS: [String] = [
     "stun:stun.l.google.com:19302",
     "stun:stun1.l.google.com:19302",

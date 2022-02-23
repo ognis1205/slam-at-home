@@ -1,14 +1,14 @@
 //
-//  WebRTCSettingsRowView.swift
+//  WebRTCMenuItemView.swift
 //  iOSCamera
 //
-//  Created by Shingo OKAWA on 2022/02/14.
+//  Created by Shingo OKAWA on 2022/02/23.
 //  Copyright © 2022 Shingo OKAWA. All rights reserved.
 //
 
 import SwiftUI
 
-struct WebRTCSettingsRowView: View {
+struct WebRTCMenuItemView: View {
   // MARK: Properties
   
   var name: String
@@ -23,7 +23,8 @@ struct WebRTCSettingsRowView: View {
 
   var body: some View {
     VStack {
-      Divider().padding(.vertical, 4)
+      Divider()
+        .padding(.vertical, 4)
       HStack {
         Text(name).foregroundColor(.gray)
         Spacer()
@@ -43,10 +44,12 @@ struct WebRTCSettingsRowView: View {
   }
 }
 
-struct WebRTCSettingsRowView_Previews: PreviewProvider {
+struct WebRTCMenuItemView_Previews: PreviewProvider {
   // MARK: Previews
 
   static var previews: some View {
-    WebRTCSettingsRowView(name: "Developer", content: "Shingo OKAWA")
+    WebRTCMenuItemView(
+      name: "Developer",
+      content: "Shingo OKAWA")
   }
 }
