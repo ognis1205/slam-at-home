@@ -20,13 +20,13 @@ Startup()
 
     // For pinging.
     app.get('/', (req: Express.Request, res: Express.Response): void => {
-      Logger.info(`Pinged`);
+      Logger.info(`Ping`);
       res.send({ uptime: process.uptime() });
     });
 
-    // For pinging.
+    // For clients list display.
     app.get('/peers', (req: Express.Request, res: Express.Response): void => {
-      Logger.info(`Pinged`);
+      Logger.info(`Peers`);
       res.send({ peers: Signaling.listClients() });
     });
 

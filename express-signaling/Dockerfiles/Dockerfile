@@ -1,11 +1,17 @@
-FROM node:12
+FROM node:17
 
 WORKDIR /usr/src/app
 
-COPY package*.json ./
+COPY . /usr/src/app
 
-RUN npm install
+ENV PORT 4000
+
+RUN npm install --production=false
+
+RUN npm run build
 
 COPY . .
 
-CMD [ "npm", "start" ]
+EXPOSE $PORT
+
+CMD ["npm", "start"]
