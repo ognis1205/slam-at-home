@@ -63,7 +63,7 @@ final class SharpenFilter {
   
   static func apply(_ image: CGImage, sharpness: Int) -> CGImage? {
     shared?.setValue(CIImage(cgImage: image), forKey: kCIInputImageKey)
-    shared?.setValue(2, forKey: kCIInputSharpnessKey)
+    shared?.setValue(sharpness, forKey: kCIInputSharpnessKey)
     guard
       let filtered = shared?.outputImage
     else {
