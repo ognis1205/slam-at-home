@@ -43,6 +43,17 @@ extension WebRTCModel: WebRTCClientDelegate {
   }
   
   func webRTC(_ client: WebRTCClient, didCapture frame: RTCVideoFrame) -> RTCVideoFrame? {
+    let timestamp: Int64 = Int64(
+      Date().timeIntervalSince1970 * 1_000_000_000)
+    let modulo: Int = Int(
+      timestamp % WebRTCConstants.FPS_REDUCE_RATE)
+
+    guard
+      modulo == 0
+    else {
+      return nil
+    }
+
     guard
       let i420 = RGB.fromRTCI420Buffer(frame.buffer.toI420() as? RTCI420Buffer),
       let depth = self.predict(
@@ -53,10 +64,10 @@ extension WebRTCModel: WebRTCClientDelegate {
     else {
       return nil
     }
-
+      
     return RTCVideoFrame(
       buffer: RTCCVPixelBuffer(pixelBuffer: buffer),
       rotation: RTCVideoRotation._0,
-      timeStampNs: Int64(Date().timeIntervalSince1970 * 1_000_000_000))
+      timeStampNs: timestamp)
   }
 }

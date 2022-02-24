@@ -200,20 +200,20 @@ class WebRTCClient: NSObject, Debuggable {
     // TODO: check if the following code is appropriate to determine the camera resolution.
     guard
       let capturer = self.videoTrack.capturer as? RTCCameraVideoCapturer,
-//      let format = (RTCCameraVideoCapturer.supportedFormats(for: videoDevice).filter {
-//        let width = CMVideoFormatDescriptionGetDimensions($0.formatDescription).width
-//        let height = CMVideoFormatDescriptionGetDimensions($0.formatDescription).height
-//        return height == WebRTCConstants.CAMERA_RESOLUTION.height &&
-//          width == WebRTCConstants.CAMERA_RESOLUTION.width
-//      }).last
-      let format = (RTCCameraVideoCapturer.supportedFormats(for: videoDevice).sorted {
-        let lhs = CMVideoFormatDescriptionGetDimensions($0.formatDescription).width
-        let rhs = CMVideoFormatDescriptionGetDimensions($1.formatDescription).width
-        return lhs > rhs
-      }).last
-//      let fps = (format.videoSupportedFrameRateRanges.sorted {
-//        return $0.maxFrameRate < $1.maxFrameRate
-//      }.last)
+      let format = (RTCCameraVideoCapturer.supportedFormats(for: videoDevice).filter {
+        let width = CMVideoFormatDescriptionGetDimensions($0.formatDescription).width
+        let height = CMVideoFormatDescriptionGetDimensions($0.formatDescription).height
+        return height == WebRTCConstants.CAMERA_RESOLUTION.height &&
+          width == WebRTCConstants.CAMERA_RESOLUTION.width
+      }).last,
+//      let format = (RTCCameraVideoCapturer.supportedFormats(for: videoDevice).sorted {
+//        let lhs = CMVideoFormatDescriptionGetDimensions($0.formatDescription).width
+//        let rhs = CMVideoFormatDescriptionGetDimensions($1.formatDescription).width
+//        return lhs > rhs
+//      }).last,
+      let fps = (format.videoSupportedFrameRateRanges.sorted {
+        return $0.maxFrameRate < $1.maxFrameRate
+      }.last)
     else {
       self.warn("failed to start capturing...")
       return
@@ -221,9 +221,7 @@ class WebRTCClient: NSObject, Debuggable {
     capturer.startCapture(
       with: videoDevice,
       format: format,
-      fps: WebRTCConstants.FPS)
-//      fps: Int(fps.maxFrameRate))
-//      fps: 15)
+      fps: Int(fps.maxFrameRate))
     self.videoTrack.sender?.add(renderer)
   }
 }
