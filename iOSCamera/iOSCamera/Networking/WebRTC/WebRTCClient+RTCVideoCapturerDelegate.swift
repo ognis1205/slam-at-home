@@ -18,7 +18,6 @@ extension WebRTCClient: RTCVideoCapturerDelegate {
     guard
       let newFrame = self.delegate?.webRTC(self, didCapture: frame)
     else {
-//      self.videoTrack.source.capturer(capturer, didCapture: frame)
       return
     }
     self.videoTrack.source.capturer(capturer, didCapture: newFrame)

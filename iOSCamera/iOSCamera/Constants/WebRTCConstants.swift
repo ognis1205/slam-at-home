@@ -23,7 +23,5 @@ struct WebRTCConstants {
 
   static let CAMERA_RESOLUTION: (height: Int, width: Int) = (height: 480, width: 640)
 
-  static let FPS: Int = 15
-  
-  static let FPS_REDUCE_RATE: Int64 = Int64(6)
+  static let FPS_REDUCE_RATE: Int64 = Int64(3)
 }

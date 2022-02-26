@@ -103,12 +103,12 @@ extension PydnetPredicting {
     
     guard
       let cgImage = cgImage,
-      let heat = MetalColorMap.apply(cgImage, filter: .magma),
-      let filtered = SharpenFilter.apply(heat, sharpness: PydnetConstants.SHARPNESS)
+      let heat = MetalColorMap.apply(cgImage, filter: .magma)
+//      let filtered = SharpenFilter.apply(heat, sharpness: PydnetConstants.SHARPNESS)
     else {
       return nil
     }
 
-    return UIImage(cgImage: filtered)
+    return UIImage(cgImage: heat)
   }
 }
