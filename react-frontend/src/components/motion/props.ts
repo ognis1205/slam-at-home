@@ -90,6 +90,15 @@ export interface Motion extends Partial<Config> {
   deadline?: number;
   forceRender?: boolean;
   removeOnExit?: boolean;
+  eventProps?: unknown;
   ref?: React.Ref<unknown>;
   children?: Children;
+}
+
+/** A {Motions} component properties. */
+export interface List
+  extends Omit<Motion, 'onVisibleChanged'>,
+    Omit<React.HTMLAttributes<unknown>, 'children'> {
+  keys: (React.Key | { key: React.Key; [name: string]: unknown })[];
+  onVisibleChanged?: (visible: boolean, info: { key: React.Key }) => void;
 }

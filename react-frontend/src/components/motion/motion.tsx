@@ -62,6 +62,7 @@ const configure = (
         visible = true,
         forceRender,
         removeOnExit = true,
+        eventProps,
         children,
         ...rest
       }: Props.Motion,
@@ -107,7 +108,7 @@ const configure = (
       }, []);
 
       let motion: React.ReactNode;
-      const context = { visible, ...rest };
+      const context = { visible, ...eventProps };
       if (!children) {
         motion = null as React.ReactNode;
       } else if (status === Stage.Status.None || !transitionIsDefined(name)) {
