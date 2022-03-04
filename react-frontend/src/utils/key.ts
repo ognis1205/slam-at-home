@@ -14,14 +14,14 @@ export const Status = {
 export type Status = typeof Status[keyof typeof Status];
 
 /** React.Key with Status. */
-export interface KeyWithStatus {
+export interface WithStatus {
   key: string;
   status?: Status;
 }
 
 /** Wraps a given `React.Key` object with a status. */
-export const wrap = (key: React.Key): KeyWithStatus => {
-  let obj: KeyWithStatus;
+export const wrap = (key: React.Key): WithStatus => {
+  let obj: WithStatus;
   if (key && typeof key === 'object' && 'key' in key) {
     obj = key;
   } else {
@@ -30,18 +30,18 @@ export const wrap = (key: React.Key): KeyWithStatus => {
   return {
     ...obj,
     key: String(keyObj.key),
-  } as KeyWithStatus;
+  } as WithStatus;
 };
 
-/** Maps a given keys into `KeyWithStatus` objects.*/
-export const parse = (keys = []): KeyWithStatus[] => keys.map(wrap);
+/** Maps a given keys into `WithStatus` objects.*/
+export const parse = (keys = []): WithStatus[] => keys.map(wrap);
 
 /** Computes the difference `lhs - rhs`. */
 export const diff = (
-  lhs: KeyWithStatus[] = [],
-  rhs: KeyWithStatus[] = []
-): KeyWithStatus[] => {
-  let diffs: KeyWithStatus[] = [];
+  lhs: WithStatus[] = [],
+  rhs: WithStatus[] = []
+): WithStatus[] => {
+  let diffs: WithStatus[] = [];
   let curr = 0;
   const len = rhs.length;
   const lhsObjs = parse(lhs);
