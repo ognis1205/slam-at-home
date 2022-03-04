@@ -90,7 +90,8 @@ export interface Motion extends Partial<Config> {
   deadline?: number;
   forceRender?: boolean;
   removeOnExit?: boolean;
-  eventProps?: unknown;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  eventProps?: any;
   ref?: React.Ref<unknown>;
   children?: Children;
 }

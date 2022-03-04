@@ -32,7 +32,7 @@ const MOTION_PROP_KEYS = [
 ];
 
 /** Defines {List} components. */
-const Component: React.FunctionComponent<Props.List> = ({
+export const Component: React.FunctionComponent<Props.List> = ({
   keys,
   onVisibleChanged,
   children,
@@ -40,7 +40,7 @@ const Component: React.FunctionComponent<Props.List> = ({
 }: Props.List): React.ReactElement => {
   /** @const Holds keys with status. */
   const [keyWithStatuses, setKeyWithStatuses] = React.useState<
-    Props.KeyWithStatus[]
+    Key.WithStatus[]
   >([]);
 
   /** `getDerivedStateFromProps` */
