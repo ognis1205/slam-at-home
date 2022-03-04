@@ -6,7 +6,15 @@ import type * as React from 'react';
 import type * as Types from '../../utils/types';
 
 /** A type union of notification level properties. */
-export type Level = 'info' | 'success' | 'warning' | 'error' | 'custom';
+export const Level = {
+  INFO: 'info',
+  SUCCESS: 'success',
+  WARNING: 'warning',
+  ERROR: 'error',
+  CUSTOM: 'custom',
+} as const;
+
+export type Level = typeof Level[keyof typeof Level];
 
 /** A {Notify} context. */
 export type Notify = {
@@ -17,10 +25,13 @@ export type Notify = {
   ttl: number;
   iconClassName?: string;
   color?: string;
-  showCloseButton: bool;
-  onClick: (e: React.MouseEvent | React.KeyboardEvent) => void;
-  onHide: () => void;
+  showCloseButton?: bool;
+  onClick?: (e: React.MouseEvent | React.KeyboardEvent) => void;
+  onHide?: () => void;
 };
+
+/** Notified event. */
+export type NotifiedEvent = 'notified';
 
 /** A {Item} component properties. */
 export type Item = Types.Overwrite<
