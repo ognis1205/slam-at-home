@@ -1,11 +1,27 @@
 /**
- * @fileoverview Defines Content component.
+ * @fileoverview Defines Item component.
  * @copyright Shingo OKAWA 2022
  */
 import * as React from 'react';
 import * as Props from './props';
+import * as Wrap from '../../utils/wrap';
 import classnames from 'classnames';
 import styles from '../../assets/styles/components/notification.module.scss';
+
+/** Default properties. */
+const DEFAULT_PROPS: Partial<Props.Item> = {
+  level: 'info',
+  title: null,
+  message: null,
+  showCloseButton: true,
+  ttl: 5000,
+  onClick: () => {
+    // Do nothing.
+  },
+  onHide: () => {
+    // Do nothign.
+  },
+};
 
 /** Returns the class name of the notification. */
 const getClassName = (
@@ -91,3 +107,7 @@ export const Component: React.FunctionComponent<Props.Item> = ({
 
 /** Sets the component's display name. */
 Component.displayName = 'NotificationItem';
+
+/** Returns a `Item` component with default property values. */
+export const WithDefaultComponent: React.FunctionComponent<Props.Item> =
+  Wrap.withDefaultProps(Component, DEFAULT_PROPS);
