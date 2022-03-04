@@ -7,7 +7,7 @@ import * as Props from './props';
 import uuidv4 from 'uuid/v4';
 
 /** Responsible to create/delete notification events. */
-export class Manager extends Events.EventEmitter {
+class Manager extends Events.EventEmitter {
   /** Construcdtor. */
   constructor() {
     super();
@@ -30,20 +30,34 @@ export class Manager extends Events.EventEmitter {
     this.emitChange();
   }
 
+  /**
+   * @param {Props.Notify} notify
+   */
   remove(notify: Props.Notify): void {
     this.que = this.que.filter((n) => notify.key !== n.key);
     this.emitChange();
   }
 
+  /**
+   * @param
+   */
   emitChange(): void {
     this.emit(Props.NotifiedEvent, this.que);
   }
 
-  addChangeListener(callback: () => void): void {
+  /**
+   * @param {() => void} callback
+   */
+  addNotificationListener(callback: (notifies: Props.Notify[]) => void): void {
     this.addListener(Props.NotifiedEvent, callback);
   }
 
-  removeChangeListener(callback: () => void): void {
+  /**
+   * @param {() => void} callback
+   */
+  removeNotificationListener(
+    callback: (notifies: Props.Notify[]) => void
+  ): void {
     this.removeListener(Props.NotifiedEvent, callback);
   }
 
@@ -90,3 +104,6 @@ export class Manager extends Events.EventEmitter {
     this.create(this.parse(maybeOptions), Props.Level.CUSTOM);
   }
 }
+
+/** Exports singleton manager. */
+export default new Manager();

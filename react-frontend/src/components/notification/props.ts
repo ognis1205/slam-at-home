@@ -58,3 +58,11 @@ export type Items = Types.Overwrite<
     duration: number;
   }
 >;
+
+/** A {Notification} component properties. */
+export type Items = Types.Overwrite<
+  React.HTMLAttributes<HTMLDivElement>,
+  {
+    duration: number;
+  }
+>;
