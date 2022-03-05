@@ -14,7 +14,7 @@ Setting up Project
  1. Run the following command in the project root directory to install dependencies:
 
 ```bash
- $ npm install
+ $ npm install && npm run build
 ```
 
  2. After the installation, you can start the server by the following command in the project root directory:
