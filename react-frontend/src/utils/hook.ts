@@ -38,6 +38,15 @@ export const useDeepComparedEffect = (
   // eslint-disable-next-line react-hooks/exhaustive-deps
   React.useEffect(callback, useDeepComparedMemo(deps));
 
+/** An equivalent for the legacy `componentWillMount` life-cycle method. */
+export const useWillMount = (callback: () => void): void => {
+  const mounted = React.useRef(false);
+  if (!mounted.current) callback();
+  React.useEffect(() => {
+    mounted.current = true;
+  }, []);
+};
+
 /** An equivalent for the legacy `componentDidMount` life-cycle method. */
 export const useDidMount = (callback: () => void): void => {
   React.useEffect(() => {

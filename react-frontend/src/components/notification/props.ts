@@ -25,13 +25,13 @@ export type Notify = {
   ttl: number;
   iconClassName?: string;
   color?: string;
-  showCloseButton?: bool;
-  onClick?: (e: React.MouseEvent | React.KeyboardEvent) => void;
+  showCloseButton?: boolean;
+  onClick?: () => void;
   onHide?: () => void;
 };
 
 /** Notified event. */
-export type NotifiedEvent = 'notified';
+export const NotifiedEvent = 'notified' as const;
 
 /** A {Item} component properties. */
 export type Item = Types.Overwrite<
@@ -43,8 +43,8 @@ export type Item = Types.Overwrite<
     ttl: number;
     iconClassName?: string;
     color?: string;
-    showCloseButton: bool;
-    onClick: (e: React.MouseEvent | React.KeyboardEvent) => void;
+    showCloseButton: boolean;
+    onClick: () => void;
     onHide: () => void;
   }
 >;
@@ -60,7 +60,7 @@ export type Items = Types.Overwrite<
 >;
 
 /** A {Notification} component properties. */
-export type Items = Types.Overwrite<
+export type Notification = Types.Overwrite<
   React.HTMLAttributes<HTMLDivElement>,
   {
     duration: number;

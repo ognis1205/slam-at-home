@@ -4,6 +4,7 @@
  */
 import * as React from 'react';
 import * as Props from './props';
+import * as Hook from '../../utils/hook';
 import * as Wrap from '../../utils/wrap';
 import classnames from 'classnames';
 import styles from '../../assets/styles/components/notification.module.scss';

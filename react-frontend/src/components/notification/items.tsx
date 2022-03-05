@@ -7,6 +7,7 @@ import * as Item from './item';
 import * as Props from './props';
 import * as Motion from '../motion';
 import * as Wrap from '../../utils/wrap';
+import Manager from './manager';
 import classnames from 'classnames';
 import styles from '../../assets/styles/components/notification.module.scss';
 
@@ -43,8 +44,9 @@ export const Component: React.FunctionComponent<Props.Items> = ({
 
   return (
     <div {...divAttrs} className={getClassName(className, notifies)}>
-      <Motion.List name="notification" deadline={duration}>
-        {notifies.map((notify) => {
+      <Motion.List keys={notifies} name="notification" deadline={duration}>
+        {({ key }) => {
+          const notify = Manager.find(key as string);
           return (
             <Item.Component
               key={notify.key}
@@ -56,10 +58,10 @@ export const Component: React.FunctionComponent<Props.Items> = ({
               onClick={notify.onClick}
               color={notify.color}
               iconClassName={notify.iconClassName}
-              onRequestHide={handleHide(notify)}
+              onHide={handleHide(notify)}
             />
           );
-        })}
+        }}
       </Motion.List>
     </div>
   );

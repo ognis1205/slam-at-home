@@ -4,10 +4,13 @@
  */
 import * as Events from 'events';
 import * as Props from './props';
-import uuidv4 from 'uuid/v4';
+import { uuid } from 'uuidv4';
 
 /** Responsible to create/delete notification events. */
 class Manager extends Events.EventEmitter {
+  /** @const Holds a queue of notifies. */
+  private que: Props.Notify[];
+
   /** Construcdtor. */
   constructor() {
     super();
@@ -20,7 +23,7 @@ class Manager extends Events.EventEmitter {
    */
   create(options: Partial<Props.Notify>, level: Props.Level): void {
     const notify = {
-      key: uuidv4(),
+      key: uuid(),
       level: level || Props.Level.INFO,
       title: null,
       message: null,
@@ -28,6 +31,13 @@ class Manager extends Events.EventEmitter {
     } as Props.Notify;
     this.que.push(Object.assign(notify, options));
     this.emitChange();
+  }
+
+  /**
+   * @param {string} key
+   */
+  find(key: string): Props.Notify {
+    return this.que.find((n) => key !== n.key);
   }
 
   /**

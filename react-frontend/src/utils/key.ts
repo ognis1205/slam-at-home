@@ -21,7 +21,8 @@ export interface WithStatus {
 
 /** Wraps a given `React.Key` object with a status. */
 export const wrap = (key: React.Key): WithStatus => {
-  let obj: WithStatus;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  let obj: any;
   if (key && typeof key === 'object' && 'key' in key) {
     obj = key;
   } else {
@@ -29,7 +30,7 @@ export const wrap = (key: React.Key): WithStatus => {
   }
   return {
     ...obj,
-    key: String(keyObj.key),
+    key: String(obj.key),
   } as WithStatus;
 };
 

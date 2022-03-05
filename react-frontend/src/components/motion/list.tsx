@@ -84,18 +84,18 @@ export const Component: React.FunctionComponent<Props.List> = ({
 
   return (
     <React.Fragment {...rest}>
-      {keyWithStatuses.map(({ status, ...eventProps }) => {
+      {keyWithStatuses.map(({ key, status, ...eventProps }) => {
         const visible = status === Key.Status.ADD || status === Key.Status.KEEP;
         return (
           <Motion.Component
             {...props}
-            key={eventProps.key}
+            key={key}
             visible={visible}
             eventProps={eventProps}
             onVisibleChanged={(visible) => {
-              onVisibleChanged?.(visible, { key: eventProps.key });
+              onVisibleChanged?.(visible, { key: key });
               if (!visible) {
-                remove(eventProps.key);
+                remove(key);
               }
             }}
           >
