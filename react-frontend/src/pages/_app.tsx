@@ -7,6 +7,7 @@ import * as NextApp from 'next/app';
 import Head from 'next/head';
 import * as Drawer from '../components/drawer';
 import * as Collapse from '../components/collapse';
+import * as Notification from '../components/notification';
 import * as Pane from '../containers/pane';
 import '../assets/styles/global.scss';
 
@@ -122,6 +123,7 @@ const SLAM: React.FC<NextApp.AppProps> = ({}) => {
           {getItems()}
         </Collapse.Wrapper>
       </Drawer.Component>
+      <Notification.Component />
     </React.Fragment>
   );
 };

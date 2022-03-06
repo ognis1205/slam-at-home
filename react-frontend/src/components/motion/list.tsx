@@ -59,7 +59,8 @@ export const Component: React.FunctionComponent<Props.List> = ({
         return true;
       })
     );
-  }, [keys, keyWithStatuses]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [keys]);
 
   /** Removes the specified key from the current state. */
   const remove = (key: React.Key): void => {
@@ -83,7 +84,7 @@ export const Component: React.FunctionComponent<Props.List> = ({
   });
 
   return (
-    <React.Fragment {...rest}>
+    <React.Fragment>
       {keyWithStatuses.map(({ key, status, ...eventProps }) => {
         const visible = status === Key.Status.ADD || status === Key.Status.KEEP;
         return (

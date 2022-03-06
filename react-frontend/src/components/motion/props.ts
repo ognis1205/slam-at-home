@@ -97,9 +97,7 @@ export interface Motion extends Partial<Config> {
 }
 
 /** A {Motions} component properties. */
-export interface List
-  extends Omit<Motion, 'onVisibleChanged'>,
-    Omit<React.HTMLAttributes<unknown>, 'children'> {
+export interface List extends Omit<Motion, 'onVisibleChanged'> {
   keys: (React.Key | { key: React.Key; [name: string]: unknown })[];
   onVisibleChanged?: (visible: boolean, info: { key: React.Key }) => void;
 }

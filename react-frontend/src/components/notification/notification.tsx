@@ -22,16 +22,6 @@ const Component: React.FunctionComponent<Props.Notification> = ({
   /** @const Holds notifies. */
   const [notifies, setNotifies] = React.useState<Props.Notify[]>([]);
 
-  /** `componentWillMount` */
-  Hook.useWillMount(() => {
-    Manager.addNotificationListener(handleNotify);
-  });
-
-  /** `componentWillUnmount` */
-  Hook.useWillUnmount(() => {
-    Manager.removeNotificationListener(handleNotify);
-  });
-
   /** An event handler called on `notify` events. */
   const handleNotify = (notifies: Props.Notify[]) => {
     setNotifies(notifies);
@@ -41,6 +31,16 @@ const Component: React.FunctionComponent<Props.Notification> = ({
   const handleHide = (notify: Props.Notify): void => {
     Manager.remove(notify);
   };
+
+  /** `componentWillMount` */
+  Hook.useWillMount(() => {
+    Manager.addNotificationListener(handleNotify);
+  });
+
+  /** `componentWillUnmount` */
+  Hook.useWillUnmount(() => {
+    Manager.removeNotificationListener(handleNotify);
+  });
 
   return (
     <Items.WithDefaultComponent
