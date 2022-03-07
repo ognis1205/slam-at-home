@@ -13,7 +13,7 @@ import '../assets/styles/global.scss';
 
 import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCog } from '@fortawesome/free-solid-svg-icons';
+import { faCog, faInfoCircle, faInfo, faCheck } from '@fortawesome/free-solid-svg-icons';
 
 /***/
 const text = `
@@ -119,7 +119,9 @@ const SLAM: React.FC<NextApp.AppProps> = ({}) => {
               Notification.Manager.info({
                 title: 'Info',
                 message: 'Information notification message',
-                ttl: 3000,
+                ttl: 3000000,
+                showCloseButton: true,
+                icon: <FontAwesomeIcon icon={faInfoCircle} />,
               });
             }}
           >

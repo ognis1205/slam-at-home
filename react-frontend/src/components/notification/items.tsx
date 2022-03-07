@@ -21,10 +21,9 @@ const DEFAULT_PROPS: Partial<Props.Items> = {
 };
 
 /** Returns the class name of the notification. */
-const getClassName = (className: string, notifies: Props.Notify[]): string =>
-  classnames(styles['notification-container'], {
+const getClassName = (className: string): string =>
+  classnames(styles['notification'], {
     [className || '']: !!className,
-    [styles['notification-container-empty']]: notifies.length === 0,
   });
 
 /** Returns a `Item` component. */
@@ -58,7 +57,7 @@ export const Component: React.FunctionComponent<Props.Items> = ({
                 showCloseButton={notify.showCloseButton}
                 onClick={notify.onClick}
                 color={notify.color}
-                iconClassName={notify.iconClassName}
+                icon={notify.icon}
                 onHide={handleHide(notify)}
               />
             );

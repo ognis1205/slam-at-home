@@ -23,7 +23,7 @@ export type Notify = {
   title: string;
   message: string;
   ttl: number;
-  iconClassName?: string;
+  icon?: string | React.ReactNode;
   color?: string;
   showCloseButton?: boolean;
   onClick?: () => void;
@@ -41,7 +41,7 @@ export type Item = Types.Overwrite<
     title: string;
     message: string;
     ttl: number;
-    iconClassName?: string;
+    icon?: string | React.ReactNode;
     color?: string;
     showCloseButton: boolean;
     onClick: () => void;

@@ -25,14 +25,9 @@ const DEFAULT_PROPS: Partial<Props.Item> = {
 };
 
 /** Returns the class name of the notification. */
-const getClassName = (
-  className: string,
-  level: string,
-  iconClassName: string
-): string =>
-  classnames(styles['notification'], styles[`${level}`], {
+const getClassName = (className: string, level: string): string =>
+  classnames(styles['item'], styles[`${level}`], {
     [className || '']: !!className,
-    [iconClassName || '']: !!iconClassName,
   });
 
 /** Returns the style of the notification. */
@@ -46,7 +41,7 @@ export const Component: React.FunctionComponent<Props.Item> = ({
   title,
   message,
   ttl,
-  iconClassName,
+  icon,
   color,
   showCloseButton,
   onClick,
@@ -69,13 +64,18 @@ export const Component: React.FunctionComponent<Props.Item> = ({
   /** Event listener which is responsible for `onClick`. */
   const handleClick = (): void => {
     if (onClick) onClick();
-    handleHide();
+    //    handleHide();
   };
 
   /** Event listener which is responsible for `onHide`. */
   const handleHide = (): void => {
     if (onHide) onHide();
   };
+
+  /** Icon element. */
+  const iconElement = icon ? (
+    <span className={styles['icon']}>{icon}</span>
+  ) : null;
 
   /** Close button element. */
   const closeButton = showCloseButton ? (
@@ -86,21 +86,22 @@ export const Component: React.FunctionComponent<Props.Item> = ({
 
   /** Title element. */
   const titleElement = title ? (
-    <h4 className={styles['title']}>{title}</h4>
+    <h4 className={styles['title']}>
+      {title}
+      {closeButton}
+    </h4>
   ) : null;
 
   return (
     <div
       {...divAttrs}
-      className={getClassName(className, level, iconClassName)}
+      className={getClassName(className, level)}
       style={getStyle(color)}
     >
-      {closeButton}
-      <div onClick={handleClick}>
+      {iconElement}
+      <div className={styles['content']} onClick={handleClick}>
         {titleElement}
-        <div className={styles['notification-message']} role="alert">
-          <div className={styles['message']}>{message}</div>
-        </div>
+        <div className={styles['message']}>{message}</div>
       </div>
     </div>
   );
