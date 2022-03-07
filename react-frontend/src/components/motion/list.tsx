@@ -66,7 +66,9 @@ export const Component: React.FunctionComponent<Props.List> = ({
   const remove = (key: React.Key): void => {
     setKeyWithStatuses((prev) =>
       prev.map((entity) => {
-        if (entity.key !== key) return entity;
+        if (entity.key !== key) {
+          return entity;
+        }
         return {
           ...entity,
           status: Key.Status.REMOVED,

@@ -7,7 +7,7 @@ import * as Item from './item';
 import * as Props from './props';
 import * as Motion from '../motion';
 import * as Wrap from '../../utils/wrap';
-import Manager from './manager';
+import * as Manager from './manager';
 import classnames from 'classnames';
 import styles from '../../assets/styles/components/notification.module.scss';
 
@@ -46,21 +46,25 @@ export const Component: React.FunctionComponent<Props.Items> = ({
     <div {...divAttrs} className={getClassName(className, notifies)}>
       <Motion.List keys={notifies} name="notification" deadline={duration}>
         {({ key }) => {
-          const notify = Manager.find(key as string);
-          return (
-            <Item.Component
-              key={notify.key}
-              level={notify.level}
-              title={notify.title}
-              message={notify.message}
-              ttl={notify.ttl}
-              showCloseButton={notify.showCloseButton}
-              onClick={notify.onClick}
-              color={notify.color}
-              iconClassName={notify.iconClassName}
-              onHide={handleHide(notify)}
-            />
-          );
+          const notify = Manager.SHARED.find(key as string);
+          if (notify) {
+            return (
+              <Item.Component
+                key={notify.key}
+                level={notify.level}
+                title={notify.title}
+                message={notify.message}
+                ttl={notify.ttl}
+                showCloseButton={notify.showCloseButton}
+                onClick={notify.onClick}
+                color={notify.color}
+                iconClassName={notify.iconClassName}
+                onHide={handleHide(notify)}
+              />
+            );
+          } else {
+            return null;
+          }
         }}
       </Motion.List>
     </div>

@@ -4,7 +4,7 @@
  */
 import * as Events from 'events';
 import * as Props from './props';
-import { uuid } from 'uuidv4';
+import { v4 as uuid } from 'uuid';
 
 /** Responsible to create/delete notification events. */
 class Manager extends Events.EventEmitter {
@@ -37,7 +37,7 @@ class Manager extends Events.EventEmitter {
    * @param {string} key
    */
   find(key: string): Props.Notify {
-    return this.que.find((n) => key !== n.key);
+    return this.que.find((n) => key === n.key);
   }
 
   /**
@@ -116,4 +116,4 @@ class Manager extends Events.EventEmitter {
 }
 
 /** Exports singleton manager. */
-export default new Manager();
+export const SHARED = new Manager();

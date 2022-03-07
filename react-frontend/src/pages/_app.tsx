@@ -112,6 +112,20 @@ const SLAM: React.FC<NextApp.AppProps> = ({}) => {
           <li>test</li>
           <li>test</li>
         </ul>
+        <p>
+          <button
+            className="btn btn-primary"
+            onClick={() => {
+              Notification.Manager.info({
+                title: 'Info',
+                message: 'Information notification message',
+                ttl: 3000,
+              });
+            }}
+          >
+            Info
+          </button>
+        </p>
       </Pane.Right>
       <Drawer.Component width="30vh" drawPane={null}>
         <Image src="/images/logo.png" alt="SLAM@Home" width="128" height="64" />

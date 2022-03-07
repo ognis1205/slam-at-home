@@ -4,10 +4,10 @@
  */
 import * as React from 'react';
 import * as Items from './items';
+import * as Manager from './manager';
 import * as Props from './props';
 import * as Hook from '../../utils/hook';
 import * as Wrap from '../../utils/wrap';
-import Manager from './manager';
 
 /** Default properties. */
 const DEFAULT_PROPS: Partial<Props.Notification> = {
@@ -23,23 +23,23 @@ const Component: React.FunctionComponent<Props.Notification> = ({
   const [notifies, setNotifies] = React.useState<Props.Notify[]>([]);
 
   /** An event handler called on `notify` events. */
-  const handleNotify = (notifies: Props.Notify[]) => {
-    setNotifies(notifies);
+  const handleNotify = (newNotifies: Props.Notify[]): void => {
+    setNotifies([...newNotifies]);
   };
 
   /** An event handler called on `onhide` events. */
   const handleHide = (notify: Props.Notify): void => {
-    Manager.remove(notify);
+    Manager.SHARED.remove(notify);
   };
 
   /** `componentWillMount` */
   Hook.useWillMount(() => {
-    Manager.addNotificationListener(handleNotify);
+    Manager.SHARED.addNotificationListener(handleNotify);
   });
 
   /** `componentWillUnmount` */
   Hook.useWillUnmount(() => {
-    Manager.removeNotificationListener(handleNotify);
+    Manager.SHARED.removeNotificationListener(handleNotify);
   });
 
   return (
