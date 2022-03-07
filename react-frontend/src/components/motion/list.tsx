@@ -85,25 +85,27 @@ export const Component: React.FunctionComponent<Props.List> = ({
 
   return (
     <React.Fragment>
-      {keyWithStatuses.map(({ key, status, ...eventProps }) => {
-        const visible = status === Key.Status.ADD || status === Key.Status.KEEP;
-        return (
-          <Motion.Component
-            {...props}
-            key={key}
-            visible={visible}
-            eventProps={eventProps}
-            onVisibleChanged={(visible) => {
-              onVisibleChanged?.(visible, { key: key });
-              if (!visible) {
-                remove(key);
-              }
-            }}
-          >
-            {children}
-          </Motion.Component>
-        );
-      })}
+      {!!keyWithStatuses.length &&
+        keyWithStatuses.map(({ key, status, ...eventProps }) => {
+          const visible =
+            status === Key.Status.ADD || status === Key.Status.KEEP;
+          return (
+            <Motion.Component
+              {...props}
+              key={key}
+              visible={visible}
+              eventProps={{ key: key, status: status, ...eventProps }}
+              onVisibleChanged={(visible) => {
+                onVisibleChanged?.(visible, { key: key });
+                if (!visible) {
+                  remove(key);
+                }
+              }}
+            >
+              {children}
+            </Motion.Component>
+          );
+        })}
     </React.Fragment>
   );
 };
