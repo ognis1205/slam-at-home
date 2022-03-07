@@ -52,7 +52,7 @@
     height: 1.5px;
     background: $color-white;
     background-image: linear-gradient(90deg, $color-icon, $color-icon);
-    border-radius: 2px;
+    border-radius: $border-radius;
     box-sizing: border-box;
     transition: transform $duration $ease-in-out-circ;
   }

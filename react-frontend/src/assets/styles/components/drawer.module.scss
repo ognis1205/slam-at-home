@@ -95,7 +95,7 @@
   .handle {
     right: -40px;
     box-shadow: 2px 0 8px $color-shadow;
-    border-radius: 0 4px 4px 0;
+    border-radius: 0 $border-radius $border-radius 0;
   }
   &.open {
     .wrapper {
@@ -112,7 +112,7 @@
   .handle {
     left: -40px;
     box-shadow: -2px 0 8px $color-shadow;
-    border-radius: 4px 0 0 4px;
+    border-radius: $border-radius 0 0 $border-radius;
   }
   &.open {
     .wrapper {
@@ -151,7 +151,7 @@
     top: auto;
     bottom: -40px;
     box-shadow: 0 2px 8px $color-shadow;
-    border-radius: 0 0 4px 4px;
+    border-radius: 0 0 $border-radius $border-radius;
   }
   &.open {
     .wrapper {
@@ -168,7 +168,7 @@
   .handle {
     top: -40px;
     box-shadow: 0 -2px 8px $color-shadow;
-    border-radius: 4px 4px 0 0;
+    border-radius: $border-radius $border-radius 0 0;
   }
   &.open {
     .wrapper {
