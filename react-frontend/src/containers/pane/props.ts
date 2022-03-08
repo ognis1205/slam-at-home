@@ -3,16 +3,23 @@
  * @copyright Shingo OKAWA 2021
  */
 import * as Draggable from '../../components/draggable';
+import type * as Types from '../../utils/types';
 
 /** A {Left} component properties. */
-export interface Left {
-  [key: string]: unknown;
-}
+export type Left = Types.Overwrite<
+  React.HTMLAttributes<HTMLDivElement>,
+  {
+    [key: string]: unknown;
+  }
+>;
 
 /** A {Right} component properties. */
-export interface Right {
-  [key: string]: unknown;
-}
+export type Right = Types.Overwrite<
+  React.HTMLAttributes<HTMLDivElement>,
+  {
+    [key: string]: unknown;
+  }
+>;
 
 /** A {Divider} component properties. */
 export interface Divider extends Draggable.Props {
