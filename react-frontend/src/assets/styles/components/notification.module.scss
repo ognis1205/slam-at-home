@@ -35,6 +35,20 @@
   &:hover, &:focus {
     opacity: 1;
   }
+  &.info {
+    background-color: $color-theme;
+  }
+  &.success {
+    background-color: $color-green;
+  }
+  &.warning {
+    background-color: $color-orange;
+  }
+  &.error {
+    background-color: $color-red;
+  }
+  &.custom-icon {
+  }
 }
 .icon {
   color: $color-white;
@@ -71,7 +85,7 @@
       content: ' ';
       width: 2px;
       height: 17px;
-      background-color: $color-grey-middle;
+      background-color: $color-grey-dark;
     }
     &:before {
       transform: rotate(45deg);
