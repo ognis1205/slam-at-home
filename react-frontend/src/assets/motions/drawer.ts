@@ -21,8 +21,8 @@ const getCurrentHeight: Motion.StartEventHandler = (node) => ({
   height: node.offsetHeight,
 });
 
-/** Skips opacity transition. */
-const skipOpacityTransition: Motion.DoneEventHandler = (_, event) =>
+/** Sets transition property. */
+const setTransitionProperty: Motion.DoneEventHandler = (_, event) =>
   (event as TransitionEvent).propertyName === 'height';
 
 /** Motion for drawer collapse. */
@@ -30,9 +30,9 @@ export default {
   name: 'motion',
   onEnterStart: getCollapsedHeight,
   onEnterActive: getRealHeight,
-  onEnterDone: skipOpacityTransition,
+  onEnterDone: setTransitionProperty,
   onExitStart: getCurrentHeight,
   onExitActive: getCollapsedHeight,
-  onExitDone: skipOpacityTransition,
+  onExitDone: setTransitionProperty,
   deadline: 500,
 } as Motion.Props;

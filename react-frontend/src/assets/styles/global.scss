@@ -24,6 +24,7 @@ html, body {
   * {
       transition: //color $duration $ease-in-out-circ,
 		  height $duration $ease-in-out-circ,
+		  transform $duration $ease-in-out-circ,
 		  border-color $duration $ease-in-out-circ,
 		  background $duration $ease-in-out-circ,
 		  padding $duration $ease-in-out-circ;
