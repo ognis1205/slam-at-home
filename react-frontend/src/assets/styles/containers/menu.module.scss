@@ -5,9 +5,18 @@
 @import '../constants.scss';
 
 .header {
+  z-index: 9999;
   overflow: hidden;
-  background-color: $color-theme;
-  position: fixed;
   top: 0;
+  background-color: $color-theme;
+  display: flex;
+  align-items : center;
+  justify-content: center;
+  position: sticky;
   width: 100%;
+}
+.title {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: $color-white;
 }
