@@ -1,0 +1,13 @@
+/**
+ * @fileoverview SCSS Module for {Menu} containers.
+ * @copyright Shingo OKAWA 2021
+ */
+@import '../constants.scss';
+
+.header {
+  overflow: hidden;
+  background-color: $color-theme;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
