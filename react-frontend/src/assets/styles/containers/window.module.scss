@@ -1,0 +1,17 @@
+/**
+ * @fileoverview SCSS Module for {Window} containers.
+ * @copyright Shingo OKAWA 2022
+ */
+@import '../constants.scss';
+
+.window {
+  height: calc(100% - 40px);
+  margin-left: 0px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-right: 20px;
+  background: $color-white;
+  border-radius: $border-radius;
+  overflow: hidden;
+  box-shadow: 0 1px 5px 0 $color-shadow;
+}
