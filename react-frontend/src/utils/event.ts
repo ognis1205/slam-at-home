@@ -55,7 +55,7 @@ export const supportTransition = (): boolean =>
 
 /** Assigns a given event handler to a specified DOM. */
 export const addListener = (
-  target: Node,
+  target: Node | typeof window,
   event: string,
   handler: (e: React.TouchEvent | TouchEvent | Event) => void,
   options?: boolean | EventListenerOptions
@@ -73,7 +73,7 @@ export const addListener = (
 
 /** Removes a given event handler from a apecified DOM. */
 export const removeListener = (
-  target: Node,
+  target: Node | typeof window,
   event: string,
   handler: (e: React.TouchEvent | TouchEvent | Event) => void,
   options?: boolean | EventListenerOptions
