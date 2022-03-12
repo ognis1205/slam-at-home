@@ -4,8 +4,10 @@
  */
 import * as React from 'react';
 import * as Props from './props';
+import * as FAUtil from '../../utils/fontawesome';
 import * as Hook from '../../utils/hook';
 import * as Wrap from '../../utils/wrap';
+import * as FontAwesome from '@fortawesome/react-fontawesome';
 import classnames from 'classnames';
 import styles from '../../assets/styles/components/notification.module.scss';
 
@@ -30,10 +32,6 @@ const getClassName = (className: string, level: string): string =>
     [className || '']: !!className,
   });
 
-/** Returns the style of the notification. */
-const getStyle = (color: string) =>
-  'custom' && color ? { backgroundColor: color } : null;
-
 /** Returns a `Item` component. */
 export const Component: React.FunctionComponent<Props.Item> = ({
   className,
@@ -42,10 +40,10 @@ export const Component: React.FunctionComponent<Props.Item> = ({
   message,
   ttl,
   icon,
-  color,
   showCloseButton,
   onClick,
   onHide,
+  style,
   ...divAttrs
 }: Props.Item): React.ReactElement => {
   /** @const Holds a motion effect. */
@@ -53,7 +51,9 @@ export const Component: React.FunctionComponent<Props.Item> = ({
 
   /** `componentDidMount` */
   Hook.useDidMount(() => {
-    if (ttl !== 0) timeout.current = setTimeout(handleHide, ttl);
+    if (ttl !== 0) {
+      timeout.current = setTimeout(handleHide, ttl);
+    }
   });
 
   /** `componentWillUnmount` */
@@ -64,7 +64,6 @@ export const Component: React.FunctionComponent<Props.Item> = ({
   /** Event listener which is responsible for `onClick`. */
   const handleClick = (): void => {
     if (onClick) onClick();
-    //    handleHide();
   };
 
   /** Event listener which is responsible for `onHide`. */
@@ -73,9 +72,13 @@ export const Component: React.FunctionComponent<Props.Item> = ({
   };
 
   /** Icon element. */
-  const iconElement = icon ? (
+  const iconElement = FAUtil.isProps(icon) ? (
+    <span className={styles['icon']}>
+      <FontAwesome.FontAwesomeIcon icon={icon} />
+    </span>
+  ) : (
     <span className={styles['icon']}>{icon}</span>
-  ) : null;
+  );
 
   /** Close button element. */
   const closeButton = showCloseButton ? (
@@ -96,7 +99,7 @@ export const Component: React.FunctionComponent<Props.Item> = ({
     <div
       {...divAttrs}
       className={getClassName(className, level)}
-      style={getStyle(color)}
+      style={style}
     >
       {iconElement}
       <div className={styles['content']} onClick={handleClick}>

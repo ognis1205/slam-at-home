@@ -6,6 +6,7 @@ import * as React from 'react';
 import * as Props from './props';
 import * as Draggable from '../../components/draggable';
 import * as DOM from '../../utils/dom';
+import * as Event from '../../utils/event';
 import * as Hook from '../../utils/hook';
 import * as Position from '../../utils/position';
 import * as Wrap from '../../utils/wrap';
@@ -15,9 +16,10 @@ import styles from '../../assets/styles/containers/pane.module.scss';
 /** Default properties. */
 const DEFAULT_PROPS = {
   axis: 'x',
-  defaultPosition: { x: 200, y: 0 },
-  leftmost: 200,
-  rightmost: 200,
+  defaultPosition: { x: 250, y: 0 },
+  width: 10,
+  leftmost: 250,
+  rightmost: 250,
 };
 
 /** Returns the class name of the wrapper. */
@@ -96,9 +98,16 @@ export const Component: React.FunctionComponent<Props.Divider> = (
     init();
   });
 
+  /** `componentWillUnmount` */
+  Hook.useWillUnmount(() => {
+    if (!DOM.isDefined()) return;
+    Event.removeListener(window, 'resize', resize);
+  });
+
   /** Inits drawer item HTML elements. */
   const init = (): void => {
     if (!DOM.isDefined()) return;
+    Event.addListener(window, 'resize', resize);
     panes.current = {
       l: DOM.get(styles['left']),
       r: DOM.get(styles['right']),
@@ -112,8 +121,8 @@ export const Component: React.FunctionComponent<Props.Divider> = (
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [width, height] = DOM.getWindowSize();
     left.style.width = `${position.x}px`;
-    right.style.left = `${position.x + 10}px`;
-    right.style.width = `${width - position.x - 10}px`;
+    right.style.left = `${position.x + props.width}px`;
+    right.style.width = `${width - position.x - props.width}px`;
   };
 
   /** An event handler called on `start` events. */

@@ -17,6 +17,7 @@ const DEFAULT_PROPS: Partial<Props.Notification> = {
 /** Returns a `Notification` component. */
 const Component: React.FunctionComponent<Props.Notification> = ({
   duration,
+  motion,
   ...divAttrs
 }: Props.Notification): React.ReactElement => {
   /** @const Holds notifies. */
@@ -46,6 +47,7 @@ const Component: React.FunctionComponent<Props.Notification> = ({
     <Items.WithDefaultComponent
       {...divAttrs}
       duration={duration}
+      motion={motion}
       notifies={notifies}
       onHide={handleHide}
     />

@@ -7,11 +7,14 @@ import * as NextApp from 'next/app';
 import Head from 'next/head';
 import * as Drawer from '../components/drawer';
 import * as Collapse from '../components/collapse';
-import * as Notification from '../components/notification';
 import * as Pane from '../containers/pane';
+import * as Menu from '../containers/menu';
+import * as Notification from '../containers/notification';
+import * as Window from '../containers/window';
+import DrawerMotion from '../assets/motions/drawer';
+import NotificationMotion from '../assets/motions/notification';
+import * as DOM from '../utils/dom';
 import '../assets/styles/global.scss';
-
-import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCog, faInfoCircle, faInfo, faCheck } from '@fortawesome/free-solid-svg-icons';
 
@@ -24,6 +27,25 @@ content content content content content
 content content content content content
 `;
 
+const Test: React.FunctionComponent = (): React.ReactElement => (
+  <p>
+    <button
+      className="btn btn-primary"
+      onClick={() => {
+        Notification.Manager.info({
+          title: 'Info',
+          message: 'Information notification message',
+          ttl: 3000,
+          showCloseButton: true,
+          icon: faInfoCircle,
+        });
+      }}
+    >
+      Info
+    </button>
+  </p>
+);
+
 /***/
 const SLAM: React.FC<NextApp.AppProps> = ({}) => {
   /** @const */
@@ -31,6 +53,10 @@ const SLAM: React.FC<NextApp.AppProps> = ({}) => {
 
   /** @const */
   const [activeKey, setActiveKey] = React.useState<string[] | string>(['4']);
+
+  const onCollapse = () => {
+    return { height: 0 };
+  };
 
   /** @const */
   const getItems = (): React.ReactElement[] => {
@@ -40,7 +66,7 @@ const SLAM: React.FC<NextApp.AppProps> = ({}) => {
       items.push(
         <Collapse.Panel
           header={`HEADER ${key}`}
-          icon={<FontAwesomeIcon icon={faCog} />}
+          icon={faCog}
           key={key}
         >
           <p>
@@ -84,7 +110,7 @@ const SLAM: React.FC<NextApp.AppProps> = ({}) => {
           content="minimum-scale=1, initial-scale=1, width=device-width"
         />
       </Head>
-      <Pane.Left>
+      <Pane.Left width="250px">
         <ul>
           <li>test</li>
           <li>test</li>
@@ -100,46 +126,22 @@ const SLAM: React.FC<NextApp.AppProps> = ({}) => {
       </Pane.Left>
       <Pane.Divider />
       <Pane.Right>
-        <ul>
-          <li>test</li>
-          <li>test</li>
-          <li>test</li>
-          <li>test</li>
-          <li>test</li>
-          <li>test</li>
-          <li>test</li>
-          <li>test</li>
-          <li>test</li>
-          <li>test</li>
-        </ul>
-        <p>
-          <button
-            className="btn btn-primary"
-            onClick={() => {
-              Notification.Manager.info({
-                title: 'Info',
-                message: 'Information notification message',
-                ttl: 3000000,
-                showCloseButton: true,
-                icon: <FontAwesomeIcon icon={faInfoCircle} />,
-              });
-            }}
-          >
-            Info
-          </button>
-        </p>
+        <Window.Component>
+          <Test />
+        </Window.Component>
       </Pane.Right>
-      <Drawer.Component width="30vh" drawPane={null}>
-        <Image src="/images/logo.png" alt="SLAM@Home" width="128" height="64" />
+      <Drawer.Component width="250px" drawPane={null}>
+        <Menu.Header />
         <Collapse.Wrapper
           accordion={accordion}
           onChange={handleChange}
           activeKey={activeKey}
+          motion={DrawerMotion}
         >
           {getItems()}
         </Collapse.Wrapper>
       </Drawer.Component>
-      <Notification.Component />
+      <Notification.Component duration={1000} motion={NotificationMotion} />
     </React.Fragment>
   );
 };

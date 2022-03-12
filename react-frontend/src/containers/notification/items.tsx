@@ -5,9 +5,8 @@
 import * as React from 'react';
 import * as Item from './item';
 import * as Props from './props';
-import * as Motion from '../motion';
+import * as Motion from '../../components/motion';
 import * as Wrap from '../../utils/wrap';
-import * as Manager from './manager';
 import classnames from 'classnames';
 import styles from '../../assets/styles/components/notification.module.scss';
 
@@ -32,6 +31,7 @@ export const Component: React.FunctionComponent<Props.Items> = ({
   notifies,
   duration,
   onHide,
+  motion,
   ...divAttrs
 }: Props.Items): React.ReactElement => {
   /** Event listener which is responsible for `onHide`. */
@@ -42,28 +42,30 @@ export const Component: React.FunctionComponent<Props.Items> = ({
   };
 
   return (
-    <div {...divAttrs} className={getClassName(className, notifies)}>
-      <Motion.List keys={notifies} name="notification" deadline={duration}>
-        {({ key }) => {
-          const notify = Manager.SHARED.find(key as string);
-          if (notify) {
-            return (
-              <Item.Component
-                key={notify.key}
-                level={notify.level}
-                title={notify.title}
-                message={notify.message}
-                ttl={notify.ttl}
-                showCloseButton={notify.showCloseButton}
-                onClick={notify.onClick}
-                color={notify.color}
-                icon={notify.icon}
-                onHide={handleHide(notify)}
-              />
-            );
-          } else {
-            return null;
-          }
+    <div {...divAttrs} className={getClassName(className)}>
+      <Motion.List
+        {...motion}
+        keys={notifies}
+        name="notification"
+        deadline={duration}
+      >
+        {(notify) => {
+          return (
+            <Item.Component
+              className={notify.className}
+              key={notify.key}
+              level={notify.level}
+              title={notify.title}
+              message={notify.message}
+              ttl={notify.ttl}
+              showCloseButton={notify.showCloseButton}
+              onClick={notify.onClick}
+              color={notify.color}
+              icon={notify.icon}
+              onHide={handleHide(notify)}
+              style={notify.style}
+            />
+          );
         }}
       </Motion.List>
     </div>

@@ -23,6 +23,7 @@ export type Right = Types.Overwrite<
 
 /** A {Divider} component properties. */
 export interface Divider extends Draggable.Props {
+  width: number;
   leftmost: number;
   rightmost: number;
 }

@@ -3,7 +3,9 @@
  * @copyright Shingo OKAWA 2022
  */
 import type * as React from 'react';
+import type * as Motion from '../motion';
 import type * as Types from '../../utils/types';
+import * as FontAwesome from '@fortawesome/react-fontawesome';
 
 /** A type union of notification level properties. */
 export const Level = {
@@ -23,8 +25,7 @@ export type Notify = {
   title: string;
   message: string;
   ttl: number;
-  icon?: string | React.ReactNode;
-  color?: string;
+  icon?: string | React.ReactNode | FontAwesome.Props;
   showCloseButton?: boolean;
   onClick?: () => void;
   onHide?: () => void;
@@ -41,11 +42,11 @@ export type Item = Types.Overwrite<
     title: string;
     message: string;
     ttl: number;
-    icon?: string | React.ReactNode;
-    color?: string;
+    icon?: string | React.ReactNode | FontAwesome.Props;
     showCloseButton: boolean;
     onClick: () => void;
     onHide: () => void;
+    style?: React.CSSProperties;
   }
 >;
 
@@ -56,6 +57,7 @@ export type Items = Types.Overwrite<
     notifies: Notify[];
     onHide: (notify: Notify) => void;
     duration: number;
+    motion?: Motion.Props;
   }
 >;
 
@@ -64,5 +66,6 @@ export type Notification = Types.Overwrite<
   React.HTMLAttributes<HTMLDivElement>,
   {
     duration: number;
+    motion?: Motion.Props;
   }
 >;
