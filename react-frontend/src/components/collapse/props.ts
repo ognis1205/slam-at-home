@@ -5,6 +5,7 @@
 import type * as React from 'react';
 import type * as Motion from '../motion';
 import type * as Types from '../../utils/types';
+import * as FontAwesome from '@fortawesome/react-fontawesome';
 
 /** Defines collapsible types. */
 export type CollapsibleType = 'header' | 'disabled';
@@ -23,7 +24,7 @@ export interface Header extends Common {
   collapsible?: CollapsibleType;
   accordion?: boolean;
   arrow?: (props: Header) => React.ReactNode;
-  icon?: string | React.ReactNode;
+  icon?: string | React.ReactNode | FontAwesome.Props;
 }
 
 /** Defines {Panel.Content} properties. */
@@ -42,6 +43,7 @@ export type Panel = Types.Overwrite<
     children?: React.ReactNode;
     header?: string | React.ReactNode;
     headerClassName?: string;
+//    icon?: string | React.ReactNode | FontAwesome.Props;
     motion?: Motion.Props;
     destroyInactivePanel?: boolean;
   }

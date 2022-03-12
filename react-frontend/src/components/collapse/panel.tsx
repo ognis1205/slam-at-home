@@ -4,7 +4,9 @@
  */
 import * as React from 'react';
 import * as Props from './props';
+import * as FAUtil from '../../utils/fontawesome';
 import * as Motion from '../motion';
+import * as FontAwesome from '@fortawesome/react-fontawesome';
 import classnames from 'classnames';
 import styles from '../../assets/styles/components/collapse.module.scss';
 
@@ -54,9 +56,18 @@ const Header: React.FunctionComponent<
     headerProps.tabIndex = props.collapsible === 'disabled' ? -1 : 0;
   }
 
+  /** Icon element. */
+  const iconElement = FAUtil.isProps(props.icon) ? (
+    <span className={styles['icon']}>
+      <FontAwesome.FontAwesomeIcon icon={props.icon} />
+    </span>
+  ) : (
+    <span className={styles['icon']}>{props.icon}</span>
+  );
+
   return (
     <div {...headerProps}>
-      {props.icon && <span className={styles['icon']}>{props.icon}</span>}
+      {iconElement}
       {props.collapsible ? (
         <span onClick={handleClick} className={styles['text']}>
           {props.children}
