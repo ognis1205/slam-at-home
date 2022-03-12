@@ -12,23 +12,23 @@ const MOTION_PROP_KEYS = [
   'eventProps',
   'visible',
   'children',
-  'motionName',
-  'motionAppear',
-  'motionEnter',
-  'motionLeave',
-  'motionLeaveImmediately',
-  'motionDeadline',
-  'removeOnLeave',
-  'leavedClassName',
+  'name',
+  'appear',
+  'enter',
+  'exit',
+  'exitImmediately',
+  'deadline',
+  'removeOnExit',
+  'exitedClassName',
   'onAppearStart',
   'onAppearActive',
-  'onAppearEnd',
+  'onAppearDone',
   'onEnterStart',
   'onEnterActive',
-  'onEnterEnd',
-  'onLeaveStart',
-  'onLeaveActive',
-  'onLeaveEnd',
+  'onEnterDone',
+  'onExitStart',
+  'onExitActive',
+  'onExitDone',
 ];
 
 /** Defines {List} components. */
@@ -66,9 +66,7 @@ export const Component: React.FunctionComponent<Props.List> = ({
   const remove = (key: React.Key): void => {
     setKeyWithStatuses((prev) =>
       prev.map((entity) => {
-        if (entity.key !== key) {
-          return entity;
-        }
+        if (entity.key !== key) return entity;
         return {
           ...entity,
           status: Key.Status.REMOVED,
@@ -80,27 +78,31 @@ export const Component: React.FunctionComponent<Props.List> = ({
   /** Holds motions properties. */
   const props: Props.Motion = {};
 
+  // TODO: refactor this.
   MOTION_PROP_KEYS.forEach((key) => {
-    props[key] = rest[key];
-    delete rest[key];
+    if (rest[key]) {
+      props[key] = rest[key];
+      delete rest[key];
+    }
   });
 
   return (
     <React.Fragment>
       {!!keyWithStatuses.length &&
-        keyWithStatuses.map(({ key, status, ...eventProps }) => {
+        keyWithStatuses.map((entity) => {
           const visible =
-            status === Key.Status.ADD || status === Key.Status.KEEP;
+            entity.status === Key.Status.ADD ||
+            entity.status === Key.Status.KEEP;
           return (
             <Motion.Component
               {...props}
-              key={key}
+              key={entity.key}
               visible={visible}
-              eventProps={{ key: key, status: status, ...eventProps }}
+              eventProps={entity}
               onVisibleChanged={(visible) => {
-                onVisibleChanged?.(visible, { key: key });
+                onVisibleChanged?.(visible, { key: entity.key });
                 if (!visible) {
-                  remove(key);
+                  remove(entity.key);
                 }
               }}
             >

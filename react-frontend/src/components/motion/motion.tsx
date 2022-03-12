@@ -108,7 +108,7 @@ const configure = (
       }, []);
 
       let motion: React.ReactNode;
-      const context = { visible, ...eventProps };
+      const context = { visible, ...eventProps, ...rest };
       if (!children) {
         motion = null as React.ReactNode;
       } else if (status === Stage.Status.None || !transitionIsDefined(name)) {
