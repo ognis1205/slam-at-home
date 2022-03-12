@@ -7,30 +7,6 @@ import * as Props from './props';
 import * as Motion from './motion';
 import * as Key from '../../utils/key';
 
-/** Target motion properties. */
-const MOTION_PROP_KEYS = [
-  'eventProps',
-  'visible',
-  'children',
-  'name',
-  'appear',
-  'enter',
-  'exit',
-  'exitImmediately',
-  'deadline',
-  'removeOnExit',
-  'exitedClassName',
-  'onAppearStart',
-  'onAppearActive',
-  'onAppearDone',
-  'onEnterStart',
-  'onEnterActive',
-  'onEnterDone',
-  'onExitStart',
-  'onExitActive',
-  'onExitDone',
-];
-
 /** Defines {List} components. */
 export const Component: React.FunctionComponent<Props.List> = ({
   keys,
@@ -75,17 +51,6 @@ export const Component: React.FunctionComponent<Props.List> = ({
     );
   };
 
-  /** Holds motions properties. */
-  const props: Props.Motion = {};
-
-  // TODO: refactor this.
-  MOTION_PROP_KEYS.forEach((key) => {
-    if (rest[key]) {
-      props[key] = rest[key];
-      delete rest[key];
-    }
-  });
-
   return (
     <React.Fragment>
       {!!keyWithStatuses.length &&
@@ -95,7 +60,7 @@ export const Component: React.FunctionComponent<Props.List> = ({
             entity.status === Key.Status.KEEP;
           return (
             <Motion.Component
-              {...props}
+              {...(rest as Motion.Props)}
               key={entity.key}
               visible={visible}
               eventProps={entity}
