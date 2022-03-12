@@ -15,3 +15,30 @@
   overflow: hidden;
   box-shadow: 0 1px 5px 0 $color-shadow;
 }
+.controller {
+//  background-color: $color-theme;
+//  background-color: $color-grey-dark;
+  border-bottom: 1px solid $color-border;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow: hidden;
+  display: block;
+  clear: both;
+}
+.button {
+  color: $color-icon;
+  float: left;
+  display: inline-block;
+  margin-left: 10px;
+  margin-right: 10px;
+  font-size: 20px;
+  opacity: 0.3;
+  &:hover {
+    color: $font-color-highlight;
+//    color: $color-theme;
+    opacity: 1;
+  }
+}
+#size-button {
+  float: right;
+}
