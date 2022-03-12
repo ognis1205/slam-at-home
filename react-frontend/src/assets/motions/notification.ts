@@ -6,12 +6,12 @@ import * as Motion from '../../components/motion';
 
 /** Returns x-translation to hide. */
 const hideX: Motion.StartEventHandler = () => ({
-  transform: `translate3d(100%, 0, 0)`,
+  transform: 'translate3d(100%, 0, 0)',
 });
 
 /* Returns x-transition to show. **/
 const showX: Motion.ActiveEventHandler = (node) => ({
-  transform: `translate3d(0, 0, 0)`,
+  transform: 'translate3d(0, 0, 0)',
 });
 
 /** Sets transition property. */
@@ -20,10 +20,10 @@ const setTransitionProperty: Motion.DoneEventHandler = (_, event) =>
 
 /** Motion for notification collapse. */
 export default {
-  name: 'motion',
-  onEnterStart: hideX,
-  onEnterActive: showX,
-  onEnterDone: setTransitionProperty,
+  name: 'notification',
+  onAppearStart: hideX,
+  onAppearActive: showX,
+  onAppearDone: setTransitionProperty,
   onExitStart: showX,
   onExitActive: hideX,
   onExitDone: setTransitionProperty,

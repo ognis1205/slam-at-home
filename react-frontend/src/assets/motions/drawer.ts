@@ -27,7 +27,7 @@ const setTransitionProperty: Motion.DoneEventHandler = (_, event) =>
 
 /** Motion for drawer collapse. */
 export default {
-  name: 'motion',
+  name: 'drawer',
   onEnterStart: getCollapsedHeight,
   onEnterActive: getRealHeight,
   onEnterDone: setTransitionProperty,
