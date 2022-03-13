@@ -7,6 +7,9 @@ import type * as Motion from '../motion';
 import type * as Types from '../../utils/types';
 import * as FontAwesome from '@fortawesome/react-fontawesome';
 
+/** A type union of CSS position properties. */
+export type Placement = 'left' | 'right';
+
 /** A type union of notification level properties. */
 export const Level = {
   INFO: 'info',
@@ -57,6 +60,7 @@ export type Items = Types.Overwrite<
     notifies: Notify[];
     onHide: (notify: Notify) => void;
     duration: number;
+    placement: Placement;
     motion?: Motion.Props;
   }
 >;
@@ -66,6 +70,7 @@ export type Notification = Types.Overwrite<
   React.HTMLAttributes<HTMLDivElement>,
   {
     duration: number;
+    placement: Placement;
     motion?: Motion.Props;
   }
 >;

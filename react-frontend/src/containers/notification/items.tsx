@@ -8,7 +8,7 @@ import * as Props from './props';
 import * as Motion from '../../components/motion';
 import * as Wrap from '../../utils/wrap';
 import classnames from 'classnames';
-import styles from '../../assets/styles/components/notification.module.scss';
+import styles from '../../assets/styles/containers/notification.module.scss';
 
 /** Default properties. */
 const DEFAULT_PROPS: Partial<Props.Items> = {
@@ -17,11 +17,12 @@ const DEFAULT_PROPS: Partial<Props.Items> = {
     // Do nothing.
   },
   duration: 400,
+  placement: 'right',
 };
 
 /** Returns the class name of the notification. */
-const getClassName = (className: string): string =>
-  classnames(styles['notification'], {
+const getClassName = (className: string, placement: Props.Placement): string =>
+  classnames(styles['notification'], styles[placement], {
     [className || '']: !!className,
   });
 
@@ -31,6 +32,7 @@ export const Component: React.FunctionComponent<Props.Items> = ({
   notifies,
   duration,
   onHide,
+  placement,
   motion,
   ...divAttrs
 }: Props.Items): React.ReactElement => {
@@ -42,7 +44,7 @@ export const Component: React.FunctionComponent<Props.Items> = ({
   };
 
   return (
-    <div {...divAttrs} className={getClassName(className)}>
+    <div {...divAttrs} className={getClassName(className, placement)}>
       <Motion.List
         {...motion}
         keys={notifies}

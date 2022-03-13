@@ -34,13 +34,6 @@ class Manager extends Events.EventEmitter {
   }
 
   /**
-   * @param {string} key
-   */
-  find(key: string): Props.Notify {
-    return this.que.find((n) => key === n.key);
-  }
-
-  /**
    * @param {Props.Notify} notify
    */
   remove(notify: Props.Notify): void {
