@@ -6,7 +6,10 @@ import * as React from 'react';
 import * as Item from './item';
 import * as Props from './props';
 import * as Motion from '../../components/motion';
+import * as Notifications from '../../redux/modules/notifications';
 import * as Wrap from '../../utils/wrap';
+import * as FontAwesome from '@fortawesome/react-fontawesome';
+import * as FontAwesomeIcon from '@fortawesome/free-solid-svg-icons';
 import classnames from 'classnames';
 import styles from '../../assets/styles/containers/notification.module.scss';
 
@@ -25,6 +28,23 @@ const getClassName = (className: string, placement: Props.Placement): string =>
   classnames(styles['notification'], styles[placement], {
     [className || '']: !!className,
   });
+
+/** Returns the corresponding FontAwesome icon. */
+const getIcon = (level: Notifications.Level): FontAwesome.Props => {
+  switch (level) {
+    case Notifications.Level.INFO:
+      return FontAwesomeIcon.faInfoCircle;
+    case Notifications.Level.SUCCESS:
+      return FontAwesomeIcon.faCheckCircle;
+    case Notifications.Level.WARNING:
+      return FontAwesomeIcon.faExclamationCircle;
+    case Notifications.Level.ERROR:
+      return FontAwesomeIcon.faExclamationTriangle;
+    case Notifications.Level.CUSTOM:
+    default:
+      return FontAwesomeIcon.faInfoCircle;
+  }
+};
 
 /** Returns a `Item` component. */
 export const Component: React.FunctionComponent<Props.Items> = ({
@@ -62,8 +82,7 @@ export const Component: React.FunctionComponent<Props.Items> = ({
               ttl={notify.ttl}
               showCloseButton={notify.showCloseButton}
               onClick={notify.onClick}
-              color={notify.color}
-              icon={notify.icon}
+              icon={getIcon(notify.level)}
               onHide={handleHide(notify)}
               style={notify.style}
             />

@@ -4,6 +4,7 @@
  */
 import type * as React from 'react';
 import type * as Motion from '../motion';
+import * as Notifications from '../redux/modules/notifications';
 import type * as Types from '../../utils/types';
 import * as FontAwesome from '@fortawesome/react-fontawesome';
 
@@ -18,24 +19,6 @@ export const Level = {
   ERROR: 'error',
   CUSTOM: 'custom',
 } as const;
-
-export type Level = typeof Level[keyof typeof Level];
-
-/** A {Notify} context. */
-export type Notify = {
-  key: string;
-  level: Level;
-  title: string;
-  message: string;
-  ttl: number;
-  icon?: string | React.ReactNode | FontAwesome.Props;
-  showCloseButton?: boolean;
-  onClick?: () => void;
-  onHide?: () => void;
-};
-
-/** Notified event. */
-export const NotifiedEvent = 'notified' as const;
 
 /** A {Item} component properties. */
 export type Item = Types.Overwrite<
@@ -57,8 +40,8 @@ export type Item = Types.Overwrite<
 export type Items = Types.Overwrite<
   React.HTMLAttributes<HTMLDivElement>,
   {
-    notifies: Notify[];
-    onHide: (notify: Notify) => void;
+    notifies: Notifications.Item[];
+    onHide: (notify: Notifications.Item) => void;
     duration: number;
     placement: Placement;
     motion?: Motion.Props;
