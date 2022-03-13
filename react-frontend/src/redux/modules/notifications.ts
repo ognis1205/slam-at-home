@@ -4,38 +4,42 @@
  */
 import * as FSA from 'typescript-fsa';
 import actionCreatorFactory from 'typescript-fsa';
+import { v4 as uuid } from 'uuid';
+
+/** Action suffix. */
+const SUFFIX = 'notifications';
 
 /** Action type for INFO. */
-const INFO = 'info';
+const INFO = `${SUFFIX}/info`;
 
 /** Action type for SUCCESS. */
-const SUCCESS = 'success';
+const SUCCESS = `${SUFFIX}/success`;
 
 /** Action type for WARNING. */
-const WARNING = 'warning';
+const WARNING = `${SUFFIX}/warning`;
 
 /** Action type for ERROR. */
-const ERROR = 'error';
+const ERROR = `${SUFFIX}/error`;
 
 /** Action type for CUSTOM. */
-const CUSTOM = 'custom';
+const CUSTOM = `${SUFFIX}/custom`;
 
 /** Action type for REMOVE. */
-const REMOVE = 'remove';
+const REMOVE = `${SUFFIX}/remove`;
 
 /** A type union of notification level properties. */
 export const Level = {
-  INFO: INFO,
-  SUCCESS: SUCCESS,
-  WARNING: WARNING,
-  ERROR: ERROR,
-  CUSTOM: CUSTOM,
+  INFO: 'info',
+  SUCCESS: 'success',
+  WARNING: 'warning',
+  ERROR: 'error',
+  CUSTOM: 'custom',
 } as const;
 
 export type Level = typeof Level[keyof typeof Level];
 
-/** A {Notification} context. */
-export type Notification = {
+/** A notification {Item}. */
+export type Item = {
   key: string;
   level: Level;
   title: string;
@@ -51,102 +55,66 @@ export type Notification = {
 const ACTION_CREATER = actionCreatorFactory();
 
 /** INFO action creator. */
-const INFO_ACTION = ACTION_CREATER<Notification>(INFO);
+const INFO_ACTION = ACTION_CREATER<Item>(INFO);
 
 /** SUCCESS action creator. */
-const SUCCESS_ACTION = ACTION_CREATER<Notification>(SUCCESS);
+const SUCCESS_ACTION = ACTION_CREATER<Item>(SUCCESS);
 
 /** WARNING action creator. */
-const WARNING_ACTION = ACTION_CREATER<Notification>(WARNING);
+const WARNING_ACTION = ACTION_CREATER<Item>(WARNING);
 
 /** ERROR action creator. */
-const ERROR_ACTION = ACTION_CREATER<Notification>(ERROR);
+const ERROR_ACTION = ACTION_CREATER<Item>(ERROR);
 
 /** CUSTOM action creator. */
-const CUSTOM_ACTION = ACTION_CREATER<Notification>(CUSTOM);
+const CUSTOM_ACTION = ACTION_CREATER<Item>(CUSTOM);
 
 /** REMOVE action creator. */
 const REMOVE_ACTION = ACTION_CREATER<string>(REMOVE);
 
-/** INFO action. */
-export const info = (
-  key: string,
-  title: string,
-  message: string,
-  ttl: number
-): FSA.Action<Notification> => {
-  return INFO_ACTION({
-    key: key,
-    level: Level.INFO,
-    title: title,
-    message: message,
-    ttl: ttl,
-  } as Notification);
+/** Returns new payload. */
+const newPayload = (options: Partial<Item>, level: Level): Item => {
+  const notify = {
+    key: uuid(),
+    level: level,
+    title: null,
+    message: null,
+    ttl: 5000,
+  } as Item;
+  return Object.assign(notify, options);
 };
+
+/** Parses a given message. */
+const parse = (maybeOptions: string | Partial<Item>): Partial<Item> => {
+  if (typeof maybeOptions === 'string') return { message: maybeOptions };
+  else return maybeOptions;
+};
+
+/** INFO action. */
+export const info = (maybeOptions: string | Partial<Item>): FSA.Action<Item> =>
+  INFO_ACTION(newPayload(parse(maybeOptions), Level.INFO));
 
 /** SUCCESS action. */
 export const success = (
-  key: string,
-  title: string,
-  message: string,
-  ttl: number
-): FSA.Action<Notification> => {
-  return SUCCESS_ACTION({
-    key: key,
-    level: Level.SUCCESS,
-    title: title,
-    message: message,
-    ttl: ttl,
-  } as Notification);
-};
+  maybeOptions: string | Partial<Item>
+): FSA.Action<Item> =>
+  SUCCESS_ACTION(newPayload(parse(maybeOptions), Level.SUCCESS));
 
 /** WARNING action. */
 export const warning = (
-  key: string,
-  title: string,
-  message: string,
-  ttl: number
-): FSA.Action<Notification> => {
-  return WARNING_ACTION({
-    key: key,
-    level: Level.WARNING,
-    title: title,
-    message: message,
-    ttl: ttl,
-  } as Notification);
-};
+  maybeOptions: string | Partial<Item>
+): FSA.Action<Item> =>
+  WARNING_ACTION(newPayload(parse(maybeOptions), Level.WARNING));
 
 /** ERROR action. */
-export const error = (
-  key: string,
-  title: string,
-  message: string,
-  ttl: number
-): FSA.Action<Notification> => {
-  return ERROR_ACTION({
-    key: key,
-    level: Level.ERROR,
-    title: title,
-    message: message,
-    ttl: ttl,
-  } as Notification);
-};
+export const error = (maybeOptions: string | Partial<Item>): FSA.Action<Item> =>
+  ERROR_ACTION(newPayload(parse(maybeOptions), Level.ERROR));
 
 /** CUSTOM action. */
 export const custom = (
-  key: string,
-  title: string,
-  message: string,
-  ttl: number
-): FSA.Action<Notification> => {
-  return CUSTOM_ACTION({
-    key: key,
-    level: Level.CUSTOM,
-    title: title,
-    message: message,
-    ttl: ttl,
-  } as Notification);
-};
+  maybeOptions: string | Partial<Item>
+): FSA.Action<Item> =>
+  CUSTOM_ACTION(newPayload(parse(maybeOptions), Level.CUSTOM));
 
 /** REMOVE action. */
 export const remove = (key: string): FSA.Action<string> => {
@@ -155,7 +123,7 @@ export const remove = (key: string): FSA.Action<string> => {
 
 /** A {State} type. */
 export type State = {
-  list: Notification[];
+  list: Item[];
 };
 
 /** An initial state of the module. */
@@ -166,7 +134,7 @@ const INITIAL_STATE = {
 /** A reducer of the module. */
 const reducer = (
   state: State = INITIAL_STATE,
-  action: FSA.Action<Notification>
+  action: FSA.Action<Item>
 ): State => {
   switch (action.type) {
     case INFO:
@@ -176,12 +144,12 @@ const reducer = (
     case CUSTOM:
       return {
         ...state,
-        aueue: [...state.list, action.payload],
+        list: [...state.list, action.payload],
       } as State;
     case REMOVE:
       return {
         ...state,
-        aueue: state.list.filter((n) => action.payload !== n.key),
+        list: state.list.filter((n) => action.payload !== n.key),
       } as State;
     default:
       return state;
