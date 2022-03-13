@@ -27,6 +27,10 @@ const CUSTOM = `${SUFFIX}/custom`;
 /** Action type for REMOVE. */
 const REMOVE = `${SUFFIX}/remove`;
 
+/** Returns true if the action is notification. */
+export const isNotification = (action: string): boolean =>
+  action.startsWith(SUFFIX);
+
 /** A type union of notification level properties. */
 export const Level = {
   INFO: 'info',
@@ -46,9 +50,9 @@ export type Item = {
   message: string;
   ttl: number;
   //  icon?: string | React.ReactNode | FontAwesome.Props;
-  //  showCloseButton?: boolean;
-  //  onClick?: () => void;
-  //  onHide?: () => void;
+  showCloseButton?: boolean;
+  onClick?: () => void;
+  onHide?: () => void;
 };
 
 /** FSA action factory. */
