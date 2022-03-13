@@ -21,18 +21,12 @@ const getCurrentHeight: Motion.StartEventHandler = (node) => ({
   height: node.offsetHeight,
 });
 
-/** Sets transition property. */
-const setTransitionProperty: Motion.DoneEventHandler = (_, event) =>
-  (event as TransitionEvent).propertyName === 'height';
-
 /** Motion for drawer collapse. */
 export default {
   name: 'drawer',
   onEnterStart: getCollapsedHeight,
   onEnterActive: getRealHeight,
-  onEnterDone: setTransitionProperty,
   onExitStart: getCurrentHeight,
   onExitActive: getCollapsedHeight,
-  onExitDone: setTransitionProperty,
   deadline: 500,
 } as Motion.Props;

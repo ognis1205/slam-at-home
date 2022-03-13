@@ -6,8 +6,6 @@
 
 .notification {
   position: fixed;
-  top: 0;
-  right: 0;
   z-index: 99999;
   box-sizing: border-box;
   width: 320px;
@@ -15,9 +13,21 @@
   padding: 0px 15px;
   overflow-x: hidden;
   overflow-y: auto;
+  &.left {
+    top: 0;
+    left: 0;
+  }
+  &.right {
+    top: 0;
+    right: 0;
+  }
+  * {
+    transition: transform $duration $ease-in-out-circ;
+  }
 }
 .item {
-  box-shadow: 2px 0 8px $color-shadow;
+//  box-shadow: 2px 0 8px $color-shadow;
+  box-shadow: 0 1px 5px 0 $color-shadow;
   min-height: 55px;
   display : flex;
   align-items : center;

@@ -10,6 +10,9 @@
 .collapse {
   color: $color-black;
   background: $color-white;
+  * {
+    transition: height $duration $ease-in-out-circ;
+  }
 }
 .header {
   user-select: none;
