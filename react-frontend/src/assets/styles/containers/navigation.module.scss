@@ -1,0 +1,78 @@
+/**
+ * @fileoverview SCSS Module for {Navigation} containers.
+ * @copyright Shingo OKAWA 2022
+ */
+@import '../constants.scss';
+
+.header {
+  padding-bottom: 10px;
+  border-bottom: 1px solid $color-border;
+  .logo {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 20px;
+    margin-top: 20px;
+  }
+  .title {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    color: $color-grey-blue;
+    font-size: 25px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  .buttons {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    .button {
+      &:before{
+        content:" "; 
+	display:inline-block; 
+	width:5px;
+      }
+    }
+    .coffee {
+      text-decoration: none;
+      outline: 0;
+      border-radius: 0.25em;
+      display: inline-flex;
+      height: 14px;
+      padding: 2px 5px;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      border: 1px solid transparent;
+      color: $button-color;
+      background-image: $button-image;
+      border-color: $color-border;
+      &:hover, &:focus {
+        text-decoration: none;
+	background-color: $button-focus-bg-color;
+	border-color: $button-focus-bd-color;
+	background-image: none;
+	filter: none;
+      }
+      &:active {
+        border-color: $button-active-bd-color;
+	box-shadow: $button-active-shadow;
+      }
+      .img {
+        margin-bottom: 1px;
+	margin-right: 2px;
+	box-shadow: none;
+	border: none;
+	vertical-align: middle;
+      }
+      .text {
+        vertical-align: middle;
+      }
+    }
+  }
+}
