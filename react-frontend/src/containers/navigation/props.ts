@@ -13,6 +13,14 @@ export type Header = Types.Overwrite<
   }
 >;
 
+/** A {Footer} component properties. */
+export type Footer = Types.Overwrite<
+  React.HTMLAttributes<HTMLDivElement>,
+  {
+    [key: string]: unknown;
+  }
+>;
+
 /** A {Github} component properties. */
 export type Github = React.HTMLAttributes<HTMLAElement>;
 
