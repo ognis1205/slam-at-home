@@ -76,3 +76,12 @@
     }
   }
 }
+.footer {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  color: $color-grey-middle;
+  text-shadow: 0.5px 0.5px $color-off-white, -0.5px -0.5px $color-grey-middle;
+}
