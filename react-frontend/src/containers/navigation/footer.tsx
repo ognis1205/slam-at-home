@@ -12,6 +12,8 @@ export const Component: React.FunctionComponent<Props.Footer> = (
 ): React.ReactElement => (
   <div className={styles['footer']} {...props}>
     Copyright &#169; 2022 Shingo OKAWA
+    <br />
+    All Rights Reserved.
   </div>
 );
 
