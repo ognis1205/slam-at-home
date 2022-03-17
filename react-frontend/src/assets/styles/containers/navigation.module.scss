@@ -82,9 +82,9 @@
     bottom: 0;
     display: flex;
     justify-content: center;
+    text-align: center;
     width: 100%;
     color: $color-grey-middle;
-    text-shadow: 1px 1px $color-off-white, -1px -1px $color-grey-middle;
   }
   .tree {
     width: 250px;
