@@ -1,5 +1,5 @@
 /**
- * @fileoverview Defines {Drawer} motions.
+ * @fileoverview Defines {Navigation} motions.
  * @copyright Shingo OKAWA 2022
  */
 import * as Motion from '../../components/motion';
@@ -17,15 +17,13 @@ const getRealHeight: Motion.ActiveEventHandler = (node) => ({
 });
 
 /** Returns current height. */
-const getCurrentHeight: Motion.StartEventHandler = (node) => {
-  console.log(node.offsetHeight);
-  return {
+const getCurrentHeight: Motion.StartEventHandler = (node) => ({
   height: node.offsetHeight,
-}};
+});
 
-/** Motion for drawer collapse. */
+/** Motion for navigation collapse. */
 export default {
-  name: 'drawer',
+  name: 'navigation',
   onEnterStart: getCollapsedHeight,
   onEnterActive: getRealHeight,
   onExitStart: getCurrentHeight,
