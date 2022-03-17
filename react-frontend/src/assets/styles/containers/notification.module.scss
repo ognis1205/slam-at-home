@@ -26,7 +26,6 @@
   }
 }
 .item {
-//  box-shadow: 2px 0 8px $color-shadow;
   box-shadow: 0 1px 5px 0 $color-shadow;
   min-height: 55px;
   display : flex;
@@ -105,7 +104,6 @@
     }
   }
   &:hover {
-//    background: $font-color-highlight;
     opacity: 1;
   }
 }
