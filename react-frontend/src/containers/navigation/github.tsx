@@ -9,7 +9,7 @@ import * as Props from './props';
 export const Component: React.FunctionComponent<Props.Github> = ({
   href,
   dataShowCount,
-  ariaLevel,
+  ariaLabel,
   ...aAttrs
 }: Props.Github): React.ReactElement => (
   <a
@@ -17,7 +17,7 @@ export const Component: React.FunctionComponent<Props.Github> = ({
     className="github-button"
     href={href}
     data-show-count={dataShowCount}
-    aria-label={ariaLevel}
+    aria-label={ariaLabel}
   >
     Star
   </a>
