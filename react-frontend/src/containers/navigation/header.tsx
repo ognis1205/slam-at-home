@@ -17,12 +17,12 @@ export const Component: React.FunctionComponent<Props.Header> = (
     <div className={styles['logo']}>
       <Image
         src="/images/logo_transparent.png"
-        alt="SLAM@Home"
+        alt="SLAM@HOME"
         width="64"
         height="64"
       />
     </div>
-    <div className={styles['title']}>SLAM@Home</div>
+    <div className={styles['title']}>SLAM@HOME</div>
     <div className={styles['buttons']}>
       <span className={styles['button']}>
         <Github.Component

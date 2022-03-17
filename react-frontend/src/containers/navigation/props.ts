@@ -1,5 +1,5 @@
 /**
- * @fileoverview Defines {Navigation} and {Item} properties.
+ * @fileoverview Defines {Navigation} properties.
  * @copyright Shingo OKAWA 2022
  */
 import type * as React from 'react';

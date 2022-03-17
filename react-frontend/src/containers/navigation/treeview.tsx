@@ -7,6 +7,7 @@ import * as Props from './props';
 import * as Collapse from '../../components/collapse';
 import * as FontAwesome from '@fortawesome/react-fontawesome';
 import * as FontAwesomeIcon from '@fortawesome/free-solid-svg-icons';
+import * as Context from './context';
 import classnames from 'classnames';
 import NavigationMotion from '../../assets/motions/navigation';
 import styles from '../../assets/styles/containers/navigation.module.scss';
@@ -47,18 +48,11 @@ export const Item: React.FunctionComponent<Props.Item> = ({
 export const Component: React.FunctionComponent<Props.TreeView> = (
   divProps: Props.TreeView
 ): React.ReactElement => {
-  /** @const Holds accodrind state. */
-  const [accordion] = React.useState<boolean>(false);
+  /** @const Holds tree-view context. */
+  const { activeKeyContext } = React.useContext(Context.TreeView);
 
   /** @const Holds opening directory state. */
-  const [activeKey, setActiveKey] = React.useState<string[] | string>([
-    'slam@home',
-    'streaming',
-    'reconstruction',
-  ]);
-
-  /** An event handler called on `onchange` events. */
-  const handleChange = (key: string): void => setActiveKey(key);
+  const [activeKey, handleChange] = activeKeyContext;
 
   /** Returns `true` if the specified key is active. */
   const isActive = (key: string): boolean => {
@@ -73,7 +67,6 @@ export const Component: React.FunctionComponent<Props.TreeView> = (
   const StreamingMenu = (
     <Collapse.Wrapper
       className={styles['item']}
-      accordion={accordion}
       onChange={handleChange}
       activeKey={activeKey}
       motion={NavigationMotion}
@@ -97,7 +90,6 @@ export const Component: React.FunctionComponent<Props.TreeView> = (
   const ReconstructionMenu = (
     <Collapse.Wrapper
       className={styles['item']}
-      accordion={accordion}
       onChange={handleChange}
       activeKey={activeKey}
       motion={NavigationMotion}
@@ -121,13 +113,12 @@ export const Component: React.FunctionComponent<Props.TreeView> = (
   return (
     <div {...divProps} className={styles['tree']}>
       <Collapse.Wrapper
-        accordion={accordion}
         onChange={handleChange}
         activeKey={activeKey}
         motion={NavigationMotion}
       >
         <Collapse.Panel
-          header="SLAM@Home"
+          header="SLAM@HOME"
           key="slam@home"
           iconClassName={styles['directory']}
           icon={
