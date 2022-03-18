@@ -72,17 +72,13 @@
 }
 .button {
   color: $color-icon;
-  float: left;
+  float: right;
   display: inline-block;
   margin-left: 10px;
   margin-right: 10px;
   font-size: 20px;
-  opacity: 0.3;
+  opacity: 0.5;
   &:hover {
-    color: $font-color-highlight;
     opacity: 1;
   }
-}
-.size-button {
-  float: right;
 }
