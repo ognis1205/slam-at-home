@@ -6,7 +6,7 @@
 
 .drawer {
   position: fixed;
-  z-index: 9999;
+  z-index: $layer-3;
   transition: width 0s ease $duration,
               height 0s ease $duration,
               transform $duration $ease-in-out-circ;
@@ -36,7 +36,7 @@
 }
 .content {
   overflow: auto;
-  z-index: 1;
+  z-index: $layer-1;
   position: relative;
 }
 .handle {
@@ -45,7 +45,7 @@
   width: 41px;
   height: 40px;
   cursor: pointer;
-  z-index: 0;
+  z-index: $layer-0;
   text-align: center;
   line-height: 40px;
   font-size: 16px;

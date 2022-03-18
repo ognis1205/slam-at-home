@@ -5,7 +5,7 @@
 @import '../constants.scss';
 
 .header {
-  z-index: 9999;
+  z-index: $layer-4;
   overflow: hidden;
   top: 0;
   background-color: $color-theme;

@@ -79,7 +79,7 @@
   }
   .footer {
     position: absolute;
-    bottom: 0;
+    bottom: 20px;
     display: flex;
     justify-content: center;
     text-align: center;
@@ -90,10 +90,11 @@
     width: 250px;
     position: absolute;
     left: 50%;
-    transform: translateX(-25%);
+    transform: translateX(-50%);
     padding-bottom: 10px;
     padding-top: 10px;
-    font-weight: 600;
+    padding-left: 85px;
+    font-weight: 500;
     .directory {
       color: $icon-color-directory;
     }
@@ -145,7 +146,7 @@
 	left: -8px;
 	display: block;
 	height: 0.6em;
-	width: 0.6em;
+	width: 0.5em;
 	border-bottom: 1px solid $color-border;
 	border-left: 1px solid $color-border;
 	border-radius: 0 0 0 .3em;

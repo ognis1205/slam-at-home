@@ -8,19 +8,15 @@
   display: none;
 }
 .collapse {
-  color: $color-black;
-  background: $color-white;
   * {
     transition: height $duration $ease-in-out-circ;
   }
 }
 .header {
+  color: $color-grey-blue;
   user-select: none;
   position: relative;
   display: flex;
-  align-items: center;
-  line-height: 22px;
-  padding: 16px 16px;
   cursor: pointer;
   &:hover {
     color: $font-color-highlight;
@@ -30,7 +26,6 @@
       }
     }
     .icon {
-      color: $font-color-highlight;
     }
   }
   &:active {
@@ -61,9 +56,9 @@
   }
 }
 .icon {
-  color: $color-icon;
   display: inline-block;
-  margin-right: 10px;
+  width: 20px;
+  height: 20px;
 }
 .content {
   user-select: none;
