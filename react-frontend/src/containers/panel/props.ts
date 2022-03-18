@@ -25,6 +25,7 @@ export type Panel = Types.Overwrite<
 export type Window = Types.Overwrite<
   React.HTMLAttributes<HTMLDivElement>,
   {
+    isMaximized: boolean;
     onMaximize?: () => void;
   }
 >;

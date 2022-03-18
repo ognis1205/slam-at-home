@@ -244,7 +244,10 @@ export const Component: React.FunctionComponent<Props.Panel> = ({
         <Divider ref={divider} />
       </Draggable.Wrapper>
       <Right ref={right} className={isMaximized() ? styles['maximized'] : ''}>
-        <Window.Component onMaximize={handleMaximize}>
+        <Window.Component
+          isMaximized={isMaximized()}
+          onMaximize={handleMaximize}
+        >
           {children}
         </Window.Component>
       </Right>
