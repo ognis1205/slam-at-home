@@ -18,7 +18,6 @@ export const Component: React.FunctionComponent<Props.Button> = ({
   /** Event listener which is responsible for `onClick`. */
   const handleClick = (): void => {
     if (onClick) onClick();
-    //    handleHide();
   };
 
   return FAUtil.isProps(icon) ? (

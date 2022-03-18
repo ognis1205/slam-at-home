@@ -30,7 +30,7 @@ export const Component: React.FunctionComponent<Props.Window> = ({
 
   /***/
   const sizeButton = (
-    <Button.Component icon={faWindowMaximize} id={styles['size-button']} onClick={handleClick} />
+    <Button.Component key={1} icon={faWindowMaximize} id={styles['size-button']} onClick={handleClick} />
   );
 
   return (
