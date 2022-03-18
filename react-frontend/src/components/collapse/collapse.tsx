@@ -81,10 +81,11 @@ export const Component: React.FunctionComponent<Props.Wrapper> = ({
             ? null
             : handleClick,
         panelKey: key,
-        showArrow: true,
+        showArrow: child.props.showArrow,
         collapsible: child.props.collapsible ?? collapsible,
         accordion: accordion,
         children: child.props.children,
+        className: child.props.className,
         header: child.props.header,
         headerClassName: child.props.headerClassName,
         destroyInactivePanel:

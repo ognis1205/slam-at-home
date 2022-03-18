@@ -4,8 +4,8 @@
  */
 import * as React from 'react';
 import * as Props from './props';
-import * as FAUtil from '../../utils/fontawesome';
 import * as Motion from '../motion';
+import * as FAUtil from '../../utils/fontawesome';
 import * as FontAwesome from '@fortawesome/react-fontawesome';
 import classnames from 'classnames';
 import styles from '../../assets/styles/components/collapse.module.scss';
@@ -15,6 +15,12 @@ const getHeaderClassName = ({ className, collapsible }: Props.Header): string =>
   classnames(styles['header'], {
     [className || '']: !!className,
     [styles['collapsible-only']]: collapsible,
+  });
+
+/** Returns the class name of the icon. */
+const getIconClassName = ({ iconClassName }: Props.Header): string =>
+  classnames(styles['icon'], {
+    [iconClassName || '']: !!iconClassName,
   });
 
 /** Returns a `PanelHeader` component. */
@@ -58,11 +64,11 @@ const Header: React.FunctionComponent<
 
   /** Icon element. */
   const iconElement = FAUtil.isProps(props.icon) ? (
-    <span className={styles['icon']}>
+    <span className={getIconClassName(props)}>
       <FontAwesome.FontAwesomeIcon icon={props.icon} />
     </span>
   ) : (
-    <span className={styles['icon']}>{props.icon}</span>
+    <span className={getIconClassName(props)}>{props.icon}</span>
   );
 
   return (
@@ -140,6 +146,7 @@ export const Component: React.FunctionComponent<Props.Panel> = (
   <div className={getClassName(props)} style={props.style} id={props.id}>
     <Header
       className={props.headerClassName}
+      iconClassName={props.iconClassName}
       active={props.active}
       onClick={props.onClick}
       panelKey={props.panelKey}

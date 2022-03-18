@@ -25,6 +25,7 @@ export interface Header extends Common {
   accordion?: boolean;
   arrow?: (props: Header) => React.ReactNode;
   icon?: string | React.ReactNode | FontAwesome.Props;
+  iconClassName?: string;
 }
 
 /** Defines {Panel.Content} properties. */
@@ -43,7 +44,7 @@ export type Panel = Types.Overwrite<
     children?: React.ReactNode;
     header?: string | React.ReactNode;
     headerClassName?: string;
-//    icon?: string | React.ReactNode | FontAwesome.Props;
+    iconClassName?: string;
     motion?: Motion.Props;
     destroyInactivePanel?: boolean;
   }
