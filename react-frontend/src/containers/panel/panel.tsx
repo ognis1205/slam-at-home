@@ -7,6 +7,7 @@ import * as Props from './props';
 import * as Window from './window';
 import * as Navigation from '../navigation';
 import * as Draggable from '../../components/draggable';
+import * as CSS from '../../utils/css';
 import * as DOM from '../../utils/dom';
 import * as Event from '../../utils/event';
 import * as Hook from '../../utils/hook';
@@ -76,6 +77,7 @@ export const Component: React.FunctionComponent<Props.Panel> = ({
   rightmost,
   position,
   defaultPosition,
+  onOpen,
   ...divProps
 }: Props.Panel): React.ReactElement => {
   /** @const Holds a force updater. */
@@ -100,6 +102,11 @@ export const Component: React.FunctionComponent<Props.Panel> = ({
     if (!isMaximized()) init();
     else maximize();
     forceUpdate();
+  };
+
+  /** An event handler called on `open` events. */
+  const handleOpen = (): void => {
+    if (onOpen) onOpen();
   };
 
   /** An event handler called on `onchange` events. */
@@ -162,7 +169,12 @@ export const Component: React.FunctionComponent<Props.Panel> = ({
 
   /** Inits drawer item HTML elements. */
   const init = (): void => {
-    divider.current.style.width = `${width}px`;
+    CSS.set(
+      {
+        width: `${width}px`,
+      },
+      divider.current
+    );
     setCoord({
       x: defaultPosition?.x || 0,
       y: defaultPosition?.y || 0,
@@ -179,22 +191,50 @@ export const Component: React.FunctionComponent<Props.Panel> = ({
   const maximize = (): void => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [windowWidth, windowHeight] = DOM.getWindowSize();
-    divider.current.style.transform = `translateX(${
-      defaultPosition?.x || 0
-    }px)`;
-    left.current.style.width = `${defaultPosition?.x || 0}px`;
-    right.current.style.left = '0px';
-    right.current.style.width = `${windowWidth}px`;
+    CSS.set(
+      {
+        transform: `translateX(${defaultPosition?.x || 0}px)`,
+      },
+      divider.current
+    );
+    CSS.set(
+      {
+        width: `${defaultPosition?.x || 0}px`,
+      },
+      left.current
+    );
+    CSS.set(
+      {
+        left: '0px',
+        width: `${windowWidth}px`,
+      },
+      right.current
+    );
   };
 
   /** Sets a CSS style on panes. */
   const drag = (): void => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [windowWidth, windowHeight] = DOM.getWindowSize();
-    divider.current.style.transform = `translateX(${coord.x}px)`;
-    left.current.style.width = `${coord.x}px`;
-    right.current.style.left = `${coord.x + width}px`;
-    right.current.style.width = `${windowWidth - coord.x - width}px`;
+    CSS.set(
+      {
+        transform: `translateX(${coord.x}px)`,
+      },
+      divider.current
+    );
+    CSS.set(
+      {
+        width: `${coord.x}px`,
+      },
+      left.current
+    );
+    CSS.set(
+      {
+        left: `${coord.x + width}px`,
+        width: `${windowWidth - coord.x - width}px`,
+      },
+      right.current
+    );
   };
 
   /** An event handler called on `start` events. */
@@ -247,6 +287,7 @@ export const Component: React.FunctionComponent<Props.Panel> = ({
         <Window.Component
           isMaximized={isMaximized()}
           onMaximize={handleMaximize}
+          onOpen={handleOpen}
         >
           {children}
         </Window.Component>

@@ -18,6 +18,7 @@ export type Panel = Types.Overwrite<
     width: number;
     leftmost: number;
     rightmost: number;
+    onOpen?: () => void;
   }
 >;
 
@@ -27,6 +28,7 @@ export type Window = Types.Overwrite<
   {
     isMaximized: boolean;
     onMaximize?: () => void;
+    onOpen?: () => void;
   }
 >;
 

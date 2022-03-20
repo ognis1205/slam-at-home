@@ -28,6 +28,7 @@ export const Component: React.FunctionComponent<Props.Window> = ({
   children,
   isMaximized,
   onMaximize,
+  onOpen,
   ...divProps
 }: Props.Window): React.ReactElement => {
   /** @const Holds a reference to the component itself. */
@@ -38,10 +39,26 @@ export const Component: React.FunctionComponent<Props.Window> = ({
     if (onMaximize) onMaximize();
   };
 
+  /** Event listener which is responsible for `onClick`. */
+  const handleOpen = (): void => {
+    console.log("clicked", onOpen);
+    if (onOpen) onOpen();
+  };
+
   return (
     <div ref={self} className={styles['window']} {...divProps}>
       <Controller>
         <Button.Component
+          className={styles['wifi']}
+          icon={FontAwesomeIcon.faWifi}
+        />
+        <Button.Component
+          className={styles['menu']}
+          icon={FontAwesomeIcon.faBars}
+          onClick={handleOpen}
+        />
+        <Button.Component
+          className={styles['maximize']}
           icon={
             isMaximized
               ? FontAwesomeIcon.faMinusCircle
