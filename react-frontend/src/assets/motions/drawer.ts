@@ -17,11 +17,9 @@ const getRealHeight: Motion.ActiveEventHandler = (node) => ({
 });
 
 /** Returns current height. */
-const getCurrentHeight: Motion.StartEventHandler = (node) => {
-  console.log(node.offsetHeight);
-  return {
+const getCurrentHeight: Motion.StartEventHandler = (node) => ({
   height: node.offsetHeight,
-}};
+});
 
 /** Motion for drawer collapse. */
 export default {

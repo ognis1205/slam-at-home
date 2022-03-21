@@ -10,6 +10,7 @@ const hideX: Motion.StartEventHandler = () => ({
 });
 
 /* Returns x-transition to show. **/
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const showX: Motion.ActiveEventHandler = (node) => ({
   transform: 'translate3d(0, 0, 0)',
 });
