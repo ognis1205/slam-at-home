@@ -41,7 +41,6 @@ export const Component: React.FunctionComponent<Props.Window> = ({
 
   /** Event listener which is responsible for `onClick`. */
   const handleOpen = (): void => {
-    console.log("clicked", onOpen);
     if (onOpen) onOpen();
   };
 
@@ -54,7 +53,7 @@ export const Component: React.FunctionComponent<Props.Window> = ({
         />
         <Button.Component
           className={styles['menu']}
-          icon={FontAwesomeIcon.faBars}
+          icon={FontAwesomeIcon.faChevronCircleDown}
           onClick={handleOpen}
         />
         <Button.Component

@@ -249,11 +249,7 @@ export const Component: React.FunctionComponent<Props.Panel> = ({
   const handleMove = (e: MouseEvent, drag: Position.Drag): void | false => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [width, height] = DOM.getWindowSize();
-    if (
-      !checkIfDragging() ||
-      drag.x < leftmost ||
-      drag.x > width - rightmost
-    )
+    if (!checkIfDragging() || drag.x < leftmost || drag.x > width - rightmost)
       return false;
     const newCoord = { x: drag.x, y: drag.y };
     setCoord(newCoord);
