@@ -96,11 +96,7 @@ export const Component: React.FunctionComponent<Props.Item> = ({
   ) : null;
 
   return (
-    <div
-      {...divAttrs}
-      className={getClassName(className, level)}
-      style={style}
-    >
+    <div {...divAttrs} className={getClassName(className, level)} style={style}>
       {iconElement}
       <div className={styles['content']} onClick={handleClick}>
         {titleElement}
