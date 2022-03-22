@@ -49,7 +49,6 @@ export type Item = {
   title: string;
   message: string;
   ttl: number;
-  //  icon?: string | React.ReactNode | FontAwesome.Props;
   showCloseButton?: boolean;
   onClick?: () => void;
   onHide?: () => void;
