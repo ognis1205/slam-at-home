@@ -39,10 +39,21 @@ $button-focus-bd-color: #c7cbcf;
 $button-active-bd-color: rgba(27,31,36,.15);
 $button-active-shadow: inset 0 0.15em 0.3em rgb(27 31 36 / 15%);
 
+// Navigation
+$navigation-header-icon-size: 16px;
+$navigation-header-font-size: 16px;
+$navigation-header-size: 20px;
+
 // Icon
 $icon-color-directory: #55aefc;
 $icon-color-document: $color-orange;
 $icon-color-application: $color-theme;
+
+// Window
+$window-color-size: #28c940;
+$window-color-size-shadow: #1f9e32;
+$window-color-menu: #0a69dd;
+$window-color-menu-shadow: #0851aa;
 
 // Z indices
 $layer-0: 0;

@@ -5,14 +5,8 @@
 @import './constants.scss';
 
 html, body {
-  font-family: "Nunito Sans",
-	       -apple-system,
-	       ".SFNSText-Regular",
-	       "San Francisco",
-	       BlinkMacSystemFont,
-	       "Segoe UI",
-	       "Helvetica Neue",
-	       Helvetica,Arial,sans-serif;
+  font-family: Arial,
+	       sans-serif;
   font-size: $font-size;
   margin: 0;
   -webkit-font-smoothing: antialiased;

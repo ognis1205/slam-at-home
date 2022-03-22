@@ -5,24 +5,29 @@
 @import '../constants.scss';
 
 .navigation {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   .header {
-    padding-bottom: 10px;
     border-bottom: 1px solid $color-border;
+    justify-content: center;
+    padding-bottom: 10px;
+    text-align: center;
     .logo {
       display: flex;
       justify-content: center;
-      width: 100%;
       margin-bottom: 20px;
       margin-top: 20px;
+      width: 100%;
     }
     .title {
-      display: flex;
-      justify-content: center;
-      width: 100%;
       color: $color-grey-blue;
+      display: flex;
       font-size: 25px;
       font-weight: 800;
+      justify-content: center;
       margin-bottom: 10px;
+      width: 100%;
     }
     .buttons {
       display: flex;
@@ -30,46 +35,47 @@
       width: 100%;
       .button {
         &:before{
-          content:" "; 
-	  display:inline-block; 
-	  width:5px;
+	  display: inline-block; 
+	  width: 5px;
+          content: " "; 
 	}
       }
       .coffee {
-        text-decoration: none;
-	outline: 0;
-	border-radius: 0.25em;
-	display: inline-flex;
-	height: 14px;
-	padding: 2px 5px;
-	font-size: 11px;
-	font-weight: 600;
-	cursor: pointer;
-	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
-	user-select: none;
-	border: 1px solid transparent;
-	color: $button-color;
+	-webkit-user-select: none;
 	background-image: $button-image;
 	border-color: $color-border;
+	border: 1px solid $color-border;
+	border-radius: 0.25em;
+	color: $button-color;
+	cursor: pointer;
+	display: inline-flex;
+	font-size: 11px;
+	font-weight: 600;
+	height: 14px;
+	outline: 0;
+	padding: 2px 5px;
+	user-select: none;
+        text-decoration: none;
 	&:hover, &:focus {
-          text-decoration: none;
 	  background-color: $button-focus-bg-color;
-	  border-color: $button-focus-bd-color;
 	  background-image: none;
+	  border: 1px solid transparent;
+	  border-color: $button-focus-bd-color;
 	  filter: none;
+          text-decoration: none;
 	}
 	&:active {
-          border-color: $button-active-bd-color;
 	  box-shadow: $button-active-shadow;
+          border-color: $button-active-bd-color;
 	}
 	.img {
-          margin-bottom: 1px;
-	  margin-right: 2px;
-	  box-shadow: none;
 	  border: none;
+	  box-shadow: none;
+	  margin-right: 2px;
 	  vertical-align: middle;
+          margin-bottom: 1px;
 	}
 	.text {
           vertical-align: middle;
@@ -78,36 +84,31 @@
     }
   }
   .footer {
-    position: absolute;
-    bottom: 20px;
-    display: flex;
+    color: $color-grey-middle;
     justify-content: center;
+    padding-bottom: 10px;
     text-align: center;
     width: 100%;
-    color: $color-grey-middle;
   }
   .tree {
-    width: 250px;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    padding-bottom: 10px;
-    padding-top: 10px;
-    padding-left: 85px;
+    flex: 1;
+    font-size: 16px;
     font-weight: 500;
-    .directory {
-      color: $icon-color-directory;
-    }
+    overflow: auto;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    padding-top: 10px;
     .item {
+      cursor: pointer;
+      padding-bottom: 1px;
+      padding-top: 1px;
+      position: relative;
       user-select: none;
       width: 100%;
-      padding-top: 1px;
-      padding-bottom: 1px;
-      position: relative;
       .link {
-        display:inline-block;
-	width: 100%;
 	color: $color-grey-blue;
+	width: 100%;
+        display: inline-block;
 	&:hover {
           color: $font-color-highlight;
 	}
@@ -115,42 +116,16 @@
           background: $color-background-highlight;
 	}
 	.icon {
-          display:inline-block;
-	  font-size: 14px;
-	  width: 20px;
-	  height: 20px;
-	  text-align:center;
-	  &.document {
-	    color: $icon-color-document;
-	  }
-	  &.application {
-	    color: $icon-color-application;
-	  }
+	  display: inline-block;
+	  font-size: $navigation-header-icon-size;
+	  height: $navigation-header-size;
+	  line-height: $navigation-header-size;
+	  padding-bottom: calc($navigation-header-size / 6);
+	  padding-right: calc($navigation-header-icon-size / 2);
+	  padding-top: calc($navigation-header-size / 6);
+	  text-align: center;
+	  width: $navigation-header-size;
 	}
-      }
-      &:before {
-        position: absolute;
-	top: 0;
-	bottom: 0;
-	left: -8px;
-	display: block;
-	border-left: 1px solid $color-border;
-	content: "";
-      }
-      &:last-child:before {
-        display: none;
-      }
-      &:after {
-        position: absolute;
-	top: 0;
-	left: -8px;
-	display: block;
-	height: 0.6em;
-	width: 0.5em;
-	border-bottom: 1px solid $color-border;
-	border-left: 1px solid $color-border;
-	border-radius: 0 0 0 .3em;
-	content: "";
       }
     }
   }
