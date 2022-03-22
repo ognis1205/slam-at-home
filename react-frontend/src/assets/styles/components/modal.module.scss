@@ -1,0 +1,17 @@
+/**
+ * @fileoverview SCSS Module for {Modal} component.
+ * @copyright Shingo OKAWA 2022
+ */
+@import '../constants.scss';
+
+.content {
+  pointer-events: auto;
+  .tooltip {
+    position: absolute;
+    zIndex: 999;
+  };
+  .modal {
+    position: relative;
+    margin: auto;
+  };
+}

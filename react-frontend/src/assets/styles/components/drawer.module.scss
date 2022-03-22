@@ -6,10 +6,10 @@
 
 .drawer {
   position: fixed;
-  z-index: $layer-3;
   transition: width 0s ease $duration,
               height 0s ease $duration,
               transform $duration $ease-in-out-circ;
+  z-index: $layer-3;
   >* {
     transition: transform $duration $ease-in-out-circ,
                 opacity $duration $ease-in-out-circ,
@@ -20,54 +20,54 @@
   }
   .mask {
     background: #000;
-    opacity: 0;
-    width: 100%;
     height: 0;
+    left: 0;
+    opacity: 0;
     position: absolute;
     top: 0;
-    left: 0;
     transition: opacity $duration $ease-in-out-circ, 
                 height 0s ease $duration;
+    width: 100%;
   }
 }
 .wrapper {
-  position: absolute;
   background: $color-white;
+  position: absolute;
 }
 .content {
   overflow: auto;
-  z-index: $layer-1;
   position: relative;
+  z-index: $layer-1;
 }
 .handle {
-  position: absolute;
-  top: 72px;
-  width: 41px;
-  height: 40px;
-  cursor: pointer;
-  z-index: $layer-0;
-  text-align: center;
-  line-height: 40px;
-  font-size: 16px;
-  display: flex;
-  justify-content: center;
   align-items: center;
   background: $color-white;
+  cursor: pointer;
+  display: flex;
+  font-size: 16px;
+  height: 40px;
+  justify-content: center;
+  line-height: 40px;
+  position: absolute;
+  text-align: center;
+  top: 72px;
+  width: 41px;
+  z-index: $layer-0;
 }
 .icon {
-  width: 14px;
-  height: 2px;
   background: $color-icon;
+  height: 2px;
   position: relative;
   transition: background $duration $ease-in-out-circ;
+  width: 14px;
   &:before, &:after {
+    background: $color-icon;
     content: '';
     display: block;
-    position: absolute;
-    background: $color-icon;
-    width: 100%;
     height: 2px;
+    position: absolute;
     transition: transform $duration $ease-in-out-circ;
+    width: 100%;
   }
   &:before {
     top: -5px;
@@ -77,8 +77,8 @@
   }
 }
 .left, .right {
-  width: 0%;
   height: 100%;
+  width: 0%;
   .wrapper, .content {
     height: 100%;
   }
@@ -90,12 +90,12 @@
   }
 }
 .left {
-  top: 0;
   left: 0;
+  top: 0;
   .handle {
-    right: -40px;
-    box-shadow: 2px 0 8px $color-shadow;
     border-radius: 0 $border-radius $border-radius 0;
+    box-shadow: 2px 0 8px $color-shadow;
+    right: -40px;
   }
   &.open {
     .wrapper {
@@ -104,15 +104,15 @@
   }
 }
 .right {
-  top: 0;
   right: 0;
+  top: 0;
   .wrapper {
     right: 0;
   }
   .handle {
-    left: -40px;
-    box-shadow: -2px 0 8px $color-shadow;
     border-radius: $border-radius 0 0 $border-radius;
+    box-shadow: -2px 0 8px $color-shadow;
+    left: -40px;
   }
   &.open {
     .wrapper {
@@ -125,8 +125,8 @@
   }
 }
 .top, .bottom {
-  width: 100%;
   height: 0%;
+  width: 100%;
   .wrapper, .content {
     width: 100%;
   }
@@ -145,13 +145,13 @@
   }
 }
 .top {
-  top: 0;
   left: 0;
+  top: 0;
   .handle {
-    top: auto;
+    border-radius: 0 0 $border-radius $border-radius;
     bottom: -40px;
     box-shadow: 0 2px 8px $color-shadow;
-    border-radius: 0 0 $border-radius $border-radius;
+    top: auto;
   }
   &.open {
     .wrapper {
@@ -166,9 +166,9 @@
     bottom: 0;
   }
   .handle {
-    top: -40px;
-    box-shadow: 0 -2px 8px $color-shadow;
     border-radius: $border-radius $border-radius 0 0;
+    box-shadow: 0 -2px 8px $color-shadow;
+    top: -40px;
   }
   &.open {
     .wrapper {
@@ -182,8 +182,8 @@
 }
 .open {
   .mask {
-    opacity: .3;
     height: 100%;
+    opacity: .3;
     transition: opacity $duration $ease-in-out-circ;
   }
   .handle {

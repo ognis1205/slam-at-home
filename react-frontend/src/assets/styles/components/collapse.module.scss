@@ -14,18 +14,20 @@
 }
 .header {
   color: $color-grey-blue;
-  user-select: none;
-  position: relative;
-  display: flex;
   cursor: pointer;
+  font-size: $navigation-header-font-size;
+  height: $navigation-header-size;
+  line-height: $navigation-header-size;
+  padding-bottom: calc($navigation-header-size / 4);
+  padding-top: calc($navigation-header-size / 4);
+  position: relative;
+  user-select: none;
   &:hover {
     color: $font-color-highlight;
     .arrow {
       &:after, &:before {
         background-image: linear-gradient(90deg, $font-color-highlight, $font-color-highlight);
       }
-    }
-    .icon {
     }
   }
   &:active {
@@ -34,8 +36,8 @@
 }
 .arrow {
   position: absolute;
-  top: 50%;
   right: 16px;
+  top: 50%;
   width: 10px;
   &:after {
     transform: rotate(45deg) translateX(-2px);
@@ -44,30 +46,36 @@
     transform: rotate(-45deg) translateX(2px);
   }
   &:after, &:before {
-    position: absolute;
-    content: "";
-    width: 6px;
-    height: 1.5px;
-    background: $color-white;
     background-image: linear-gradient(90deg, $color-icon, $color-icon);
     border-radius: $border-radius;
     box-sizing: border-box;
+    content: " ";
+    height: 1.5px;
+    position: absolute;
     transition: transform $duration $ease-in-out-circ;
+    width: 6px;
   }
 }
 .icon {
   display: inline-block;
-  width: 20px;
-  height: 20px;
+  font-size: $navigation-header-icon-size;
+  height: $navigation-header-size;
+  line-height: $navigation-header-size;
+  padding-right: calc($navigation-header-icon-size / 2);
+  text-align: center;
+  width: $navigation-header-size;
+  & > svg {
+    width: $navigation-header-icon-size;
+  }
 }
 .content {
-  user-select: none;
-  overflow: hidden;
   color: $color-grey-middle;
-  padding-left: 16px;
+  overflow: hidden;
+  padding-left: calc(3 * $navigation-header-icon-size / 2);
+  user-select: none;
   & > &-box {
-    margin-top: 16px;
     margin-bottom: 16px;
+    margin-top: 16px;
   }
 }
 .panel-active {
@@ -83,8 +91,8 @@
   }
 }
 .panel-inactive {
-  min-width: 0;
   min-height: 0;
+  min-width: 0;
 }
 .collapsible-only {
   cursor: default;
@@ -93,10 +101,10 @@
   }
 }
 .content-active {
-  min-width: 0;
   min-height: 0;
+  min-width: 0;
 }
 .content-inactive {
-  min-width: 0;
   min-height: 0;
+  min-width: 0;
 }
