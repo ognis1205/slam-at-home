@@ -85,9 +85,9 @@ export const Component: React.FunctionComponent<Props.Panel> = ({
 
   /** @const Holds opening directory state. */
   const [activeKey, setActiveKey] = React.useState<string[] | string>([
-    'slam@home',
-    'streaming',
-    'reconstruction',
+    'menu',
+    'contribution',
+    'about',
   ]);
 
   /** @const Holds a dragging position. */
