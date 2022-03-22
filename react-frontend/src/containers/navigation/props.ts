@@ -24,8 +24,12 @@ export type TreeView = Types.Overwrite<
 
 /** A type union of application type properties. */
 export const ItemType = {
-  APPLICATION: 'application',
+  CAMERA: 'camera',
+  CONSTRUCTION: 'construction',
   DOCUMENT: 'document',
+  GITHUB: 'github',
+  SHARE: 'share',
+  INFO: 'info',
 } as const;
 
 export type ItemType = typeof ItemType[keyof typeof ItemType];

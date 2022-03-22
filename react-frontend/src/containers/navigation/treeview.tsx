@@ -7,6 +7,7 @@ import * as Props from './props';
 import * as Collapse from '../../components/collapse';
 import * as FontAwesome from '@fortawesome/react-fontawesome';
 import * as FontAwesomeIcon from '@fortawesome/free-solid-svg-icons';
+import * as FontAwesomeBrandIcon from '@fortawesome/free-brands-svg-icons';
 import * as Context from './context';
 import classnames from 'classnames';
 import NavigationMotion from '../../assets/motions/navigation';
@@ -15,8 +16,16 @@ import styles from '../../assets/styles/containers/navigation.module.scss';
 /** Returns the corresponding FontAwesome icon. */
 const getIcon = (type: Props.ItemType): FontAwesome.Props => {
   switch (type) {
-    case Props.ItemType.APPLICATION:
-      return FontAwesomeIcon.faAt;
+    case Props.ItemType.CAMERA:
+      return FontAwesomeIcon.faVideo;
+    case Props.ItemType.CONSTRUCTION:
+      return FontAwesomeIcon.faCube;
+    case Props.ItemType.GITHUB:
+      return FontAwesomeBrandIcon.faGithub;
+    case Props.ItemType.SHARE:
+      return FontAwesomeIcon.faShareSquare;
+    case Props.ItemType.INFO:
+      return FontAwesomeIcon.faInfo;
     case Props.ItemType.DOCUMENT:
     default:
       return FontAwesomeIcon.faFile;
@@ -54,62 +63,6 @@ export const Component: React.FunctionComponent<Props.TreeView> = (
   /** @const Holds opening directory state. */
   const [activeKey, handleChange] = activeKeyContext;
 
-  /** Returns `true` if the specified key is active. */
-  const isActive = (key: string): boolean => {
-    if (typeof activeKey === 'string') return key === activeKey;
-    return activeKey.includes(key);
-  };
-
-  /** @const readme menu */
-  const Readme = <Item title="README" key="readme" type="document" />;
-
-  /** @const streaming menu */
-  const StreamingMenu = (
-    <Collapse.Wrapper
-      className={styles['item']}
-      onChange={handleChange}
-      activeKey={activeKey}
-      motion={NavigationMotion}
-    >
-      <Collapse.Panel
-        header="Streaming"
-        key="streaming"
-        iconClassName={styles['directory']}
-        icon={
-          isActive('streaming')
-            ? FontAwesomeIcon.faFolderOpen
-            : FontAwesomeIcon.faFolder
-        }
-      >
-        <Item title="WebRTC" key="webrtc" type="application" />
-      </Collapse.Panel>
-    </Collapse.Wrapper>
-  );
-
-  /** @const reconstruction menu */
-  const ReconstructionMenu = (
-    <Collapse.Wrapper
-      className={styles['item']}
-      onChange={handleChange}
-      activeKey={activeKey}
-      motion={NavigationMotion}
-    >
-      <Collapse.Panel
-        header="Reconstruction"
-        key="reconstruction"
-        iconClassName={styles['directory']}
-        icon={
-          isActive('reconstruction')
-            ? FontAwesomeIcon.faFolderOpen
-            : FontAwesomeIcon.faFolder
-        }
-      >
-        <Item title="SLAM" key="SLAM" type="application" />
-        <Item title="SfM" key="SfM" type="application" />
-      </Collapse.Panel>
-    </Collapse.Wrapper>
-  );
-
   return (
     <div {...divProps} className={styles['tree']}>
       <Collapse.Wrapper
@@ -118,18 +71,33 @@ export const Component: React.FunctionComponent<Props.TreeView> = (
         motion={NavigationMotion}
       >
         <Collapse.Panel
-          header="SLAM@HOME"
-          key="slam@home"
-          iconClassName={styles['directory']}
-          icon={
-            isActive('slam@home')
-              ? FontAwesomeIcon.faFolderOpen
-              : FontAwesomeIcon.faFolder
-          }
+          header="Menu"
+          key="menu"
+          showArrow={true}
+          icon={FontAwesomeIcon.faHome}
         >
-          {Readme}
-          {StreamingMenu}
-          {ReconstructionMenu}
+          <Item title="README" key="readme" type="document" />
+          <Item title="WebRTC" key="webrtc" type="camera" />
+          <Item title="SLAM" key="slam" type="construction" />
+          <Item title="SfM" key="sfm" type="construction" />
+        </Collapse.Panel>
+        <Collapse.Panel
+          header="Contribution"
+          key="contribution"
+          showArrow={true}
+          icon={FontAwesomeIcon.faUsers}
+        >
+          <Item title="Report a bug" key="bugreport" type="github" />
+          <Item title="Get help" key="gethelp" type="github" />
+          <Item title="Share this app" key="share" type="share" />
+        </Collapse.Panel>
+        <Collapse.Panel
+          header="About"
+          key="about"
+          showArrow={true}
+          icon={FontAwesomeIcon.faInfoCircle}
+        >
+          <Item title="Github acount" key="acount" type="github" />
         </Collapse.Panel>
       </Collapse.Wrapper>
     </div>
