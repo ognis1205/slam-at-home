@@ -67,9 +67,9 @@ const Header: React.FunctionComponent<
     <span className={getIconClassName(props)}>
       <FontAwesome.FontAwesomeIcon icon={props.icon} />
     </span>
-  ) : (
+  ) : props.icon ? (
     <span className={getIconClassName(props)}>{props.icon}</span>
-  );
+  ) : null;
 
   return (
     <div {...headerProps}>
