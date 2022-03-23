@@ -60,7 +60,7 @@ export const Component: React.FunctionComponent<Props.List> = ({
             entity.status === Key.Status.KEEP;
           return (
             <Motion.Component
-              {...(rest as Motion.Props)}
+              {...(rest as Props.Motion)}
               key={entity.key}
               visible={visible}
               eventProps={entity}

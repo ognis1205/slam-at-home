@@ -3,20 +3,17 @@
  * @copyright Shingo OKAWA 2021
  */
 import * as React from 'react';
+import * as ReactRedux from 'react-redux';
 import * as NextApp from 'next/app';
 import Head from 'next/head';
-import * as Drawer from '../components/drawer';
+import * as Store from '../redux/store';
+import * as Notifications from '../redux/modules/notifications';
 import * as Collapse from '../components/collapse';
-import * as Pane from '../containers/pane';
-import * as Menu from '../containers/menu';
+import * as Panel from '../containers/panel';
 import * as Notification from '../containers/notification';
-import * as Window from '../containers/window';
-import DrawerMotion from '../assets/motions/drawer';
 import NotificationMotion from '../assets/motions/notification';
-import * as DOM from '../utils/dom';
 import '../assets/styles/global.scss';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCog, faInfoCircle, faInfo, faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faCog } from '@fortawesome/free-solid-svg-icons';
 
 /***/
 const text = `
@@ -27,36 +24,82 @@ content content content content content
 content content content content content
 `;
 
-const Test: React.FunctionComponent = (): React.ReactElement => (
-  <p>
-    <button
-      className="btn btn-primary"
-      onClick={() => {
-        Notification.Manager.info({
-          title: 'Info',
-          message: 'Information notification message',
-          ttl: 3000,
-          showCloseButton: true,
-          icon: faInfoCircle,
-        });
-      }}
-    >
-      Info
-    </button>
-  </p>
-);
+const Test: React.FunctionComponent = (): React.ReactElement => {
+  /***/
+  const dispatch = ReactRedux.useDispatch();
+
+  return (
+    <p>
+      <button
+        className="btn btn-primary"
+        onClick={() => {
+          dispatch(
+            Notifications.info({
+              title: 'Info',
+              message: 'Information notification message',
+              showCloseButton: true,
+            })
+          );
+        }}
+      >
+        Info
+      </button>
+      <button
+        className="btn btn-primary"
+        onClick={() => {
+          dispatch(
+            Notifications.success({
+              title: 'Success',
+              message: 'Information notification message',
+              showCloseButton: true,
+            })
+          );
+        }}
+      >
+        Success
+      </button>
+      <button
+        className="btn btn-primary"
+        onClick={() => {
+          dispatch(
+            Notifications.warning({
+              title: 'Warning',
+              message: 'Information notification message',
+              showCloseButton: true,
+            })
+          );
+        }}
+      >
+        Warning
+      </button>
+      <button
+        className="btn btn-primary"
+        onClick={() => {
+          dispatch(
+            Notifications.error({
+              title: 'Error',
+              message: 'Information notification message',
+              showCloseButton: true,
+            })
+          );
+        }}
+      >
+        Error
+      </button>
+    </p>
+  );
+};
 
 /***/
-const SLAM: React.FC<NextApp.AppProps> = ({}) => {
+const SLAM: React.FC<NextApp.AppProps> = ({ Component, pageProps }) => {
+  /** @const */
+  const [open, setOpen] = React.useState<boolean>(false);
+
   /** @const */
   const [accordion] = React.useState<boolean>(false);
 
   /** @const */
   const [activeKey, setActiveKey] = React.useState<string[] | string>(['4']);
-
-  const onCollapse = () => {
-    return { height: 0 };
-  };
 
   /** @const */
   const getItems = (): React.ReactElement[] => {
@@ -66,6 +109,7 @@ const SLAM: React.FC<NextApp.AppProps> = ({}) => {
       items.push(
         <Collapse.Panel
           header={`HEADER ${key}`}
+          headerClassName="test"
           icon={faCog}
           key={key}
         >
@@ -99,51 +143,33 @@ const SLAM: React.FC<NextApp.AppProps> = ({}) => {
     return items;
   };
 
+  const handleOpen = (): void => {
+    setOpen((prev) => !prev);
+  };
+
   const handleChange = (activeKey: string): void => setActiveKey(activeKey);
 
   return (
     <React.Fragment>
       <Head>
-        <title>SLAM</title>
+        <title>SLAM@HOME</title>
         <meta
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width"
         />
+        <script async defer src="https://buttons.github.io/buttons.js" />
       </Head>
-      <Pane.Left width="250px">
-        <ul>
-          <li>test</li>
-          <li>test</li>
-          <li>test</li>
-          <li>test</li>
-          <li>test</li>
-          <li>test</li>
-          <li>test</li>
-          <li>test</li>
-          <li>test</li>
-          <li>test</li>
-        </ul>
-      </Pane.Left>
-      <Pane.Divider />
-      <Pane.Right>
-        <Window.Component>
-          <Test />
-        </Window.Component>
-      </Pane.Right>
-      <Drawer.Component width="250px" drawPane={null}>
-        <Menu.Header />
-        <Collapse.Wrapper
-          accordion={accordion}
-          onChange={handleChange}
-          activeKey={activeKey}
-          motion={DrawerMotion}
-        >
-          {getItems()}
-        </Collapse.Wrapper>
-      </Drawer.Component>
-      <Notification.Component duration={1000} motion={NotificationMotion} />
+      <Panel.Component onOpen={handleOpen}>
+        <Component {...pageProps} />
+      </Panel.Component>
+      <Notification.Component
+        duration={1000}
+        placement="right"
+        motion={NotificationMotion}
+      />
     </React.Fragment>
   );
 };
 
-export default SLAM;
+// export default SLAM;
+export default Store.wrapper.withRedux(SLAM);

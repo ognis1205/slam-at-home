@@ -4,6 +4,7 @@
  */
 import * as Draggable from '../../components/draggable';
 import type * as Types from '../../utils/types';
+import * as FontAwesome from '@fortawesome/fontawesome-svg-core';
 
 /** A {Left} component properties. */
 export type Left = React.HTMLAttributes<HTMLDivElement>;
@@ -39,7 +40,7 @@ export type Controller = React.HTMLAttributes<HTMLDivElement>;
 export type Button = Types.Overwrite<
   React.HTMLAttributes<HTMLSpanElement>,
   {
-    icon: string | React.ReactNode | FontAwesome.Props;
+    icon: string | React.ReactNode | FontAwesome.IconProp;
     title?: string;
     onClick?: () => void;
   }

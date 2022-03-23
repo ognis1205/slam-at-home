@@ -152,7 +152,7 @@ const reducer = (
     case REMOVE:
       return {
         ...state,
-        list: state.list.filter((n) => action.payload !== n.key),
+        list: state.list.filter((n) => action.payload.key !== n.key),
       } as State;
     default:
       return state;

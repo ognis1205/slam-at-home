@@ -5,36 +5,39 @@
 import * as DOM from './dom';
 
 /** A type union of popup positions. */
-export type Position =
-  | 'top left'
-  | 'top center'
-  | 'top right'
-  | 'right top'
-  | 'right center'
-  | 'right bottom'
-  | 'bottom left'
-  | 'bottom center'
-  | 'bottom right'
-  | 'left top'
-  | 'left center'
-  | 'left bottom'
-  | 'center center';
+const POSITIONS = [
+  'top left',
+  'top center',
+  'top right',
+  'right top',
+  'right center',
+  'right bottom',
+  'bottom left',
+  'bottom center',
+  'bottom right',
+  'left top',
+  'left center',
+  'left bottom',
+  'center center',
+] as const;
+
+export type Position = typeof POSITIONS[number];
 
 /** General purpose 2-D positions. */
 export type CSSCoord = {
-  top: number | string;
-  left: number | string;
+  top: number;
+  left: number;
   transform: string;
-  arrowLeft: number | string;
-  arrowTop: number | string;
+  arrowLeft: string;
+  arrowTop: string;
 };
 
 /** Defines HTML bounds. */
 export type Bounds = {
-  top: number | string;
-  left: number | string;
-  width: number | string;
-  height: number | string;
+  top: number;
+  left: number;
+  width: number;
+  height: number;
 };
 
 /** Computes CSS coordinate for a given position. */
@@ -146,14 +149,14 @@ export const getPosition = (
   };
 
   let i = 0;
-  const wrapperBox = getTooltipBoundary(keepTooltipInside);
+  const wrapperBox = getTooltipBounds(keepTooltipInside);
   let positions = Array.isArray(position) ? position : [position];
 
   if (keepTooltipInside || Array.isArray(position))
-    positions = [...positions, ...POSITION_TYPES];
+    positions = [...positions, ...POSITIONS];
 
   while (i < positions.length) {
-    best = getCoordinatesForPosition(
+    best = getCSSCoord(
       triggerBounding,
       contentBounding,
       positions[i],

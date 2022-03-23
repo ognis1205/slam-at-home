@@ -3,10 +3,10 @@
  * @copyright Shingo OKAWA 2022
  */
 import type * as React from 'react';
-import type * as Motion from '../motion';
-import * as Notifications from '../redux/modules/notifications';
+import type * as Motion from '../../components/motion';
+import type * as Notifications from '../../redux/modules/notifications';
 import type * as Types from '../../utils/types';
-import * as FontAwesome from '@fortawesome/react-fontawesome';
+import * as FontAwesome from '@fortawesome/fontawesome-svg-core';
 
 /** A type union of CSS position properties. */
 export type Placement = 'left' | 'right';
@@ -20,6 +20,8 @@ export const Level = {
   CUSTOM: 'custom',
 } as const;
 
+export type Level = typeof Level[keyof typeof Level];
+
 /** A {Item} component properties. */
 export type Item = Types.Overwrite<
   React.HTMLAttributes<HTMLDivElement>,
@@ -28,7 +30,7 @@ export type Item = Types.Overwrite<
     title: string;
     message: string;
     ttl: number;
-    icon?: string | React.ReactNode | FontAwesome.Props;
+    icon?: string | React.ReactNode | FontAwesome.IconProp;
     showCloseButton: boolean;
     onClick: () => void;
     onHide: () => void;

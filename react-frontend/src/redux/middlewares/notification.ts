@@ -5,6 +5,7 @@
 import * as Redux from 'redux';
 import * as Events from 'events';
 import * as FSA from 'typescript-fsa';
+import * as Store from '../store';
 import * as Notifications from '../modules/notifications';
 
 /** Responsible to emit notification events. */
@@ -36,11 +37,11 @@ export const removeNotificationListener = (
 
 /** Notification middleware. */
 export const middleware: Redux.Middleware =
-  <S extends Redux.AppStore>({
+  <S extends Store.Type>({
     getState,
   }: Redux.MiddlewareAPI<Redux.Dispatch, S>) =>
   (next: Redux.Dispatch<Redux.AnyAction>) =>
-  (action: FSA.Action<unknonw>): unknown => {
+  (action: FSA.Action<unknown>): unknown => {
     if (Notifications.isNotification(action.type)) {
       setTimeout(() => {
         const state = getState();

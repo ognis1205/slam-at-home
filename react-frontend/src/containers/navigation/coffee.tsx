@@ -7,23 +7,27 @@ import * as Props from './props';
 import styles from '../../assets/styles/containers/navigation.module.scss';
 
 /** Returns a `Button` component. */
-const Button: React.FunctionComponent<React.HTMLAttributes<HTMLAElement>> = ({
+const Button: React.FunctionComponent<
+  React.AnchorHTMLAttributes<HTMLAnchorElement>
+> = ({
   children,
   target,
   href,
   ...aAttrs
-}: React.HTMLAttributes<HTMLAElement>): React.ReactElement => (
+}: React.AnchorHTMLAttributes<HTMLAnchorElement>): React.ReactElement => (
   <a className={styles['coffee']} {...aAttrs} target={target} href={href}>
     {children}
   </a>
 );
 
 /** Returns a `Image` component. */
-const Image: React.FunctionComponent<React.HTMLAttributes<HTMLImgElement>> = ({
+const Image: React.FunctionComponent<
+  React.ImgHTMLAttributes<HTMLImageElement>
+> = ({
   src,
   alt,
   ...imgAttrs
-}: React.HTMLAttributes<HTMLImgElement>): React.ReactElement => (
+}: React.ImgHTMLAttributes<HTMLImageElement>): React.ReactElement => (
   // eslint-disable-next-line @next/next/no-img-element
   <img className={styles['img']} {...imgAttrs} src={src} alt={alt} />
 );

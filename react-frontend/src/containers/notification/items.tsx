@@ -8,7 +8,7 @@ import * as Props from './props';
 import * as Motion from '../../components/motion';
 import * as Notifications from '../../redux/modules/notifications';
 import * as Wrap from '../../utils/wrap';
-import * as FontAwesome from '@fortawesome/react-fontawesome';
+import * as FontAwesomeCore from '@fortawesome/fontawesome-svg-core';
 import * as FontAwesomeIcon from '@fortawesome/free-solid-svg-icons';
 import classnames from 'classnames';
 import styles from '../../assets/styles/containers/notification.module.scss';
@@ -30,7 +30,9 @@ const getClassName = (className: string, placement: Props.Placement): string =>
   });
 
 /** Returns the corresponding FontAwesome icon. */
-const getIcon = (level: Notifications.Level): FontAwesome.Props => {
+const getIcon = (
+  level: Notifications.Level
+): FontAwesomeCore.IconDefinition => {
   switch (level) {
     case Notifications.Level.INFO:
       return FontAwesomeIcon.faInfoCircle;
@@ -57,7 +59,7 @@ export const Component: React.FunctionComponent<Props.Items> = ({
   ...divAttrs
 }: Props.Items): React.ReactElement => {
   /** Event listener which is responsible for `onHide`. */
-  const handleHide = (notification: Props.Notify) => () => {
+  const handleHide = (notification: Notifications.Item) => () => {
     if (onHide) {
       onHide(notification);
     }
@@ -71,10 +73,9 @@ export const Component: React.FunctionComponent<Props.Items> = ({
         name="notification"
         deadline={duration}
       >
-        {(notify) => {
+        {(notify: Notifications.Item) => {
           return (
             <Item.Component
-              className={notify.className}
               key={notify.key}
               level={notify.level}
               title={notify.title}
@@ -84,7 +85,6 @@ export const Component: React.FunctionComponent<Props.Items> = ({
               onClick={notify.onClick}
               icon={getIcon(notify.level)}
               onHide={handleHide(notify)}
-              style={notify.style}
             />
           );
         }}

@@ -5,7 +5,7 @@
 import type * as React from 'react';
 import type * as Motion from '../motion';
 import type * as Types from '../../utils/types';
-import * as FontAwesome from '@fortawesome/react-fontawesome';
+import * as FontAwesome from '@fortawesome/fontawesome-svg-core';
 
 /** Defines collapsible types. */
 export type CollapsibleType = 'header' | 'disabled';
@@ -24,7 +24,7 @@ export interface Header extends Common {
   collapsible?: CollapsibleType;
   accordion?: boolean;
   arrow?: (props: Header) => React.ReactNode;
-  icon?: string | React.ReactNode | FontAwesome.Props;
+  icon?: string | React.ReactNode | FontAwesome.IconProp;
   iconClassName?: string;
 }
 

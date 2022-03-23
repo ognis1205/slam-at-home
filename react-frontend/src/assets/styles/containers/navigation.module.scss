@@ -41,9 +41,6 @@
 	}
       }
       .coffee {
-	-moz-user-select: none;
-	-ms-user-select: none;
-	-webkit-user-select: none;
 	background-image: $button-image;
 	border-color: $color-border;
 	border: 1px solid $color-border;
@@ -93,7 +90,6 @@
   .tree {
     flex: 1;
     font-size: 16px;
-    font-weight: 500;
     overflow: auto;
     padding-bottom: 10px;
     padding-left: 20px;

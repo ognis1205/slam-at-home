@@ -36,17 +36,23 @@ export type ItemType = typeof ItemType[keyof typeof ItemType];
 
 /** A {Item} component properties. */
 export type Item = Types.Overwrite<
-  React.HTMLAttributes<HTMLAElement>,
+  React.AnchorHTMLAttributes<HTMLAnchorElement>,
   {
     key: string | number;
     type: ItemType;
     title: string;
-    active: boolean;
+    active?: boolean;
   }
 >;
 
 /** A {Github} component properties. */
-export type Github = React.HTMLAttributes<HTMLAElement>;
+export type Github = Types.Overwrite<
+  React.AnchorHTMLAttributes<HTMLAnchorElement>,
+  {
+    dataShowCount: boolean | string;
+    ariaLabel: string;
+  }
+>;
 
 /** A {Coffee} component properties. */
-export type Coffee = React.HTMLAttributes<HTMLAElement>;
+export type Coffee = React.AnchorHTMLAttributes<HTMLAnchorElement>;

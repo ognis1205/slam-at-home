@@ -26,7 +26,7 @@ const DEFAULT_PROPS = {
 
 /** Returns a `Left` component. */
 const Left = React.forwardRef<HTMLDivElement, Props.Left>(
-  ({ children, divProps }: Props.Left, ref) => (
+  ({ children, ...divProps }: Props.Left, ref) => (
     <div ref={ref} className={styles['left']} {...divProps}>
       {children}
     </div>
@@ -75,9 +75,31 @@ export const Component: React.FunctionComponent<Props.Panel> = ({
   width,
   leftmost,
   rightmost,
-  position,
-  defaultPosition,
   onOpen,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  disabled,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  allowAnyClick,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  onStart,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  onMove,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  onStop,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  onMouseDown,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  grid,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  axis,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  scale,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  bounds,
+  position,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  positionOffset,
+  defaultPosition,
   ...divProps
 }: Props.Panel): React.ReactElement => {
   /** @const Holds a force updater. */

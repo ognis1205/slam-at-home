@@ -6,6 +6,7 @@ import * as React from 'react';
 import * as Props from './props';
 import * as Collapse from '../../components/collapse';
 import * as FontAwesome from '@fortawesome/react-fontawesome';
+import * as FontAwesomeCore from '@fortawesome/fontawesome-svg-core';
 import * as FontAwesomeIcon from '@fortawesome/free-solid-svg-icons';
 import * as FontAwesomeBrandIcon from '@fortawesome/free-brands-svg-icons';
 import * as Context from './context';
@@ -14,7 +15,7 @@ import NavigationMotion from '../../assets/motions/navigation';
 import styles from '../../assets/styles/containers/navigation.module.scss';
 
 /** Returns the corresponding FontAwesome icon. */
-const getIcon = (type: Props.ItemType): FontAwesome.Props => {
+const getIcon = (type: Props.ItemType): FontAwesomeCore.IconDefinition => {
   switch (type) {
     case Props.ItemType.CAMERA:
       return FontAwesomeIcon.faVideo;
