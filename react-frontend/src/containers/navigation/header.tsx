@@ -22,8 +22,7 @@ export const Component: React.FunctionComponent<Props.Header> = (
         height="64"
       />
     </div>
-    <div className={styles['title']}>SLAM@HOME</div>
-    <div className={styles['buttons']}>
+    {/*<div className={styles['buttons']}>
       <span className={styles['button']}>
         <Github.Component
           href="https://github.com/ognis1205/slam-at-home"
@@ -34,7 +33,7 @@ export const Component: React.FunctionComponent<Props.Header> = (
       <span className={styles['button']}>
         <Coffee.Component />
       </span>
-    </div>
+    </div>*/}
   </div>
 );
 
