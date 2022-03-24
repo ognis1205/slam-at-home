@@ -162,3 +162,52 @@ export const useFrame = (): [
 
   return [next, cancel];
 };
+
+/** A type union of application type properties. */
+export const ScriptState = {
+  IDLE: 'idle',
+  LOADING: 'loading',
+  READY: 'ready',
+  ERROR: 'error',
+} as const;
+
+export type ScriptState = typeof ScriptState[keyof typeof ScriptState];
+
+/** Returns the `<script />` loading state. */
+export const useExternalScript = (url: string): ScriptState => {
+  const [state, setState] = React.useState<ScriptState>(
+    url ? ScriptState.LOADING : ScriptState.IDLE
+  );
+
+  React.useEffect(() => {
+    if (!url || !DOM.isDefined()) {
+      setState(ScriptState.IDLE);
+      return;
+    }
+
+    let script = document.querySelector(`script[src="${url}"]`);
+    const handleScript = (e: React.SyntheticEvent) => {
+      setState(e.type === 'load' ? ScriptState.READY : ScriptState.ERROR);
+    };
+
+    if (!script) {
+      script = document.createElement('script');
+      script.type = 'application/javascript';
+      script.src = url;
+      script.async = true;
+      document.body.appendChild(script);
+      script.addEventListener('load', handleScript);
+      script.addEventListener('error', handleScript);
+    }
+
+    script.addEventListener('load', handleScript);
+    script.addEventListener('error', handleScript);
+
+    return () => {
+      script.removeEventListener('load', handleScript);
+      script.removeEventListener('error', handleScript);
+    };
+  }, [url]);
+
+  return state;
+};
