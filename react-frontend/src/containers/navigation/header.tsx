@@ -4,8 +4,6 @@
  */
 import * as React from 'react';
 import * as Props from './props';
-import * as Github from './github';
-import * as Coffee from './coffee';
 import Image from 'next/image';
 import styles from '../../assets/styles/containers/navigation.module.scss';
 
