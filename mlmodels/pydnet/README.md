@@ -3,9 +3,7 @@ pydnet
 
 PydNet: Single inference using TensorFlow 1.15.0 and python 3.7.
 
-* [Real-time single image depth perception in the wild with handheld devices, Arxiv](https://arxiv.org/pdf/2006.05724.pdf)
-* [PyDNet paper](https://arxiv.org/pdf/1806.11430.pdf)
-* [PyDNet code](https://github.com/mattpoggi/pydnet)
+[![](https://img.shields.io/badge/python-v3.7-blue.svg)](https://github.com/python/)
 
 Installation
 ------------
@@ -59,3 +57,10 @@ Project Organization
     ├── setup.py           <- Makes project pip installable (pip install -e .) so src can be imported.
     ├── src                <- Source code for use in this project.
     └── tox.ini            <- tox file with settings for running tox; see tox.readthedocs.io
+
+References
+------------
+
+* [Real-time single image depth perception in the wild with handheld devices, Arxiv](https://arxiv.org/pdf/2006.05724.pdf)
+* [PyDNet paper](https://arxiv.org/pdf/1806.11430.pdf)
+* [PyDNet code](https://github.com/mattpoggi/pydnet)
