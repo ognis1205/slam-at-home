@@ -3,8 +3,6 @@ pydnet
 
 PydNet: Single inference using TensorFlow 1.15.0 and python 3.7.
 
-[![](https://img.shields.io/badge/python-v3.7-blue.svg)](https://github.com/python/)
-
 Installation
 ------------
  - You can install *pydnet* with *pip*, run the following command in the project root directory:
