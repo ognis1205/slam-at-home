@@ -28,8 +28,6 @@ export type CSSCoord = {
   top: number;
   left: number;
   transform: string;
-  arrowLeft: string;
-  arrowTop: string;
 };
 
 /** Defines HTML bounds. */
@@ -42,66 +40,51 @@ export type Bounds = {
 
 /** Computes CSS coordinate for a given position. */
 export const getCSSCoord = (
-  triggerBounding: DOMRect,
-  contentBounding: DOMRect,
+  triggerRect: DOMRect,
+  contentRect: DOMRect,
   position: Position,
-  offset: { x: number; y: number },
-  arrow: boolean
+  offset: { x: number; y: number }
 ): CSSCoord => {
   const args = position.split(/\s+/);
-  const margin = arrow ? 8 : 0;
-
-  const centerTop = triggerBounding.top + triggerBounding.height / 2;
-  const centerLeft = triggerBounding.left + triggerBounding.width / 2;
-  const { height, width } = contentBounding;
+  const centerTop = triggerRect.top + triggerRect.height / 2;
+  const centerLeft = triggerRect.left + triggerRect.width / 2;
+  const { height, width } = contentRect;
   let top = centerTop - height / 2;
   let left = centerLeft - width / 2;
   let transform = '';
-  let arrowTop = '0%';
-  let arrowLeft = '0%';
 
   switch (args[0]) {
     case 'top':
-      top -= height / 2 + triggerBounding.height / 2 + margin;
+      top -= height / 2 + triggerRect.height / 2;
       transform = `rotate(180deg)  translateX(50%)`;
-      arrowTop = '100%';
-      arrowLeft = '50%';
       break;
     case 'bottom':
-      top += height / 2 + triggerBounding.height / 2 + margin;
+      top += height / 2 + triggerRect.height / 2;
       transform = `rotate(0deg) translateY(-100%) translateX(-50%)`;
-      arrowLeft = '50%';
       break;
     case 'left':
-      left -= width / 2 + triggerBounding.width / 2 + margin;
+      left -= width / 2 + triggerRect.width / 2;
       transform = ` rotate(90deg)  translateY(50%) translateX(-25%)`;
-      arrowLeft = '100%';
-      arrowTop = '50%';
       break;
     case 'right':
-      left += width / 2 + triggerBounding.width / 2 + margin;
+      left += width / 2 + triggerRect.width / 2;
       transform = `rotate(-90deg)  translateY(-150%) translateX(25%)`;
-      arrowTop = '50%';
       break;
     default:
   }
 
   switch (args[1]) {
     case 'top':
-      top = triggerBounding.top;
-      arrowTop = `${triggerBounding.height / 2}px`;
+      top = triggerRect.top;
       break;
     case 'bottom':
-      top = triggerBounding.top - height + triggerBounding.height;
-      arrowTop = `${height - triggerBounding.height / 2}px`;
+      top = triggerRect.top - height + triggerRect.height;
       break;
     case 'left':
-      left = triggerBounding.left;
-      arrowLeft = `${triggerBounding.width / 2}px`;
+      left = triggerRect.left;
       break;
     case 'right':
-      left = triggerBounding.left - width + triggerBounding.width;
-      arrowLeft = `${width - triggerBounding.width / 2}px`;
+      left = triggerRect.left - width + triggerRect.width;
       break;
     default:
   }
@@ -109,7 +92,7 @@ export const getCSSCoord = (
   top = args[0] === 'top' ? top - offset.y : top + offset.y;
   left = args[0] === 'left' ? left - offset.x : left + offset.x;
 
-  return { top, left, transform, arrowLeft, arrowTop };
+  return { top, left, transform };
 };
 
 /** Computes tooltip boundary. */
@@ -133,16 +116,13 @@ export const getTooltipBounds = (
 
 /** Computes CSS coordinate for a given position. */
 export const getPosition = (
-  triggerBounding: DOMRect,
-  contentBounding: DOMRect,
+  triggerRect: DOMRect,
+  contentRect: DOMRect,
   position: Position | Position[],
   offset: { x: number; y: number },
-  arrow: boolean,
   keepTooltipInside: string | boolean
 ): CSSCoord => {
   let best: CSSCoord = {
-    arrowLeft: '0%',
-    arrowTop: '0%',
     left: 0,
     top: 0,
     transform: 'rotate(135deg)',
@@ -157,18 +137,17 @@ export const getPosition = (
 
   while (i < positions.length) {
     best = getCSSCoord(
-      triggerBounding,
-      contentBounding,
+      triggerRect,
+      contentRect,
       positions[i],
-      offset,
-      arrow
+      offset
     );
 
     const box = {
       top: best.top,
       left: best.left,
-      width: contentBounding.width,
-      height: contentBounding.height,
+      width: contentRect.width,
+      height: contentRect.height,
     };
 
     if (
