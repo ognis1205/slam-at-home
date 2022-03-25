@@ -3,6 +3,7 @@
  * @copyright Shingo OKAWA 2022
  */
 import type * as React from 'react';
+import * as Portal from '../../components/portal';
 import * as Popup from '../../utils/popup';
 import * as Types from '../../utils/types';
 
@@ -12,63 +13,64 @@ export type Event = 'hover' | 'click' | 'focus' | 'right-click';
 /** A type union of modal position properties. */
 export type Position = Popup.Position;
 
+/** A popup action trigger. */
+export type Trigger = {
+  open: () => void;
+  close: () => void;
+  toggle: () => void;
+};
+
+/** A type of open event handler. */
+export type MouseHandler = (e?: React.SyntheticEvent) => void;
+
+/** A type of open event handler. */
+export type OpenHandler = (e?: React.SyntheticEvent) => void;
+
+/** A type of close event handler. */
+export type CloseHandler = (
+  e?: React.SyntheticEvent | KeyboardEvent | TouchEvent | MouseEvent
+) => void;
+
 /** A common properties shared by both {Modal} and {Content} components. */
-type Common = Types.Overwrite<
-  React.HTMLAttributes<HTMLDivElement>,
-  {
-    open?: boolean;
-    defaultOpen?: boolean;
-    disabled?: boolean;
-    modal?: boolean;
-    trigger?: JSX.Element | ((isOpen: boolean) => JSX.Element);
-    delay?: number;
-    on?: Event | Event[];
-    onOpen?: (event?: React.SyntheticEvent) => void;
-    onClose?: (
-      event?: React.SyntheticEvent | KeyboardEvent | TouchEvent | MouseEvent
-    ) => void;
-  }
->;
+type Common = {
+  children:
+    | React.ReactNode
+    | ((onClose: CloseHandler, isOpen: boolean) => React.ReactNode);
+  container?: DOM.Identifier;
+  modal?: boolean;
+  trigger?: JSX.Element | ((isOpen: boolean) => JSX.Element);
+  on?: Event | Event[];
+};
 
 /** A {Content} component properties. */
 export type Content = Types.Overwrite<
   React.HTMLAttributes<HTMLDivElement>,
-  Common
+  Common & Portal.Context
 >;
+
+//export interface WrapperContext {
+//  container?: DOM.Identifier;
+//  getOpenCount?: () => number;
+//  scrollLocker?: Scroll.Locker;
+//  switchScrollingEffect?: () => void;
+//}
 
 /** A {Modal} component properties. */
 export type Modal = Types.Overwrite<
-  React.HTMLAttributes<HTMLDivElement>,
+  Common,
   {
-//    children: React.ReactNode;
-//    className?: string;
     offset: { x: number; y: number };
-////    trigger?: JSX.Element | ((isOpen: boolean) => JSX.Element);
-////    open?: boolean;
-////    defaultOpen?: boolean;
-////    disabled?: boolean;
-    nested?: boolean;
-////    on?: Event | Event[];
-    //| ((close: () => void, isOpen: boolean) => React.ReactNode);
+    disabled?: boolean;
+    open?: boolean;
+    defaultOpen?: boolean;
+    onOpen?: OpenHandler;
+    onClose?: CloseHandler;
     position?: Position | Position[];
-//    offsetX?: number;
-//    offsetY?: number;
-    arrow?: boolean;
-////    modal?: boolean;
-    lockScroll?: boolean;
+    delay?: number;
     closeOnDocumentClick?: boolean;
     closeOnEscape?: boolean;
     repositionOnResize?: boolean;
-////    mouseEnterDelay?: number;
-////    mouseLeaveDelay?: number;
-////    onOpen?: (event?: React.SyntheticEvent) => void;
-    // the popup can be closed depend on multiple factor: mouse click outside, keyboard esc, click a close button
-////    onClose?: (
-////      event?: React.SyntheticEvent | KeyboardEvent | TouchEvent | MouseEvent
-////    ) => void;
-//    contentStyle?: React.CSSProperties;
     overlayStyle?: React.CSSProperties;
-    arrowStyle?: React.CSSProperties;
     keepTooltipInside?: boolean | string;
   }
 >;
