@@ -48,7 +48,6 @@ export const diff = (
   const lhsObjs = parse(lhs);
   const rhsObjs = parse(rhs);
 
-  // Check prev keys to insert or keep
   lhsObjs.forEach((lhsObj) => {
     let hit = false;
     for (let i = curr; i < len; i += 1) {
@@ -79,15 +78,12 @@ export const diff = (
     }
   });
 
-  // Add rest to the list
   if (curr < len) {
     diffs = diffs.concat(
       rhsObjs.slice(curr).map((obj) => ({ ...obj, status: Status.ADD }))
     );
   }
 
-  // Merge same key when it remove and add again:
-  // [1 - add, 2 - keep, 1 - remove] -> [1 - keep, 2 - keep]
   const keys = {};
   diffs.forEach(({ key }) => {
     keys[key] = (keys[key] || 0) + 1;
