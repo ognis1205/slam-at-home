@@ -136,12 +136,7 @@ export const getPosition = (
     positions = [...positions, ...POSITIONS];
 
   while (i < positions.length) {
-    best = getCSSCoord(
-      triggerRect,
-      contentRect,
-      positions[i],
-      offset
-    );
+    best = getCSSCoord(triggerRect, contentRect, positions[i], offset);
 
     const box = {
       top: best.top,
