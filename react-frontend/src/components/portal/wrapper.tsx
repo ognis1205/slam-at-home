@@ -168,7 +168,7 @@ export const Component: React.FunctionComponent<Props.Wrapper> = (
     },
   } as Props.WrapperContext;
 
-  if (props.forceRender || props.visible || portal.current)
+  if (props.forceRender || props.visible)
     return (
       <Portal.Component
         container={getPortal}

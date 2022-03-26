@@ -17,7 +17,7 @@ export type Ref = Record<string, unknown>;
 
 /** Returns a `Portal` component. */
 export const Component = React.forwardRef<Ref, Props.Portal>(
-  (props: Props.Portal, ref): React.ReactElement => {
+  (props: Props.Portal, ref: React.ForwardedRef<Ref>): React.ReactElement => {
     /** Returns nothing but defines instance just for the existence check in a wrapper. */
     React.useImperativeHandle(ref, () => ({}));
 
