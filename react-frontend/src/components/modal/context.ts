@@ -7,6 +7,7 @@ import * as Props from './props';
 
 /** A {Modal} context type. */
 export type ContextType = {
+  id: string;
   isOpen: boolean;
   openHandler: Props.OpenHandler;
   closeHandler: Props.CloseHandler;

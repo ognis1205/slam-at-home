@@ -11,6 +11,7 @@ import * as DOM from '../../utils/dom';
 import * as Event from '../../utils/event';
 import * as Hook from '../../utils/hook';
 import * as Popup from '../../utils/popup';
+import * as Wrap from '../../utils/wrap';
 import classnames from 'classnames';
 import styles from '../../assets/styles/components/modal.module.scss';
 
@@ -19,7 +20,7 @@ const DEFAULT_PROPS: Partial<Props.Modal> = {
   //  placement: 'left',
   container: 'body',
   defaultOpen: false,
-  delay: '.2s',
+  delay: 200,
 };
 
 /** Returns the class name of the wrapper. */
@@ -29,7 +30,7 @@ const getClassName = (className: string): string =>
   });
 
 /** Returns a `Modal` component. */
-const Component = React.forwardRef<Props.Trigger, Props.Content>(
+const Component = React.forwardRef<Props.Trigger, Props.Modal>(
   (
     {
       children,
@@ -51,15 +52,24 @@ const Component = React.forwardRef<Props.Trigger, Props.Content>(
 
       ...commonProps
     }: Props.Modal,
-    ref: Props.Trigger
+    ref: React.ForwardedRef<Props.Trigger>
   ): React.ReactElement => {
     /** @const Holds a open state. */
     const [isOpen, setOpen] = React.useState<boolean>(
       typeof open !== 'undefined' ? open : !!defaultOpen
     );
 
+    /** @const Holds a component's identifier. */
+    const id = React.useRef<string>(
+      `modal_id_${Number(
+        (Date.now() + Math.random())
+          .toString()
+          .replace('.', Math.round(Math.random() * 9).toString())
+      ).toString(16)}`
+    );
+
     /** @const Holds `true` if the component is modal. */
-    const isModal = modal ? true : !commonProps.trigger;
+    const isModal = commonProps.modal ? true : !commonProps.trigger;
 
     /** @const Holds a reference to the component itself. */
     const self = React.useRef<HTMLDivElement>(null);
@@ -71,7 +81,7 @@ const Component = React.forwardRef<Props.Trigger, Props.Content>(
     const content = React.useRef<HTMLDivElement>(null);
 
     /** @const Holds a reference to the focused element. */
-    const focusedBeforeOpen = React.useRef<HTMLElement>(null);
+    const focusedBeforeOpen = React.useRef<Element>(null);
 
     /** @const Holds a mouse enter effect. */
     const timeout = React.useRef<ReturnType<typeof setTimeout>>(null);
@@ -197,13 +207,14 @@ const Component = React.forwardRef<Props.Trigger, Props.Content>(
 
     /** Renders trigger element. */
     const renderTrigger = (): JSX.Element => {
-      const props: unknown = {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const props: any = {
         key: 'T',
         ref: (el) => (trigger.current = el),
-        'aria-describedby': popupId.current,
+        'aria-describedby': id.current,
       };
 
-      const on = Array.isArray(commomProps.on)
+      const on = Array.isArray(commonProps.on)
         ? commonProps.on
         : [commonProps.on];
       on.forEach((e) => {
@@ -259,16 +270,16 @@ const Component = React.forwardRef<Props.Trigger, Props.Content>(
           {renderTrigger()}
           <Portal.Wrapper
             visible={isOpen}
-            forceRender={!!commonProps.handler || forceRender}
             container={container}
             className={getClassName(className)}
           >
             {(contentProps: Props.Content) => (
-              <Context.Provider
+              <Context.Modal.Provider
                 value={{
+                  id: id.current,
                   isOpen: isOpen,
                   openHandler: handleOpen,
-                  closeHandler: CloseHandler,
+                  closeHandler: handleClose,
                   mouseEnterHandler: handleMouseEnter,
                   mouseLeaveHandler: handleMouseLeave,
                 }}
@@ -281,7 +292,7 @@ const Component = React.forwardRef<Props.Trigger, Props.Content>(
                 >
                   {children}
                 </Content.Component>
-              </Context.Provider>
+              </Context.Modal.Provider>
             )}
           </Portal.Wrapper>
         </React.Fragment>
@@ -292,6 +303,6 @@ const Component = React.forwardRef<Props.Trigger, Props.Content>(
 /** Sets the component's display name. */
 Component.displayName = 'Modal';
 
-/** Returns a `Drawer` component with default property values. */
-export const WithDefaultComponent: React.FunctionComponent<Props.Drawer> =
+/** Returns a `Modal` component with default property values. */
+export const WithDefaultComponent: React.FunctionComponent<Props.Modal> =
   Wrap.withDefaultProps(Component, DEFAULT_PROPS);

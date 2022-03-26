@@ -4,6 +4,7 @@
  */
 import type * as React from 'react';
 import * as Portal from '../../components/portal';
+import * as DOM from '../../utils/dom';
 import * as Popup from '../../utils/popup';
 import * as Types from '../../utils/types';
 
@@ -57,8 +58,8 @@ export type Content = Types.Overwrite<
 
 /** A {Modal} component properties. */
 export type Modal = Types.Overwrite<
-  Common,
-  {
+  React.HTMLAttributes<HTMLDivElement>,
+  Common & {
     offset: { x: number; y: number };
     disabled?: boolean;
     open?: boolean;

@@ -5,8 +5,14 @@
 import * as React from 'react';
 import * as Props from './props';
 import * as Context from './context';
+import * as DOM from '../../utils/dom';
+import * as Hook from '../../utils/hook';
 import classnames from 'classnames';
 import styles from '../../assets/styles/components/modal.module.scss';
+
+/** Returns the container element of a modal content. */
+const getContainer = (container: DOM.Identifier): HTMLElement =>
+  DOM.get(container);
 
 /** Returns the class name of the content. */
 const getClassName = (className: string, isModal: boolean): string =>
@@ -35,22 +41,14 @@ export const Component = React.forwardRef<HTMLDivElement, Props.Content>(
   ): React.ReactElement => {
     /** @const Holds modal context. */
     const {
+      id,
       isOpen,
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      handleOpen,
-      handleClose,
-      handleMouseEnter,
-      handleMouseLeave,
+      openHandler,
+      closeHandler,
+      mouseEnterHandler,
+      mouseLeaveHandler,
     } = React.useContext(Context.Modal);
-
-    /** @const Holds a component's identifier. */
-    const id = React.useRef<string>(
-      `modal_id_${Number(
-        (Date.now() + Math.random())
-          .toString()
-          .replace('.', Math.round(Math.random() * 9).toString())
-      ).toString(16)}`
-    );
 
     /** @const Holds `true` if the component is modal. */
     const isModal = modal ? true : !trigger;
@@ -62,7 +60,7 @@ export const Component = React.forwardRef<HTMLDivElement, Props.Content>(
     Hook.useDidMount(() => {
       if (isOpen) {
         if (getContainer(container)?.parentNode === document.body)
-          CURRENT_MODAL[id.current] = isOpen;
+          CURRENT_MODAL[id] = isOpen;
         scrollLocker?.lock();
       }
     });
@@ -70,7 +68,7 @@ export const Component = React.forwardRef<HTMLDivElement, Props.Content>(
     /** `componentDidUpdate` */
     Hook.useDidUpdate(() => {
       if (getContainer(container)?.parentNode === document.body)
-        CURRENT_MODAL[id.current] = !!isOpen;
+        CURRENT_MODAL[id] = !!isOpen;
       if (isOpen) scrollLocker?.lock();
       else scrollLocker?.unlock();
     }, [isOpen]);
@@ -93,11 +91,11 @@ export const Component = React.forwardRef<HTMLDivElement, Props.Content>(
         role={isModal ? 'dialog' : 'tooltip'}
         className={getClassName(className, isModal)}
         onClick={handleClick}
-        onMouseEnter={hasHover ? handleMouseEnter : handleNothing}
-        onMouseLeave={hasHover ? handleMouseLeave : handleNothing}
+        onMouseEnter={hasHover ? mouseEnterHandler : handleNothing}
+        onMouseLeave={hasHover ? mouseLeaveHandler : handleNothing}
       >
         {children && typeof children === 'function'
-          ? children(handleClose, isOpen)
+          ? children(closeHandler, isOpen)
           : children}
       </div>
     );
