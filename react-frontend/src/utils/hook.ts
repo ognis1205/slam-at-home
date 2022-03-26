@@ -185,11 +185,13 @@ export const useExternalScript = (url: string): ScriptState => {
       return;
     }
 
-    let script = document.querySelector(`script[src="${url}"]`);
-    const handleScript = (e: React.SyntheticEvent) => {
+    const handleScript = (e: Event) => {
       setState(e.type === 'load' ? ScriptState.READY : ScriptState.ERROR);
     };
 
+    let script: HTMLScriptElement = document.querySelector(
+      `script[src="${url}"]`
+    );
     if (!script) {
       script = document.createElement('script');
       script.type = 'application/javascript';
