@@ -4,6 +4,10 @@
  */
 @import '../constants.scss';
 
+.portal {
+  min-height: 0px;
+  min-width: 0px;
+}
 .content {
   pointer-events: auto;
   .tooltip {
