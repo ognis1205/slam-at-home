@@ -103,7 +103,9 @@ export class Locker {
       return;
 
     const container = this.options?.container || document.body;
-    if (!CLASS_NAME_REGEX.test(container.className)) return;
+    if (!CLASS_NAME_REGEX.test(container.className)) {
+      return;
+    }
 
     CSS.set(LOCKER_CACHE.get(container), container);
     LOCKER_CACHE.delete(container);
