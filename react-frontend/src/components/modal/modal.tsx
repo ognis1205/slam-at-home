@@ -11,23 +11,34 @@ import * as DOM from '../../utils/dom';
 import * as Event from '../../utils/event';
 import * as Hook from '../../utils/hook';
 import * as Popup from '../../utils/popup';
-import * as Wrap from '../../utils/wrap';
 import classnames from 'classnames';
 import styles from '../../assets/styles/components/modal.module.scss';
 
-/** Default properties. */
-const DEFAULT_PROPS: Partial<Props.Modal> = {
-  //  placement: 'left',
-  container: 'body',
-  defaultOpen: false,
-  delay: 200,
+/** Returns a `Overlay` component. */
+export const Overlay: React.FunctionComponent<
+  React.HTMLAttributes<HTMLDivElement>
+> = ({
+  children,
+  ...divProps
+}: React.HTMLAttributes<HTMLDivElement>): React.ReactElement => {
+  return (
+    <div className={styles['overlay']} {...divProps}>
+      {children}
+    </div>
+  );
 };
 
+/** Sets the component's display name. */
+Overlay.displayName = 'Overlay';
+
 /** Returns the class name of the wrapper. */
-const getClassName = (className: string): string =>
+const getPortalClassName = (className: string): string =>
   classnames(styles['portal'], {
     [className || '']: !!className,
   });
+
+/** Manages modal id. */
+let ID_COUNTER = 0;
 
 /** Returns a `Modal` component. */
 const Component = React.forwardRef<Props.Trigger, Props.Modal>(
@@ -35,21 +46,17 @@ const Component = React.forwardRef<Props.Trigger, Props.Modal>(
     {
       children,
       className,
-
-      container,
-
+      container = 'body',
       offset,
       open,
-      defaultOpen,
+      defaultOpen = false,
       disabled,
       onOpen,
       onClose,
       position,
-      delay,
-
-      repositionOnResize,
+      delay = 200,
+      repositionOnResize = true,
       keepTooltipInside,
-
       ...commonProps
     }: Props.Modal,
     ref: React.ForwardedRef<Props.Trigger>
@@ -60,13 +67,7 @@ const Component = React.forwardRef<Props.Trigger, Props.Modal>(
     );
 
     /** @const Holds a component's identifier. */
-    const id = React.useRef<string>(
-      `modal_id_${Number(
-        (Date.now() + Math.random())
-          .toString()
-          .replace('.', Math.round(Math.random() * 9).toString())
-      ).toString(16)}`
-    );
+    const id = React.useRef<string>(`modal-${ID_COUNTER++}`);
 
     /** @const Holds `true` if the component is modal. */
     const isModal = commonProps.modal ? true : !commonProps.trigger;
@@ -103,8 +104,12 @@ const Component = React.forwardRef<Props.Trigger, Props.Modal>(
     Hook.useLayoutEffect(() => {
       if (isOpen) {
         if (DOM.isDefined()) focusedBeforeOpen.current = document.activeElement;
-        setPosition();
-        focus();
+        // This is workaround due to the React Portal will only be rendered
+        // after the host node has been appended into the DOM.
+        setTimeout(() => {
+          setPosition();
+          focus();
+        }, 0);
       }
       return () => {
         clearTimeout(timeout.current);
@@ -144,7 +149,9 @@ const Component = React.forwardRef<Props.Trigger, Props.Modal>(
       const candidates = content?.current?.querySelectorAll(
         'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), [tabindex="0"]'
       );
-      const focusiable = Array.prototype.slice.call(candidates)[0];
+      const focusiable = candidates
+        ? Array.prototype.slice.call(candidates)[0]
+        : null;
       focusiable?.focus();
     };
 
@@ -152,7 +159,9 @@ const Component = React.forwardRef<Props.Trigger, Props.Modal>(
     const handleOpen = (e?: React.SyntheticEvent) => {
       if (isOpen || disabled) return;
       setOpen(true);
-      setTimeout(() => onOpen(e), 0);
+      setTimeout(() => {
+        if (onOpen) onOpen(e);
+      }, 0);
     };
 
     /** An event handler called on `close` events. */
@@ -163,7 +172,9 @@ const Component = React.forwardRef<Props.Trigger, Props.Modal>(
       setOpen(false);
       if (DOM.isDefined() && isModal)
         (focusedBeforeOpen.current as HTMLElement)?.focus();
-      setTimeout(() => onClose(e), 0);
+      setTimeout(() => {
+        if (onClose) onClose(e);
+      }, 0);
     };
 
     /** An event handler called on `mouseenter` events. */
@@ -192,8 +203,9 @@ const Component = React.forwardRef<Props.Trigger, Props.Modal>(
         !isOpen ||
         !trigger?.current ||
         !content?.current
-      )
+      ) {
         return;
+      }
       const coord = Popup.getPosition(
         trigger.current.getBoundingClientRect(),
         content.current.getBoundingClientRect(),
@@ -201,6 +213,7 @@ const Component = React.forwardRef<Props.Trigger, Props.Modal>(
         offset,
         keepTooltipInside
       );
+      console.log("coord", coord);
       content.current.style.top = `${coord.top + window.scrollY}px`;
       content.current.style.left = `${coord.left + window.scrollX}px`;
     };
@@ -211,7 +224,7 @@ const Component = React.forwardRef<Props.Trigger, Props.Modal>(
       const props: any = {
         key: 'T',
         ref: (el) => (trigger.current = el),
-        'aria-describedby': id.current,
+        //        'aria-describedby': id.current,
       };
 
       const on = Array.isArray(commonProps.on)
@@ -251,16 +264,18 @@ const Component = React.forwardRef<Props.Trigger, Props.Modal>(
         <React.Fragment>
           {renderTrigger()}
           <div
-            className={getClassName(className)}
+            className={getPortalClassName(className)}
             ref={(el) => (self.current = el)}
           >
-            <Content.Component
-              {...commonProps}
-              className={className}
-              ref={(el) => (content.current = el)}
-            >
-              {children}
-            </Content.Component>
+            <Overlay>
+              <Content.Component
+                {...commonProps}
+                className={className}
+                ref={(el) => (content.current = el)}
+              >
+                {children}
+              </Content.Component>
+            </Overlay>
           </div>
         </React.Fragment>
       );
@@ -271,9 +286,15 @@ const Component = React.forwardRef<Props.Trigger, Props.Modal>(
           <Portal.Wrapper
             visible={isOpen}
             container={container}
-            className={getClassName(className)}
+            className={getPortalClassName(className)}
           >
-            {(contentProps: Props.Content) => (
+            {({
+              // eslint-disable-next-line @typescript-eslint/no-unused-vars
+              getOpenCount,
+              // eslint-disable-next-line @typescript-eslint/no-unused-vars
+              switchScrollingEffect,
+              ...rest
+            }: Props.Content) => (
               <Context.Modal.Provider
                 value={{
                   id: id.current,
@@ -284,14 +305,16 @@ const Component = React.forwardRef<Props.Trigger, Props.Modal>(
                   mouseLeaveHandler: handleMouseLeave,
                 }}
               >
-                <Content.Component
-                  {...commonProps}
-                  {...contentProps}
-                  className={className}
-                  ref={(el) => (content.current = el)}
-                >
-                  {children}
-                </Content.Component>
+                <Overlay>
+                  <Content.Component
+                    {...commonProps}
+                    {...rest}
+                    className={className}
+                    ref={(el) => (content.current = el)}
+                  >
+                    {children}
+                  </Content.Component>
+                </Overlay>
               </Context.Modal.Provider>
             )}
           </Portal.Wrapper>
@@ -304,5 +327,7 @@ const Component = React.forwardRef<Props.Trigger, Props.Modal>(
 Component.displayName = 'Modal';
 
 /** Returns a `Modal` component with default property values. */
-export const WithDefaultComponent: React.FunctionComponent<Props.Modal> =
-  Wrap.withDefaultProps(Component, DEFAULT_PROPS);
+//export const WithDefaultComponent: React.FunctionComponent<Props.Modal> =
+//  Wrap.withDefaultProps(Component, DEFAULT_PROPS);
+
+export const WithDefaultComponent = Component;

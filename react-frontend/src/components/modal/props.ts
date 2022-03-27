@@ -49,13 +49,6 @@ export type Content = Types.Overwrite<
   Common & Portal.Context
 >;
 
-//export interface WrapperContext {
-//  container?: DOM.Identifier;
-//  getOpenCount?: () => number;
-//  scrollLocker?: Scroll.Locker;
-//  switchScrollingEffect?: () => void;
-//}
-
 /** A {Modal} component properties. */
 export type Modal = Types.Overwrite<
   React.HTMLAttributes<HTMLDivElement>,

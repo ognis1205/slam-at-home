@@ -37,7 +37,7 @@ export const Component = React.forwardRef<HTMLDivElement, Props.Content>(
       on,
       ...divAttrs
     }: Props.Content,
-    ref: React.Ref<HTMLDivElement>
+    ref
   ): React.ReactElement => {
     /** @const Holds modal context. */
     const {
@@ -54,7 +54,7 @@ export const Component = React.forwardRef<HTMLDivElement, Props.Content>(
     const isModal = modal ? true : !trigger;
 
     /** @const Holds `true` if the component has `hover` event handler. */
-    const hasHover = !modal && on.indexOf('hover') >= 0;
+    const hasHover = !modal && on?.indexOf('hover') >= 0;
 
     /** `componentDidMount` */
     Hook.useDidMount(() => {
