@@ -81,14 +81,17 @@ export const Component: React.FunctionComponent<Props.Wrapper> = (
 
   /** Updates a scroll locker. */
   const updateScrollLocker = React.useCallback((): void => {
-    if (
+    if (!props.visible) {
+      scrollLocker.current?.unlock();
+    } else if (
       props.visible &&
       DOM.isDefined() &&
       getContainer(props) !== scrollLocker.current?.getContainer()
-    )
+    ) {
       scrollLocker.current?.relock({
         container: getContainer(props) as HTMLElement,
       });
+    }
   }, [props]);
 
   /** Returns `true` if container has changed. */
