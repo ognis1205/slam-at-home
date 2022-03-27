@@ -15,18 +15,39 @@ import classnames from 'classnames';
 import styles from '../../assets/styles/components/modal.module.scss';
 
 /** Returns a `Overlay` component. */
-export const Overlay: React.FunctionComponent<
-  React.HTMLAttributes<HTMLDivElement>
-> = ({
-  children,
-  ...divProps
-}: React.HTMLAttributes<HTMLDivElement>): React.ReactElement => {
-  return (
-    <div className={styles['overlay']} {...divProps}>
-      {children}
-    </div>
-  );
-};
+const Overlay = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement> & {
+    onClick?: (e: React.MouseEvent | React.KeyboardEvent) => void;
+  }
+>(
+  (
+    {
+      children,
+      onClick,
+      ...divProps
+    }: React.HTMLAttributes<HTMLDivElement> & {
+      onClick?: (e: React.MouseEvent | React.KeyboardEvent) => void;
+    },
+    ref
+  ) => {
+    /** An event handler called on `close` events. */
+    const handleClick = (e?: React.MouseEvent | React.KeyboardEvent) => {
+      if (onClick) onClick(e);
+    };
+
+    return (
+      <div
+        ref={ref}
+        onClick={handleClick}
+        className={styles['overlay']}
+        {...divProps}
+      >
+        {children}
+      </div>
+    );
+  }
+);
 
 /** Sets the component's display name. */
 Overlay.displayName = 'Overlay';
@@ -80,6 +101,9 @@ const Component = React.forwardRef<Props.Trigger, Props.Modal>(
 
     /** @const Holds a reference to the contentg. */
     const content = React.useRef<HTMLDivElement>(null);
+
+    /** @const Holds a reference to the overlay element. */
+    const overlay = React.useRef<HTMLDivElement>(null);
 
     /** @const Holds a reference to the focused element. */
     const focusedBeforeOpen = React.useRef<Element>(null);
@@ -267,7 +291,7 @@ const Component = React.forwardRef<Props.Trigger, Props.Modal>(
             className={getPortalClassName(className)}
             ref={(el) => (self.current = el)}
           >
-            <Overlay>
+            <Overlay ref={overlay} onClick={handleToggle}>
               <Content.Component
                 {...commonProps}
                 className={className}
@@ -305,7 +329,7 @@ const Component = React.forwardRef<Props.Trigger, Props.Modal>(
                   mouseLeaveHandler: handleMouseLeave,
                 }}
               >
-                <Overlay>
+                <Overlay ref={overlay} onClick={handleToggle}>
                   <Content.Component
                     {...commonProps}
                     {...rest}
