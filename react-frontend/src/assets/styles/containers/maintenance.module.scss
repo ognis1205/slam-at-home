@@ -6,7 +6,7 @@
 
 .wrapper {
   margin: auto;
-  max-width: 400px;
+  max-width: 600px;
 }
 .animation {
   animation: maintenance 2s ease-in infinite alternate;
@@ -33,7 +33,6 @@
     color: $color-grey-blue;
     font-size: 2rem;
     font-weight: 900;
-    letter-spacing: -2.25px;
   }
   & p {
     color: $color-theme;

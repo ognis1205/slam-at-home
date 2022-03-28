@@ -16,10 +16,6 @@
   color: $color-grey-blue;
   cursor: pointer;
   font-size: $navigation-header-font-size;
-  height: $navigation-header-size;
-  line-height: $navigation-header-size;
-  padding-bottom: calc($navigation-header-size / 4);
-  padding-top: calc($navigation-header-size / 4);
   position: relative;
   user-select: none;
   &:hover {
