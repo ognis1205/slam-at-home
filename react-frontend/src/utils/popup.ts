@@ -51,9 +51,6 @@ export const getCSSCoord = (
   const { height, width } = contentRect;
   let top = centerTop - height / 2;
   let left = centerLeft - width / 2;
-  console.log(contentRect);
-  console.log("top", top);
-  console.log("left", left);
   let transform = '';
 
   switch (args[0]) {
