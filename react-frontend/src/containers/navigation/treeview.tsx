@@ -25,6 +25,8 @@ const getIcon = (type: Props.ItemType): FontAwesomeCore.IconDefinition => {
       return FontAwesomeIcon.faCube;
     case Props.ItemType.GITHUB:
       return FontAwesomeBrandIcon.faGithub;
+    case Props.ItemType.GITTER:
+      return FontAwesomeBrandIcon.faGitter;
     case Props.ItemType.SHARE:
       return FontAwesomeIcon.faShareSquare;
     case Props.ItemType.INFO:
@@ -131,7 +133,7 @@ export const Component: React.FunctionComponent<Props.TreeView> = (
           <ExternalLink
             title="Get help"
             key="gethelp"
-            type="github"
+            type="gitter"
             target="_blank"
           />
           <ExternalLink

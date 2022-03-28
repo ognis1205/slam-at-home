@@ -29,6 +29,7 @@ export const ItemType = {
   CONSTRUCTION: 'construction',
   DOCUMENT: 'document',
   GITHUB: 'github',
+  GITTER: 'gitter',
   SHARE: 'share',
   INFO: 'info',
 } as const;

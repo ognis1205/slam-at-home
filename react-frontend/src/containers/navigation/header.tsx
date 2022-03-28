@@ -14,10 +14,10 @@ export const Component: React.FunctionComponent<Props.Header> = (
   <div className={styles['header']} {...props}>
     <div className={styles['logo']}>
       <Image
-        src="/images/logo_transparent.png"
+        src="/images/logo_box.png"
         alt="SLAM@HOME"
-        width="64"
-        height="64"
+        width="96"
+        height="96"
       />
     </div>
     {/*<div className={styles['buttons']}>
