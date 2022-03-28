@@ -3,6 +3,7 @@
  * @copyright Shingo OKAWA 2021
  */
 import * as React from 'react';
+import * as NextRouter from 'next/router'
 import * as Props from './props';
 import * as Collapse from '../../components/collapse';
 import * as FontAwesome from '@fortawesome/react-fontawesome';
@@ -10,6 +11,7 @@ import * as FontAwesomeCore from '@fortawesome/fontawesome-svg-core';
 import * as FontAwesomeIcon from '@fortawesome/free-solid-svg-icons';
 import * as FontAwesomeBrandIcon from '@fortawesome/free-brands-svg-icons';
 import * as Context from './context';
+import Link from 'next/link';
 import classnames from 'classnames';
 import NavigationMotion from '../../assets/motions/navigation';
 import styles from '../../assets/styles/containers/navigation.module.scss';
@@ -37,13 +39,41 @@ const getIcon = (type: Props.ItemType): FontAwesomeCore.IconDefinition => {
 const getIconClassName = (type: Props.ItemType): string =>
   classnames(styles['icon'], styles[type]);
 
-/** Returns a `Item` component. */
-export const Item: React.FunctionComponent<Props.Item> = ({
+/** Returns a `Router` component. */
+export const Router: React.FunctionComponent<Props.Router> = ({
   type,
   title,
-  active,
+  ...linkAttrs
+}: Props.Router): React.ReactElement => {
+  /** @const Holds Next.js routing context. */
+  const { asPath } = NextRouter.useRouter();
+
+  return (
+    <Link {...linkAttrs}>
+      <div
+        className={classnames(styles['item'], {
+          [styles['selected'] || '']:
+            asPath === linkAttrs.href || asPath === linkAttrs.as,
+        })}
+      >
+        <span className={getIconClassName(type)}>
+          <FontAwesome.FontAwesomeIcon icon={getIcon(type)} />
+        </span>
+        <span className={styles['title']}>{title}</span>
+      </div>
+    </Link>
+  );
+};
+
+/** Sets the component's display name. */
+Router.displayName = 'Router';
+
+/** Returns a `ExternalLink` component. */
+export const ExternalLink: React.FunctionComponent<Props.ExternalLink> = ({
+  type,
+  title,
   ...aAttrs
-}: Props.Item): React.ReactElement => (
+}: Props.ExternalLink): React.ReactElement => (
   <div className={styles['item']}>
     <a className={styles['link']} {...aAttrs}>
       <span className={getIconClassName(type)}>
@@ -53,6 +83,9 @@ export const Item: React.FunctionComponent<Props.Item> = ({
     </a>
   </div>
 );
+
+/** Sets the component's display name. */
+ExternalLink.displayName = 'Externallink';
 
 /** Returns a `TreeView` component. */
 export const Component: React.FunctionComponent<Props.TreeView> = (
@@ -77,10 +110,10 @@ export const Component: React.FunctionComponent<Props.TreeView> = (
           showArrow={true}
           icon={FontAwesomeIcon.faHome}
         >
-          <Item title="README" key="readme" type="document" />
-          <Item title="WebRTC" key="webrtc" type="camera" />
-          <Item title="SLAM" key="slam" type="construction" />
-          <Item title="SfM" key="sfm" type="construction" />
+          <Router title="README" key="readme" type="document" href="/" />
+          <Router title="WebRTC" key="webrtc" type="camera" href="/webrtc" />
+          <Router title="SLAM" key="slam" type="construction" href="/slam" />
+          <Router title="SfM" key="sfm" type="construction" href="/sfm" />
         </Collapse.Panel>
         <Collapse.Panel
           header="Contribution"
@@ -88,9 +121,25 @@ export const Component: React.FunctionComponent<Props.TreeView> = (
           showArrow={true}
           icon={FontAwesomeIcon.faUsers}
         >
-          <Item title="Report a bug" key="bugreport" type="github" />
-          <Item title="Get help" key="gethelp" type="github" />
-          <Item title="Share this app" key="share" type="share" />
+          <ExternalLink
+            title="Report a bug"
+            key="bugreport"
+            type="github"
+            target="_blank"
+            href="https://github.com/ognis1205/slam-at-home/issues"
+          />
+          <ExternalLink
+            title="Get help"
+            key="gethelp"
+            type="github"
+            target="_blank"
+          />
+          <ExternalLink
+            title="Share this app"
+            key="share"
+            type="share"
+            target="_blank"
+          />
         </Collapse.Panel>
         <Collapse.Panel
           header="About"
@@ -98,7 +147,13 @@ export const Component: React.FunctionComponent<Props.TreeView> = (
           showArrow={true}
           icon={FontAwesomeIcon.faInfoCircle}
         >
-          <Item title="Github acount" key="acount" type="github" />
+          <ExternalLink
+            title="Github acount"
+            key="acount"
+            type="github"
+            target="_blank"
+            href="https://github.com/ognis1205"
+          />
         </Collapse.Panel>
       </Collapse.Wrapper>
     </div>

@@ -3,6 +3,7 @@
  * @copyright Shingo OKAWA 2022
  */
 import type * as React from 'react';
+import { LinkProps } from 'next/link';
 import type * as Types from '../../utils/types';
 
 /** A {Navigation} component properties. */
@@ -34,14 +35,23 @@ export const ItemType = {
 
 export type ItemType = typeof ItemType[keyof typeof ItemType];
 
-/** A {Item} component properties. */
-export type Item = Types.Overwrite<
+/** A {Externallink} component properties. */
+export type ExternalLink = Types.Overwrite<
   React.AnchorHTMLAttributes<HTMLAnchorElement>,
   {
     key: string | number;
     type: ItemType;
     title: string;
-    active?: boolean;
+  }
+>;
+
+/** A {Router} component properties. */
+export type Router = Types.Overwrite<
+  LinkProps,
+  {
+    key: string | number;
+    type: ItemType;
+    title: string;
   }
 >;
 
