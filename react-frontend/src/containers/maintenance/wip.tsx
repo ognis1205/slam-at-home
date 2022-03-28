@@ -3,13 +3,12 @@
  * @copyright Shingo OKAWA 2022
  */
 import * as React from 'react';
-import * as Props from './props';
 import styles from '../../assets/styles/containers/maintenance.module.scss';
 
 /** Returns a `WIP` component. */
 export const Component: React.FunctionComponent<
   React.HTMLAttributes<HTMLDivElement>
-> = (props: Props.Github): React.ReactElement => {
+> = (props: React.HTMLAttributes<HTMLDivElement>): React.ReactElement => {
   return (
     <div {...props} className={styles['wrapper']}>
       <div className={styles['animation']} />
