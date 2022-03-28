@@ -112,10 +112,6 @@ export const Component: React.FunctionComponent<Props.Content> = ({
   scrollLocker,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   switchScrollingEffect,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  visible,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  afterClose,
   ...divAttrs
 }: Props.Content): React.ReactElement => {
   /** @const Holds a force updater. */
