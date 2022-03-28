@@ -76,30 +76,30 @@
   display: inline-block;
   opacity: 0.75;
   font-size: 16px;
-//  z-index: $layer-4;
   &:hover {
     opacity: 1;
   }
   &.wifi {
     float: left;
     margin-left: 10px;
+    opacity: 1;
   }
   &.menu {
-    color: $window-color-menu;
+    color: $color-icon;
     float: right;
     margin-right: 10px;
     cursor: pointer;
     &:active {
-      color: $window-color-menu-shadow;
+      color: $color-icon-dark;
     }
   }
   &.maximize {
-    color: $window-color-size;
+    color: $color-icon;
     float: right;
     margin-right: 10px;
     cursor: pointer;
     &:active {
-      color: $window-color-size-shadow;
+      color: $color-icon-dark;
     }
   }
 }
