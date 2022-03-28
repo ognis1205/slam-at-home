@@ -9,14 +9,12 @@
   flex-direction: column;
   height: 100%;
   .header {
-    border-bottom: 1px solid $color-border;
     justify-content: center;
     padding-bottom: 10px;
     text-align: center;
     .logo {
       display: flex;
       justify-content: center;
-      margin-bottom: 20px;
       margin-top: 20px;
       width: 100%;
     }

@@ -63,20 +63,19 @@
   box-shadow: 0 1px 5px 0 $color-shadow;
 }
 .controller {
-  border-bottom: 1px solid $color-border;
   padding-top: 5px;
   padding-bottom: 5px;
   overflow: hidden;
   display: block;
   clear: both;
   background-color: $color-grey-light;
-  box-shadow: rgb(255 255 255 / 40%) 0 1px, inset 0 20px 20px -10px $color-white;
 }
 .button {
   color: $color-icon;
   display: inline-block;
   opacity: 0.75;
   font-size: 16px;
+//  z-index: $layer-4;
   &:hover {
     opacity: 1;
   }

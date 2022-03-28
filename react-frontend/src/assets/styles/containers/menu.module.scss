@@ -4,52 +4,7 @@
  */
 @import '../constants.scss';
 
-.header {
-  z-index: $layer-4;
-  overflow: hidden;
-  top: 0;
-    color: $color-white;
-  background-color: $color-theme;
-    font-size: 16px;
-font-weight: 800;
-  display: flex;
-  align-items : center;
-  justify-content: center;
-  position: sticky;
-  width: 100%;
-//  -webkit-touch-callout: none;
-//  -webkit-user-select: none;
-//  -khtml-user-select: none;
-//  -moz-user-select: none;
-//  -ms-user-select: none;
-  user-select: none;
-}
-.section {
-    min-height: 0px;
-    font-size: 16px;
-    padding-left: 5px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    color: $color-grey-dark;
-font-weight: 500;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    position: relative;
-    display: -moz-box;
-    display: flex;
-    cursor: pointer;
-}
-.item {
-    min-height: 0px;
-}
-.icon {
-    min-height: 0px;
-}
-.title {
-    min-height: 0px;
-//  font-size: 1.2em;
-//  font-weight: bold;
-//  color: $color-white;
+.menu {
+  min-height: 0px;
+  min-width: 0px;
 }
