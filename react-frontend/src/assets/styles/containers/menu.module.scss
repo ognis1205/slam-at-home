@@ -5,6 +5,68 @@
 @import '../constants.scss';
 
 .menu {
-  min-height: 0px;
-  min-width: 0px;
+  background: $color-white;
+  border: 1px solid $color-grey-middle;
+  border-radius: $border-radius;
+  box-shadow: 0 1px 5px 0 $color-shadow;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  padding-left: 24px;
+  padding-right: 24px;
+  width: 100%;
+  &:before {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    bottom: 100%;
+    right: 8px;
+    border: 8px solid transparent;
+    border-top: none;
+    border-bottom-color: $color-grey-middle;
+    filter: drop-shadow(0 -0.0625rem 0.0625rem rgba(0, 0, 0, .1));
+  }
+  &:after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    bottom: 100%;
+    top: -7px;
+    right: 8px;
+    border: 8px solid transparent;
+    border-top: none;
+    border-bottom-color: $color-white;
+    filter: drop-shadow(0 -0.0625rem 0.0625rem rgba(0, 0, 0, .1));
+  }
+  .item {
+    color: $color-grey-blue;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 16px;
+    position: relative;
+    user-select: none;
+    width: 100%;
+    width: 100%;
+    &:hover {
+      color: $font-color-highlight;
+    }
+    &:active {
+      background: $color-background-highlight;
+    }
+    .link {
+      color: $color-grey-blue;
+      text-decoration: none;
+      width: 100%;
+      display: inline-block;
+      &:hover {
+        color: $font-color-highlight;
+      }
+      &:active {
+        background: $color-background-highlight;
+      }
+    }
+  }
 }
