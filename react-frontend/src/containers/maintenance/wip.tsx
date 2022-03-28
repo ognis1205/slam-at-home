@@ -15,10 +15,14 @@ export const Component: React.FunctionComponent<
       <section className={styles['content']}>
         <h1>Pardon my dust.</h1>
         <p>
-          The page is currently WIP and is planned to deliver in the near future.
+          {
+            // eslint-disable-next-line prettier/prettier
+          }This page is currently WIP and is planned to deliver in the near future.
         </p>
         <footer>
-          If you need to you can always <a href="mailto:shingo.okawa.g.h.c@gmail.com">contact me</a>.
+          {
+            // eslint-disable-next-line prettier/prettier
+          }If you need to you can always <a href="mailto:shingo.okawa.g.h.c@gmail.com">contact me</a>.
         </footer>
       </section>
     </div>
