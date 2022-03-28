@@ -16,31 +16,39 @@ const getClassName = (className: string): string =>
   });
 
 /** Returns a `Button` component. */
-export const Component: React.FunctionComponent<Props.Button> = ({
-  icon,
-  title,
-  onClick,
-  className,
-  ...spanProps
-}: Props.Button): React.ReactElement => {
-  /** Event listener which is responsible for `onClick`. */
-  const handleClick = (): void => {
-    if (onClick) onClick();
-  };
+export const Component = React.forwardRef<HTMLSpanElement, Props.Button>(
+  (
+    {
+      icon,
+      title,
+      onClick,
+      className,
+      ...spanProps
+    }: Props.Button,
+    ref
+  ): React.ReactElement => {
+    /** Event listener which is responsible for `onClick`. */
+    const handleClick = (): void => {
+      if (onClick) onClick();
+    };
 
-  return FAUtil.isProps(icon) ? (
-    <span
-      {...spanProps}
-      title={title}
-      className={getClassName(className)}
-      onClick={handleClick}
-    >
-      <FontAwesome.FontAwesomeIcon icon={icon} />
-    </span>
-  ) : (
-    <span className={styles['button']}>{icon}</span>
-  );
-};
+    return FAUtil.isProps(icon) ? (
+      <span
+        {...spanProps}
+        title={title}
+        className={getClassName(className)}
+        ref={ref}
+        onClick={handleClick}
+      >
+        <FontAwesome.FontAwesomeIcon icon={icon} />
+      </span>
+    ) : (
+      <span className={styles['button']} ref={ref}>
+        {icon}
+      </span>
+    );
+  }
+);
 
 /** Sets the component's display name. */
 Component.displayName = 'Button';

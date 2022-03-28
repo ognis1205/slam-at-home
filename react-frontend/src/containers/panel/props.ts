@@ -29,12 +29,14 @@ export type Window = Types.Overwrite<
   {
     isMaximized: boolean;
     onMaximize?: () => void;
-    onOpen?: () => void;
   }
 >;
 
 /** A {Controller} component properties. */
 export type Controller = React.HTMLAttributes<HTMLDivElement>;
+
+/** A {Pager} component properties. */
+export type Pager = React.HTMLAttributes<HTMLDivElement>;
 
 /** A {Button} component properties. */
 export type Button = Types.Overwrite<

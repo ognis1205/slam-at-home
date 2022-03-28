@@ -75,7 +75,6 @@ export const Component: React.FunctionComponent<Props.Panel> = ({
   width,
   leftmost,
   rightmost,
-  onOpen,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   disabled,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -124,11 +123,6 @@ export const Component: React.FunctionComponent<Props.Panel> = ({
     if (!isMaximized()) init();
     else maximize();
     forceUpdate();
-  };
-
-  /** An event handler called on `open` events. */
-  const handleOpen = (): void => {
-    if (onOpen) onOpen();
   };
 
   /** An event handler called on `onchange` events. */
@@ -305,7 +299,6 @@ export const Component: React.FunctionComponent<Props.Panel> = ({
         <Window.Component
           isMaximized={isMaximized()}
           onMaximize={handleMaximize}
-          onOpen={handleOpen}
         >
           {children}
         </Window.Component>

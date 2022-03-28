@@ -5,6 +5,8 @@
 import * as React from 'react';
 import * as Props from './props';
 import * as Button from './button';
+import * as Menu from '../menu';
+import * as Modal from '../../components/modal';
 import * as FontAwesomeIcon from '@fortawesome/free-solid-svg-icons';
 import styles from '../../assets/styles/containers/panel.module.scss';
 
@@ -23,12 +25,26 @@ export const Controller: React.FunctionComponent<Props.Controller> = ({
 /** Sets the component's display name. */
 Controller.displayName = 'Controller';
 
+/** Returns a `Pager` component. */
+export const Pager: React.FunctionComponent<Props.Pager> = ({
+  children,
+  ...divProps
+}: Props.Pager): React.ReactElement => {
+  return (
+    <div className={styles['pager']} {...divProps}>
+      {children}
+    </div>
+  );
+};
+
+/** Sets the component's display name. */
+Pager.displayName = 'Pager';
+
 /** Returns a `Window` component. */
 export const Component: React.FunctionComponent<Props.Window> = ({
   children,
   isMaximized,
   onMaximize,
-  onOpen,
   ...divProps
 }: Props.Window): React.ReactElement => {
   /** @const Holds a reference to the component itself. */
@@ -39,11 +55,6 @@ export const Component: React.FunctionComponent<Props.Window> = ({
     if (onMaximize) onMaximize();
   };
 
-  /** Event listener which is responsible for `onClick`. */
-  const handleOpen = (): void => {
-    if (onOpen) onOpen();
-  };
-
   return (
     <div ref={self} className={styles['window']} {...divProps}>
       <Controller>
@@ -51,11 +62,19 @@ export const Component: React.FunctionComponent<Props.Window> = ({
           className={styles['wifi']}
           icon={FontAwesomeIcon.faWifi}
         />
-        <Button.Component
-          className={styles['menu']}
-          icon={FontAwesomeIcon.faChevronCircleDown}
-          onClick={handleOpen}
-        />
+        <Modal.Component
+          trigger={
+            <Button.Component
+              className={styles['menu']}
+              icon={FontAwesomeIcon.faChevronCircleDown}
+            />
+          }
+          position={['right top', 'left top']}
+          on="click"
+          offset={{ x: 0, y: 0 }}
+        >
+          Popup content Here
+        </Modal.Component>
         <Button.Component
           className={styles['maximize']}
           icon={
@@ -66,7 +85,7 @@ export const Component: React.FunctionComponent<Props.Window> = ({
           onClick={handleMaximize}
         />
       </Controller>
-      {children}
+      <Pager>{children}</Pager>
     </div>
   );
 };
