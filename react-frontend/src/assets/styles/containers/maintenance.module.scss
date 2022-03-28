@@ -5,8 +5,11 @@
 @import '../constants.scss';
 
 .wrapper {
+  align-items: center;
+  display: flex;
+  height: 100%;
   margin: auto;
-  max-width: 600px;
+  max-width: 551px;
 }
 .animation {
   animation: maintenance 2s ease-in infinite alternate;
