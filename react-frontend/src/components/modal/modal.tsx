@@ -71,7 +71,8 @@ const Component = React.forwardRef<Props.Trigger, Props.Modal>(
       offset,
       open,
       defaultOpen = false,
-      disabled,
+      autoFocus = false,
+      disabled = false,
       onOpen,
       onClose,
       position,
@@ -132,7 +133,7 @@ const Component = React.forwardRef<Props.Trigger, Props.Modal>(
         // after the host node has been appended into the DOM.
         setTimeout(() => {
           setPosition();
-          focus();
+          if (autoFocus) focus();
         }, 0);
       }
       return () => {
@@ -224,7 +225,6 @@ const Component = React.forwardRef<Props.Trigger, Props.Modal>(
       if (
         !DOM.isDefined() ||
         isModal ||
-        !isOpen ||
         !trigger?.current ||
         !content?.current
       ) {
@@ -237,7 +237,6 @@ const Component = React.forwardRef<Props.Trigger, Props.Modal>(
         offset,
         keepTooltipInside
       );
-      console.log("coord", coord);
       content.current.style.top = `${coord.top + window.scrollY}px`;
       content.current.style.left = `${coord.left + window.scrollX}px`;
     };
@@ -349,9 +348,5 @@ const Component = React.forwardRef<Props.Trigger, Props.Modal>(
 
 /** Sets the component's display name. */
 Component.displayName = 'Modal';
-
-/** Returns a `Modal` component with default property values. */
-//export const WithDefaultComponent: React.FunctionComponent<Props.Modal> =
-//  Wrap.withDefaultProps(Component, DEFAULT_PROPS);
 
 export const WithDefaultComponent = Component;

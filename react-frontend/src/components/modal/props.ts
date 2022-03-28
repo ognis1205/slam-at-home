@@ -57,6 +57,7 @@ export type Modal = Types.Overwrite<
     disabled?: boolean;
     open?: boolean;
     defaultOpen?: boolean;
+    autoFocus?: boolean;
     onOpen?: OpenHandler;
     onClose?: CloseHandler;
     position?: Position | Position[];
