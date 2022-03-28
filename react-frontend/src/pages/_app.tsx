@@ -12,6 +12,7 @@ import * as Collapse from '../components/collapse';
 import * as Panel from '../containers/panel';
 import * as Notification from '../containers/notification';
 import NotificationMotion from '../assets/motions/notification';
+import '../assets/styles/reset.css';
 import '../assets/styles/global.scss';
 import { faCog } from '@fortawesome/free-solid-svg-icons';
 
@@ -93,9 +94,6 @@ const Test: React.FunctionComponent = (): React.ReactElement => {
 /***/
 const SLAM: React.FC<NextApp.AppProps> = ({ Component, pageProps }) => {
   /** @const */
-  const [open, setOpen] = React.useState<boolean>(false);
-
-  /** @const */
   const [accordion] = React.useState<boolean>(false);
 
   /** @const */
@@ -143,10 +141,6 @@ const SLAM: React.FC<NextApp.AppProps> = ({ Component, pageProps }) => {
     return items;
   };
 
-  const handleOpen = (): void => {
-    setOpen((prev) => !prev);
-  };
-
   const handleChange = (activeKey: string): void => setActiveKey(activeKey);
 
   return (
@@ -157,9 +151,8 @@ const SLAM: React.FC<NextApp.AppProps> = ({ Component, pageProps }) => {
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width"
         />
-        <script async defer src="https://buttons.github.io/buttons.js" />
       </Head>
-      <Panel.Component onOpen={handleOpen}>
+      <Panel.Component>
         <Component {...pageProps} />
       </Panel.Component>
       <Notification.Component
