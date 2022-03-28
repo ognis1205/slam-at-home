@@ -69,11 +69,11 @@ export const Component: React.FunctionComponent<Props.Window> = ({
               icon={FontAwesomeIcon.faChevronCircleDown}
             />
           }
-          position={['right top', 'left top']}
+          position={['right bottom']}
           on="click"
-          offset={{ x: 0, y: 0 }}
+          offset={{ x: 8, y: 4 }}
         >
-          Popup content Here
+          <Menu.Component />
         </Modal.Component>
         <Button.Component
           className={styles['maximize']}
