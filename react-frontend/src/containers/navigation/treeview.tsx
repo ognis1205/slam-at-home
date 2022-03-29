@@ -3,7 +3,7 @@
  * @copyright Shingo OKAWA 2021
  */
 import * as React from 'react';
-import * as NextRouter from 'next/router'
+import * as NextRouter from 'next/router';
 import * as Props from './props';
 import * as Collapse from '../../components/collapse';
 import * as FontAwesome from '@fortawesome/react-fontawesome';
