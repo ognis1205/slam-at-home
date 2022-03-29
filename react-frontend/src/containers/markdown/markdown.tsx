@@ -5,6 +5,7 @@
 import * as React from 'react';
 import * as Props from './props';
 import ReactMarkdown from 'react-markdown';
+import classnames from 'classnames';
 import 'github-markdown-css/github-markdown.css';
 
 /** Returns a `Container` component. */
@@ -20,10 +21,17 @@ export const Container: React.FunctionComponent<
 /** Sets the component's display name. */
 Container.displayName = 'Container';
 
+/** Returns the class name. */
+const getClassName = (className: string): string =>
+  classnames('markdown-body', {
+    [className || '']: !!className,
+  });
+
 /** Returns a `Markdown` component. */
 export const Component: React.FunctionComponent<Props.Markdown> = ({
   src,
-  ...mdProps
+  className,
+  ...divProps
 }: Props.Markdown): React.ReactElement => {
   /** @const Holds the markdown. */
   const [markdown, setMarkdown] = React.useState<string>('');
@@ -42,8 +50,8 @@ export const Component: React.FunctionComponent<Props.Markdown> = ({
   });
 
   return (
-    <Container className="markdown-body">
-      <ReactMarkdown {...mdProps}>{markdown}</ReactMarkdown>
+    <Container {...divProps} className={getClassName(className)}>
+      <ReactMarkdown>{markdown}</ReactMarkdown>
     </Container>
   );
 };
