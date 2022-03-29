@@ -26,7 +26,7 @@ const getIcon = (type: Props.ItemType): FontAwesomeCore.IconDefinition => {
       return FontAwesomeIcon.faShareSquare;
     case Props.ItemType.INFO:
     default:
-      return FontAwesomeIcon.faInfo;
+      return FontAwesomeIcon.faInfoCircle;
   }
 };
 
@@ -41,32 +41,41 @@ const getClassName = (className: string): string =>
   });
 
 /** Returns a `Container` component. */
-export const Container: React.FunctionComponent<
+const Container = React.forwardRef<
+  HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
-> = ({
-  children,
-  ...divProps
-}: React.HTMLAttributes<HTMLDivElement>): React.ReactElement => (
-  <div {...divProps}>{children}</div>
-);
+>(({ children, ...divProps }: React.HTMLAttributes<HTMLDivElement>, ref) => (
+  <div ref={ref} {...divProps}>
+    {children}
+  </div>
+));
+
+///** Returns a `Container` component. */
+//export const Container: React.FunctionComponent<
+//  React.HTMLAttributes<HTMLDivElement>
+//> = ({
+//  children,
+//  ...divProps
+//}: React.HTMLAttributes<HTMLDivElement>): React.ReactElement => (
+//  <div {...divProps}>{children}</div>
+//);
 
 /** Sets the component's display name. */
-Container.displayName = 'Controller';
+Container.displayName = 'Container';
 
 /** Returns a `Divider` component. */
-export const Divider: React.FunctionComponent<
-  React.HTMLAttributes<HTMLDivElement>
-> = ({
-  ...divProps
-}: React.HTMLAttributes<HTMLDivElement>): React.ReactElement => (
-  <div {...divProps} className={styles['divider']} />
-);
+const Divider: React.FunctionComponent<React.HTMLAttributes<HTMLDivElement>> =
+  ({
+    ...divProps
+  }: React.HTMLAttributes<HTMLDivElement>): React.ReactElement => (
+    <div {...divProps} className={styles['divider']} />
+  );
 
 /** Sets the component's display name. */
 Container.displayName = 'Controller';
 
 /** Returns a `ExternalLink` component. */
-export const ExternalLink: React.FunctionComponent<Props.ExternalLink> = ({
+const ExternalLink: React.FunctionComponent<Props.ExternalLink> = ({
   type,
   title,
   ...aAttrs
@@ -85,10 +94,10 @@ export const ExternalLink: React.FunctionComponent<Props.ExternalLink> = ({
 ExternalLink.displayName = 'Externallink';
 
 /** Returns a `Menu` component. */
-export const Component = React.forwardRef<Props.Trigger, Props.Menu>(
+export const Component = React.forwardRef<HTMLDivElement, Props.Menu>(
   (
     { className, ...rest }: Props.Menu,
-    ref: React.ForwardedRef<Props.Trigger>
+    ref: React.ForwardedRef<HTMLDivElement>
   ): React.ReactElement => {
     return (
       <Container
