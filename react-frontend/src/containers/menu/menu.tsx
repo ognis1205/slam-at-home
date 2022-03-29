@@ -50,16 +50,6 @@ const Container = React.forwardRef<
   </div>
 ));
 
-///** Returns a `Container` component. */
-//export const Container: React.FunctionComponent<
-//  React.HTMLAttributes<HTMLDivElement>
-//> = ({
-//  children,
-//  ...divProps
-//}: React.HTMLAttributes<HTMLDivElement>): React.ReactElement => (
-//  <div {...divProps}>{children}</div>
-//);
-
 /** Sets the component's display name. */
 Container.displayName = 'Container';
 
