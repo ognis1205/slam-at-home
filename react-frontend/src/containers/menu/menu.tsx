@@ -85,14 +85,7 @@ ExternalLink.displayName = 'Externallink';
 
 /** Returns a `Popups` component. */
 export const Popup = React.forwardRef<HTMLDivElement, Props.Popup>(
-  (
-    {
-      type,
-      title,
-      ...divAttrs
-    }: Props.Popup,
-    ref
-  ): React.ReactElement => (
+  ({ type, title, ...divAttrs }: Props.Popup, ref): React.ReactElement => (
     <div ref={ref} className={styles['item']} {...divAttrs}>
       <span className={getIconClassName(type)}>
         <FontAwesome.FontAwesomeIcon icon={getIcon(type)} />
@@ -128,11 +121,7 @@ export const Component = React.forwardRef<HTMLDivElement, Props.Menu>(
     };
 
     return (
-      <Container
-        {...rest}
-        className={getClassName(className)}
-        ref={ref}
-      >
+      <Container {...rest} className={getClassName(className)} ref={ref}>
         <ExternalLink
           title="Settings"
           key="settings"
@@ -176,12 +165,7 @@ export const Component = React.forwardRef<HTMLDivElement, Props.Menu>(
         <Modal.Component
           ref={about}
           trigger={
-            <Popup
-              title="About"
-              key="about"
-              type="info"
-              target="_blank"
-            />
+            <Popup title="About" key="about" type="info" target="_blank" />
           }
           modal={true}
           position={['right bottom']}
