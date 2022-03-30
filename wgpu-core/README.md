@@ -1,8 +1,4 @@
-# FastAPI Backend.
+Wgpu/Rust SLAM core
+==============================
 
-Is it really neccessary to be RESTful?
- -
- -
- -
- -
- -
+wgpu-core: Wgpu/Rust Based SLAM Core Engine.
