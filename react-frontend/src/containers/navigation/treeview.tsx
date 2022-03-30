@@ -93,14 +93,7 @@ ExternalLink.displayName = 'Externallink';
 
 /** Returns a `Popups` component. */
 export const Popup = React.forwardRef<HTMLDivElement, Props.Popup>(
-  (
-    {
-      type,
-      title,
-      ...divAttrs
-    }: Props.Popup,
-    ref
-  ): React.ReactElement => (
+  ({ type, title, ...divAttrs }: Props.Popup, ref): React.ReactElement => (
     <div ref={ref} className={styles['item']} {...divAttrs}>
       <span className={getIconClassName(type)}>
         <FontAwesome.FontAwesomeIcon icon={getIcon(type)} />
