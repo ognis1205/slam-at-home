@@ -111,12 +111,20 @@ export const Component = React.forwardRef<HTMLDivElement, Props.Menu>(
     { className, ...rest }: Props.Menu,
     ref: React.ForwardedRef<HTMLDivElement>
   ): React.ReactElement => {
-    /** @const Holds a reference to the component itself. */
+    /** @const Holds a reference to the about item. */
     const about = React.useRef<Modal.Trigger>(null);
+
+    /** @const Holds a reference to the share item. */
+    const share = React.useRef<Modal.Trigger>(null);
 
     /** Event listener which is responsible for `onClose`. */
     const handleAboutClose = (): void => {
       about.current?.close();
+    };
+
+    /** Event listener which is responsible for `onClose`. */
+    const handleShareClose = (): void => {
+      share.current?.close();
     };
 
     return (
@@ -147,12 +155,23 @@ export const Component = React.forwardRef<HTMLDivElement, Props.Menu>(
           target="_blank"
           rel="noreferrer"
         />
-        <ExternalLink
-          title="Share this app"
-          key="share"
-          type="share"
-          target="_blank"
-        />
+        <Modal.Component
+          ref={share}
+          trigger={
+            <Popup
+              title="Share this app"
+              key="share"
+              type="share"
+              target="_blank"
+            />
+          }
+          modal={true}
+          position={['right bottom']}
+          on="click"
+          offset={{ x: 0, y: 0 }}
+        >
+          <Popups.Share onClose={handleShareClose} />
+        </Modal.Component>
         <Divider />
         <Modal.Component
           ref={about}
