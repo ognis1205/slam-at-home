@@ -128,6 +128,7 @@ export const Component: React.FunctionComponent<Props.TreeView> = (
             key="bugreport"
             type="github"
             target="_blank"
+            rel="noreferrer"
             href="https://github.com/ognis1205/slam-at-home/issues"
           />
           <ExternalLink
@@ -141,6 +142,7 @@ export const Component: React.FunctionComponent<Props.TreeView> = (
             key="share"
             type="share"
             target="_blank"
+            rel="noreferrer"
           />
         </Collapse.Panel>
         <Collapse.Panel
@@ -150,11 +152,12 @@ export const Component: React.FunctionComponent<Props.TreeView> = (
           icon={FontAwesomeIcon.faInfoCircle}
         >
           <ExternalLink
-            title="Github acount"
+            title="Github"
             key="acount"
             type="github"
             target="_blank"
-            href="https://github.com/ognis1205"
+            rel="noreferrer"
+            href="https://github.com/ognis1205/slam-at-home"
           />
         </Collapse.Panel>
       </Collapse.Wrapper>
