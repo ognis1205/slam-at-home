@@ -46,6 +46,16 @@ export type ExternalLink = Types.Overwrite<
   }
 >;
 
+/** A {Popup} component properties. */
+export type Popup = Types.Overwrite<
+  React.AnchorHTMLAttributes<HTMLDivElement>,
+  {
+    key: string | number;
+    type: ItemType;
+    title: string;
+  }
+>;
+
 /** A {Router} component properties. */
 export type Router = Types.Overwrite<
   LinkProps,

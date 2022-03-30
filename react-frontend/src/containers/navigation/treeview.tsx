@@ -5,7 +5,9 @@
 import * as React from 'react';
 import * as NextRouter from 'next/router';
 import * as Props from './props';
+import * as Popups from '../popups';
 import * as Collapse from '../../components/collapse';
+import * as Modal from '../../components/modal';
 import * as FontAwesome from '@fortawesome/react-fontawesome';
 import * as FontAwesomeCore from '@fortawesome/fontawesome-svg-core';
 import * as FontAwesomeIcon from '@fortawesome/free-solid-svg-icons';
@@ -89,6 +91,28 @@ export const ExternalLink: React.FunctionComponent<Props.ExternalLink> = ({
 /** Sets the component's display name. */
 ExternalLink.displayName = 'Externallink';
 
+/** Returns a `Popups` component. */
+export const Popup = React.forwardRef<HTMLDivElement, Props.Popup>(
+  (
+    {
+      type,
+      title,
+      ...divAttrs
+    }: Props.Popup,
+    ref
+  ): React.ReactElement => (
+    <div ref={ref} className={styles['item']} {...divAttrs}>
+      <span className={getIconClassName(type)}>
+        <FontAwesome.FontAwesomeIcon icon={getIcon(type)} />
+      </span>
+      <span className={styles['title']}>{title}</span>
+    </div>
+  )
+);
+
+/** Sets the component's display name. */
+Popup.displayName = 'Popup';
+
 /** Returns a `TreeView` component. */
 export const Component: React.FunctionComponent<Props.TreeView> = (
   divProps: Props.TreeView
@@ -98,6 +122,14 @@ export const Component: React.FunctionComponent<Props.TreeView> = (
 
   /** @const Holds opening directory state. */
   const [activeKey, handleChange] = activeKeyContext;
+
+  /** @const Holds a reference to the share item. */
+  const share = React.useRef<Modal.Trigger>(null);
+
+  /** Event listener which is responsible for `onClose`. */
+  const handleShareClose = (): void => {
+    share.current?.close();
+  };
 
   return (
     <div {...divProps} className={styles['tree']}>
@@ -137,13 +169,23 @@ export const Component: React.FunctionComponent<Props.TreeView> = (
             type="gitter"
             target="_blank"
           />
-          <ExternalLink
-            title="Share this app"
-            key="share"
-            type="share"
-            target="_blank"
-            rel="noreferrer"
-          />
+          <Modal.Component
+            ref={share}
+            trigger={
+              <Popup
+                title="Share this app"
+                key="share"
+                type="share"
+                target="_blank"
+              />
+            }
+            modal={true}
+            position={['right bottom']}
+            on="click"
+            offset={{ x: 0, y: 0 }}
+          >
+            <Popups.Share onClose={handleShareClose} />
+          </Modal.Component>
         </Collapse.Panel>
         <Collapse.Panel
           header="About"
