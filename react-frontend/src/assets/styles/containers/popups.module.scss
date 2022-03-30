@@ -1,0 +1,137 @@
+/**
+ * @fileoverview SCSS Module for {Popups} containers.
+ * @copyright Shingo OKAWA 2022
+ */
+@import '../constants.scss';
+
+.window {
+  background-color: $color-grey-light-blue;
+  border: 1px solid $color-grey-middle;
+  border-radius: $border-radius;
+  box-shadow: 0 1px 5px 0 $color-shadow;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin: 0 auto;
+  min-width: 400px;
+  overflow: hidden;
+  width: 100%;
+}
+.controller {
+  min-height: 34px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow: hidden;
+  display: block;
+  clear: both;
+  background-color: $color-grey-light-blue;
+  .header {
+    color: $color-grey-blue;
+    display: inline-block;
+    float: left;
+    font-size: 16px;
+    user-select: none;
+    .icon {
+      display: inline-block;
+      font-size: $navigation-header-icon-size;
+      height: $navigation-header-size;
+      line-height: $navigation-header-size;
+      padding-left: calc($navigation-header-icon-size / 2);
+      padding-right: calc($navigation-header-icon-size / 2);
+      text-align: center;
+      width: $navigation-header-size;
+    }
+  }
+}
+.pager {
+  flex-grow: 1;
+  overflow: scroll;
+}
+.button {
+  color: $color-grey-blue;
+  display: inline-block;
+  font-size: 16px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  &.close {
+    color: $color-grey-blue;
+    float: right;
+    margin-right: 10px;
+    cursor: pointer;
+    &:hover {
+      color: $window-color-close;
+    }
+    &:active {
+      color: $window-color-close-shadow;
+    }
+  }
+}
+.about {
+  color: $color-grey-blue;
+  padding-bottom: 40px;
+  width: 450px;
+  .title {
+    margin: auto;
+    padding-bottom: 20px;
+    width: 400px;
+    .logo {
+      display: inline-block;
+      height: 100px;
+      width: 100px;
+      vertical-align:middle;
+    }
+    .description {
+      display: inline-block;
+      width: 300px;
+      vertical-align:middle;
+    }
+  }
+  .divider {
+    display: block;
+    height: 0;
+    border-top: 1px solid $color-grey-middle;
+  }
+  .table {
+    background-color: $color-white;
+    border: 1px solid $color-grey-middle;
+    border-radius: $border-radius;
+    box-shadow: 0 1px 5px 0 $color-shadow inset;
+    font-size: 16px;
+    margin: auto;
+    padding: 8px;
+    width: 400px;
+    .name {
+      .icon {
+        display: inline-block;
+	font-size: 16px;
+	height: 16px;
+	line-height: 30px;
+	text-align: center;
+	width: 30px;
+      }
+    }
+    .value {
+      float: right;
+      & > a {
+	background: linear-gradient(
+	    to bottom,
+	    $font-color-highlight 0%,
+	    $font-color-highlight 100%
+	);
+	background-position: 0 100%;
+	background-repeat: repeat-x;
+	background-size: 1px 1px;
+	color: rgba(7, 6, 0, 0.7);
+	text-decoration: none;
+      }
+      & > a:hover {
+	background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:ev='http://www.w3.org/2001/xml-events' viewBox='0 0 20 4'%3E%3Cstyle type='text/css'%3E.squiggle{animation:shift .3s linear infinite;}@keyframes shift {from {transform:translateX(0);}to {transform:translateX(-20px);}}%3C/style%3E%3Cpath fill='none' stroke='%231890ff' stroke-width='2' class='squiggle' d='M0,3.5 c 5,0,5,-3,10,-3 s 5,3,10,3 c 5,0,5,-3,10,-3 s 5,3,10,3'/%3E%3C/svg%3E");
+	background-position: 0 100%;
+	background-size: auto 2px;
+	background-repeat: repeat-x;
+	text-decoration: none;
+      }
+    }
+  }
+}
