@@ -50,16 +50,22 @@ const Header: React.FunctionComponent<Props.Header> = ({
 /** Sets the component's display name. */
 Header.displayName = 'Header';
 
+/** Returns the class name of the icon. */
+const getContainerClassName = (className: string): string =>
+  classnames(styles['window'], {
+    [className || '']: !!className,
+  });
+
 /** Returns a `Container` component. */
 const Container = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(
   (
-    { children, ...divProps }: React.HTMLAttributes<HTMLDivElement>,
+    { children, className, ...divProps }: React.HTMLAttributes<HTMLDivElement>,
     ref
   ): React.ReactElement => (
-    <div {...divProps} ref={ref} className={styles['window']}>
+    <div {...divProps} ref={ref} className={getContainerClassName(className)}>
       {children}
     </div>
   )

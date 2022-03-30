@@ -46,7 +46,7 @@ export type Pager = React.HTMLAttributes<HTMLDivElement>;
 export type Button = Types.Overwrite<
   React.HTMLAttributes<HTMLSpanElement>,
   {
-    type: ItemType;
+    icon: string | React.ReactNode | FontAwesome.IconProp;
     title?: string;
     onClick?: () => void;
   }
