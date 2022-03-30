@@ -29,10 +29,6 @@ const getIcon = (type: Props.ItemType): FontAwesomeCore.IconDefinition => {
   }
 };
 
-/** Returns the class name of the icon. */
-const getIconClassName = (type: Props.ItemType): string =>
-  classnames(styles['icon'], styles[type]);
-
 /** Returns a `Header` component. */
 const Header: React.FunctionComponent<Props.Header> = ({
   type,
@@ -40,7 +36,7 @@ const Header: React.FunctionComponent<Props.Header> = ({
   ...divAttrs
 }: Props.Header): React.ReactElement => (
   <div className={styles['header']} {...divAttrs}>
-    <span className={getIconClassName(type)}>
+    <span className={styles['icon']}>
       <FontAwesome.FontAwesomeIcon icon={getIcon(type)} />
     </span>
     <span className={styles['title']}>{title}</span>

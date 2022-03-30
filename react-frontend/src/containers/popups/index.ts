@@ -4,3 +4,4 @@
  */
 export type { Window as Props } from './props';
 export { Component as About } from './about';
+export { Component as Share } from './share';

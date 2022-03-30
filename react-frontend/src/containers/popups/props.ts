@@ -42,6 +42,14 @@ export type Controller = React.HTMLAttributes<HTMLDivElement>;
 /** A {Pager} component properties. */
 export type Pager = React.HTMLAttributes<HTMLDivElement>;
 
+/** A {Description} component properties. */
+export type Description = Types.Overwrite<
+  React.HTMLAttributes<HTMLDivElement>,
+  {
+    children: string;
+  }
+>;
+
 /** A {Button} component properties. */
 export type Button = Types.Overwrite<
   React.HTMLAttributes<HTMLSpanElement>,
