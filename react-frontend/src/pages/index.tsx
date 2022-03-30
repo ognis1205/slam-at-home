@@ -4,11 +4,13 @@
  */
 import * as React from 'react';
 import * as Next from 'next';
-import * as Maintenance from '../containers/maintenance';
+import * as Markdown from '../containers/markdown';
 
 /** Returns a '/index' page. */
 const Index: Next.NextPage = () => {
-  return <Maintenance.Component />;
+  return (
+    <Markdown.Component src="https://raw.githubusercontent.com/remarkjs/react-markdown/main/readme.md" />
+  );
 };
 
 export default Index;

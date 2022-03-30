@@ -1,5 +1,5 @@
 /**
- * @fileoverview
+ * @fileoverview Defines {SLAM} component.
  * @copyright Shingo OKAWA 2021
  */
 import * as React from 'react';
@@ -80,36 +80,26 @@ const Test: React.FunctionComponent = (): React.ReactElement => {
   );
 };
 
-/***/
-const SLAM: React.FC<NextApp.AppProps> = ({ Component, pageProps }) => {
-  /** @const */
-  const [accordion] = React.useState<boolean>(false);
-
-  /** @const */
-  const [activeKey, setActiveKey] = React.useState<string[] | string>(['4']);
-
-  const handleChange = (activeKey: string): void => setActiveKey(activeKey);
-
-  return (
-    <React.Fragment>
-      <Head>
-        <title>SLAM@HOME</title>
-        <meta
-          name="viewport"
-          content="minimum-scale=1, initial-scale=1, width=device-width"
-        />
-      </Head>
-      <Panel.Component>
-        <Component {...pageProps} />
-      </Panel.Component>
-      <Notification.Component
-        duration={1000}
-        placement="right"
-        motion={NotificationMotion}
+/** Returns a `SLAM` component. */
+const SLAM: React.FC<NextApp.AppProps> = ({ Component, pageProps }) => (
+  <React.Fragment>
+    <Head>
+      <title>SLAM@HOME</title>
+      <meta
+        name="viewport"
+        content="minimum-scale=1, initial-scale=1, width=device-width"
       />
-    </React.Fragment>
-  );
-};
+    </Head>
+    <Panel.Component>
+      <Component {...pageProps} />
+    </Panel.Component>
+    <Notification.Component
+      duration={1000}
+      placement="right"
+      motion={NotificationMotion}
+    />
+  </React.Fragment>
+);
 
 // export default SLAM;
 export default Store.wrapper.withRedux(SLAM);
