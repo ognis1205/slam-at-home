@@ -12,7 +12,9 @@ import styles from '../../assets/styles/containers/popus.module.scss';
 export const Component: React.FunctionComponent<Props.Window> = ({
   ...windowProps
 }: Props.Window): React.ReactElement => (
-  <Window.Component {...windowProps}>Info</Window.Component>
+  <Window.Component {...windowProps} type="info" title="About">
+    Info
+  </Window.Component>
 );
 
 /** Sets the component's display name. */

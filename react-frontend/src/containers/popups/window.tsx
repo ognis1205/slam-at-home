@@ -5,8 +5,50 @@
 import * as React from 'react';
 import * as Props from './props';
 import * as Button from './button';
+import * as FontAwesome from '@fortawesome/react-fontawesome';
+import * as FontAwesomeCore from '@fortawesome/fontawesome-svg-core';
 import * as FontAwesomeIcon from '@fortawesome/free-solid-svg-icons';
+import * as FontAwesomeBrandIcon from '@fortawesome/free-brands-svg-icons';
+import classnames from 'classnames';
 import styles from '../../assets/styles/containers/popups.module.scss';
+
+/** Returns the corresponding FontAwesome icon. */
+const getIcon = (type: Props.ItemType): FontAwesomeCore.IconDefinition => {
+  switch (type) {
+    case Props.ItemType.SETTING:
+      return FontAwesomeIcon.faBars;
+    case Props.ItemType.GITHUB:
+      return FontAwesomeBrandIcon.faGithub;
+    case Props.ItemType.GITTER:
+      return FontAwesomeBrandIcon.faGitter;
+    case Props.ItemType.SHARE:
+      return FontAwesomeIcon.faShareSquare;
+    case Props.ItemType.INFO:
+    default:
+      return FontAwesomeIcon.faInfoCircle;
+  }
+};
+
+/** Returns the class name of the icon. */
+const getIconClassName = (type: Props.ItemType): string =>
+  classnames(styles['icon'], styles[type]);
+
+/** Returns a `Header` component. */
+const Header: React.FunctionComponent<Props.Header> = ({
+  type,
+  title,
+  ...divAttrs
+}: Props.Header): React.ReactElement => (
+  <div className={styles['header']} {...divAttrs}>
+    <span className={getIconClassName(type)}>
+      <FontAwesome.FontAwesomeIcon icon={getIcon(type)} />
+    </span>
+    <span className={styles['title']}>{title}</span>
+  </div>
+);
+
+/** Sets the component's display name. */
+Header.displayName = 'Header';
 
 /** Returns a `Container` component. */
 const Container = React.forwardRef<
@@ -59,7 +101,7 @@ Pager.displayName = 'Pager';
 /** Returns a `Window` component. */
 export const Component: React.FunctionComponent<Props.Window> = ({
   children,
-  icon,
+  type,
   title,
   onClose,
   ...divProps
@@ -75,6 +117,7 @@ export const Component: React.FunctionComponent<Props.Window> = ({
   return (
     <Container {...divProps} ref={self}>
       <Controller>
+        <Header type={type} title={title} />
         <Button.Component
           className={styles['close']}
           icon={FontAwesomeIcon.faDotCircle}
