@@ -6,7 +6,6 @@ import * as React from 'react';
 import * as Props from './props';
 import * as Popups from '../popups';
 import * as Modal from '../../components/modal';
-import * as Hook from '../../utils/hook';
 import * as FontAwesome from '@fortawesome/react-fontawesome';
 import * as FontAwesomeCore from '@fortawesome/fontawesome-svg-core';
 import * as FontAwesomeIcon from '@fortawesome/free-solid-svg-icons';
@@ -63,7 +62,7 @@ const Divider: React.FunctionComponent<React.HTMLAttributes<HTMLDivElement>> =
   );
 
 /** Sets the component's display name. */
-Container.displayName = 'Controller';
+Divider.displayName = 'Divider';
 
 /** Returns a `ExternalLink` component. */
 const ExternalLink: React.FunctionComponent<Props.ExternalLink> = ({
@@ -112,6 +111,14 @@ export const Component = React.forwardRef<HTMLDivElement, Props.Menu>(
     { className, ...rest }: Props.Menu,
     ref: React.ForwardedRef<HTMLDivElement>
   ): React.ReactElement => {
+    /** @const Holds a reference to the component itself. */
+    const about = React.useRef<Modal.Trigger>(null);
+
+    /** Event listener which is responsible for `onClose`. */
+    const handleAboutClose = (): void => {
+      about.current?.close();
+    };
+
     return (
       <Container
         {...rest}
@@ -130,6 +137,7 @@ export const Component = React.forwardRef<HTMLDivElement, Props.Menu>(
           key="bugreport"
           type="github"
           target="_blank"
+          rel="noreferrer"
           href="https://github.com/ognis1205/slam-at-home/issues"
         />
         <ExternalLink
@@ -137,6 +145,7 @@ export const Component = React.forwardRef<HTMLDivElement, Props.Menu>(
           key="gethelp"
           type="gitter"
           target="_blank"
+          rel="noreferrer"
         />
         <ExternalLink
           title="Share this app"
@@ -146,6 +155,7 @@ export const Component = React.forwardRef<HTMLDivElement, Props.Menu>(
         />
         <Divider />
         <Modal.Component
+          ref={about}
           trigger={
             <Popup
               title="About"
@@ -159,7 +169,7 @@ export const Component = React.forwardRef<HTMLDivElement, Props.Menu>(
           on="click"
           offset={{ x: 0, y: 0 }}
         >
-          <Popups.Info />
+          <Popups.About onClose={handleAboutClose} />
         </Modal.Component>
       </Container>
     );

@@ -3,11 +3,7 @@
  * @copyright Shingo OKAWA 2022
  */
 import type * as React from 'react';
-import type * as Modal from '../../components/modal';
 import type * as Types from '../../utils/types';
-
-/***/
-export type Trigger = Modal.Trigger;
 
 /** A type union of application type properties. */
 export const ItemType = {
