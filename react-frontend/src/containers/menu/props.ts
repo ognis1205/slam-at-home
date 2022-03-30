@@ -30,10 +30,15 @@ export type ExternalLink = Types.Overwrite<
   }
 >;
 
-/** A {Menu} component properties. */
-export type Menu = Types.Overwrite<
-  React.HTMLAttributes<HTMLDivElement>,
+/** A {Popup} component properties. */
+export type Popup = Types.Overwrite<
+  React.AnchorHTMLAttributes<HTMLDivElement>,
   {
-    //
+    key: string | number;
+    type: ItemType;
+    title: string;
   }
 >;
+
+/** A {Menu} component properties. */
+export type Menu = React.HTMLAttributes<HTMLDivElement>;

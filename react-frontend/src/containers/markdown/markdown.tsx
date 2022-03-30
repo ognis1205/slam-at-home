@@ -1,5 +1,5 @@
 /**
- * @fileoverview Defines WIP component.
+ * @fileoverview Defines Markdown component.
  * @copyright Shingo OKAWA 2022
  */
 import * as React from 'react';

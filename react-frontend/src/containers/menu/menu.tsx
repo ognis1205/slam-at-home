@@ -4,6 +4,7 @@
  */
 import * as React from 'react';
 import * as Props from './props';
+import * as Popups from '../popups';
 import * as Modal from '../../components/modal';
 import * as Hook from '../../utils/hook';
 import * as FontAwesome from '@fortawesome/react-fontawesome';
@@ -83,6 +84,28 @@ const ExternalLink: React.FunctionComponent<Props.ExternalLink> = ({
 /** Sets the component's display name. */
 ExternalLink.displayName = 'Externallink';
 
+/** Returns a `Popups` component. */
+export const Popup = React.forwardRef<HTMLDivElement, Props.Popup>(
+  (
+    {
+      type,
+      title,
+      ...divAttrs
+    }: Props.Popup,
+    ref
+  ): React.ReactElement => (
+    <div ref={ref} className={styles['item']} {...divAttrs}>
+      <span className={getIconClassName(type)}>
+        <FontAwesome.FontAwesomeIcon icon={getIcon(type)} />
+      </span>
+      <span className={styles['title']}>{title}</span>
+    </div>
+  )
+);
+
+/** Sets the component's display name. */
+Popup.displayName = 'Popup';
+
 /** Returns a `Menu` component. */
 export const Component = React.forwardRef<HTMLDivElement, Props.Menu>(
   (
@@ -122,12 +145,22 @@ export const Component = React.forwardRef<HTMLDivElement, Props.Menu>(
           target="_blank"
         />
         <Divider />
-        <ExternalLink
-          title="About"
-          key="about"
-          type="info"
-          target="_blank"
-        />
+        <Modal.Component
+          trigger={
+            <Popup
+              title="About"
+              key="about"
+              type="info"
+              target="_blank"
+            />
+          }
+          modal={true}
+          position={['right bottom']}
+          on="click"
+          offset={{ x: 0, y: 0 }}
+        >
+          <Popups.Info />
+        </Modal.Component>
       </Container>
     );
   }
