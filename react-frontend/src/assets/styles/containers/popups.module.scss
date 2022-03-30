@@ -18,6 +18,7 @@
   width: 100%;
 }
 .controller {
+//  border-bottom: 1px solid $color-grey-middle;
   min-height: 34px;
   padding-top: 5px;
   padding-bottom: 5px;
@@ -30,6 +31,7 @@
     display: inline-block;
     float: left;
     font-size: 16px;
+    margin-left: 5px;
     user-select: none;
     .icon {
       display: inline-block;
@@ -73,7 +75,7 @@
   width: 450px;
   .title {
     margin: auto;
-    padding-bottom: 20px;
+//    padding-bottom: 20px;
     width: 400px;
     .logo {
       display: inline-block;
@@ -96,6 +98,7 @@
     background-color: $color-white;
     border: 1px solid $color-grey-middle;
     border-radius: $border-radius;
+    border-spacing: 0px;
     box-shadow: 0 1px 5px 0 $color-shadow inset;
     font-size: 16px;
     margin: auto;
@@ -131,6 +134,51 @@
 	background-size: auto 2px;
 	background-repeat: repeat-x;
 	text-decoration: none;
+      }
+    }
+  }
+}
+.share {
+  color: $color-grey-blue;
+  padding-bottom: 40px;
+  width: 450px;
+  .title {
+    margin: auto;
+    width: 400px;
+    .logo {
+      display: inline-block;
+      height: 100px;
+      width: 100px;
+      vertical-align:middle;
+    }
+    .description {
+      display: inline-block;
+      width: 300px;
+      vertical-align:middle;
+    }
+  }
+  .scroll {
+    background-color: $color-white;
+    border: 1px solid $color-grey-middle;
+    border-radius: $border-radius;
+    border-spacing: 0px;
+    box-shadow: 0 1px 5px 0 $color-shadow inset;
+    font-size: 16px;
+    margin: auto;
+    overflow: auto;
+    white-space: nowrap;
+    width: 400px;
+    .social {
+      display: inline-block;
+      margin-bottom: 8px;
+      margin-top: 8px;
+      width: 96px;
+      .share-button {
+         margin: 0 auto;
+	 display: block;
+      }
+      .social-name {
+	text-align: center;
       }
     }
   }
