@@ -11,7 +11,7 @@ import styles from '../../assets/styles/containers/popups.module.scss';
 export const Component: React.FunctionComponent<Props.Description> = ({
   children,
   ...divProps
-}: Props.description): React.ReactElement => (
+}: Props.Description): React.ReactElement => (
   <div className={styles['title']} {...divProps}>
     <div className={styles['logo']}>
       <Image
