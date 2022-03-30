@@ -1,14 +1,12 @@
 /**
- * @fileoverview
+ * @fileoverview Defines custom document.
  * @copyright Shingo OKAWA 2021
  */
 import * as React from 'react';
 import * as NextDocument from 'next/document';
 import Document from 'next/document';
 
-/**
- *
- */
+/** Represents a custom document. */
 export default class SLAMDocument extends Document {
   static async getInitialProps(
     ctx: NextDocument.DocumentContext

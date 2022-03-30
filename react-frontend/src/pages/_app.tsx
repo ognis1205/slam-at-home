@@ -5,11 +5,11 @@
 import * as React from 'react';
 import * as ReactRedux from 'react-redux';
 import * as NextApp from 'next/app';
-import Head from 'next/head';
 import * as Store from '../redux/store';
 import * as Notifications from '../redux/modules/notifications';
 import * as Panel from '../containers/panel';
 import * as Notification from '../containers/notification';
+import Head from 'next/head';
 import NotificationMotion from '../assets/motions/notification';
 import '../assets/styles/reset.css';
 import '../assets/styles/global.scss';
