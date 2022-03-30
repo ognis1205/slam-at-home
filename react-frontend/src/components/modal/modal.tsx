@@ -14,19 +14,28 @@ import * as Popup from '../../utils/popup';
 import classnames from 'classnames';
 import styles from '../../assets/styles/components/modal.module.scss';
 
+/** Returns the class name of the overlay. */
+const getOverlayClassName = (isModal: boolean): string =>
+  classnames(styles['overlay'], {
+    [styles['mask'] || '']: !!isModal,
+  });
+
 /** Returns a `Overlay` component. */
 const Overlay = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement> & {
+    isModal?: boolean;
     onClick?: (e: React.MouseEvent | React.KeyboardEvent) => void;
   }
 >(
   (
     {
       children,
+      isModal,
       onClick,
       ...divProps
     }: React.HTMLAttributes<HTMLDivElement> & {
+      isModal?: boolean;
       onClick?: (e: React.MouseEvent | React.KeyboardEvent) => void;
     },
     ref
@@ -40,7 +49,7 @@ const Overlay = React.forwardRef<
       <div
         ref={ref}
         onClick={handleClick}
-        className={styles['overlay']}
+        className={getOverlayClassName(isModal)}
         {...divProps}
       >
         {children}
@@ -53,9 +62,10 @@ const Overlay = React.forwardRef<
 Overlay.displayName = 'Overlay';
 
 /** Returns the class name of the wrapper. */
-const getPortalClassName = (className: string): string =>
+const getPortalClassName = (className: string, id: string): string =>
   classnames(styles['portal'], {
     [className || '']: !!className,
+    [id || '']: !!id,
   });
 
 /** Manages modal id. */
@@ -287,18 +297,17 @@ const Component = React.forwardRef<Props.Trigger, Props.Modal>(
         <React.Fragment>
           {renderTrigger()}
           <div
-            className={getPortalClassName(className)}
+            className={getPortalClassName(className, id.current)}
             ref={(el) => (self.current = el)}
           >
-            <Overlay ref={overlay} onClick={handleToggle}>
-              <Content.Component
-                {...commonProps}
-                className={className}
-                ref={(el) => (content.current = el)}
-              >
-                {children}
-              </Content.Component>
-            </Overlay>
+            <Overlay ref={overlay} onClick={handleToggle} isModal={isModal} />
+            <Content.Component
+              {...commonProps}
+              className={className}
+              ref={(el) => (content.current = el)}
+            >
+              {children}
+            </Content.Component>
           </div>
         </React.Fragment>
       );
@@ -309,7 +318,7 @@ const Component = React.forwardRef<Props.Trigger, Props.Modal>(
           <Portal.Wrapper
             visible={isOpen}
             container={container}
-            className={getPortalClassName(className)}
+            className={getPortalClassName(className, id.current)}
           >
             {({
               // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -328,16 +337,19 @@ const Component = React.forwardRef<Props.Trigger, Props.Modal>(
                   mouseLeaveHandler: handleMouseLeave,
                 }}
               >
-                <Overlay ref={overlay} onClick={handleToggle}>
-                  <Content.Component
-                    {...commonProps}
-                    {...rest}
-                    className={className}
-                    ref={(el) => (content.current = el)}
-                  >
-                    {children}
-                  </Content.Component>
-                </Overlay>
+                <Overlay
+                  ref={overlay}
+                  onClick={handleToggle}
+                  isModal={isModal}
+                />
+                <Content.Component
+                  {...commonProps}
+                  {...rest}
+                  className={className}
+                  ref={(el) => (content.current = el)}
+                >
+                  {children}
+                </Content.Component>
               </Context.Modal.Provider>
             )}
           </Portal.Wrapper>
