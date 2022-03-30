@@ -18,13 +18,7 @@ const getClassName = (className: string): string =>
 /** Returns a `Button` component. */
 export const Component = React.forwardRef<HTMLSpanElement, Props.Button>(
   (
-    {
-      icon,
-      title,
-      onClick,
-      className,
-      ...spanProps
-    }: Props.Button,
+    { icon, title, onClick, className, ...spanProps }: Props.Button,
     ref
   ): React.ReactElement => {
     /** Event listener which is responsible for `onClick`. */
