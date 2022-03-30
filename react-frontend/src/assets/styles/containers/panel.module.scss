@@ -15,6 +15,7 @@
   left: 0;
   width: 100%;
   height: 100%;
+  z-index: $layer-1;
 }
 .right {
   position: absolute;
@@ -29,6 +30,10 @@
   padding-right: 10px;
   &.maximized {
     padding: 0;
+    & > .window {
+      border: none;
+      border-radius: 0px;
+    }
   }
 }
 .divider {
@@ -50,6 +55,7 @@
 }
 .window {
   background: $color-white;
+  border: 1px solid $color-grey-middle;
   border-radius: $border-radius;
   box-shadow: 0 1px 5px 0 $color-shadow;
   display: flex;
@@ -59,47 +65,53 @@
   width: 100%;
 }
 .controller {
+  border-bottom: 1px solid $color-grey-middle;
+  min-height: 34px;
   padding-top: 5px;
   padding-bottom: 5px;
   overflow: hidden;
   display: block;
   clear: both;
-  background-color: $color-grey-light;
+  background-color: $color-grey-light-blue;
 }
 .pager {
   flex-grow: 1;
-  min-height: 0px;
-  min-width: 0px;
+  overflow: scroll;
+  padding-bottom: 16px;
+  padding-left: 32px;
+  padding-right: 32px;
+  padding-top: 16px;
 }
 .button {
-  color: $color-icon;
+  color: $color-grey-blue;
   display: inline-block;
-  opacity: 0.75;
   font-size: 16px;
-  &:hover {
-    opacity: 1;
-  }
   &.wifi {
     float: left;
     margin-left: 10px;
-    opacity: 1;
   }
   &.menu {
-    color: $color-icon;
+    color: $color-grey-blue;
     float: right;
     margin-right: 10px;
     cursor: pointer;
+    &:hover {
+      color: $window-color-menu;
+    }
     &:active {
-      color: $color-icon-dark;
+      color: $window-color-menu-shadow;
     }
   }
   &.maximize {
-    color: $color-icon;
+    color: $color-grey-blue;
     float: right;
     margin-right: 10px;
     cursor: pointer;
+    &:hover {
+      color: $window-color-size;
+    }
     &:active {
-      color: $color-icon-dark;
+      color: $window-color-size-shadow;
     }
   }
 }
