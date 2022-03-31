@@ -41,7 +41,7 @@ const getIcon = (
     case Notifications.Level.WARNING:
       return FontAwesomeIcon.faExclamationCircle;
     case Notifications.Level.ERROR:
-      return FontAwesomeIcon.faExclamationTriangle;
+      return FontAwesomeIcon.faExclamationCircle;
     case Notifications.Level.CUSTOM:
     default:
       return FontAwesomeIcon.faInfoCircle;
@@ -71,20 +71,19 @@ export const Component: React.FunctionComponent<Props.Items> = ({
         name="notification"
         deadline={duration}
       >
-        {({ className, style, ...notify }: Props.NotificationsWithStyle) => {
+        {({ className, style, ...notify }: Motion.Context) => {
           return (
             <Item.Component
               className={className}
               style={style}
-              key={notify.key}
-              level={notify.level}
-              title={notify.title}
-              message={notify.message}
-              ttl={notify.ttl}
-              showCloseButton={notify.showCloseButton}
-              onClick={notify.onClick}
-              icon={getIcon(notify.level)}
-              onHide={handleHide(notify)}
+              level={(notify as Props.Item).level}
+              title={(notify as Props.Item).title}
+              message={(notify as Props.Item).message}
+              ttl={(notify as Props.Item).ttl}
+              showCloseButton={(notify as Props.Item).showCloseButton}
+              onClick={(notify as Props.Item).onClick}
+              icon={getIcon((notify as Props.Item).level)}
+              onHide={handleHide(notify as Notifications.Item)}
             />
           );
         }}

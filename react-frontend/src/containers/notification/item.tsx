@@ -4,10 +4,12 @@
  */
 import * as React from 'react';
 import * as Props from './props';
+import * as Button from './button';
 import * as FAUtil from '../../utils/fontawesome';
 import * as Hook from '../../utils/hook';
 import * as Wrap from '../../utils/wrap';
 import * as FontAwesome from '@fortawesome/react-fontawesome';
+import * as FontAwesomeIcon from '@fortawesome/free-solid-svg-icons';
 import classnames from 'classnames';
 import styles from '../../assets/styles/containers/notification.module.scss';
 
@@ -82,9 +84,11 @@ export const Component: React.FunctionComponent<Props.Item> = ({
 
   /** Close button element. */
   const closeButton = showCloseButton ? (
-    <span className={styles['close-button']} onClick={handleHide}>
-      <i className={styles['close-icon']} />
-    </span>
+    <Button.Component
+      className={styles['close']}
+      icon={FontAwesomeIcon.faWindowClose}
+      onClick={handleHide}
+    />
   ) : null;
 
   /** Title element. */

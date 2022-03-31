@@ -68,3 +68,13 @@ export type Notification = Types.Overwrite<
     motion?: Motion.Props;
   }
 >;
+
+/** A {Button} component properties. */
+export type Button = Types.Overwrite<
+  React.HTMLAttributes<HTMLSpanElement>,
+  {
+    icon: string | React.ReactNode | FontAwesome.IconProp;
+    title?: string;
+    onClick?: () => void;
+  }
+>;
