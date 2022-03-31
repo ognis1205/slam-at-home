@@ -25,6 +25,8 @@ const getIcon = (type: Props.ItemType): FontAwesomeCore.IconDefinition => {
       return FontAwesomeIcon.faVideo;
     case Props.ItemType.CONSTRUCTION:
       return FontAwesomeIcon.faCube;
+    case Props.ItemType.SETTING:
+      return FontAwesomeIcon.faBars;
     case Props.ItemType.GITHUB:
       return FontAwesomeBrandIcon.faGithub;
     case Props.ItemType.GITTER:
@@ -121,9 +123,17 @@ export const Component: React.FunctionComponent<Props.TreeView> = (
   /** @const Holds a reference to the share item. */
   const share = React.useRef<Modal.Trigger>(null);
 
+  /** @const Holds a reference to the settings item. */
+  const settings = React.useRef<Modal.Trigger>(null);
+
   /** Event listener which is responsible for `onClose`. */
   const handleShareClose = (): void => {
     share.current?.close();
+  };
+
+  /** Event listener which is responsible for `onClose`. */
+  const handleSettingsClose = (): void => {
+    settings.current?.close();
   };
 
   return (
@@ -143,6 +153,23 @@ export const Component: React.FunctionComponent<Props.TreeView> = (
           <Router title="WebRTC" key="webrtc" type="camera" href="/webrtc" />
           <Router title="SLAM" key="slam" type="construction" href="/slam" />
           <Router title="SfM" key="sfm" type="construction" href="/sfm" />
+          <Modal.Component
+            ref={settings}
+            trigger={
+              <Popup
+                title="Settings"
+                key="settings"
+                type="setting"
+                target="_blank"
+              />
+            }
+            modal={true}
+            position={['right bottom']}
+            on="click"
+            offset={{ x: 0, y: 0 }}
+          >
+            <Popups.Settings onClose={handleSettingsClose} />
+          </Modal.Component>
         </Collapse.Panel>
         <Collapse.Panel
           header="Contribution"

@@ -27,6 +27,7 @@ export type TreeView = Types.Overwrite<
 export const ItemType = {
   CAMERA: 'camera',
   CONSTRUCTION: 'construction',
+  SETTING: 'setting',
   DOCUMENT: 'document',
   GITHUB: 'github',
   GITTER: 'gitter',
