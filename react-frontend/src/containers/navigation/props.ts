@@ -30,6 +30,7 @@ export const ItemType = {
   DOCUMENT: 'document',
   GITHUB: 'github',
   GITTER: 'gitter',
+  WIKI: 'wiki',
   SHARE: 'share',
   INFO: 'info',
 } as const;

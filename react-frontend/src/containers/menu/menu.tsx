@@ -22,6 +22,8 @@ const getIcon = (type: Props.ItemType): FontAwesomeCore.IconDefinition => {
       return FontAwesomeBrandIcon.faGithub;
     case Props.ItemType.GITTER:
       return FontAwesomeBrandIcon.faGitter;
+    case Props.ItemType.WIKI:
+      return FontAwesomeIcon.faBookOpen;
     case Props.ItemType.SHARE:
       return FontAwesomeIcon.faShareSquare;
     case Props.ItemType.INFO:
@@ -110,6 +112,9 @@ export const Component = React.forwardRef<HTMLDivElement, Props.Menu>(
     /** @const Holds a reference to the share item. */
     const share = React.useRef<Modal.Trigger>(null);
 
+    /** @const Holds a reference to the settings item. */
+    const settings = React.useRef<Modal.Trigger>(null);
+
     /** Event listener which is responsible for `onClose`. */
     const handleAboutClose = (): void => {
       about.current?.close();
@@ -120,14 +125,30 @@ export const Component = React.forwardRef<HTMLDivElement, Props.Menu>(
       share.current?.close();
     };
 
+    /** Event listener which is responsible for `onClose`. */
+    const handleSettingsClose = (): void => {
+      settings.current?.close();
+    };
+
     return (
       <Container {...rest} className={getClassName(className)} ref={ref}>
-        <ExternalLink
-          title="Settings"
-          key="settings"
-          type="setting"
-          target="_blank"
-        />
+        <Modal.Component
+          ref={settings}
+          trigger={
+            <Popup
+              title="Settings"
+              key="settings"
+              type="setting"
+              target="_blank"
+            />
+          }
+          modal={true}
+          position={['right bottom']}
+          on="click"
+          offset={{ x: 0, y: 0 }}
+        >
+          <Popups.Settings onClose={handleSettingsClose} />
+        </Modal.Component>
         <Divider />
         <ExternalLink
           title="Report a bug"
@@ -174,6 +195,13 @@ export const Component = React.forwardRef<HTMLDivElement, Props.Menu>(
         >
           <Popups.About onClose={handleAboutClose} />
         </Modal.Component>
+        <ExternalLink
+          title="Wiki"
+          key="wiki"
+          type="wiki"
+          target="_blank"
+          rel="noreferrer"
+        />
       </Container>
     );
   }

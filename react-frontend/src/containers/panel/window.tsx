@@ -45,6 +45,8 @@ export const Component: React.FunctionComponent<Props.Window> = ({
   children,
   isMaximized,
   onMaximize,
+  isMenuOpened,
+  onMenuOpen,
   ...divProps
 }: Props.Window): React.ReactElement => {
   /** @const Holds a reference to the component itself. */
@@ -53,6 +55,11 @@ export const Component: React.FunctionComponent<Props.Window> = ({
   /** Event listener which is responsible for `onClick`. */
   const handleMaximize = (): void => {
     if (onMaximize) onMaximize();
+  };
+
+  /** Event listener which is responsible for `onClick`. */
+  const handleMenuOpen = (): void => {
+    if (onMenuOpen) onMenuOpen();
   };
 
   return (
@@ -66,12 +73,19 @@ export const Component: React.FunctionComponent<Props.Window> = ({
           trigger={
             <Button.Component
               className={styles['menu']}
-              icon={FontAwesomeIcon.faChevronCircleDown}
+              icon={
+                isMenuOpened
+                  ? FontAwesomeIcon.faCaretSquareUp
+                  : FontAwesomeIcon.faCaretSquareDown
+              }
+              onClick={handleMenuOpen}
             />
           }
           position={['right bottom']}
           on="click"
           offset={{ x: 8, y: 4 }}
+          onOpen={handleMenuOpen}
+          onClose={handleMenuOpen}
         >
           <Menu.Component />
         </Modal.Component>
@@ -79,8 +93,8 @@ export const Component: React.FunctionComponent<Props.Window> = ({
           className={styles['maximize']}
           icon={
             isMaximized
-              ? FontAwesomeIcon.faMinusCircle
-              : FontAwesomeIcon.faPlusCircle
+              ? FontAwesomeIcon.faMinusSquare
+              : FontAwesomeIcon.faPlusSquare
           }
           onClick={handleMaximize}
         />

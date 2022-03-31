@@ -117,6 +117,12 @@ export const Component: React.FunctionComponent<Props.Panel> = ({
     y: position?.y || defaultPosition?.y || 0,
   });
 
+  /** An event handler called on `menu` events. */
+  const handleMenuOpen = (): void => {
+    toggleMenuOpened();
+    forceUpdate();
+  };
+
   /** An event handler called on `maximize` events. */
   const handleMaximize = (): void => {
     toggleMaximized();
@@ -137,13 +143,24 @@ export const Component: React.FunctionComponent<Props.Panel> = ({
   /** @const Holds a reference to the right. */
   const right = React.useRef<HTMLDivElement>(null);
 
+  /** @const Holds a menu opened flag. */
+  const hasMenuOpened = React.useRef(false);
+
+  /** Returns `true` if the menu has opned. */
+  const isMenuOpened = (): boolean => hasMenuOpened.current;
+
+  /** Toggles menu flag. */
+  const toggleMenuOpened = (): void => {
+    hasMenuOpened.current = !hasMenuOpened.current;
+  };
+
   /** @const Holds a maximized flag. */
   const hasMaximized = React.useRef(false);
 
   /** Returns `true` if the component has maximized. */
   const isMaximized = (): boolean => hasMaximized.current;
 
-  /** Returns `true` if the component has maximized. */
+  /** Toggles maximize flag. */
   const toggleMaximized = (): void => {
     hasMaximized.current = !hasMaximized.current;
   };
@@ -299,6 +316,8 @@ export const Component: React.FunctionComponent<Props.Panel> = ({
         <Window.Component
           isMaximized={isMaximized()}
           onMaximize={handleMaximize}
+          isMenuOpened={isMenuOpened()}
+          onMenuOpen={handleMenuOpen}
         >
           {children}
         </Window.Component>

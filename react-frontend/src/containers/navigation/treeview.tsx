@@ -29,6 +29,8 @@ const getIcon = (type: Props.ItemType): FontAwesomeCore.IconDefinition => {
       return FontAwesomeBrandIcon.faGithub;
     case Props.ItemType.GITTER:
       return FontAwesomeBrandIcon.faGitter;
+    case Props.ItemType.WIKI:
+      return FontAwesomeIcon.faBookOpen;
     case Props.ItemType.SHARE:
       return FontAwesomeIcon.faShareSquare;
     case Props.ItemType.INFO:
@@ -193,6 +195,13 @@ export const Component: React.FunctionComponent<Props.TreeView> = (
             target="_blank"
             rel="noreferrer"
             href="https://github.com/ognis1205/slam-at-home"
+          />
+          <ExternalLink
+            title="Wiki"
+            key="wiki"
+            type="wiki"
+            target="_blank"
+            rel="noreferrer"
           />
         </Collapse.Panel>
       </Collapse.Wrapper>

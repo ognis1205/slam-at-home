@@ -28,7 +28,9 @@ export type Window = Types.Overwrite<
   React.HTMLAttributes<HTMLDivElement>,
   {
     isMaximized: boolean;
+    isMenuOpened: boolean;
     onMaximize?: () => void;
+    onMenuOpen?: () => void;
   }
 >;
 
