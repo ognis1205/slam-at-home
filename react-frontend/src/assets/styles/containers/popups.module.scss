@@ -61,11 +61,12 @@
     float: right;
     margin-right: 10px;
     cursor: pointer;
+    opacity: 0.8;
     &:hover {
-      color: $window-color-close;
+      opacity: 1;
     }
     &:active {
-      color: $window-color-close-shadow;
+      color: $color-grey-blue-dark;
     }
   }
 }
@@ -75,7 +76,6 @@
   width: 450px;
   .title {
     margin: auto;
-//    padding-bottom: 20px;
     width: 400px;
     .logo {
       display: inline-block;

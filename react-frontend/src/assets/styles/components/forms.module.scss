@@ -54,17 +54,17 @@
     text-transform: uppercase;
   }
   .switch-right {
-    min-height: 0px;
-    display: block;
-    width: calc($forms-size - 2px);
-    margin: 2px;
     background: $color-white;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: calc(2 * $forms-slide-size - 2px);
     border-radius: calc($forms-size - 2px);
+    bottom: 0;
+    display: block;
+    margin: 2px;
+    min-height: 0px;
+    position: absolute;
+    right: calc(2 * $forms-slide-size - 2px);
+    top: 0;
     transition: all 0.3s ease-in 0s;
+    width: calc($forms-size - 2px);
   }
   .checkbox:checked + .label {
     .switch-left {

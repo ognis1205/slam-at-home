@@ -6,6 +6,7 @@
 $font-size: 14px;
 $font-color-logo: #080d79;
 $font-color-highlight: #1890ff;
+$font-color-active: #005FC5;
 
 // Colors
 $color-theme: #0a69dd;
@@ -20,6 +21,7 @@ $color-grey-light-blue: #F6F8FA;
 $color-grey-middle: #D4D4D4;
 $color-grey-dark: #999999;
 $color-grey-blue: #454d64;
+$color-grey-blue-dark: #182135;
 $color-background-highlight: #e6f7ff;
 $color-shadow: rgba(0, 0, 0, .15);
 $color-icon: rgba(0,0,0,.65);
@@ -27,7 +29,7 @@ $color-icon-dark: rgba(0,0,0,.75);
 $color-border: #ccd1d5;
 
 // Animations
-$duration: 0.1s;
+$duration: 0.2s;
 $ease-in-out-circ: cubic-bezier(0.78, 0.14, 0.15, 0.86);
 
 // Shapes

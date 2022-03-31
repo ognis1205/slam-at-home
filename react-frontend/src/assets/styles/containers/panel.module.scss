@@ -95,11 +95,12 @@
     float: right;
     margin-right: 10px;
     cursor: pointer;
+    opacity: 0.8;
     &:hover {
-      color: $window-color-menu;
+      opacity: 1;
     }
     &:active {
-      color: $window-color-menu-shadow;
+      color: $color-grey-blue-dark;
     }
   }
   &.maximize {
@@ -107,11 +108,12 @@
     float: right;
     margin-right: 10px;
     cursor: pointer;
+    opacity: 0.8;
     &:hover {
-      color: $window-color-size;
+      opacity: 1;
     }
     &:active {
-      color: $window-color-size-shadow;
+      color: $color-grey-blue-dark;
     }
   }
 }
