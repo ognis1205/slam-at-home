@@ -135,7 +135,7 @@ const INITIAL_STATE = {
 /** A reducer of the module. */
 const reducer = (
   state: State = INITIAL_STATE,
-  action: FSA.Action<Item>
+  action: FSA.Action<unknown>
 ): State => {
   switch (action.type) {
     case INFO:
