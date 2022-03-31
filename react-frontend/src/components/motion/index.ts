@@ -11,6 +11,7 @@ export type {
   ActiveEventHandler,
   DoneEventHandler,
   Config,
+  Context,
   Transition,
 } from './props';
 export { Component as List } from './list';
