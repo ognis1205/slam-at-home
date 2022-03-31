@@ -1,0 +1,77 @@
+/**
+ * @fileoverview SCSS Module for {Forms} component.
+ * @copyright Shingo OKAWA 2022
+ */
+@import '../constants.scss';
+
+.toggle {
+  display: inline-block;
+  position: relative;
+  text-align: left;
+  user-select: none;
+  vertical-align: middle;
+  width: calc(2 * $forms-size);
+  .checkbox {
+    display: none;
+  }
+  .label {
+    border-radius: $forms-size;
+    cursor: pointer;
+    display: block;
+    overflow: hidden;
+  }
+  .switch-left {
+    display: block;
+    width: 200%;
+    margin-left: -100%;
+    transition: all 0.3s ease-in 0s;
+    &:before, &:after {
+      display: block;
+      float: left;
+      font-size: $forms-size;
+      height: $forms-size;
+      line-height: $forms-size;
+      padding: 0;
+      width: 50%;
+    }
+    &:before {
+      background-color: $color-theme;
+      content: " ";
+      text-transform: uppercase;
+    }
+  }
+  &.disabled {
+    background-color: $color-grey-blue;
+    cursor: not-allowed;
+    &:before {
+      background-color: $color-grey-blue;
+      cursor: not-allowed;
+    }
+  }
+  .switch-left:after {
+    background-color: $color-grey-blue;
+    content: " ";
+    text-transform: uppercase;
+  }
+  .switch-right {
+    min-height: 0px;
+    display: block;
+    width: calc($forms-size - 2px);
+    margin: 2px;
+    background: $color-white;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: calc(2 * $forms-slide-size - 2px);
+    border-radius: calc($forms-size - 2px);
+    transition: all 0.3s ease-in 0s;
+  }
+  .checkbox:checked + .label {
+    .switch-left {
+      margin-left: 0px;
+    }
+    .switch-right {
+      right: 0px;
+    }
+  }
+}
