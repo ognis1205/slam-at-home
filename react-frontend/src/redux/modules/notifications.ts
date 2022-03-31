@@ -120,9 +120,7 @@ export const custom = (
   CUSTOM_ACTION(newPayload(parse(maybeOptions), Level.CUSTOM));
 
 /** REMOVE action. */
-export const remove = (key: string): FSA.Action<string> => {
-  return REMOVE_ACTION(key);
-};
+export const remove = (key: string): FSA.Action<string> => REMOVE_ACTION(key);
 
 /** A {State} type. */
 export type State = {
@@ -152,7 +150,7 @@ const reducer = (
     case REMOVE:
       return {
         ...state,
-        list: state.list.filter((n) => action.payload.key !== n.key),
+        list: state.list.filter((n) => action.payload !== n.key),
       } as State;
     default:
       return state;
