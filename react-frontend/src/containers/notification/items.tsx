@@ -60,9 +60,7 @@ export const Component: React.FunctionComponent<Props.Items> = ({
 }: Props.Items): React.ReactElement => {
   /** Event listener which is responsible for `onHide`. */
   const handleHide = (notification: Notifications.Item) => () => {
-    if (onHide) {
-      onHide(notification);
-    }
+    if (onHide) onHide(notification);
   };
 
   return (
@@ -73,9 +71,11 @@ export const Component: React.FunctionComponent<Props.Items> = ({
         name="notification"
         deadline={duration}
       >
-        {(notify: Notifications.Item) => {
+        {({ className, style, ...notify }: Props.NotificationsWithStyle) => {
           return (
             <Item.Component
+              className={className}
+              style={style}
               key={notify.key}
               level={notify.level}
               title={notify.title}

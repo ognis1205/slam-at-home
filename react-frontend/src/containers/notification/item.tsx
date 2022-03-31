@@ -17,7 +17,7 @@ const DEFAULT_PROPS: Partial<Props.Item> = {
   title: null,
   message: null,
   showCloseButton: true,
-  ttl: 5000,
+  ttl: 1000,
   onClick: () => {
     // Do nothing.
   },

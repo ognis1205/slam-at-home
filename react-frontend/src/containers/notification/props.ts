@@ -38,6 +38,15 @@ export type Item = Types.Overwrite<
   }
 >;
 
+/** A {Item} component properties. */
+export type NotificationWithStyle = Types.Overwrite<
+  Notifications.Item,
+  {
+    className: string;
+    style: string;
+  }
+>;
+
 /** A {Items} component properties. */
 export type Items = Types.Overwrite<
   React.HTMLAttributes<HTMLDivElement>,
