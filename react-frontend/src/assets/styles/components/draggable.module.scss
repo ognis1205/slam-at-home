@@ -2,28 +2,28 @@
  * @fileoverview SCSS Module for {Scroll} utility functions.
  * @copyright Shingo OKAWA 2021
  */
+@import '../constants.scss';
+
 @mixin selection {
-  ::-moz-selection {
-    @content; 
-  }
   ::selection {
     @content; 
   }
 }
+
 .body {
   @include selection {
     all: inherit;
   }
 }
+
 .draggable {
-  min-height: 0;
-  min-width: 0;
+  @include placeholder();
 }
+
 .dragging {
-  min-height: 0;
-  min-width: 0;
+  @include placeholder();
 }
+
 .dragged {
-  min-height: 0;
-  min-width: 0;
+  @include placeholder();
 }

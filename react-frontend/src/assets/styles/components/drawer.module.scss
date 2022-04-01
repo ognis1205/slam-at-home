@@ -4,61 +4,55 @@
  */
 @import '../constants.scss';
 
+$handle-size: 40px;
+$handle-offset: 80px;
+
 .drawer {
   position: fixed;
-  transition: width 0s ease $duration,
-              height 0s ease $duration,
-              transform $duration $ease-in-out-circ;
   z-index: $layer-3;
-  >* {
-    transition: transform $duration $ease-in-out-circ,
-                opacity $duration $ease-in-out-circ,
-                box-shadow $duration $ease-in-out-circ;
-  }
-  &.open {
-    transition: transform $duration $ease-in-out-circ;
-  }
-  .mask {
-    background: #000;
-    height: 0;
-    left: 0;
-    opacity: 0;
-    position: absolute;
-    top: 0;
-    transition: opacity $duration $ease-in-out-circ, 
-                height 0s ease $duration;
-    width: 100%;
-  }
 }
+
+.mask {
+  background: black;
+  height: 0;
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  transition: opacity $animation-ease-in-out-circ, 
+              height $animation-ease;
+  width: 100%;
+}
+
 .wrapper {
-  background: $color-white;
+  background: white;
   position: absolute;
 }
+
 .content {
   overflow: auto;
   position: relative;
-  z-index: $layer-1;
 }
+
 .handle {
   align-items: center;
-  background: $color-white;
+  background: white;
   cursor: pointer;
   display: flex;
   font-size: 16px;
-  height: 40px;
+  height: $handle-size;
   justify-content: center;
-  line-height: 40px;
+  line-height: $handle-size;
   position: absolute;
   text-align: center;
-  top: 72px;
-  width: 41px;
-  z-index: $layer-0;
+  top: $handle-offset;
+  width: $handle-size;
 }
+
 .icon {
-  background: $color-icon;
+  background: $font-color;
   height: 2px;
   position: relative;
-  transition: background $duration $ease-in-out-circ;
   width: 14px;
   &:before, &:after {
     background: $color-icon;
@@ -66,7 +60,7 @@
     display: block;
     height: 2px;
     position: absolute;
-    transition: transform $duration $ease-in-out-circ;
+    transition: transform $animation-ease-in-out-circ;
     width: 100%;
   }
   &:before {
@@ -76,6 +70,7 @@
     top: 5px;
   }
 }
+
 .left, .right {
   height: 100%;
   width: 0%;
@@ -89,20 +84,20 @@
     }
   }
 }
+
 .left {
   left: 0;
   top: 0;
   .handle {
-    border-radius: 0 $border-radius $border-radius 0;
-    box-shadow: 2px 0 8px $color-shadow;
-    right: -40px;
+    border-radius: 0 $radius-size-m $radius-size-m 0;
+    box-shadow: $shadow-right $shadow-outset;
+    right: (-$handle-size);
   }
-  &.open {
-    .wrapper {
-      box-shadow: 2px 0 8px $color-shadow;
-    }
+  &.open .wrapper {
+    box-shadow: $shadow-right $shadow-outset;
   }
 }
+
 .right {
   right: 0;
   top: 0;
@@ -110,13 +105,13 @@
     right: 0;
   }
   .handle {
-    border-radius: $border-radius 0 0 $border-radius;
-    box-shadow: -2px 0 8px $color-shadow;
-    left: -40px;
+    border-radius: $radius-size-m 0 0 $radius-size-m;
+    box-shadow: $shadow-left $shadow-outset;
+    left: (-$handle-size);
   }
   &.open {
     .wrapper {
-      box-shadow: -2px 0 8px $color-shadow;
+      box-shadow: $shadow-left $shadow-outset;
     }
     &.no-mask {
       right: 1px;
@@ -124,6 +119,7 @@
     }
   }
 }
+
 .top, .bottom {
   height: 0%;
   width: 100%;
@@ -144,21 +140,23 @@
     margin-left: -20px;
   }
 }
+
 .top {
   left: 0;
   top: 0;
   .handle {
-    border-radius: 0 0 $border-radius $border-radius;
-    bottom: -40px;
-    box-shadow: 0 2px 8px $color-shadow;
+    border-radius: 0 0 $radius-size-m $radius-size-m;
+    bottom: (-$handle-size);
+    box-shadow: $shadow-bottom $shadow-outset;
     top: auto;
   }
   &.open {
     .wrapper {
-      box-shadow: 0 2px 8px $color-shadow;
+      box-shadow: $shadow-bottom $shadow-outset;
     }
   }
 }
+
 .bottom {
   bottom: 0;
   left: 0;
@@ -166,13 +164,13 @@
     bottom: 0;
   }
   .handle {
-    border-radius: $border-radius $border-radius 0 0;
-    box-shadow: 0 -2px 8px $color-shadow;
-    top: -40px;
+    border-radius: $radius-size-m $radius-size-m 0 0;
+    box-shadow: $shadow-top $shadow-outset;
+    top: (-$handle-size);
   }
   &.open {
     .wrapper {
-      box-shadow: 0 -2px 8px $color-shadow;
+      box-shadow: $shadow-top $shadow-outset;
     }
     &.no-mask {
       bottom: 1px;
@@ -180,21 +178,24 @@
     }
   }
 }
-.open {
-  .mask {
-    height: 100%;
-    opacity: .3;
-    transition: opacity $duration $ease-in-out-circ;
-  }
-  .handle {
-    .icon {
-      background: transparent;
-      &:before {
-        transform: translateY(5px) rotate(45deg);
-      }
-      &:after {
-        transform: translateY(-5px) rotate(-45deg);
+
+
+  &.open {
+    transition: transform $animation-ease-in-out-circ;
+    .mask {
+      height: 100%;
+      opacity: $opacity-l;
+      transition: opacity $animation-ease-in-out-circ;
+    }
+    .handle {
+      .icon {
+	background: transparent;
+	&:before {
+          transform: translateY(5px) rotate(45deg);
+	}
+	&:after {
+          transform: translateY(-5px) rotate(-45deg);
+	}
       }
     }
   }
-}

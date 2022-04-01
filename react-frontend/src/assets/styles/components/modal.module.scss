@@ -11,26 +11,30 @@
   width: 100%;
   height: 100%;
 }
+
 .overlay {
   left: 0;
   position: absolute;
   top: 0;
   width: 100%;
   height: 100%;
-  z-index: $layer-2;
+  z-index: $z-layer-3;
   &.mask {
     background-color: #000;
     opacity: .1;
   }
 }
+
 .content {
   pointer-events: auto;
   position: relative;
-  z-index: $layer-2;
+  z-index: $z-layer-3;
   display: inline-block;
+
   &.tooltip {
     position: absolute;
   };
+
   &.modal {
     position: relative;
     display: table;

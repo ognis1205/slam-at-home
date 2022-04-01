@@ -7,29 +7,30 @@
 .hidden {
   display: none;
 }
-.collapse {
-  * {
-    transition: height $duration $ease-in-out-circ;
-  }
+
+.collapse * {
+  transition: height $animation-ease-in-out-circ;
 }
+
 .header {
-  color: $color-grey-blue;
+  color: $font-color;
   cursor: pointer;
-  font-size: $navigation-header-font-size;
+  font-size: $font-size-l;
   position: relative;
   user-select: none;
   &:hover {
-    color: $font-color-highlight;
+    color: $font-color-hover;
     .arrow {
       &:after, &:before {
-        background-image: linear-gradient(90deg, $font-color-highlight, $font-color-highlight);
+        background-image: $icon-background-image-hover;
       }
     }
   }
   &:active {
-    background: $color-background-highlight;
+    background: $font-color-highlight;
   }
 }
+
 .arrow {
   position: absolute;
   right: 16px;
@@ -42,65 +43,56 @@
     transform: rotate(-45deg) translateX(2px);
   }
   &:after, &:before {
-    background-image: linear-gradient(90deg, $color-icon, $color-icon);
-    border-radius: $border-radius;
+    background-image: $icon-background-image;
     box-sizing: border-box;
     content: " ";
-    height: 1.5px;
+    height: 2px;
     position: absolute;
-    transition: transform $duration $ease-in-out-circ;
+    transition: transform $animation-ease-in-out-circ;
     width: 6px;
   }
 }
+
 .icon {
   display: inline-block;
-  font-size: $navigation-header-icon-size;
-  height: $navigation-header-size;
-  line-height: $navigation-header-size;
-  padding-right: calc($navigation-header-icon-size / 2);
+  font-size: $icon-size-m;
+  height: $icon-wrapper-size-m;
+  line-height: $icon-wrapper-size-m;
+  padding-right: calc($icon-size-m / 2);
   text-align: center;
-  width: $navigation-header-size;
-  & > svg {
-    width: $navigation-header-icon-size;
-  }
+  width: $icon-wrapper-size-m;
 }
+
 .content {
-  color: $color-grey-middle;
   overflow: hidden;
-  padding-left: calc(3 * $navigation-header-icon-size / 2);
+  padding-left: $indent-size-m;
   user-select: none;
-  & > &-box {
-    margin-bottom: 16px;
-    margin-top: 16px;
+}
+
+.panel-active > .header > .arrow {
+  &:after {
+    transform: rotate(-45deg) translateX(-2px);
+  }
+  &:before {
+    transform: rotate(45deg) translateX(2px);
   }
 }
-.panel-active {
-  & > .header {
-    & > .arrow {
-      &:after {
-        transform: rotate(-45deg) translateX(-2px);
-      }
-      &:before {
-        transform: rotate(45deg) translateX(2px);
-      }
-    }
-  }
-}
+
 .panel-inactive {
-  min-height: 0;
-  min-width: 0;
+  @include placeholder();
 }
+
 .collapsible-only {
   cursor: default;
   .text {
     cursor: pointer;
   }
 }
+
 .content-active {
-  min-height: 0;
-  min-width: 0;
+  @include placeholder();
 }
+
 .content-inactive {
-  min-height: 0;
-  min-width: 0;
+  @include placeholder();
 }

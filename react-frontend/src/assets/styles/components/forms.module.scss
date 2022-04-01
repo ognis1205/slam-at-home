@@ -10,68 +10,75 @@
   text-align: left;
   user-select: none;
   vertical-align: middle;
-  width: calc(2 * $forms-size);
+  width: calc(2 * $form-size-m);
+  * {
+    transition: left $animation-ease-in-out-circ;
+  }
+
   .checkbox {
     display: none;
   }
+
   .label {
-    border-radius: $forms-size;
+    border-radius: $form-size-m;
     cursor: pointer;
     display: block;
     overflow: hidden;
   }
-  .switch-left {
+
+  .left {
     display: block;
     width: 200%;
     margin-left: -100%;
-    transition: all 0.3s ease-in 0s;
+
     &:before, &:after {
       display: block;
       float: left;
-      font-size: $forms-size;
-      height: $forms-size;
-      line-height: $forms-size;
-      padding: 0;
+      font-size: $form-size-m;
+      height: $form-size-m;
+      line-height: $form-size-m;
       width: 50%;
     }
+
     &:before {
-      background-color: $color-theme;
+      background-color: $form-color-active;
       content: " ";
-      text-transform: uppercase;
+    }
+
+    &:after {
+      background-color: $color-grey-blue;
+      content: " ";
     }
   }
+
   &.disabled {
-    background-color: $color-grey-blue;
+    background-color: $form-color-inactive;
     cursor: not-allowed;
+
     &:before {
-      background-color: $color-grey-blue;
+      background-color: $form-color-inactive;
       cursor: not-allowed;
     }
   }
-  .switch-left:after {
-    background-color: $color-grey-blue;
-    content: " ";
-    text-transform: uppercase;
-  }
-  .switch-right {
-    background: $color-white;
-    border-radius: calc($forms-size - 2px);
+
+  .right {
+    background: white;
+    border-radius: calc($form-size-m - 2px);
     bottom: 0;
     display: block;
     margin: 2px;
-    min-height: 0px;
     position: absolute;
-    right: calc(2 * $forms-slide-size - 2px);
+    left: 0px;
     top: 0;
-    transition: all 0.3s ease-in 0s;
-    width: calc($forms-size - 2px);
+    width: calc($form-size-m - 2px);
   }
+
   .checkbox:checked + .label {
-    .switch-left {
+    .left {
       margin-left: 0px;
     }
-    .switch-right {
-      right: 0px;
+    .right {
+	left: calc($form-size-m - 2px);
     }
   }
 }
