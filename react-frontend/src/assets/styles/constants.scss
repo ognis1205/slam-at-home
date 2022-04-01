@@ -2,72 +2,128 @@
  * @fileoverview SCSS Module Constants.
  * @copyright Shingo OKAWA 2021
  */
-// Fonts
-$font-size: 14px;
-$font-color-logo: #080d79;
-$font-color-highlight: #1890ff;
+
+// Mixin
+@mixin placeholder() {
+  min-height: 0;
+  min-width: 0;
+}
+
+@mixin zindex($base, $level) {
+  z-index: calc($base + $level);
+}
+
+@mixin link() {
+    background: linear-gradient(
+	to bottom,
+	$font-color-link 0%,
+	$font-color-link 100%
+    );
+    background-position: 0 100%;
+    background-repeat: repeat-x;
+    background-size: 1px 1px;
+    color: $font-color;
+    text-decoration: none;
+}
+
+@mixin link-hover() {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:ev='http://www.w3.org/2001/xml-events' viewBox='0 0 20 4'%3E%3Cstyle type='text/css'%3E.squiggle{animation:shift .3s linear infinite;}@keyframes shift {from {transform:translateX(0);}to {transform:translateX(-20px);}}%3C/style%3E%3Cpath fill='none' stroke='%231890ff' stroke-width='2' class='squiggle' d='M0,3.5 c 5,0,5,-3,10,-3 s 5,3,10,3 c 5,0,5,-3,10,-3 s 5,3,10,3'/%3E%3C/svg%3E");
+  background-position: 0 100%;
+  background-size: auto 2px;
+  background-repeat: repeat-x;
+  text-decoration: none;
+}
+
+// Font
+$font-color: #454d64;
+$font-color-light: #F6F8FA;
+$font-color-dark: #182135;
+$font-color-link: #1890ff;
+$font-color-hover: #1890ff;
 $font-color-active: #005FC5;
+$font-color-highlight: #e6f7ff;
+$font-color-nadir: #D4D4D4;
+$font-size-s: 12px;
+$font-size-m: 14px;
+$font-size-l: 16px;
+$font-size-header: 32px;
 
-// Colors
-$color-theme: #0a69dd;
-$color-red: #e74c3c;
-$color-green: #2ecc71;
-$color-orange: #e67e22;
-$color-black: #000000;
-$color-white: #ffffff;
-$color-off-white: #F6F9FC;
-$color-grey-light: #EBECF0;
-$color-grey-light-blue: #F6F8FA;
-$color-grey-middle: #D4D4D4;
-$color-grey-dark: #999999;
-$color-grey-blue: #454d64;
-$color-grey-blue-dark: #182135;
-$color-background-highlight: #e6f7ff;
-$color-shadow: rgba(0, 0, 0, .15);
-$color-icon: rgba(0,0,0,.65);
-$color-icon-dark: rgba(0,0,0,.75);
-$color-border: #ccd1d5;
-
-// Animations
-$duration: 0.2s;
-$ease-in-out-circ: cubic-bezier(0.78, 0.14, 0.15, 0.86);
-
-// Shapes
-$border-radius: 4px;
-
-// SNS
-$button-color: #24292f;
-$button-image: linear-gradient(180deg, #f6f8fa, #ebf0f4 90%);
-$button-focus-bg-color: #e5e9ed;
-$button-focus-bd-color: #c7cbcf;
-$button-active-bd-color: rgba(27,31,36,.15);
-$button-active-shadow: inset 0 0.15em 0.3em rgb(27 31 36 / 15%);
-
-// Navigation
-$navigation-header-icon-size: 16px;
-$navigation-header-font-size: 16px;
-$navigation-header-size: 30px;
-
-// Forms
-$forms-size: 20px;
-$forms-slide-size: 10px;
+// Logo
+$logo-size-s: 64px;
+$logo-size-m: 96px;
+$logo-size-l: 128px;
 
 // Icon
-$icon-color-directory: #55aefc;
-$icon-color-document: $color-orange;
-$icon-color-application: $color-theme;
+$icon-size-s: 14px;
+$icon-size-m: 16px;
+$icon-size-l: 18px;
+$icon-size-xl: 26px;
+$icon-wrapper-size-s: 28px;
+$icon-wrapper-size-m: 30px;
+$icon-wrapper-size-l: 32px;
+$icon-color-green: #2ecc71;
+$icon-color-red: #e74c3c;
+$icon-color-orange: #e67e22;
+$icon-background-image: linear-gradient(90deg, $font-color, $font-color);
+$icon-background-image-hover: linear-gradient(90deg, $font-color-hover, $font-color-hover);
+$icon-background-image-active: linear-gradient(90deg, $font-color-active, $font-color-active);
+$icon-background-image-highlight: linear-gradient(90deg, $font-color-highlight, $font-color-highlight);
 
-// Window
-$window-color-size: #28c940;
-$window-color-size-shadow: #1f9e32;
-$window-color-close: #FA5753;
-$window-color-close-shadow: #BC332F;
-$window-color-menu: #0a69dd;
-$window-color-menu-shadow: #0851aa;
+// Forms
+$form-size-s: 14px;
+$form-size-m: 16px;
+$form-size-l: 18px;
+$form-color-active: #0a69dd;
+$form-color-inactive: $font-color;
 
-// Z indices
-$layer-0: 0;
-$layer-1: 9;
-$layer-2: 99;
-$layer-3: 999;
-$layer-4: 9999;
+// Position & Geometry
+$indent-size-s: calc(3 * $icon-size-s / 2);
+$indent-size-m: calc(3 * $icon-size-m / 2);
+$indent-size-l: calc(3 * $icon-size-l / 2);
+$radius-size-s: 2px;
+$radius-size-m: 4px;
+$radius-size-l: 6px;
+$spacing-size-xs: 4px;
+$spacing-size-s: 8px;
+$spacing-size-m: 16px;
+$spacing-size-l: 32px;
+
+// Effect
+$animation-ease: 0s ease 0.2s;
+$animation-ease-in-out-circ: 0.2s cubic-bezier(0.78, 0.14, 0.15, 0.86);
+$animation-blink: blink 2s ease-in infinite alternate;
+$bar-color: #F6F8FA;
+$border-color: #D4D4D4;
+$border-s: 1px solid $border-color;
+$border-m: 2px solid $border-color;
+$border-l: 3px solid $border-color;
+$opacity-l: .2;
+$opacity-m: .5;
+$opacity-h: .8;
+$opacity-none: 1;
+$shadow-all: 0px 0px;
+$shadow-right: 2px 0px;
+$shadow-left: -2px 0px;
+$shadow-top: 0px -2px;
+$shadow-bottom: 0px 2px;
+$shadow-right-top: 2px -2px;
+$shadow-right-bottom: 2px 2px;
+$shadow-left-top: -2px -2px;
+$shadow-left-bottom: -2px 2px;
+$shadow-outset: 5px 0 rgba(0, 0, 0, .15);
+$shadow-inset: 5px 0 rgba(0, 0, 0, .15) inset;
+@keyframes blink {
+  from {
+    opacity: $opacity-l;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+// Z Index
+$z-layer-0: 0;  // Base
+$z-layer-1: 10; // Mask
+$z-layer-2: 20; // Drawer
+$z-layer-3: 30; // Popup
+$z-layer-4: 40; // Notification

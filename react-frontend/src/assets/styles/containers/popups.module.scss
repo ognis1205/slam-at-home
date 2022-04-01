@@ -4,179 +4,188 @@
  */
 @import '../constants.scss';
 
+$min-width: 450px;
+$width-s: 400px;
+$width-m: 450px;
+$width-l: 500px;
+
 .window {
-  background-color: $color-grey-light-blue;
-  border: 1px solid $color-grey-middle;
-  border-radius: $border-radius;
-  box-shadow: 0 1px 5px 0 $color-shadow;
+  background-color: $bar-color;
+  border-radius: $radius-size-m;
+  border: $border-s;
+  box-shadow: $shadow-all $shadow-outset;
   display: flex;
   flex-direction: column;
   height: 100%;
   margin: 0 auto;
-  min-width: 400px;
+  min-width: $min-width;
   overflow: hidden;
   width: 100%;
 }
+
 .controller {
-//  border-bottom: 1px solid $color-grey-middle;
-  min-height: 34px;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  overflow: hidden;
-  display: block;
+  background-color: $bar-color;
   clear: both;
-  background-color: $color-grey-light-blue;
+  display: block;
+  min-height: calc(2 * $font-size-m + $spacing-size-xs);
+  overflow: hidden;
+  padding-bottom: $spacing-size-xs;
+  padding-top: $spacing-size-xs;
+
   .header {
-    color: $color-grey-blue;
+    color: $font-color;
     display: inline-block;
     float: left;
-    font-size: 16px;
-    margin-left: 5px;
+    font-size: $font-size-l;
+    margin-left: calc($spacing-size-s / 2);
     user-select: none;
+
     .icon {
       display: inline-block;
-      font-size: $navigation-header-icon-size;
-      height: $navigation-header-size;
-      line-height: $navigation-header-size;
-      padding-left: calc($navigation-header-icon-size / 2);
-      padding-right: calc($navigation-header-icon-size / 2);
+      font-size: $icon-size-m;
+      height: $icon-wrapper-size-m;
+      line-height: $icon-wrapper-size-m;
+      padding-left: calc($icon-size-m / 2);
+      padding-right: calc($icon-size-m / 2);
       text-align: center;
-      width: $navigation-header-size;
+      width: $icon-wrapper-size-m;
     }
   }
 }
+
 .pager {
   flex-grow: 1;
   overflow: scroll;
+  padding-bottom: $spacing-size-m;
+  padding-left: $spacing-size-m;
+  padding-right: $spacing-size-m;
 }
+
 .button {
-  color: $color-grey-blue;
+  color: $font-color;
   display: inline-block;
-  font-size: 16px;
-  height: 30px;
-  line-height: 30px;
+  font-size: $icon-size-m;
+  height: $icon-wrapper-size-m;
+  line-height: $icon-wrapper-size-m;
   text-align: center;
+
   &.close {
-    color: $color-grey-blue;
-    float: right;
-    margin-right: 10px;
+    color: $font-color;
     cursor: pointer;
-    opacity: 0.8;
+    float: right;
+    margin-right: $spacing-size-s;
+    opacity: $opacity-h;
     &:hover {
       opacity: 1;
     }
     &:active {
-      color: $color-grey-blue-dark;
+      color: $font-color-dark;
     }
   }
 }
+
 .about {
-  color: $color-grey-blue;
-  padding-bottom: 40px;
-  width: 450px;
+  width: $width-m;
+
   .title {
     margin: auto;
-    width: 400px;
+    margin-bottom: $spacing-size-m;
+    width: 100%;
+
     .logo {
-      display: inline-block;
-      height: 100px;
-      width: 100px;
-      vertical-align:middle;
+      float: left;
+      height: $logo-size-m;
+      width: $logo-size-m;
     }
+
     .description {
-      display: inline-block;
-      width: 300px;
-      vertical-align:middle;
+      align-content: center;
+      display: flex;
+      flex-direction: column;
+      height: $logo-size-m;
+      justify-content: center;
     }
   }
-  .divider {
-    display: block;
-    height: 0;
-    border-top: 1px solid $color-grey-middle;
-  }
+
   .table {
-    background-color: $color-white;
-    border: 1px solid $color-grey-middle;
-    border-radius: $border-radius;
+    background-color: white;
+    border-radius: $radius-size-m;
     border-spacing: 0px;
-    box-shadow: 0 1px 5px 0 $color-shadow inset;
-    font-size: 16px;
+    border: $border-s;
+    box-shadow: $shadow-all $shadow-inset;
+    font-size: $font-size-l;
     margin: auto;
-    padding: 8px;
-    width: 400px;
-    .name {
-      .icon {
-        display: inline-block;
-	font-size: 16px;
-	height: 16px;
-	line-height: 30px;
-	text-align: center;
-	width: 30px;
-      }
+    padding: $spacing-size-s;
+    width: 100%;
+
+    .name .icon {
+      display: inline-block;
+      font-size: $icon-size-m;
+      height: $icon-size-m;
+      line-height: $icon-wrapper-size-m;
+      text-align: center;
+      width: $icon-wrapper-size-m;
     }
+
     .value {
       float: right;
       & > a {
-	background: linear-gradient(
-	    to bottom,
-	    $font-color-highlight 0%,
-	    $font-color-highlight 100%
-	);
-	background-position: 0 100%;
-	background-repeat: repeat-x;
-	background-size: 1px 1px;
-	color: rgba(7, 6, 0, 0.7);
-	text-decoration: none;
+        @include link();
       }
       & > a:hover {
-	background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:ev='http://www.w3.org/2001/xml-events' viewBox='0 0 20 4'%3E%3Cstyle type='text/css'%3E.squiggle{animation:shift .3s linear infinite;}@keyframes shift {from {transform:translateX(0);}to {transform:translateX(-20px);}}%3C/style%3E%3Cpath fill='none' stroke='%231890ff' stroke-width='2' class='squiggle' d='M0,3.5 c 5,0,5,-3,10,-3 s 5,3,10,3 c 5,0,5,-3,10,-3 s 5,3,10,3'/%3E%3C/svg%3E");
-	background-position: 0 100%;
-	background-size: auto 2px;
-	background-repeat: repeat-x;
-	text-decoration: none;
+	@include link-hover();
       }
     }
   }
 }
+
 .share {
-  color: $color-grey-blue;
-  padding-bottom: 40px;
-  width: 450px;
+  width: $width-m;
+
   .title {
     margin: auto;
-    width: 400px;
+    margin-bottom: $spacing-size-m;
+    width: 100%;
+
     .logo {
-      display: inline-block;
-      height: 100px;
-      width: 100px;
-      vertical-align:middle;
+      float: left;
+      height: $logo-size-m;
+      width: $logo-size-m;
     }
+
     .description {
-      display: inline-block;
-      width: 300px;
-      vertical-align:middle;
+      align-content: center;
+      display: flex;
+      flex-direction: column;
+      height: $logo-size-m;
+      justify-content: center;
     }
   }
+
   .scroll {
-    background-color: $color-white;
-    border: 1px solid $color-grey-middle;
-    border-radius: $border-radius;
+    background-color: white;
+    border-radius: $radius-size-m;
     border-spacing: 0px;
-    box-shadow: 0 1px 5px 0 $color-shadow inset;
-    font-size: 16px;
+    border: $border-s;
+    box-shadow: $shadow-all $shadow-inset;
+    font-size: $font-size-l;
     margin: auto;
     overflow: auto;
+    padding: $spacing-size-s;
     white-space: nowrap;
-    width: 400px;
+    width: 100%;
+
     .social {
       display: inline-block;
-      margin-bottom: 8px;
-      margin-top: 8px;
-      width: 96px;
+      margin-bottom: $spacing-size-s;
+      margin-top: $spacing-size-s;
+      width: $logo-size-m;
+
       .share-button {
-         margin: 0 auto;
 	 display: block;
+         margin: 0 auto;
       }
+
       .social-name {
 	text-align: center;
       }

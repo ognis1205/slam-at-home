@@ -8,147 +8,102 @@
   display: flex;
   flex-direction: column;
   height: 100%;
+
   .header {
     justify-content: center;
     text-align: center;
+
     .logo {
       display: flex;
       justify-content: center;
-      margin-top: 10px;
+      margin-top: $spacing-size-m;
       width: 100%;
-    }
-    .title {
-      color: $color-grey-blue;
-      display: flex;
-      font-size: 25px;
-      font-weight: 800;
-      justify-content: center;
-      margin-bottom: 10px;
-      width: 100%;
-    }
-    .buttons {
-      display: flex;
-      justify-content: center;
-      width: 100%;
-      .button {
-        &:before{
-	  display: inline-block; 
-	  width: 5px;
-          content: " "; 
-	}
-      }
-      .coffee {
-	background-image: $button-image;
-	border-color: $color-border;
-	border: 1px solid $color-border;
-	border-radius: 0.25em;
-	color: $button-color;
-	cursor: pointer;
-	display: inline-flex;
-	font-size: 11px;
-	font-weight: 600;
-	height: 14px;
-	outline: 0;
-	padding: 2px 5px;
-	user-select: none;
-        text-decoration: none;
-	&:hover, &:focus {
-	  background-color: $button-focus-bg-color;
-	  background-image: none;
-	  border: 1px solid transparent;
-	  border-color: $button-focus-bd-color;
-	  filter: none;
-          text-decoration: none;
-	}
-	&:active {
-	  box-shadow: $button-active-shadow;
-          border-color: $button-active-bd-color;
-	}
-	.img {
-	  border: none;
-	  box-shadow: none;
-	  margin-right: 2px;
-	  vertical-align: middle;
-          margin-bottom: 1px;
-	}
-	.text {
-          vertical-align: middle;
-	}
-      }
     }
   }
+
   .footer {
-    color: $color-grey-middle;
+    color: $font-color-nadir;
     justify-content: center;
-    padding-bottom: 10px;
+    margin-bottom: $spacing-size-m;
     text-align: center;
     width: 100%;
   }
+
   .tree {
     flex: 1;
-    font-size: 16px;
+    font-size: $font-size-l;
     overflow: auto;
-    padding-left: 20px;
+    padding-left: $spacing-size-m;
+
     .item {
-      color: $color-grey-blue;
+      color: $font-color;
       cursor: pointer;
       display: inline-block;
       position: relative;
       user-select: none;
       width: 100%;
       width: 100%;
+
       &:hover {
-        color: $font-color-highlight;
+        color: $font-color-hover;
       }
+
       &:active {
-        background: $color-background-highlight;
+        background: $font-color-highlight;
       }
+
       &.selected {
-        color: $font-color-highlight;
+        color: $font-color-hover;
+
 	&:after {
-	  background-color: $font-color-highlight;
+	  background-color: $font-color-hover;
 	  border-radius: 50%;
 	  content: "";
 	  display: inline-block;
-	  height: 5px;
+	  height: 6px;
 	  left: -10px;
-	  margin-top: -2.5px;
+	  margin-top: -3px;
 	  opacity: 1;
 	  position: absolute;
 	  top: 50%;
 	  transform: scale(1) translateX(0);
-	  width: 5px;
+	  width: 6px;
 	}
       }
+
       .link {
-	color: $color-grey-blue;
+	color: $font-color;
 	text-decoration: none;
 	width: 100%;
         display: inline-block;
+
 	&:hover {
-          color: $font-color-highlight;
+          color: $font-color-hover;
 	}
+
 	&:active {
-          background: $color-background-highlight;
+          background: $font-color-highlight;
 	}
+
 	.icon {
 	  display: inline-block;
-	  font-size: $navigation-header-icon-size;
-	  height: $navigation-header-size;
-	  line-height: $navigation-header-size;
-	  padding-right: calc($navigation-header-icon-size / 2);
+	  font-size: $icon-size-m;
+	  height: $icon-wrapper-size-m;
+	  line-height: $icon-wrapper-size-m;
+	  padding-right: calc($icon-size-m / 2);
 	  text-align: center;
-	  width: $navigation-header-size;
+	  width: $icon-wrapper-size-m;
 	}
       }
+
       .icon {
 	display: inline-block;
-	font-size: $navigation-header-icon-size;
-	height: $navigation-header-size;
-	line-height: $navigation-header-size;
-	padding-right: calc($navigation-header-icon-size / 2);
+	font-size: $icon-size-m;
+	height: $icon-wrapper-size-m;
+	line-height: $icon-wrapper-size-m;
+	padding-right: calc($icon-size-m / 2);
 	text-align: center;
-	width: $navigation-header-size;
+	width: $icon-wrapper-size-m;
       }
     }
   }

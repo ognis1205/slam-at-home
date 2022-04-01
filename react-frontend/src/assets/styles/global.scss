@@ -7,12 +7,12 @@
 html, body {
   font-family: Arial,
 	       sans-serif;
-  font-size: $font-size;
+  font-size: $font-size-m;
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  -webkit-tap-highlight-color: $color-black;
+  -webkit-tap-highlight-color: black;
   -webkit-overflow-scrolling: touch;
-  color: $color-black;
-  background: $color-white;
+  color: black;
+  background: white;
 }

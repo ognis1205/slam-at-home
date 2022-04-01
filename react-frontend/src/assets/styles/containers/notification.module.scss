@@ -4,89 +4,97 @@
  */
 @import '../constants.scss';
 
+$width: 320px;
+
 .notification {
   box-sizing: border-box;
-  max-height: calc(100% - 30px);
   overflow-x: hidden;
   overflow-y: auto;
-  padding: 0px 10px;
+  padding-left: $spacing-size-s;
+  padding-right: $spacing-size-s;
   position: fixed;
-  width: 320px;
-  z-index: $layer-4;
+  width: $width;
+  z-index: $z-layer-4;
+
   &.left {
     left: 0;
     top: 0;
   }
+
   &.right {
     right: 0;
     top: 0;
   }
+
   * {
-    transition: transform $duration $ease-in-out-circ;
+    transition: transform $animation-ease-in-out-circ;
   }
 }
+
 .item {
   align-items : center;
-  background-color: $color-grey-blue;
-  border-radius: $border-radius;
-  box-shadow: 0 1px 5px 0 $color-shadow;
+  background-color: $font-color;
+  border-radius: $radius-size-m;
+  box-shadow: $shadow-all $shadow-outset;
   box-sizing: border-box;
-  color: $color-white;
+  color: white;
   cursor: pointer;
   display : flex;
-  font-size: 1em;
-  line-height: 1.2em;
-  margin-top: 15px;
-  min-height: 55px;
-  opacity: 0.9;
-  padding: 15px 10px 15px 10px;
-  position: relative;
-  width: 300px;
+  font-size: $font-size-m;
+  margin-top: $spacing-size-m;
+  opacity: $opacity-h;
+  padding: $spacing-size-m;
+
   &:hover, &:focus {
-    opacity: 1;
+    opacity: $opacity-none;
   }
+
   &.info {
-    color: $color-white;
+    color: white;
   }
+
   &.success {
-    color: $color-green;
+    color: $icon-color-green;
   }
+
   &.warning {
-    color: $color-orange;
+    color: $icon-color-orange;
   }
+
   &.error {
-    color: $color-red;
+    color: $icon-color-red;
   }
+
   &.custom-icon {
   }
 }
+
 .icon {
   display: inline-block;
   float: left;
-  font-size: 25px;
-  margin-left: 10px;
-  margin-right: 20px;
+  font-size: $icon-size-xl;
+  margin-right: $spacing-size-m;
 }
+
 .content {
-  color: $color-grey-light-blue;
+  color: white;
 }
+
 .title {
-  font-size: 1em;
-  font-weight: bold;
-  line-height: 1.2em;
-  margin: 0 0 5px 0;
-  width: 225px;
+  width: calc($width - 2 * $spacing-size-s - $icon-size-xl - 3 * $spacing-size-m);
 }
+
 .close {
-  color: $color-grey-light-blue;
+  color: $font-color-light;
   float: right;
-  margin-right: 10px;
   cursor: pointer;
-  opacity: 0.8;
+  opacity: $opacity-m;
+
   &:hover {
-    opacity: 1;
+    opacity: $opacity-none;
   }
 }
+
 .message {
-  width: 225px;
+  width: calc($width - 2 * $spacing-size-s - $icon-size-xl - 3 * $spacing-size-m);
 }

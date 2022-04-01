@@ -2,7 +2,8 @@
  * @fileoverview SCSS Module for {Scroll} utility functions.
  * @copyright Shingo OKAWA 2021
  */
+@import '../constants.scss';
+
 .scroll {
-  min-height: 0;
-  min-width: 0;
+  @include placeholder();
 }

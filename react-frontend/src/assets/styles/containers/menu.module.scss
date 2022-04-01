@@ -5,94 +5,104 @@
 @import '../constants.scss';
 
 .menu {
-  background: $color-white;
-  border: 1px solid $color-grey-middle;
-  border-radius: $border-radius;
-  box-shadow: 0 1px 5px 0 $color-shadow;
+  background: white;
+  border: $border-s;
+  border-radius: $radius-size-m;
+  box-shadow: $shadow-all $shadow-outset;
   display: flex;
   flex-direction: column;
   height: 100%;
   overflow: hidden;
-  padding-bottom: 12px;
-  padding-top: 12px;
+  padding-bottom: $spacing-size-s;
+  padding-top: $spacing-size-s;
   width: 100%;
+
   &:before {
     content: '';
     position: absolute;
     width: 0;
     height: 0;
     bottom: 100%;
-    right: 8px;
-    border: 8px solid transparent;
+    right: calc($icon-size-m / 2);
+    border: calc($icon-size-m / 2) solid transparent;
     border-top: none;
-    border-bottom-color: $color-grey-middle;
+    border-bottom-color: $border-color;
     filter: drop-shadow(0 -0.0625rem 0.0625rem rgba(0, 0, 0, .1));
   }
+
   &:after {
     content: '';
     position: absolute;
     width: 0;
     height: 0;
     bottom: 100%;
-    top: -7px;
-    right: 8px;
-    border: 8px solid transparent;
+    top: calc(-1 * ($icon-size-m / 2 - 1px));
+    right: calc($icon-size-m / 2);
+    border: calc($icon-size-m / 2) solid transparent;
     border-top: none;
-    border-bottom-color: $color-white;
-    filter: drop-shadow(0 -0.0625rem 0.0625rem rgba(0, 0, 0, .1));
+    border-bottom-color: white;
   }
+
   .divider {
     display: block;
     height: 0;
     margin: 8px 0;
-    border-top: 1px solid $color-grey-middle;
+    border-top: $border-s;
   }
+
   .item {
-    color: $color-grey-blue;
+    color: $font-color;
     cursor: pointer;
     display: inline-block;
-    font-size: 16px;
-    margin-left: 24px;
-    margin-right: 24px;
+    font-size: $font-size-l;
+    margin-left: $indent-size-s;
+    margin-right: $indent-size-s;
     position: relative;
     user-select: none;
     width: 100%;
     width: 100%;
+
     &:hover {
-      color: $font-color-highlight;
+      color: $font-color-hover;
     }
+
     &:active {
-      background: $color-background-highlight;
+      background: $font-color-highlight;
     }
+
     .link {
-      color: $color-grey-blue;
+      color: $font-color;
       text-decoration: none;
       width: 100%;
       display: inline-block;
+
       &:hover {
-        color: $font-color-highlight;
+        color: $font-color-hover;
       }
+
       &:active {
-        background: $color-background-highlight;
+        background: $font-color-highlight;
       }
+
       .icon {
         display: inline-block;
-	font-size: $navigation-header-icon-size;
-	height: $navigation-header-size;
-	line-height: $navigation-header-size;
-	padding-right: calc($navigation-header-icon-size / 2);
+	font-size: $icon-size-m;
+	height: $icon-wrapper-size-m;
+	line-height: $icon-wrapper-size-m;
+	padding-right: calc($icon-size-m / 2);
 	text-align: center;
-	width: $navigation-header-size;
+	width: $icon-wrapper-size-m;
       }
     }
+
     .icon {
       display: inline-block;
-      font-size: $navigation-header-icon-size;
-      height: $navigation-header-size;
-      line-height: $navigation-header-size;
-      padding-right: calc($navigation-header-icon-size / 2);
+      font-size: $icon-size-m;
+      height: $icon-wrapper-size-m;
+      line-height: $icon-wrapper-size-m;
+      padding-right: calc($icon-size-m / 2);
       text-align: center;
-      width: $navigation-header-size;
+      width: $icon-wrapper-size-m;
     }
   }
 }

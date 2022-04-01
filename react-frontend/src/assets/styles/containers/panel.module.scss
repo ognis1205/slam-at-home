@@ -5,115 +5,134 @@
 @import '../constants.scss';
 
 .panel{
-  min-height: 0px;
-  min-width: 0px;
+  @include placeholder();
 }
+
 .left {
-  position: absolute;
   box-sizing: border-box;
-  top: 0;
-  left: 0;
-  width: 100%;
   height: 100%;
-  z-index: $layer-1;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: $z-layer-1;
 }
+
 .right {
-  position: absolute;
   box-sizing: border-box;
-  top: 0;
-  left: 0;
-  width: 100%;
   height: 100%;
-  z-index: $layer-1;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  padding-right: 10px;
+  left: 0;
+  padding-bottom: $spacing-size-m;
+  padding-right: $spacing-size-m;
+  padding-top: $spacing-size-m;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: $z-layer-1;
+
   &.maximized {
     padding: 0;
+
     & > .window {
       border: none;
       border-radius: 0px;
     }
   }
 }
+
 .divider {
   display: block;
   cursor: col-resize;
   position: absolute;
   box-sizing: border-box;
-  z-index: $layer-1;
+  z-index: $z-layer-1;
   top: 0;
   left: 0;
   height: 100%;
   opacity: 1;
+
   &:hover {
-    background-image: radial-gradient(at center center,rgba(0,0,0,0.2) 0%,transparent 70%,transparent 100%);
-    background-size: 50px 100%;
+    background-image: radial-gradient(at center center,
+				      rgba(0,0,0,0.3) 0%,
+				      transparent 70%,
+				      transparent 100%);
     background-position: 0 50%;
     background-repeat: no-repeat;
+    background-size: 50px 100%;
   }
 }
+
 .window {
-  background: $color-white;
-  border: 1px solid $color-grey-middle;
-  border-radius: $border-radius;
-  box-shadow: 0 1px 5px 0 $color-shadow;
+  background: white;
+  border-radius: $radius-size-m;
+  border: $border-s;
+  box-shadow: $shadow-all $shadow-outset;
   display: flex;
   flex-direction: column;
   height: 100%;
   overflow: hidden;
   width: 100%;
 }
+
 .controller {
-  border-bottom: 1px solid $color-grey-middle;
-  min-height: 34px;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  overflow: hidden;
-  display: block;
+  background-color: $bar-color;
+  border-bottom: $border-s;
   clear: both;
-  background-color: $color-grey-light-blue;
+  display: block;
+  min-height: calc(2 * $font-size-m + $spacing-size-xs);
+  overflow: hidden;
+  padding-bottom: $spacing-size-xs;
+  padding-top: $spacing-size-xs;
 }
+
 .pager {
   flex-grow: 1;
   overflow: scroll;
-  padding-bottom: 16px;
-  padding-left: 32px;
-  padding-right: 32px;
-  padding-top: 16px;
+  padding-bottom: $spacing-size-m;
+  padding-left: $spacing-size-l;
+  padding-right: $spacing-size-l;
+  padding-top: $spacing-size-m;
 }
+
 .button {
-  color: $color-grey-blue;
+  color: $font-color;
   display: inline-block;
-  font-size: 16px;
+  font-size: $font-size-l;
+
   &.wifi {
     float: left;
-    margin-left: 10px;
+    margin-left: $spacing-size-m;
   }
+
   &.menu {
-    color: $color-grey-blue;
-    float: right;
-    margin-right: 10px;
+//    color: $color-grey-blue;
     cursor: pointer;
-    opacity: 0.8;
+    float: right;
+    margin-right: $spacing-size-m;
+    opacity: $opacity-h;
+
     &:hover {
       opacity: 1;
     }
+
     &:active {
-      color: $color-grey-blue-dark;
+      color: $font-color-dark;
     }
   }
+
   &.maximize {
-    color: $color-grey-blue;
+    color: $font-color;
     float: right;
-    margin-right: 10px;
+    margin-right: $spacing-size-s;
     cursor: pointer;
-    opacity: 0.8;
+    opacity: $opacity-h;
+
     &:hover {
       opacity: 1;
     }
+
     &:active {
-      color: $color-grey-blue-dark;
+      color: $font-color-dark;
     }
   }
 }
