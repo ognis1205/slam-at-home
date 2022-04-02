@@ -24,7 +24,6 @@ export const Component: React.FunctionComponent<Props.Text> = ({
   placeholder,
   toggleId,
   toggleName,
-  toggleClassName,
   checked,
   disabled,
   onChange,
@@ -59,7 +58,6 @@ export const Component: React.FunctionComponent<Props.Text> = ({
       <Toggle.Component
         id={toggleId}
         name={toggleName}
-        className={toggleClassName}
         checked={checked}
         disabled={disabled}
         onChange={handleChange}

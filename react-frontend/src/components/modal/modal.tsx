@@ -62,10 +62,9 @@ const Overlay = React.forwardRef<
 Overlay.displayName = 'Overlay';
 
 /** Returns the class name of the wrapper. */
-const getPortalClassName = (className: string, id: string): string =>
+const getPortalClassName = (className: string): string =>
   classnames(styles['portal'], {
     [className || '']: !!className,
-    [id || '']: !!id,
   });
 
 /** Manages modal id. */
