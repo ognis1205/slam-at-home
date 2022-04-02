@@ -42,7 +42,7 @@ export const middleware: Redux.Middleware =
   }: Redux.MiddlewareAPI<Redux.Dispatch, S>) =>
   (next: Redux.Dispatch<Redux.AnyAction>) =>
   (action: FSA.Action<unknown>): unknown => {
-    if (Notifications.isNotification(action.type)) {
+    if (Notifications.checkIfActionIsNotification(action.type)) {
       setTimeout(() => {
         const state = getState();
         const notifications = state.notifications;

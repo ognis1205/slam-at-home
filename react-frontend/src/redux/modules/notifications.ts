@@ -28,7 +28,7 @@ const CUSTOM = `${SUFFIX}/custom`;
 const REMOVE = `${SUFFIX}/remove`;
 
 /** Returns true if the action is notification. */
-export const isNotification = (action: string): boolean =>
+export const checkIfActionIsNotification = (action: string): boolean =>
   action.startsWith(SUFFIX);
 
 /** A type union of notification level properties. */
