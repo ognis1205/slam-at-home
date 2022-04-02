@@ -42,8 +42,21 @@ export const getId = (req: HTTP.IncomingMessage): string | undefined => {
 };
 
 /** Returns the remote address of the request. */
-export const getAddress = (req: HTTP.IncomingMessage): string =>
-  req.socket.remoteAddress;
+export const getAddress = (req: HTTP.IncomingMessage): string => {
+  const toString = (value: string | string[], delimiter = ','): string => {
+    if (typeof value === 'string') {
+      const values = value.split(delimiter).map((v) => v.trim())[0];
+      return values ? values[0] : undefined;
+    } else {
+      return value ? value[0] : undefined;
+    }
+  };
+  const conRemoteAddress = req.connection?.remoteAddress;
+  const sockRemoteAddress = req.socket?.remoteAddress;
+  const xRealIP = toString(req.headers['x-real-ip']);
+  const xForwardedForIP = toString(req.headers['x-forwarded-for']);
+  return xForwardedForIP || xRealIP || sockRemoteAddress || conRemoteAddress;
+};
 
 /** Returns the user agent of the request. */
 export const getUserAgent = (req: HTTP.IncomingMessage): string =>
@@ -66,9 +79,13 @@ class Client {
     req: HTTP.IncomingMessage
   ) {
     this.id = id;
-    const addr = getAddress(req);
+    // TODO:
+    // Docker for Mac/Windows looses the real IP information of the clients.
+    // Hence using IP addresses for client names are meaningless here.
+    // const addr = getAddress(req);
     const user = getUserAgent(req).split(/[ ,]+/)[0];
-    this.name = `${user}(${addr})`;
+    //this.name = `${user}(${addr})`;
+    this.name = `${user}(${id})`;
     this.connection = conn;
   }
 
