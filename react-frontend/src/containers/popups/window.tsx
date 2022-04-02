@@ -122,7 +122,7 @@ export const Component: React.FunctionComponent<Props.Window> = ({
         <Header type={type} title={title} />
         <Button.Component
           className={styles['close']}
-          icon={FontAwesomeIcon.faWindowClose}
+          icon={FontAwesomeIcon.faTimesCircle}
           onClick={handleClose}
         />
       </Controller>
