@@ -1,5 +1,5 @@
 /**
- * @fileoverview Defines Toggle component.
+ * @fileoverview Defines Menu component.
  * @copyright Shingo OKAWA 2022
  */
 import * as React from 'react';
@@ -15,13 +15,13 @@ const getClassName = (className: string): string =>
 
 /** Returns the class name of the label. */
 const getLeftClassName = (disabled: boolean): string =>
-  classnames(styles['left'], {
+  classnames(styles['switch-left'], {
     [styles['disabled']]: disabled,
   });
 
 /** Returns the class name of the label. */
 const getRightClassName = (disabled: boolean): string =>
-  classnames(styles['right'], {
+  classnames(styles['switch-right'], {
     [styles['disabled']]: disabled,
   });
 
@@ -35,36 +35,29 @@ export const Component: React.FunctionComponent<Props.Toggle> = ({
   onChange,
   options = { on: 'yes', off: 'no' },
   ...divAttrs
-}: Props.Toggle): React.ReactElement => {
-  /** An event handler called on 'change' events. */
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    if (onChange) onChange(e);
-  };
-
-  return (
-    <div {...divAttrs} className={getClassName(className)}>
-      <input
-        type="checkbox"
-        id={id}
-        name={name}
-        checked={checked}
-        disabled={disabled}
-        className={styles['input']}
-        onChange={handleChange}
-      />
-      {id ? (
-        <label className={styles['label']} htmlFor={id}>
-          <span
-            className={getLeftClassName(disabled)}
-            data-on={options.on}
-            data-off={options.off}
-          />
-          <span className={getRightClassName(disabled)} />
-        </label>
-      ) : null}
-    </div>
-  );
-};
+}: Props.Toggle): React.ReactElement => (
+  <div {...divAttrs} className={getClassName(className)}>
+    <input
+      type="checkbox"
+      id={id}
+      name={name}
+      checked={checked}
+      disabled={disabled}
+      className={styles['checkbox']}
+      onChange={(e) => onChange(e)}
+    />
+    {id ? (
+      <label className={styles['label']} htmlFor={id}>
+        <span
+          className={getLeftClassName(disabled)}
+          data-on={options.on}
+          data-off={options.off}
+        />
+        <span className={getRightClassName(disabled)} />
+      </label>
+    ) : null}
+  </div>
+);
 
 /** Sets the component's display name. */
 Component.displayName = 'Toggle';

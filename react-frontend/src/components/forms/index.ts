@@ -2,5 +2,6 @@
  * @fileoverview Defines {Forms} components.
  * @copyright Shingo OKAWA 2022
  */
-export type { Toggle as ToggleProps } from './props';
+export type { Toggle as ToggleProps, Text as TextProps } from './props';
+export { Component as Text } from './text';
 export { Component as Toggle } from './toggle';
