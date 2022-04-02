@@ -297,7 +297,7 @@ const Component = React.forwardRef<Props.Trigger, Props.Modal>(
         <React.Fragment>
           {renderTrigger()}
           <div
-            className={getPortalClassName(className, id.current)}
+            className={getPortalClassName(className)}
             ref={(el) => (self.current = el)}
           >
             <Overlay ref={overlay} onClick={handleToggle} isModal={isModal} />
@@ -318,7 +318,7 @@ const Component = React.forwardRef<Props.Trigger, Props.Modal>(
           <Portal.Wrapper
             visible={isOpen}
             container={container}
-            className={getPortalClassName(className, id.current)}
+            className={getPortalClassName(className)}
           >
             {({
               // eslint-disable-next-line @typescript-eslint/no-unused-vars
