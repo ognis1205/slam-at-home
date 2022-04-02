@@ -8,6 +8,7 @@ import * as Button from './button';
 import * as Menu from '../menu';
 import * as Modal from '../../components/modal';
 import * as FontAwesomeIcon from '@fortawesome/free-solid-svg-icons';
+import classnames from 'classnames';
 import styles from '../../assets/styles/containers/panel.module.scss';
 
 /** Returns a `Controller` component. */
@@ -40,6 +41,12 @@ export const Pager: React.FunctionComponent<Props.Pager> = ({
 /** Sets the component's display name. */
 Pager.displayName = 'Pager';
 
+/** Returns the class name of the toggle. */
+const getMenuClassName = (isOpen: boolean): string =>
+  classnames(styles['menu'], {
+    [styles['open'] || '']: isOpen,
+  });
+
 /** Returns a `Window` component. */
 export const Component: React.FunctionComponent<Props.Window> = ({
   children,
@@ -52,6 +59,9 @@ export const Component: React.FunctionComponent<Props.Window> = ({
   /** @const Holds a reference to the component itself. */
   const self = React.useRef<HTMLDivElement>(null);
 
+  /** @const Holds a state of menu. */
+  const [isOpen, setOpen] = React.useState<boolean>(false);
+
   /** Event listener which is responsible for `onClick`. */
   const handleMaximize = (): void => {
     if (onMaximize) onMaximize();
@@ -59,6 +69,7 @@ export const Component: React.FunctionComponent<Props.Window> = ({
 
   /** Event listener which is responsible for `onClick`. */
   const handleMenuOpen = (): void => {
+    setOpen((open) => !open);
     if (onMenuOpen) onMenuOpen();
   };
 
@@ -72,11 +83,11 @@ export const Component: React.FunctionComponent<Props.Window> = ({
         <Modal.Component
           trigger={
             <Button.Component
-              className={styles['menu']}
+              className={getMenuClassName(isOpen)}
               icon={
                 isMenuOpened
-                  ? FontAwesomeIcon.faCaretSquareUp
-                  : FontAwesomeIcon.faCaretSquareDown
+                  ? FontAwesomeIcon.faChevronCircleUp
+                  : FontAwesomeIcon.faChevronCircleDown
               }
               onClick={handleMenuOpen}
             />
@@ -93,8 +104,8 @@ export const Component: React.FunctionComponent<Props.Window> = ({
           className={styles['maximize']}
           icon={
             isMaximized
-              ? FontAwesomeIcon.faMinusSquare
-              : FontAwesomeIcon.faPlusSquare
+              ? FontAwesomeIcon.faMinusCircle
+              : FontAwesomeIcon.faPlusCircle
           }
           onClick={handleMaximize}
         />
