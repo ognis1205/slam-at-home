@@ -86,7 +86,7 @@ export const Component: React.FunctionComponent<Props.Item> = ({
   const closeButton = showCloseButton ? (
     <Button.Component
       className={styles['close']}
-      icon={FontAwesomeIcon.faWindowClose}
+      icon={FontAwesomeIcon.faTimesCircle}
       onClick={handleHide}
     />
   ) : null;
