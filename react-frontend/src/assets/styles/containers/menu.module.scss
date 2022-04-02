@@ -67,6 +67,7 @@
     }
 
     &:active {
+      color: $font-color-active;
       background: $font-color-highlight;
     }
 
@@ -81,17 +82,8 @@
       }
 
       &:active {
+        color: $font-color-active;
         background: $font-color-highlight;
-      }
-
-      .icon {
-        display: inline-block;
-	font-size: $icon-size-m;
-	height: $icon-wrapper-size-m;
-	line-height: $icon-wrapper-size-m;
-	padding-right: calc($icon-size-m / 2);
-	text-align: center;
-	width: $icon-wrapper-size-m;
       }
     }
 

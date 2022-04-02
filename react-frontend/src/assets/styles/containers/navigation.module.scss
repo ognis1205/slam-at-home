@@ -49,11 +49,12 @@
       }
 
       &:active {
+        color: $font-color-active;
         background: $font-color-highlight;
       }
 
       &.selected {
-        color: $font-color-hover;
+        color: $font-color-active;
 
 	&:after {
 	  background-color: $font-color-hover;
@@ -82,6 +83,7 @@
 	}
 
 	&:active {
+          color: $font-color-active;
           background: $font-color-highlight;
 	}
 

@@ -40,7 +40,8 @@ $font-color-light: #F6F8FA;
 $font-color-dark: #182135;
 $font-color-link: #1890ff;
 $font-color-hover: #1890ff;
-$font-color-active: #005FC5;
+//$font-color-active: #005FC5;
+$font-color-active: #1890ff;
 $font-color-highlight: #e6f7ff;
 $font-color-nadir: #D4D4D4;
 $font-size-s: 12px;
@@ -61,6 +62,7 @@ $icon-size-xl: 26px;
 $icon-wrapper-size-s: 28px;
 $icon-wrapper-size-m: 30px;
 $icon-wrapper-size-l: 32px;
+$icon-color-blue: #1890ff;
 $icon-color-green: #2ecc71;
 $icon-color-red: #e74c3c;
 $icon-color-orange: #e67e22;
@@ -73,7 +75,9 @@ $icon-background-image-highlight: linear-gradient(90deg, $font-color-highlight, 
 $form-size-s: 14px;
 $form-size-m: 16px;
 $form-size-l: 18px;
-$form-color-active: #0a69dd;
+//$form-color-active: #0a69dd;
+//$form-color-active: #1890ff;
+$form-color-active: $icon-color-green;
 $form-color-inactive: $font-color;
 
 // Position & Geometry

@@ -105,11 +105,15 @@
   }
 
   &.menu {
-//    color: $color-grey-blue;
     cursor: pointer;
     float: right;
     margin-right: $spacing-size-m;
     opacity: $opacity-h;
+
+    &.open {
+      opacity: 1;
+      color: $font-color-dark;
+    }
 
     &:hover {
       opacity: 1;

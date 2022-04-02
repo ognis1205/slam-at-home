@@ -15,7 +15,7 @@
     transition: left $animation-ease-in-out-circ;
   }
 
-  .checkbox {
+  .input {
     display: none;
   }
 
@@ -73,12 +73,46 @@
     width: calc($form-size-m - 2px);
   }
 
-  .checkbox:checked + .label {
+  .input:checked + .label {
     .left {
       margin-left: 0px;
     }
     .right {
 	left: calc($form-size-m - 2px);
     }
+  }
+}
+
+.text {
+  align-items: center;
+  background: white;
+  border-radius: $icon-wrapper-size-m;
+  border: $border-s;
+  box-shadow: $shadow-all $shadow-inset;
+  display: flex;
+  height: $icon-wrapper-size-m;
+  justify-content: center;
+
+  .icon {
+    float: left;
+    font-size: $icon-size-m;
+    height: $icon-wrapper-size-m;
+    line-height: $icon-wrapper-size-m;
+    margin-left: $spacing-size-s;
+    text-align: center;
+    width: $icon-wrapper-size-m;
+  }
+
+  .input {
+    border: none;
+    flex-grow: 1;
+    &:focus {
+      outline-width: 0;
+    }
+  }
+  
+  .toggle {
+    float: right;
+    margin-right: $spacing-size-s;
   }
 }
