@@ -89,6 +89,20 @@ struct IconButtonStyle: ButtonStyle {
   }
 }
 
+struct PopupStyle: GroupBoxStyle {
+  // MARK: Methods
+
+  func makeBody(configuration: Configuration) -> some View {
+    VStack(alignment: .leading) {
+      configuration.label
+      configuration.content
+    }
+    .padding(ViewConstants.PADDING_L)
+    .foregroundColor(Color.fontColor)
+    .background(RoundedRectangle(cornerRadius: ViewConstants.RADIUS_M).fill(Color.uiColor))
+  }
+}
+
 extension Text {
   // MARK: Methods
 
@@ -96,6 +110,5 @@ extension Text {
     self.fontWeight(weight)
         .frame(height: height)
         .padding(.horizontal, padding)
-        .clipShape(Capsule())
     }
 }

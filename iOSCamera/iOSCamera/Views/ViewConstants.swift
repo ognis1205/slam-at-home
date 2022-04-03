@@ -11,6 +11,12 @@ import SwiftUI
 
 struct ViewConstants {
   // MARK: Properties
+
+  static let FONT_S = 14.0
+
+  static let FONT_M = 16.0
+
+  static let FONT_L = 18.0
   
   static let PADDING_S = 8.0
   
@@ -18,11 +24,29 @@ struct ViewConstants {
   
   static let PADDING_L = 14.0
   
+  static let MARGIN_S = 64.0
+  
+  static let MARGIN_M = 128.0
+  
+  static let MARGIN_L = 256.0
+  
   static let BORDER_S = 1.0
   
   static let BORDER_M = 2.0
   
   static let BORDER_L = 3.0
+  
+  static let RADIUS_S = 4.0
+  
+  static let RADIUS_M = 8.0
+  
+  static let RADIUS_L = 12.0
+  
+  static let LOGO_S = 64.0
+  
+  static let LOGO_M = 96.0
+  
+  static let LOGO_L = 128.0
   
   static let ICON_S = 9.0
   

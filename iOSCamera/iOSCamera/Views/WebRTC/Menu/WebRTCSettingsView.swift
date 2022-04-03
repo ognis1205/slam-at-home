@@ -31,44 +31,106 @@ struct WebRTCSettingsView: View {
       ScrollView(.vertical, showsIndicators: false) {
         GroupBox(
           label:
-            WebRTCMenuTitleView(
-              labelText: "Signaling Server",
-              labelImage: "personalhotspot")
+            WebRTCPopupHeaderView(
+              labelText: "Settings",
+              labelImage: "gearshape.fill",
+              isOpen: $isOpen)
         ) {
-          // swiftlint:disable line_length
-          WebRTCMenuHeaderView(
-            labelImage: "network",
-            labelColor: .green,
-            content: "Establishing a WebRTC connection between two devices requires the use of a signaling server to resolve how to connect them over the internet.")
+          HStack {
+            Image("Logo")
+              .resizable()
+              .aspectRatio(contentMode: .fill)
+              .frame(width: ViewConstants.LOGO_M, height: ViewConstants.LOGO_M)
+              .clipped()
+            // swiftlint:disable line_length
+            Text("Establishing a WebRTC connection between two devices requires the use of a signaling server to resolve how to connect them over the internet.")
+              .font(.footnote)
+              .fontWeight(.semibold)
+          }
+
           WebRTCURLTextFieldView(
             viewModel: viewModel)
           WebRTCConnectToggleView(
             viewModel: viewModel)
-          WebRTCMenuItemView(
-            name: "Local ID",
-            content: viewModel.model.client.id)
-          WebRTCMenuItemView(
-            name: "Remote ID",
-            content: viewModel.remoteId)
-          WebRTCMenuItemView(
-            name: "Local SDP",
-            content: viewModel.hasLocalSdp ? "Yes" : "No")
-          WebRTCMenuItemView(
-            name: "Remote SDP",
-            content: viewModel.hasRemoteSdp ? "Yes" : "No")
-          WebRTCMenuItemView(
-            name: "Local Candidates",
-            content: String(viewModel.numberOfLocalCandidate))
-          WebRTCMenuItemView(
-            name: "Remote Candidates",
-            content: String(viewModel.numberOfRemoteCandidate))
+
+
+          VStack(alignment: .leading) {
+            HStack(alignment: .top) {
+              Image(systemName: "person.fill")
+                .font(.system(size: ViewConstants.FONT_M, weight: .semibold))
+                .frame(width: ViewConstants.FONT_M)
+              Text("Local ID")
+                .font(.subheadline)
+                .bold()
+              Spacer()
+              Text(viewModel.model.client.id)
+                .font(.subheadline)
+            }.padding(ViewConstants.PADDING_S)
+            HStack(alignment: .top) {
+              Image(systemName: "person")
+                .font(.system(size: ViewConstants.FONT_M, weight: .semibold))
+                .frame(width: ViewConstants.FONT_M)
+              Text("Remote ID")
+                .font(.subheadline)
+                .bold()
+              Spacer()
+              Text(viewModel.remoteId)
+                .font(.subheadline)
+            }.padding(ViewConstants.PADDING_S)
+            HStack(alignment: .top) {
+              Image(systemName: "doc.plaintext")
+                .font(.system(size: ViewConstants.FONT_M, weight: .semibold))
+                .frame(width: ViewConstants.FONT_M)
+              Text("Local SDP")
+                .font(.subheadline)
+                .bold()
+              Spacer()
+              Text(viewModel.hasLocalSdp ? "Yes" : "No")
+                .font(.subheadline)
+            }.padding(ViewConstants.PADDING_S)
+            HStack(alignment: .top) {
+              Image(systemName: "doc.plaintext.fill")
+                .font(.system(size: ViewConstants.FONT_M, weight: .semibold))
+                .frame(width: ViewConstants.FONT_M)
+              Text("Remote SDP")
+                .font(.subheadline)
+                .bold()
+              Spacer()
+              Text(viewModel.hasRemoteSdp ? "Yes" : "No")
+                .font(.subheadline)
+            }.padding(ViewConstants.PADDING_S)
+            HStack(alignment: .top) {
+              Image(systemName: "point.3.connected.trianglepath.dotted")
+                .font(.system(size: ViewConstants.FONT_M, weight: .semibold))
+                .frame(width: ViewConstants.FONT_M)
+              Text("Local Candidates")
+                .font(.subheadline)
+                .bold()
+              Spacer()
+              Text(String(viewModel.numberOfLocalCandidate))
+                .font(.subheadline)
+            }.padding(ViewConstants.PADDING_S)
+            HStack(alignment: .top) {
+              Image(systemName: "point.3.filled.connected.trianglepath.dotted")
+                .font(.system(size: ViewConstants.FONT_M, weight: .semibold))
+                .frame(width: ViewConstants.FONT_M)
+              Text("Remote Candidates")
+                .font(.subheadline)
+                .bold()
+              Spacer()
+              Text(String(viewModel.numberOfRemoteCandidate))
+                .font(.subheadline)
+            }.padding(ViewConstants.PADDING_S)
+          }
+          .background(.white)
+          .clipShape(RoundedRectangle(cornerRadius: 5))
         }
-        .cornerRadius(5)
+        .groupBoxStyle(PopupStyle())
       }
-      .cornerRadius(5)
+      .cornerRadius(ViewConstants.RADIUS_M)
       .frame(
-        width: UIScreen.main.bounds.width - 250,
-        height: UIScreen.main.bounds.height - 40)
+        width: UIScreen.main.bounds.width - ViewConstants.MARGIN_L,
+        height: UIScreen.main.bounds.height - ViewConstants.MARGIN_S)
     }
   }
 }
