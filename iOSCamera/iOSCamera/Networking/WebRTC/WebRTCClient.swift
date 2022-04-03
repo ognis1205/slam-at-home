@@ -204,23 +204,36 @@ class WebRTCClient: NSObject, Debuggable {
 
     guard
       let capturer = self.videoTrack.capturer as? RTCCameraVideoCapturer,
-      let format = (RTCCameraVideoCapturer.supportedFormats(for: videoDevice).sorted {
-        let lhs = manhattan(
-          PydnetConstants.INPUT_SHAPE,
-          (
-            height: Int(CMVideoFormatDescriptionGetDimensions($0.formatDescription).height),
-            width: Int(CMVideoFormatDescriptionGetDimensions($0.formatDescription).width)
-          )
-        )
-        let rhs = manhattan(
-          PydnetConstants.INPUT_SHAPE,
-          (
-            height: Int(CMVideoFormatDescriptionGetDimensions($1.formatDescription).height),
-            width: Int(CMVideoFormatDescriptionGetDimensions($1.formatDescription).width)
-          )
-        )
-        return lhs > rhs
-      }).last,
+      let format = (
+        RTCCameraVideoCapturer.supportedFormats(for: videoDevice)
+          // Since the input frames will be resized as they are consumed by Pydnet,
+          // filters out redundant high resolution formats.
+          .filter {
+            Int(
+              CMVideoFormatDescriptionGetDimensions($0.formatDescription).height
+            ) < PydnetConstants.INPUT_SHAPE.height &&
+            Int(
+              CMVideoFormatDescriptionGetDimensions($0.formatDescription).width
+            ) < PydnetConstants.INPUT_SHAPE.width
+          }
+          // The appropriate resolution are computed by the Manhattan distance.
+          .sorted {
+            let lhs = manhattan(
+              PydnetConstants.INPUT_SHAPE,
+              (
+                height: Int(CMVideoFormatDescriptionGetDimensions($0.formatDescription).height),
+                width: Int(CMVideoFormatDescriptionGetDimensions($0.formatDescription).width)
+              )
+            )
+            let rhs = manhattan(
+              PydnetConstants.INPUT_SHAPE,
+              (
+                height: Int(CMVideoFormatDescriptionGetDimensions($1.formatDescription).height),
+                width: Int(CMVideoFormatDescriptionGetDimensions($1.formatDescription).width)
+              )
+            )
+            return lhs > rhs
+          }).last,
       let fps = (format.videoSupportedFrameRateRanges.sorted {
         return $0.maxFrameRate < $1.maxFrameRate
       }.last)

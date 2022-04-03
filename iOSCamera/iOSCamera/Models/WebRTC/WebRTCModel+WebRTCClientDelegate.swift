@@ -45,16 +45,12 @@ extension WebRTCModel: WebRTCClientDelegate {
   func webRTC(_ client: WebRTCClient, didCapture frame: RTCVideoFrame) -> RTCVideoFrame? {
     let timestamp: Int64 = Int64(
       Date().timeIntervalSince1970 * 1_000_000_000)
-    let modulo: Int = Int(
-      timestamp % WebRTCConstants.FPS_REDUCE_RATE)
 
+    // TODO: The current implementaion of RGB <-> YUV conversion is memory backed. This should be done with Metal and remove the following shameful FPS reduction.
+    self.frameNumber += 1
+    self.frameNumber %= WebRTCConstants.FPS_REDUCE_RATE
     guard
-      modulo == 0
-    else {
-      return nil
-    }
-
-    guard
+      self.frameNumber == 0,
       let i420 = RGB.fromRTCI420Buffer(frame.buffer.toI420() as? RTCI420Buffer),
       let depth = self.predict(
         i420,

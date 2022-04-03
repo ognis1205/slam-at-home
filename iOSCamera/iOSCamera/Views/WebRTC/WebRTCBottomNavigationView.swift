@@ -15,7 +15,7 @@ struct WebRTCBottomNavigationView: View {
   
   @Binding var isRecording: Bool
 
-  @State private var opacity: CGFloat = 0.5
+  @State private var opacity: CGFloat = ViewConstants.OPACITY_M
   
   // MARK: Body
 
@@ -25,12 +25,13 @@ struct WebRTCBottomNavigationView: View {
           action: { /* Do nothing. */ },
           label: {
             Text("\(viewModel.ip) \(viewModel.signalingState)")
-              .foregroundColor(viewModel.isSignaling ? .white : .gray)
-              .fontWeight(.semibold)
-              .padding(.vertical, 10)
-              .padding(.horizontal, 20)
+              .withIconStyle(
+                weight: .semibold,
+                height: ViewConstants.ICON_L,
+                padding: ViewConstants.PADDING_S)
+              .foregroundColor(viewModel.isSignaling ? .white : Color.fontColor)
               .background(
-                viewModel.isSignaling ? .green.opacity(opacity) : .white.opacity(opacity))
+                viewModel.isSignaling ? Color.uiGreenColor.opacity(opacity) : Color.uiColor.opacity(opacity))
               .clipShape(Capsule())
               .onAppear {
                 withAnimation {
@@ -42,7 +43,8 @@ struct WebRTCBottomNavigationView: View {
                 value: opacity)
           })
           .disabled(true)
-          .padding(.leading)
+          .padding(.leading, ViewConstants.PADDING_M)
+          .padding(.bottom, ViewConstants.PADDING_M)
         Spacer()
         Button(
           action: {
@@ -50,14 +52,11 @@ struct WebRTCBottomNavigationView: View {
           },
           label: {
             Image(systemName: "video.slash.fill")
-              .foregroundColor(.white)
-              .padding(10)
-              .background(Color.themeColor)
-              .clipShape(RoundedRectangle(cornerRadius: 10))
           })
-          .padding(.trailing, 15)
+          .buttonStyle(IconButtonStyle())
+          .padding(.trailing, ViewConstants.PADDING_M)
+          .padding(.bottom, ViewConstants.PADDING_M)
       }
-      .frame(height: 75, alignment: .center)
   }
 }
 

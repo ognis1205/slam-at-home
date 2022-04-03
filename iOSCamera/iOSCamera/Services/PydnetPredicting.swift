@@ -87,7 +87,6 @@ extension PydnetPredicting {
   
   func predict(_ input: UIImage, width: Int, height: Int) -> UIImage? {
     var cgImage: CGImage?
-
     guard
       let buffer = input.pixelBuffer?.resize(
         width: PydnetConstants.INPUT_SHAPE.width,
@@ -98,17 +97,13 @@ extension PydnetPredicting {
     else {
       return nil
     }
-
     VTCreateCGImageFromCVPixelBuffer(depth, options: nil, imageOut: &cgImage)
-    
     guard
       let cgImage = cgImage,
       let heat = MetalColorMap.apply(cgImage, filter: .magma)
-//      let filtered = SharpenFilter.apply(heat, sharpness: PydnetConstants.SHARPNESS)
     else {
       return nil
     }
-
     return UIImage(cgImage: heat)
   }
 }

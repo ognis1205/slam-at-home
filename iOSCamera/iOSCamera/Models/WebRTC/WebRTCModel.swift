@@ -54,6 +54,8 @@ class WebRTCModel: VideoConfiguring, PydnetPredicting {
   let capture: WebRTCCapture = WebRTCCapture(
     state: .ready)
   
+  var frameNumber: Int = 0
+  
   // MARK: Methods
   
   func prepare() {

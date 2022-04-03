@@ -27,27 +27,21 @@ struct WebRTCTopNavigationView: View {
         },
         label: {
           Image(systemName: "info")
-            .foregroundColor(.white)
-            .padding()
-            .background(Color.themeColor)
-            .clipShape(Circle())
         })
-        .padding(.leading, 10)
-        .padding(.top, 10)
+        .buttonStyle(IconButtonStyle())
+        .padding(.leading, ViewConstants.PADDING_M)
+        .padding(.top, ViewConstants.PADDING_M)
       Spacer()
       Button(
         action: {
           self.showSettings.toggle()
         },
         label: {
-          Image(systemName: "slider.horizontal.3")
-            .foregroundColor(.white)
-            .padding()
-            .background(Color.themeColor)
-            .clipShape(Circle())
+          Image(systemName: "gearshape.fill")
         })
-        .padding(.trailing, 10)
-        .padding(.top, 10)
+        .buttonStyle(IconButtonStyle())
+        .padding(.trailing, ViewConstants.PADDING_M)
+        .padding(.top, ViewConstants.PADDING_M)
     }
   }
 }
