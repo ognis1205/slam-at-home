@@ -45,7 +45,7 @@ extension WebRTCModel: WebRTCClientDelegate {
   func webRTC(_ client: WebRTCClient, didCapture frame: RTCVideoFrame) -> RTCVideoFrame? {
     let timestamp: Int64 = Int64(
       Date().timeIntervalSince1970 * 1_000_000_000)
-
+    // swiftlint:disable line_length
     // TODO: The current implementaion of RGB <-> YUV conversion is memory backed. This should be done with Metal and remove the following shameful FPS reduction.
     self.frameNumber += 1
     self.frameNumber %= WebRTCConstants.FPS_REDUCE_RATE

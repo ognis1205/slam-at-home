@@ -11,9 +11,15 @@ import SwiftUI
 struct WiFiToggleStyle: ToggleStyle {
   // MARK: Properties
 
-  static let backgroundColor = Color.secondary
+  var size: CGFloat = ViewConstants.FONT_M
   
-  static let switchColor = Color(.systemBackground)
+  var padding: CGFloat = ViewConstants.PADDING_S
+  
+  var textColor: Color = .white
+
+  var onToggleColor: Color = Color.uiGreenColor
+  
+  var offToggleColor: Color = Color.fontColor
   
   // MARK: Methods
 
@@ -21,17 +27,18 @@ struct WiFiToggleStyle: ToggleStyle {
     HStack {
       configuration.label
       Spacer()
-      RoundedRectangle(cornerRadius: 25.0)
-        .frame(width: 50, height: 30, alignment: .center)
+      RoundedRectangle(cornerRadius: size)
+        .stroke(configuration.isOn ? onToggleColor : offToggleColor, lineWidth: padding)
+        .frame(width: size * 2, height: size, alignment: .center)
         .overlay((
-          Image(systemName: configuration.isOn ? "wifi.circle.fill" : "xmark.circle.fill")
-            .font(.system(size: 20))
-            .foregroundColor(configuration.isOn ? .white : WiFiToggleStyle.switchColor)
-            .padding(3)
-            .offset(x: configuration.isOn ? 10 : -10, y: 0)
+          Image(
+            systemName: configuration.isOn ? "wifi.circle.fill" : "xmark.circle.fill")
+            .font(.system(size: size))
+            .foregroundColor(textColor)
+            .offset(x: configuration.isOn ? size / 2 : -1 * (size / 2), y: 0)
             .animation(.linear, value: configuration.isOn)
         ))
-        .foregroundColor(configuration.isOn ? .green : WiFiToggleStyle.backgroundColor)
+        .background(configuration.isOn ? onToggleColor : offToggleColor)
         .onTapGesture(perform: {
           configuration.isOn.toggle()
         })

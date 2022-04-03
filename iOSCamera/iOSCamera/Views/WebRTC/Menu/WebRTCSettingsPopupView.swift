@@ -1,5 +1,5 @@
 //
-//  WebRTCInfoView.swift
+//  WebRTCSettingsPopupView.swift
 //  iOSCamera
 //
 //  Created by Shingo OKAWA on 2022/02/23.
@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct WebRTCInfoView: View {
+struct WebRTCSettingsPopupView: View {
   // MARK: Properties
 
   @ObservedObject var viewModel: WebRTCViewModel
@@ -32,8 +32,8 @@ struct WebRTCInfoView: View {
         GroupBox(
           label:
             WebRTCPopupHeaderView(
-              labelText: "About",
-              labelImage: "info.circle.fill",
+              labelText: "Settings",
+              labelImage: "gearshape.fill",
               isOpen: $isOpen)
         ) {
           HStack {
@@ -43,62 +43,77 @@ struct WebRTCInfoView: View {
               .frame(width: ViewConstants.LOGO_M, height: ViewConstants.LOGO_M)
               .clipped()
             // swiftlint:disable line_length
-            Text("This application is a part of SLAM@HOME project. For more details such as usage restrictions, please refer to the link below.")
+            Text("Establishing a WebRTC connection between two devices requires the use of a signaling server to resolve how to connect them over the internet.")
               .font(.footnote)
               .fontWeight(.semibold)
           }
+          WebRTCURLTextFieldView(
+            viewModel: viewModel)
           VStack(alignment: .leading) {
             HStack(alignment: .top) {
-              Image(systemName: "info.circle.fill")
+              Image(systemName: "person")
                 .font(.system(size: ViewConstants.FONT_M, weight: .semibold))
                 .frame(width: ViewConstants.FONT_M)
-              Text("Version")
+              Text("Local ID")
                 .font(.subheadline)
                 .bold()
               Spacer()
-              Text("1.0.0")
+              Text(viewModel.model.client.id)
                 .font(.subheadline)
-            }.padding(ViewConstants.PADDING_S)
-            HStack(alignment: .top) {
-              Image(systemName: "applelogo")
-                .font(.system(size: ViewConstants.FONT_M, weight: .semibold))
-                .frame(width: ViewConstants.FONT_M)
-              Text("Compatibility")
-                .font(.subheadline)
-                .bold()
-              Spacer()
-              Text("iOS 15.1")
-                .font(.subheadline)
-            }.padding(ViewConstants.PADDING_S)
-            HStack(alignment: .top) {
-              Image(systemName: "globe")
-                .font(.system(size: ViewConstants.FONT_M, weight: .semibold))
-                .frame(width: ViewConstants.FONT_M)
-              Text("Website")
-                .font(.subheadline)
-                .bold()
-              Spacer()
-              if let destination = URL(string: "https://github.com/ognis1205/slam-at-home") {
-                Link(
-                  "slam-at-home",
-                  destination: destination)
-                  .foregroundColor(Color.fontColor)
-                  .font(.subheadline)
-                Image(systemName: "arrow.up.right.square").foregroundColor(Color.fontColor)
-              } else {
-                Text("slam-at-home")
-                  .font(.subheadline)
-              }
             }.padding(ViewConstants.PADDING_S)
             HStack(alignment: .top) {
               Image(systemName: "person.fill")
                 .font(.system(size: ViewConstants.FONT_M, weight: .semibold))
                 .frame(width: ViewConstants.FONT_M)
-              Text("Developer")
+              Text("Remote ID")
                 .font(.subheadline)
                 .bold()
               Spacer()
-              Text("Shingo OKAWA")
+              Text(viewModel.remoteId)
+                .font(.subheadline)
+            }.padding(ViewConstants.PADDING_S)
+            HStack(alignment: .top) {
+              Image(systemName: "doc.plaintext")
+                .font(.system(size: ViewConstants.FONT_M, weight: .semibold))
+                .frame(width: ViewConstants.FONT_M)
+              Text("Local SDP")
+                .font(.subheadline)
+                .bold()
+              Spacer()
+              Text(viewModel.hasLocalSdp ? "Yes" : "No")
+                .font(.subheadline)
+            }.padding(ViewConstants.PADDING_S)
+            HStack(alignment: .top) {
+              Image(systemName: "doc.plaintext.fill")
+                .font(.system(size: ViewConstants.FONT_M, weight: .semibold))
+                .frame(width: ViewConstants.FONT_M)
+              Text("Remote SDP")
+                .font(.subheadline)
+                .bold()
+              Spacer()
+              Text(viewModel.hasRemoteSdp ? "Yes" : "No")
+                .font(.subheadline)
+            }.padding(ViewConstants.PADDING_S)
+            HStack(alignment: .top) {
+              Image(systemName: "point.3.connected.trianglepath.dotted")
+                .font(.system(size: ViewConstants.FONT_M, weight: .semibold))
+                .frame(width: ViewConstants.FONT_M)
+              Text("Local Candidates")
+                .font(.subheadline)
+                .bold()
+              Spacer()
+              Text(String(viewModel.numberOfLocalCandidate))
+                .font(.subheadline)
+            }.padding(ViewConstants.PADDING_S)
+            HStack(alignment: .top) {
+              Image(systemName: "point.3.filled.connected.trianglepath.dotted")
+                .font(.system(size: ViewConstants.FONT_M, weight: .semibold))
+                .frame(width: ViewConstants.FONT_M)
+              Text("Remote Candidates")
+                .font(.subheadline)
+                .bold()
+              Spacer()
+              Text(String(viewModel.numberOfRemoteCandidate))
                 .font(.subheadline)
             }.padding(ViewConstants.PADDING_S)
           }
@@ -115,11 +130,11 @@ struct WebRTCInfoView: View {
   }
 }
 
-struct WebRTCInfoView_Previews: PreviewProvider {
+struct WebRTCSettingsPopupView_Previews: PreviewProvider {
   // MARK: Previews
 
   static var previews: some View {
-    WebRTCInfoView(
+    WebRTCSettingsPopupView(
       viewModel: WebRTCViewModel(),
       isOpen: .constant(false),
       onToggle: { print("toggled") })

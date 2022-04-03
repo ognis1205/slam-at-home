@@ -8,7 +8,32 @@
 
 import SwiftUI
 
-struct WebRTCURLTextFieldView: View {
+struct CustomTextField: View {
+  // MARK: Properties
+
+  var placeholder: Text
+  
+  @Binding var text: String
+  
+  var disabled: Bool
+
+  var editingChanged: (Bool) -> Void = { _ in }
+  
+  var commit: () -> Void = { }
+  
+  // MARK: Body
+
+  var body: some View {
+    ZStack(alignment: .leading) {
+      if text.isEmpty { placeholder }
+      TextField("", text: $text, onEditingChanged: editingChanged, onCommit: commit)
+        .disableAutocorrection(true)
+        .disabled(disabled)
+    }
+  }
+}
+
+struct WebRTCURLTextFieldView: View, Debuggable {
   // MARK: Properties
   
   @ObservedObject var viewModel: WebRTCViewModel
@@ -16,15 +41,40 @@ struct WebRTCURLTextFieldView: View {
   // MARK: Body
 
   var body: some View {
-    Divider().padding(.vertical, 4)
     HStack {
-      Image(systemName: "wifi").foregroundColor(.secondary)
-      TextField("0.0.0.0:10000", text: $viewModel.URL)
-        .disableAutocorrection(true)
+      Image(systemName: "wifi")
+        .foregroundColor(viewModel.isSignaling ? Color.uiGreenColor : Color.fontColor)
+      CustomTextField(
+        placeholder: Text("0.0.0.0:10000").foregroundColor(.gray),
+        text: $viewModel.URL,
+        disabled: viewModel.isSignaling)
+      Toggle(isOn: $viewModel.isSignaling) {
+        Text("")
+      }
+        .toggleStyle(WiFiToggleStyle())
+        .disabled(!viewModel.URL.isValid(.URL))
+        .onChange(of: viewModel.isSignaling) { connecting in
+          let endpoint = String(
+            format: WebRTCConstants.SIGNALING_ENDPOINT,
+            viewModel.URL,
+            viewModel.model.client.id)
+          if connecting {
+            self.info("connect to URL \(endpoint)...")
+            guard
+              let url = URL(string: endpoint)
+            else {
+              self.warn("failed to parse URL...")
+              return
+            }
+            viewModel.model.connect(URL: url)
+          } else {
+            self.info("disconnect from URL \(endpoint)...")
+            viewModel.model.disconnect()
+          }
+        }
     }
       .padding()
-      .disabled(viewModel.isSignaling)
-      .background(Capsule().fill(.gray))
+      .background(Capsule().fill(.white))
     }
 }
 

@@ -60,13 +60,13 @@ struct WebRTCView: View {
           isRecording: self.$isRecording)
       }
       if self.showInfo {
-        WebRTCInfoView(
+        WebRTCInfoPopupView(
           viewModel: self.viewModel,
           isOpen: self.$showInfo,
           onToggle: { self.showInfo.toggle() })
       }
       if self.showSettings {
-        WebRTCSettingsView(
+        WebRTCSettingsPopupView(
           viewModel: self.viewModel,
           isOpen: self.$showSettings,
           onToggle: { self.showSettings.toggle() })

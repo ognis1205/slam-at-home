@@ -15,8 +15,8 @@
 		541BA09827C544FA00E995CA /* PydnetConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541BA09727C544FA00E995CA /* PydnetConstants.swift */; };
 		541BA0A227C5C99700E995CA /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541BA0A127C5C99700E995CA /* UIApplication.swift */; };
 		541BD19E27C5EA3B00B8C69C /* WebRTCPopupHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541BD19D27C5EA3B00B8C69C /* WebRTCPopupHeaderView.swift */; };
-		541BD1A227C5EC6100B8C69C /* WebRTCInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541BD1A127C5EC6100B8C69C /* WebRTCInfoView.swift */; };
-		541BD1A427C5FAC300B8C69C /* WebRTCSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541BD1A327C5FAC300B8C69C /* WebRTCSettingsView.swift */; };
+		541BD1A227C5EC6100B8C69C /* WebRTCInfoPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541BD1A127C5EC6100B8C69C /* WebRTCInfoPopupView.swift */; };
+		541BD1A427C5FAC300B8C69C /* WebRTCSettingsPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541BD1A327C5FAC300B8C69C /* WebRTCSettingsPopupView.swift */; };
 		541BD1A627C5FF1500B8C69C /* WebRTCTopNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541BD1A527C5FF1500B8C69C /* WebRTCTopNavigationView.swift */; };
 		5422E53427F9700800D59636 /* ViewConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5422E53327F9700800D59636 /* ViewConstants.swift */; };
 		545699AC27C64CE40076B192 /* PydnetPredicting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 545699AB27C64CE40076B192 /* PydnetPredicting.swift */; };
@@ -63,7 +63,6 @@
 		54677EA027B4FEB200419FBB /* Debuggable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54677E9F27B4FEB100419FBB /* Debuggable.swift */; };
 		54695CFF27B79B4400CF78F2 /* WebRTCVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54695CFE27B79B4400CF78F2 /* WebRTCVideoView.swift */; };
 		54695D0327BA0F7100CF78F2 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54695D0227BA0F7100CF78F2 /* Colors.swift */; };
-		54695D0927BB9E8000CF78F2 /* WebRTCConnectToggleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54695D0827BB9E7F00CF78F2 /* WebRTCConnectToggleView.swift */; };
 		54695D0B27BBC07C00CF78F2 /* WebRTCURLTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54695D0A27BBC07C00CF78F2 /* WebRTCURLTextFieldView.swift */; };
 		54695D0D27BBE19200CF78F2 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54695D0C27BBE19200CF78F2 /* String.swift */; };
 		54695D0F27BBF94300CF78F2 /* WebRTCBottomNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54695D0E27BBF94300CF78F2 /* WebRTCBottomNavigationView.swift */; };
@@ -104,8 +103,8 @@
 		541BA09727C544FA00E995CA /* PydnetConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PydnetConstants.swift; sourceTree = "<group>"; };
 		541BA0A127C5C99700E995CA /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 		541BD19D27C5EA3B00B8C69C /* WebRTCPopupHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebRTCPopupHeaderView.swift; sourceTree = "<group>"; };
-		541BD1A127C5EC6100B8C69C /* WebRTCInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebRTCInfoView.swift; sourceTree = "<group>"; };
-		541BD1A327C5FAC300B8C69C /* WebRTCSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebRTCSettingsView.swift; sourceTree = "<group>"; };
+		541BD1A127C5EC6100B8C69C /* WebRTCInfoPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebRTCInfoPopupView.swift; sourceTree = "<group>"; };
+		541BD1A327C5FAC300B8C69C /* WebRTCSettingsPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebRTCSettingsPopupView.swift; sourceTree = "<group>"; };
 		541BD1A527C5FF1500B8C69C /* WebRTCTopNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebRTCTopNavigationView.swift; sourceTree = "<group>"; };
 		5422E53327F9700800D59636 /* ViewConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewConstants.swift; sourceTree = "<group>"; };
 		545699AB27C64CE40076B192 /* PydnetPredicting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PydnetPredicting.swift; sourceTree = "<group>"; };
@@ -155,7 +154,6 @@
 		54677E9F27B4FEB100419FBB /* Debuggable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debuggable.swift; sourceTree = "<group>"; };
 		54695CFE27B79B4400CF78F2 /* WebRTCVideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebRTCVideoView.swift; sourceTree = "<group>"; };
 		54695D0227BA0F7100CF78F2 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
-		54695D0827BB9E7F00CF78F2 /* WebRTCConnectToggleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebRTCConnectToggleView.swift; sourceTree = "<group>"; };
 		54695D0A27BBC07C00CF78F2 /* WebRTCURLTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebRTCURLTextFieldView.swift; sourceTree = "<group>"; };
 		54695D0C27BBE19200CF78F2 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		54695D0E27BBF94300CF78F2 /* WebRTCBottomNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebRTCBottomNavigationView.swift; sourceTree = "<group>"; };
@@ -247,10 +245,9 @@
 			isa = PBXGroup;
 			children = (
 				54695D0A27BBC07C00CF78F2 /* WebRTCURLTextFieldView.swift */,
-				54695D0827BB9E7F00CF78F2 /* WebRTCConnectToggleView.swift */,
 				541BD19D27C5EA3B00B8C69C /* WebRTCPopupHeaderView.swift */,
-				541BD1A127C5EC6100B8C69C /* WebRTCInfoView.swift */,
-				541BD1A327C5FAC300B8C69C /* WebRTCSettingsView.swift */,
+				541BD1A127C5EC6100B8C69C /* WebRTCInfoPopupView.swift */,
+				541BD1A327C5FAC300B8C69C /* WebRTCSettingsPopupView.swift */,
 			);
 			path = Menu;
 			sourceTree = "<group>";
@@ -816,7 +813,6 @@
 				54F9A82B279CFE9900E994A1 /* HLSView.swift in Sources */,
 				54677E49279E777400419FBB /* AlertReporting.swift in Sources */,
 				54677E9827AFA53B00419FBB /* WebRTCViewModel.swift in Sources */,
-				54695D0927BB9E8000CF78F2 /* WebRTCConnectToggleView.swift in Sources */,
 				54677E5B279FAE2700419FBB /* HLSVideoView.swift in Sources */,
 				54677E6527A018EE00419FBB /* RTCStates.swift in Sources */,
 				54677EA027B4FEB200419FBB /* Debuggable.swift in Sources */,
@@ -844,8 +840,8 @@
 				54677E7027A0699E00419FBB /* WebRTCClient+RTCDataChannelDelegate.swift in Sources */,
 				545699B527C6D3480076B192 /* MetalColorMapApplier.swift in Sources */,
 				54677E6327A015E500419FBB /* IceCandidate.swift in Sources */,
-				541BD1A427C5FAC300B8C69C /* WebRTCSettingsView.swift in Sources */,
-				541BD1A227C5EC6100B8C69C /* WebRTCInfoView.swift in Sources */,
+				541BD1A427C5FAC300B8C69C /* WebRTCSettingsPopupView.swift in Sources */,
+				541BD1A227C5EC6100B8C69C /* WebRTCInfoPopupView.swift in Sources */,
 				54677E8C27ABB68300419FBB /* VideoConfiguring.swift in Sources */,
 				54677E9227AF000300419FBB /* WebRTCModel+WebRTCSignalDelegate.swift in Sources */,
 				54677E8E27AC526F00419FBB /* HLSModel+VideoConfiguringDelegate.swift in Sources */,
