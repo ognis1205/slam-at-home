@@ -32,3 +32,7 @@ export type WithDefaultProps<Props, Defaults> = RequiredProps<Props, Defaults> &
 
 /** Overwrites properties. */
 export type Overwrite<T, U> = Pick<T, Exclude<keyof T, keyof U>> & U;
+
+/** This type is responsible to declare that the type being passed is a class. */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type Constructor<T> = new (...args: any[]) => T;
