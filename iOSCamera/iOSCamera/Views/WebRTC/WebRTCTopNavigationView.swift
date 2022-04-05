@@ -13,35 +13,35 @@ struct WebRTCTopNavigationView: View {
   
   @ObservedObject var viewModel: WebRTCViewModel
   
-  @Binding var showInfo: Bool
-
-  @Binding var showSettings: Bool
+  @State var showInfo: Bool = false
+  
+  @State var showSettings: Bool = false
   
   // MARK: Body
 
   var body: some View {
     HStack {
       Button(
-        action: {
-          self.showInfo.toggle()
-        },
-        label: {
-          Image(systemName: "info")
-        })
+        action: { self.showInfo.toggle() },
+        label: { Image(systemName: "info") })
         .buttonStyle(IconButtonStyle())
-        .padding(.leading, ViewConstants.PADDING_M)
-        .padding(.top, ViewConstants.PADDING_M)
+        .padding([.leading, .top])
+        .fullScreenCover(isPresented: self.$showInfo) {
+          WebRTCInfoView(
+            viewModel: self.viewModel,
+            onToggle: { self.showInfo.toggle() })
+        }
       Spacer()
       Button(
-        action: {
-          self.showSettings.toggle()
-        },
-        label: {
-          Image(systemName: "gearshape.fill")
-        })
+        action: { self.showSettings.toggle() },
+        label: { Image(systemName: "gearshape.fill") })
         .buttonStyle(IconButtonStyle())
-        .padding(.trailing, ViewConstants.PADDING_M)
-        .padding(.top, ViewConstants.PADDING_M)
+        .padding([.trailing, .top])
+        .fullScreenCover(isPresented: self.$showSettings) {
+          WebRTCSettingsView(
+            viewModel: self.viewModel,
+            onToggle: { self.showSettings.toggle() })
+        }
     }
   }
 }
@@ -49,8 +49,6 @@ struct WebRTCTopNavigationView: View {
 struct WebRTCTopNavigationView_Previews: PreviewProvider {
     static var previews: some View {
         WebRTCTopNavigationView(
-          viewModel: WebRTCViewModel(),
-          showInfo: .constant(false),
-          showSettings: .constant(false))
+          viewModel: WebRTCViewModel())
     }
 }

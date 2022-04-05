@@ -15,48 +15,40 @@ struct WebRTCBottomNavigationView: View {
   
   @Binding var isRecording: Bool
 
-  @State private var opacity: CGFloat = ViewConstants.OPACITY_M
+  @State private var opacity: CGFloat = 0.5
   
   // MARK: Body
 
   var body: some View {
-      HStack {
-        Button(
-          action: { /* Do nothing. */ },
-          label: {
-            Text("\(viewModel.ip) \(viewModel.signalingState)")
-              .withIconStyle(
-                weight: .semibold,
-                height: ViewConstants.ICON_L,
-                padding: ViewConstants.PADDING_S)
-              .foregroundColor(viewModel.isSignaling ? .white : Color.fontColor)
-              .background(
-                viewModel.isSignaling ? Color.uiGreenColor.opacity(opacity) : Color.uiColor.opacity(opacity))
-              .clipShape(Capsule())
-              .onAppear {
-                withAnimation {
-                  opacity = 0.0
-                }
+    HStack {
+      Button(
+        action: { /* Do nothing. */ },
+        label: {
+          Text("\(viewModel.ip) \(viewModel.signalingState)")
+            .fontWeight(.semibold)
+            .padding()
+            .foregroundColor(viewModel.isSignaling ? .white : Color.fontColor)
+            .background(
+              viewModel.isSignaling ? Color.uiGreenColor.opacity(opacity) : Color.uiColor.opacity(opacity))
+            .clipShape(Capsule())
+            .onAppear {
+              withAnimation {
+                opacity = 0.0
               }
-              .animation(
-                Animation.easeInOut(duration: 1).repeatForever(autoreverses: true),
-                value: opacity)
-          })
-          .disabled(true)
-          .padding(.leading, ViewConstants.PADDING_M)
-          .padding(.bottom, ViewConstants.PADDING_M)
-        Spacer()
-        Button(
-          action: {
-            isRecording = false
-          },
-          label: {
-            Image(systemName: "video.slash.fill")
-          })
-          .buttonStyle(IconButtonStyle())
-          .padding(.trailing, ViewConstants.PADDING_M)
-          .padding(.bottom, ViewConstants.PADDING_M)
-      }
+            }
+            .animation(
+              Animation.easeInOut(duration: 1).repeatForever(autoreverses: true),
+              value: opacity)
+        })
+        .disabled(true)
+        .padding([.leading, .bottom])
+      Spacer()
+      Button(
+        action: { isRecording = false },
+        label: { Image(systemName: "video.slash.fill") })
+        .buttonStyle(IconButtonStyle())
+        .padding([.trailing, .bottom])
+    }
   }
 }
 

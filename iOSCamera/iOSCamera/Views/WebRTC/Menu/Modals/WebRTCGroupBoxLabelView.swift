@@ -1,5 +1,5 @@
 //
-//  WebRTCPopupHeaderView.swift
+//  WebRTCGroupBoxLabelView.swift
 //  iOSCamera
 //
 //  Created by Shingo OKAWA on 2022/02/23.
@@ -8,40 +8,44 @@
 
 import SwiftUI
 
-struct WebRTCPopupHeaderView: View {
+struct WebRTCGroupBoxLabelView: View {
   // MARK: Properties
   
   var labelText: String
   
   var labelImage: String
   
-  @Binding var isOpen: Bool
+  let onToggle: () -> Void
   
   // MARK: Body
 
   var body: some View {
     HStack {
       Image(systemName: labelImage)
+        .padding([.leading, .top])
       Text(labelText.uppercased()).fontWeight(.bold)
+        .padding([.top])
       Spacer()
       Button(
         action: {
-          isOpen.toggle()
+          onToggle()
         },
         label: {
           Image(systemName: "xmark.circle.fill")
         })
+        .buttonStyle(IconButtonStyle())
+        .padding([.trailing, .top])
     }
   }
 }
 
-struct WebRTCPopupHeaderView_Previews: PreviewProvider {
+struct WebRTCGroupBoxLabelView_Previews: PreviewProvider {
   // MARK: Previews
 
   static var previews: some View {
-    WebRTCPopupHeaderView(
+    WebRTCGroupBoxLabelView(
       labelText: "Fructus",
       labelImage: "info.circle",
-      isOpen: .constant(true))
+      onToggle: {})
   }
 }

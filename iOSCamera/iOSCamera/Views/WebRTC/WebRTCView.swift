@@ -15,10 +15,6 @@ struct WebRTCView: View {
   @Binding var isRecording: Bool
 
   @ObservedObject var viewModel: WebRTCViewModel = WebRTCViewModel()
-
-  @State var showInfo: Bool = false
-
-  @State var showSettings: Bool = false
   
   // MARK: Body
 
@@ -51,25 +47,11 @@ struct WebRTCView: View {
       #endif
       VStack {
         WebRTCTopNavigationView(
-          viewModel: self.viewModel,
-          showInfo: self.$showInfo,
-          showSettings: self.$showSettings)
+          viewModel: self.viewModel)
         Spacer()
         WebRTCBottomNavigationView(
           viewModel: self.viewModel,
           isRecording: self.$isRecording)
-      }
-      if self.showInfo {
-        WebRTCInfoPopupView(
-          viewModel: self.viewModel,
-          isOpen: self.$showInfo,
-          onToggle: { self.showInfo.toggle() })
-      }
-      if self.showSettings {
-        WebRTCSettingsPopupView(
-          viewModel: self.viewModel,
-          isOpen: self.$showSettings,
-          onToggle: { self.showSettings.toggle() })
       }
     }
   }
