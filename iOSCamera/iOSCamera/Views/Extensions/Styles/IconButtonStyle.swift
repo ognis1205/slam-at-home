@@ -14,6 +14,8 @@ struct IconButtonStyle: ButtonStyle {
   var inverted: Bool = false
 
   var color: Color = Color.uiColor
+  
+  var withOpacity: Bool = true
 
   var maxHeight: CGFloat = 36
 
@@ -31,7 +33,8 @@ struct IconButtonStyle: ButtonStyle {
       .foregroundColor(inverted ? Color.uiColor : Color.fontColor)
       .background(inverted ? Color.fontColor : Color.uiColor)
       .clipShape(Circle())
-      .opacity(configuration.isPressed ? 0.5 : 1.0)
+//      .opacity(configuration.isPressed ? 0.5 : 1.0)
+      .opacity(withOpacity ? 0.5 : 1.0)
       .scaleEffect(configuration.isPressed ? 0.5 : 1.0)
   }
 }

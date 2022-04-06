@@ -33,7 +33,7 @@ struct WebRTCGroupBoxLabelView: View {
         label: {
           Image(systemName: "xmark.circle.fill")
         })
-        .buttonStyle(IconButtonStyle())
+        .buttonStyle(IconButtonStyle(withOpacity: false))
         .padding([.trailing, .top])
     }
   }

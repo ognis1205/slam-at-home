@@ -46,7 +46,7 @@ struct WebRTCBottomNavigationView: View {
       Button(
         action: { isRecording = false },
         label: { Image(systemName: "video.slash.fill") })
-        .buttonStyle(IconButtonStyle())
+        .buttonStyle(IconButtonStyle(inverted: true))
         .padding([.trailing, .bottom])
     }
   }

@@ -24,7 +24,7 @@ struct WebRTCTopNavigationView: View {
       Button(
         action: { self.showInfo.toggle() },
         label: { Image(systemName: "info") })
-        .buttonStyle(IconButtonStyle())
+        .buttonStyle(IconButtonStyle(inverted: true))
         .padding([.leading, .top])
         .fullScreenCover(isPresented: self.$showInfo) {
           WebRTCInfoView(
@@ -35,7 +35,7 @@ struct WebRTCTopNavigationView: View {
       Button(
         action: { self.showSettings.toggle() },
         label: { Image(systemName: "gearshape.fill") })
-        .buttonStyle(IconButtonStyle())
+        .buttonStyle(IconButtonStyle(inverted: true))
         .padding([.trailing, .top])
         .fullScreenCover(isPresented: self.$showSettings) {
           WebRTCSettingsView(
