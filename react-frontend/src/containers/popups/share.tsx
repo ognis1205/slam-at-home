@@ -3,7 +3,6 @@
  * @copyright Shingo OKAWA 2022
  */
 import * as React from 'react';
-import * as Description from './description';
 import * as Window from './window';
 import * as ReactShare from 'react-share';
 import styles from '../../assets/styles/containers/popups.module.scss';
@@ -26,11 +25,7 @@ export const Component: React.FunctionComponent<
     title="Share this app"
     onClose={onClose}
   >
-    <Description.Component>
-      {
-        // eslint-disable-next-line prettier/prettier
-      }There might still be performance issues and/or bugs. With that being said, I would be happy if you promote &#8221;ognis1205/slam-at-home&#8221;.
-    </Description.Component>
+    <div className={styles['comment']}>Share with</div>
     <div className={styles['scroll']}>
       <div className={styles['social']}>
         <ReactShare.TwitterShareButton

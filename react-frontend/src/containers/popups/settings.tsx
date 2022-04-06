@@ -3,7 +3,6 @@
  * @copyright Shingo OKAWA 2022
  */
 import * as React from 'react';
-import * as Description from './description';
 import * as Window from './window';
 import * as Forms from '../../components/forms';
 import * as FontAwesomeIcon from '@fortawesome/free-solid-svg-icons';
@@ -31,16 +30,12 @@ export const Component: React.FunctionComponent<
   return (
     <Window.Component
       {...windowProps}
-      className={styles['about']}
+      className={styles['settings']}
       type="setting"
       title="Settings"
       onClose={onClose}
     >
-      <Description.Component>
-        {
-          // eslint-disable-next-line prettier/prettier
-        }Establishing a WebRTC connection between two devices requires the use of signaling server to resolve how to connect them.
-      </Description.Component>
+      <div className={styles['divider']}>Signaling Server</div>
       <Forms.Text
         id="text"
         name="text"
