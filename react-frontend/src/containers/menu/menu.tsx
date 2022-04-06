@@ -17,7 +17,7 @@ import styles from '../../assets/styles/containers/menu.module.scss';
 const getIcon = (type: Props.ItemType): FontAwesomeCore.IconDefinition => {
   switch (type) {
     case Props.ItemType.SETTING:
-      return FontAwesomeIcon.faBars;
+      return FontAwesomeIcon.faCog;
     case Props.ItemType.GITHUB:
       return FontAwesomeBrandIcon.faGithub;
     case Props.ItemType.GITTER:
