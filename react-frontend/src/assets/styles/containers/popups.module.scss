@@ -88,55 +88,64 @@ $width-l: 500px;
   color: $font-color;
   width: $width-m;
 
-  .title {
-    margin: auto;
-    margin-bottom: $spacing-size-m;
+  .info {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    padding-right: $spacing-size-l;
     width: 100%;
 
     .logo {
+      display: flex;
+      flex: 1;
       float: left;
-      height: $logo-size-m;
-      width: $logo-size-m;
+      height: $logo-size-l;
+      width: $logo-size-l;
     }
 
-    .description {
+    .table {
       align-content: center;
       display: flex;
       flex-direction: column;
+      flex: 2;
       height: $logo-size-m;
       justify-content: center;
-    }
-  }
 
-  .table {
-    background-color: white;
-    border-radius: $radius-size-m;
-    border-spacing: 0px;
-    border: $border-s;
-    box-shadow: $shadow-all $shadow-inset;
-    font-size: $font-size-l;
-    margin: auto;
-    padding: $spacing-size-s;
-    width: 100%;
+      .item {
+        color: $font-color;
+	display: inline-block;
+	position: relative;
+	width: 100%;
+	width: 100%;
 
-    .name .icon {
-      display: inline-block;
-      font-size: $icon-size-m;
-      height: $icon-size-m;
-      line-height: $icon-wrapper-size-m;
-      text-align: center;
-      width: $icon-wrapper-size-m;
-    }
+	.icon {
+	  display: inline-block;
+	  font-size: $icon-size-m;
+	  height: $icon-wrapper-size-m;
+	  line-height: $icon-wrapper-size-m;
+	  padding-right: calc($icon-size-m / 2);
+	  text-align: center;
+	  width: $icon-wrapper-size-m;
+	}
 
-    .value {
-      float: right;
+	.value {
+	  float: right;
       & > a {
         @include link();
       }
       & > a:hover {
 	@include link-hover();
       }
+	}
+      }
     }
+  }
+
+  .copyright {
+    color: $font-color-nadir;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
   }
 }
 
@@ -144,24 +153,12 @@ $width-l: 500px;
   color: $font-color;
   width: $width-m;
 
-  .title {
-    margin: auto;
+  .comment {
+    color: $font-color;
+    font-size: $font-size-l;
+    font-weight: bold;
     margin-bottom: $spacing-size-m;
-    width: 100%;
-
-    .logo {
-      float: left;
-      height: $logo-size-m;
-      width: $logo-size-m;
-    }
-
-    .description {
-      align-content: center;
-      display: flex;
-      flex-direction: column;
-      height: $logo-size-m;
-      justify-content: center;
-    }
+    text-align: center;
   }
 
   .scroll {
@@ -192,5 +189,16 @@ $width-l: 500px;
 	text-align: center;
       }
     }
+  }
+}
+
+.settings {
+  color: $font-color;
+  width: $width-m;
+
+  .divider {
+    color: $font-color-light;
+    font-size: $font-size-m;
+    margin-bottom: $spacing-size-s;
   }
 }
