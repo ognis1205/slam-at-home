@@ -26,7 +26,7 @@ const getIcon = (type: Props.ItemType): FontAwesomeCore.IconDefinition => {
     case Props.ItemType.CONSTRUCTION:
       return FontAwesomeIcon.faCube;
     case Props.ItemType.SETTING:
-      return FontAwesomeIcon.faBars;
+      return FontAwesomeIcon.faCog;
     case Props.ItemType.GITHUB:
       return FontAwesomeBrandIcon.faGithub;
     case Props.ItemType.GITTER:
