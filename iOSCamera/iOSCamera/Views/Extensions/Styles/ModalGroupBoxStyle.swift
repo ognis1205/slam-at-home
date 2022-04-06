@@ -14,12 +14,6 @@ struct ModalGroupBoxStyle: GroupBoxStyle {
   func makeBody(configuration: Configuration) -> some View {
     ZStack {
       Color.uiColor
-      GeometryReader { geometry in
-        Image("Logo")
-            .resizable()
-            .aspectRatio(contentMode: .fit)
-            .edgesIgnoringSafeArea(.all)
-      }
       VStack(alignment: .center) {
         configuration.label
         GeometryReader { geometry in

@@ -26,8 +26,22 @@ struct WebRTCSettingsView: View {
           onToggle: onToggle)
     ) {
       ScrollView(.vertical, showsIndicators: false) {
+        HStack {
+          Text("Signaling Server")
+            .font(.headline)
+            .bold()
+            .foregroundColor(Color.lightFontColor)
+          Spacer()
+        }
         WebRTCURLTextFieldView(
           viewModel: viewModel)
+        HStack {
+          Text("Peer Connection")
+            .font(.headline)
+            .bold()
+            .foregroundColor(Color.lightFontColor)
+          Spacer()
+        }
         VStack(alignment: .leading) {
           HStack(alignment: .top) {
             Image(systemName: "person.fill")

@@ -21,12 +21,6 @@ struct StartView: View {
     ZStack {
       Color.themeColor
           .ignoresSafeArea()
-      GeometryReader { geometry in
-        Image("Logo")
-            .resizable()
-            .aspectRatio(contentMode: .fit)
-            .edgesIgnoringSafeArea(.all)
-      }
       VStack {
         Button(
           action: {

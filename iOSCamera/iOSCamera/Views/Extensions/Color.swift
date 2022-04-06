@@ -16,6 +16,10 @@ extension Color {
   
   static let fontColor = Color("FontColor")
   
+  static let lightFontColor = Color("LightFontColor")
+  
+  static let nadirFontColor = Color("NadirFontColor")
+  
   static let uiColor = Color("UIColor")
 
   static let uiRedColor = Color("UIRedColor")
