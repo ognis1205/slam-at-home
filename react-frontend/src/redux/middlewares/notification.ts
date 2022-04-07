@@ -6,7 +6,7 @@ import * as Redux from 'redux';
 import * as Events from 'events';
 import * as FSA from 'typescript-fsa';
 import * as Store from '../store';
-import * as Notifications from '../modules/notifications';
+import * as Notification from '../modules/notification';
 
 /** Responsible to emit notification events. */
 class Notifier extends Events.EventEmitter {
@@ -17,20 +17,20 @@ class Notifier extends Events.EventEmitter {
 const SHARED = new Notifier();
 
 /** Notifies a given notification items. */
-const notify = (items: Notifications.Item[]): void => {
+const notify = (items: Notification.Item[]): void => {
   SHARED.emit('notified', items);
 };
 
 /** Adds a notification event listener. */
 export const addNotificationListener = (
-  callback: (items: Notifications.Item[]) => void
+  callback: (items: Notification.Item[]) => void
 ): void => {
   SHARED.addListener('notified', callback);
 };
 
 /** Removes a notification event listener. */
 export const removeNotificationListener = (
-  callback: (items: Notifications.Item[]) => void
+  callback: (items: Notification.Item[]) => void
 ): void => {
   SHARED.removeListener('notified', callback);
 };
@@ -42,12 +42,7 @@ export const middleware: Redux.Middleware =
   }: Redux.MiddlewareAPI<Redux.Dispatch, S>) =>
   (next: Redux.Dispatch<Redux.AnyAction>) =>
   (action: FSA.Action<unknown>): unknown => {
-    if (Notifications.checkIfActionIsNotification(action.type)) {
-      setTimeout(() => {
-        const state = getState();
-        const notifications = state.notifications;
-        notify(notifications.list);
-      });
-    }
+    if (Notification.hasAction(action))
+      setTimeout(() => notify(getState()?.notification?.list));
     return next(action);
   };

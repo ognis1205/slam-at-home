@@ -7,29 +7,25 @@ import actionCreatorFactory from 'typescript-fsa';
 import { v4 as uuid } from 'uuid';
 
 /** Action suffix. */
-const SUFFIX = 'notifications';
+const SUFFIX = 'notification';
 
 /** Action type for INFO. */
-const INFO = `${SUFFIX}/info`;
+const INFO = 'info';
 
 /** Action type for SUCCESS. */
-const SUCCESS = `${SUFFIX}/success`;
+const SUCCESS = 'success';
 
 /** Action type for WARNING. */
-const WARNING = `${SUFFIX}/warning`;
+const WARNING = 'warning';
 
 /** Action type for ERROR. */
-const ERROR = `${SUFFIX}/error`;
+const ERROR = 'error';
 
 /** Action type for CUSTOM. */
-const CUSTOM = `${SUFFIX}/custom`;
+const CUSTOM = 'custom';
 
 /** Action type for REMOVE. */
-const REMOVE = `${SUFFIX}/remove`;
-
-/** Returns true if the action is notification. */
-export const checkIfActionIsNotification = (action: string): boolean =>
-  action.startsWith(SUFFIX);
+const REMOVE = 'remove';
 
 /** A type union of notification level properties. */
 export const Level = {
@@ -55,25 +51,34 @@ export type Item = {
 };
 
 /** FSA action factory. */
-const ACTION_CREATER = actionCreatorFactory();
+const ACTION_CREATER = actionCreatorFactory(SUFFIX);
 
 /** INFO action creator. */
-const INFO_ACTION = ACTION_CREATER<Item>(INFO);
+export const INFO_ACTION = ACTION_CREATER<Item>(INFO);
 
 /** SUCCESS action creator. */
-const SUCCESS_ACTION = ACTION_CREATER<Item>(SUCCESS);
+export const SUCCESS_ACTION = ACTION_CREATER<Item>(SUCCESS);
 
 /** WARNING action creator. */
-const WARNING_ACTION = ACTION_CREATER<Item>(WARNING);
+export const WARNING_ACTION = ACTION_CREATER<Item>(WARNING);
 
 /** ERROR action creator. */
-const ERROR_ACTION = ACTION_CREATER<Item>(ERROR);
+export const ERROR_ACTION = ACTION_CREATER<Item>(ERROR);
 
 /** CUSTOM action creator. */
-const CUSTOM_ACTION = ACTION_CREATER<Item>(CUSTOM);
+export const CUSTOM_ACTION = ACTION_CREATER<Item>(CUSTOM);
 
 /** REMOVE action creator. */
-const REMOVE_ACTION = ACTION_CREATER<string>(REMOVE);
+export const REMOVE_ACTION = ACTION_CREATER<string>(REMOVE);
+
+/** Returns true if the action is notification. */
+export const hasAction = (action: FSA.Action<unknown>): boolean =>
+  INFO_ACTION.match(action) ||
+  SUCCESS_ACTION.match(action) ||
+  WARNING_ACTION.match(action) ||
+  ERROR_ACTION.match(action) ||
+  CUSTOM_ACTION.match(action) ||
+  REMOVE_ACTION.match(action);
 
 /** Returns new payload. */
 const newPayload = (options: Partial<Item>, level: Level): Item => {
@@ -137,24 +142,24 @@ const reducer = (
   state: State = INITIAL_STATE,
   action: FSA.Action<unknown>
 ): State => {
-  switch (action.type) {
-    case INFO:
-    case SUCCESS:
-    case WARNING:
-    case ERROR:
-    case CUSTOM:
-      return {
-        ...state,
-        list: [...state.list, action.payload],
-      } as State;
-    case REMOVE:
-      return {
-        ...state,
-        list: state.list.filter((n) => action.payload !== n.key),
-      } as State;
-    default:
-      return state;
+  if (
+    FSA.isType(action, INFO_ACTION) ||
+    FSA.isType(action, SUCCESS_ACTION) ||
+    FSA.isType(action, WARNING_ACTION) ||
+    FSA.isType(action, ERROR_ACTION) ||
+    FSA.isType(action, CUSTOM_ACTION)
+  ) {
+    return {
+      ...state,
+      list: [...state.list, action.payload],
+    } as State;
+  } else if (FSA.isType(action, REMOVE_ACTION)) {
+    return {
+      ...state,
+      list: state.list.filter((n) => action.payload !== n.key),
+    } as State;
   }
+  return state;
 };
 
 export default reducer;

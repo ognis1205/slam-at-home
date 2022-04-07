@@ -5,15 +5,21 @@
 import * as Redux from 'redux';
 import * as NextRedux from 'next-redux-wrapper';
 import * as Notification from './middlewares/notification';
-import * as Notifications from './modules/notifications';
+import * as Signaling from './middlewares/signaling';
+import * as NotificationReducks from './modules/notification';
+import * as SignalingReducks from './modules/signaling';
 import reducer from './modules/reducer';
 
 /** Redux middlewares. */
-const enhancer = Redux.applyMiddleware(Notification.middleware);
+const enhancer = Redux.applyMiddleware(
+  Notification.middleware,
+  Signaling.middleware
+);
 
 /** A {Store} type. */
 export type Type = {
-  notifications: Notifications.State;
+  notification: NotificationReducks.State;
+  signaling: SignalingReducks.State;
 };
 
 /** Redux Next.js wrapper. */

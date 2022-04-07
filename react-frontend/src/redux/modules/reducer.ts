@@ -3,11 +3,13 @@
  * @copyright Shingo OKAWA 2022
  */
 import * as Redux from 'redux';
-import notifications from './notifications';
+import notification from './notification';
+import signaling from './signaling';
 
 /** A combined reducer. */
 const reducer = Redux.combineReducers({
-  notifications: notifications,
+  notification: notification,
+  signaling: signaling,
 });
 
 export default reducer;
