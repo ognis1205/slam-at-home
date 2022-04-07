@@ -29,10 +29,11 @@ export type Text = Types.Overwrite<
     toggleId: string;
     toggleName: string;
     checked: boolean;
+    onCheck: (value: string) => void;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-//    toggleClassName?: string;
+    value?: string;
     icon?: string | React.ReactNode | FontAwesome.IconProp;
-    disabled?: boolean;
-//    options: { on: string; off: string };
+    textDisabled?: boolean;
+    checkDisabled?: boolean;
   }
 >;
