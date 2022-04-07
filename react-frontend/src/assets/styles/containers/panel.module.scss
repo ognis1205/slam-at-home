@@ -78,7 +78,8 @@
   background-color: $bar-color;
   border-bottom: $border-s;
   clear: both;
-  display: block;
+  display: table;
+  vertical-align: middle;
   min-height: calc(2 * $font-size-m + $spacing-size-xs);
   overflow: hidden;
   padding-bottom: $spacing-size-xs;
@@ -96,12 +97,16 @@
 
 .button {
   color: $font-color;
-  display: inline-block;
   font-size: $font-size-l;
 
   &.wifi {
     float: left;
     margin-left: $spacing-size-m;
+//    opacity: $opacity-h;
+
+    &.connected {
+      color: $icon-color-green;
+    }
   }
 
   &.menu {
@@ -139,4 +144,13 @@
       color: $font-color-dark;
     }
   }
+}
+
+.status {
+  color: $font-color;
+  font-size: $font-size-l;
+//  font-weight: bold;
+  float: left;
+  margin-left: $spacing-size-s;
+//  opacity: $opacity-h;
 }

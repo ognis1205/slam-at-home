@@ -92,7 +92,8 @@ $width-l: 500px;
     align-items: center;
     display: flex;
     flex-wrap: wrap;
-    padding-right: $spacing-size-l;
+    padding-left: $spacing-size-m;
+    padding-right: $spacing-size-m;
     width: 100%;
 
     .logo {
@@ -113,13 +114,13 @@ $width-l: 500px;
 
       .item {
         color: $font-color;
-	display: inline-block;
+	display: table;
 	position: relative;
 	width: 100%;
 	width: 100%;
 
 	.icon {
-	  display: inline-block;
+          display: table-cell;
 	  font-size: $icon-size-m;
 	  height: $icon-wrapper-size-m;
 	  line-height: $icon-wrapper-size-m;
@@ -130,12 +131,12 @@ $width-l: 500px;
 
 	.value {
 	  float: right;
-      & > a {
-        @include link();
-      }
-      & > a:hover {
-	@include link-hover();
-      }
+	  & > a {
+            @include link();
+	  }
+	  & > a:hover {
+	    @include link-hover();
+	  }
 	}
       }
     }
@@ -156,7 +157,6 @@ $width-l: 500px;
   .comment {
     color: $font-color;
     font-size: $font-size-l;
-    font-weight: bold;
     margin-bottom: $spacing-size-m;
     text-align: center;
   }

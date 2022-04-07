@@ -40,7 +40,6 @@ $font-color-light: #767E97;
 $font-color-dark: #182135;
 $font-color-link: #1890ff;
 $font-color-hover: #1890ff;
-//$font-color-active: #005FC5;
 $font-color-active: #1890ff;
 $font-color-highlight: #e6f7ff;
 $font-color-nadir: #D4D4D4;
@@ -75,8 +74,6 @@ $icon-background-image-highlight: linear-gradient(90deg, $font-color-highlight, 
 $form-size-s: 14px;
 $form-size-m: 16px;
 $form-size-l: 18px;
-//$form-color-active: #0a69dd;
-//$form-color-active: #1890ff;
 $form-color-active: $icon-color-green;
 $form-color-inactive: $font-color;
 
@@ -91,6 +88,7 @@ $spacing-size-xs: 4px;
 $spacing-size-s: 8px;
 $spacing-size-m: 16px;
 $spacing-size-l: 32px;
+$spacing-size-xl: 64px;
 
 // Effect
 $animation-ease: 0s ease 0.2s;

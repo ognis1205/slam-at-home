@@ -101,11 +101,22 @@
     margin-left: $spacing-size-s;
     text-align: center;
     width: $icon-wrapper-size-m;
+
+    &.checked {
+      color: $icon-color-green;
+    }
   }
 
   .input {
+    background: transparent;
     border: none;
+    color: $font-color;
     flex-grow: 1;
+
+    &:disabled {
+      font-weight: bold;
+    }
+
     &:focus {
       outline-width: 0;
     }
