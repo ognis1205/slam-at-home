@@ -196,6 +196,14 @@ $width-l: 500px;
   color: $font-color;
   width: $width-m;
 
+  .error {
+    color: $font-color-error;
+    display: flex;
+    font-size: $font-size-s;
+    justify-content: center;
+    padding: $spacing-size-s;
+  }
+
   .divider {
     color: $font-color-light;
     font-size: $font-size-m;
