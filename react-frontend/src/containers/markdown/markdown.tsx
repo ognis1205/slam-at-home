@@ -4,6 +4,7 @@
  */
 import * as React from 'react';
 import * as Props from './props';
+import * as Console from '../../utils/console';
 import ReactMarkdown from 'react-markdown';
 import classnames from 'classnames';
 import rehypeRaw from 'rehype-raw';
@@ -47,7 +48,7 @@ export const Component: React.FunctionComponent<Props.Markdown> = ({
       .then((text) => {
         setMarkdown(text);
       })
-      .catch((error) => console.error(error));
+      .catch((error) => Console.error(error));
   });
 
   return (
