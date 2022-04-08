@@ -209,4 +209,8 @@ $width-l: 500px;
     font-size: $font-size-m;
     margin-bottom: $spacing-size-s;
   }
+
+   .divider:nth-child(n+2) {
+      margin-top: $spacing-size-s;
+   }
 }
