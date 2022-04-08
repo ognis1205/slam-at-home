@@ -11,7 +11,7 @@ const SUFFIX = 'signaling';
 /** Action type for CONNECT. */
 const CONNECT = 'connect';
 
-/** Action type for CONNECT. */
+/** Action type for ESTABLISHED. */
 const ESTABLISHED = 'established';
 
 /** Action type for DISCONNECT. */
@@ -21,7 +21,8 @@ const DISCONNECT = 'disconnect';
 const ACTION_CREATER = actionCreatorFactory(SUFFIX);
 
 /** CONNECT action creator. */
-export const CONNECT_ACTION = ACTION_CREATER<{ url: string; id: string }>(CONNECT);
+export const CONNECT_ACTION =
+  ACTION_CREATER<{ url: string; id: string }>(CONNECT);
 
 /** ESTABLISHED action creator. */
 export const ESTABLISHED_ACTION = ACTION_CREATER<void>(ESTABLISHED);
@@ -48,25 +49,25 @@ export const established = (): FSA.Action<void> => ESTABLISHED_ACTION();
 /** DISCONNECT action. */
 export const disconnect = (): FSA.Action<void> => DISCONNECT_ACTION();
 
-/** A type union of notification level properties. */
-export const Connection = {
+/** A type union of connection states. */
+export const Status = {
   DISCONNECTED: 'disconnected',
   ESTABLISHING: 'establishing',
   CONNECTED: 'connected',
 } as const;
 
-export type Connection = typeof Connection[keyof typeof Connection];
+export type Status = typeof Status[keyof typeof Status];
 
 /** A {State} type. */
 export type State = {
-  connection: Connection;
+  status: Status;
   id?: string;
   url?: string;
 };
 
 /** An initial state of the module. */
 const INITIAL_STATE = {
-  connection: Connection.DISCONNECTED,
+  status: Status.DISCONNECTED,
   id: '',
   url: '',
 } as State;
@@ -79,19 +80,19 @@ const reducer = (
   if (FSA.isType(action, CONNECT_ACTION))
     return {
       ...state,
-      connection: Connection.ESTABLISHING,
+      status: Status.ESTABLISHING,
       id: action.payload.id,
       url: action.payload.url,
     } as State;
   if (FSA.isType(action, ESTABLISHED_ACTION))
     return {
       ...state,
-      connection: Connection.CONNECTED,
+      status: Status.CONNECTED,
     } as State;
   if (FSA.isType(action, DISCONNECT_ACTION))
     return {
       ...state,
-      connection: Connection.DISCONNECTED,
+      status: Status.DISCONNECTED,
       id: undefined,
       url: undefined,
     } as State;
