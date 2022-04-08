@@ -92,17 +92,17 @@ export const Component: React.FunctionComponent<Props.Window> = ({
       <Controller>
         <Button.Component
           className={getWifiClassName(
-            signalingStore.connection !== Signaling.Connection.DISCONNECTED
+            signalingStore.status !== Signaling.Status.DISCONNECTED
           )}
           icon={FontAwesomeIcon.faWifi}
         />
         {
           <span className={styles['status']}>
             {signalingStore.url
-              ? `Signaling ${signalingStore.url}`
+              ? `Signaling (${signalingStore.url})`
               : 'Not Signaling'}
             &nbsp;/&nbsp;
-            {'No Camera'}
+            {'No Device'}
           </span>
         }
         <Modal.Component

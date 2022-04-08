@@ -25,7 +25,7 @@ export const Component: React.FunctionComponent<Props.Select> = ({
     {options.length === 0 ? (
       <div className={styles['empty']}>No devices found</div>
     ) : (
-      <select id={id} className={styles['scroll']} size={options.length}>
+      <select id={id} className={styles['scroll']} multiple>
         {options.map(({ value, name }: Props.Option, index: number) => (
           <option key={index} value={value}>
             {name}

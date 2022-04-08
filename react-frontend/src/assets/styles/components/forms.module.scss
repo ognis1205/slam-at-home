@@ -156,12 +156,12 @@
     outline:0px;
     width: 100%;
     float: left;
-    font-size: $icon-size-m;
+    font-size: $icon-size-s;
     user-select: none;
 
     & > option {
       color: $font-color-light;
-      font-size: $font-size-l;
+      font-size: $font-size-s;
       margin: $spacing-size-xs;
     }
 

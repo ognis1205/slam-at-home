@@ -114,6 +114,9 @@ export const Component = React.forwardRef<HTMLDivElement, Props.Menu>(
       (store: Store.Type) => store.signaling
     );
 
+    /** @const Holds a Redux state of the p2p module. */
+    const p2pStore = ReactRedux.useSelector((store: Store.Type) => store.p2p);
+
     /** @const Holds a reference to the about item. */
     const about = React.useRef<Modal.Trigger>(null);
 
@@ -156,10 +159,9 @@ export const Component = React.forwardRef<HTMLDivElement, Props.Menu>(
           offset={{ x: 0, y: 0 }}
         >
           <Popups.Settings
-            checked={
-              signalingsStore.connection !== Signaling.Connection.DISCONNECTED
-            }
+            checked={signalingsStore.status !== Signaling.Status.DISCONNECTED}
             url={signalingsStore.url}
+            devices={p2pStore.devices}
             onClose={handleSettingsClose}
           />
         </Modal.Component>

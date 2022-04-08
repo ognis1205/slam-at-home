@@ -4,6 +4,7 @@
  */
 import type * as React from 'react';
 import type * as Types from '../../utils/types';
+import type * as WSUtils from '../../utils/websocket';
 import * as FontAwesome from '@fortawesome/fontawesome-svg-core';
 
 /** A type union of application type properties. */
@@ -73,6 +74,7 @@ export type Settings = Types.Overwrite<
   Omit<Window, 'type'>,
   {
     checked: boolean;
+    devices?: WSUtils.ClientDescription[];
     url?: string;
     onClose?: () => void;
   }

@@ -41,7 +41,6 @@ export type Text = Types.Overwrite<
 
 export type Option = {
   value: string;
-  icon: FontAwesomeCore.IconDefinition;
   name: string;
 };
 

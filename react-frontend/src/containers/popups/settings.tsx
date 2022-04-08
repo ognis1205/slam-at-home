@@ -17,6 +17,7 @@ import { v4 as uuid } from 'uuid';
 export const Component: React.FunctionComponent<Props.Settings> = ({
   checked,
   url,
+  devices,
   onClose,
   ...windowProps
 }: Props.Settings): React.ReactElement => {
@@ -66,6 +67,14 @@ export const Component: React.FunctionComponent<Props.Settings> = ({
     else setError(true);
   };
 
+  const test = [
+    { value: 'option1', name: 'option1' },
+    { value: 'option2', name: 'option2' },
+    { value: 'option3', name: 'option3' },
+    { value: 'option4', name: 'option4' },
+    { value: 'option5', name: 'option5' },
+  ];
+
   return (
     <Window.Component
       {...windowProps}
@@ -76,8 +85,8 @@ export const Component: React.FunctionComponent<Props.Settings> = ({
     >
       <div className={styles['divider']}>Signaling Server</div>
       <Forms.Text
-        id="text"
-        name="text"
+        id="url"
+        name="url"
         placeholder="0.0.0.0:10000"
         toggleId="text-toggle"
         toggleName="text-toggle"
@@ -95,7 +104,14 @@ export const Component: React.FunctionComponent<Props.Settings> = ({
           Specify a valid IP address or FQDN of the signaling server
         </span>
       ) : null}
-      <div className={styles['divider']}>Cameras</div>
+      <div className={styles['divider']}>Devices</div>
+      <Forms.Select
+        id="camera"
+        options={devices.map((o) => {
+          return { value: o.id, name: o.name };
+        })}
+      />
+      <div className={styles['divider']}>Peer Connection</div>
     </Window.Component>
   );
 };

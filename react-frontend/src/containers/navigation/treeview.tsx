@@ -122,6 +122,9 @@ export const Component: React.FunctionComponent<Props.TreeView> = (
     (store: Store.Type) => store.signaling
   );
 
+  /** @const Holds a Redux state of the p2p module. */
+  const p2pStore = ReactRedux.useSelector((store: Store.Type) => store.p2p);
+
   /** @const Holds tree-view context. */
   const { activeKeyContext } = React.useContext(Context.TreeView);
 
@@ -177,10 +180,9 @@ export const Component: React.FunctionComponent<Props.TreeView> = (
             offset={{ x: 0, y: 0 }}
           >
             <Popups.Settings
-              checked={
-                signalingsStore.connection !== Signaling.Connection.DISCONNECTED
-              }
+              checked={signalingsStore.status !== Signaling.Status.DISCONNECTED}
               url={signalingsStore.url}
+              devices={p2pStore.devices}
               onClose={handleSettingsClose}
             />
           </Modal.Component>
