@@ -3,21 +3,16 @@
  * @copyright Shingo OKAWA 2022
  */
 import * as React from 'react';
+import * as Props from './props';
 import * as Window from './window';
 import * as ReactShare from 'react-share';
 import styles from '../../assets/styles/containers/popups.module.scss';
 
 /** Returns a `Share` component. */
-export const Component: React.FunctionComponent<
-  React.HTMLAttributes<HTMLDivElement> & {
-    onClose?: () => void;
-  }
-> = ({
+export const Component: React.FunctionComponent<Props.Share> = ({
   onClose,
   ...windowProps
-}: React.HTMLAttributes<HTMLDivElement> & {
-  onClose?: () => void;
-}): React.ReactElement => (
+}: Props.Share): React.ReactElement => (
   <Window.Component
     {...windowProps}
     className={styles['share']}

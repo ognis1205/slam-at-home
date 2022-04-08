@@ -3,9 +3,12 @@
  * @copyright Shingo OKAWA 2022
  */
 import * as React from 'react';
+import * as ReactRedux from 'react-redux';
 import * as Props from './props';
 import * as Popups from '../popups';
 import * as Modal from '../../components/modal';
+import * as Store from '../../redux/store';
+import * as Signaling from '../../redux/modules/signaling';
 import * as FontAwesome from '@fortawesome/react-fontawesome';
 import * as FontAwesomeCore from '@fortawesome/fontawesome-svg-core';
 import * as FontAwesomeIcon from '@fortawesome/free-solid-svg-icons';
@@ -106,6 +109,11 @@ export const Component = React.forwardRef<HTMLDivElement, Props.Menu>(
     { className, ...rest }: Props.Menu,
     ref: React.ForwardedRef<HTMLDivElement>
   ): React.ReactElement => {
+    /** @const Holds a Redux state of the signalings module. */
+    const signalingsStore = ReactRedux.useSelector(
+      (store: Store.Type) => store.signaling
+    );
+
     /** @const Holds a reference to the about item. */
     const about = React.useRef<Modal.Trigger>(null);
 
@@ -147,7 +155,13 @@ export const Component = React.forwardRef<HTMLDivElement, Props.Menu>(
           on="click"
           offset={{ x: 0, y: 0 }}
         >
-          <Popups.Settings onClose={handleSettingsClose} />
+          <Popups.Settings
+            checked={
+              signalingsStore.connection !== Signaling.Connection.DISCONNECTED
+            }
+            url={signalingsStore.url}
+            onClose={handleSettingsClose}
+          />
         </Modal.Component>
         <Divider />
         <ExternalLink

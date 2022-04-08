@@ -3,10 +3,13 @@
  * @copyright Shingo OKAWA 2022
  */
 import * as React from 'react';
+import * as ReactRedux from 'react-redux';
 import * as Props from './props';
 import * as Button from './button';
 import * as Menu from '../menu';
 import * as Modal from '../../components/modal';
+import * as Store from '../../redux/store';
+import * as Signaling from '../../redux/modules/signaling';
 import * as FontAwesomeIcon from '@fortawesome/free-solid-svg-icons';
 import classnames from 'classnames';
 import styles from '../../assets/styles/containers/panel.module.scss';
@@ -47,6 +50,12 @@ const getMenuClassName = (isOpen: boolean): string =>
     [styles['open'] || '']: isOpen,
   });
 
+/** Returns the class name of the toggle. */
+const getWifiClassName = (isConnected: boolean): string =>
+  classnames(styles['wifi'], {
+    [styles['connected'] || '']: isConnected,
+  });
+
 /** Returns a `Window` component. */
 export const Component: React.FunctionComponent<Props.Window> = ({
   children,
@@ -56,6 +65,11 @@ export const Component: React.FunctionComponent<Props.Window> = ({
   onMenuOpen,
   ...divProps
 }: Props.Window): React.ReactElement => {
+  /** @const Holds a Redux state of the signaling module. */
+  const signalingStore = ReactRedux.useSelector(
+    (store: Store.Type) => store.signaling
+  );
+
   /** @const Holds a reference to the component itself. */
   const self = React.useRef<HTMLDivElement>(null);
 
@@ -77,9 +91,20 @@ export const Component: React.FunctionComponent<Props.Window> = ({
     <div ref={self} className={styles['window']} {...divProps}>
       <Controller>
         <Button.Component
-          className={styles['wifi']}
+          className={getWifiClassName(
+            signalingStore.connection !== Signaling.Connection.DISCONNECTED
+          )}
           icon={FontAwesomeIcon.faWifi}
         />
+        {
+          <span className={styles['status']}>
+            {signalingStore.url
+              ? `Signaling ${signalingStore.url}`
+              : 'Not Signaling'}
+            &nbsp;/&nbsp;
+            {'No Camera'}
+          </span>
+        }
         <Modal.Component
           trigger={
             <Button.Component

@@ -4,7 +4,7 @@
  */
 import type * as React from 'react';
 import type * as Motion from '../../components/motion';
-import type * as Notifications from '../../redux/modules/notifications';
+import type * as Reducks from '../../redux/modules/notification';
 import type * as Types from '../../utils/types';
 import * as FontAwesome from '@fortawesome/fontawesome-svg-core';
 
@@ -40,7 +40,7 @@ export type Item = Types.Overwrite<
 
 /** A {Item} component properties. */
 export type NotificationWithStyle = Types.Overwrite<
-  Notifications.Item,
+  Reducks.Item,
   {
     className: string;
     style: string;
@@ -51,8 +51,8 @@ export type NotificationWithStyle = Types.Overwrite<
 export type Items = Types.Overwrite<
   React.HTMLAttributes<HTMLDivElement>,
   {
-    notifies: Notifications.Item[];
-    onHide: (notify: Notifications.Item) => void;
+    notifies: Reducks.Item[];
+    onHide: (notify: Reducks.Item) => void;
     duration: number;
     placement: Placement;
     motion?: Motion.Props;

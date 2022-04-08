@@ -6,7 +6,7 @@ import * as React from 'react';
 import * as Item from './item';
 import * as Props from './props';
 import * as Motion from '../../components/motion';
-import * as Notifications from '../../redux/modules/notifications';
+import * as Reducks from '../../redux/modules/notification';
 import * as Wrap from '../../utils/wrap';
 import * as FontAwesomeCore from '@fortawesome/fontawesome-svg-core';
 import * as FontAwesomeIcon from '@fortawesome/free-solid-svg-icons';
@@ -30,19 +30,17 @@ const getClassName = (className: string, placement: Props.Placement): string =>
   });
 
 /** Returns the corresponding FontAwesome icon. */
-const getIcon = (
-  level: Notifications.Level
-): FontAwesomeCore.IconDefinition => {
+const getIcon = (level: Reducks.Level): FontAwesomeCore.IconDefinition => {
   switch (level) {
-    case Notifications.Level.INFO:
+    case Reducks.Level.INFO:
       return FontAwesomeIcon.faInfoCircle;
-    case Notifications.Level.SUCCESS:
+    case Reducks.Level.SUCCESS:
       return FontAwesomeIcon.faCheckCircle;
-    case Notifications.Level.WARNING:
+    case Reducks.Level.WARNING:
       return FontAwesomeIcon.faExclamationCircle;
-    case Notifications.Level.ERROR:
+    case Reducks.Level.ERROR:
       return FontAwesomeIcon.faExclamationCircle;
-    case Notifications.Level.CUSTOM:
+    case Reducks.Level.CUSTOM:
     default:
       return FontAwesomeIcon.faInfoCircle;
   }
@@ -59,7 +57,7 @@ export const Component: React.FunctionComponent<Props.Items> = ({
   ...divAttrs
 }: Props.Items): React.ReactElement => {
   /** Event listener which is responsible for `onHide`. */
-  const handleHide = (notification: Notifications.Item) => () => {
+  const handleHide = (notification: Reducks.Item) => () => {
     if (onHide) onHide(notification);
   };
 
@@ -83,7 +81,7 @@ export const Component: React.FunctionComponent<Props.Items> = ({
               showCloseButton={(notify as Props.Item).showCloseButton}
               onClick={(notify as Props.Item).onClick}
               icon={getIcon((notify as Props.Item).level)}
-              onHide={handleHide(notify as Notifications.Item)}
+              onHide={handleHide(notify as Reducks.Item)}
             />
           );
         }}

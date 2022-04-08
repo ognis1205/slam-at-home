@@ -3,6 +3,7 @@
  * @copyright Shingo OKAWA 2022
  */
 import * as React from 'react';
+import * as Props from './props';
 import * as Window from './window';
 import * as FontAwesome from '@fortawesome/react-fontawesome';
 import * as FontAwesomeIcon from '@fortawesome/free-solid-svg-icons';
@@ -10,16 +11,10 @@ import Image from 'next/image';
 import styles from '../../assets/styles/containers/popups.module.scss';
 
 /** Returns a `About` component. */
-export const Component: React.FunctionComponent<
-  React.HTMLAttributes<HTMLDivElement> & {
-    onClose?: () => void;
-  }
-> = ({
+export const Component: React.FunctionComponent<Props.About> = ({
   onClose,
   ...windowProps
-}: React.HTMLAttributes<HTMLDivElement> & {
-  onClose?: () => void;
-}): React.ReactElement => (
+}: Props.About): React.ReactElement => (
   <Window.Component
     {...windowProps}
     className={styles['about']}

@@ -42,14 +42,6 @@ export type Controller = React.HTMLAttributes<HTMLDivElement>;
 /** A {Pager} component properties. */
 export type Pager = React.HTMLAttributes<HTMLDivElement>;
 
-/** A {Description} component properties. */
-export type Description = Types.Overwrite<
-  React.HTMLAttributes<HTMLDivElement>,
-  {
-    children: string;
-  }
->;
-
 /** A {Button} component properties. */
 export type Button = Types.Overwrite<
   React.HTMLAttributes<HTMLSpanElement>,
@@ -57,5 +49,31 @@ export type Button = Types.Overwrite<
     icon: string | React.ReactNode | FontAwesome.IconProp;
     title?: string;
     onClick?: () => void;
+  }
+>;
+
+/** A {About} component properties. */
+export type About = Types.Overwrite<
+  Omit<Window, 'type'>,
+  {
+    onClose?: () => void;
+  }
+>;
+
+/** A {Share} component properties. */
+export type Share = Types.Overwrite<
+  Omit<Window, 'type'>,
+  {
+    onClose?: () => void;
+  }
+>;
+
+/** A {Settings} component properties. */
+export type Settings = Types.Overwrite<
+  Omit<Window, 'type'>,
+  {
+    checked: boolean;
+    url?: string;
+    onClose?: () => void;
   }
 >;
