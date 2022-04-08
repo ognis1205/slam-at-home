@@ -15,6 +15,7 @@ export const SignalType = {
   SESSION_DESCRIPTION: 'SessionDescription',
   NEW_CONNECTION: 'NewConnection',
   DISCONNECTION: 'Disconnection',
+  LIST_REMOTE_PEERS: 'ListRemotePeers',
 } as const;
 
 export type SignalType = typeof SignalType[keyof typeof SignalType];
@@ -147,6 +148,12 @@ export const onConnection = (
       to: 'all',
       type: SignalType.NEW_CONNECTION,
       payload: client.toJson().name,
+    }), 'utf-8'));
+    client.send(Buffer.from(JSON.stringify({
+      from: 'server',
+      to: id,
+      type: SignalType.LIST_REMOTE_PEERS,
+      payload: listClients(),
     }), 'utf-8'));
     CLIENTS.set(id, client);
     return id;
