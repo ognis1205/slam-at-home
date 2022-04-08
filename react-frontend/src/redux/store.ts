@@ -8,6 +8,7 @@ import * as Notification from './middlewares/notification';
 import * as Signaling from './middlewares/signaling';
 import * as NotificationReducks from './modules/notification';
 import * as SignalingReducks from './modules/signaling';
+import * as P2PReducks from './modules/p2p';
 import reducer from './modules/reducer';
 
 /** Redux middlewares. */
@@ -20,6 +21,7 @@ const enhancer = Redux.applyMiddleware(
 export type Type = {
   notification: NotificationReducks.State;
   signaling: SignalingReducks.State;
+  p2p: P2PReducks.State;
 };
 
 /** Redux Next.js wrapper. */

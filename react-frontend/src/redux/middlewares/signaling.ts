@@ -3,13 +3,15 @@
  * @copyright Shingo OKAWA 2022
  */
 import * as Redux from 'redux';
-import * as Events from 'events';
 import * as FSA from 'typescript-fsa';
 import * as Store from '../store';
 import * as Console from '../../utils/console';
+import * as SafeJSON from '../../utils/json';
+import * as RTCUtils from '../../utils/webrtc';
 import * as WSUtils from '../../utils/websocket';
 import * as Signaling from '../modules/signaling';
 import * as Notification from '../modules/notification';
+import * as P2P from '../modules/p2p';
 
 /** Exports singleton manager. */
 let SHARED: WebSocket = null;
@@ -24,8 +26,7 @@ export const middleware: Redux.Middleware =
   (action: FSA.Action<unknown>): unknown => {
     /** @const Holds `true` if the signaling server is connected. */
     const isConnectionEstablished =
-      SHARED &&
-      getState().signaling.connection === Signaling.Connection.CONNECTED;
+      SHARED && getState().signaling.status === Signaling.Status.CONNECTED;
 
     if (Signaling.DISCONNECT_ACTION.match(action)) {
       if (SHARED) SHARED.close(1000);
@@ -89,10 +90,86 @@ export const middleware: Redux.Middleware =
             break;
         }
         dispatch(Signaling.disconnect());
+        dispatch(P2P.close());
       };
 
+      SHARED.onmessage = (e: MessageEvent): void => {
+        new Response(e.data).text().then((message: string) => {
+          const signal = SafeJSON.safeParse(WSUtils.isSignal)(message);
+          if (signal.hasError) {
+            Console.warning(`signaling: recieved malformed signal from server`);
+            dispatch(
+              Notification.warning({
+                title: 'WARNING (Signaling Server)',
+                message: 'Recieved malformed signal from server',
+                showCloseButton: true,
+              })
+            );
+          } else {
+            if (signal.json.type === WSUtils.SignalType.ICE_CANDIDATE) {
+              console.log('ice candiate', signal);
+              //if (signal.to === user) processIce(signal.payload);
+            } else if (
+              signal.json.type === WSUtils.SignalType.SESSION_DESCRIPTION
+            ) {
+              // incoming offer
+              console.log('session description', signal);
+              //if (signal.payload.type === 'offer' && signal.to === user) {
+              //  user2 = signal.from;
+              //  processOffer(signal.payload);
+              //}
+              // incoming answer
+              //if (signal.payload.type === 'answer' && signal.to === user) {
+              //  processAnswer(signal.payload);
+              //}
+            } else if (signal.json.type === WSUtils.SignalType.NEW_CONNECTION) {
+              Console.info('New device found on the network');
+              dispatch(
+                P2P.newDevices({
+                  id: signal.json.from,
+                  name: signal.json.payload,
+                })
+              );
+              dispatch(
+                Notification.info({
+                  title: 'INFO (Signaling Server)',
+                  message: 'New device found on the network',
+                  showCloseButton: true,
+                })
+              );
+            } else if (signal.json.type === WSUtils.SignalType.DISCONNECTION) {
+              Console.warning('A device disconnected from the network');
+              const currentId = getState().p2p.id;
+              if (currentId && currentId === signal.json.from)
+                dispatch(P2P.close(signal.json.from));
+              dispatch(P2P.removeDevice(signal.json.from));
+              dispatch(
+                Notification.warning({
+                  title: 'WARNING (Signaling Server)',
+                  message: 'A device disconnected from the network',
+                  showCloseButton: true,
+                })
+              );
+            } else if (
+              signal.json.type === WSUtils.SignalType.LIST_REMOTE_PEERS
+            ) {
+              Console.info('Acquired the information of connected devices');
+              dispatch(P2P.newDevices(signal.json.payload));
+              dispatch(
+                Notification.info({
+                  title: 'INFO (Signaling Server)',
+                  message: 'Acquired the information of connected devices',
+                  showCloseButton: true,
+                })
+              );
+            }
+          }
+        });
+      };
+
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       SHARED.onerror = (e: Event): void => {
-        Console.error(`signaling: error occured ${e}`);
+        Console.error(`signaling: error occured`);
       };
     }
 
