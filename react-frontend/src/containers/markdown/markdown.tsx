@@ -6,6 +6,7 @@ import * as React from 'react';
 import * as Props from './props';
 import ReactMarkdown from 'react-markdown';
 import classnames from 'classnames';
+import rehypeRaw from 'rehype-raw';
 import 'github-markdown-css/github-markdown.css';
 
 /** Returns a `Container` component. */
@@ -51,7 +52,7 @@ export const Component: React.FunctionComponent<Props.Markdown> = ({
 
   return (
     <Container {...divProps} className={getClassName(className)}>
-      <ReactMarkdown>{markdown}</ReactMarkdown>
+      <ReactMarkdown rehypePlugins={[rehypeRaw]}>{markdown}</ReactMarkdown>
     </Container>
   );
 };
