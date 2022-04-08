@@ -9,11 +9,21 @@ import WebSocket from 'ws';
 import QueryString from 'query-string';
 import Logger from '../utils/logger';
 
+/** A type union of signal type properties. */
+export const SignalType = {
+  ICE_CANDIDATE: 'IceCandidate',
+  SESSION_DESCRIPTION: 'SessionDescription',
+  NEW_CONNECTION: 'NewConnection',
+  DISCONNECTION: 'Disconnection',
+} as const;
+
+export type SignalType = typeof SignalType[keyof typeof SignalType];
+
 /** Signal data format. */
 export type Signal = {
   from: string;
   to: string;
-  type: string;
+  type: SignalType;
   payload: string;
 };
 
@@ -25,7 +35,7 @@ export type ClientDescription = {
 
 /** Validate this value with a custom type guard. */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const isValid = (value: any): value is Signal =>
+export const isSignal = (value: any): value is Signal =>
   'from' in value && 'to' in value && 'type' in value && 'payload' in value;
 
 /** Returns the remote address of the request. */
@@ -115,6 +125,14 @@ class Client {
 /** @const @private Holds a subscribed clients. */
 const CLIENTS = new Map<ClientId, Client>();
 
+/** Broadcasts a given message to clients. */
+const broadcast = (from: string, buffer: Buffer): void => {
+  Logger.info(`Broadcasts message from ${from}`);
+  CLIENTS.forEach((client: Client, id: ClientId) => {
+    if (id !== from) client.send(buffer);
+  });
+};
+
 /** Registers new connected web socket. */
 export const onConnection = (
   conn: WebSocket.WebSocket,
@@ -122,12 +140,15 @@ export const onConnection = (
 ): ClientId | undefined => {
   const id = getId(req);
   if (id !== undefined) {
-    if (CLIENTS.has(id)) {
-      Logger.info(`Disconnected from client ${id}`);
-      CLIENTS.delete(id);
-    }
-    CLIENTS.set(id, new Client(id, conn, req));
     Logger.info(`Connected from client ${id}`);
+    const client = new Client(id, conn, req);
+    broadcast(id, Buffer.from(JSON.stringify({
+      from: id,
+      to: 'all',
+      type: SignalType.NEW_CONNECTION,
+      payload: client.toJson().name,
+    }), 'utf-8'));
+    CLIENTS.set(id, client);
     return id;
   } else {
     Logger.warn('Failed to acquire client id');
@@ -137,7 +158,7 @@ export const onConnection = (
 
 /** Registers new connected web socket. */
 export const onMessage = (message: WebSocket.RawData): void => {
-  const signal = SafeJSON.safeParse(isValid)(Payload.toString(message));
+  const signal = SafeJSON.safeParse(isSignal)(Payload.toString(message));
   if (signal.hasError) {
     Logger.warn('Recieved malformed signal from client');
   } else {
@@ -155,7 +176,16 @@ export const onMessage = (message: WebSocket.RawData): void => {
 export const onClose = (id: ClientId | undefined): void => {
   if (id !== undefined) {
     Logger.info(`Disconnected from client ${id}`);
-    CLIENTS.delete(id);
+    if (CLIENTS.has(id)) {
+      const client = CLIENTS.get(id);
+      broadcast(id, Buffer.from(JSON.stringify({
+        from: id,
+        to: 'all',
+        type: SignalType.DISCONNECTION,
+        payload: client.toJson().name,
+      }), 'utf-8'));
+      CLIENTS.delete(id);
+    }
   }
 };
 
