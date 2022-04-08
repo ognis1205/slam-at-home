@@ -150,12 +150,23 @@ export const toString = (data: Data): string => {
   return undefined;
 };
 
+/** A type union of signal type properties. */
+export const SignalType = {
+  ICE_CANDIDATE: 'IceCandidate',
+  SESSION_DESCRIPTION: 'SessionDescription',
+  NEW_CONNECTION: 'NewConnection',
+  DISCONNECTION: 'Disconnection',
+  LIST_REMOTE_PEERS: 'ListRemotePeers',
+} as const;
+
+export type SignalType = typeof SignalType[keyof typeof SignalType];
+
 /** Signal data format. */
 export type Signal = {
   from: string;
   to: string;
-  type: string;
-  payload: string;
+  type: SignalType;
+  payload: unknown;
 };
 
 /** Client description format. */
@@ -166,5 +177,22 @@ export type ClientDescription = {
 
 /** Validate this value with a custom type guard. */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any,@typescript-eslint/explicit-module-boundary-types
-export const isValid = (value: any): value is Signal =>
+export const isSignal = (value: any): value is Signal =>
   'from' in value && 'to' in value && 'type' in value && 'payload' in value;
+
+/** Sends a given SDP over a specified WebSocket. */
+export const send = (
+  sock: WebSocket,
+  from: string,
+  to: string,
+  type: SignalType,
+  sdp: RTCSessionDescriptionInit
+): void =>
+  sock.send(
+    JSON.stringify({
+      from: from,
+      to: to,
+      type: type,
+      payload: sdp,
+    })
+  );
