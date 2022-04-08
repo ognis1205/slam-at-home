@@ -1,5 +1,5 @@
 /**
- * @fileoverview Defines Menu component.
+ * @fileoverview Defines Select component.
  * @copyright Shingo OKAWA 2022
  */
 import * as React from 'react';
@@ -7,57 +7,35 @@ import * as Props from './props';
 import classnames from 'classnames';
 import styles from '../../assets/styles/components/forms.module.scss';
 
-/** Returns the class name of the toggle. */
+/** Returns the class name of the select. */
 const getClassName = (className: string): string =>
-  classnames(styles['toggle'], {
+  classnames(styles['select'], {
     [className || '']: !!className,
   });
 
-/** Returns the class name of the label. */
-const getLeftClassName = (disabled: boolean): string =>
-  classnames(styles['switch-left'], {
-    [styles['disabled']]: disabled,
-  });
-
-/** Returns the class name of the label. */
-const getRightClassName = (disabled: boolean): string =>
-  classnames(styles['switch-right'], {
-    [styles['disabled']]: disabled,
-  });
-
-/** Returns a `Toggle` component. */
-export const Component: React.FunctionComponent<Props.Toggle> = ({
+/** Returns a `Select` component. */
+export const Component: React.FunctionComponent<Props.Select> = ({
   className,
   id,
-  name,
-  checked,
-  disabled = false,
-  onChange,
-  options = { on: 'yes', off: 'no' },
+  onCheck,
+  options = [],
   ...divAttrs
-}: Props.Toggle): React.ReactElement => (
+}: Props.Select): React.ReactElement => (
   <div {...divAttrs} className={getClassName(className)}>
-    <input
-      type="checkbox"
-      id={id}
-      name={name}
-      checked={checked}
-      disabled={disabled}
-      className={styles['checkbox']}
-      onChange={(e) => onChange(e)}
-    />
-    {id ? (
-      <label className={styles['label']} htmlFor={id}>
-        <span
-          className={getLeftClassName(disabled)}
-          data-on={options.on}
-          data-off={options.off}
-        />
-        <span className={getRightClassName(disabled)} />
-      </label>
-    ) : null}
+    {options.length === 0 ? (
+      <div className={styles['empty']}>No devices found</div>
+    ) : (
+      <select id={id} className={styles['scroll']} size={options.length}>
+        {options.map(({ value, name }: Props.Option, index: number) => (
+          <option key={index} value={value}>
+            {name}
+          </option>
+        ))}
+      </select>
+    )}
+    <span className="focus"></span>
   </div>
 );
 
 /** Sets the component's display name. */
-Component.displayName = 'Toggle';
+Component.displayName = 'Select';
