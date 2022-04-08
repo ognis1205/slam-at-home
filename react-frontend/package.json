@@ -32,6 +32,7 @@
     "react-share": "^4.4.0",
     "redux": "^4.1.2",
     "redux-thunk": "^2.4.1",
+    "rehype-raw": "^6.1.1",
     "sharp": "^0.30.1",
     "typescript-fsa": "^3.0.0",
     "typescript-fsa-reducers": "^1.2.2",
