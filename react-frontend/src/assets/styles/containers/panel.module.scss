@@ -80,7 +80,6 @@
   clear: both;
   display: table;
   vertical-align: middle;
-  min-height: calc(2 * $font-size-m + $spacing-size-xs);
   overflow: hidden;
   padding-bottom: $spacing-size-xs;
   padding-top: $spacing-size-xs;
@@ -149,8 +148,8 @@
 .status {
   color: $font-color;
   font-size: $font-size-l;
-//  font-weight: bold;
+  font-weight: bold;
   float: left;
   margin-left: $spacing-size-s;
-//  opacity: $opacity-h;
+  opacity: $opacity-h;
 }

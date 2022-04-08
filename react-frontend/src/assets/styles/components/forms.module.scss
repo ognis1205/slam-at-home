@@ -127,3 +127,56 @@
     margin-right: $spacing-size-s;
   }
 }
+
+.select {
+  background-color: white;
+  border-radius: $radius-size-m;
+  border-spacing: 0px;
+  border: $border-s;
+  box-shadow: $shadow-all $shadow-inset;
+//  font-family: 'FontAwesome', 'Second Font name';
+  font-size: $font-size-l;
+  margin: auto;
+  overflow: auto;
+  padding: $spacing-size-s;
+  white-space: nowrap;
+  width: 100%;
+
+  .empty {
+    color: $font-color-light;
+    line-height: calc(3 * $icon-wrapper-size-m);
+    min-height: calc(3 * $icon-wrapper-size-m);
+    text-align: center;
+    user-select: none;
+  }
+
+  .scroll {
+    min-height: calc(3 * $icon-wrapper-size-m);
+    border: none;
+    outline:0px;
+    width: 100%;
+    float: left;
+    font-size: $icon-size-m;
+    user-select: none;
+
+    & > option {
+      color: $font-color-light;
+      font-size: $font-size-l;
+      margin: $spacing-size-xs;
+    }
+
+    & > option:hover, option:focus, option:active, option:checked {
+      background: linear-gradient($font-color-highlight, $font-color-highlight);
+      background-color: $font-color-highlight;
+      color: $font-color-hover;
+    }
+
+    & > option:checked {
+      font-weight: bold;
+    }
+
+    &:focus {
+      border: none;
+    }
+  }
+}
