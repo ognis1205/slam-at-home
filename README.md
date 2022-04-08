@@ -1,5 +1,5 @@
 <p align="center">
-  <img height="128" width="128" src="https://imgur.com/epwBqaA">
+  <img height="128" width="128" src="https://imgur.com/epwBqaA.png">
 </p>
 <p align="center">
   <a href="https://www.buymeacoffee.com/ognis1205">
