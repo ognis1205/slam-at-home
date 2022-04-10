@@ -6,8 +6,8 @@ import * as React from 'react';
 import * as ReactRedux from 'react-redux';
 import * as Items from './items';
 import * as Props from './props';
-import * as Middleware from '../../redux/middlewares/notification';
-import * as Reducks from '../../redux/modules/notification';
+import * as NotificationMiddleware from '../../redux/middlewares/notification';
+import * as NotificationModule from '../../redux/modules/notification';
 import * as Hook from '../../utils/hook';
 import * as Wrap from '../../utils/wrap';
 
@@ -28,26 +28,26 @@ const Component: React.FunctionComponent<Props.Notification> = ({
   const dispatch = ReactRedux.useDispatch();
 
   /** @const Holds notifies. */
-  const [notifies, setNotifies] = React.useState<Reducks.Item[]>([]);
+  const [notifies, setNotifies] = React.useState<NotificationModule.Item[]>([]);
 
   /** An event handler called on `notify` events. */
-  const handleNotify = (newNotifies: Reducks.Item[]): void => {
+  const handleNotify = (newNotifies: NotificationModule.Item[]): void => {
     setNotifies([...newNotifies]);
   };
 
   /** An event handler called on `onhide` events. */
-  const handleHide = (notify: Reducks.Item): void => {
-    dispatch(Reducks.remove(notify.key));
+  const handleHide = (notify: NotificationModule.Item): void => {
+    dispatch(NotificationModule.remove(notify.key));
   };
 
   /** `componentWillMount` */
   Hook.useWillMount(() => {
-    Middleware.addNotificationListener(handleNotify);
+    NotificationMiddleware.addNotificationListener(handleNotify);
   });
 
   /** `componentWillUnmount` */
   Hook.useWillUnmount(() => {
-    Middleware.removeNotificationListener(handleNotify);
+    NotificationMiddleware.removeNotificationListener(handleNotify);
   });
 
   return (

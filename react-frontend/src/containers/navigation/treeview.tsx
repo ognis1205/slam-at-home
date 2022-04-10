@@ -10,7 +10,7 @@ import * as Popups from '../popups';
 import * as Collapse from '../../components/collapse';
 import * as Modal from '../../components/modal';
 import * as Store from '../../redux/store';
-import * as Signaling from '../../redux/modules/signaling';
+import * as SignalingModule from '../../redux/modules/signaling';
 import * as FontAwesome from '@fortawesome/react-fontawesome';
 import * as FontAwesomeCore from '@fortawesome/fontawesome-svg-core';
 import * as FontAwesomeIcon from '@fortawesome/free-solid-svg-icons';
@@ -123,7 +123,7 @@ export const Component: React.FunctionComponent<Props.TreeView> = (
   );
 
   /** @const Holds a Redux state of the p2p module. */
-  const p2pStore = ReactRedux.useSelector((store: Store.Type) => store.p2p);
+  const rtcStore = ReactRedux.useSelector((store: Store.Type) => store.rtc);
 
   /** @const Holds tree-view context. */
   const { activeKeyContext } = React.useContext(Context.TreeView);
@@ -180,9 +180,11 @@ export const Component: React.FunctionComponent<Props.TreeView> = (
             offset={{ x: 0, y: 0 }}
           >
             <Popups.Settings
-              checked={signalingsStore.status !== Signaling.Status.DISCONNECTED}
+              checked={
+                signalingsStore.status !== SignalingModule.Status.DISCONNECTED
+              }
               url={signalingsStore.url}
-              devices={p2pStore.devices}
+              devices={rtcStore.devices}
               onClose={handleSettingsClose}
             />
           </Modal.Component>

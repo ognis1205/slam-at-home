@@ -6,7 +6,8 @@ import * as React from 'react';
 import * as ReactRedux from 'react-redux';
 import * as Props from './props';
 import * as Window from './window';
-import * as Reducks from '../../redux/modules/signaling';
+import * as RTCModule from '../../redux/modules/rtc';
+import * as SignalingModule from '../../redux/modules/signaling';
 import * as Forms from '../../components/forms';
 import * as FontAwesomeIcon from '@fortawesome/free-solid-svg-icons';
 import styles from '../../assets/styles/containers/popups.module.scss';
@@ -30,10 +31,15 @@ export const Component: React.FunctionComponent<Props.Settings> = ({
   /** @const Holds a state to of the input. */
   const [isEmpty, setEmpty] = React.useState<boolean>(!url);
 
-  /** Event listener which is responsible for `onCheck`. */
+  /** Event listener which is responsible for `oncheck`. */
   const handleCheck = (url: string) => {
-    if (checked) dispatch(Reducks.disconnect());
-    else dispatch(Reducks.connect(url, uuid()));
+    if (checked) dispatch(SignalingModule.disconnect());
+    else dispatch(SignalingModule.connect(url, uuid()));
+  };
+
+  /** Event listener which is responsible for `onchange`. */
+  const handleSelectChange = (remoteId: string) => {
+    dispatch(RTCModule.offer(remoteId));
   };
 
   /** Returns `true` if the value is valid URL. */
@@ -62,18 +68,10 @@ export const Component: React.FunctionComponent<Props.Settings> = ({
 
   /** An event handler called on 'change' events. */
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+  const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     if (isValidInput(e.target.value)) setError(false);
     else setError(true);
   };
-
-  const test = [
-    { value: 'option1', name: 'option1' },
-    { value: 'option2', name: 'option2' },
-    { value: 'option3', name: 'option3' },
-    { value: 'option4', name: 'option4' },
-    { value: 'option5', name: 'option5' },
-  ];
 
   return (
     <Window.Component
@@ -97,7 +95,7 @@ export const Component: React.FunctionComponent<Props.Settings> = ({
         textDisabled={checked}
         checkDisabled={isEmpty || error}
         onCheck={handleCheck}
-        onChange={handleChange}
+        onChange={handleTextChange}
       />
       {error ? (
         <span className={styles['error']}>
@@ -107,6 +105,7 @@ export const Component: React.FunctionComponent<Props.Settings> = ({
       <div className={styles['divider']}>Devices</div>
       <Forms.Select
         id="camera"
+        onChange={handleSelectChange}
         options={devices.map((o) => {
           return { value: o.id, name: o.name };
         })}

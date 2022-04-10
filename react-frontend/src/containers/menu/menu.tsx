@@ -8,7 +8,7 @@ import * as Props from './props';
 import * as Popups from '../popups';
 import * as Modal from '../../components/modal';
 import * as Store from '../../redux/store';
-import * as Signaling from '../../redux/modules/signaling';
+import * as SignalingModule from '../../redux/modules/signaling';
 import * as FontAwesome from '@fortawesome/react-fontawesome';
 import * as FontAwesomeCore from '@fortawesome/fontawesome-svg-core';
 import * as FontAwesomeIcon from '@fortawesome/free-solid-svg-icons';
@@ -115,7 +115,7 @@ export const Component = React.forwardRef<HTMLDivElement, Props.Menu>(
     );
 
     /** @const Holds a Redux state of the p2p module. */
-    const p2pStore = ReactRedux.useSelector((store: Store.Type) => store.p2p);
+    const rtcStore = ReactRedux.useSelector((store: Store.Type) => store.rtc);
 
     /** @const Holds a reference to the about item. */
     const about = React.useRef<Modal.Trigger>(null);
@@ -159,9 +159,11 @@ export const Component = React.forwardRef<HTMLDivElement, Props.Menu>(
           offset={{ x: 0, y: 0 }}
         >
           <Popups.Settings
-            checked={signalingsStore.status !== Signaling.Status.DISCONNECTED}
+            checked={
+              signalingsStore.status !== SignalingModule.Status.DISCONNECTED
+            }
             url={signalingsStore.url}
-            devices={p2pStore.devices}
+            devices={rtcStore.devices}
             onClose={handleSettingsClose}
           />
         </Modal.Component>
