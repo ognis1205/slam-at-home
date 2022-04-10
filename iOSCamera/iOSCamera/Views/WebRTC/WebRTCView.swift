@@ -29,6 +29,9 @@ struct WebRTCView: View {
             AppDelegate.orientationLock = .landscapeRight
             viewModel.start()
           }
+          .onDisappear {
+            viewModel.end()
+          }
           .ignoresSafeArea(.all, edges: .all)
           .alert(isPresented: $viewModel.showAlert, content: { self.viewModel.dialog })
       #else

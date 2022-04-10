@@ -73,14 +73,14 @@ struct WebRTCSettingsView: View {
           }.padding([.leading, .trailing, .bottom])
           HStack(alignment: .top) {
             Image(systemName: "point.topleft.down.curvedto.point.bottomright.up.fill")
-            Text("Local Candidates")
+            Text("Recieved Local Candidates")
               .bold()
             Spacer()
             Text(String(viewModel.numberOfLocalCandidate))
           }.padding([.leading, .trailing, .bottom])
           HStack(alignment: .top) {
             Image(systemName: "point.topleft.down.curvedto.point.bottomright.up")
-            Text("Remote Candidates")
+            Text("Recieved Remote Candidates")
               .bold()
             Spacer()
             Text(String(viewModel.numberOfRemoteCandidate))

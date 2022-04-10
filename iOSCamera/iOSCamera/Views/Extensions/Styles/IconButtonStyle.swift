@@ -11,12 +11,10 @@ import SwiftUI
 struct IconButtonStyle: ButtonStyle {
   // MARK: Properties
   
-  var inverted: Bool = false
-
-  var color: Color = Color.uiColor
+  var foregroundColor: Color = Color.fontColor
   
-  var withOpacity: Bool = true
-
+  var backgroundColor: Color = Color.uiColor
+  
   var maxHeight: CGFloat = 36
 
   var maxWidth: CGFloat = 36
@@ -30,11 +28,9 @@ struct IconButtonStyle: ButtonStyle {
         maxWidth: maxWidth,
         minHeight: 0,
         maxHeight: maxHeight)
-      .foregroundColor(inverted ? Color.uiColor : Color.fontColor)
-      .background(inverted ? Color.fontColor : Color.uiColor)
+      .foregroundColor(foregroundColor)
+      .background(backgroundColor)
       .clipShape(Circle())
-//      .opacity(configuration.isPressed ? 0.5 : 1.0)
-      .opacity(withOpacity ? 0.5 : 1.0)
       .scaleEffect(configuration.isPressed ? 0.5 : 1.0)
   }
 }

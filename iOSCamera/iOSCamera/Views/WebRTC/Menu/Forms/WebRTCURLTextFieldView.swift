@@ -66,6 +66,7 @@ struct WebRTCURLTextFieldView: View, Debuggable {
           } else {
             self.info("disconnect from URL \(endpoint)...")
             viewModel.model.disconnect()
+            viewModel.reset()
           }
         }
     }

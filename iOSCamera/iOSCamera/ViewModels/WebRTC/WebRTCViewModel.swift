@@ -65,4 +65,22 @@ class WebRTCViewModel: ObservableObject {
   func start() {
     self.model.start()
   }
+  
+  func end() {
+    model.end()
+    model.delegate = nil
+    reset()
+  }
+  
+  func reset() {
+    self.isSignaling = false
+    self.signalingState = RTCSignalingState.stable.description
+    self.remoteId = "Not specified"
+    self.hasLocalSdp = false
+    self.hasRemoteSdp = false
+    self.numberOfLocalCandidate = 0
+    self.numberOfRemoteCandidate = 0
+    self.URL = ""
+    self.showAlert = false
+  }
 }

@@ -80,6 +80,13 @@ class WebRTCModel: VideoConfiguring, PydnetPredicting {
     }
     self.capture(alert: delegate)
   }
+  
+  func end() {
+    self.info("end...")
+    self.disconnect()
+    self.client.delegate = nil
+    self.delegate = nil
+  }
 
   func capture(alert: AlertReportingDelegate) {
     self.info("capture...")
