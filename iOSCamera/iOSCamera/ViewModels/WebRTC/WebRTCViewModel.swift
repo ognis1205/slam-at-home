@@ -67,9 +67,8 @@ class WebRTCViewModel: ObservableObject {
   }
   
   func end() {
-    model.end()
-    model.delegate = nil
-    reset()
+    self.model.end()
+    self.reset()
   }
   
   func reset() {

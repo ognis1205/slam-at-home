@@ -16,8 +16,6 @@ export const SignalType = {
   NEW_CONNECTION: 'NewConnection',
   DISCONNECTION: 'Disconnection',
   LIST_REMOTE_PEERS: 'ListRemotePeers',
-  OFFER: 'offer',
-  ANSWER: 'answer',
 } as const;
 
 export type SignalType = typeof SignalType[keyof typeof SignalType];
