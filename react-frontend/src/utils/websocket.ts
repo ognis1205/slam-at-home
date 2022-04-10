@@ -24,78 +24,72 @@ export const reasonOf = (e: CloseEvent): CloseReason => {
     case 1000:
       return {
         level: CloseLevel.SUCCESS,
-        message: '1000: WebSocket successfully closed',
+        message: '(1000) Closed WebSocket successfully',
       } as CloseReason;
     case 1001:
       return {
         level: CloseLevel.WARNING,
-        message:
-          '1001: An endpoint is "going away", this may occur due to server down or browser navigated away',
+        message: '(1001) Server down or remote client navigated away',
       } as CloseReason;
     case 1002:
       return {
         level: CloseLevel.ERROR,
-        message:
-          '1002: An endpoint is terminating the connection due to a protocol error',
+        message: '(1002) Protocol error occured while closing connection',
       } as CloseReason;
     case 1003:
       return {
         level: CloseLevel.ERROR,
-        message:
-          '1003: An endpoint is terminating the connection because it has received a malformed type of data',
+        message: '(1003) Terminated connection due to malformed type of data',
       } as CloseReason;
     case 1004:
       return {
         level: CloseLevel.ERROR,
-        message:
-          '1004: Unknown error, error code 1004 is reserved but not defined',
+        message: '(1004) Unknown error',
       } as CloseReason;
     case 1005:
       return {
         level: CloseLevel.WARNING,
-        message: '1005: Unknonw error, no status code was actually present',
+        message: '(1005) Unknonw error',
       } as CloseReason;
     case 1006:
       return {
         level: CloseLevel.ERROR,
         message:
-          '1006: The connection was closed abnormally without sending or receiving a close control frame',
+          '(1006) Closed connection abnormally without sending or receiving close control frame',
       } as CloseReason;
     case 1007:
       return {
         level: CloseLevel.ERROR,
         message:
-          '1007: An endpoint is terminating the connection because it has received data within a message that was not consistent with the type of the message',
+          '(1007) Terminated connection due to inconsistent type of message',
       } as CloseReason;
     case 1008:
       return {
         level: CloseLevel.ERROR,
-        message:
-          '1008: An endpoint is terminating the connection because it has received a message that "violates its policy',
+        message: '(1008) Terminated connection due to policy violating message',
       } as CloseReason;
     case 1009:
       return {
         level: CloseLevel.ERROR,
         message:
-          '1009: An endpoint is terminating the connection because it has received a message that is too big for it to process',
+          '(1009) Terminated connection because due to exceeding limit of data',
       } as CloseReason;
     case 1010:
       return {
         level: CloseLevel.ERROR,
         message:
-          '1010: An endpoint is terminating the connection because the server did not return in the response message of the WebSocket handshake',
+          '(1010) Terminated connection because due to failure to perform WebSocket handshake',
       } as CloseReason;
     case 1011:
       return {
         level: CloseLevel.ERROR,
-        message:
-          '1011: A server is terminating the connection because it encountered an unexpected condition',
+        message: '(1011) Terminated connection due to unexpected condition',
       } as CloseReason;
     case 1015:
       return {
         level: CloseLevel.ERROR,
         message:
-          '1015: The connection was closed due to a failure to perform a TLS handshake',
+          '(1015) Closed connection due to failure to perform TLS handshake',
       } as CloseReason;
     default:
       return {
@@ -179,20 +173,3 @@ export type ClientDescription = {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any,@typescript-eslint/explicit-module-boundary-types
 export const isSignal = (value: any): value is Signal =>
   'from' in value && 'to' in value && 'type' in value && 'payload' in value;
-
-/** Sends a given SDP over a specified WebSocket. */
-export const send = (
-  sock: WebSocket,
-  from: string,
-  to: string,
-  type: SignalType,
-  sdp: RTCSessionDescriptionInit
-): void =>
-  sock.send(
-    JSON.stringify({
-      from: from,
-      to: to,
-      type: type,
-      payload: sdp,
-    })
-  );
