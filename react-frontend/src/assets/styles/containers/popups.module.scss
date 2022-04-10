@@ -210,7 +210,36 @@ $width-l: 500px;
     margin-bottom: $spacing-size-s;
   }
 
-   .divider:nth-child(n+2) {
-      margin-top: $spacing-size-s;
-   }
+  .divider:nth-child(n+2) {
+    margin-top: $spacing-size-s;
+  }
+
+  .status {
+    align-content: center;
+    display: flex;
+    flex-direction: column;
+    flex: 2;
+
+    .item {
+      color: $font-color;
+      display: table;
+      position: relative;
+      width: 100%;
+      width: 100%;
+
+      .icon {
+        display: table-cell;
+	font-size: $icon-size-m;
+	height: $icon-wrapper-size-m;
+	line-height: $icon-wrapper-size-m;
+	padding-right: calc($icon-size-m / 2);
+	text-align: center;
+	width: $icon-wrapper-size-m;
+      }
+
+      .value {
+	float: right;
+      }
+    }
+  }
 }
