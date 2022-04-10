@@ -17,25 +17,37 @@ const getClassName = (className: string): string =>
 export const Component: React.FunctionComponent<Props.Select> = ({
   className,
   id,
-  onCheck,
+  onChange,
   options = [],
   ...divAttrs
-}: Props.Select): React.ReactElement => (
-  <div {...divAttrs} className={getClassName(className)}>
-    {options.length === 0 ? (
-      <div className={styles['empty']}>No devices found</div>
-    ) : (
-      <select id={id} className={styles['scroll']} multiple>
-        {options.map(({ value, name }: Props.Option, index: number) => (
-          <option key={index} value={value}>
-            {name}
-          </option>
-        ))}
-      </select>
-    )}
-    <span className="focus"></span>
-  </div>
-);
+}: Props.Select): React.ReactElement => {
+  /** An event handler called on 'onchnage' events. */
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>): void => {
+    if (onChange) onChange(e.target.value);
+  };
+
+  return (
+    <div {...divAttrs} className={getClassName(className)}>
+      {options.length === 0 ? (
+        <div className={styles['empty']}>No devices found</div>
+      ) : (
+        <select
+          id={id}
+          className={styles['scroll']}
+          onChange={handleChange}
+          multiple
+        >
+          {options.map(({ value, name }: Props.Option, index: number) => (
+            <option key={index} value={value}>
+              {name}
+            </option>
+          ))}
+        </select>
+      )}
+      <span className="focus"></span>
+    </div>
+  );
+};
 
 /** Sets the component's display name. */
 Component.displayName = 'Select';

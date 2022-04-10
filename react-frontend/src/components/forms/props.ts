@@ -5,7 +5,6 @@
 import type * as React from 'react';
 import * as Types from '../../utils/types';
 import * as FontAwesome from '@fortawesome/fontawesome-svg-core';
-import * as FontAwesomeCore from '@fortawesome/fontawesome-svg-core';
 
 /** A {Toggle} component properties. */
 export type Toggle = Types.Overwrite<
@@ -49,7 +48,7 @@ export type Select = Types.Overwrite<
   React.HTMLAttributes<HTMLDivElement>,
   {
     id: string;
-    onCheck?: (value: string) => void;
+    onChange?: (value: string) => void;
     options?: Option[];
   }
 >;
