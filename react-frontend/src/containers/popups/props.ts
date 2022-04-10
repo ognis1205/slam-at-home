@@ -4,7 +4,7 @@
  */
 import type * as React from 'react';
 import type * as Types from '../../utils/types';
-import type * as WSUtils from '../../utils/websocket';
+import type * as WebSocketUtil from '../../utils/websocket';
 import * as FontAwesome from '@fortawesome/fontawesome-svg-core';
 
 /** A type union of application type properties. */
@@ -17,6 +17,16 @@ export const ItemType = {
 } as const;
 
 export type ItemType = typeof ItemType[keyof typeof ItemType];
+
+/** Represents RTC status. */
+export type RTCStatus = {
+  localId: string;
+  remoteId: string;
+  hasLocalSDP: boolean;
+  hasRemoteSDP: boolean;
+  localCandidate: number;
+  remoteCandidate: number;
+};
 
 /** A {Header} component properties. */
 export type Header = Types.Overwrite<
@@ -74,7 +84,8 @@ export type Settings = Types.Overwrite<
   Omit<Window, 'type'>,
   {
     checked: boolean;
-    devices?: WSUtils.ClientDescription[];
+    status: RTCStatus;
+    devices?: WebSocketUtil.ClientDescription[];
     url?: string;
     onClose?: () => void;
   }

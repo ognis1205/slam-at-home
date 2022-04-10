@@ -102,7 +102,9 @@ export const Component: React.FunctionComponent<Props.Window> = ({
               ? `Signaling (${signalingStore.url})`
               : 'Not Signaling'}
             &nbsp;/&nbsp;
-            {'No Device'}
+            {signalingStore.remoteId
+              ? `Camera (${signalingStore.remoteId})`
+              : 'No Device'}
           </span>
         }
         <Modal.Component

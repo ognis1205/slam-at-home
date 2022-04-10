@@ -9,7 +9,9 @@ import * as Window from './window';
 import * as RTCModule from '../../redux/modules/rtc';
 import * as SignalingModule from '../../redux/modules/signaling';
 import * as Forms from '../../components/forms';
-import * as FontAwesomeIcon from '@fortawesome/free-solid-svg-icons';
+import * as FontAwesome from '@fortawesome/react-fontawesome';
+import * as FontAwesomeSolidIcon from '@fortawesome/free-solid-svg-icons';
+import * as FontAwesomeRegularIcon from '@fortawesome/free-regular-svg-icons';
 import styles from '../../assets/styles/containers/popups.module.scss';
 import validator from 'validator';
 import { v4 as uuid } from 'uuid';
@@ -17,6 +19,7 @@ import { v4 as uuid } from 'uuid';
 /** Returns a `Settings` component. */
 export const Component: React.FunctionComponent<Props.Settings> = ({
   checked,
+  status,
   url,
   devices,
   onClose,
@@ -90,7 +93,7 @@ export const Component: React.FunctionComponent<Props.Settings> = ({
         toggleName="text-toggle"
         className={checked ? 'checked' : ''}
         value={url}
-        icon={FontAwesomeIcon.faWifi}
+        icon={FontAwesomeSolidIcon.faWifi}
         checked={checked}
         textDisabled={checked}
         checkDisabled={isEmpty || error}
@@ -111,6 +114,62 @@ export const Component: React.FunctionComponent<Props.Settings> = ({
         })}
       />
       <div className={styles['divider']}>Peer Connection</div>
+      <div className={styles['status']}>
+        <div className={styles['item']}>
+          <span className={styles['icon']}>
+            <FontAwesome.FontAwesomeIcon icon={FontAwesomeSolidIcon.faUser} />
+          </span>
+          <span className={styles['name']}>Local ID</span>
+          <span className={styles['value']}>
+            {status.localId ? status.localId : 'Not Specified'}
+          </span>
+        </div>
+        <div className={styles['item']}>
+          <span className={styles['icon']}>
+            <FontAwesome.FontAwesomeIcon icon={FontAwesomeRegularIcon.faUser} />
+          </span>
+          <span className={styles['name']}>Remote ID</span>
+          <span className={styles['value']}>
+            {status.remoteId ? status.remoteId : 'Not Specified'}
+          </span>
+        </div>
+        <div className={styles['item']}>
+          <span className={styles['icon']}>
+            <FontAwesome.FontAwesomeIcon icon={FontAwesomeSolidIcon.faFile} />
+          </span>
+          <span className={styles['name']}>Local SDP</span>
+          <span className={styles['value']}>
+            {status.hasLocalSDP ? 'Yes' : 'No'}
+          </span>
+        </div>
+        <div className={styles['item']}>
+          <span className={styles['icon']}>
+            <FontAwesome.FontAwesomeIcon icon={FontAwesomeRegularIcon.faFile} />
+          </span>
+          <span className={styles['name']}>Remote SDP</span>
+          <span className={styles['value']}>
+            {status.hasRemoteSDP ? 'Yes' : 'No'}
+          </span>
+        </div>
+        <div className={styles['item']}>
+          <span className={styles['icon']}>
+            <FontAwesome.FontAwesomeIcon
+              icon={FontAwesomeSolidIcon.faHashtag}
+            />
+          </span>
+          <span className={styles['name']}>Recieved Local Cadidates</span>
+          <span className={styles['value']}>{status.localCandidate}</span>
+        </div>
+        <div className={styles['item']}>
+          <span className={styles['icon']}>
+            <FontAwesome.FontAwesomeIcon
+              icon={FontAwesomeSolidIcon.faHashtag}
+            />
+          </span>
+          <span className={styles['name']}>Recieved Remote Cadidates</span>
+          <span className={styles['value']}>{status.remoteCandidate}</span>
+        </div>
+      </div>
     </Window.Component>
   );
 };

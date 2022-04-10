@@ -18,9 +18,6 @@ const CLOSE = 'close';
 /** Action type for OFFER. */
 const OFFER = 'offer';
 
-/** Action type for NEW_REMOTE. */
-//const NEW_REMOTE = 'newRemote';
-
 /** Action type for NEW_DEVICES. */
 const NEW_DEVICES = 'newDevices';
 
@@ -56,9 +53,6 @@ export const CLOSE_ACTION = ACTION_CREATER<void>(CLOSE);
 
 /** OFFER action creator. */
 export const OFFER_ACTION = ACTION_CREATER<string>(OFFER);
-
-/** NEW_REMOTE action creator. */
-//export const NEW_REMOTE_ACTION = ACTION_CREATER<string>(NEW_REMOTE);
 
 /** NEW_DEVICES action creator. */
 export const NEW_DEVICES_ACTION = ACTION_CREATER<
@@ -158,9 +152,6 @@ export type Status = typeof Status[keyof typeof Status];
 
 /** A {State} type. */
 export type State = {
-//  id?: string;
-//  remoteId?: string;
-//  conn?: RTCPeerConnection;
   status?: Status;
   stream?: MediaStream;
   devices?: WSUtils.ClientDescription[];
@@ -172,9 +163,6 @@ export type State = {
 
 /** An initial state of the module. */
 const INITIAL_STATE = {
-//  id: '',
-//  remoteId: '',
-//  conn: null,
   status: undefined,
   stream: undefined,
   devices: [],
@@ -192,9 +180,6 @@ const reducer = (
   if (FSA.isType(action, OPEN_ACTION)) {
     return {
       ...state,
-//      id: action.payload.id,
-//      remoteId: '',
-//      conn: action.payload.conn,
       status: Status.NEW,
       stream: undefined,
       devices: [],
@@ -205,12 +190,8 @@ const reducer = (
     } as State;
   }
   if (FSA.isType(action, CLOSE_ACTION)) {
-//    if (state.conn) state.conn.close();
     return {
       ...state,
-//      id: '',
-//      remoteId: '',
-//      conn: null,
       status: undefined,
       stream: undefined,
       devices: [],

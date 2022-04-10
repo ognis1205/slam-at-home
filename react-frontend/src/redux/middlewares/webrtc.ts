@@ -227,6 +227,7 @@ export const middleware: Redux.Middleware =
     if (RTC.OFFER_ACTION.match(action)) {
       CLIENT.offer(
         (sdp: RTCSessionDescriptionInit) => {
+          dispatch(RTC.newLocalSDP());
           dispatch(Signaling.offer(action.payload, sdp));
         },
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -270,6 +271,7 @@ export const middleware: Redux.Middleware =
         }
         CLIENT.conn.onicecandidate = (e: RTCPeerConnectionIceEvent) => {
           if (!e || !e.candidate) return;
+          dispatch(RTC.newLocalCandidate());
           CLIENT.send<RTCIceCandidate>(
             getState()?.signaling?.localId,
             action.payload.remoteId,

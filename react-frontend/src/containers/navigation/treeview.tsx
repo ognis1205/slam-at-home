@@ -183,6 +183,14 @@ export const Component: React.FunctionComponent<Props.TreeView> = (
               checked={
                 signalingsStore.status !== SignalingModule.Status.DISCONNECTED
               }
+              status={{
+                localId: signalingsStore.localId,
+                remoteId: signalingsStore.remoteId,
+                hasLocalSDP: rtcStore.hasLocalSDP,
+                hasRemoteSDP: rtcStore.hasRemoteSDP,
+                localCandidate: rtcStore.localCandidate,
+                remoteCandidate: rtcStore.remoteCandidate,
+              }}
               url={signalingsStore.url}
               devices={rtcStore.devices}
               onClose={handleSettingsClose}
