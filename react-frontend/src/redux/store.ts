@@ -5,23 +5,23 @@
 import * as Redux from 'redux';
 import * as NextRedux from 'next-redux-wrapper';
 import * as Notification from './middlewares/notification';
-import * as Signaling from './middlewares/signaling';
-import * as NotificationReducks from './modules/notification';
-import * as SignalingReducks from './modules/signaling';
-import * as P2PReducks from './modules/p2p';
+import * as WebRTC from './middlewares/webrtc';
+import * as NotificationModule from './modules/notification';
+import * as SignalingModule from './modules/signaling';
+import * as RTCModule from './modules/rtc';
 import reducer from './modules/reducer';
 
 /** Redux middlewares. */
 const enhancer = Redux.applyMiddleware(
   Notification.middleware,
-  Signaling.middleware
+  WebRTC.middleware
 );
 
 /** A {Store} type. */
 export type Type = {
-  notification: NotificationReducks.State;
-  signaling: SignalingReducks.State;
-  p2p: P2PReducks.State;
+  notification: NotificationModule.State;
+  signaling: SignalingModule.State;
+  rtc: RTCModule.State;
 };
 
 /** Redux Next.js wrapper. */

@@ -13,7 +13,7 @@ class Notifier extends Events.EventEmitter {
   // Placeholder.
 }
 
-/** Exports singleton manager. */
+/** Singleton manager. */
 const SHARED = new Notifier();
 
 /** Notifies a given notification items. */

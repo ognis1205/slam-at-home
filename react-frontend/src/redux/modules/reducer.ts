@@ -5,13 +5,13 @@
 import * as Redux from 'redux';
 import notification from './notification';
 import signaling from './signaling';
-import p2p from './p2p';
+import rtc from './rtc';
 
 /** A combined reducer. */
 const reducer = Redux.combineReducers({
   notification: notification,
   signaling: signaling,
-  p2p: p2p,
+  rtc: rtc,
 });
 
 export default reducer;
