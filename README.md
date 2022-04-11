@@ -12,7 +12,7 @@ SLAM@HOME
 An implementation of a real-time SLAM system on your local Wi-Fi network.
 
 <p align="center">
-  <img height="128" width="128" src="https://imgur.com/i3dMqCD.gif">
+  <img height="128" width="128" src="https://imgur.com/nqNvOzg.gif">
 </p>
 
 Implementation Notes
