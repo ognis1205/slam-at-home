@@ -1,5 +1,5 @@
 <p align="center">
-  <img height="128" width="128" src="https://imgur.com/epwBqaA.png">
+  <img height="128" width="128" src="./docs/images/logo.png">
 </p>
 <p align="center">
   <a href="https://www.buymeacoffee.com/ognis1205">
@@ -12,7 +12,7 @@ SLAM@HOME
 An implementation of a real-time SLAM system on your local Wi-Fi network.
 
 <p align="center">
-  <img height="128" width="128" src="https://imgur.com/nqNvOzg.gif">
+  <img height="128" width="128" src="./docs/images/mobile.gif">
 </p>
 
 Implementation Notes
