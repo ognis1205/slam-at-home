@@ -24,7 +24,7 @@ export class Camera {
   private enableZoom: boolean;
 
   /** OrbitControls option. */
-  private zoomSpeed: boolean;
+  private zoomSpeed: number;
 
   /** OrbitControls option. */
   private enableKeys: boolean;
@@ -53,12 +53,7 @@ export class Camera {
     enableRotate = true,
     enablePan = false,
   }: Props.Camera) {
-    this.instance = THREE.PerspectiveCamera(
-      fov,
-      aspect,
-      nearPlane,
-      farPlane
-    );
+    this.instance = THREE.PerspectiveCamera(fov, aspect, nearPlane, farPlane);
     this.enableDamping = enableDamping;
     this.dampingFactor = dampingFactor;
     this.enableZoom = enableZoom;
@@ -72,7 +67,7 @@ export class Camera {
   /** Starts a WebGL camera. */
   public async start(
     object: THREE.Object3D,
-    domElement: HTMLDomElement
+    domElement: HTMLElement
   ): Promise<void> {
     const box = new THREE.Box3().setFromObject(object);
     const len = (() => {
@@ -83,7 +78,7 @@ export class Camera {
     const z = len / Math.tan((this.instance.fov * (Math.PI / 180)) / 2);
 
     this.instance.position.z = c.z + z;
-    this.instance.far = z - boz.min.z;
+    this.instance.far = z - box.min.z;
     this.instance.lookAt(c);
     this.instance.updateProjectionMatrix();
 
@@ -96,8 +91,8 @@ export class Camera {
     this.controls.screenSpacePanning = this.screenSpacePanning;
     this.controls.enableRotate = this.enableRotate;
     this.controls.enablePan = this.enablePan;
-    controls.target.set(c.x, c.y, c.z);
-    controls.update();
+    this.controls.target.set(c.x, c.y, c.z);
+    this.controls.update();
   }
 
   /** Stops WebGL camera. */

@@ -16,7 +16,7 @@ export class Scene {
   private uniforms: Props.SceneUniforms;
 
   /** Holds a frame per second rate. */
-  private fps: fps;
+  private fps: number;
 
   /** Holds a vertex shader. */
   private vertexShader: string;
@@ -52,8 +52,8 @@ export class Scene {
       i++
     ) {
       const v = new THREE.Vector3();
-      v.x = i % width;
-      v.y = Math.floor(i / width);
+      v.x = i % this.uniforms.width.value;
+      v.y = Math.floor(i / this.uniforms.width.value);
       geometry.vertices.push(v);
     }
 

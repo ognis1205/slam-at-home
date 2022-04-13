@@ -45,7 +45,7 @@ export type Camera = {
   enableDamping?: boolean;
   dampingFactor?: number;
   enableZoom?: boolean;
-  zoomSpeed?: boolean;
+  zoomSpeed?: number;
   enableKeys?: boolean;
   screenSpacePanning?: boolean;
   enableRotate?: boolean;
@@ -53,15 +53,10 @@ export type Camera = {
 };
 
 /** A {Scene} component properties. */
-export type Scene = Types.Overwrite<
+export type Projector = Types.Overwrite<
   React.HTMLAttributes<HTMLDivElement>,
   {
-//    video: HTMLVideoElement;
     width: number;
     height: number;
-//    scene: THREE.Scene;
-//    origin: THREE.Vector3;
-    uniforms: SceneUniforms;
-//    texture: THREE.Texture;
   }
 >;
