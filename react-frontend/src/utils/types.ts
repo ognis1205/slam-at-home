@@ -36,3 +36,13 @@ export type Overwrite<T, U> = Pick<T, Exclude<keyof T, keyof U>> & U;
 /** This type is responsible to declare that the type being passed is a class. */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type Constructor<T> = new (...args: any[]) => T;
+
+/** Defines key-value union types. */
+export type KeyValue<T> = {
+  [K in keyof T]: { key: K; value: T[K] };
+}[keyof T];
+
+/** Defines type-value union types. */
+export type TypeValue<T> = {
+  [K in keyof T]: { type: K; value: T[K] };
+}[keyof T];
