@@ -23,6 +23,7 @@ const RTCSessionDescriptionType = {
 type RTCSessionDescriptionType =
   typeof RTCSessionDescriptionType[keyof typeof RTCSessionDescriptionType];
 
+/** Represents WebRTC client. */
 class Client {
   /** WebRTC connection configuration. */
   private static readonly CONFIG = {

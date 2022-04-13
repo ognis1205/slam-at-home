@@ -10,16 +10,15 @@ const IS_RAF_AVAILABLE: boolean =
 /** Animation request/clear functions. */
 const requestFrame: (callback: FrameRequestCallback) => number = (() => {
   return IS_RAF_AVAILABLE
-    ? (callback: FrameRequestCallback): number =>
-        window.requestAnimationFrame(callback)
-    : (callback: FrameRequestCallback): number => +setTimeout(callback, 16);
+    ? (callback: FrameRequestCallback) => window.requestAnimationFrame(callback)
+    : (callback: FrameRequestCallback) => +setTimeout(callback, 16);
 })();
 
 /** Animation request/clear functions. */
 const clearFrame: (identifier: number) => void = (() => {
   return IS_RAF_AVAILABLE
-    ? (identifier: number): void => window.cancelAnimationFrame(identifier)
-    : (identifier: number): void => clearTimeout(identifier);
+    ? (identifier: number) => window.cancelAnimationFrame(identifier)
+    : (identifier: number) => clearTimeout(identifier);
 })();
 
 /** Holds the current global unique id. */

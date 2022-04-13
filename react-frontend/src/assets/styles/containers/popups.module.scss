@@ -219,6 +219,8 @@ $width-l: 500px;
     display: flex;
     flex-direction: column;
     flex: 2;
+//    padding-left: $spacing-size-m;
+//    padding-right: $spacing-size-m;
 
     .item {
       color: $font-color;

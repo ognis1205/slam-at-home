@@ -100,7 +100,7 @@ export const Component: React.FunctionComponent<Props.Window> = ({
           <span className={styles['status']}>
             {signalingStore.url
               ? `Signaling (${signalingStore.url})`
-              : 'Not Signaling'}
+              : 'No Signal'}
             &nbsp;/&nbsp;
             {signalingStore.remoteId
               ? `Camera (${signalingStore.remoteId})`
