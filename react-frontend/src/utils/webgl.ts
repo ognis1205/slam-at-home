@@ -70,6 +70,13 @@ export type SceneConfig = Types.Overwrite<
   }
 >;
 
+/** WebGL renderer properties. */
+export type RendererConfig = {
+  antiAlias?: boolean;
+  gammaOutput?: boolean;
+  gammaFactor?: number;
+};
+
 /** Represents WebGL camera. */
 export class Camera {
   /** Holds a camera for projection. */
@@ -239,5 +246,37 @@ export class Scene {
   /** Stops WebGL scene. */
   public stop(): void {
     if (this.interval) clearInterval(this.interval);
+  }
+}
+
+/** Represents WebGL renderer. */
+export class Renderer {
+  /** Holds a scene for projection. */
+  public readonly instance: THREE.WebGLRenderer;
+
+  /** Constructor. */
+  constructor({
+    antiAlias = true,
+    gammaOutput = true,
+    gammaFactor = 2.0,
+  }: SceneConfig) {
+    this.instance = new THREE.WebGLRenderer({ antialias: antiAlias });
+    this.instance.gammaOutput = gammaOutput;
+    this.instance.gammaFactor = gammaFactor;
+  }
+
+  /** Starts a WebGL renderer. */
+  public start(scene: Scene, camera: Camera): void {
+    this.instance.render(scene.instance, camera.instance);
+  }
+
+  /** Stops WebGL renderer. */
+  public stop(): void {
+    if (this.instance) {
+      this.instance.forceContextLoss();
+      this.instance.context = null;
+      this.instance.domElement = null;
+      this.instance = null;
+    }
   }
 }
