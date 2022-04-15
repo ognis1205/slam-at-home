@@ -5,5 +5,14 @@
 @import '../constants.scss';
 
 .video {
-    min-height: 0px;
+  height: 256px;
+  width: 256px;
+
+  .display {
+    height: auto;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+  }
 }
