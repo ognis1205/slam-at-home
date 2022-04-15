@@ -37,6 +37,8 @@ vec3 rgb2lab(vec3 rgb) {
   return vec3(lab.x / 100.0, 0.5 + 0.5 * (lab.y / 127.0), 0.5 + 0.5 * (lab.z / 127.0));
 }
 
+//attribute vec3 position;
+
 /** A magma colormap input sent from a video.*/
 uniform sampler2D colormap;
 
@@ -71,17 +73,13 @@ const float YtoZ = 0.83359;
  */
 void main() {
   vUv = vec2(position.x / width, position.y / height);
-
   vec4 rgb = texture2D(colormap, vUv);
-  vec4 lab = rgb2lab(rgb.rgb);
-
-  float z = (1.0 - lab.x) * (farClipping - nearClipping) + nearClipping;
+  vec3 lab = rgb2lab(rgb.rgb);
   vec4 coord = vec4(
-    (position.x / width  - 0.5) * z * XtoZ,
-    (position.y / height - 0.5) * z * YtoZ,
-    - z + zOffset,
+    position.x,
+    position.y,
+    lab.x * 1000.0,
     1.0);
-
   gl_PointSize = pointSize;
   gl_Position  = projectionMatrix * modelViewMatrix * coord;
 }

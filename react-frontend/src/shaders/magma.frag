@@ -14,10 +14,9 @@ varying vec2 vUv;
  */
 void main() {
   vec4 rgb = texture2D(colormap, vUv);
-
   gl_FragColor = vec4(
     rgb.r,
     rgb.g,
     rgb.b,
-    smoothstep(8000.0, -8000.0, gl_FragCoord.z / gl_FragCoord.w));
+    1.0);
 }
