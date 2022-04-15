@@ -5,7 +5,7 @@
 import * as THREE from 'three';
 import * as DOM from './dom';
 import * as Types from './types';
-import OrbitControls from 'three/examples/jsm/controls/OrbitControls';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import magma from '../shaders/magma.frag';
 import magma2depth from '../shaders/magma2depth.vert';
 
@@ -38,18 +38,13 @@ export type SceneUniforms = {
   colormap: Uniform;
   width: Uniform;
   height: Uniform;
-  nearClipping: Uniform;
-  farClipping: Uniform;
   pointSize: Uniform;
-  zOffset: Uniform;
 };
 
 /** WebGL camera properties. */
 export type CameraConfig = {
   fov: number;
   aspect: number;
-  nearPlane: number;
-  farPlane: number;
   enableDamping?: boolean;
   dampingFactor?: number;
   enableZoom?: boolean;
@@ -72,9 +67,16 @@ export type SceneConfig = Types.Overwrite<
 
 /** WebGL renderer properties. */
 export type RendererConfig = {
+  width: number;
+  height: number;
   antiAlias?: boolean;
-  gammaOutput?: boolean;
-  gammaFactor?: number;
+};
+
+/** WebGL rendering context. */
+export type Context = {
+  renderer: Renderer;
+  camera: Camera;
+  scene: Scene;
 };
 
 /** Represents WebGL camera. */
@@ -113,8 +115,6 @@ export class Camera {
   constructor({
     fov,
     aspect,
-    nearPlane,
-    farPlane,
     enableDamping = true,
     dampingFactor = 1,
     enableZoom = true,
@@ -124,7 +124,7 @@ export class Camera {
     enableRotate = true,
     enablePan = false,
   }: CameraConfig) {
-    this.instance = THREE.PerspectiveCamera(fov, aspect, nearPlane, farPlane);
+    this.instance = new THREE.PerspectiveCamera(fov, aspect);
     this.enableDamping = enableDamping;
     this.dampingFactor = dampingFactor;
     this.enableZoom = enableZoom;
@@ -136,20 +136,18 @@ export class Camera {
   }
 
   /** Starts a WebGL camera. */
-  public async start(
-    object: THREE.Object3D,
-    domElement: HTMLElement
-  ): Promise<void> {
-    const box = new THREE.Box3().setFromObject(object);
-    const len = (() => {
-      const size = box.getSize();
-      return Math.max(size.x, size.y, size.z) / 2;
-    })();
-    const c = box.getCenter();
+  public start(object: THREE.Object3D, domElement: HTMLElement): void {
+    const box = new THREE.Box3();
+    box.setFromObject(object);
+    const size = new THREE.Vector3();
+    box.getSize(size);
+    const len = Math.max(size.x, size.y, size.z) / 2;
+    const c = new THREE.Vector3();
+    box.getCenter(c);
     const z = len / Math.tan((this.instance.fov * (Math.PI / 180)) / 2);
 
-    this.instance.position.z = c.z + z;
-    this.instance.far = z - box.min.z;
+    this.instance.position.set(c.x, c.y, c.z + z);
+    this.instance.far = z * 10;
     this.instance.lookAt(c);
     this.instance.updateProjectionMatrix();
 
@@ -207,10 +205,8 @@ export class Scene {
   }
 
   /** Starts a WebGL scene. */
-  public async start(video: HTMLVideoElement): Promise<THREE.Object3D> {
-    const texture = new THREE.Texture(video);
-
-    const geometry = new THREE.Geometry();
+  public start(video: HTMLVideoElement): THREE.Object3D {
+    const vertices = [];
     for (
       let i = 0;
       i < this.uniforms.width.value * this.uniforms.height.value;
@@ -219,24 +215,27 @@ export class Scene {
       const v = new THREE.Vector3();
       v.x = i % this.uniforms.width.value;
       v.y = Math.floor(i / this.uniforms.width.value);
-      geometry.vertices.push(v);
+      vertices.push(v);
     }
+    const geometry = new THREE.BufferGeometry().setFromPoints(vertices);
 
     const material = new THREE.ShaderMaterial({
       uniforms: this.uniforms,
       vertexShader: this.vertexShader,
       fragmentShader: this.fragmentShader,
+      depthTest: false,
+      depthWrite: false,
       transparent: true,
     });
 
-    const mesh = new THREE.ParticleSystem(geometry, material);
+    const mesh = new THREE.Points(geometry, material);
     mesh.position.x = 0;
     mesh.position.y = 0;
 
     this.instance.add(mesh);
     this.interval = setInterval(() => {
       if (video.readyState === video.HAVE_ENOUGH_DATA) {
-        texture.needsUpdate = true;
+        this.uniforms.colormap.value.needsUpdate = true;
       }
     }, 1000 / this.fps);
 
@@ -256,17 +255,16 @@ export class Renderer {
 
   /** Constructor. */
   constructor({
+    width,
+    height,
     antiAlias = true,
-    gammaOutput = true,
-    gammaFactor = 2.0,
   }: SceneConfig) {
     this.instance = new THREE.WebGLRenderer({ antialias: antiAlias });
-    this.instance.gammaOutput = gammaOutput;
-    this.instance.gammaFactor = gammaFactor;
+    this.instance.setSize(width, height);
   }
 
   /** Starts a WebGL renderer. */
-  public start(scene: Scene, camera: Camera): void {
+  public render(scene: Scene, camera: Camera): void {
     this.instance.render(scene.instance, camera.instance);
   }
 
@@ -274,9 +272,12 @@ export class Renderer {
   public stop(): void {
     if (this.instance) {
       this.instance.forceContextLoss();
-      this.instance.context = null;
       this.instance.domElement = null;
-      this.instance = null;
     }
+  }
+
+  /** Returns a canvas element which is associated with this renderer. */
+  public getDOMElement(): HTMLElement {
+    return this.instance.domElement;
   }
 }
