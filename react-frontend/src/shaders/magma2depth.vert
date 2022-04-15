@@ -32,8 +32,6 @@ vec3 rgb2lab(vec3 rgb) {
   return vec3(lab.x / 100.0, 0.5 + 0.5 * (lab.y / 127.0), 0.5 + 0.5 * (lab.z / 127.0));
 }
 
-//attribute vec3 position;
-
 /** A magma colormap input sent from a video.*/
 uniform sampler2D colormap;
 
@@ -43,23 +41,11 @@ uniform float width;
 /** A height of screen space. */
 uniform float height;
 
-/** Defines depth clipping. */
-uniform float nearClipping, farClipping;
-
 /** A rasterized diameter of points. */
 uniform float pointSize;
 
-/** A z-offset. */
-uniform float zOffset;
-
 /** A pixel color. */
 varying vec2 vUv;
-
-/** tan( 1.0144686 / 2.0 ) * 2.0 */
-const float XtoZ = 1.11146;
-
-/** tan( 0.7898090 / 2.0 ) * 2.0 */
-const float YtoZ = 0.83359;
 
 /**
  * We use a magma colormap to represent a depth image, hence, the resulting L* component
