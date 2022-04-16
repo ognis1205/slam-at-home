@@ -50,5 +50,5 @@ export const find = <T>(array: Array<T>, condition: (key: T) => boolean): T => {
 export const toInt = (a: string): number => parseInt(a, 10);
 
 /** Sorts a given array as an array of numbers. */
-export const sort = (array: Array<number | string>): Array<number | string> =>
+export const sort = (array: Array<number>): Array<number> =>
   [...array].sort((l, r) => Number(l) - Number(r));

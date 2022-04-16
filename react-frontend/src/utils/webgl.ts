@@ -180,7 +180,7 @@ export class Camera {
     this.controls.screenSpacePanning = this.screenSpacePanning;
     this.controls.enableRotate = this.enableRotate;
     this.controls.enablePan = this.enablePan;
-    this.controls.target.set(c.x, c.y, c.z);
+    this.controls.target.set(c.x, c.y, 0.0);
     this.controls.update();
   }
 
@@ -274,11 +274,7 @@ export class Renderer {
   public readonly instance: THREE.WebGLRenderer;
 
   /** Constructor. */
-  constructor({
-    width,
-    height,
-    antiAlias = true,
-  }: SceneConfig) {
+  constructor({ width, height, antiAlias = true }: RendererConfig) {
     this.instance = new THREE.WebGLRenderer({ antialias: antiAlias });
     this.instance.setSize(width, height);
   }
