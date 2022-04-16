@@ -23,7 +23,5 @@ export type Projector = Types.Overwrite<
   React.HTMLAttributes<HTMLDivElement>,
   {
     context: WebGL.Context;
-    width: number;
-    height: number;
   }
 >;
