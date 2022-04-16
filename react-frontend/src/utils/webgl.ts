@@ -22,6 +22,18 @@ export const isDefined = (): boolean => {
   return false;
 };
 
+/** Returns the depth of a given combination of width, height and fov. */
+export const depthOf = (width: number, height: number, fov: number): number =>
+  Math.max(width, height) / 2 / Math.tan((fov * (Math.PI / 180)) / 2);
+
+/** Returns the center of a given combination of width and height. */
+export const centerOf = (
+  width: number,
+  height: number
+): { x: number; y: number } => {
+  return { x: (width - 1.0) / 2.0, y: (height - 1.0) / 2.0 };
+};
+
 /** A type union of WebGL uniform types. */
 type UniformType = {
   t: THREE.Texture;
@@ -38,6 +50,10 @@ export type SceneUniforms = {
   colormap: Uniform;
   width: Uniform;
   height: Uniform;
+  offset: Uniform;
+  centerX: Uniform;
+  centerY: Uniform;
+  depth: Uniform; // in pixel
   pointSize: Uniform;
 };
 
@@ -45,6 +61,8 @@ export type SceneUniforms = {
 export type CameraConfig = {
   fov: number;
   aspect: number;
+  width: number;
+  height: number;
   enableDamping?: boolean;
   dampingFactor?: number;
   enableZoom?: boolean;
@@ -84,6 +102,12 @@ export class Camera {
   /** Holds a camera for projection. */
   public readonly instance: THREE.PerspectiveCamera;
 
+  /** Holds a width of the frame. */
+  private width: number;
+
+  /** Holds a height of the frame. */
+  private height: number;
+
   /** OrbitControls. */
   private controls: OrbitControls;
 
@@ -115,6 +139,8 @@ export class Camera {
   constructor({
     fov,
     aspect,
+    width,
+    height,
     enableDamping = true,
     dampingFactor = 1,
     enableZoom = true,
@@ -125,6 +151,8 @@ export class Camera {
     enablePan = false,
   }: CameraConfig) {
     this.instance = new THREE.PerspectiveCamera(fov, aspect);
+    this.width = width;
+    this.height = height;
     this.enableDamping = enableDamping;
     this.dampingFactor = dampingFactor;
     this.enableZoom = enableZoom;
@@ -137,20 +165,12 @@ export class Camera {
 
   /** Starts a WebGL camera. */
   public start(object: THREE.Object3D, domElement: HTMLElement): void {
-    const box = new THREE.Box3();
-    box.setFromObject(object);
-    const size = new THREE.Vector3();
-    box.getSize(size);
-    const len = Math.max(size.x, size.y, size.z) / 2;
-    const c = new THREE.Vector3();
-    box.getCenter(c);
-    const z = len / Math.tan((this.instance.fov * (Math.PI / 180)) / 2);
-
-    this.instance.position.set(c.x, c.y, c.z + z);
+    const c = centerOf(this.width, this.height);
+    const z = depthOf(this.width, this.height, this.instance.fov);
+    this.instance.position.set(c.x, c.y, z);
     this.instance.far = z * 10;
     this.instance.lookAt(c);
     this.instance.updateProjectionMatrix();
-
     this.controls = new OrbitControls(this.instance, domElement);
     this.controls.enableDamping = this.enableDamping;
     this.controls.dampingFactor = this.dampingFactor;
@@ -270,10 +290,7 @@ export class Renderer {
 
   /** Stops WebGL renderer. */
   public stop(): void {
-    if (this.instance) {
-      this.instance.forceContextLoss();
-      this.instance.domElement = null;
-    }
+    if (this.instance) this.instance.forceContextLoss();
   }
 
   /** Returns a canvas element which is associated with this renderer. */

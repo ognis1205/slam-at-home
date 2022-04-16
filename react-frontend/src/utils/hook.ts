@@ -98,6 +98,13 @@ export const usePrevious = <T>(defaultValue?: T): T => {
   return ref.current;
 };
 
+/** Returns the latest value of a specified variable. */
+export const useLatest = <T>(value?: T): T => {
+  const ref = React.useRef(value);
+  ref.current = value;
+  return React.useCallback(() => ref.current, []);
+};
+
 /** Returns the mount-safe value of a specified variable. */
 export const useMountedState = <T>(
   defaultValue?: T

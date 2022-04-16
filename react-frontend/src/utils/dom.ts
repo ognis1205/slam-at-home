@@ -180,6 +180,21 @@ export const getInnerWidth = (target: HTMLElement | SVGElement): number => {
   return width;
 };
 
+/** Returns the bounding client rect. */
+export const getBoundingClientRect = (target: HTMLElement): DOMRect => {
+  const rect = target.getBoundingClientRect();
+  return {
+    x: Math.ceil(rect.x),
+    y: Math.ceil(rect.y),
+    width: Math.ceil(rect.width),
+    height: Math.ceil(rect.height),
+    top: Math.ceil(rect.top),
+    right: Math.ceil(rect.right),
+    bottom: Math.ceil(rect.bottom),
+    left: Math.ceil(rect.left),
+  } as DOMRect;
+};
+
 /** Adds `className` to a specified element. */
 export const addClassName = (target: HTMLElement, className: string): void => {
   if (target.classList) target.classList.add(className);

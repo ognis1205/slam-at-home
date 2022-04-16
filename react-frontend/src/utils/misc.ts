@@ -48,3 +48,7 @@ export const find = <T>(array: Array<T>, condition: (key: T) => boolean): T => {
 
 /** Converts a string to int. */
 export const toInt = (a: string): number => parseInt(a, 10);
+
+/** Sorts a given array as an array of numbers. */
+export const sort = (array: Array<number | string>): Array<number | string> =>
+  [...array].sort((l, r) => Number(l) - Number(r));
