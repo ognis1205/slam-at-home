@@ -192,6 +192,7 @@ export const Component: React.FunctionComponent<Props.TreeView> = (
                 remoteCandidate: rtcStore.remoteCandidate,
               }}
               url={signalingsStore.url}
+              selected={signalingsStore.remoteId}
               devices={rtcStore.devices}
               onClose={handleSettingsClose}
             />

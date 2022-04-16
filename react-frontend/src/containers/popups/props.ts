@@ -85,6 +85,7 @@ export type Settings = Types.Overwrite<
   {
     checked: boolean;
     status: RTCStatus;
+    selected?: WebSocketUtil.ClientDescription['id'];
     devices?: WebSocketUtil.ClientDescription[];
     url?: string;
     onClose?: () => void;

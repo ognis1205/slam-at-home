@@ -40,11 +40,13 @@ export const Component: React.FunctionComponent<Props.Select> = ({
           onChange={handleChange}
           multiple
         >
-          {options.map(({ value, name }: Props.Option, index: number) => (
-            <option key={index} value={value}>
-              {name}
-            </option>
-          ))}
+          {options.map(
+            ({ value, name, selected }: Props.Option, index: number) => (
+              <option key={index} value={value} selected={selected}>
+                {name}
+              </option>
+            )
+          )}
         </select>
       )}
       <span className="focus"></span>

@@ -10,5 +10,5 @@ export type {
 } from './props';
 export { Component as Text } from './text';
 export { Component as Toggle } from './toggle';
-export { Component as Range } from './range';
 export { Component as Select } from './select';
+export { useRange } from './range';

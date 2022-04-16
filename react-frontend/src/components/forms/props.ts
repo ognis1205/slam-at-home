@@ -42,6 +42,7 @@ export type Text = Types.Overwrite<
 export type Option = {
   value: string;
   name: string;
+  selected: boolean;
 };
 
 /** A {Select} component properties. */

@@ -171,6 +171,7 @@ export const Component = React.forwardRef<HTMLDivElement, Props.Menu>(
               remoteCandidate: rtcStore.remoteCandidate,
             }}
             url={signalingsStore.url}
+            selected={signalingsStore.remoteId}
             devices={rtcStore.devices}
             onClose={handleSettingsClose}
           />

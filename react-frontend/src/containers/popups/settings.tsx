@@ -21,6 +21,7 @@ export const Component: React.FunctionComponent<Props.Settings> = ({
   checked,
   status,
   url,
+  selected,
   devices,
   onClose,
   ...windowProps
@@ -111,7 +112,7 @@ export const Component: React.FunctionComponent<Props.Settings> = ({
         emptyText="No Devices Found"
         onChange={handleSelectChange}
         options={devices.map((o) => {
-          return { value: o.id, name: o.name };
+          return { value: o.id, name: o.name, selected: o.id === selected };
         })}
       />
       <div className={styles['divider']}>Peer Connection</div>

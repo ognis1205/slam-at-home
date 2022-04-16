@@ -286,13 +286,7 @@ export const middleware: Redux.Middleware =
           WebSocketUtil.SignalType.SESSION_DESCRIPTION,
           action.payload.sdp
         );
-        dispatch(
-          Notification.info({
-            title: 'INFO (Peer Connection)',
-            message: 'Sent WebRTC offer to remote',
-            showCloseButton: true,
-          })
-        );
+        Console.info(`WebRTC: Sent WebRTC offer to remote`);
       }
     }
 
@@ -368,25 +362,13 @@ export const middleware: Redux.Middleware =
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const handleSetLocalSDP = (sdp: RTCSessionDescriptionInit): void => {
         dispatch(RTC.newLocalSDP());
-        dispatch(
-          Notification.info({
-            title: 'INFO (Peer Connection)',
-            message: 'Set local SDP',
-            showCloseButton: true,
-          })
-        );
+        Console.info(`WebRTC: Set local SDP`);
       };
 
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const handleSetRemoteSDP = (sdp: RTCSessionDescriptionInit): void => {
         dispatch(RTC.newRemoteSDP());
-        dispatch(
-          Notification.info({
-            title: 'INFO (Peer Connection)',
-            message: 'Set remote SDP',
-            showCloseButton: true,
-          })
-        );
+        Console.info(`WebRTC: Set remote SDP`);
       };
 
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -502,7 +484,7 @@ export const middleware: Redux.Middleware =
         handleClose,
         handleMessage,
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        (e: Event): void => Console.error(`webrtc: error occured`)
+        (e: Event): void => Console.error(`WebRTC: Error occured`)
       );
 
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
