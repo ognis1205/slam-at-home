@@ -38,6 +38,7 @@ export type Text = Types.Overwrite<
   }
 >;
 
+/** A {Select} options. */
 export type Option = {
   value: string;
   name: string;
@@ -48,7 +49,46 @@ export type Select = Types.Overwrite<
   React.HTMLAttributes<HTMLDivElement>,
   {
     id: string;
+    emptyText?: string;
     onChange?: (value: string) => void;
     options?: Option[];
   }
 >;
+
+/** A {Interpolation} for {Range}. */
+export type Interpolation = {
+  percentage: (value: number, min: number, max: number) => number;
+  clientX: (x: number, rect: DOMRect, min: number, max: number) => number;
+};
+
+/** A {Range} hook properties. */
+export type Range = {
+  tick: number;
+  values: number[];
+  min: number;
+  max: number;
+  step: number;
+  steps: number[];
+  onChange: (values: number[]) => void;
+  onDrag: (values: number[]) => void;
+  interpolator?: Interpolation;
+};
+
+/** A {Range} contex. */
+export type RangeContext = {
+  activeIndex: number;
+  getTrackProps: (options: unknown) => unknown;
+  ticks: {
+    value: number;
+    getTickProps: (options: unknown) => unknown;
+  }[];
+  segments: {
+    value: number;
+    getSegmentProps: (options: unknown) => unknown;
+  }[];
+  handles: {
+    value: number;
+    active: boolean;
+    getHandleProps: (options: unknown) => unknown;
+  }[];
+};

@@ -17,7 +17,10 @@ const getClassName = (className: string): string =>
 export const Component: React.FunctionComponent<Props.Select> = ({
   className,
   id,
-  onChange,
+  emptyText = '',
+  onChange = () => {
+    // Do nothing.
+  },
   options = [],
   ...divAttrs
 }: Props.Select): React.ReactElement => {
@@ -29,7 +32,7 @@ export const Component: React.FunctionComponent<Props.Select> = ({
   return (
     <div {...divAttrs} className={getClassName(className)}>
       {options.length === 0 ? (
-        <div className={styles['empty']}>No devices found</div>
+        <div className={styles['empty']}>{emptyText}</div>
       ) : (
         <select
           id={id}
