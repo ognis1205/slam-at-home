@@ -41,6 +41,18 @@ uniform float width;
 /** A height of screen space. */
 uniform float height;
 
+/** An offset of camera. */
+uniform float offset;
+
+/** A center of camera. */
+uniform float centerX;
+
+/** A center of camera. */
+uniform float centerY;
+
+/** A depth of screen space. */
+uniform float depth;
+
 /** A rasterized diameter of points. */
 uniform float pointSize;
 
@@ -57,9 +69,9 @@ void main() {
   vec4 rgb = texture2D(colormap, vUv);
   vec3 lab = rgb2lab(rgb.rgb);
   vec4 coord = vec4(
-    position.x,
-    position.y,
-    lab.x * 500.0,
+    centerX + (position.x - 0.5 * width) * ((offset + (1.0 - lab.x) * depth) / offset),
+    centerY + (position.y - 0.5 * height) * ((offset + (1.0 - lab.x) * depth) / offset),
+    (lab.x - 1.0) * depth,
     1.0);
   gl_PointSize = pointSize;
   gl_Position  = projectionMatrix * modelViewMatrix * coord;
