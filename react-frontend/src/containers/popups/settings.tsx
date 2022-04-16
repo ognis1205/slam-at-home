@@ -108,6 +108,7 @@ export const Component: React.FunctionComponent<Props.Settings> = ({
       <div className={styles['divider']}>Devices</div>
       <Forms.Select
         id="camera"
+        emptyText="No Devices Found"
         onChange={handleSelectChange}
         options={devices.map((o) => {
           return { value: o.id, name: o.name };
