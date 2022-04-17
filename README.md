@@ -39,11 +39,23 @@ Implementation Notes
 
 TODO
 ==============================
- - LiDAR over DataChannel
- - Recording
- - WebGPU engine
- - Android
- - Manage CMSampleBuffer
- Use current AVCaptureSession on WebRTC on iOS devices
- https://groups.google.com/g/discuss-webrtc/c/8TgRy9YWvVc
- https://stackoverflow.com/questions/28265880/use-current-avcapturesession-on-webrtc-on-ios-devices
+
+The following is a checklist of features and their progress:
+- [ ] React/Frontend
+  - [x] WebRTC
+  - [ ] SLAM
+  - [ ] SfM
+- [x] Express/Signaling
+  - [x] WebRTC Signaling
+  - [x] Device Detection
+- [ ] iOS/Camera
+  - [x] ML based Depth Sampler
+  - [ ] CPU Monitor
+  - [ ] LiDAR Camera over DataChannel
+- [x] MLModels
+  - [x] Pydnet
+- [ ] Wgpu/Core
+  - [ ] SLAM engine
+- [ ] Android
+- [ ] Video Server
+  - [ ] Recording
