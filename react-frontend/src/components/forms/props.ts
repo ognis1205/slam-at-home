@@ -50,6 +50,8 @@ export type Select = Types.Overwrite<
   React.HTMLAttributes<HTMLDivElement>,
   {
     id: string;
+    value?: string;
+    selectText?: string;
     emptyText?: string;
     onChange?: (value: string) => void;
     options?: Option[];

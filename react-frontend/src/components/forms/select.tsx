@@ -17,6 +17,8 @@ const getClassName = (className: string): string =>
 export const Component: React.FunctionComponent<Props.Select> = ({
   className,
   id,
+  value = 'DEFAULT',
+  selectText = 'Choose an option',
   emptyText = '',
   onChange = () => {
     // Do nothing.
@@ -37,16 +39,18 @@ export const Component: React.FunctionComponent<Props.Select> = ({
         <select
           id={id}
           className={styles['scroll']}
+          value={[value]}
           onChange={handleChange}
           multiple
         >
-          {options.map(
-            ({ value, name, selected }: Props.Option, index: number) => (
-              <option key={index} value={value} selected={selected}>
-                {name}
-              </option>
-            )
-          )}
+          <option value="DEFAULT" disabled>
+            {selectText}
+          </option>
+          {options.map(({ value, name }: Props.Option, index: number) => (
+            <option key={index} value={value}>
+              {name}
+            </option>
+          ))}
         </select>
       )}
       <span className="focus"></span>

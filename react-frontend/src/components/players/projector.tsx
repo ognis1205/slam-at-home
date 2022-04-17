@@ -29,7 +29,6 @@ export const Component: React.FunctionComponent<Props.Projector> = ({
   /** Starts the WebGL animatio. */
   React.useEffect(() => {
     const display = container.current;
-    console.log(context);
     display.appendChild(context.renderer.getDOMElement());
 
     const animate = (): void => {

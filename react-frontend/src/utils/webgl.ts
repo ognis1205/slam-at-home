@@ -144,7 +144,7 @@ export class Camera {
     enableDamping = true,
     dampingFactor = 1,
     enableZoom = true,
-    zoomSpeed = 0.1,
+    zoomSpeed = 1.0,
     enableKeys = false,
     screenSpacePanning = false,
     enableRotate = true,

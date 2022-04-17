@@ -6,6 +6,7 @@ export type {
   Toggle as ToggleProps,
   Text as TextProps,
   Range as RangeProps,
+  RangeContext as RangeContext,
   Select as SelectProps,
 } from './props';
 export { Component as Text } from './text';
