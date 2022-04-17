@@ -14,10 +14,10 @@ import * as WebGL from '../../utils/webgl';
 import styles from '../../assets/styles/pages/webrtc.module.scss';
 
 /** Type alias for trackers. */
-type TrackProps = typeof Forms.RangeContext['getTrackprops'];
+type TrackProps = Forms.RangeContext['getTrackProps'];
 
 /** Type alias for trackers. */
-type Handles = typeof Forms.RangeContext['handle'];
+type Handles = Forms.RangeContext['handles'];
 
 /** Returns a `Display` component. */
 const Display: React.FunctionComponent<
@@ -202,11 +202,7 @@ const WebRTC: Next.NextPage = () => {
     <Players.NoSignal />
   );
 
-  return (
-    <div className={styles['webrtc']}>
-      {content}
-    </div>
-  );
+  return <div className={styles['webrtc']}>{content}</div>;
 };
 
 export default WebRTC;

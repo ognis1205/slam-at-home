@@ -66,14 +66,14 @@ export type Interpolation = {
 
 /** A {Range} hook properties. */
 export type Range = {
-  tick: number;
   values: number[];
   min: number;
   max: number;
   step: number;
-  steps: number[];
-  onChange: (values: number[]) => void;
-  onDrag: (values: number[]) => void;
+  tick?: number;
+  steps?: number[];
+  onChange?: (values: number[]) => void;
+  onDrag?: (values: number[]) => void;
   interpolator?: Interpolation;
 };
 

@@ -196,16 +196,16 @@ export class Scene {
   public readonly instance: THREE.Scene;
 
   /** Holds a geometry for projection. */
-  public readonly geometry: THREE.BufferGeometry;
+  public geometry: THREE.BufferGeometry;
 
   /** Holds a material for projection. */
-  public readonly material: THREE.ShaderMaterial;
+  public material: THREE.ShaderMaterial;
 
   /** Holds a width of the texture. */
-  public readonly width: number;
+  public width: number;
 
   /** Holds a height of the texture. */
-  public readonly height: number;
+  public height: number;
 
   /** Holds a props. */
   private uniforms: SceneUniforms;
