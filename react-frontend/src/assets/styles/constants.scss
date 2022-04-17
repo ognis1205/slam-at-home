@@ -47,6 +47,7 @@ $font-color-error: #e74c3c;
 $font-size-s: 12px;
 $font-size-m: 14px;
 $font-size-l: 16px;
+$font-size-player: 64px;
 $font-size-header: 32px;
 
 // Logo
@@ -55,6 +56,7 @@ $logo-size-m: 96px;
 $logo-size-l: 128px;
 
 // Icon
+$icon-size-xs: 4px;
 $icon-size-s: 14px;
 $icon-size-m: 16px;
 $icon-size-l: 18px;
@@ -90,6 +92,9 @@ $spacing-size-s: 8px;
 $spacing-size-m: 16px;
 $spacing-size-l: 32px;
 $spacing-size-xl: 64px;
+$display-size-s: 192px;
+$display-size-m: 256px;
+$display-size-l: 512px;
 
 // Effect
 $animation-ease: 0s ease 0.2s;

@@ -5,14 +5,18 @@
 @import '../constants.scss';
 
 .video {
-  height: 256px;
-  width: 256px;
-
   .display {
     height: auto;
     position: relative;
-    top: 50%;
-    transform: translateY(-50%);
     width: 100%;
   }
+}
+
+.nosignal {
+  color: $font-color;
+  font-size: $font-size-player;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }

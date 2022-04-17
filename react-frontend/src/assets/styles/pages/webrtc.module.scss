@@ -1,0 +1,62 @@
+/**
+ * @fileoverview SCSS Module for {WebRTC} page.
+ * @copyright Shingo OKAWA 2022
+ */
+@import '../constants.scss';
+
+.webrtc {
+  background-color: black;
+  height: 100%;
+  position: relative;
+
+  .display {
+    .original {
+      clear: both;
+      height: $display-size-s;
+      left: $spacing-size-m;
+      position: absolute;
+      top: $spacing-size-m;
+      width: $display-size-s;
+    }
+
+    .webgl {
+      left: 50%;
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  .sliders {
+    clear:both;
+    color: $bar-color;
+    position: absolute;
+    right: $spacing-size-m;
+    top: $spacing-size-m;
+    width: $display-size-s;
+
+    .slider {
+      font-size: $font-size-s;
+      margin: $spacing-size-s;
+
+      .name {
+        margin: $spacing-size-s;
+      }
+
+      .track {
+         background: $bar-color;
+         border-radius: calc($icon-size-xs / 2);
+	 height: $icon-size-xs;
+
+	 .handle {
+           background: $font-color;
+           border-radius: calc($icon-size-s / 2);
+           border: $border-s;
+           height: $icon-size-s;
+           outline: "none";
+           width: $icon-size-s;
+	 }
+      }
+    }
+  }
+}

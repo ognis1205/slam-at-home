@@ -134,7 +134,6 @@
   border-spacing: 0px;
   border: $border-s;
   box-shadow: $shadow-all $shadow-inset;
-//  font-family: 'FontAwesome', 'Second Font name';
   font-size: $font-size-l;
   margin: auto;
   overflow: auto;
@@ -163,6 +162,11 @@
       color: $font-color;
       font-size: $font-size-s;
       margin: $spacing-size-xs;
+    }
+
+    & > option:first-child {
+      color: $font-color-dark;
+      font-weight: bold;
     }
 
     & > option:hover, option:focus, option:active, option:checked {
