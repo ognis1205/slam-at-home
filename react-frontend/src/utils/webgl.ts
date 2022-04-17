@@ -195,6 +195,18 @@ export class Scene {
   /** Holds a scene for projection. */
   public readonly instance: THREE.Scene;
 
+  /** Holds a geometry for projection. */
+  public readonly geometry: THREE.BufferGeometry;
+
+  /** Holds a material for projection. */
+  public readonly material: THREE.ShaderMaterial;
+
+  /** Holds a width of the texture. */
+  public readonly width: number;
+
+  /** Holds a height of the texture. */
+  public readonly height: number;
+
   /** Holds a props. */
   private uniforms: SceneUniforms;
 
@@ -237,9 +249,9 @@ export class Scene {
       v.y = Math.floor(i / this.uniforms.width.value);
       vertices.push(v);
     }
-    const geometry = new THREE.BufferGeometry().setFromPoints(vertices);
+    this.geometry = new THREE.BufferGeometry().setFromPoints(vertices);
 
-    const material = new THREE.ShaderMaterial({
+    this.material = new THREE.ShaderMaterial({
       uniforms: this.uniforms,
       vertexShader: this.vertexShader,
       fragmentShader: this.fragmentShader,
@@ -248,7 +260,10 @@ export class Scene {
       transparent: true,
     });
 
-    const mesh = new THREE.Points(geometry, material);
+    this.width = this.uniforms.width.value;
+    this.height = this.uniforms.height.value;
+
+    const mesh = new THREE.Points(this.geometry, this.material);
     mesh.position.x = 0;
     mesh.position.y = 0;
 
@@ -275,7 +290,11 @@ export class Renderer {
 
   /** Constructor. */
   constructor({ width, height, antiAlias = true }: RendererConfig) {
-    this.instance = new THREE.WebGLRenderer({ antialias: antiAlias });
+    this.instance = new THREE.WebGLRenderer({
+      antialias: antiAlias,
+      alpha: true,
+    });
+    this.instance.setClearColor(0x000000, 0);
     this.instance.setSize(width, height);
   }
 
