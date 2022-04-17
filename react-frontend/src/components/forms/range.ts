@@ -112,7 +112,7 @@ export const useRange = ({
   /** An event handler called on `drag` events. */
   const handleDrag = React.useCallback(
     (e: Event.MouseTouch) => {
-      const { activeIndex, onDrag } = getLatest();
+      const { activeIndex, onChange } = getLatest();
       const clientX =
         e.type === 'touchmove' ? e.changedTouches[0].clientX : e.clientX;
       const value = getValueForClientX(clientX);
@@ -122,8 +122,8 @@ export const useRange = ({
         rounded,
         ...values.slice(activeIndex + 1),
       ];
-      if (onDrag) onDrag(newValues);
-      else setInactiveValues(newValues);
+      const sortedValues = Misc.sort(newValues);
+      onChange(sortedValues);
     },
     [getLatest, getValueForClientX, toRound, values]
   );
