@@ -1,5 +1,5 @@
 <p align="center">
-  <img height="128" width="128" src="./docs/images/logo.png">
+  <img height="128" width="128" src="https://raw.githubusercontent.com/ognis1205/slam-at-home/main/docs/images/logo.png">
 </p>
 <p align="center">
   <a href="https://www.buymeacoffee.com/ognis1205">
@@ -12,8 +12,8 @@ SLAM@HOME
 An implementation of a real-time SLAM system over a local Wi-Fi network. This project was initially started for my self-learning purpose so the implementation is not production ready and may include performance issues and/or edge cases but I still believe this can be a code example for something like a DIY 3D scanner project or a DIY 3D survelliance system. Hope you will like it.
 
 <p align="center" float="left">
-  <img width="256" src="./docs/images/mobile.gif">
-  <img width="384" src="./docs/images/pc.gif">
+  <img width="256" src="https://raw.githubusercontent.com/ognis1205/slam-at-home/main/docs/images/mobile.gif">
+  <img width="384" src="https://raw.githubusercontent.com/ognis1205/slam-at-home/main/docs/images/pc.gif">
 </p>
 
 Architecture
@@ -21,7 +21,7 @@ Architecture
 This diagram illustrates the overall architecture of SLAM@HOME.
 
 <p align="center">
-  <img width="100%" src="./docs/images/architecture.jpg">
+  <img width="100%" src="https://raw.githubusercontent.com/ognis1205/slam-at-home/main/docs/images/architecture.jpg">
 </p>
 
 Implementation Notes
