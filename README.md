@@ -11,9 +11,16 @@ SLAM@HOME
 ==============================
 An implementation of a real-time SLAM system over a local Wi-Fi network. This project was initially started for my self-learning purpose so the implementation is not production ready and may include performance issues and/or edge cases but I still believe this can be a code example for something like a DIY 3D scanner project or a DIY 3D survelliance system. Hope you will like it.
 
-<p align="center">
-  <img width="256" src="./docs/images/mobile.gif">
-</p>
+<table>
+  <tr>
+    <td>
+	  <img width="256" src="./docs/images/mobile.gif">
+	</td>
+    <td>
+	  <img width="256" src="./docs/images/pc.gif">
+	</td>
+   </tr> 
+</table>
 
 Implementation Notes
 ==============================
@@ -41,6 +48,12 @@ TODO
 ==============================
 
 The following is a checklist of features and their progress:
+- [ ] Documentation
+  - [x] README
+  - [ ] Wiki
+- [ ] DevOps
+  - [x] Dockerfile
+  - [ ] Kubernetes
 - [ ] React/Frontend
   - [x] WebRTC
   - [ ] SLAM
