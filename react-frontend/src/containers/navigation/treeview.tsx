@@ -39,7 +39,7 @@ const getIcon = (type: Props.ItemType): FontAwesomeCore.IconDefinition => {
     case Props.ItemType.SHARE:
       return FontAwesomeIcon.faShareSquare;
     case Props.ItemType.INFO:
-      return FontAwesomeIcon.faInfo;
+      return FontAwesomeIcon.faInfoCircle;
     case Props.ItemType.DOCUMENT:
     default:
       return FontAwesomeIcon.faFile;
@@ -131,11 +131,19 @@ export const Component: React.FunctionComponent<Props.TreeView> = (
   /** @const Holds opening directory state. */
   const [activeKey, handleChange] = activeKeyContext;
 
+  /** @const Holds a reference to the about item. */
+  const about = React.useRef<Modal.Trigger>(null);
+
   /** @const Holds a reference to the share item. */
   const share = React.useRef<Modal.Trigger>(null);
 
   /** @const Holds a reference to the settings item. */
   const settings = React.useRef<Modal.Trigger>(null);
+
+  /** Event listener which is responsible for `onClose`. */
+  const handleAboutClose = (): void => {
+    about.current?.close();
+  };
 
   /** Event listener which is responsible for `onClose`. */
   const handleShareClose = (): void => {
@@ -237,11 +245,23 @@ export const Component: React.FunctionComponent<Props.TreeView> = (
           </Modal.Component>
         </Collapse.Panel>
         <Collapse.Panel
-          header="About"
-          key="about"
+          header="Info"
+          key="info"
           showArrow={true}
           icon={FontAwesomeIcon.faInfoCircle}
         >
+          <Modal.Component
+            ref={about}
+            trigger={
+              <Popup title="About" key="about" type="info" target="_blank" />
+            }
+            modal={true}
+            position={['right bottom']}
+            on="click"
+            offset={{ x: 0, y: 0 }}
+          >
+            <Popups.About onClose={handleAboutClose} />
+          </Modal.Component>
           <ExternalLink
             title="Github"
             key="acount"
@@ -256,6 +276,7 @@ export const Component: React.FunctionComponent<Props.TreeView> = (
             type="wiki"
             target="_blank"
             rel="noreferrer"
+            href="https://github.com/ognis1205/slam-at-home/wiki"
           />
         </Collapse.Panel>
       </Collapse.Wrapper>

@@ -108,7 +108,7 @@ export const Component: React.FunctionComponent<Props.Panel> = ({
   const [activeKey, setActiveKey] = React.useState<string[] | string>([
     'menu',
     'contribution',
-    'about',
+    'info',
   ]);
 
   /** @const Holds a dragging position. */

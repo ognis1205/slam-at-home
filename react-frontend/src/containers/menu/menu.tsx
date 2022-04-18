@@ -223,11 +223,20 @@ export const Component = React.forwardRef<HTMLDivElement, Props.Menu>(
           <Popups.About onClose={handleAboutClose} />
         </Modal.Component>
         <ExternalLink
+          title="Github"
+          key="acount"
+          type="github"
+          target="_blank"
+          rel="noreferrer"
+          href="https://github.com/ognis1205/slam-at-home"
+        />
+        <ExternalLink
           title="Wiki"
           key="wiki"
           type="wiki"
           target="_blank"
           rel="noreferrer"
+          href="https://github.com/ognis1205/slam-at-home/wiki"
         />
       </Container>
     );
