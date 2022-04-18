@@ -9,7 +9,7 @@ import * as Markdown from '../containers/markdown';
 /** Returns a '/index' page. */
 const Index: Next.NextPage = () => {
   return (
-    <Markdown.Component src="https://raw.githubusercontent.com/remarkjs/react-markdown/main/readme.md" />
+    <Markdown.Component src="https://raw.githubusercontent.com/ognis1205/slam-at-home/main/README.md" />
   );
 };
 
