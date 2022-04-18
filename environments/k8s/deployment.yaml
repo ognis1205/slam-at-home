@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: express-signaling
+  labels:
+    app: express-signaling
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: express-signaling
+  template:
+    metadata:
+      labels:
+        app: express-signaling
+    spec:
+      containers:
+      - name: express-signaling
+        image: express-signaling:minikube
+        ports:
+        - containerPort: 4000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: react-frontend
+  labels:
+    app: react-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: react-frontend
+  template:
+    metadata:
+      labels:
+        app: react-frontend
+    spec:
+      containers:
+      - name: react-frontend
+        image: react-frontend:minikube
+        ports:
+        - containerPort: 3000
