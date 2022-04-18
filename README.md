@@ -9,6 +9,9 @@
 
 SLAM@HOME
 ==============================
+
+[![Join the chat at https://gitter.im/slam-at-home/community](https://badges.gitter.im/slam-at-home/community.svg)](https://gitter.im/slam-at-home/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 An implementation of a real-time SLAM system over a local Wi-Fi network. This project was initially started for my self-learning purpose so the implementation is not production ready and may include performance issues and/or edge cases but I still believe this can be a code example for something like a DIY 3D scanner project or a DIY 3D survelliance system. Hope you will like it.
 
 <p align="center" float="left">
