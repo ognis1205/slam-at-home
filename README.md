@@ -18,9 +18,10 @@ An implementation of a real-time SLAM system over a local Wi-Fi network. This pr
 
 Architecture
 ==============================
+This diagram illustrates the overall architecture of SLAM@HOME.
 
 <p align="center">
-  <img width="512" src="./docs/images/architecture.jpg">
+  <img width="100%" src="./docs/images/architecture.jpg">
 </p>
 
 Implementation Notes
