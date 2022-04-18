@@ -225,6 +225,7 @@ export const Component: React.FunctionComponent<Props.TreeView> = (
             key="gethelp"
             type="gitter"
             target="_blank"
+            href="https://gitter.im/slam-at-home/community"
           />
           <Modal.Component
             ref={share}

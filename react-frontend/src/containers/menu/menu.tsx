@@ -191,6 +191,7 @@ export const Component = React.forwardRef<HTMLDivElement, Props.Menu>(
           type="gitter"
           target="_blank"
           rel="noreferrer"
+          href="https://gitter.im/slam-at-home/community"
         />
         <Modal.Component
           ref={share}
