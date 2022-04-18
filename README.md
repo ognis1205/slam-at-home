@@ -16,6 +16,13 @@ An implementation of a real-time SLAM system over a local Wi-Fi network. This pr
   <img width="384" src="./docs/images/pc.gif">
 </p>
 
+Architecture
+==============================
+
+<p align="center">
+  <img width="512" src="./docs/images/architecture.jpg">
+</p>
+
 Implementation Notes
 ==============================
  1. **React/Frontend**
