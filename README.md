@@ -1,11 +1,6 @@
 <p align="center">
   <img height="128" width="128" src="https://raw.githubusercontent.com/ognis1205/slam-at-home/main/docs/images/logo.png">
 </p>
-<p align="center">
-  <a href="https://www.buymeacoffee.com/ognis1205">
-    <img width="128" src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" />
-  </a>
-</p>
 
 SLAM@HOME
 ==============================
