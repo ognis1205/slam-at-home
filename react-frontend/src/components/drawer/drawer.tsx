@@ -63,21 +63,16 @@ const Component: React.FunctionComponent<Props.Drawer> = ({
   /** @const Holds a reference to the component itself. */
   const self = React.useRef<HTMLDivElement>(null);
 
-  /** `getDerivedStateFromProps` */
-  React.useEffect(() => {
-    setOpen(open);
-  }, [open]);
-
   /** An event handler called on 'clickevent' events. */
   const handleClick = (e: React.MouseEvent | React.KeyboardEvent): void => {
     if (onClick) onClick(e);
-    if (typeof open === 'undefined') setOpen(!isOpen);
+    setOpen((prev: boolean) => !prev);
   };
 
   /** An event handler called on 'clickevent' events. */
   const handleClose = (e: React.MouseEvent | React.KeyboardEvent): void => {
     if (onClose) onClose(e);
-    if (typeof open === 'undefined') setOpen(false);
+    setOpen(false);
   };
 
   if (!container)
