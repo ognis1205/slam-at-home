@@ -26,7 +26,7 @@ Implementation Notes
 ==============================
  1. **React/Frontend**
 
-	All components (except the markdown parser and social buttons) are built upon the vanilla React library. As I mentioned before, the purpose of this project is self-learning, so all these components are not responsive and the SCSS modules are messy, which I really don't like. These implementations may be replaced with ChakraUI implementations in the near future.
+	All components (except the markdown parser and social buttons) are built upon the vanilla React library. Given that the purpose of this project is self-learning as I mentioned before and this frontend app is meant to be run on a nonmobile device, all these components were not implemented responsively. With that all being said though, these implementations may be replaced with [ChakraUI](https://chakra-ui.com/)-based ones in the near future.
 
  2. **Express/Signaling**
 
